@@ -1278,8 +1278,109 @@ async function renderIncantesimi(app, dv, page) {
     const names = groups.get(L).slice().sort((a, b) => a.localeCompare(b)).map((n) => `${concentra.has(n) ? "🌀 " : ""}[[${n}]]`);
     out.push(`> **${titolo}**${L > 0 ? slotInfo(L) : ""} (${names.length})\n> ${names.join(" · ")}`);
   }
+  // Testata: CD incantesimo (8 + competenza + mod) e bonus d'attacco (competenza +
+  // mod). La caratteristica da incantatore = la prima MENTALE fra le primarie della
+  // classe (Mago→INT, Chierico→SAG, Paladino [FOR,CAR]→CAR, Ranger [DES,SAG]→SAG…),
+  // così SRD e homebrew funzionano senza un campo dedicato. Il mod si calcola dal
+  // punteggio nel frontmatter → corretto a ogni ri-render (non serve mod_<car>).
+  const MENTALE = ["intelligenza", "saggezza", "carisma"];
+  const carInc = classe.caratteristica_incantesimi
+    || asArray(classe.caratteristica_primaria).map(text).find((c) => MENTALE.includes(c));
+  let testa = "";
+  if (carInc && page[carInc] != null) {
+    const mod = Math.floor((Number(page[carInc]) - 10) / 2);
+    const pb = Number(page.competenza) || 0;
+    const cd = 8 + pb + mod, atk = pb + mod;
+    const lab = carInc.charAt(0).toUpperCase() + carInc.slice(1);
+    testa = `> **CD incantesimo ${cd}** · **Attacco ${atk >= 0 ? "+" : ""}${atk}** · ${lab}\n>\n`;
+  }
   const legenda = concentra.size ? "\n>\n> 🌀 = concentrazione" : "";
-  return "> [!note]- 🪄 Incantesimi\n" + out.join("\n>\n") + legenda;
+  return "> [!note]- 🪄 Incantesimi\n" + testa + out.join("\n>\n") + legenda;
+}
+
+// --- Coerenza GS (DM): "i numeri combaciano col GS dichiarato?" ----------------
+// Inverte gs_baseline (mediane SRD) per stimare il GS DIFENSIVO (da AC+PF) e
+// OFFENSIVO (da bonus d'attacco + danno per colpo) di una creatura e confrontarli
+// col GS dichiarato. Sorgente = mediane SRD (core.gs_baseline), NON le tabelle DMG
+// (niente vincolo di licenza). Pensato per gli statblock RIFINITI A MANO: lo scaffold
+// è corretto per costruzione, ma una creatura editata può uscire dal GS senza che
+// te ne accorga (es. un "GS 5" con 30 PF). Best-effort: i PF/AC si leggono sempre, il
+// lato offensivo dipende dal formato delle azioni (n/d se non parsabile).
+function _gsToNum(k) {
+  if (typeof k === "string" && k.includes("/")) { const [a, b] = k.split("/").map(Number); return b ? a / b : NaN; }
+  return Number(k);
+}
+function _relDist(a, b) { return Math.abs((Number(a) - Number(b)) / Math.max(1, Math.abs(Number(b)))); }
+function nearestGs(table, score) {
+  let best = null, bestD = Infinity;
+  for (const k of Object.keys(table || {})) {
+    const d = score(table[k]);
+    if (Number.isFinite(d) && d < bestD) { bestD = d; best = k; }
+  }
+  return best;
+}
+function nearestGsByNum(table, target) {
+  const keys = Object.keys(table || {}).filter((k) => Number.isFinite(_gsToNum(k)));
+  if (!keys.length) return null;
+  return keys.reduce((best, k) => Math.abs(_gsToNum(k) - target) < Math.abs(_gsToNum(best) - target) ? k : best);
+}
+function gsDifensivo(table, ac, hp) {
+  if (hp == null) return null;
+  return nearestGs(table, (r) => (r.hp == null ? Infinity : _relDist(hp, r.hp)) + (r.ac == null || ac == null ? 0 : 0.5 * _relDist(ac, r.ac)));
+}
+function gsOffensivo(table, atk, danno) {
+  if (danno == null) return null;
+  return nearestGs(table, (r) => (r.danno == null ? Infinity : _relDist(danno, r.danno)) + (r.attacco == null || atk == null ? 0 : 0.5 * _relDist(atk, r.attacco)));
+}
+function verificaGS(table, stats, dichiarato) {
+  const difensivo = gsDifensivo(table, stats.ac, stats.hp);
+  const offensivo = gsOffensivo(table, stats.atk, stats.danno);
+  const nums = [difensivo, offensivo].filter((x) => x != null).map(_gsToNum).filter(Number.isFinite);
+  const atteso = nums.length ? nearestGsByNum(table, nums.reduce((a, b) => a + b, 0) / nums.length) : null;
+  return { difensivo, offensivo, atteso, dichiarato: dichiarato == null ? null : String(dichiarato) };
+}
+
+// Estrae dal corpo nota i numeri del primo blocco ```statblock: AC, PF e (best-effort
+// dal formato delle azioni) il miglior bonus d'attacco e il danno per colpo.
+function parseStatblockStats(testo) {
+  const block = (String(testo || "").match(/```statblock[\s\S]*?```/) || [])[0] || "";
+  if (!block) return null;
+  const one = (re) => { const m = block.match(re); return m ? Number(m[1]) : null; };
+  let atk = null, danno = null, m;
+  const atkRe = /per colpire:\*?\s*([+-]?\d+)/g;
+  while ((m = atkRe.exec(block))) { const v = Number(m[1]); if (atk == null || v > atk) atk = v; }
+  const dmgRe = /Colpito:\*?\s*(\d+)/g;
+  while ((m = dmgRe.exec(block))) { const v = Number(m[1]); if (danno == null || v > danno) danno = v; }
+  return { ac: one(/^\s*ac:\s*"?(\d+)/m), hp: one(/^\s*hp:\s*"?(\d+)/m), atk, danno };
+}
+
+async function renderVerificaGS(app, page) {
+  if (!page || text(page.categoria) !== "creatura") return "";
+  const gs = page.gs != null ? String(page.gs).trim() : "";
+  if (!gs) return "";
+  const core = await loadCoreData(app);
+  const table = core.gs_baseline || {};
+  if (!Object.keys(table).length) return "";
+  const f = app.workspace && app.workspace.getActiveFile && app.workspace.getActiveFile();
+  if (!f) return "";
+  let body = "";
+  try { body = await app.vault.read(f); } catch (e) { return ""; }
+  const st = parseStatblockStats(body);
+  if (!st || st.hp == null) return "";
+  const v = verificaGS(table, st, gs);
+  const vicino = (a) => a != null && Math.abs(_gsToNum(a) - _gsToNum(gs)) <= Math.max(1, _gsToNum(gs) * 0.34);
+  const icona = (a) => a == null ? "·" : (vicino(a) ? "✅" : "⚠️");
+  const righe = [
+    `> - Difensivo (AC ${st.ac != null ? st.ac : "?"} · PF ${st.hp}) ≈ **GS ${v.difensivo}** ${icona(v.difensivo)}`,
+    v.offensivo != null
+      ? `> - Offensivo (att ${st.atk >= 0 ? "+" : ""}${st.atk} · danno ${st.danno}/colpo) ≈ **GS ${v.offensivo}** ${icona(v.offensivo)}`
+      : "> - Offensivo: n/d (rifinisci le azioni col formato dello scaffold)",
+    `> - **Atteso ≈ GS ${v.atteso}** · dichiarato **GS ${gs}**`,
+  ];
+  const allarme = (v.difensivo != null && !vicino(v.difensivo)) || (v.offensivo != null && !vicino(v.offensivo));
+  return `> [!${allarme ? "warning" : "tip"}]- 📐 Coerenza GS${allarme ? " — controlla i numeri" : ""}\n`
+    + righe.join("\n")
+    + "\n>\n> Stime dalle mediane SRD di pari GS (non tabelle DMG). Difensivo = AC+PF; offensivo = attacco + danno per colpo.";
 }
 
 module.exports = {
@@ -1289,6 +1390,7 @@ module.exports = {
   renderCoerenza, confrontoAssi, coerenzaNote,
   renderClock, clockSvg,
   renderEncounter, xpForCreature,
+  renderVerificaGS, verificaGS, gsDifensivo, gsOffensivo, parseStatblockStats,
   renderProgressione,
   renderRisorsePG, barPct, barRow,
   renderSpecieTratti, sezioniMarkdown,

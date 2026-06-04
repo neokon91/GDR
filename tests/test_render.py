@@ -98,6 +98,17 @@ def test_entity_schema():
     assert render.validate_entity_schema(render.load_entities()) == []
 
 
+def test_background_2024_legale():
+    """Un background homebrew 2024-legale DEVE concedere ASI (3 caratteristiche), 2
+    abilità, 1 strumento e un Talento d'Origine: il wizard rende OBBLIGATORI questi
+    campi-meccanica, così non si crea un background non conforme al 2024."""
+    bg = next((e for e in render.load_entities() if e["id"] == "background"), None)
+    assert bg, "entità background mancante"
+    req = {q["field"] for q in (bg.get("creation", {}).get("fields") or []) if q.get("required")}
+    for f in ("car_background", "abilita_background", "talento_origine", "strumento"):
+        assert f in req, f"campo background '{f}' non obbligatorio → background non 2024-legale"
+
+
 @pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
 def test_crea_js_present(tpl):
     """Ogni template ha un crea_<id>.js: hand-authored in JS/ o generato (wrapper)."""
@@ -608,11 +619,48 @@ def test_scaffold_statblock_e2e(tmp_path):
     assert "size: Grande" in out and "type: aberrazione" in out    # da frontmatter
     assert 'cr: "5"' in out and 'pb: "+3"' in out
     assert "*Tiro per colpire:* +7" in out and "2d10 + 3" in out   # azione d'attacco reale
+    assert "Multiattacco" in out and "effettua 2 attacchi" in out  # GS 5 -> multiattacco x2
     assert "CD 14" in out                                          # azione-salvezza dal GS
     assert "actions: []" not in out                                # placeholder sostituito
     assert "layout: 5-5e-ita" in out                               # layout preservato
     assert out.count("```statblock") == 1                          # un solo blocco
     assert out.startswith("# Orrore") and out.rstrip().endswith("fine")  # corpo preservato
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_verifica_gs(tmp_path):
+    """views.verificaGS + parseStatblockStats + renderVerificaGS: invertono gs_baseline
+    per stimare il GS difensivo (AC+PF) e offensivo (attacco+danno per colpo) e
+    confrontarli col dichiarato. Un boss con PF da GS basso esce dal GS dichiarato."""
+    table = {"1": {"ac": 13, "hp": 20, "attacco": 4, "danno": 6},
+             "5": {"ac": 15, "hp": 90, "attacco": 6, "danno": 14},
+             "10": {"ac": 17, "hp": 180, "attacco": 8, "danno": 28}}
+    body = ('# Boss\n\n```statblock\nlayout: 5-5e-ita\nname: Boss\nac: 15\nhp: 90\n'
+            'cr: "5"\nactions:\n  - name: Attacco\n    desc: "*Tiro per colpire:* +6, '
+            'portata 1,5 m. *Colpito:* 14 (2d10 + 3) danni."\n```\n')
+    harness = tmp_path / "vgs.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        f'const table={json.dumps(table, ensure_ascii=False)};'
+        f'const body={json.dumps(body, ensure_ascii=False)};'
+        'const ok=m.exports.verificaGS(table,{ac:15,hp:90,atk:6,danno:14},"5");'
+        'const mis=m.exports.verificaGS(table,{ac:15,hp:20,atk:6,danno:14},"5");'
+        'const parsed=m.exports.parseStatblockStats(body);'
+        'const file={basename:"Boss",path:"Mondi/Creature/Boss.md"};'
+        'const app={workspace:{getActiveFile:()=>file},'
+        ' vault:{read:async()=>body, adapter:{read:async()=>JSON.stringify({gs_baseline:table})}}};'
+        'm.exports.renderVerificaGS(app,{categoria:"creatura",gs:"5"}).then(r=>'
+        ' process.stdout.write(JSON.stringify({ok,mis,parsed,r})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["ok"] == {"difensivo": "5", "offensivo": "5", "atteso": "5", "dichiarato": "5"}
+    assert out["mis"]["difensivo"] == "1"          # PF 20 = GS 1, fuori dal GS 5 dichiarato
+    assert out["parsed"] == {"ac": 15, "hp": 90, "atk": 6, "danno": 14}
+    assert "Coerenza GS" in out["r"] and "GS 5" in out["r"]
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -790,6 +838,32 @@ def test_render_risorse_pg(tmp_path):
     assert out["b"] == ""                          # scheda non compilata -> niente
     assert out["c"] == "*Apri la scheda PG.*"      # senza page -> guida
     assert out["pct"] == 50
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_incantesimi_cd(tmp_path):
+    """views.renderIncantesimi: testata con CD incantesimo (8+PB+mod) e bonus d'attacco
+    (PB+mod). La caratteristica da incantatore = prima MENTALE fra le primarie della
+    classe (Mago→Intelligenza); il mod si calcola dal punteggio nel frontmatter."""
+    harness = tmp_path / "inc.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const data={classi:{mago:{incantatore:true,caratteristica_primaria:["intelligenza"],'
+        ' incantesimi_pool:{"0":["Mano magica"],"1":["Dardo incantato"]}}}};'
+        'const app={vault:{adapter:{read:async()=>JSON.stringify(data)}}};'
+        'const page={classe:"mago",intelligenza:16,competenza:2,'
+        ' trucchetti:["Mano magica"],incantesimi:["Dardo incantato"]};'
+        'm.exports.renderIncantesimi(app,null,page).then(o=>process.stdout.write(o));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "CD incantesimo 13" in out          # 8 + 2 (PB) + 3 (mod INT 16)
+    assert "Attacco +5" in out                 # 2 (PB) + 3 (mod)
+    assert "Intelligenza" in out               # caratteristica da incantatore
+    assert "[[Dardo incantato]]" in out        # incantesimo elencato
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

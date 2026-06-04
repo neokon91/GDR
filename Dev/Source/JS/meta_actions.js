@@ -414,10 +414,18 @@ async function scaffold_statblock(file) {
   const danno = base.danno != null
     ? `${base.danno}${base.danno_formula ? ` (${base.danno_formula})` : ""} danni${base.danno_tipo ? ` ${base.danno_tipo}` : ""}`
     : "danni a scelta";
-  const azioni = [
-    "  - name: Attacco",
-    `    desc: "*Tiro per colpire:* ${_sign(atk)}, portata 1,5 m (o gittata). *Colpito:* ${danno}."`,
-  ];
+  // Multiattacco: i mostri di GS medio-alto attaccano più volte per turno. Lo
+  // scaffold lo riflette (1 attacco fino a GS 1; 2 da GS 2; 3 da GS 11) così un boss
+  // homebrew "picchia" come la sua fascia. Ogni attacco fa il danno-base del GS.
+  const gsN = _gsNum(gs);
+  const nAtt = !Number.isFinite(gsN) ? 1 : (gsN >= 11 ? 3 : (gsN >= 2 ? 2 : 1));
+  const azioni = [];
+  if (nAtt > 1) {
+    azioni.push("  - name: Multiattacco");
+    azioni.push(`    desc: "${file.basename} effettua ${nAtt} attacchi."`);
+  }
+  azioni.push("  - name: Attacco");
+  azioni.push(`    desc: "*Tiro per colpire:* ${_sign(atk)}, portata 1,5 m (o gittata). *Colpito:* ${danno}."`);
   if (base.cd != null) {
     azioni.push(`  - name: Azione speciale (CD ${base.cd})`);
     azioni.push(`    desc: "*Tiro salvezza:* CD ${base.cd}. Personalizza l'effetto (area, condizione, danno)."`);

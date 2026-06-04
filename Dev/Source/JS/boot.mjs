@@ -59,6 +59,7 @@ const PANELS = {
   renderIncantesimi: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderConnessioni: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderEncounter: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
+  renderVerificaGS: { mode: "md", args: (a, d) => [a, d.page] },
   renderMap: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderDintorni: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderViaggio: { mode: "md", args: (a, d) => [a, d.dv, d.page] },

@@ -28,20 +28,22 @@ creation:
     prompt: Tipo
     from: subtypes
     required: true
-  # Dati che rendono il background GIOCABILE (crea_pg li fonde nelle opzioni PG):
-  # caratteristiche per l'ASI, abilità competenti, talento d'origine, strumenti.
+  # Dati che rendono il background GIOCABILE e 2024-LEGALE (crea_pg li fonde nelle
+  # opzioni PG). Nel 2024 OGNI background concede: ASI su 3 caratteristiche (a
+  # creazione il PG sceglie +2/+1 o +1/+1/+1), 2 abilità, 1 strumento e un Talento
+  # d'Origine. Sono quindi OBBLIGATORI: un background mutilo non è conforme al 2024.
   - field: car_background
-    prompt: 'Caratteristiche (es. Forza, Costituzione, Saggezza)'
-    optional: true
+    prompt: 'Caratteristiche d''origine — ESATTAMENTE 3 (es. Forza, Costituzione, Saggezza)'
+    required: true
   - field: abilita_background
-    prompt: 'Competenze in abilità (es. Atletica, Intimidire)'
-    optional: true
+    prompt: 'Competenze in abilità — esattamente 2 (es. Atletica, Intimidire)'
+    required: true
   - field: talento_origine
-    prompt: "Talento d'origine (es. Robusto)"
-    optional: true
+    prompt: "Talento d'Origine (2024: ne concede uno — es. Robusto, Iniziato alla magia)"
+    required: true
   - field: strumento
-    prompt: Competenza in strumenti
-    optional: true
+    prompt: Competenza in 1 strumento (o un kit/strumento musicale)
+    required: true
   body:
   - field: descrizione
     prompt: Chi era prima dell'avventura
