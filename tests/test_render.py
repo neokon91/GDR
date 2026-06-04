@@ -156,7 +156,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "third_party_licenses.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)
@@ -2736,3 +2736,21 @@ def test_release_zip_tree_excludes_local_state(tmp_path):
     for excl in ("workspace.json", ".DS_Store", ".trash"):
         assert not any(excl in name for name in names), excl
     assert n == 2                                                      # nota + app.json
+
+
+def test_third_party_licenses_complete():
+    """Attribuzione plugin: ogni plugin bundlato (plugins.yaml) ha author/repo/
+    license e compare in THIRD-PARTY-LICENSES con licenza e link al repo. Se aggiungi
+    un plugin senza questi campi, il test fallisce → ti forza a verificarne la licenza."""
+    out = _env().get_template("third_party_licenses.md.j2").render(
+        core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
+    plugins = PLUGINS["plugins"]
+    assert len(plugins) >= 18
+    for p in plugins:
+        for field in ("author", "repo", "license"):
+            assert p.get(field), f"{p['id']}: manca '{field}' (attribuzione)"
+        assert p["name"] in out and p["license"] in out
+        assert f"https://github.com/{p['repo']}" in out
+    assert "mera aggregazione" in out                         # base legale dichiarata
+    for lic in ("MIT", "GPL-3.0", "AGPL-3.0"):
+        assert lic in out, lic

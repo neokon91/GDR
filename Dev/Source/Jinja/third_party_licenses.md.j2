@@ -1,0 +1,27 @@
+{# Attribuzione dei plugin di terzi bundlati nel vault distribuito. Generato da
+   plugins.yaml (campi author/repo/license). Soddisfa la nota di copyright (MIT) e
+   l'obbligo di licenza+sorgente (GPL/AGPL): i plugin sono inclusi NON MODIFICATI,
+   come «mera aggregazione» su un supporto di distribuzione → non relicenzia il
+   codice MIT di questo progetto. Vive nel vault (→ nello zip di `npm run dist`). #}
+# Licenze dei plugin di terzi
+
+Questo vault include, come comodità d'uso e **non modificati**, i plugin community di
+Obsidian elencati sotto. Il **codice e i template di questo progetto** sono distribuiti
+sotto licenza **MIT** (vedi `LICENSE` nel repo). Ogni plugin resta soggetto alla
+**propria licenza**: l'inclusione è una **mera aggregazione** su un supporto di
+distribuzione e non altera la licenza dei singoli plugin né di questo progetto.
+
+Il **codice sorgente** di ciascun plugin è disponibile al repository indicato (i plugin
+con licenza **GPL-3.0 / AGPL-3.0** sono inclusi come build rilasciate e non modificate;
+la sorgente corrispondente, con il testo completo della licenza, è al rispettivo repo).
+
+| Plugin | Autore | Licenza | Sorgente |
+|---|---|:--:|---|
+{% for p in plugins.plugins -%}
+| {{ p.name }} | {{ p.author | default("—", true) }} | {{ p.license | default("?", true) }} | {% if p.repo %}[{{ p.repo }}](https://github.com/{{ p.repo }}){% else %}—{% endif %} |
+{% endfor %}
+
+> **Per chi ridistribuisce questo vault**: mantieni i plugin non modificati e conserva
+> questo file. Per i plugin GPL/AGPL, l'obbligo di rendere disponibile la sorgente è
+> assolto dai link qui sopra (build non modificate). Il contenuto SRD 5.2.1 è CC-BY-4.0
+> (attribuzione in `Dev/Source/SRD/LICENSE_SRD` nel repo).

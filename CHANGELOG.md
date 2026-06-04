@@ -20,6 +20,9 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   da frontmatter) vengono copiate in `dist/GDR-site/media/` e rese come `<img>`.
 - **`npm run dist`**: crea gli artefatti di release versionati in `dist/` — il vault
   Obsidian pronto all'uso (plugin inclusi) e il sito dei giocatori, zippati.
+- **`THIRD-PARTY-LICENSES.md`** auto-generato (da `plugins.yaml`) e incluso nel vault:
+  attribuzione di tutti i 18 plugin bundlati (autore/licenza/repo). Licenze verificate
+  — tutte redistribuibili (12 MIT, 3 GPL-3.0, 3 AGPL-3.0), incluse come mera aggregazione.
 
 ## [0.1.0]
 

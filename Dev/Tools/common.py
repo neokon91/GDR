@@ -36,7 +36,7 @@ GENERATED_DIRS = (*HIDDEN_DIRS, "SRD")
 INDEX_DIR = "Indici"
 
 # Note generate alla radice del vault (non contenuti utente).
-GENERATED_NOTES = ("Home.md", "LEGGIMI.md")
+GENERATED_NOTES = ("Home.md", "LEGGIMI.md", "THIRD-PARTY-LICENSES.md")
 
 # Lo schema 5.5e vive in system.yaml, separato dall'ontologia di core.yaml; lo
 # schema per-entità in entities/*.yaml. Tutto si fonde in un unico 'core'.

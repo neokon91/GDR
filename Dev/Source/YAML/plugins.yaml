@@ -3,43 +3,100 @@ version: 0.1.0
 purpose: Solo plugin fondamentali usati dai template.
 # Allineati ai plugin realmente installati in dist/GDR-vault (verificato dai
 # main.js). NB: tabs = tab-panels; niente initiative-tracker.
+# author/repo/license: attribuzione per THIRD-PARTY-LICENSES (verificato via API
+# GitHub / package.json il 2026-06-04). Inclusi NON MODIFICATI come mera aggregazione
+# (non relicenzia il codice MIT del progetto). GPL/AGPL: sorgente al repo.
 plugins:
   - id: templater-obsidian
     name: Templater
+    author: SilentVoid
+    repo: silentvoid13/Templater
+    license: AGPL-3.0
   - id: dataview
     name: Dataview
+    author: Michael Brenan
+    repo: blacksmithgu/obsidian-dataview
+    license: MIT
   - id: obsidian-meta-bind-plugin
     name: Meta Bind
+    author: Moritz Jung
+    repo: mProjectsCode/obsidian-meta-bind-plugin
+    license: GPL-3.0
   - id: js-engine
     name: JS Engine
+    author: Moritz Jung
+    repo: mProjectsCode/obsidian-js-engine-plugin
+    license: GPL-3.0
   - id: tab-panels
     name: Tab Panels
+    author: GnoxNahte
+    repo: GnoxNahte/obsidian-tab-panels
+    license: MIT
   - id: callout-manager
     name: Callout Manager
+    author: eth-p
+    repo: eth-p/obsidian-callout-manager
+    license: MIT
   - id: obsidian-5e-statblocks
     name: Fantasy Statblocks
+    author: Jeremy Valentine
+    repo: Obsidian-TTRPG-Community/fantasy-statblocks
+    license: MIT
   - id: metadata-menu
     name: Metadata Menu
+    author: mdelobelle
+    repo: mdelobelle/metadatamenu
+    license: MIT
   - id: obsidian-icon-folder
     name: Iconize
+    author: Florian Woelki
+    repo: FlorianWoelki/obsidian-iconize
+    license: MIT
   - id: calendarium
     name: Calendarium
+    author: Jeremy Valentine
+    repo: javalent/calendarium
+    license: MIT
   - id: obsidian-dice-roller
     name: Dice Roller
+    author: Jeremy Valentine
+    repo: Obsidian-TTRPG-Community/dice-roller
+    license: MIT
   - id: obsidian-tasks-plugin
     name: Tasks
+    author: Obsidian Tasks contributors
+    repo: obsidian-tasks-group/obsidian-tasks
+    license: MIT
   - id: obsidian-excalidraw-plugin
     name: Excalidraw
+    author: Zsolt Viczian
+    repo: zsviczian/obsidian-excalidraw-plugin
+    license: AGPL-3.0
   - id: zoom-map
     name: "TTRPG Tools - Maps"
+    author: Jareika
+    repo: Jareika/zoom-map
+    license: MIT
   - id: obsidian42-brat
     name: BRAT
+    author: TfTHacker
+    repo: TfTHacker/obsidian42-brat
+    license: MIT
   - id: homepage
     name: Homepage
+    author: novov
+    repo: mirnovov/obsidian-homepage
+    license: MIT
   - id: initiative-tracker
     name: Initiative Tracker
+    author: Jeremy Valentine
+    repo: Obsidian-TTRPG-Community/initiative-tracker
+    license: GPL-3.0
   - id: folder-notes
     name: Folder Notes
+    author: Lost Paul
+    repo: LostPaul/obsidian-folder-notes
+    license: AGPL-3.0
 metabind_inputs:
   stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
   rivelazione: INPUT[inlineSelect(option(pubblico), option(incontrato), option(segreto))]

@@ -32,10 +32,14 @@ Lo stato locale (workspace, cache, `.DS_Store`) è escluso, così lo zip è puli
 
 ## Note
 
-- **Licenze dei plugin**: il vault distribuito include i plugin community (turnkey).
-  Sono per lo più MIT (redistribuzione lecita con nota di copyright), ma **verifica**
-  ogni plugin prima di una release pubblica; in alternativa distribuisci un vault
-  *senza* `.obsidian/plugins/` e affidati a BRAT/community-install al primo avvio.
+- **Licenze dei plugin** (verificato 2026-06-04): tutti e 18 i plugin bundlati sono
+  **redistribuibili** — 12 MIT, 3 GPL-3.0, 3 AGPL-3.0. Inclusi **non modificati** come
+  *mera aggregazione* (non relicenzia il codice MIT del progetto). L'attribuzione è
+  **auto-generata** da `plugins.yaml` (campi `author/repo/license`) nel file
+  `THIRD-PARTY-LICENSES.md`, incluso nel vault → nello zip. *Mantieni i plugin non
+  modificati*; se ne aggiungi uno, metti i suoi `author/repo/license` (un test lo impone).
+  In alternativa, per azzerare ogni dubbio, una release *senza* `.obsidian/plugins/`
+  (lite) con i plugin installati al primo avvio.
 - **SRD**: il contenuto SRD 5.2.1 è CC-BY-4.0 (attribuzione in `Dev/Source/SRD/LICENSE_SRD`);
   il codice/tooling è MIT. Vedi [README §Licenza](../README.md#licenza).
 - **Feedback**: il template issue *🎲 Feedback beta* (`.github/ISSUE_TEMPLATE/`) è già
