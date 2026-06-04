@@ -1,0 +1,47 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'editto'.
+# Carattere di una norma del mondo, ortogonale ai campi (emanato_da/pena/ambito): non «cosa
+# dice», ma «che tipo di legge è». Danno attrito al tavolo — un editto spietato e arbitrario
+# su una terra libera è una posta in gioco; il radar lo mostra a colpo d'occhio.
+id: editto
+assi:
+- id: severita
+  nome: Severità
+  descrizione: "Durezza della sanzione e del suo peso sulla vita di chi vi soggiace."
+  valori:
+    1: { etichetta: Blanda,   descrizione: "Pene simboliche o ammende lievi; più monito che castigo." }
+    2: { etichetta: Mite,     descrizione: "Sanzioni reali ma proporzionate; raramente rovinano una vita." }
+    3: { etichetta: Severa,   descrizione: "Pene pesanti: multe rovinose, prigione, esilio." }
+    4: { etichetta: Dura,     descrizione: "Punizioni corporali, marchio, lavori forzati; colpisce anche i parenti." }
+    5: { etichetta: Spietata, descrizione: "Morte, mutilazione, schiavitù; il terrore è parte della legge." }
+- id: legittimita
+  nome: Legittimità
+  descrizione: "Quanto è riconosciuta come giusta, dal capriccio del tiranno al patto condiviso."
+  valori:
+    1: { etichetta: Arbitraria,  descrizione: "Imposta per fiat: nessuno la riconosce giusta, solo temuta." }
+    2: { etichetta: Contestata,  descrizione: "Larga parte la considera ingiusta; cova resistenza." }
+    3: { etichetta: Tollerata,   descrizione: "Accettata per quieto vivere, senza vero consenso." }
+    4: { etichetta: Riconosciuta, descrizione: "Vista come legittima dalla maggioranza; ha autorità reale." }
+    5: { etichetta: Consensuale, descrizione: "Frutto di patto o tradizione condivisa; obbedita per convinzione." }
+- id: portata
+  nome: Portata
+  descrizione: "Ampiezza di ciò che tocca, dal caso singolo all'ordinamento universale."
+  valori:
+    1: { etichetta: Circoscritta, descrizione: "Riguarda una persona, un caso, un luogo solo." }
+    2: { etichetta: Locale,       descrizione: "Vale per una città o una comunità." }
+    3: { etichetta: Regionale,    descrizione: "Copre una provincia o un ambito definito della vita." }
+    4: { etichetta: Estesa,       descrizione: "Vincola un intero regno o un grande settore." }
+    5: { etichetta: Universale,   descrizione: "Pretende di valere per tutti e ovunque, senza eccezioni." }
+- id: applicazione
+  nome: Applicazione
+  descrizione: "Quanto è davvero fatta rispettare: lo scarto fra la lettera e i fatti."
+  valori:
+    1: { etichetta: "Lettera morta", descrizione: "Scritta ma ignorata; nessuno la applica più." }
+    2: { etichetta: Lassa,        descrizione: "Applicata a sprazzi, aggirata da chiunque conti." }
+    3: { etichetta: Discontinua,  descrizione: "Fatta valere a seconda di chi governa e dove." }
+    4: { etichetta: Vigilata,     descrizione: "Controlli regolari; trasgredire è rischioso." }
+    5: { etichetta: Inflessibile, descrizione: "Applicata senza eccezioni; informatori, controlli capillari, nessuno scampo." }
+archetipi:
+- { id: tirannico,       nome: "Decreto tirannico", quando: { legittimita: "<=2", severita: ">=4" },     tag: [arbitrario, spietato] }
+- { id: legge_condivisa, nome: "Legge condivisa",   quando: { legittimita: ">=4", applicazione: ">=4" }, tag: [legittimo, applicato] }
+- { id: lettera_morta,   nome: "Lettera morta",     quando: { applicazione: "<=2" },                      tag: [inapplicato] }
+- { id: legge_quadro,    nome: "Norma universale",  quando: { portata: ">=4" },                           tag: [universale] }

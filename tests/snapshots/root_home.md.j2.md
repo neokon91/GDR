@@ -17,6 +17,7 @@
 > [[Cronologia|📜 Cronologia]]
 > [[Geografia|🧭 Geografia & confini]]
 > [[Economia|💰 Economia & rotte]]
+> [[Missioni|🗺 Quest log]]
 > [[Occhi del giocatore|👁 Occhi del giocatore]]
 
 > [!example] 🌍 La cornice

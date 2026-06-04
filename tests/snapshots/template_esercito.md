@@ -77,6 +77,57 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
+--- 📊 Carattere
+
+> [!abstract] Carattere
+> **Disciplina** `INPUT[slider(minValue(1), maxValue(5), addLabels):disciplina]` → `VIEW[{disciplina} == 5 ? "5 · Ferrea" : ({disciplina} == 4 ? "4 · Salda" : ({disciplina} == 3 ? "3 · Addestrata" : ({disciplina} == 2 ? "2 · Irregolare" : ({disciplina} == 1 ? "1 · Sbandata" : ("—")))))]`
+> **Ferocia** `INPUT[slider(minValue(1), maxValue(5), addLabels):ferocia]` → `VIEW[{ferocia} == 5 ? "5 · Spietata" : ({ferocia} == 4 ? "4 · Brutale" : ({ferocia} == 3 ? "3 · Risoluta" : ({ferocia} == 2 ? "2 · Misurata" : ({ferocia} == 1 ? "1 · Cavalleresca" : ("—")))))]`
+> **Lealtà** `INPUT[slider(minValue(1), maxValue(5), addLabels):lealta]` → `VIEW[{lealta} == 5 ? "5 · Fanatica" : ({lealta} == 4 ? "4 · Devota" : ({lealta} == 3 ? "3 · Affidabile" : ({lealta} == 2 ? "2 · Volubile" : ({lealta} == 1 ? "1 · Venale" : ("—")))))]`
+> **Mobilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):mobilita]` → `VIEW[{mobilita} == 5 ? "5 · Fulminea" : ({mobilita} == 4 ? "4 · Rapida" : ({mobilita} == 3 ? "3 · Manovriera" : ({mobilita} == 2 ? "2 · Lenta" : ({mobilita} == 1 ? "1 · Statica" : ("—")))))]`
+
+> [!note]- Disciplina — Coesione e tenuta degli ordini sotto pressione, dalla massa sbandata al reparto che non si rompe.
+> **1 · Sbandata** — Nessun ordine: al primo urto si disperde o si dà al saccheggio. Recluta grezza, plebaglia armata.
+> **2 · Irregolare** — Combatte a sprazzi; tiene se vince, fugge se perde. Bande, leve raccogliticce.
+> **3 · Addestrata** — Conosce le formazioni e gli ordini; regge un combattimento normale.
+> **4 · Salda** — Tiene la linea anche in difficoltà; ufficiali competenti, manovre provate.
+> **5 · Ferrea** — Macchina inarrestabile: esegue sotto qualsiasi fuoco, non si sfalda. Legioni, ordini d'élite.
+
+> [!note]- Ferocia — Come tratta nemici, prigionieri e popolazione: dal codice cavalleresco alla guerra totale.
+> **1 · Cavalleresca** — Rispetta resa, prigionieri e civili; la guerra ha regole sacre.
+> **2 · Misurata** — Violenza proporzionata allo scopo; eccessi puniti.
+> **3 · Risoluta** — Colpisce duro per vincere, ma non infierisce per sport.
+> **4 · Brutale** — Terrore come arma: razzie, rappresaglie, poca pietà per i vinti.
+> **5 · Spietata** — Guerra di sterminio: nessun prigioniero, terra bruciata, il massacro è il metodo.
+
+> [!note]- Lealtà — A chi e a cosa risponde davvero la truppa: dalla paga al fanatismo.
+> **1 · Venale** — Fedele all'ultimo pagamento; cambia bandiera per più oro o se la paga salta.
+> **2 · Volubile** — Lealtà fragile: diserta sotto stress, tratta col nemico se conviene.
+> **3 · Affidabile** — Serve il suo signore con normale fedeltà; non tradisce senza ragione grave.
+> **4 · Devota** — Legata al comandante o alla causa; sopporta privazioni e sconfitte senza cedere.
+> **5 · Fanatica** — Muore senza esitare per il capo, il dio o l'ideale; nessuna corruzione la piega.
+
+> [!note]- Mobilità — Tempo strategico della forza: dalla massa d'assedio agli incursori fulminei.
+> **1 · Statica** — Lenta e pesante: assedio, difesa fissa, treno logistico enorme. Domina un punto, non manovra.
+> **2 · Lenta** — Marcia pesante; colpisce dove arriva, ma arriva tardi.
+> **3 · Manovriera** — Si sposta e reagisce a velocità normale di campagna.
+> **4 · Rapida** — Colonne veloci, cavalleria, sorpresa: arriva dove non l'aspetti.
+> **5 · Fulminea** — Razzia e sparisce: incursori, predoni a cavallo, corsari. Inafferrabile, vive di colpi di mano.
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "esercito", component);
+```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
+```
+
 --- 🔗 Collegamenti
 
 > [!example] Relazioni

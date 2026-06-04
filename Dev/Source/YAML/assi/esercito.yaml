@@ -1,0 +1,48 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'esercito'.
+# Carattere di una forza armata, ortogonale ai campi-stat (consistenza/morale/dottrina):
+# non «quanto è grossa», ma «che esercito è». Due eserciti `nemici` condividono questi
+# assi per costruzione → il motore di coerenza (renderCoerenza) ne fa emergere lo scontro.
+id: esercito
+assi:
+- id: disciplina
+  nome: Disciplina
+  descrizione: "Coesione e tenuta degli ordini sotto pressione, dalla massa sbandata al reparto che non si rompe."
+  valori:
+    1: { etichetta: Sbandata,   descrizione: "Nessun ordine: al primo urto si disperde o si dà al saccheggio. Recluta grezza, plebaglia armata." }
+    2: { etichetta: Irregolare, descrizione: "Combatte a sprazzi; tiene se vince, fugge se perde. Bande, leve raccogliticce." }
+    3: { etichetta: Addestrata, descrizione: "Conosce le formazioni e gli ordini; regge un combattimento normale." }
+    4: { etichetta: Salda,      descrizione: "Tiene la linea anche in difficoltà; ufficiali competenti, manovre provate." }
+    5: { etichetta: Ferrea,     descrizione: "Macchina inarrestabile: esegue sotto qualsiasi fuoco, non si sfalda. Legioni, ordini d'élite." }
+- id: ferocia
+  nome: Ferocia
+  descrizione: "Come tratta nemici, prigionieri e popolazione: dal codice cavalleresco alla guerra totale."
+  valori:
+    1: { etichetta: Cavalleresca, descrizione: "Rispetta resa, prigionieri e civili; la guerra ha regole sacre." }
+    2: { etichetta: Misurata,     descrizione: "Violenza proporzionata allo scopo; eccessi puniti." }
+    3: { etichetta: Risoluta,     descrizione: "Colpisce duro per vincere, ma non infierisce per sport." }
+    4: { etichetta: Brutale,      descrizione: "Terrore come arma: razzie, rappresaglie, poca pietà per i vinti." }
+    5: { etichetta: Spietata,     descrizione: "Guerra di sterminio: nessun prigioniero, terra bruciata, il massacro è il metodo." }
+- id: lealta
+  nome: Lealtà
+  descrizione: "A chi e a cosa risponde davvero la truppa: dalla paga al fanatismo."
+  valori:
+    1: { etichetta: Venale,     descrizione: "Fedele all'ultimo pagamento; cambia bandiera per più oro o se la paga salta." }
+    2: { etichetta: Volubile,   descrizione: "Lealtà fragile: diserta sotto stress, tratta col nemico se conviene." }
+    3: { etichetta: Affidabile, descrizione: "Serve il suo signore con normale fedeltà; non tradisce senza ragione grave." }
+    4: { etichetta: Devota,     descrizione: "Legata al comandante o alla causa; sopporta privazioni e sconfitte senza cedere." }
+    5: { etichetta: Fanatica,   descrizione: "Muore senza esitare per il capo, il dio o l'ideale; nessuna corruzione la piega." }
+- id: mobilita
+  nome: Mobilità
+  descrizione: "Tempo strategico della forza: dalla massa d'assedio agli incursori fulminei."
+  valori:
+    1: { etichetta: Statica,    descrizione: "Lenta e pesante: assedio, difesa fissa, treno logistico enorme. Domina un punto, non manovra." }
+    2: { etichetta: Lenta,      descrizione: "Marcia pesante; colpisce dove arriva, ma arriva tardi." }
+    3: { etichetta: Manovriera, descrizione: "Si sposta e reagisce a velocità normale di campagna." }
+    4: { etichetta: Rapida,     descrizione: "Colonne veloci, cavalleria, sorpresa: arriva dove non l'aspetti." }
+    5: { etichetta: Fulminea,   descrizione: "Razzia e sparisce: incursori, predoni a cavallo, corsari. Inafferrabile, vive di colpi di mano." }
+archetipi:
+- { id: legione,     nome: "Legione di ferro",     quando: { disciplina: ">=4", mobilita: "<=2" },  tag: [disciplinata, statica] }
+- { id: orda,        nome: "Orda travolgente",     quando: { disciplina: "<=2", ferocia: ">=4" },   tag: [feroce, indisciplinata] }
+- { id: ventura,     nome: "Compagnia di ventura", quando: { lealta: "<=2" },                        tag: [mercenaria, venale] }
+- { id: incursori,   nome: "Predoni fulminei",     quando: { mobilita: ">=4", ferocia: ">=4" },     tag: [mobile, feroce] }
+- { id: pretoriani,  nome: "Guardia fedele",       quando: { lealta: ">=4", disciplina: ">=4" },    tag: [leale, scelta] }

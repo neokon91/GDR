@@ -133,6 +133,32 @@ def _caster_slot_tables(classi: dict[str, Any]) -> dict[str, list[dict[str, int]
     return out
 
 
+def _class_resources(raw_prog: list[Any], risorse_map: dict[str, Any]) -> list[dict[str, Any]]:
+    """Risorse di classe a ricarica (Ki/Ira/Incanalare divinità/...) dalle COLONNE-risorsa
+    della progressione SRD, mappate in pg_rules.risorse_classe (chiave = nome colonna). Per
+    ogni colonna presente: {id, label, ricarica, icona, valori:{livello:n}} — i livelli col
+    valore '-' (la classe non l'ha ancora) sono saltati. crea_pg/sali_pg ne derivano il max
+    al livello del PG; renderRisorsePG le disegna; i riposi le azzerano."""
+    rows = [r for r in (raw_prog or []) if isinstance(r, dict)]
+    out: list[dict[str, Any]] = []
+    for col, spec in (risorse_map or {}).items():
+        valori = {}
+        for r in rows:
+            liv = _int_or_none(r.get("Livello"))
+            n = _int_or_none(r.get(col))
+            if liv and n is not None:
+                valori[liv] = n
+        if valori:
+            out.append({
+                "id": spec["id"],
+                "label": spec.get("label", col),
+                "ricarica": spec.get("ricarica", "lungo"),
+                "icona": spec.get("icona", ""),
+                "valori": valori,
+            })
+    return out
+
+
 def parse_class_skills(prose: str, all_skill_ids: list[str], label_to_id: dict[str, str]) -> dict[str, Any]:
     """Da una frase SRD ('Due a scelta tra Atletica, Intimidire o ...') ricava
     {scelte: N, opzioni: [id...]}. Senza elenco esplicito -> tutte le 18 abilità."""
@@ -230,6 +256,7 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
         return [label_to_id[_norm(n)] for n in (names or []) if _norm(n) in label_to_id]
 
     mastery_fallback = int(pg_rules.get("padronanza_armi_fallback", 2))
+    risorse_map = pg_rules.get("risorse_classe", {}) or {}
     classi: dict[str, Any] = {}
     for cls in load_srd("srd_5_2_1_classes.json"):
         comp = cls.get("competenze", {}) or {}
@@ -264,7 +291,22 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
             # Padronanze d'armi note al L1 (Weapon Mastery 2024): quante l'utente
             # ne sceglie in creazione (0 per le classi che non la ottengono).
             "padronanza_armi": _weapon_mastery_count(cls, prog1["privilegi"], mastery_fallback),
+            # Risorse di classe a ricarica (Ki/Ira/Incanalare/...): valori per livello
+            # dalle colonne SRD + ricarica curata (pg_rules). crea_pg/sali_pg → risorse_pg.
+            "risorse": _class_resources(cls.get("progressione"), risorse_map),
         }
+
+    # Risorse il cui max = mod. di una caratteristica (Ispirazione bardica = mod CAR):
+    # non in tabella SRD → appese qui alla classe; crea_pg/sali_pg ne calcolano il max.
+    for cid, spec in (pg_rules.get("risorse_caratteristica", {}) or {}).items():
+        if cid in classi:
+            classi[cid].setdefault("risorse", []).append({
+                "id": spec["id"], "label": spec.get("label", spec["id"]),
+                "ricarica": spec.get("ricarica", "lungo"),
+                "ricarica_breve_da_livello": spec.get("ricarica_breve_da_livello"),
+                "caratteristica": spec.get("caratteristica"),
+                "icona": spec.get("icona", ""),
+            })
 
     specie: dict[str, Any] = {}
     for sp in load_srd("srd_5_2_1_species.json"):
@@ -311,6 +353,9 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
         "talenti": talenti,
         # Tabelle slot standard (pieno/mezzo) per i caster homebrew, dall'SRD.
         "slot_incantatore": _caster_slot_tables(classi),
+        # Classi le cui SLOT ricaricano sul riposo BREVE (Patto del Warlock 2024):
+        # crea_pg/sali_pg scrivono `slot_ricarica: breve`; riposo_breve azzera gli slot.
+        "slot_ricarica_breve_classi": pg_rules.get("slot_ricarica_breve_classi", []) or [],
         # Mappa nome-arma -> padronanza (Weapon Mastery 2024): crea_pg la usa per
         # offrire le armi alla scelta delle padronanze e per mostrarne l'effetto.
         "armi_padronanza": _weapon_mastery_map(),

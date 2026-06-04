@@ -248,6 +248,9 @@ buttons:
   - id: riposo-breve
     label: Riposo breve
     action: riposo_breve
+  - id: usa-risorsa
+    label: Usa risorsa
+    action: usa_risorsa
   - id: aggiorna-encounter
     label: Aggiorna encounter
     action: aggiorna_encounter

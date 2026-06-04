@@ -100,6 +100,7 @@ function classeHomebrew(opt) {
       incantesimi_pool: caster ? incantesimiHomebrew(f.basename, f.basename) : {},
       tipo_incantatore: tipoInc || "nessuno",
       padronanza_armi: 0,
+      risorse: Array.isArray(fm.risorse) ? fm.risorse : [],
     };
   }
   return out;
@@ -257,6 +258,27 @@ async function sali_pg(tp) {
   // Dice Roller `dice: 1d20 + mod_<car>` restano corretti senza riaprire la nota.
   for (const c of ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"]) {
     if (u[c] != null) u["mod_" + c] = mod(u[c]);
+  }
+
+  // Risorse di classe (Ki/Ira/Incanalare/...): aggiorna il max al nuovo livello; le
+  // risorse appena ottenute partono da 0 spesi (le altre conservano gli usi correnti,
+  // li azzera un riposo). Le classi senza risorse a ricarica non scrivono nulla.
+  const risorse = (classe.risorse || []).map(r => {
+    let max;
+    if (r.caratteristica) {
+      const score = u[r.caratteristica] != null ? u[r.caratteristica] : fm[r.caratteristica];
+      max = Math.max(1, mod(score));  // Ispirazione bardica = mod CAR (aggiornato da un ASI)
+    } else if (r.valori) {
+      max = 0;
+      for (const [k, v] of Object.entries(r.valori)) if (Number(k) <= nuovo) max = Math.max(max, Number(v) || 0);
+    } else max = Number(r.max) || 0;  // homebrew: max fisso
+    const ric = (r.ricarica_breve_da_livello && nuovo >= r.ricarica_breve_da_livello) ? "breve" : r.ricarica;
+    return { id: r.id, label: r.label, max, ric, icona: r.icona || "" };
+  }).filter(r => r.max > 0);
+  if (risorse.length) {
+    u.risorse_pg = risorse;
+    for (const r of risorse) if (fm["usi_" + r.id] == null) u["usi_" + r.id] = 0;
+    note.push("risorse aggiornate");
   }
 
   await app.fileManager.processFrontMatter(file, f => { for (const [k, v] of Object.entries(u)) f[k] = v; });

@@ -13,12 +13,12 @@ templates:
 # SOTTOTIPI con PROFILO: la NATURA dell'incarico (cosa devono fare i PG). Una missione
 # non è un Fronte (è seguita dallo `stato`, non da un clock): clock/evoluzione false.
 subtypes:
-- { nome: incarico,     descrizione: "Un lavoro su commissione: fai X, ricevi Y. Il pane dell'avventuriero.",          campi: [committente, ricompensa], clock: false, evoluzione: false }
-- { nome: caccia,       descrizione: "Dai la caccia a una creatura o a un ricercato: traccia, stana, cattura o uccidi.", campi: [bersaglio, ricompensa], clock: false, evoluzione: false }
-- { nome: recupero,     descrizione: "Recupera un oggetto o una persona da un luogo pericoloso.",                       campi: [da_recuperare, ricompensa], clock: false, evoluzione: false }
-- { nome: scorta,       descrizione: "Proteggi qualcuno o qualcosa lungo un tragitto pericoloso.",                      campi: [committente, ricompensa], clock: false, evoluzione: false }
-- { nome: indagine,     descrizione: "Scopri la verità: chi, come, perché — indizi, testimoni, depistaggi.",           campi: [committente], clock: false, evoluzione: false }
-- { nome: eliminazione, descrizione: "Elimina un bersaglio: un colpo, una bonifica, un assassinio.",                    campi: [bersaglio, ricompensa], clock: false, evoluzione: false }
+- { nome: incarico,     descrizione: "Un lavoro su commissione: fai X, ricevi Y. Il pane dell'avventuriero.",          campi: [committente, ricompensa], clock: false, evoluzione: false, wizard: ["Chi commissiona, e cosa NON dice ai PG?", "Cosa rende il pagamento incerto o avvelenato?"] }
+- { nome: caccia,       descrizione: "Dai la caccia a una creatura o a un ricercato: traccia, stana, cattura o uccidi.", campi: [bersaglio, ricompensa], clock: false, evoluzione: false, wizard: ["Cosa rende il bersaglio difficile da trovare o fermare?", "Chi altri lo cerca, e perché?"] }
+- { nome: recupero,     descrizione: "Recupera un oggetto o una persona da un luogo pericoloso.",                       campi: [da_recuperare, ricompensa], clock: false, evoluzione: false, wizard: ["Perché si trova proprio là, e chi lo sorveglia?", "Chi altro lo rivuole indietro?"] }
+- { nome: scorta,       descrizione: "Proteggi qualcuno o qualcosa lungo un tragitto pericoloso.",                      campi: [committente, ricompensa], clock: false, evoluzione: false, wizard: ["Cosa o chi insidia il protetto lungo la via?", "Cosa nasconde ai PG il protetto stesso?"] }
+- { nome: indagine,     descrizione: "Scopri la verità: chi, come, perché — indizi, testimoni, depistaggi.",           campi: [committente], clock: false, evoluzione: false, wizard: ["Qual è il depistaggio che sembra la verità?", "Chi ha interesse a che i PG non scoprano?"] }
+- { nome: eliminazione, descrizione: "Elimina un bersaglio: un colpo, una bonifica, un assassinio.",                    campi: [bersaglio, ricompensa], clock: false, evoluzione: false, wizard: ["Il bersaglio merita davvero questa fine?", "Cosa succede se i PG esitano o rifiutano?"] }
 fields:
   committente:    { label: Committente,   widget: legame }
   bersaglio:      { label: Bersaglio,      widget: legame }

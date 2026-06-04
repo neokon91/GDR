@@ -32,6 +32,35 @@ aumento_background:
 # (Ladro/Paladino/Ranger). Barbaro (2) e Guerriero (3) vengono dal SRD. Valore 2024.
 padronanza_armi_fallback: 2
 
+# Risorse di classe a ricarica (loop di sessione 2024). L'SRD TABELLA il valore per
+# livello in una colonna della progressione, ma NON dice quando ricarica → mappa
+# curata qui. Chiave = nome ESATTO della colonna SRD; build_personaggio.py estrae i
+# valori per livello, il resto è authoring. `id` = chiave frontmatter (usi_<id> = spesi);
+# `ricarica` breve = riposo breve O lungo · lungo = solo riposo lungo. crea_pg/sali_pg
+# scrivono `risorse_pg` sulla scheda; renderRisorsePG ne disegna le barre; i riposi le
+# azzerano; il bottone «Usa risorsa» ne spende una (meta_actions.usa_risorsa).
+risorse_classe:
+  "Ire":                 { id: ira,                label: "Ira",                  ricarica: lungo, icona: "🔥" }
+  "Punti stregoneria":   { id: punti_stregoneria,  label: "Punti stregoneria",    ricarica: lungo, icona: "✨" }
+  "Concentrazione":      { id: disciplina,         label: "Punti Disciplina (Ki)", ricarica: breve, icona: "🥋" }
+  "Incanalare divinità": { id: incanalare,         label: "Incanalare divinità",  ricarica: breve, icona: "🙏" }
+  "Forma selvatica":     { id: forma_selvatica,    label: "Forma selvatica",      ricarica: breve, icona: "🐻" }
+  "Recuperare energie":  { id: recuperare_energie, label: "Recuperare energie",   ricarica: breve, icona: "💨" }
+  "Nemico prescelto":    { id: nemico_prescelto,   label: "Nemico prescelto",     ricarica: lungo, icona: "🎯" }
+
+# Classi le cui SLOT incantesimo ricaricano sul riposo BREVE (Magia del Patto del
+# Warlock 2024): crea_pg/sali_pg scrivono `slot_ricarica: breve`, e riposo_breve azzera
+# gli slot_uso_N. Gli altri incantatori recuperano gli slot solo sul riposo lungo.
+slot_ricarica_breve_classi: [warlock]
+
+# Risorse il cui MAX = modificatore di una CARATTERISTICA (non una colonna SRD): es.
+# l'Ispirazione bardica = mod Carisma (min 1). Chiave = id classe; crea_pg/sali_pg
+# calcolano max = mod(<caratteristica>) al punteggio corrente del PG (si aggiorna a un ASI).
+# `ricarica_breve_da_livello`: dal livello indicato la ricarica passa a riposo breve (Bardo:
+# «Fonte di ispirazione» al 5º livello, 2024 → prima riposo lungo, poi breve).
+risorse_caratteristica:
+  bardo: { id: ispirazione, label: "Ispirazione bardica", caratteristica: carisma, ricarica: lungo, ricarica_breve_da_livello: 5, icona: "🎵" }
+
 # Armature SRD 5.2.1 (per il calcolo CA). ca_base = CA dell'armatura; dex_max =
 # massimo bonus di Destrezza applicabile (null = nessun limite; 0 = nessun bonus).
 # La scheda calcola: CA = ca_base + min(mod_DES, dex_max) + (2 se scudo). SRD JSON

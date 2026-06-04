@@ -15,11 +15,11 @@ templates:
 # clock) che evolvono tra le epoche. NB: 'ordine monastico' (non 'ordine') per non
 # confondersi con l'asse «Ordine» (cosmico) e col sottotipo 'ordine' di fazione.
 subtypes:
-- { nome: religione,        descrizione: "Fede organizzata e diffusa, con clero, dottrina e luoghi di culto pubblici.",                  campi: [dogma], clock: true, evoluzione: true }
-- { nome: ordine monastico, descrizione: "Fratellanza chiusa votata a una regola: monaci, asceti, custodi; voti e disciplina.",         campi: [regola_monastica, voti], clock: true, evoluzione: true }
-- { nome: setta,            descrizione: "Scissione eretica o segreta dal culto madre: dottrina deviante, riti nascosti, segni di riconoscimento.", campi: [eresia], clock: true, evoluzione: true }
-- { nome: culto misterico,  descrizione: "Religione iniziatica a gradi: rivelazioni progressive riservate agli adepti.",                campi: [gradi_iniziazione], clock: true, evoluzione: true }
-- { nome: fede popolare,    descrizione: "Devozione diffusa e decentrata: santi locali, superstizioni, pratiche quotidiane senza clero forte.", campi: [pratiche], clock: true, evoluzione: true }
+- { nome: religione,        descrizione: "Fede organizzata e diffusa, con clero, dottrina e luoghi di culto pubblici.",                  campi: [dogma], clock: true, evoluzione: true, wizard: ["Cosa promette ai fedeli, e cosa pretende in cambio?", "Quale altra fede considera nemica?"] }
+- { nome: ordine monastico, descrizione: "Fratellanza chiusa votata a una regola: monaci, asceti, custodi; voti e disciplina.",         campi: [regola_monastica, voti], clock: true, evoluzione: true, wizard: ["Qual è la regola che nessun membro può infrangere?", "Cosa custodisce, lontano da occhi esterni?"] }
+- { nome: setta,            descrizione: "Scissione eretica o segreta dal culto madre: dottrina deviante, riti nascosti, segni di riconoscimento.", campi: [eresia], clock: true, evoluzione: true, wizard: ["Qual è l'eresia che la separa dal culto madre?", "Come si riconoscono fra loro, e cosa rischiano se scoperti?"] }
+- { nome: culto misterico,  descrizione: "Religione iniziatica a gradi: rivelazioni progressive riservate agli adepti.",                campi: [gradi_iniziazione], clock: true, evoluzione: true, wizard: ["Cosa si rivela solo all'ultimo grado?", "Cosa lega gli iniziati e li tiene in silenzio?"] }
+- { nome: fede popolare,    descrizione: "Devozione diffusa e decentrata: santi locali, superstizioni, pratiche quotidiane senza clero forte.", campi: [pratiche], clock: true, evoluzione: true, wizard: ["Quale paura o bisogno quotidiano placa?", "Quale rito tutti praticano senza sapere perché?"] }
 fields:
   dogma:             { label: Dogma centrale,        widget: text }
   regola_monastica:  { label: Regola,                widget: text }

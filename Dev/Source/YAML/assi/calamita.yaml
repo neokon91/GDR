@@ -1,0 +1,47 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'calamità'.
+# Carattere di una sciagura-Fronte, ortogonale ai campi (causa/diffusione/rimedio/gravità):
+# non «quanto è grave ORA» (gravita), ma come AVANZA — la fisionomia del clock. Danno al
+# radar la differenza fra una peste fulminea e una maledizione che marcisce per generazioni.
+id: calamita
+assi:
+- id: virulenza
+  nome: Virulenza
+  descrizione: "Velocità con cui si propaga: quanto in fretta il clock del Fronte si riempie."
+  valori:
+    1: { etichetta: Stagnante,  descrizione: "Quasi non si estende: resta dov'è, va contenuta solo per non peggiorare." }
+    2: { etichetta: Lenta,      descrizione: "Avanza di stagione in stagione; c'è tempo per reagire." }
+    3: { etichetta: Crescente,  descrizione: "Si diffonde a ritmo costante e percepibile; va fermata presto." }
+    4: { etichetta: Galoppante, descrizione: "Dilaga di settimana in settimana; ogni indugio raddoppia il fronte." }
+    5: { etichetta: Fulminea,   descrizione: "Esplode: travolge regioni in giorni. Il clock corre, serve un miracolo per arginarla." }
+- id: letalita
+  nome: Letalità
+  descrizione: "Quanto colpisce duro chi raggiunge: dal logorio allo sterminio."
+  valori:
+    1: { etichetta: Debilitante,   descrizione: "Indebolisce, non uccide: malesseri, perdite di raccolto, sfinimento." }
+    2: { etichetta: Fiaccante,     descrizione: "Mette in ginocchio comunità; le morti sono indirette (fame, stenti)." }
+    3: { etichetta: Mortale,       descrizione: "Uccide una quota di chi colpisce; lascia lutti e vuoti." }
+    4: { etichetta: Devastante,    descrizione: "Falcia popolazioni; villaggi spopolati, fosse comuni." }
+    5: { etichetta: Sterminatrice, descrizione: "Quasi nessuno sopravvive nel suo raggio: lascia terra morta." }
+- id: manifestazione
+  nome: Manifestazione
+  descrizione: "Quanto è palese: dal male occulto che nessuno nota al cataclisma sotto gli occhi di tutti."
+  valori:
+    1: { etichetta: Occulta,      descrizione: "Invisibile finché non è tardi: si scopre solo dai suoi effetti." }
+    2: { etichetta: Strisciante,  descrizione: "Segni sottili, facili da ignorare o fraintendere." }
+    3: { etichetta: Riconoscibile, descrizione: "Chiara a chi guarda; allarme e diagnosi sono possibili." }
+    4: { etichetta: Evidente,     descrizione: "Innegabile: tutti la vedono, il panico monta." }
+    5: { etichetta: Spettacolare, descrizione: "Apocalittica e visibile a leghe di distanza: cielo che brucia, terra che si apre." }
+- id: arginabilita
+  nome: Arginabilità
+  descrizione: "Quanto si può fermare o invertire: la speranza che il Fronte lascia ai PG."
+  valori:
+    1: { etichetta: Inarrestabile, descrizione: "Nessun rimedio noto; si può solo fuggire o rimandare la fine." }
+    2: { etichetta: Ostinata,      descrizione: "Resiste a ogni cura; servirebbe qualcosa che ancora non esiste." }
+    3: { etichetta: Contrastabile, descrizione: "Si rallenta e si limita con sforzo e sacrificio." }
+    4: { etichetta: Contenibile,   descrizione: "Con le misure giuste si circoscrive e si spegne." }
+    5: { etichetta: Reversibile,   descrizione: "Esiste un rimedio chiaro: trovato quello, il danno si ripara." }
+archetipi:
+- { id: morbo_fulminante, nome: "Morbo fulminante",       quando: { virulenza: ">=4", letalita: ">=4" },       tag: [fulminante, letale] }
+- { id: male_strisciante, nome: "Male strisciante",        quando: { manifestazione: "<=2", virulenza: "<=2" }, tag: [occulto, lento] }
+- { id: cataclisma,       nome: "Cataclisma inarrestabile", quando: { manifestazione: ">=4", arginabilita: "<=2" }, tag: [spettacolare, inarrestabile] }
+- { id: lenta_rovina,     nome: "Lenta rovina",            quando: { letalita: "<=2", arginabilita: "<=2" },   tag: [debilitante, perpetua] }

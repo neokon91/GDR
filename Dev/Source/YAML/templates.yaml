@@ -34,6 +34,9 @@ actions:
   - id: riposo_breve
     title: Riposo breve
     target: z.modelli/azioni/Riposo breve.md
+  - id: usa_risorsa
+    title: Usa risorsa
+    target: z.modelli/azioni/Usa risorsa.md
   - id: aggiorna_encounter
     title: Aggiorna encounter
     target: z.modelli/azioni/Aggiorna encounter.md

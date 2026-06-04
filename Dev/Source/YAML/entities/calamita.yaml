@@ -15,11 +15,11 @@ templates:
 # SOTTOTIPI con PROFILO: la NATURA della sciagura. Tutte sono Fronti che avanzano (clock);
 # alcune evolvono in fasi.
 subtypes:
-- { nome: pestilenza,  descrizione: "Malattia che si propaga: sintomi, contagio, morti; il clock è il dilagare dell'epidemia.", campi: [diffusione, rimedio, gravita], clock: true, evoluzione: true }
-- { nome: carestia,    descrizione: "Fame diffusa: raccolti perduti, scorte esaurite; il clock è la spirale verso la fame nera.", campi: [causa, rimedio, gravita], clock: true, evoluzione: true }
-- { nome: cataclisma,  descrizione: "Disastro naturale o magico in corso: terremoto, eruzione, tempesta arcana, marea che sale.", campi: [causa, gravita], clock: true, evoluzione: true }
-- { nome: maledizione, descrizione: "Sciagura soprannaturale su una terra o una stirpe: sterilità, follia, non-morte che cresce.", campi: [causa, rimedio, gravita], clock: true, evoluzione: true }
-- { nome: anomalia,    descrizione: "Squarcio o distorsione che si allarga: una zona morta, un varco, una realtà che si sfalda.", campi: [causa, diffusione, gravita], clock: true, evoluzione: true }
+- { nome: pestilenza,  descrizione: "Malattia che si propaga: sintomi, contagio, morti; il clock è il dilagare dell'epidemia.", campi: [diffusione, rimedio, gravita], clock: true, evoluzione: false }
+- { nome: carestia,    descrizione: "Fame diffusa: raccolti perduti, scorte esaurite; il clock è la spirale verso la fame nera.", campi: [causa, rimedio, gravita], clock: true, evoluzione: false }
+- { nome: cataclisma,  descrizione: "Disastro naturale o magico in corso: terremoto, eruzione, tempesta arcana, marea che sale.", campi: [causa, gravita], clock: true, evoluzione: false }
+- { nome: maledizione, descrizione: "Sciagura soprannaturale su una terra o una stirpe: sterilità, follia, non-morte che cresce.", campi: [causa, rimedio, gravita], clock: true, evoluzione: false }
+- { nome: anomalia,    descrizione: "Squarcio o distorsione che si allarga: una zona morta, un varco, una realtà che si sfalda.", campi: [causa, diffusione, gravita], clock: true, evoluzione: false }
 fields:
   causa:      { label: Causa / origine, widget: text }
   diffusione: { label: Come si diffonde, widget: text }

@@ -99,6 +99,7 @@ tappe_categorie:
   - fazione
   - culto
   - divinita   # una divinità evolve attraverso le epoche (venerata, dimenticata, sepolta, risvegliata)
+  - ecosistema # un ecosistema cambia su scala di epoche (foresta → palude → landa): i suoi sottotipi sono evoluzione:true
 
 # Categorie dove il MOTORE DI COERENZA (views.renderCoerenza) ha senso: hanno
 # relazioni di RIVALITÀ/ALLEANZA same-type (assi condivisi per costruzione), quindi
@@ -110,6 +111,7 @@ coerenza_categorie:
   - divinita
   - regno
   - personaggio
+  - esercito   # due eserciti `nemici` condividono gli assi per costruzione: il confronto fa emergere lo scontro (rivali-specchio)
 
 # Categorie che possono essere un FRONTE: attori con agenda/momento (sociale,
 # politico, religioso) o principi cosmici che premono sul tavolo. Solo qui la

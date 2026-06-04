@@ -485,6 +485,16 @@ async function renderRisorsePG(page) {
   const rows = [barRow("PF", num(page.pf), pfMax, "green", num(page.pf_temp) ? ` (+${num(page.pf_temp)} temp)` : "")];
   if (dvMax) rows.push(barRow("Dadi Vita", dvMax - num(page.dadi_vita_spesi), dvMax, "blue"));
   rows.push(barRow("Esaurimento", esa, 6, esa >= 5 ? "red" : (esa >= 3 ? "orange" : "purple")));
+  // Risorse di classe a ricarica (Ki/Ira/Incanalare/...): barra rimasti/max + icona della
+  // ricarica (🌙 riposo breve · ☀ riposo lungo). Da risorse_pg (scritto da crea_pg/sali_pg)
+  // e dal contatore usi_<id> (spesi). I riposi le azzerano (meta_actions); «Usa risorsa» ne spende.
+  for (const r of (Array.isArray(page.risorse_pg) ? page.risorse_pg : [])) {
+    const max = num(r && r.max);
+    if (max <= 0) continue;
+    const rem = Math.max(0, max - num(page["usi_" + r.id]));
+    const ric = r.ric === "breve" ? "🌙" : "☀";
+    rows.push(barRow(`${r.icona ? r.icona + " " : ""}${r.label} ${ric}`, rem, max, "cyan"));
+  }
   return `**🩸 Risorse**\n\n<div class="gdr-bars">${rows.join("")}</div>`;
 }
 
@@ -549,9 +559,22 @@ async function renderTipoProfilo(app, page) {
   }
   const tags = [];
   if (prof.clock) tags.push("⏳ è un **Fronte** — usa il clock nell'*Al tavolo*");
-  if (prof.evoluzione) tags.push("🕰 **evolve** tra le epoche — vedi *Cronologia*");
+  // «vedi Cronologia» SOLO se la categoria ha davvero quella tab (è in tappe_categorie):
+  // altrimenti il riferimento penzolerebbe verso una tab inesistente.
+  if (prof.evoluzione) {
+    const inTappe = asArray(core.tappe_categorie).includes(cat);
+    tags.push("🕰 **evolve** tra le epoche" + (inTappe ? " — vedi *Cronologia*" : ""));
+  }
   if (tags.length) { out.push(">"); out.push("> " + tags.join(" · ")); }
-  out.push(">", "> *I campi del tipo si modificano dal pannello **Proprietà**.*");
+  // Il promemoria «edita dal pannello Proprietà» ha senso SOLO se il tipo porta campi
+  // propri: un sottotipo senza `campi` (es. 'evento storico') non deve mostrarlo — il
+  // pannello resta un compatto richiamo di cosa significa il tipo scelto.
+  if (campi.length) out.push(">", "> *I campi del tipo si modificano dal pannello **Proprietà**.*");
+  // Spunti del tipo: le domande-guida del profilo (campo `wizard`), prima orfane (non
+  // chieste nel modale per scelta di design — la prosa non si digita lì). Qui diventano
+  // suggerimenti su cosa sviluppare creando una nota di QUESTO sottotipo.
+  const spunti = asArray(prof.wizard);
+  if (spunti.length) out.push(">", "> 💡 *Per un* «" + tipo + "» *chiediti:* " + spunti.join(" · "));
   return out.join("\n");
 }
 

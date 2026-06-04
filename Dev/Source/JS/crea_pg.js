@@ -294,6 +294,7 @@ function classeHomebrew(opt) {
       incantesimi_pool: caster ? incantesimiHomebrew(f.basename, f.basename) : {},
       tipo_incantatore: tipoInc || "nessuno",
       padronanza_armi: 0,
+      risorse: Array.isArray(fm.risorse) ? fm.risorse : [],
     };
   }
   return out;
@@ -371,6 +372,45 @@ function listaYamlQ(items) {
     return `\n${items.map(x => `  - ${JSON.stringify(String(x))}`).join("\n")}`;
 }
 
+// Max di una risorsa di classe al livello `liv`: il valore della colonna SRD al livello
+// del PG (valori per livello da personaggio.json; monotòno → max sui livelli ≤ liv).
+function maxAtLevel(valori, liv) {
+    let m = 0;
+    for (const [k, v] of Object.entries(valori || {})) {
+        if (Number(k) <= liv) m = Math.max(m, Number(v) || 0);
+    }
+    return m;
+}
+
+// Risorse di classe (Ki/Ira/Incanalare/...) ATTIVE al livello `liv`: {id, label, max,
+// ric, icona}, escluse quelle non ancora ottenute (max 0). → frontmatter `risorse_pg`.
+// Il max viene da: una CARATTERISTICA (Ispirazione = mod CAR, min 1) · una tabella SRD
+// per livello (`valori`) · o un `max` fisso (classe homebrew). La ricarica passa a breve
+// dal livello `ricarica_breve_da_livello` (Bardo: «Fonte di ispirazione» al 5º).
+function risorseAtLevel(risorse, liv, caratteristiche) {
+    return (risorse || [])
+        .map(r => {
+            let max;
+            if (r.caratteristica) max = Math.max(1, mod((caratteristiche || {})[r.caratteristica]));
+            else if (r.valori) max = maxAtLevel(r.valori, liv);
+            else max = Number(r.max) || 0;
+            const ric = (r.ricarica_breve_da_livello && liv >= r.ricarica_breve_da_livello) ? "breve" : r.ricarica;
+            return { id: r.id, label: r.label, max, ric, icona: r.icona || "" };
+        })
+        .filter(r => r.max > 0);
+}
+
+// risorse_pg (lista di oggetti) + i contatori usi_<id> azzerati (= 0 spesi). Vuoto per le
+// classi senza risorse a ricarica. renderRisorsePG le disegna, i riposi le azzerano.
+function risorseYaml(risorse) {
+    if (!risorse || !risorse.length) return "";
+    const lista = risorse.map(r =>
+        `  - { id: ${r.id}, label: ${JSON.stringify(String(r.label))}, max: ${r.max}, ric: ${r.ric}, icona: ${JSON.stringify(String(r.icona || ""))} }`
+    ).join("\n");
+    const usi = risorse.map(r => `usi_${r.id}: 0`).join("\n");
+    return `risorse_pg:\n${lista}\n${usi}\n`;
+}
+
 // Frontmatter con ID stabili. Competenze come FLAG 0/1 (ts_<stat>, prof_<skill>):
 // così la scheda PG calcola TS/bonus con Meta Bind (mod + flag * competenza).
 function frontmatter(pg) {
@@ -415,7 +455,7 @@ inventario:${listaYamlQ(pg.inventario)}
 incantatore: ${pg.incantatore ? "true" : "false"}
 trucchetti:${listaYamlQ(pg.trucchetti)}
 incantesimi:${listaYamlQ(pg.incantesimi)}
-${slotRighe ? slotRighe + "\n" : ""}talenti:${listaYaml(pg.talenti)}
+${slotRighe ? slotRighe + "\n" : ""}${pg.slot_ricarica ? `slot_ricarica: ${pg.slot_ricarica}\n` : ""}${risorseYaml(pg.risorse)}talenti:${listaYaml(pg.talenti)}
 padronanze_armi:${listaYamlQ(pg.padronanze_armi)}
 stato: bozza
 ---
@@ -499,6 +539,10 @@ async function costruisciPG(tp, opt, nome) {
     return frontmatter({
         nome,
         classe: classeId,
+        // Risorse di classe a ricarica al 1º livello (Ki/Ira/Incanalare/Ispirazione...) +
+        // slot del Patto (Warlock) che ricaricano sul riposo breve. Vuoto per le altre classi.
+        risorse: risorseAtLevel(classe.risorse, 1, caratteristiche),
+        slot_ricarica: (opt.slot_ricarica_breve_classi || []).includes(classeId) ? "breve" : "",
         specie: specieId,
         background: backgroundId,
         taglia: specie.taglia || "",
@@ -582,3 +626,4 @@ module.exports.backgroundHomebrew = backgroundHomebrew;
 module.exports.specieHomebrew = specieHomebrew;
 module.exports.classeHomebrew = classeHomebrew;
 module.exports.armiPadronanzaHomebrew = armiPadronanzaHomebrew;
+module.exports.risorseAtLevel = risorseAtLevel;

@@ -16,16 +16,16 @@ templates:
 # (clock) che evolvono tra le epoche. NB: `feudo` (non `dominio`) evita la collisione col
 # `dominio` cosmico.
 subtypes:
-- { nome: monarchia,      descrizione: "Un sovrano regna a vita, di norma per linea dinastica.",                       campi: [legge_successione], clock: true, evoluzione: true }
-- { nome: impero,         descrizione: "Potere espansionista che governa molte province e popoli sotto un imperatore.", campi: [province, motore_espansione], clock: true, evoluzione: true }
-- { nome: repubblica,     descrizione: "Il potere è eletto e a tempo: senato, consoli, magistrature.",                 campi: [organo_governo, durata_carica], clock: true, evoluzione: true }
-- { nome: teocrazia,      descrizione: "Governa il clero in nome di una divinità: la legge è dottrina.",               campi: [divinita_di_stato], clock: true, evoluzione: true }
-- { nome: oligarchia,     descrizione: "Poche casate, gilde o famiglie detengono il potere reale.",                    campi: [organo_governo], clock: true, evoluzione: true }
-- { nome: magocrazia,     descrizione: "Governano gli incantatori: l'accesso al potere passa dalla magia.",            campi: [organo_governo, sistema_magico_stato], clock: true, evoluzione: true }
-- { nome: città-stato,    descrizione: "Una sola città sovrana col suo contado, retta da consiglio o signore.",       campi: [organo_governo], clock: true, evoluzione: true }
-- { nome: confederazione, descrizione: "Stati o tribù alleati sotto un patto, con sovranità condivisa.",              campi: [membri, organo_governo], clock: true, evoluzione: true }
-- { nome: feudo,          descrizione: "Un signore governa la terra in cambio di fedeltà a un sovrano superiore.",     campi: [sovrano_feudale], clock: true, evoluzione: true }
-- { nome: despotismo,     descrizione: "Un tiranno detiene il potere assoluto, spesso preso con la forza.",           campi: [presa_potere], clock: true, evoluzione: true }
+- { nome: monarchia,      descrizione: "Un sovrano regna a vita, di norma per linea dinastica.",                       campi: [legge_successione], clock: true, evoluzione: true, wizard: ["Quanto è saldo il diritto al trono dell'attuale sovrano?", "Chi avanza una pretesa rivale?"] }
+- { nome: impero,         descrizione: "Potere espansionista che governa molte province e popoli sotto un imperatore.", campi: [province, motore_espansione], clock: true, evoluzione: true, wizard: ["Cosa lo tiene unito malgrado l'estensione?", "Quale provincia freme per staccarsi?"] }
+- { nome: repubblica,     descrizione: "Il potere è eletto e a tempo: senato, consoli, magistrature.",                 campi: [organo_governo, durata_carica], clock: true, evoluzione: true, wizard: ["Chi muove i fili dietro le cariche elette?", "Quale fazione vorrebbe abolire il voto?"] }
+- { nome: teocrazia,      descrizione: "Governa il clero in nome di una divinità: la legge è dottrina.",               campi: [divinita_di_stato], clock: true, evoluzione: true, wizard: ["Cosa attende chi dubita della dottrina?", "Potere sacro e temporale sono in pace?"] }
+- { nome: oligarchia,     descrizione: "Poche casate, gilde o famiglie detengono il potere reale.",                    campi: [organo_governo], clock: true, evoluzione: true, wizard: ["Quali casate spartiscono il potere, e quale sale?", "Cosa tiene il popolo fuori dalla stanza?"] }
+- { nome: magocrazia,     descrizione: "Governano gli incantatori: l'accesso al potere passa dalla magia.",            campi: [organo_governo, sistema_magico_stato], clock: true, evoluzione: true, wizard: ["Chi resta escluso perché non sa usare la magia?", "Cosa attende l'incantatore che sfida l'ordine?"] }
+- { nome: città-stato,    descrizione: "Una sola città sovrana col suo contado, retta da consiglio o signore.",       campi: [organo_governo], clock: true, evoluzione: true, wizard: ["Da cosa dipende la sua sopravvivenza (commercio, mura, alleanze)?", "Quale vicino la vorrebbe sottomessa?"] }
+- { nome: confederazione, descrizione: "Stati o tribù alleati sotto un patto, con sovranità condivisa.",              campi: [membri, organo_governo], clock: true, evoluzione: true, wizard: ["Cosa tiene insieme i membri, e cosa li dividerebbe?", "Chi vorrebbe farne un dominio unico?"] }
+- { nome: feudo,          descrizione: "Un signore governa la terra in cambio di fedeltà a un sovrano superiore.",     campi: [sovrano_feudale], clock: true, evoluzione: true, wizard: ["Cosa deve il signore al suo sovrano, e cosa gli nega?", "Il popolo è protetto o spremuto?"] }
+- { nome: despotismo,     descrizione: "Un tiranno detiene il potere assoluto, spesso preso con la forza.",           campi: [presa_potere], clock: true, evoluzione: true, wizard: ["Come ha preso il potere il tiranno, e chi lo ricorda?", "Chi cospira, e cosa lo trattiene?"] }
 fields:
   sovrano:              { label: Sovrano / capo,          widget: text }
   legge_successione:    { label: Legge di successione,    widget: successione }

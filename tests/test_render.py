@@ -156,7 +156,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "third_party_licenses.md.j2", "crea_il_tuo_mondo.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "third_party_licenses.md.j2", "crea_il_tuo_mondo.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "missioni.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)
@@ -310,6 +310,21 @@ def test_personaggio_options():
     assert opt["classi"]["ladro"]["padronanza_armi"] == 2
     # I caster puri non ottengono padronanza d'armi.
     assert opt["classi"]["mago"]["padronanza_armi"] == 0
+    # Risorse di classe a ricarica (loop di sessione 2024): pool numerici dalle colonne
+    # SRD + ricarica curata (pg_rules). Barbaro=Ira (lungo, 2→6); Monaco=Disciplina/Ki
+    # (breve, = livello da L2); caster puri/Ladro senza contatore; Warlock=slot a riposo breve.
+    barb = {r["id"]: r for r in opt["classi"]["barbaro"]["risorse"]}
+    assert barb["ira"]["ricarica"] == "lungo" and barb["ira"]["valori"][1] == 2
+    assert max(barb["ira"]["valori"].values()) == 6
+    monk = {r["id"]: r for r in opt["classi"]["monaco"]["risorse"]}
+    assert monk["disciplina"]["ricarica"] == "breve" and monk["disciplina"]["valori"][2] == 2
+    assert not opt["classi"]["mago"]["risorse"] and not opt["classi"]["ladro"]["risorse"]
+    assert opt["slot_ricarica_breve_classi"] == ["warlock"]
+    # Ispirazione bardica: risorsa il cui max = mod Carisma (non in tabella SRD), con
+    # ricarica che passa a riposo breve dal 5º livello (Fonte di ispirazione 2024).
+    bard = {r["id"]: r for r in opt["classi"]["bardo"]["risorse"]}
+    assert bard["ispirazione"]["caratteristica"] == "carisma" and "valori" not in bard["ispirazione"]
+    assert bard["ispirazione"]["ricarica"] == "lungo" and bard["ispirazione"]["ricarica_breve_da_livello"] == 5
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -379,6 +394,52 @@ def test_crea_personaggio_caster_e2e(tmp_path):
     assert fm["slot_1"] == mago["slot_l1"]["1"]
     assert set(fm["trucchetti"]).issubset(set(mago["incantesimi_pool"]["0"]))
     assert set(fm["incantesimi"]).issubset(set(mago["incantesimi_pool"]["1"]))
+
+
+@pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
+def test_crea_personaggio_risorse_e2e(tmp_path):
+    """Per una classe con risorsa a ricarica (Barbaro→Ira) il wizard scrive `risorse_pg`
+    (lista di oggetti) e il contatore usi_<id>=0 nel frontmatter: YAML valido e parsabile."""
+    opt, fm = _run_crea_pg(tmp_path, classe="Barbaro")
+    assert fm["classe"] == "barbaro"
+    risorse = {r["id"]: r for r in fm["risorse_pg"]}
+    assert "ira" in risorse
+    assert risorse["ira"]["max"] == 2 and risorse["ira"]["ric"] == "lungo"  # L1 = 2 Ire
+    assert fm["usi_ira"] == 0   # contatore spesi inizializzato
+    # Bardo: Ispirazione = mod Carisma (min 1), ricarica lungo al 1º livello (< soglia 5).
+    _, fmb = _run_crea_pg(tmp_path, classe="bardo")
+    risb = {r["id"]: r for r in fmb["risorse_pg"]}
+    assert "ispirazione" in risb
+    assert risb["ispirazione"]["max"] == max(1, (fmb["carisma"] - 10) // 2)
+    assert risb["ispirazione"]["ric"] == "lungo" and fmb["usi_ispirazione"] == 0
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_risorse_at_level(tmp_path):
+    """crea_pg.risorseAtLevel: il max viene da una CARATTERISTICA (mod, min 1), da una
+    TABELLA SRD (`valori`) o da un `max` fisso (homebrew); la ricarica passa a breve dalla
+    soglia `ricarica_breve_da_livello` (Bardo: Fonte di ispirazione al 5º)."""
+    harness = tmp_path / "ral.js"
+    harness.write_text(
+        f'const crea = require({json.dumps(str(render.JS_DIR / "crea_pg.js"))});\n'
+        'const R = ['
+        '  {id:"ispir",label:"Isp",caratteristica:"carisma",ricarica:"lungo",ricarica_breve_da_livello:5},'
+        '  {id:"ira",label:"Ira",valori:{1:2,3:3},ricarica:"lungo"},'
+        '  {id:"hb",label:"HB",max:4,ricarica:"breve"} ];\n'
+        'process.stdout.write(JSON.stringify({'
+        '  l1: crea.risorseAtLevel(R, 1, {carisma:14}),'
+        '  l5: crea.risorseAtLevel(R, 5, {carisma:8}) }));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    l1 = {r["id"]: r for r in out["l1"]}
+    assert l1["ispir"]["max"] == 2 and l1["ispir"]["ric"] == "lungo"   # mod(14)=2 · L1<5 → lungo
+    assert l1["ira"]["max"] == 2                                       # tabella al L1
+    assert l1["hb"]["max"] == 4 and l1["hb"]["ric"] == "breve"         # max fisso (homebrew)
+    l5 = {r["id"]: r for r in out["l5"]}
+    assert l5["ispir"]["max"] == 1 and l5["ispir"]["ric"] == "breve"   # mod(8)=−1 → min 1 · L5≥5 → breve
+    assert l5["ira"]["max"] == 3                                       # tabella: max sui livelli ≤5
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -838,7 +899,8 @@ def test_render_risorse_pg(tmp_path):
         'const fs=require("fs");'
         f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
-        'const pg={pf:10,pf_max:20,pf_temp:3,esaurimento:3,dadi_vita_max:4,dadi_vita_spesi:1};'
+        'const pg={pf:10,pf_max:20,pf_temp:3,esaurimento:3,dadi_vita_max:4,dadi_vita_spesi:1,'
+        '  risorse_pg:[{id:"ira",label:"Ira",max:5,ric:"lungo",icona:"🔥"}],usi_ira:1};'
         'Promise.all(['
         '  m.exports.renderRisorsePG(pg),'
         '  m.exports.renderRisorsePG({}),'
@@ -852,6 +914,8 @@ def test_render_risorse_pg(tmp_path):
     assert "width:50%" in out["a"]                 # PF 10/20 (ed Esaurimento 3/6)
     assert "width:75%" in out["a"]                 # Dadi Vita rimasti 3/4
     assert "(+3 temp)" in out["a"]                 # PF temporanei annotati
+    assert "width:80%" in out["a"]                 # risorsa di classe Ira: rimasti 4/5
+    assert "Ira" in out["a"] and "☀" in out["a"]   # etichetta + icona ricarica (lungo)
     assert out["b"] == ""                          # scheda non compilata -> niente
     assert out["c"] == "*Apri la scheda PG.*"      # senza page -> guida
     assert out["pct"] == 50
@@ -891,7 +955,8 @@ def test_riposo_lungo_e2e(tmp_path):
     harness.write_text(
         'global.Notice = class { constructor(m){} };\n'
         'const fm = { pf:5, pf_max:20, pf_temp:4, ts_morte_successi:2, ts_morte_fallimenti:1,'
-        ' slot_uso_1:1, esaurimento:3, concentrazione_su:"Benedizione", dadi_vita_max:4, dadi_vita_spesi:3 };\n'
+        ' slot_uso_1:1, esaurimento:3, concentrazione_su:"Benedizione", dadi_vita_max:4, dadi_vita_spesi:3,'
+        ' risorse_pg:[{id:"ira",ric:"lungo"},{id:"disciplina",ric:"breve"}], usi_ira:2, usi_disciplina:3 };\n'
         'const file = { basename:"Eroe", path:"Personaggi/Eroe.md" };\n'
         'global.app = {\n'
         '  workspace: { getActiveFile: () => file },\n'
@@ -910,6 +975,7 @@ def test_riposo_lungo_e2e(tmp_path):
     assert fm["esaurimento"] == 2   # −1, non azzerato (regola 2024)
     assert fm["concentrazione_su"] == ""        # concentrazione conclusa
     assert fm["dadi_vita_spesi"] == 1           # 3 − floor(4/2)=2 recuperati
+    assert fm["usi_ira"] == 0 and fm["usi_disciplina"] == 0  # riposo lungo: TUTTE le risorse ricaricate
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -933,12 +999,45 @@ def test_riposo_breve_e2e(tmp_path):
         return json.loads(res.stdout)
 
     # COS 14 (+2), d10: cura fra 1+2=3 e 10+2=12, pf 5→[8..17] cappato a 20.
-    fm = run('{ pf:5, pf_max:20, dado_vita:10, costituzione:14, dadi_vita_max:3, dadi_vita_spesi:0 }')
+    fm = run('{ pf:5, pf_max:20, dado_vita:10, costituzione:14, dadi_vita_max:3, dadi_vita_spesi:0,'
+             ' risorse_pg:[{id:"disciplina",ric:"breve"},{id:"ira",ric:"lungo"}], usi_disciplina:2, usi_ira:2,'
+             ' slot_ricarica:"breve", slot_uso_1:1 }')
     assert fm["dadi_vita_spesi"] == 1
     assert 8 <= fm["pf"] <= 17
-    # Nessun Dado Vita rimasto: invariato.
-    fm2 = run('{ pf:5, pf_max:20, dado_vita:10, costituzione:14, dadi_vita_max:1, dadi_vita_spesi:1 }')
+    assert fm["usi_disciplina"] == 0   # risorsa a riposo breve: ricaricata
+    assert fm["usi_ira"] == 2          # risorsa a riposo lungo: il breve non la tocca
+    assert fm["slot_uso_1"] == 0       # slot del Patto (Warlock 2024): ricaricati al breve
+    # Nessun Dado Vita rimasto: PF/Dadi Vita invariati, ma le risorse breve SI ricaricano.
+    fm2 = run('{ pf:5, pf_max:20, dado_vita:10, costituzione:14, dadi_vita_max:1, dadi_vita_spesi:1,'
+              ' risorse_pg:[{id:"disciplina",ric:"breve"}], usi_disciplina:2 }')
     assert fm2["dadi_vita_spesi"] == 1 and fm2["pf"] == 5
+    assert fm2["usi_disciplina"] == 0  # ricarica anche SENZA Dadi Vita da spendere
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_usa_risorsa_e2e(tmp_path):
+    """meta_actions.usa_risorsa: spende 1 uso (usi_<id>+1) della risorsa scelta nel
+    suggester, cappato al max; già esaurita -> invariato."""
+    def run(usi):
+        harness = tmp_path / "ur.js"
+        harness.write_text(
+            'global.Notice = class { constructor(m){} };\n'
+            f'const fm = {{ risorse_pg:[{{id:"ira",label:"Ira",max:3,ric:"lungo"}}], usi_ira:{usi} }};\n'
+            'const file = { basename:"Eroe", path:"P/Eroe.md" };\n'
+            'global.app = { workspace:{ getActiveFile:()=>file },\n'
+            '  metadataCache:{ getFileCache:()=>({ frontmatter: fm }) },\n'
+            '  fileManager:{ processFrontMatter: async (f, fn) => fn(fm) } };\n'
+            'const tp = { system:{ suggester: async (labels, items) => items[0] } };\n'
+            f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+            'meta(tp, "usa_risorsa").then(() => process.stdout.write(JSON.stringify(fm)));\n',
+            encoding="utf-8")
+        res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+        assert res.returncode == 0, res.stderr
+        return json.loads(res.stdout)
+
+    assert run(0)["usi_ira"] == 1   # speso 1 (0→1)
+    assert run(2)["usi_ira"] == 3   # 2→3 (raggiunge il max)
+    assert run(3)["usi_ira"] == 3   # già esaurita: invariato (non supera il max)
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -2173,13 +2272,16 @@ def test_render_tipo_profilo(tmp_path):
         f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const core={categories:{luogo:{subtype_profiles:{dungeon:{descrizione:"Complesso esplorabile.",'
-        ' campi:["livelli","occupante"],clock:true,evoluzione:false}}}},'
-        ' fields:{livelli:{label:"Livelli / aree"},occupante:{label:"Occupante"}}};'
+        ' campi:["livelli","occupante"],clock:true,evoluzione:false,wizard:["Origine e scopo","Il guardiano principale"]},'
+        ' storico:{descrizione:"Un fatto del passato.",campi:[],clock:false,evoluzione:true}}}},'
+        ' fields:{livelli:{label:"Livelli / aree"},occupante:{label:"Occupante"}},tappe_categorie:[]};'
         'const app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
         'const dung={categoria:"luogo",tipo:"dungeon",livelli:3,occupante:"[[Corvi]]"};'
         'const altro={categoria:"luogo",tipo:"regione"};'
-        'Promise.all([m.exports.renderTipoProfilo(app,dung),m.exports.renderTipoProfilo(app,altro)])'
-        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        'const senza={categoria:"luogo",tipo:"storico"};'
+        'Promise.all([m.exports.renderTipoProfilo(app,dung),m.exports.renderTipoProfilo(app,altro),'
+        ' m.exports.renderTipoProfilo(app,senza)])'
+        '.then(([a,b,c])=>process.stdout.write(JSON.stringify({a,b,c})));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
@@ -2187,7 +2289,15 @@ def test_render_tipo_profilo(tmp_path):
     assert "🧩 dungeon" in out["a"] and "Complesso esplorabile" in out["a"]
     assert "**Livelli / aree**: 3" in out["a"] and "[[Corvi]]" in out["a"]
     assert "è un **Fronte**" in out["a"]                 # clock:true
+    assert "Proprietà" in out["a"]                       # ha campi → mostra il promemoria
+    assert "💡" in out["a"] and "Il guardiano principale" in out["a"]  # spunti del tipo (campo wizard attivato)
     assert out["b"] == ""                                # sottotipo senza profilo → vuoto
+    # Sottotipo CON profilo ma SENZA campi (es. 'evento storico'): mostra descrizione e
+    # flag, ma NON il footer «edita dal pannello Proprietà» (non ci sono campi-tipo).
+    assert "🧩 storico" in out["c"] and "Un fatto del passato" in out["c"]
+    assert "evolve" in out["c"] and "Proprietà" not in out["c"]
+    # 'luogo' NON è in tappe_categorie (fixture) → niente riferimento «Cronologia» penzolante.
+    assert "Cronologia" not in out["c"]
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

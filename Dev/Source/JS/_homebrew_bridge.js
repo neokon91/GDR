@@ -92,6 +92,7 @@ function classeHomebrew(opt) {
       incantesimi_pool: caster ? incantesimiHomebrew(f.basename, f.basename) : {},
       tipo_incantatore: tipoInc || "nessuno",
       padronanza_armi: 0,
+      risorse: Array.isArray(fm.risorse) ? fm.risorse : [],
     };
   }
   return out;

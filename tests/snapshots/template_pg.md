@@ -47,7 +47,9 @@
 >
 > **🌀 Concentrazione** su `INPUT[text:concentrazione_su]` — quando subisci danni: TS Costituzione (CD 10 o metà danni); finisce a 0 PF o se incapacitato
 >
-> Riposo: `BUTTON[riposo-breve]` (spendi 1 Dado Vita → +tiro+mod COS ai PF) · `BUTTON[riposo-lungo]` (PF al massimo, slot e TS morte azzerati, metà Dadi Vita recuperati, −1 Esaurimento)
+> Riposo: `BUTTON[riposo-breve]` (spendi 1 Dado Vita → +tiro+mod COS ai PF · ricarica le risorse a riposo breve) · `BUTTON[riposo-lungo]` (PF al massimo, slot e TS morte azzerati, risorse di classe e metà Dadi Vita recuperati, −1 Esaurimento)
+>
+> Risorse di classe (Ki/Ira/Incanalare/…): `BUTTON[usa-risorsa]` (spendi 1 uso) — le barre 🩸 sopra mostrano i rimasti; 🌙 si ricaricano al riposo breve, ☀ solo al lungo.
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderRisorsePG");
