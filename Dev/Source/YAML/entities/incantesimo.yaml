@@ -24,12 +24,15 @@ relazioni:
 - field: sistema_magico
   label: Sistema magico
   category: sistema_magico
+fields:
+  rituale: { label: Rituale, widget: text }
 scheda:
 - livello
 - tempo_lancio
 - gittata
 - componenti
 - durata
+- rituale
 - classi
 creation:
   fields:
@@ -73,6 +76,14 @@ creation:
     prompt: Durata
     from: list
     options: [Istantanea, "1 round", "Concentrazione, fino a 1 minuto", "Concentrazione, fino a 10 minuti", "Concentrazione, fino a 1 ora", "1 minuto", "10 minuti", "1 ora", "8 ore", "24 ore", "Finché non viene dissolto"]
+    optional: true
+  # Rituale (2024): lanciabile come rito (+10 min, senza slot) se la classe ha il
+  # Lancio rituale. La concentrazione è già codificata nella `durata`. Reso (📿) in
+  # renderIncantesimi.
+  - field: rituale
+    prompt: Rituale?
+    from: list
+    options: [No, Sì]
     optional: true
   body:
   - field: effetto

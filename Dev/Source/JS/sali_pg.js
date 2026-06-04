@@ -106,11 +106,24 @@ function classeHomebrew(opt) {
 }
 // <<<homebrew-bridge
 
-// Talenti homebrew → {nome:{label:nome}}, da fondere con opt.talenti (SRD).
+// Talenti homebrew → {nome:{label, categoria}}, da fondere con opt.talenti (SRD).
+// `categoria` dal subtype della nota (origine/generale/stile/epico) → gating.
 function talentiHomebrew() {
   const out = {};
-  for (const { f } of noteVault("talento")) out[f.basename] = { label: f.basename };
+  for (const { f, fm } of noteVault("talento")) out[f.basename] = { label: f.basename, categoria: fm.tipo || "" };
   return out;
+}
+
+// Gating dei talenti a un ASI (2024): a un Aumento dei punteggi si prende un talento
+// GENERALE; i DONI EPICI solo dal livello 19; i talenti di ORIGINE vengono dal
+// background e gli STILI DI COMBATTIMENTO dai privilegi di classe → esclusi qui.
+// Categoria ignota (homebrew non marcato) = permesso (non bloccare l'homebrew).
+function talentoAmmesso(t, livello) {
+  const c = normTxt(t && t.categoria);
+  if (!c) return true;
+  if (c.includes("general")) return true;
+  if (c.includes("epic")) return Number(livello) >= 19;
+  return false;
 }
 
 // Sottoclassi homebrew del vault legate a una classe (match su id o label del
@@ -202,8 +215,10 @@ async function sali_pg(tp) {
       }
     } else if (scelta === "talento") {
       const talenti = { ...(opt.talenti || {}), ...talentiHomebrew() };  // SRD + homebrew
-      const ids = Object.keys(talenti);
-      const t = await tp.system.suggester(ids.map(id => (talenti[id].label) || id), ids, false, "Quale talento?");
+      const ids = Object.keys(talenti).filter((id) => talentoAmmesso(talenti[id], nuovo));  // gating 2024
+      const t = await tp.system.suggester(
+        ids.map(id => (talenti[id].label) || id), ids, false,
+        `Quale talento (generale${nuovo >= 19 ? " o dono epico" : ""})?`);
       if (t) { const l = Array.isArray(fm.talenti) ? [...fm.talenti] : []; if (!l.includes(t)) l.push(t); u.talenti = l; note.push(`talento ${t}`); }
     }
   }
@@ -253,6 +268,7 @@ module.exports = sali_pg;
 // Esposti per i test del ponte homebrew→motore.
 module.exports.incantesimiHomebrew = incantesimiHomebrew;
 module.exports.talentiHomebrew = talentiHomebrew;
+module.exports.talentoAmmesso = talentoAmmesso;
 module.exports.sottoclasseHomebrew = sottoclasseHomebrew;
 module.exports.fondiPool = fondiPool;
 module.exports.classeHomebrew = classeHomebrew;

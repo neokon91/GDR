@@ -63,6 +63,19 @@ inserisce al cursore. Logica pura testabile (`generaPersona/Toponimo/Fazione/DaF
   copia-incolla. I **PG** entrano nel tracker via `players: true` configurando il **Party**
   nelle impostazioni di Initiative Tracker (note in `Mondi/Personaggi`).
 
+## Combattimento al tavolo (VTT-lite, plugin Javalent)
+La triade **Initiative Tracker + Fantasy Statblocks + Dice Roller** dà l'automazione di
+combattimento *testuale* (iniziativa, PF, condizioni, dadi cliccabili — **non** una mappa
+con token: IT ha rimosso l'integrazione mappa in v12). La pipeline la sfrutta a fondo:
+- **Statblock giocabile dal GS** (`meta_actions.scaffold_statblock`): riempie il blocco dai
+  valori-base del GS (mediane SRD) con **multiattacco** (2 da GS 2, 3 da GS 11) e TS
+  competenti; `views.renderVerificaGS` stima il GS difensivo/offensivo e avvisa se i numeri
+  (rifiniti a mano) escono dal GS dichiarato.
+- **Condizioni → status di Initiative Tracker** (15 condizioni 5.5e + Concentrazione/Reazione)
+  e **party «Gruppo»** di default, iniettati in `data.json` (`render.write_initiative_tracker`,
+  non distruttivo: solo chiavi assenti). Dadi cliccabili negli statblock via `useDice` (FS).
+- Guida operativa passo-passo: **[[Guida al combattimento]]** (`Indici/`).
+
 ## Azioni (`meta_actions.js` + bottoni)
 `collega` (link reciproco), `marca_canonico`, `archivia`, `applica_profilo`,
 `scatena_conseguenza`, `avanza_fronte` (clock +1), `sali_di_livello` (delega a `tp.user.sali_pg`),
@@ -75,7 +88,9 @@ sessione 2024: Dadi Vita, slot, TS-morte, concentrazione, Esaurimento), `turno_b
 ## Pannelli JS Engine (`views.js`)
 `renderEntityPanel` (Vista: "pronto al tavolo?" + Citato da), `renderSessionPanel`,
 `renderAxesRadar`/`renderAxesCompare` (radar assi), `renderProfilo`, `renderClock`,
-`renderEncounter`, `renderProgressione`, `renderTimeline` (linea del tempo: eventi per
+`renderEncounter`, `renderVerificaGS` (coerenza GS creatura: difensivo AC+PF / offensivo
+attacco+danno vs dichiarato), `renderRisorsePG` (barre PF/Dadi Vita/Esaurimento della scheda
+PG), `renderProgressione`, `renderTimeline` (linea del tempo: eventi per
 epoca, ordinati per `quando`; pannello in cima alla pagina *Cronologia*, opt-in via
 `pages.yaml:panel: timeline`), `renderMap` (tab *Mappa* su luogo/mondo: embed del campo
 `mappa` — Excalidraw/immagine/nota), `renderCondizioni` (quick-ref delle 15 condizioni

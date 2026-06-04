@@ -26,9 +26,14 @@ subtypes:
 - veleno
 - tesoro
 - veicolo o cavalcatura
+fields:
+  cariche: { label: Cariche, widget: text }
+  ricarica: { label: Ricarica, widget: text }
 scheda:
 - rarita
 - sintonia
+- cariche
+- ricarica
 relazioni:
 - field: proprietario
   label: Proprietario
@@ -61,6 +66,13 @@ creation:
     optional: true
   - field: sintonia
     prompt: Sintonia richiesta? (es. sì, da un druido)
+    optional: true
+  # Cariche/ricarica (oggetti magici con usi limitati: bacchette, anelli, …).
+  - field: cariche
+    prompt: 'Cariche (es. 7 max)'
+    optional: true
+  - field: ricarica
+    prompt: "Ricarica (es. 1d6+1 all'alba)"
     optional: true
   # Meccaniche arma/armatura (parità SRD): per i subtype arma/armatura/scudo. STESSI
   # nomi-campo dell'equip ufficiale → l'arma homebrew è giocabile in renderAttacchi.

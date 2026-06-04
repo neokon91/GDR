@@ -67,8 +67,15 @@ SRD-completo**):
 - **18 Abilità** (tabella): **Bonus** = `mod(car) + prof_<id> * competenza` + **Tiro 🎲**
   (`dice: 1d20 + mod_<car> + prof_<id> * competenza`), toggle competenza/maestria (0/1/2).
 - **Risorse al tavolo**: TS contro morte (+ tiro `dice: 1d20`), **Esaurimento** 2024,
-  tracker **Dadi Vita** (`dadi_vita_spesi`/`dadi_vita_max`), **🌀 Concentrazione**
-  (`concentrazione_su`), tabella **slot incantesimo**, bottoni **Riposo breve/lungo**.
+  **Ispirazione eroica** (toggle 2024), tracker **Dadi Vita** (`dadi_vita_spesi`/`dadi_vita_max`),
+  **🌀 Concentrazione** (`concentrazione_su`), tabella **slot incantesimo**, bottoni
+  **Riposo breve/lungo**. Barre proporzionali **PF/Dadi Vita/Esaurimento** via JS Engine
+  (`views.renderRisorsePG`, max variabile a runtime — il `progressBar` di Meta Bind accetta
+  solo max letterali, issue #323).
+- **Incantesimi** (`views.renderIncantesimi`): elenco per livello con slot residui,
+  🌀 concentrazione / 📿 rituale, e testata **CD incantesimo** (8+PB+mod) + **bonus
+  d'attacco** (PB+mod), con caratteristica da incantatore = prima MENTALE fra le primarie
+  della classe (SRD + homebrew).
 
 I tiri Dice Roller leggono i campi dal frontmatter (`mod_<car>`/`ts_<car>`/`prof_<id>`/
 `competenza`); le scelte strutturali restano flag interrogabili da Dataview.
@@ -82,15 +89,20 @@ applica il livello successivo dalla `progressione` della classe:
 - **Deterministico**: PF += `floor(dado_vita/2)+1 + mod(COS)` (media fissa); `competenza`,
   `slot_<n>` dalla riga di progressione; `livello`; `dadi_vita_max = livello`. Dopo un ASI
   risincronizza `mod_<car>` nel frontmatter (i tiri Dice Roller della scheda lo usano).
-- **Scelte guidate**: ASI ai `livelli_asi` (`+2` / `+1+1` / talento), `sottoclasse` al
-  `livello_sottoclasse` (l'SRD ne ha una per classe), nuovi `trucchetti`/`incantesimi`
-  dal pool (fino al max livello castabile) quando i conteggi crescono.
+- **Scelte guidate**: ASI ai `livelli_asi` (`+2` / `+1+1` / talento — i talenti sono
+  **filtrati per categoria 2024**: solo *Generali*, e *Doni epici* dal livello 19, via
+  `sali_pg.talentoAmmesso`; *Origine* viene dal background, *Stile di combattimento* dai
+  privilegi di classe), `sottoclasse` al `livello_sottoclasse` (l'SRD ne ha una per
+  classe), nuovi `trucchetti`/`incantesimi` dal pool (fino al max livello castabile) quando i conteggi crescono.
 - Scrive via `app.fileManager.processFrontMatter`. La vista `renderProgressione` (scheda PG)
   mostra i privilegi acquisiti + l'anteprima del livello successivo.
 
 ## Estendere
 
 - Nuova classe/specie/background SRD → ricade automaticamente nel converter.
+- **Background homebrew** 2024-legale: il wizard impone ASI (3 caratteristiche), 2 abilità,
+  1 strumento e un **Talento d'Origine** (campi `required`); `crea_pg` non crea PG con un
+  basename vuoto/duplicato (`tp.file.exists` + nome obbligatorio con retry).
 - Nuovo metodo di generazione o costi point-buy → `pg_rules.yaml`.
 - Se la prosa SRD di una classe non si parsa → fallback `{scelte: 2, opzioni: tutte}`;
   i nomi-abilità si mappano dalle label (normalizzate) di `system.abilita`.

@@ -330,6 +330,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > Competenza +`INPUT[number:competenza]` · Iniziativa {{ computed('floor(({destrezza} - 10) / 2)') }} → tira `dice: 1d20 + mod_destrezza`
 >
+> 🎲 **Ispirazione eroica** `INPUT[toggle:ispirazione]` — quando ce l'hai, ritira un tiro per colpire, una prova o un TS (2024).
+>
 > **A 0 PF** — TS morte (CD 10) `dice: 1d20` · successi `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ✓")):ts_morte_successi]` · fallimenti `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ☠")):ts_morte_fallimenti]`
 >
 > **Esaurimento** (Indebolimento 2024) `INPUT[inlineSelect(option(0, "0 —"), option(1, "1"), option(2, "2"), option(3, "3"), option(4, "4"), option(5, "5"), option(6, "6 ☠")):esaurimento]` → −{{ computed('2 * ({esaurimento} ?? 0)') }} a OGNI prova d20 · velocità −{{ computed('1.5 * ({esaurimento} ?? 0)') }} m

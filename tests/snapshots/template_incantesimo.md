@@ -11,6 +11,7 @@
 > | **Gittata** | `VIEW[{gittata} ?? "—"]` |
 > | **Componenti** | `VIEW[{componenti} ?? "—"]` |
 > | **Durata** | `VIEW[{durata} ?? "—"]` |
+> | **Rituale** | `VIEW[{rituale} ?? "—"]` |
 > | **Classi** | `VIEW[{classi} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
@@ -23,6 +24,7 @@
 > Gittata: `INPUT[text:gittata]`
 > Componenti: `INPUT[text:componenti]`
 > Durata: `INPUT[text:durata]`
+> Rituale: `INPUT[text:rituale]`
 > Classi: `INPUT[text:classi]`
 
 --- ✨ Effetto

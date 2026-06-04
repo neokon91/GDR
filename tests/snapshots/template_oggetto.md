@@ -10,6 +10,8 @@
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Rarità** | `VIEW[{rarita} ?? "—"]` |
 > | **Sintonia** | `VIEW[{sintonia} ?? "—"]` |
+> | **Cariche** | `VIEW[{cariche} ?? "—"]` |
+> | **Ricarica** | `VIEW[{ricarica} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
@@ -18,6 +20,8 @@
 > [!abstract] Scheda
 > Rarità: `INPUT[rarita][:rarita]`
 > Sintonia: `INPUT[text:sintonia]`
+> Cariche: `INPUT[text:cariche]`
+> Ricarica: `INPUT[text:ricarica]`
 
 --- 📖 Lore
 

@@ -292,7 +292,10 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
             "strumenti": comp.get("strumenti", ""),
         }
 
-    talenti = {_slug(f.get("nome")): {"label": f.get("nome", "")}
+    # categoria (Origini / Generale / Stile di combattimento / Dono epico): serve al
+    # gating dei talenti a un ASI (sali_pg.talentoAmmesso) — solo i Generali, e i Doni
+    # epici dal 19. Origine = dal background; Stile = dai privilegi di classe.
+    talenti = {_slug(f.get("nome")): {"label": f.get("nome", ""), "categoria": f.get("categoria", "")}
                for f in load_srd("srd_5_2_1_feats.json") if f.get("nome")}
 
     return {

@@ -1404,6 +1404,27 @@ def test_sali_pg_sottoclasse_homebrew_e2e(tmp_path):
     assert fm["sottoclasse"] == "Via della Cenere"  # sottoclasse homebrew assegnata al 3º livello
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_talento_ammesso(tmp_path):
+    """sali_pg.talentoAmmesso: gating talenti 2024 a un ASI — solo GENERALE; i DONI
+    EPICI dal livello 19; ORIGINE/STILE esclusi; categoria ignota (homebrew non
+    marcato) = permesso (non blocca)."""
+    harness = tmp_path / "ta.js"
+    harness.write_text(
+        f'const s=require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});'
+        'const f=(cat,liv)=>s.talentoAmmesso({categoria:cat},liv);'
+        'process.stdout.write(JSON.stringify({'
+        'gen:f("Generale",4), ori:f("Origini",4), stile:f("Stile di combattimento",4),'
+        'epic8:f("Dono epico",8), epic19:f("Dono epico",19),'
+        'hb:f("generale",8), vuoto:f("",4)}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    assert json.loads(res.stdout) == {
+        "gen": True, "ori": False, "stile": False,
+        "epic8": False, "epic19": True, "hb": True, "vuoto": True}
+
+
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 def test_srd_counts_and_statblock():
     """Conteggi attesi + il mostro si mappa su uno statblock Fantasy Statblocks."""

@@ -1251,6 +1251,7 @@ async function renderIncantesimi(app, dv, page) {
   // della classe — così gli incantesimi homebrew si raggruppano bene, non sotto "ignoto".
   // Stessa passata raccoglie chi richiede CONCENTRAZIONE (durata SRD) → 🌀.
   const concentra = new Set();
+  const rituali = new Set();
   if (dv) {
     try {
       const cat = (p) => p && p.file && (text(p.categoria) === "incantesimo" || text(p.categoria) === "srd-incantesimo");
@@ -1258,8 +1259,9 @@ async function renderIncantesimi(app, dv, page) {
         const L = Number(sp.livello);
         if (!levelOf.has(sp.file.name) && Number.isFinite(L)) levelOf.set(sp.file.name, L);
         if (sp.durata && /concentr/i.test(text(sp.durata))) concentra.add(sp.file.name);
+        if (sp.rituale && /^s[iì]?$|^v?ero$|true/i.test(text(sp.rituale))) rituali.add(sp.file.name);
       }
-    } catch (e) { /* dv assente o query fallita: niente livelli homebrew né 🌀 */ }
+    } catch (e) { /* dv assente o query fallita: niente livelli/🌀/📿 homebrew */ }
   }
   const groups = new Map();  // livello → [nomi]
   const push = (L, n) => { if (!groups.has(L)) groups.set(L, []); groups.get(L).push(n); };
@@ -1275,7 +1277,7 @@ async function renderIncantesimi(app, dv, page) {
   const out = [];
   for (const L of [...groups.keys()].sort((a, b) => a - b)) {
     const titolo = L === 0 ? "Trucchetti" : L === -1 ? "Livello ignoto" : `${L}º livello`;
-    const names = groups.get(L).slice().sort((a, b) => a.localeCompare(b)).map((n) => `${concentra.has(n) ? "🌀 " : ""}[[${n}]]`);
+    const names = groups.get(L).slice().sort((a, b) => a.localeCompare(b)).map((n) => `${concentra.has(n) ? "🌀 " : ""}${rituali.has(n) ? "📿 " : ""}[[${n}]]`);
     out.push(`> **${titolo}**${L > 0 ? slotInfo(L) : ""} (${names.length})\n> ${names.join(" · ")}`);
   }
   // Testata: CD incantesimo (8 + competenza + mod) e bonus d'attacco (competenza +
@@ -1294,7 +1296,10 @@ async function renderIncantesimi(app, dv, page) {
     const lab = carInc.charAt(0).toUpperCase() + carInc.slice(1);
     testa = `> **CD incantesimo ${cd}** · **Attacco ${atk >= 0 ? "+" : ""}${atk}** · ${lab}\n>\n`;
   }
-  const legenda = concentra.size ? "\n>\n> 🌀 = concentrazione" : "";
+  const leg = [];
+  if (concentra.size) leg.push("🌀 = concentrazione");
+  if (rituali.size) leg.push("📿 = rituale");
+  const legenda = leg.length ? "\n>\n> " + leg.join(" · ") : "";
   return "> [!note]- 🪄 Incantesimi\n" + testa + out.join("\n>\n") + legenda;
 }
 
