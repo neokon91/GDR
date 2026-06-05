@@ -1,4 +1,7 @@
 <% await tp.user.crea_regno(tp) %>
+> [!banner]
+> `INPUT[banner][:banner]`
+
 # `=this.nome`
 
 > [!infobox|regno] 👑 Regno

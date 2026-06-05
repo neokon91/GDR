@@ -7,7 +7,7 @@
    entità; lo specifico vive nel template per-entità + nel suo file YAML. #}
 {% import '_macros.j2' as m with context -%}
 <% await tp.user.crea_{{ template.id }}(tp) %>
-# `=this.nome`
+{{ m.banner(template) }}# `=this.nome`
 
 {{ m.identita_card(template) }}
 

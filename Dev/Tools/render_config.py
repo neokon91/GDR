@@ -178,6 +178,20 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
    a tutta larghezza (pulita, robusta), con l'identità data dall'accento di categoria
    (B) e dalla cornice; niente layout fragile. */
 
+/* Banner (macro banner): cover image in testa per le categorie panoramiche (banner_categorie).
+   È la versione FATTIBILE dell'idea-sidebar — un blocco SINGOLO a tutta larghezza (≠ float fra
+   blocchi), quindi robusto col renderer virtuale. Callout "nudo": niente titolo/bordo/padding,
+   immagine ritagliata a fascia (object-fit: cover) sopra il titolo della nota. */
+.callout[data-callout="banner"] {
+  padding: 0; border: none; background: none; margin: 0.2em 0 0.7em;
+}
+.callout[data-callout="banner"] > .callout-title { display: none; }
+.callout[data-callout="banner"] img {
+  width: 100%; height: 200px; object-fit: cover;
+  border-radius: 10px; display: block; margin: 0;
+  border: 1px solid var(--background-modifier-border);
+}
+
 /* E — titolo nota: più respiro + filetto sottile (aria da voce di wiki). */
 .markdown-rendered h1 { margin-bottom: 0.4rem; padding-bottom: 0.2rem; border-bottom: 1px solid var(--background-modifier-border); }
 /* Header delle tab (Tab Panels): più scandito e leggibile. */

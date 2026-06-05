@@ -1,4 +1,7 @@
 <% await tp.user.crea_luogo(tp) %>
+> [!banner]
+> `INPUT[banner][:banner]`
+
 # `=this.nome`
 
 > [!infobox|luogo] 🗺️ Luogo

@@ -398,7 +398,7 @@ def check() -> int:
     # Anti-drift: gli elenchi-di-categorie di core.yaml (chi riceve il Fronte/clock,
     # le tappe, il motore di coerenza, il ritratto) devono nominare SOLO categorie
     # dichiarate. Un typo qui scollerebbe in silenzio una feature dalle sue entità.
-    for key in ("fronte_categorie", "tappe_categorie", "coerenza_categorie", "ritratto_categorie"):
+    for key in ("fronte_categorie", "tappe_categorie", "coerenza_categorie", "ritratto_categorie", "banner_categorie"):
         for cat in core.get(key, []) or []:
             if cat not in categories:
                 errors.append(f"{key}: categoria non dichiarata ({cat})")

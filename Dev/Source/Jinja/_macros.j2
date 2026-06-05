@@ -81,6 +81,19 @@
    Un'unica definizione, riusata da tutti i template. Evita il copia-incolla di
    intestazioni, superficie giocabile, collegamenti e pannelli. #}
 
+{# Banner (cover image in testa, stile wiki/World Anvil/LegendKeeper): per le categorie
+   "panoramiche" (core.banner_categorie) emette un'immagine LARGA full-width sopra il titolo,
+   via lo stesso imageSuggester del ritratto; gdr.css la rende "nuda" e ritagliata a fascia.
+   È UN blocco singolo full-width → robusto: niente float fra blocchi (che il renderer virtuale
+   di Obsidian in lettura rompe — vedi nota in render_config). Vuoto per le altre categorie. #}
+{% macro banner(template) -%}
+{%- if template.category in core.get('banner_categorie', []) -%}
+> [!banner]
+> {{ field('banner', label=false) }}
+
+{% endif -%}
+{%- endmacro %}
+
 {# Infobox stile wiki (intestazione sopra le tab): icona + titolo, un RITRATTO
    opzionale (immagine, solo per le categorie "visive") e una TABELLA dei fatti
    chiave — tipo/mondo/famiglia + i campi-scheda (sola lettura reattiva, VIEW),

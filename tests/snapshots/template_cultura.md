@@ -1,4 +1,7 @@
 <% await tp.user.crea_cultura(tp) %>
+> [!banner]
+> `INPUT[banner][:banner]`
+
 # `=this.nome`
 
 > [!infobox|cultura] 🎏 Cultura

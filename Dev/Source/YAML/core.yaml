@@ -65,6 +65,9 @@ fields:
   arcano:         { label: Arcano,               widget: arcano }
   # Ritratto/immagine (infobox stile wiki): un'immagine del vault (Meta Bind imageSuggester).
   ritratto:       { label: Ritratto,             widget: ritratto }
+  # Banner (cover image in testa, stile World Anvil/LegendKeeper): immagine LARGA del vault,
+  # ritagliata a fascia full-width sopra il titolo. Stesso imageSuggester del ritratto.
+  banner:         { label: Banner,               widget: banner }
   # Stile dei nomi (generatore homebrew): su cultura/specie sceglie lo stile da cui
   # genera.js compone nomi a tema. Opzioni = stili di generatori.yaml (vedi metabind).
   stile_nomi:     { label: Stile dei nomi,       widget: stile_nomi }
@@ -85,6 +88,18 @@ ritratto_categorie:
   - mito
   - cultura
   - specie
+
+# Categorie con un BANNER (cover image full-width in testa): le "panoramiche" — geografia
+# e società, dove un'immagine larga (paesaggio/scena/insegna) ha senso. Le altre restano
+# senza (un'arma o una legge non hanno una "veduta"). Reso da banner() in _entity_base.
+banner_categorie:
+  - mondo
+  - luogo
+  - regno
+  - cultura
+  - fazione
+  - bioma
+  - ecosistema
 
 # Entità "durature" che cambiano attraverso le epoche: ricevono la tab Cronologia
 # (proprietà `tappe`, righe "quando | stato" → views.renderTappe). Il mondo NON è

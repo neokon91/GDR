@@ -1,4 +1,7 @@
 <% await tp.user.crea_mondo(tp) %>
+> [!banner]
+> `INPUT[banner][:banner]`
+
 # `=this.nome`
 
 > [!infobox|mondo] 🌍 Mondo

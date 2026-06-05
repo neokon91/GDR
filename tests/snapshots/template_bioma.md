@@ -1,4 +1,7 @@
 <% await tp.user.crea_bioma(tp) %>
+> [!banner]
+> `INPUT[banner][:banner]`
+
 # `=this.nome`
 
 > [!infobox|bioma] 🌲 Bioma

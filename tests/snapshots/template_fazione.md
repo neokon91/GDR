@@ -1,4 +1,7 @@
 <% await tp.user.crea_fazione(tp) %>
+> [!banner]
+> `INPUT[banner][:banner]`
+
 # `=this.nome`
 
 > [!infobox|fazione] ⚔️ Fazione

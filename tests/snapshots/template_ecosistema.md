@@ -1,4 +1,7 @@
 <% await tp.user.crea_ecosistema(tp) %>
+> [!banner]
+> `INPUT[banner][:banner]`
+
 # `=this.nome`
 
 > [!infobox|ecosistema] 🌿 Ecosistema
