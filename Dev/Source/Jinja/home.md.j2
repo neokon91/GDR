@@ -101,7 +101,7 @@ Cosa preme nel mondo adesso — ordina per pressione. Ogni riga è una mossa pro
 table without id file.link as Fronte, pressione as Pressione, prossima_mossa as "Prossima mossa", (clock + "/" + clock_dim) as Clock, conseguenza as Conseguenza
 from ""
 where (pressione >= 5 or clock_dim) and stato != "archiviata"
-sort (clock / clock_dim) desc, pressione desc
+sort (default(clock, 0) / default(clock_dim, 1)) + (default(pressione, 0) / 10) desc
 limit 12
 ```
 

@@ -2254,8 +2254,9 @@ def test_spinte_fronte_assi_e_scarsita(tmp_path):
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_stato_mondo(tmp_path):
-    """views.renderStatoMondo (cruscotto Fronti): i Fronti (clock_dim) ordinati per
-    imminenza (clock + spinte dal grafo); intestazione coi conteggi; non-fronti esclusi."""
+    """views.renderStatoMondo (cruscotto Fronti): Fronti (clock_dim) ordinati per IMMINENZA
+    = clock (countdown) + pressione autoriale + spinte dal grafo; conteggi in testa; non-
+    fronti esclusi. La pressione conta: un 🔴 Crisi a clock vuoto non è più seppellito."""
     harness = tmp_path / "stato.js"
     harness.write_text(
         'const fs=require("fs");'
@@ -2265,8 +2266,9 @@ def test_render_stato_mondo(tmp_path):
         'const mk=(name,categoria,ex)=>Object.assign({file:{name,path:name+".md"},categoria,stato:"pronto"},ex);'
         'const all=[mk("Sale","risorsa",{pressione:8,controllata_da:L("Capitolo")}),'
         ' mk("Capitolo","fazione",{}),'
-        ' mk("Forte","luogo",{clock_dim:4,clock:1,dipende_da:[L("Sale")]}),'   # 1 spinta → score 0.375
-        ' mk("Setta","fazione",{clock_dim:4,clock:3}),'                        # 0 spinte, 3/4 → score 0.75
+        ' mk("Forte","luogo",{clock_dim:4,clock:1,dipende_da:[L("Sale")]}),'   # 1 spinta → 0.375
+        ' mk("Setta","fazione",{clock_dim:4,clock:3}),'                        # 3/4 → 0.75
+        ' mk("Crisi","fazione",{pressione:9,clock_dim:6,clock:0}),'            # pressione 9, clock vuoto → 0.54
         ' mk("Quieto","luogo",{})];'                                          # niente clock → non è un fronte
         'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
         ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
@@ -2275,10 +2277,11 @@ def test_render_stato_mondo(tmp_path):
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = res.stdout
-    assert "**2 fronti**" in out                             # Forte + Setta (Quieto/Sale/Capitolo non sono fronti)
-    assert out.index("[[Setta]]") < out.index("[[Forte]]")   # Setta (0.75) prima di Forte (0.375)
+    assert "**3 fronti**" in out                             # Forte + Setta + Crisi (Quieto/Sale/Capitolo no)
+    assert out.index("[[Setta]]") < out.index("[[Crisi]]")   # Setta (0.75) prima di Crisi (0.54)
+    assert out.index("[[Crisi]]") < out.index("[[Forte]]")   # Crisi (pressione 9, clock vuoto) NON sepolta sotto Forte (0.375)
     assert "⛓ Dipendi da [[Sale]]" in out                    # la spinta dal grafo di Forte è mostrata
-    assert "3/4" in out and "1/4" in out                     # stato del clock per fronte
+    assert "3/4" in out and "1/4" in out and "0/6" in out    # stato del clock per fronte
     assert "Quieto" not in out                               # senza clock → escluso
 
 

@@ -24,7 +24,7 @@ sort file.name asc
 table without id file.link as Fronte, (clock + "/" + clock_dim) as Clock, prossima_mossa as "Prossima mossa", conseguenza as Conseguenza
 from ""
 where clock_dim and clock < clock_dim and stato != "archiviata"
-sort (clock / clock_dim) desc
+sort (clock / clock_dim) + (default(pressione, 0) / 10) desc
 ```
 
 ## 📜 Conseguenze scatenate — storia del mondo

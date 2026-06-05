@@ -73,8 +73,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Bersaglio: `INPUT[legame][:conseguenza_su]`
 
 > [!tip] Avanza / scatena
+> **Pressione** = quanto scotta *adesso* (temperatura) · **Clock** = il countdown alla conseguenza. Pressione e spinte dal grafo *giustificano* di avanzare il clock; l'imminenza nei cruscotti le pesa entrambe.
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza e chiede se il fronte è *risolto* (si chiude, archiviato) o *ricorrente* (riparte, clock azzerato).
 
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`

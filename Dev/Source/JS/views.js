@@ -1255,8 +1255,12 @@ async function renderStatoMondo(app, dv) {
     const dim = Math.max(1, Math.floor(Number(f.clock_dim) || 0));
     const cur = Math.max(0, Math.min(dim, Math.floor(Number(f.clock) || 0)));
     const spinte = await spinteFronte(app, dv, f);
-    // Imminenza: riempimento + peso delle spinte (ogni spinta ≈ mezzo segmento).
-    const score = cur / dim + (spinte.length * 0.5) / dim;
+    // Imminenza COERENTE (stessa scala di Home e fronti.md.j2): il countdown (clock) è il
+    // segnale primario; la PRESSIONE autoriale ora conta (0-10 → peso 0.6, mai sopra un
+    // clock pieno); le spinte dal grafo aggiungono slancio (≈ mezzo segmento l'una). Così
+    // la dashboard non seppellisce più un Fronte segnato 🔴 Crisi col clock ancora vuoto.
+    const pr = Math.max(0, Math.min(10, Number(f.pressione) || 0)) / 10;
+    const score = cur / dim + 0.6 * pr + (spinte.length * 0.5) / dim;
     rows.push({ f, dim, cur, spinte, score });
   }
   rows.sort((a, b) => b.score - a.score || b.cur / b.dim - a.cur / a.dim);
@@ -1265,16 +1269,20 @@ async function renderStatoMondo(app, dv) {
   // resta visibile nell'intestazione (no silent cap). Per la prep di sessione
   // contano i fronti caldi in cima, non l'elenco esaustivo.
   const TOP = 12;
+  // "Caldo" = sta per scattare: ha spinte dal grafo, è al penultimo segmento, O è in
+  // pressione di Crisi (≥7) — così la pressione autoriale tinge anche l'icona/stato.
+  const caldo = (f, cur, dim, spinte) => spinte.length || cur >= dim - 1 || (Number(f.pressione) || 0) >= 7;
   const blocchi = rows.slice(0, TOP).map(({ f, dim, cur, spinte }) => {
     const pieno = cur >= dim;
-    const icona = pieno ? "🔴" : (spinte.length || cur >= dim - 1) ? "🟠" : "🟢";
-    const stato = pieno ? "PIENO — scatena la conseguenza" : (spinte.length || cur >= dim - 1) ? "sta per scattare" : "stabile";
+    const hot = caldo(f, cur, dim, spinte);
+    const icona = pieno ? "🔴" : hot ? "🟠" : "🟢";
+    const stato = pieno ? "PIENO — scatena la conseguenza" : hot ? "sta per scattare" : "stabile";
     const next = text(f.prossima_mossa) ? ` · *${text(f.prossima_mossa)}*` : "";
     let blocco = `> ${icona} **${noteLink(f)}** ${cur}/${dim} — ${stato}${next}`;
     for (const s of spinte.slice(0, 2)) blocco += `\n> - ${s}`;
     return blocco;
   });
-  const attivi = rows.filter((r) => r.spinte.length || r.cur >= r.dim - 1).length;
+  const attivi = rows.filter((r) => caldo(r.f, r.cur, r.dim, r.spinte)).length;
   const piuDi = rows.length > TOP ? ` · mostro i ${TOP} più imminenti` : "";
   return `> [!warning] ⚡ Stato del Mondo — **${rows.length} fronti** · ${attivi} sotto pressione${piuDi}\n`
     + "> In ordine di imminenza (clock + spinte dal grafo):\n>\n"

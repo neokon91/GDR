@@ -194,8 +194,22 @@ ${conseguenza}
 > Fronte d'origine: [[${fronte}]]${su ? `\n> Colpisce: ${su}` : ""}
 `;
   await app.vault.create(path, content);
-  await updateFrontmatter(file, f => { f.clock = 0; pushUnique(f, "connessioni", `[[${title}]]`); });
-  new Notice(`Conseguenza scatenata → evento "${title}"; clock azzerato.`);
+  // Risolto o ricorrente? Un Fronte one-shot SI CHIUDE (archiviato → esce dai cruscotti,
+  // resta come storia); uno ciclico RIPARTE (clock azzerato). Default ricorrente (compat
+  // e su annullo): mai lasciare il Fronte in uno stato ambiguo.
+  const opzioni = ["Ricorrente — riparte (clock azzerato)", "Risolto — si chiude (archiviato)"];
+  const scelta = tp.system?.suggester
+    ? await tp.system.suggester(opzioni, ["ricorrente", "risolto"], false, `«${fronte}» dopo la conseguenza è…`)
+    : "ricorrente";
+  const risolto = scelta === "risolto";
+  await updateFrontmatter(file, f => {
+    pushUnique(f, "connessioni", `[[${title}]]`);
+    if (risolto) { f.stato = "archiviata"; f.archiviata_il = when; }
+    else f.clock = 0;
+  });
+  new Notice(risolto
+    ? `Conseguenza scatenata e fronte RISOLTO (archiviato) → "${title}".`
+    : `Conseguenza scatenata → "${title}"; clock azzerato (fronte ricorrente).`);
   return "";
 }
 
