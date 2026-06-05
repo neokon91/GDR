@@ -1344,6 +1344,71 @@ async function renderProiezione(app, dv) {
     + blocchi.join("\n>\n");
 }
 
+// --- Tensioni latenti (motore G: il mondo propone i propri Fronti) -----------
+// Scandisce il grafo per i CONFLITTI strutturali che non sono ancora un Fronte e li
+// propone come orologi pronti: rivalità inerti, risorse contese, profezie dormienti,
+// confini caldi. Read-only: suggerisce (chi, perché, conseguenza pre-compilata), il GM
+// accende il clock sull'entità indicata. Così il mondo si ALIMENTA di tensioni invece di
+// aspettare che le scriva tu. Ritorna markdown.
+async function renderTensioni(app, dv) {
+  if (!dv) return "*Dataview non attivo.*";
+  const pages = dv.pages().where((p) => p && p.file && text(p.stato) !== "archiviata").array();
+  const isFronte = (p) => p && Number(p.clock_dim) > 0;
+  const nome = (p) => (p && p.file ? p.file.name : "");
+  const sugg = [];
+  const seen = new Set();
+  const addOnce = (key, line) => { if (!seen.has(key)) { seen.add(key); sugg.push(line); } };
+
+  // P1 — Rivalità inerte: A rivali B, e nessuno dei due è già un Fronte → vuole un orologio.
+  for (const p of pages) {
+    if (isFronte(p)) continue;
+    for (const link of asArray(p.rivali)) {
+      const o = resolve(dv, link);
+      if (!o || !o.file || isFronte(o)) continue;
+      addOnce("riv:" + [nome(p), nome(o)].sort().join("|"),
+        `> 🔥 **${noteLink(p)} ⚔ ${noteLink(o)}** — rivalità senza orologio. Accendi un Fronte su ${noteLink(p)} *(suggerito: clock 6 · conseguenza «${nome(o)} incassa un colpo»)*.`);
+    }
+  }
+  // P2 — Risorsa contesa: una risorsa è di X, ma X ha dei rivali che la vogliono.
+  for (const p of pages.filter((x) => text(x.categoria) === "risorsa")) {
+    const ctrl = resolve(dv, p.controllata_da);
+    if (!ctrl || !ctrl.file) continue;
+    const rivali = asArray(ctrl.rivali).map((l) => resolve(dv, l)).filter((o) => o && o.file);
+    if (!rivali.length) continue;
+    addOnce("ris:" + nome(p),
+      `> 💎 **${noteLink(p)}** è di ${noteLink(ctrl)}, ma ${rivali.slice(0, 2).map(noteLink).join(", ")} la vogliono. Accendi una «corsa a ${nome(p)}» *(clock 4)*.`);
+  }
+  // P3 — Profezia dormiente: una profezia non ancora un Fronte → il suo compiersi è un clock.
+  for (const p of pages.filter((x) => text(x.categoria) === "profezia" && !isFronte(x))) {
+    addOnce("prof:" + nome(p),
+      `> 🔮 **${noteLink(p)}** è una profezia senza orologio. Accendi un Fronte: il suo compiersi è il clock *(suggerito: 8 · conseguenza = ciò che predice)*.`);
+  }
+  // P4 — Confine caldo: due luoghi confinanti controllati da fazioni RIVALI tra loro.
+  for (const p of pages.filter((x) => text(x.categoria) === "luogo")) {
+    const cp = resolve(dv, p.controllata_da);
+    if (!cp || !cp.file) continue;
+    const rivaliCp = asArray(cp.rivali).map((l) => nome(resolve(dv, l)));
+    for (const link of asArray(p.confina_con)) {
+      const q = resolve(dv, link);
+      if (!q || !q.file) continue;
+      const cq = resolve(dv, q.controllata_da);
+      if (!cq || !cq.file || nome(cp) === nome(cq) || !rivaliCp.includes(nome(cq))) continue;
+      addOnce("conf:" + [nome(p), nome(q)].sort().join("|"),
+        `> 🗺 Confine caldo: **${noteLink(p)}** (${noteLink(cp)}) ⟷ **${noteLink(q)}** (${noteLink(cq)}), fazioni rivali. Accendi un Fronte di frontiera *(clock 6)*.`);
+    }
+  }
+
+  if (!sugg.length) {
+    return "> [!tip]- 🌱 Tensioni latenti\n> Nessun conflitto latente nel grafo. Collega *rivali*, risorse *controllate*, *profezie* e *confini* di fazioni rivali per farne emergere.";
+  }
+  const TOP = 10;
+  const righe = sugg.slice(0, TOP);
+  if (sugg.length > TOP) righe.push(`> - *…e altre ${sugg.length - TOP} tensioni.*`);
+  return `> [!tip]- 🌱 Tensioni latenti — ${sugg.length} conflitti che vogliono un orologio\n`
+    + "> Il grafo propone i suoi Fronti: accendi un clock sull'entità indicata (tab *Al tavolo*).\n>\n"
+    + righe.join("\n>\n");
+}
+
 // --- Catena causale (timeline causale) ---------------------------------------
 // Per un evento ricostruisce PERCHÉ è successo (risalendo causato_da) e COSA NE È
 // DERIVATO (scendendo per conseguenze). Le due direzioni sono complementari: con
@@ -1604,7 +1669,7 @@ module.exports = {
   renderCausalita,
   renderMap, renderDintorni, renderViaggio, parseCoord,
   renderPressioni, cosmicPush, spinteFronte, renderStatoMondo,
-  renderProiezione, forecastHeat,
+  renderProiezione, forecastHeat, renderTensioni,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma, armiHomebrew,

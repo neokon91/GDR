@@ -596,6 +596,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Tensioni latenti (motore G, dashboard Fronti): il grafo propone i propri Fronti —
+   rivalità inerti, risorse contese, profezie dormienti, confini caldi. Read-only.
+   Logica in views.renderTensioni. #}
+{% macro tensioni() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTensioni");
+```
+{%- endmacro %}
+
 {# Tema natale (personalità psico-astrale, #9): scelto un segno si deriva
    archetipo/elemento/MBTI/ombra; l'arcano è opzionale; l'allineamento D&D resta
    accanto. Profilo per i personaggi (soprattutto PNG). Logica in views.renderTemaNatale. #}

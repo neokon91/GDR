@@ -16,6 +16,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderStatoMondo");
 ```
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTensioni");
+```
+
 ## 🔴 Pieni — pronti a scatenare
 ```dataview
 table without id file.link as Fronte, (clock + "/" + clock_dim) as Clock, conseguenza as Conseguenza, conseguenza_su as Bersaglio

@@ -2364,6 +2364,36 @@ def test_render_proiezione(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_tensioni(tmp_path):
+    """views.renderTensioni (motore G): il grafo PROPONE i suoi Fronti — rivalità inerti
+    (A rivali B, nessuno già un Fronte) e profezie dormienti; un'entità che è GIÀ un Fronte
+    non rigenera la proposta, e la coppia di rivali è deduplicata."""
+    harness = tmp_path / "tens.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const all=[\n'
+        '  {file:{name:"Corvi",path:"Corvi.md"}, categoria:"fazione", rivali:[L("Gilda")]},\n'
+        '  {file:{name:"Gilda",path:"Gilda.md"}, categoria:"fazione", rivali:[L("Corvi")]},\n'
+        '  {file:{name:"Veggente",path:"Veggente.md"}, categoria:"profezia"},\n'
+        '  {file:{name:"Setta",path:"Setta.md"}, categoria:"fazione", clock_dim:4, rivali:[L("Gilda")]},\n'
+        '];\n'
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
+        ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};\n'
+        'm.exports.renderTensioni({},dv).then(out=>process.stdout.write(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "rivalità senza orologio" in out and "Corvi" in out and "Gilda" in out  # P1
+    assert out.count("⚔") == 1                                  # coppia rivali deduplicata
+    assert "Veggente" in out and "profezia senza orologio" in out  # P3 dormiente
+    assert "2 conflitti" in out                                 # P1 + P3; Setta esclusa (già un Fronte)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_coerenza_tematica(tmp_path):
     """views.confrontoAssi + coerenzaNote: confronto su assi con lo STESSO id e note
     (contrasto forte ≥3 = tensione; rivale-specchio = tutti gli assi ≤1)."""
