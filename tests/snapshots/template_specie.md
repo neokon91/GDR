@@ -111,6 +111,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "spe
 
 --- 🔗 Collegamenti
 
+> [!example]- 🎭 Chi la gioca
+> I personaggi del vault che hanno scelto questa nota (si popola creando un PG/PNG che la sceglie):
+```dataview
+list
+from ""
+where categoria = "personaggio" and lower(string(specie)) = lower(this.file.name)
+sort tipo asc, file.name asc
+```
 > [!example] Relazioni
 > **Regione d'origine**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):origine]`
 > **Culture associate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`

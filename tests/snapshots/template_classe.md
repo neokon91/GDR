@@ -81,6 +81,14 @@ where categoria = "sottoclasse" and classe = this.file.link
 
 --- 🔗 Collegamenti
 
+> [!example]- 🎭 Chi la gioca al tavolo
+> I personaggi del vault che hanno scelto questa nota (si popola creando un PG/PNG che la sceglie):
+```dataview
+list
+from ""
+where categoria = "personaggio" and lower(string(classe)) = lower(this.file.name)
+sort tipo asc, file.name asc
+```
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`
 >

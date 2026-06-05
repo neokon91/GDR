@@ -134,17 +134,20 @@ relazioni:
   category: luogo
   multi: true
   reciprocal: confina_con
-# Economia: cosa il luogo PRODUCE e da cosa DIPENDE (inverso generico 'connessioni'
-# su risorsa); le ROTTE commerciali verso altri luoghi (simmetriche → auto-reciproche).
+# Economia: cosa il luogo PRODUCE e da cosa DIPENDE (inversi TIPIZZATI su risorsa,
+# prodotta_in/consumata_da → il grafo economico è percorribile da entrambi i lati);
+# le ROTTE commerciali verso altri luoghi (simmetriche → auto-reciproche).
 # Alimentano la dashboard Economia e danno stakes materiali a Fronti/clock.
 - field: produce
   label: Produce
   category: risorsa
   multi: true
+  reciprocal: prodotta_in
 - field: dipende_da
   label: Dipende da
   category: risorsa
   multi: true
+  reciprocal: consumata_da
 - field: rotta_con
   label: Rotta commerciale con
   category: luogo

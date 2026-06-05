@@ -597,6 +597,22 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Chi usa al tavolo un'entità-regola del vault (classe/specie/background): i PG/PNG il
+   cui campo meccanico combacia con questa nota. crea_pg scrive l'id homebrew = basename
+   della nota, quindi il match è `lower(campo) == lower(this.file.name)`. AUTO-DERIVATO
+   dai campi già scritti: niente relazione di schema (così «Collega» non sovrascrive l'id
+   meccanico che legge il motore PG). Triade PC che entra nel grafo dal lato sicuro. #}
+{% macro chi_la_usa(field, ruolo) -%}
+> [!example]- 🎭 Chi {{ ruolo }}
+> I personaggi del vault che hanno scelto questa nota (si popola creando un PG/PNG che la sceglie):
+```dataview
+list
+from ""
+where categoria = "personaggio" and lower(string({{ field }})) = lower(this.file.name)
+sort tipo asc, file.name asc
+```
+{%- endmacro %}
+
 {# Tab Mappa (luogo/mondo): collega ed embedda una mappa (disegno Excalidraw,
    immagine o nota) col campo 'mappa'; l'embed vive in views.renderMap. #}
 {% macro mappa() -%}

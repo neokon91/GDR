@@ -37,6 +37,12 @@ scheda: [fonte, scarsita, usi]
 relazioni:
   # Inverso pulito (1:1) di fazione.controlla_risorse → chi la controlla.
   - { field: controllata_da, label: Controllata da, category: fazione }
+  # Inversi TIPIZZATI del grafo economico (luogo.produce/dipende_da, rotta.risorse):
+  # così dalla risorsa si vede dove nasce, dove serve e su quali rotte viaggia — e la
+  # dashboard Economia / spinteFronte percorrono il grafo da entrambi i lati.
+  - { field: prodotta_in,    label: Prodotta in,    category: luogo, multi: true, reciprocal: produce }
+  - { field: consumata_da,   label: Consumata da,   category: luogo, multi: true, reciprocal: dipende_da }
+  - { field: trasportata_su, label: Trasportata su, category: rotta, multi: true, reciprocal: risorse }
 creation:
   fields:
     - { field: tipo, prompt: "Tipo di risorsa", from: subtypes, required: true }

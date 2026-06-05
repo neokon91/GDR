@@ -44,6 +44,9 @@
 {% endif %}
 --- 🔗 Collegamenti
 
+{% if template.category in ['specie', 'background'] %}
+{{ m.chi_la_usa(template.category, 'la gioca' if template.category == 'specie' else 'viene da qui') }}
+{% endif %}
 {{ m.relazioni(template.category) }}
 {{ m.collegamenti(with_sessioni=false) }}
 --- 👁 Vista

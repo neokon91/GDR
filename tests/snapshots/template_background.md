@@ -47,6 +47,14 @@
 
 --- 🔗 Collegamenti
 
+> [!example]- 🎭 Chi viene da qui
+> I personaggi del vault che hanno scelto questa nota (si popola creando un PG/PNG che la sceglie):
+```dataview
+list
+from ""
+where categoria = "personaggio" and lower(string(background)) = lower(this.file.name)
+sort tipo asc, file.name asc
+```
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

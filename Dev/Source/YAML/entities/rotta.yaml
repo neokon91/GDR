@@ -27,7 +27,7 @@ relazioni:
 - { field: estremi,       label: Collega (estremi), category: luogo, multi: true }
 - { field: tappe_luoghi,  label: Tappe intermedie,  category: luogo, multi: true }
 - { field: controllata_da, label: Controllata da,   category: fazione }
-- { field: risorse,       label: Risorse in transito, category: risorsa, multi: true }
+- { field: risorse,       label: Risorse in transito, category: risorsa, multi: true, reciprocal: trasportata_su }
 creation:
   fields:
   - { field: tipo, prompt: Tipo di rotta, from: subtypes, required: true }

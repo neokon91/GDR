@@ -2215,6 +2215,44 @@ def test_spinte_teologiche(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_spinte_fronte_assi_e_scarsita(tmp_path):
+    """views.spinteFronte: (1) gli ASSI di una divinità-Fronte SCENDONO sul tavolo
+    (Volontà alta → interviene; intransigente+schierata → crociata; ancorata+incarnata →
+    tangibile); (2) la SCARSITÀ di una risorsa è un driver economico (una risorsa rara è
+    contesa anche a pressione bassa); (3) un dio venerato intransigente infiamma i fedeli."""
+    harness = tmp_path / "assi.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const all=[\n'
+        '  {file:{name:"Vorth",path:"Vorth.md",inlinks:[]}, categoria:"divinita", pressione:6, clock_dim:8, clock:1,'
+        '   volonta:5, etica_divina:5, polarita_cosmica:4, presenza_cosmica:4, incarnazione:5},\n'
+        '  {file:{name:"Forte",path:"Forte.md",inlinks:[]}, categoria:"luogo", clock_dim:6, clock:1,'
+        '   dipende_da:[L("Mithril")], produce:[L("Sale")]},\n'
+        '  {file:{name:"Mithril",path:"Mithril.md"}, categoria:"risorsa", pressione:1, scarsita:"rara"},\n'
+        '  {file:{name:"Sale",path:"Sale.md"}, categoria:"risorsa", pressione:0, scarsita:"scarsa"},\n'
+        '  {file:{name:"Setta",path:"Setta.md",inlinks:[]}, categoria:"culto", clock_dim:4, clock:1, divinita:[L("Vorth")]},\n'
+        '];\n'
+        'const dv={page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};\n'
+        'const f=(n)=>all.find(x=>x.file.name===n);\n'
+        'Promise.all([f("Vorth"),f("Forte"),f("Setta")].map(p=>m.exports.spinteFronte({},dv,p)))'
+        '.then(a=>process.stdout.write(JSON.stringify(a)));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    vorth, forte, setta = json.loads(res.stdout)
+    jv = "\n".join(vorth)
+    assert "Volontà interventista" in jv                       # volontà 5 → interviene
+    assert "i suoi fedeli si fanno crociata" in jv             # etica 5 + polarità 4 → crociata
+    assert "quasi incarnata" in jv                             # presenza 4 + incarnazione 5 → tangibile
+    assert any("Mithril" in r and "rara" in r for r in forte)  # dipendenza da risorsa RARA (pressione 1)
+    assert any("Sale" in r and "scarsa" in r for r in forte)   # produzione di risorsa SCARSA (pressione 0)
+    assert "intransigenza divina infiamma" in "\n".join(setta) # il dio militante venerato infiamma i fedeli
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_stato_mondo(tmp_path):
     """views.renderStatoMondo (cruscotto Fronti): i Fronti (clock_dim) ordinati per
     imminenza (clock + spinte dal grafo); intestazione coi conteggi; non-fronti esclusi."""

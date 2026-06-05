@@ -1130,17 +1130,24 @@ async function spinteFronte(app, dv, page) {
   // Un Fronte è "religioso" (categoria culto o tipo culto): i suoi rivali-culto e
   // il sacro che serve li tratta il GRAFO TEOLOGICO sotto, non quello economico.
   const religioso = text(page.categoria) === "culto" || text(page.tipo) === "culto";
+  // Scarsità come driver economico: una risorsa SCARSA è contesa anche se la sua
+  // pressione è bassa (la rarità stessa fa gola). Legge il campo `scarsita` (select).
+  const scarsaR = (r) => ["scarsa", "rara", "esaurita"].includes(text(r.scarsita));
   for (const link of asArray(page.dipende_da)) {
     const r = resolve(dv, link); if (!r || !r.file) continue;
     const ctrl = resolve(dv, r.controllata_da);
     const why = [];
     if (hot(r) >= 5) why.push(pressureLabel(r.pressione));
+    if (scarsaR(r)) why.push(`risorsa ${text(r.scarsita)}`);
     if (ctrl && ctrl.file) why.push(`in mano a ${noteLink(ctrl)}`);
     if (why.length) out.push(`⛓ Dipendi da ${noteLink(r)} — ${why.join(", ")}: tagliarla ti stringe`);
   }
   for (const link of asArray(page.produce)) {
     const r = resolve(dv, link); if (!r || !r.file) continue;
-    if (hot(r) >= 5) out.push(`💎 Produci ${noteLink(r)} (${pressureLabel(r.pressione)}): chi la vuole preme qui`);
+    if (hot(r) >= 5 || scarsaR(r)) {
+      const why = hot(r) >= 5 ? pressureLabel(r.pressione) : `risorsa ${text(r.scarsita)}`;
+      out.push(`💎 Produci ${noteLink(r)} (${why}): chi la vuole preme qui`);
+    }
   }
   for (const link of asArray(page.rotta_con)) {
     const o = resolve(dv, link); if (!o || !o.file) continue;
@@ -1164,6 +1171,19 @@ async function spinteFronte(app, dv, page) {
       for (const link of asArray(page[fld])) add(resolve(dv, link), "Si manifesta in");
     for (const link of asArray(page.file.inlinks)) add(resolve(dv, link), "Dipende da te");
   }
+  // Grafo degli ASSI: il CARATTERE di una divinità preme sul tavolo — gli assi che
+  // SCENDONO (il ritratto cosmico diventa spinta, non solo descrizione). Volontà alta →
+  // interviene; intransigente e schierata → i fedeli si fanno crociata; ancorata e
+  // incarnata → la sua presenza si fa crisi tangibile. Legge i valori-assi dal frontmatter.
+  if (text(page.categoria) === "divinita") {
+    const ax = (k) => Number(page[k]) || 0;
+    if (ax("volonta") >= 4)
+      out.push(`🌌 Volontà ${ax("volonta") >= 5 ? "interventista" : "attiva"}: interviene negli eventi, non resta a guardare`);
+    if (ax("etica_divina") >= 4 && ax("polarita_cosmica") >= 4)
+      out.push(`⚔ Dio intransigente e schierato (etica ${ax("etica_divina")}/5 · polarità ${ax("polarita_cosmica")}/5): i suoi fedeli si fanno crociata`);
+    if (ax("presenza_cosmica") >= 4 && ax("incarnazione") >= 4)
+      out.push(`👁 Presenza ancorata e quasi incarnata: la sua mano si fa tangibile nel mondo`);
+  }
   // Grafo TEOLOGICO: un Fronte religioso è spinto dalla metafisica — il dio/dominio
   // cosmico che venera si desta o freme, un culto rivale sale, una profezia che lo
   // riguarda matura. La fede genera trame come l'economia genera tensioni materiali
@@ -1179,7 +1199,10 @@ async function spinteFronte(app, dv, page) {
         const o = resolve(dv, link); if (!o || !o.file) continue;
         if (!COSMO.has(text(o.categoria)) || (hot(o) < 5 && !adv(o))) continue;
         const stato = adv(o) ? `si desta (${Number(o.clock) || 0}/${cdim(o)})` : `freme (${pressureLabel(o.pressione)})`;
-        push(o, `🙏 ${noteLink(o)} che veneri ${stato}: la posta cosmica matura, la fede si infiamma`);
+        // Gli ASSI del dio venerato scendono sul culto: un dio intransigente e schierato
+        // (etica/polarità alte) infiamma di più i suoi fedeli.
+        const milit = (Number(o.etica_divina) || 0) >= 4 && (Number(o.polarita_cosmica) || 0) >= 4;
+        push(o, `🙏 ${noteLink(o)} che veneri ${stato}${milit ? ", e la sua intransigenza divina infiamma i fedeli" : ""}: la posta cosmica matura`);
       }
     // 2) Un culto rivale in ascesa (caldo o fronte a metà): la fede è contesa.
     for (const link of asArray(page.rivali)) {
