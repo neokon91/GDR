@@ -368,6 +368,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Calendario: {{ field('fc-calendar', label=false) }} · Categoria: {{ field('fc-category', label=false) }}
 >
 > Compila *{{ 'Inizio (e Fine)' if range else 'Data' }}* per far comparire {{ "l'epoca" if range else "l'evento" }} sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
+>
+> Manca il calendario del mondo (mesi/ere)? `BUTTON[apri-calendario]` — crealo o aprilo in un clic; poi i datati vi compaiono soli.
 {%- endmacro %}
 
 {# Generazione nomi/spunti (generatore homebrew, genera.js): un bottone Templater
@@ -599,9 +601,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    immagine o nota) col campo 'mappa'; l'embed vive in views.renderMap. #}
 {% macro mappa() -%}
 > [!info] Mappa
-> Collega una mappa: {{ field('mappa', label=false) }}
+> Pesca l'**immagine** della mappa: {{ field('mappa', label=false) }}
 >
-> Collega un'**immagine** (mappa di mondo/regione) e diventa **interattiva** sotto — zoom/pan e righello distanze→tempi (TTRPG Tools - Maps); aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]`. In alternativa una **nota Excalidraw** (disegnala a mano, `[[Luogo]]` per zone cliccabili).
+> Diventa **interattiva** sotto — zoom/pan e righello distanze→tempi (TTRPG Tools - Maps); aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]` (restano salvati accanto all'immagine). Mappe da **Azgaar/Watabou**: esporta PNG/SVG, trascina in `Media/`, poi pescala qui.
+>
+> Alternative: `BUTTON[disegna-mappa]` (disegnala a mano in Excalidraw, poi incorporala con `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con overlay/livelli multipli).
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```

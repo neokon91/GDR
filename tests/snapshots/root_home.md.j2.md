@@ -116,6 +116,10 @@ limit 20
 > `BUTTON[crea-nota_rapida]`
 > `BUTTON[crea-missione]`
 
+> [!example]- 🔧 Strumenti
+> Apri lo strumento giusto in un clic, senza cercarlo nelle impostazioni:
+> `BUTTON[apri-calendario]` (calendario del mondo · timeline) · `BUTTON[world-board]` (Canvas «a colpo d'occhio») · `BUTTON[prepara-gruppo]` (schiera i PG in Initiative Tracker)
+
 ## Sessione attiva
 ```dataview
 list

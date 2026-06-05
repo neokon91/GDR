@@ -146,7 +146,11 @@ metabind_inputs:
   clock_dim: INPUT[inlineSelect(option(4), option(6), option(8))]
   gs: INPUT[inlineSelect(option(0), option(1/8), option(1/4), option(1/2), option(1), option(2), option(3), option(4), option(5), option(6), option(7), option(8), option(9), option(10), option(11), option(12), option(13), option(14), option(15), option(16), option(17), option(18), option(19), option(20))]
   legame: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
-  mappa: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
+  # imageSuggester (come ritratto/banner): pesca l'IMMAGINE della mappa senza
+  # digitare il path (il caso dominante: export PNG/SVG da Azgaar/Watabou in Media/).
+  # renderMap risolve path/[[link]]/![[embed]]; il disegno Excalidraw a mano passa
+  # dal bottone «Disegna mappa», non da questo campo (immagini-only).
+  mappa: INPUT[imageSuggester()]
   ritratto: INPUT[imageSuggester()]
   banner: INPUT[imageSuggester()]
   segno: INPUT[inlineSelect(option(Ariete), option(Toro), option(Gemelli), option(Cancro), option(Leone), option(Vergine), option(Bilancia), option(Scorpione), option(Sagittario), option(Capricorno), option(Acquario), option(Pesci))]
@@ -274,3 +278,26 @@ buttons:
   - id: prepara-gruppo
     label: Prepara il gruppo (IT)
     action: inizia_incontro
+  # --- Comandi-strumento (button con 'command'): aprono DIRETTAMENTE lo strumento
+  # del plugin senza cercarlo nella tavolozza comandi né nelle impostazioni → tolgono
+  # l'attrito di "dov'è la mappa / il calendario". NON richiedono un'azione-nota
+  # (vedi action_buttons). Senza il plugin il comando non esiste: il bottone mostra
+  # un avviso e non rompe la nota. ID-comando verificati sui main.js dei plugin in dist.
+  - id: apri-calendario
+    label: Apri calendario
+    command: calendarium:open-calendarium
+  - id: inserisci-mappa
+    label: Inserisci mappa
+    command: zoom-map:insert-new-map
+  # autocreate-newtab (non -embed-on-current): crea+apre un disegno in una scheda
+  # nuova, robusto in QUALSIASI vista (gli "insert al cursore" non funzionano in
+  # Lettura, dove però si vedono le note del vault). Poi si collega nel campo Mappa.
+  - id: disegna-mappa
+    label: Disegna mappa
+    command: obsidian-excalidraw-plugin:excalidraw-autocreate-newtab
+  # Timbra la data in-game corrente del calendario al cursore (nota sessione, in
+  # edit durante il gioco → l'insert-al-cursore funziona). Serve un calendario con
+  # una data corrente impostata (vedi «Apri calendario»).
+  - id: inserisci-data
+    label: Inserisci data
+    command: calendarium:insert-calendarium-current-date

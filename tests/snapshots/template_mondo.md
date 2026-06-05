@@ -157,9 +157,11 @@ group by categoria as "Tipo"
 --- 🗺 Mappa
 
 > [!info] Mappa
-> Collega una mappa: `INPUT[mappa][:mappa]`
+> Pesca l'**immagine** della mappa: `INPUT[mappa][:mappa]`
 >
-> Collega un'**immagine** (mappa di mondo/regione) e diventa **interattiva** sotto — zoom/pan e righello distanze→tempi (TTRPG Tools - Maps); aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]`. In alternativa una **nota Excalidraw** (disegnala a mano, `[[Luogo]]` per zone cliccabili).
+> Diventa **interattiva** sotto — zoom/pan e righello distanze→tempi (TTRPG Tools - Maps); aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]` (restano salvati accanto all'immagine). Mappe da **Azgaar/Watabou**: esporta PNG/SVG, trascina in `Media/`, poi pescala qui.
+>
+> Alternative: `BUTTON[disegna-mappa]` (disegnala a mano in Excalidraw, poi incorporala con `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con overlay/livelli multipli).
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```

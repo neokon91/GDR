@@ -27,7 +27,7 @@
 > [!info] Live
 > Scena corrente: `INPUT[text:scena_corrente]`
 >
-> Tiro rapido: `dice: 1d20`
+> Tiro rapido: `dice: 1d20` · Data in gioco: `BUTTON[inserisci-data]`
 
 > [!todo]- Task
 > ```tasks

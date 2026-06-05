@@ -1401,12 +1401,14 @@ def test_render_map(tmp_path):
         'const link={mappa:{path:"Mondi/Mappe/Valdoria.excalidraw.md"}};'
         'const imgLink={mappa:{path:"Media/Atlante.webp"}};'
         'const str={mappa:"[[Atlante.png]]"};'
+        'const emb={mappa:"![[Atlante.png]]"};'  # imageSuggester può scrivere un embed
         'Promise.all(['
         '  m.exports.renderMap({},{},link),'
         '  m.exports.renderMap({},{},imgLink),'
         '  m.exports.renderMap({},{},str),'
         '  m.exports.renderMap({},{},{}),'
-        ']).then(([a,b,c,d])=>process.stdout.write(JSON.stringify({a,b,c,d})));',
+        '  m.exports.renderMap({},{},emb),'
+        ']).then(([a,b,c,d,e])=>process.stdout.write(JSON.stringify({a,b,c,d,e})));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
@@ -1415,6 +1417,7 @@ def test_render_map(tmp_path):
     assert out["b"].startswith("```zoommap") and "image: Media/Atlante.webp" in out["b"]  # immagine (Link) -> mappa interattiva
     assert out["c"].startswith("```zoommap") and "image: Atlante.png" in out["c"]         # immagine (stringa) -> mappa interattiva
     assert out["d"].startswith("> [!tip] Nessuna mappa")             # campo vuoto -> guida
+    assert out["e"].startswith("```zoommap") and "image: Atlante.png" in out["e"]         # immagine (![[embed]] da imageSuggester) -> mappa interattiva
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

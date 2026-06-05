@@ -150,6 +150,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epo
 > Calendario: `INPUT[text:fc-calendar]` · Categoria: `INPUT[text:fc-category]`
 >
 > Compila *Inizio (e Fine)* per far comparire l'epoca sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
+>
+> Manca il calendario del mondo (mesi/ere)? `BUTTON[apri-calendario]` — crealo o aprilo in un clic; poi i datati vi compaiono soli.
 --- 🔗 Collegamenti
 
 > [!example] Relazioni

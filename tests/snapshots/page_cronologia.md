@@ -6,6 +6,7 @@
 > `BUTTON[crea-evento]`
 
 ## 🕰 Linea del tempo
+> [!tip] La nostra timeline (nastro qui sotto) si popola sola dagli eventi e dalle tappe. Per il **calendario navigabile** (mesi/ere, agenda dei datati): `BUTTON[apri-calendario]`
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTimeline");
 ```

@@ -930,7 +930,7 @@ async function renderMap(app, dv, page) {
   if (raw && raw.path) {
     path = String(raw.path);
   } else if (raw) {
-    nameStr = text(raw).replace(/^\[\[/, "").replace(/\]\]$/, "").split("|")[0].trim();
+    nameStr = text(raw).replace(/^!?\[\[/, "").replace(/\]\]$/, "").split("|")[0].trim();
     const dest = nameStr && app && app.metadataCache && app.metadataCache.getFirstLinkpathDest
       ? app.metadataCache.getFirstLinkpathDest(nameStr, (page.file && page.file.path) || "")
       : null;
