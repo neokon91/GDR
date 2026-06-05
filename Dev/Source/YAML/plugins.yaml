@@ -244,6 +244,11 @@ buttons:
   - id: avanza-fronte
     label: Avanza fronte
     action: avanza_fronte
+  # Motore A «Giro del mondo»: avanza TUTTI i Fronti di un passo per calore (i pieni scattano
+  # con conseguenza in bozza + cascata), e scrive una cronaca. Il mondo si muove da sé.
+  - id: avanza-mondo
+    label: Avanza il mondo
+    action: giro_del_mondo
   - id: sali-di-livello
     label: Sali di livello
     action: sali_di_livello

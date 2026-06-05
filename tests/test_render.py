@@ -2286,6 +2286,33 @@ def test_render_stato_mondo(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_motori_mondo_vivo(tmp_path):
+    """meta_actions, motori del mondo vivo: propagaShock (CASCATA — BFS con decadimento per
+    distanza, cicli gestiti, la sorgente non si auto-colpisce) e avanzamentoDaPressione
+    (GIRO DEL MONDO — il calore/pressione decide i passi del clock)."""
+    harness = tmp_path / "motori.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const grafo={A:[{nome:"B",via:"rivali"},{nome:"C",via:"confina_con"}],'
+        ' B:[{nome:"D",via:"alleati"},{nome:"A",via:"rivali"}], C:[], D:[]};'
+        'const shock=m.exports.propagaShock("A",(n)=>grafo[n]||[],[2,1]);'
+        'const obj={};shock.forEach((v,k)=>{obj[k]=v;});'
+        'process.stdout.write(JSON.stringify({shock:obj,'
+        ' adv:[8,5,3,0].map((x)=>m.exports.avanzamentoDaPressione(x))}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["shock"]["B"] == {"delta": 2, "via": "rivali"}       # dist 1 → +2
+    assert out["shock"]["C"] == {"delta": 2, "via": "confina_con"}  # dist 1 → +2
+    assert out["shock"]["D"] == {"delta": 1, "via": "alleati"}      # dist 2 → +1 (decadimento)
+    assert "A" not in out["shock"]                                  # sorgente: nessun auto-colpo (ciclo B→A gestito)
+    assert out["adv"] == [2, 1, 0, 0]                               # 8→+2 (Crisi), 5→+1 (Tensione), 3/0→0 (Calma)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_coerenza_tematica(tmp_path):
     """views.confrontoAssi + coerenzaNote: confronto su assi con lo STESSO id e note
     (contrasto forte ≥3 = tensione; rivale-specchio = tutti gli assi ≤1)."""

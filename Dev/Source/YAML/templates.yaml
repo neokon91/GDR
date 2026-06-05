@@ -25,6 +25,9 @@ actions:
   - id: avanza_fronte
     title: Avanza fronte
     target: z.modelli/azioni/Avanza fronte.md
+  - id: giro_del_mondo
+    title: Avanza il mondo
+    target: z.modelli/azioni/Avanza il mondo.md
   - id: sali_di_livello
     title: Sali di livello
     target: z.modelli/azioni/Sali di livello.md
