@@ -75,6 +75,7 @@ const PANELS = {
   renderStatoMondo: { mode: "md", args: (a, d) => [a, d.dv] },
   renderProiezione: { mode: "md", args: (a, d) => [a, d.dv] },
   renderTensioni: { mode: "md", args: (a, d) => [a, d.dv] },
+  renderMemoria: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderTimeline: { mode: "md", args: (a, d) => [a, d.dv] },
   renderClock: { mode: "dom", args: (a, d, cont) => [cont, a, d.page] },
   renderAxesCompare: { mode: "dom", args: (a, d, cont) => [cont, a, d.dv, d.page] },

@@ -25,6 +25,9 @@ fields:
   # pieno, scatena una conseguenza nel mondo (vedi macro clock() + meta_actions).
   clock_dim:      { label: "Clock (segmenti)",   widget: clock_dim }
   clock:          { label: "Clock (pieni)",      widget: number }
+  # Scadenza (motore I): deadline in GIRI del mondo. Il giro la decrementa; a 0 il Fronte
+  # scatta comunque (la deadline è arrivata), anche se il clock non è pieno. Opzionale.
+  scadenza:       { label: "Scadenza (giri)",    widget: number }
   conseguenza:    { label: Conseguenza,          widget: testo_area }
   conseguenza_su: { label: Conseguenza su,       widget: legame }
   uso_al_tavolo:  { label: Uso al tavolo,        widget: testo_area }

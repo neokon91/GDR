@@ -208,7 +208,7 @@
    crea un evento collegato e azzera il clock (meta_actions). Opt-in: senza
    clock_dim mostra solo un suggerimento. #}
 {% macro clock() -%}
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
+**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
 ```
@@ -342,6 +342,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 
 {{ rete() }}
+{{ memoria() }}
+{%- endmacro %}
+
+{# Memoria (il mondo ricorda): gli eventi (specie le conseguenze) che hanno toccato questa
+   nota, in ordine cronologico. Read-only; vuoto se non c'è storia. views.renderMemoria. #}
+{% macro memoria() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```
 {%- endmacro %}
 
 {# Rete di collegamenti (JS Engine): le relazioni tipizzate forward della nota

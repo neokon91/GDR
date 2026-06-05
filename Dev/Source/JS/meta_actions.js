@@ -284,35 +284,43 @@ async function giro_del_mondo(tp) {
   const piani = [];
   for (const { f, fm } of fronti) {
     const adv = avanzamentoDaPressione(fm.pressione);
-    if (adv <= 0) continue;
     const dim = Math.floor(Number(fm.clock_dim) || 0);
     const da = Math.max(0, Math.min(dim, Math.floor(Number(fm.clock) || 0)));
     const a = Math.min(dim, da + adv);
-    if (a === da) continue;
-    piani.push({ f, fm, dim, da, a, pieno: a >= dim, haConseguenza: !!String(fm.conseguenza ?? "").trim() });
+    // Scadenza (motore I): conto alla rovescia in GIRI; a 0 il Fronte scatta comunque, col
+    // clock non pieno (la deadline è arrivata). Un Fronte con SOLA scadenza (clock fermo)
+    // entra comunque nel giro per scalarla.
+    const hasScad = fm.scadenza != null && Number.isFinite(Number(fm.scadenza));
+    const scadA = hasScad ? Math.floor(Number(fm.scadenza)) - 1 : null;
+    if (a === da && !hasScad) continue;   // niente avanzamento clock né deadline → fermo
+    const scaduto = hasScad && scadA <= 0;
+    piani.push({ f, fm, dim, da, a, scadA, scaduto, pieno: a >= dim || scaduto, haConseguenza: !!String(fm.conseguenza ?? "").trim() });
   }
   if (!piani.length) { new Notice("Nessun Fronte abbastanza caldo per avanzare (serve pressione ≥4)."); return ""; }
   // Fase 2 — applica.
   const avanzati = [], scattati = [], onde = [], sospesi = [];
   for (const p of piani) {
     const scatta = p.pieno && p.haConseguenza;
-    await updateFrontmatter(p.f, (f) => { f.clock = scatta ? 0 : p.a; });
+    await updateFrontmatter(p.f, (f) => {
+      f.clock = scatta ? 0 : p.a;
+      if (p.scadA != null) { if (scatta) delete f.scadenza; else f.scadenza = p.scadA; }
+    });
     if (scatta) {
       const ev = await creaEventoConseguenza(p.f, p.fm, core, when);
       const d = await cascata(p.f, p.fm);
-      scattati.push({ nome: p.f.basename, title: ev.title });
+      scattati.push({ nome: p.f.basename, title: ev.title, perche: (p.scaduto && p.a < p.dim) ? "scadenza" : "clock" });
       for (const x of d) onde.push({ nome: x.nome, da: x.da, a: x.a, via: x.via, da_fronte: p.f.basename });
     } else if (p.pieno) {
       sospesi.push(p.f.basename);
     } else {
-      avanzati.push({ nome: p.f.basename, da: p.da, a: p.a, dim: p.dim });
+      avanzati.push({ nome: p.f.basename, da: p.da, a: p.a, dim: p.dim, scadA: p.scadA });
     }
   }
   // Cronaca: «cosa è cambiato nel mondo» (record rivedibile; i nuovi eventi sono in bozza).
   const R = [`# 📖 Giro del mondo — ${when}`, "",
     `> [!info] Un passo del mondo: **${avanzati.length}** avanzati · **${scattati.length}** scattati · **${onde.length}** onde di pressione.`, ""];
-  if (scattati.length) { R.push("## 🔴 Scattati — conseguenza in bozza"); for (const s of scattati) R.push(`- [[${s.nome}]] → [[${s.title}]]`); R.push(""); }
-  if (avanzati.length) { R.push("## ⏳ Avanzati"); for (const a of avanzati) R.push(`- [[${a.nome}]] — clock ${a.da}→${a.a}/${a.dim}`); R.push(""); }
+  if (scattati.length) { R.push("## 🔴 Scattati — conseguenza in bozza"); for (const s of scattati) R.push(`- [[${s.nome}]] → [[${s.title}]]${s.perche === "scadenza" ? " *(deadline scaduta)*" : ""}`); R.push(""); }
+  if (avanzati.length) { R.push("## ⏳ Avanzati"); for (const a of avanzati) R.push(`- [[${a.nome}]] — clock ${a.da}→${a.a}/${a.dim}${a.scadA != null ? ` · scadenza ${Math.max(0, a.scadA)} giri` : ""}`); R.push(""); }
   if (onde.length) { R.push("## 🌊 Onde di pressione (cascata dal grafo)"); for (const o of onde) R.push(`- [[${o.nome}]] pressione ${o.da}→${o.a} *(da [[${o.da_fronte}]] · ${o.via})*`); R.push(""); }
   if (sospesi.length) { R.push("## ⚠️ Pieni senza conseguenza — scrivila, poi «Scatena conseguenza»"); for (const n of sospesi) R.push(`- [[${n}]]`); R.push(""); }
   const folder = "Mondi/Cronache";

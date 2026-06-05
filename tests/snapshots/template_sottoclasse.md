@@ -40,6 +40,9 @@ I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```
 --- 👁 Vista
 
 ```js-engine

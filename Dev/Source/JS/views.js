@@ -1130,6 +1130,14 @@ async function spinteFronte(app, dv, page) {
   // Un Fronte è "religioso" (categoria culto o tipo culto): i suoi rivali-culto e
   // il sacro che serve li tratta il GRAFO TEOLOGICO sotto, non quello economico.
   const religioso = text(page.categoria) === "culto" || text(page.tipo) === "culto";
+  // Motore I — SCADENZA: un Fronte con una deadline (campo `scadenza`, in giri) preme più
+  // forte man mano che si avvicina; a 0 è arrivata (il giro del mondo lo fa scattare).
+  const scad = Number(page.scadenza);
+  if (Number.isFinite(scad) && scad <= 3) {
+    out.push(scad <= 0
+      ? "⏳ **Scadenza arrivata**: la deadline è scaduta — scatena la conseguenza"
+      : `⏳ Scadenza tra ${scad} ${scad === 1 ? "giro" : "giri"}: la deadline incombe`);
+  }
   // Scarsità come driver economico: una risorsa SCARSA è contesa anche se la sua
   // pressione è bassa (la rarità stessa fa gola). Legge il campo `scarsita` (select).
   const scarsaR = (r) => ["scarsa", "rara", "esaurita"].includes(text(r.scarsita));
@@ -1169,7 +1177,21 @@ async function spinteFronte(app, dv, page) {
     };
     for (const fld of MANIF_FIELDS)
       for (const link of asArray(page[fld])) add(resolve(dv, link), "Si manifesta in");
-    for (const link of asArray(page.file.inlinks)) add(resolve(dv, link), "Dipende da te");
+    // I culti (la fede) li tratta il motore F qui sotto: dal generico li escludiamo.
+    for (const link of asArray(page.file.inlinks)) {
+      const o = resolve(dv, link);
+      if (o && text(o.categoria) === "culto") continue;
+      add(o, "Dipende da te");
+    }
+    // Motore F — FEDE ⇄ REALTÀ: la fede che cresce RAFFORZA il principio cosmico (chiude il
+    // loop cosmo↔mortali: la cosmologia preme sul tavolo via i culti, e i culti che fioriscono
+    // premono sul cosmo). I culti che lo venerano (inlink) caldi o in corsa lo destano.
+    const cdimF = (o) => Number(o && o.clock_dim) || 0;
+    const fiorenti = asArray(page.file.inlinks).map((l) => resolve(dv, l))
+      .filter((o) => o && o.file && text(o.categoria) === "culto"
+        && (hot(o) >= 5 || (cdimF(o) > 0 && (Number(o.clock) || 0) >= Math.ceil(cdimF(o) / 2))));
+    if (fiorenti.length)
+      out.push(`🙏 La fede cresce: ${fiorenti.slice(0, 3).map(noteLink).join(", ")} in ascesa ti rafforza${fiorenti.length > 1 ? "no" : ""} — la tua presenza nel mondo si fa più densa`);
   }
   // Grafo degli ASSI: il CARATTERE di una divinità preme sul tavolo — gli assi che
   // SCENDONO (il ritratto cosmico diventa spinta, non solo descrizione). Volontà alta →
@@ -1407,6 +1429,25 @@ async function renderTensioni(app, dv) {
   return `> [!tip]- 🌱 Tensioni latenti — ${sugg.length} conflitti che vogliono un orologio\n`
     + "> Il grafo propone i suoi Fronti: accendi un clock sull'entità indicata (tab *Al tavolo*).\n>\n"
     + righe.join("\n>\n");
+}
+
+// --- Memoria (il mondo ricorda) ----------------------------------------------
+// Apri una nota: riemerge la STORIA che l'ha toccata — gli eventi (specie le conseguenze
+// che B+A generano in continuazione) che la citano, in ordine cronologico. Legge gli inlink
+// filtrati a eventi (connessioni/luogo/fazioni/coinvolti/conseguenza_su risolvono qui). Le
+// conseguenze sono marcate ⚑. Read-only; "" se nessun evento la tocca → invisibile dove non
+// c'è storia (così la si può innestare ovunque). Ritorna markdown.
+async function renderMemoria(app, dv, page) {
+  if (!dv || !page || !page.file) return "";
+  const eventi = asArray(page.file.inlinks)
+    .map((l) => resolve(dv, l))
+    .filter((e) => e && e.file && text(e.categoria) === "evento" && text(e.stato) !== "archiviata");
+  if (!eventi.length) return "";
+  const righe = eventi.slice()
+    .sort((a, b) => cmpQuando(a.quando, b.quando))
+    .map((e) => `> - ${text(e.tipo) === "conseguenza" ? "⚑ " : ""}**${text(e.quando) || "—"}** ${noteLink(e)}`);
+  return `> [!quote]- 📜 Memoria — ${eventi.length} ${eventi.length === 1 ? "evento" : "eventi"} che hanno toccato questa nota\n`
+    + righe.join("\n");
 }
 
 // --- Catena causale (timeline causale) ---------------------------------------
@@ -1669,7 +1710,7 @@ module.exports = {
   renderCausalita,
   renderMap, renderDintorni, renderViaggio, parseCoord,
   renderPressioni, cosmicPush, spinteFronte, renderStatoMondo,
-  renderProiezione, forecastHeat, renderTensioni,
+  renderProiezione, forecastHeat, renderTensioni, renderMemoria,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma, armiHomebrew,

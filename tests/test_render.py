@@ -2394,6 +2394,65 @@ def test_render_tensioni(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_memoria(tmp_path):
+    """views.renderMemoria (il mondo ricorda): gli eventi che TOCCANO una nota (inlink
+    filtrati a categoria evento) in ordine cronologico, le conseguenze marcate ⚑; "" se
+    nessun evento la tocca (invisibile dove non c'è storia)."""
+    harness = tmp_path / "mem.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const all=[\n'
+        '  {file:{name:"Porto",path:"Porto.md",inlinks:[L("Assedio"),L("Esito")]}, categoria:"luogo"},\n'
+        '  {file:{name:"Assedio",path:"Assedio.md"}, categoria:"evento", tipo:"storico", quando:"anno 1200"},\n'
+        '  {file:{name:"Esito",path:"Esito.md"}, categoria:"evento", tipo:"conseguenza", quando:"anno 1210"},\n'
+        '  {file:{name:"Vuoto",path:"Vuoto.md",inlinks:[]}, categoria:"luogo"},\n'
+        '];\n'
+        'const dv={page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};\n'
+        'const f=(n)=>all.find(x=>x.file.name===n);\n'
+        'Promise.all([m.exports.renderMemoria({},dv,f("Porto")),m.exports.renderMemoria({},dv,f("Vuoto"))])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({porto:a,vuoto:b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "📜 Memoria — 2 eventi" in out["porto"]               # 2 eventi toccano il Porto
+    assert out["porto"].index("Assedio") < out["porto"].index("Esito")  # cronologico (1200 < 1210)
+    assert "⚑" in out["porto"]                                  # la conseguenza è marcata
+    assert out["vuoto"] == ""                                    # nessun evento → invisibile
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_spinte_fronte_scadenza_e_fede(tmp_path):
+    """views.spinteFronte: motore I (SCADENZA — una deadline in giri preme avvicinandosi) e
+    motore F (FEDE⇄REALTÀ — i culti che fioriscono rafforzano il principio cosmico che
+    venerano; il loop cosmo↔mortali si chiude, il culto NON è più trattato dal generico)."""
+    harness = tmp_path / "scfe.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const all=[\n'
+        '  {file:{name:"Vorth",path:"Vorth.md",inlinks:[L("Setta")]}, categoria:"divinita", clock_dim:6, clock:1, scadenza:2},\n'
+        '  {file:{name:"Setta",path:"Setta.md"}, categoria:"culto", pressione:7},\n'
+        '];\n'
+        'const dv={page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};\n'
+        'const f=(n)=>all.find(x=>x.file.name===n);\n'
+        'm.exports.spinteFronte({},dv,f("Vorth")).then(a=>process.stdout.write(JSON.stringify(a)));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    joined = "\n".join(out)
+    assert "Scadenza tra 2 giri" in joined                       # I — la deadline incombe
+    assert "La fede cresce" in joined and "[[Setta]]" in joined   # F — il culto fiorente rafforza il dio
+    assert not any("Dipende da te [[Setta]]" in r for r in out)   # il culto è di F, non del generico cosmico
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_coerenza_tematica(tmp_path):
     """views.confrontoAssi + coerenzaNote: confronto su assi con lo STESSO id e note
     (contrasto forte ≥3 = tensione; rivale-specchio = tutti gli assi ≤1)."""
