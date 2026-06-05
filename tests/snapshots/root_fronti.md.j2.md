@@ -9,6 +9,10 @@
 > `BUTTON[avanza-mondo]` — avanza **tutti** i Fronti di un passo (in proporzione al calore: 🔴 Crisi +2, 🟠 Tensione +1, 🟢 Calma fermo), scatena i pieni (conseguenza in bozza) e ne propaga le **onde** nel grafo. Scrive una cronaca «Giro del mondo». *Premilo tra una sessione e l'altra.*
 
 ```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProiezione");
+```
+
+```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderStatoMondo");
 ```
 

@@ -2313,6 +2313,57 @@ def test_motori_mondo_vivo(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_forecast_heat_allineato(tmp_path):
+    """Anti-drift fra motori: views.forecastHeat (Proiezione) DEVE dare gli stessi passi di
+    meta_actions.avanzamentoDaPressione (Giro del mondo) per ogni pressione 0..10 — se
+    divergono, la Proiezione mente su dove va il mondo."""
+    harness = tmp_path / "drift.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        'const loadJ=(p)=>{const m={exports:{}};new Function("module","exports",fs.readFileSync(p,"utf8"))(m,m.exports);return m.exports;};'
+        f'const V=loadJ({json.dumps(str(render.JS_DIR / "views.js"))});'
+        f'const M=loadJ({json.dumps(str(render.JS_DIR / "meta_actions.js"))});'
+        'const out=[];for(let p=0;p<=10;p++)out.push([V.forecastHeat(p),M.avanzamentoDaPressione(p)]);'
+        'process.stdout.write(JSON.stringify(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    pairs = json.loads(res.stdout)
+    assert all(a == b for a, b in pairs), f"forecastHeat ≠ avanzamentoDaPressione: {pairs}"
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_proiezione(tmp_path):
+    """views.renderProiezione (motore J, dry-run read-only): stima in quanti GIRI scatta ogni
+    Fronte al ritmo attuale (calore costante: ceil((dim-clock)/passi)), ordina per imminenza,
+    e anticipa l'ONDA (chi spingerà scattando, lookahead a 1 passo)."""
+    harness = tmp_path / "proi.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const all=[\n'
+        '  {file:{name:"Corvi",path:"Corvi.md"}, categoria:"fazione", clock_dim:4, clock:3, pressione:7,'
+        '   conseguenza:"Prendono il porto", rivali:[L("Gilda")]},\n'
+        '  {file:{name:"Gilda",path:"Gilda.md"}, categoria:"fazione", clock_dim:6, clock:1, pressione:5},\n'
+        '  {file:{name:"Quieto",path:"Quieto.md"}, categoria:"fazione", clock_dim:4, clock:0, pressione:2},\n'
+        '];\n'
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
+        ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};\n'
+        'm.exports.renderProiezione({},dv).then(out=>process.stdout.write(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert out.index("[[Corvi]]") < out.index("[[Gilda]]")    # Corvi (eta 1) prima di Gilda (eta 5)
+    assert "al prossimo giro" in out                          # Corvi (Crisi +2): (4-3)/2 → 1 giro
+    assert "tra **5 giri**" in out                            # Gilda (Tensione +1): (6-1)/1 = 5
+    assert "l'onda spingerà" in out                           # lookahead: Corvi scattando spingerà il rivale
+    assert "fermo" in out                                     # Quieto (Calma) non avanza da solo
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_coerenza_tematica(tmp_path):
     """views.confrontoAssi + coerenzaNote: confronto su assi con lo STESSO id e note
     (contrasto forte ≥3 = tensione; rivale-specchio = tutti gli assi ≤1)."""

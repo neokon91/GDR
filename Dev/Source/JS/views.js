@@ -1289,6 +1289,61 @@ async function renderStatoMondo(app, dv) {
     + blocchi.join("\n>\n");
 }
 
+// --- Proiezione (motore J: dry-run del giro del mondo) -----------------------
+// Passi del clock per giro dal CALORE (pressione). DEVE combaciare con
+// meta_actions.avanzamentoDaPressione (la proiezione mente se divergono → lo impone il
+// guard test test_forecast_heat_allineato). Stesse bande di pressureLabel (≥7 / ≥4).
+function forecastHeat(pressione) {
+  const p = Number(pressione) || 0;
+  return p >= 7 ? 2 : p >= 4 ? 1 : 0;
+}
+
+// PROIEZIONE: «dove va il mondo se premi Avanza?». Per ogni Fronte stima in QUANTI giri
+// scatta al ritmo attuale (calore costante: ceil((dim-clock)/passi)), ordina per imminenza,
+// e per chi scatta anticipa l'ONDA (lookahead a 1 passo: chi spingerà, sulle stesse relazioni
+// di tensione della cascata). READ-ONLY: è il dry-run del tick — guardi il futuro prima di
+// committerlo. Stima a calore costante (le onde reali possono accelerare il resto). Markdown.
+async function renderProiezione(app, dv) {
+  if (!dv) return "*Dataview non attivo.*";
+  const fronti = dv.pages()
+    .where((p) => p && p.clock_dim != null && Number(p.clock_dim) > 0 && text(p.stato) !== "archiviata")
+    .array();
+  if (!fronti.length) {
+    return "> [!info] Niente da proiettare\n> Imposta un **clock** su una nota per vedere dove va il mondo.";
+  }
+  const TENS = ["conseguenza_su", "confina_con", "rivali", "alleati", "controllata_da", "fazioni"];
+  const righe = fronti.map((f) => {
+    const dim = Math.max(1, Math.floor(Number(f.clock_dim) || 0));
+    const cur = Math.max(0, Math.min(dim, Math.floor(Number(f.clock) || 0)));
+    const passi = forecastHeat(f.pressione);
+    const eta = passi > 0 ? Math.ceil((dim - cur) / passi) : Infinity;
+    const bersagli = [];
+    if (Number.isFinite(eta)) {
+      const seen = new Set([f.file ? f.file.name : ""]);
+      for (const campo of TENS)
+        for (const link of asArray(f[campo])) {
+          const o = resolve(dv, link);
+          if (o && o.file && !seen.has(o.file.name)) { seen.add(o.file.name); bersagli.push(noteLink(o)); }
+        }
+    }
+    return { f, dim, cur, passi, eta, bersagli };
+  }).sort((a, b) => (a.eta - b.eta) || 0);
+  const TOP = 12;
+  const blocchi = righe.slice(0, TOP).map(({ f, dim, cur, passi, eta, bersagli }) => {
+    if (!Number.isFinite(eta)) return `> 🟢 *fermo* — **${noteLink(f)}** ${cur}/${dim} (Calma: non avanza da solo)`;
+    const quando = eta <= 1 ? "**al prossimo giro**" : `tra **${eta} giri**`;
+    const cons = text(f.conseguenza) ? ` → ${text(f.conseguenza)}` : "";
+    let b = `> ${eta <= 1 ? "🔴" : "🟠"} ${quando} — **${noteLink(f)}** ${cur}/${dim} *(+${passi}/giro)*${cons}`;
+    if (bersagli.length) b += `\n> ↳ *l'onda spingerà* ${bersagli.slice(0, 4).join(", ")}`;
+    return b;
+  });
+  const prossimi = righe.filter((r) => Number.isFinite(r.eta) && r.eta <= 1).length;
+  const piuDi = righe.length > TOP ? ` · i ${TOP} più vicini` : "";
+  return `> [!abstract]- 🔮 Proiezione — al ritmo attuale (${prossimi} scattano al prossimo giro)${piuDi}\n`
+    + "> *Dove va il mondo se premi «Avanza il mondo»: stima a calore costante; le onde possono accelerare il resto.*\n>\n"
+    + blocchi.join("\n>\n");
+}
+
 // --- Catena causale (timeline causale) ---------------------------------------
 // Per un evento ricostruisce PERCHÉ è successo (risalendo causato_da) e COSA NE È
 // DERIVATO (scendendo per conseguenze). Le due direzioni sono complementari: con
@@ -1549,6 +1604,7 @@ module.exports = {
   renderCausalita,
   renderMap, renderDintorni, renderViaggio, parseCoord,
   renderPressioni, cosmicPush, spinteFronte, renderStatoMondo,
+  renderProiezione, forecastHeat,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma, armiHomebrew,

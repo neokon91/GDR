@@ -587,6 +587,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Proiezione (motore J, dashboard Fronti): dove va il mondo al ritmo attuale, PRIMA di
+   premere «Avanza il mondo». Dry-run read-only del tick (ETA per Fronte + onda anticipata).
+   Logica in views.renderProiezione. #}
+{% macro proiezione() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProiezione");
+```
+{%- endmacro %}
+
 {# Tema natale (personalità psico-astrale, #9): scelto un segno si deriva
    archetipo/elemento/MBTI/ombra; l'arcano è opzionale; l'allineamento D&D resta
    accanto. Profilo per i personaggi (soprattutto PNG). Logica in views.renderTemaNatale. #}
