@@ -1073,6 +1073,10 @@ def test_render_timeline(tmp_path):
     assert out.index("🏛 Prima") < out.index("🌫 Senza epoca")
     assert "**anno 100** [[Fondazione]] · regionale" in out
     assert "[[Vecchio]]" not in out                          # archiviato non compare
+    # Nastro grafico delle epoche (resa "a colpo d'occhio") sopra il dettaglio pieghevole.
+    assert '<div class="gdr-timeline">' in out and "gdr-tl-era" in out
+    assert 'gdr-tl-name">🏛 Prima' in out                    # l'epoca compare nel nastro
+    assert "2 voci" in out                                   # conteggio voci nel segmento (2 eventi nell'epoca)
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -1387,27 +1391,30 @@ def test_tema_natale(tmp_path):
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_map(tmp_path):
-    """views.renderMap: embed ![[..]] della mappa collegata (Link Dataview o
-    stringa), con suggerimento se il campo è vuoto."""
+    """views.renderMap: un'IMMAGINE → blocco zoommap interattivo (pan/zoom/pin); una
+    nota/Excalidraw → embed ![[..]]; campo vuoto → suggerimento."""
     harness = tmp_path / "map.js"
     harness.write_text(
         'const fs=require("fs");'
         f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const link={mappa:{path:"Mondi/Mappe/Valdoria.excalidraw.md"}};'
+        'const imgLink={mappa:{path:"Media/Atlante.webp"}};'
         'const str={mappa:"[[Atlante.png]]"};'
         'Promise.all(['
         '  m.exports.renderMap({},{},link),'
+        '  m.exports.renderMap({},{},imgLink),'
         '  m.exports.renderMap({},{},str),'
         '  m.exports.renderMap({},{},{}),'
-        ']).then(([a,b,c])=>process.stdout.write(JSON.stringify({a,b,c})));',
+        ']).then(([a,b,c,d])=>process.stdout.write(JSON.stringify({a,b,c,d})));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
-    assert out["a"] == "![[Valdoria.excalidraw]]"   # Link risolto al basename (senza .md)
-    assert out["b"] == "![[Atlante.png]]"            # stringa [[..]] -> embed immagine
-    assert out["c"].startswith("> [!tip] Nessuna mappa")  # campo vuoto -> guida
+    assert out["a"] == "![[Valdoria.excalidraw]]"                     # Excalidraw (.md) -> embed
+    assert out["b"].startswith("```zoommap") and "image: Media/Atlante.webp" in out["b"]  # immagine (Link) -> mappa interattiva
+    assert out["c"].startswith("```zoommap") and "image: Atlante.png" in out["c"]         # immagine (stringa) -> mappa interattiva
+    assert out["d"].startswith("> [!tip] Nessuna mappa")             # campo vuoto -> guida
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

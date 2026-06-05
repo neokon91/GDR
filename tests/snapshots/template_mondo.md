@@ -159,7 +159,7 @@ group by categoria as "Tipo"
 > [!info] Mappa
 > Collega una mappa: `INPUT[mappa][:mappa]`
 >
-> Disegnala con **Excalidraw** (scrivi `[[Luogo]]` per zone cliccabili), oppure usa **TTRPG Tools - Maps** (comando «Insert new map…») per una mappa con **segnaposto** collegati alle note, o trascina un'immagine nel vault e collegala qui.
+> Collega un'**immagine** (mappa di mondo/regione) e diventa **interattiva** sotto — zoom/pan e righello distanze→tempi (TTRPG Tools - Maps); aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]`. In alternativa una **nota Excalidraw** (disegnala a mano, `[[Luogo]]` per zone cliccabili).
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```

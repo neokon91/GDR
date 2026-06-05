@@ -111,6 +111,20 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 .gdr-bar-fill { display: block; height: 100%; border-radius: 5px; }
 .gdr-bar-val { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
+/* Timeline grafica (views.js: renderTimeline). Nastro orizzontale di epoche in ordine
+   cronologico (larghezza ∝ n. di voci), colorate sul bordo inferiore: overview a colpo
+   d'occhio sopra il dettaglio pieghevole. Resa custom (HTML), nessun plugin timeline. */
+.gdr-timeline { display: flex; gap: 3px; margin: 0.4em 0 0.9em; align-items: stretch; }
+.gdr-tl-era {
+  flex: 1; min-width: 66px; padding: 0.35em 0.55em 0.3em;
+  background: var(--background-secondary); border-radius: 6px;
+  border-bottom: 3px solid var(--background-modifier-border);
+  display: flex; flex-direction: column; gap: 1px; overflow: hidden;
+}
+.gdr-tl-name { font-weight: 600; font-size: var(--font-ui-small); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gdr-tl-span { font-size: var(--font-ui-smaller); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gdr-tl-count { font-size: var(--font-ui-smaller); color: var(--text-faint); }
+
 /* === Feel wiki (rifinitura) — tutto su variabili del tema (chiaro/scuro). === */
 
 /* Infobox (macro identita_card): scheda d'identità in cima alla nota. Box

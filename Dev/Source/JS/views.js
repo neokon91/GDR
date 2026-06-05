@@ -680,7 +680,25 @@ async function renderTimeline(app, dv, page) {
   const eras = ordered.filter((n) => n !== SENZA).length;
   const head = `**${eventi.length} eventi**` + (nTappe ? ` · **${nTappe} tappe**` : "")
     + ` · ${eras} ${eras === 1 ? "epoca" : "epoche"}`;
-  return `${head}\n\n` + blocchi.join("\n\n");
+  // Nastro grafico delle epoche (resa "a colpo d'occhio"): un segmento per epoca in ordine
+  // cronologico, largo ∝ al n. di voci, colorato; sotto resta il dettaglio pieghevole. HTML
+  // (reso da engine.markdown.create, come le barre-risorsa) → nessun plugin timeline dedicato.
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  const palette = ["green", "blue", "purple", "cyan", "orange", "pink", "red", "yellow"];
+  let ci = 0;
+  const seg = ordered.map((name) => {
+    const its = groups.get(name);
+    const info = eraInfo[name] || {};
+    const span = [text(info.inizio), text(info.fine)].filter(Boolean).join("–");
+    const isS = name === SENZA;
+    const color = isS ? "var(--text-faint)" : `var(--color-${palette[ci++ % palette.length]})`;
+    return `<div class="gdr-tl-era" style="flex:${Math.max(1, its.length)};border-bottom-color:${color}">`
+      + `<span class="gdr-tl-name">${isS ? "🌫" : "🏛"} ${esc(isS ? SENZA : name)}</span>`
+      + (span ? `<span class="gdr-tl-span">${esc(span)}</span>` : "")
+      + `<span class="gdr-tl-count">${its.length} voci</span></div>`;
+  }).join("");
+  const ribbon = `<div class="gdr-timeline">${seg}</div>`;
+  return `${head}\n\n${ribbon}\n\n` + blocchi.join("\n\n");
 }
 
 // --- Quick-ref condizioni 5.5e -----------------------------------------------
@@ -906,13 +924,30 @@ async function renderConnessioni(app, dv, page) {
 async function renderMap(app, dv, page) {
   if (!page) return "*Apri una nota.*";
   const raw = page.mappa;
-  let name = "";
-  if (raw && raw.path) name = String(raw.path).split("/").pop().replace(/\.md$/, "");
-  else if (raw) name = text(raw).replace(/^\[\[/, "").replace(/\]\]$/, "").split("|")[0].trim();
-  if (!name) {
-    return "> [!tip] Nessuna mappa\n> Imposta il campo **Mappa** qui sopra: disegnala con **Excalidraw** (mappa a mano), usa **Zoom Map** per immagini grandi, o trascina un'immagine nel vault e collegala.";
+  // Risolvi mappa → path nel vault: Link Dataview ({path}) o stringa "[[..]]" (risolta
+  // al path reale via metadataCache, fallback al nome del link).
+  let path = "", nameStr = "";
+  if (raw && raw.path) {
+    path = String(raw.path);
+  } else if (raw) {
+    nameStr = text(raw).replace(/^\[\[/, "").replace(/\]\]$/, "").split("|")[0].trim();
+    const dest = nameStr && app && app.metadataCache && app.metadataCache.getFirstLinkpathDest
+      ? app.metadataCache.getFirstLinkpathDest(nameStr, (page.file && page.file.path) || "")
+      : null;
+    path = dest ? dest.path : nameStr;
   }
-  return `![[${name}]]`;
+  if (!path) {
+    return "> [!tip] Nessuna mappa\n> Imposta il campo **Mappa** qui sopra: collega un'**immagine** (mappa interattiva con zoom/pan e segnaposto che linkano le note), un disegno **Excalidraw**, o una nota.";
+  }
+  // Immagine raster/SVG → mappa INTERATTIVA zoom-map (pan/zoom, righello distanze→tempi,
+  // pin con [[link]] alle note). Verificato in-app: zoom-map processa il blocco anche se
+  // iniettato da JS Engine (engine.markdown.create). I marker si piazzano a mano (Shift+clic).
+  if (/\.(png|jpe?g|webp|gif|svg|avif)$/i.test(path)) {
+    return "```zoommap\nimage: " + path + "\nheight: 480px\nminZoom: 0.3\nmaxZoom: 8\n```";
+  }
+  // Nota o disegno Excalidraw → embed (zone cliccabili disegnate a mano).
+  const base = (nameStr || path.split("/").pop()).replace(/\.md$/, "");
+  return `![[${base}]]`;
 }
 
 // --- Dintorni (geografia spaziale) -------------------------------------------
