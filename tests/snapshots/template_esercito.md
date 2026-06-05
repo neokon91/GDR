@@ -6,6 +6,8 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Stato / regno** | `VIEW[{regno}][text(renderMarkdown)]` |
+> | **Comandante** | `VIEW[{comandante}][text(renderMarkdown)]` |
 > | **Consistenza** | `VIEW[{consistenza} ?? "—"]` |
 > | **Morale** | `VIEW[{morale} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |

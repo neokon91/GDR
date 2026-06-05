@@ -11,6 +11,7 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Capitale** | `VIEW[{capitale}][text(renderMarkdown)]` |
 > | **Sovrano / capo** | `VIEW[{sovrano} ?? "—"]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Popolazione** | `VIEW[{popolazione} ?? "—"]` |

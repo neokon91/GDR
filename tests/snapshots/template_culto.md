@@ -8,6 +8,7 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Luogo sacro** | `VIEW[{luogo_sacro}][text(renderMarkdown)]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 

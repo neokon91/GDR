@@ -9,6 +9,7 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Piano di dimora** | `VIEW[{piano}][text(renderMarkdown)]` |
 > | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
 > | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |

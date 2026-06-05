@@ -12,6 +12,8 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Regione** | `VIEW[{regione}][text(renderMarkdown)]` |
+> | **Controllata da** | `VIEW[{controllata_da}][text(renderMarkdown)]` |
 > | **Clima** | `VIEW[{clima} ?? "—"]` |
 > | **Popolazione** | `VIEW[{popolazione} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |

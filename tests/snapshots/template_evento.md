@@ -7,6 +7,8 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Epoca** | `VIEW[{epoca}][text(renderMarkdown)]` |
+> | **Luogo** | `VIEW[{luogo}][text(renderMarkdown)]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 

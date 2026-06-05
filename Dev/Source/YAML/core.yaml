@@ -101,6 +101,21 @@ banner_categorie:
   - bioma
   - ecosistema
 
+# Relazioni-chiave "pinnate" nell'infobox (idea Kanka): 1-2 link identitari per categoria,
+# mostrati nella scheda-fatti in cima alla nota senza aprire la tab Collegamenti (read-only
+# VIEW). Solo relazioni SINGLE (no multi → infobox compatto). I `field` devono essere
+# relazioni reali della categoria (validato). Reso da identita_card.
+infobox_relazioni:
+  luogo:    [regione, controllata_da]
+  fazione:  [regno]
+  culto:    [luogo_sacro]
+  regno:    [capitale]
+  evento:   [epoca, luogo]
+  divinita: [piano]
+  esercito: [regno, comandante]
+  missione: [luogo, fazione]
+  cultura:  [lingua]
+
 # Entità "durature" che cambiano attraverso le epoche: ricevono la tab Cronologia
 # (proprietà `tappe`, righe "quando | stato" → views.renderTappe). Il mondo NON è
 # statico: un luogo si fonda/fiorisce/cade, un regno sorge e crolla. Le entità

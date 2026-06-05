@@ -117,6 +117,13 @@
 {% if cat.get('famiglie') %}
 > | **{{ cat.get('famiglia_label', 'Famiglia') }}** | {{ view('famiglia') }} |
 {% endif %}
+{%- set rels = core.get('relazioni', {}).get(template.category, []) -%}
+{% for fid in core.get('infobox_relazioni', {}).get(template.category, []) %}
+{% set r = (rels | selectattr('field', 'equalto', fid) | list | first) %}
+{% if r %}
+> | **{{ r.label }}** | {{ view_md(r.field) }} |
+{% endif %}
+{% endfor %}
 {% for fid in scheda %}
 > | **{{ core.fields[fid].label }}** | {{ view(fid) }} |
 {% endfor %}

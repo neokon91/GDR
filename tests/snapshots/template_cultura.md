@@ -12,6 +12,7 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Lingua** | `VIEW[{lingua}][text(renderMarkdown)]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Stile dei nomi** | `VIEW[{stile_nomi} ?? "—"]` |
 > | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |

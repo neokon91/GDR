@@ -31,8 +31,10 @@ sulla v2.1 prima di generarla dalla pipeline (lo schema è cambiato fra major).
 - ⚠️ **Trattino nei field-id**: `fc-*` è whitelisted in `validate.INTEROP_FIELDS`
   (non snake_case di proposito: chiavi richieste dal plugin). Meta Bind 1.4.x ammette il
   trattino negli identificatori → `INPUT[text:fc-date]` bind-a correttamente.
-- *Residuo*: `epoca` potrebbe emettere ere come `fc-date` con `fc-end` (range) per disegnare
-  le epoche sul calendario; non fatto (le epoche vivono già nella nostra timeline).
+- **`epoca` emette `fc-date`+`fc-end`** (range) → le ere si disegnano come **intervallo** sul
+  calendario. Campi `fc-date`/`fc-end` nel wizard di `epoca` (opzionali) + tab 🕰 Cronologia con
+  `calendario(range=true)` (macro `calendario`, ramo range → «Inizio»=fc-date, «Fine»=fc-end). Le
+  epoche vivono ANCHE nella nostra timeline (nastro grafico `renderTimeline` + dettaglio per-era).
 
 ## Chiavi `fc-*` disponibili (v2.1.0, non tutte cablate)
 Oltre a `fc-date`/`fc-end`/`fc-calendar`/`fc-category` (whitelistate in `INTEROP_FIELDS`), il

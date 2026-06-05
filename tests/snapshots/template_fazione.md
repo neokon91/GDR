@@ -12,6 +12,7 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Regno / Stato** | `VIEW[{regno}][text(renderMarkdown)]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Motto** | `VIEW[{motto} ?? "—"]` |
 > | **Epoca di fondazione** | `VIEW[{fondazione} ?? "—"]` |

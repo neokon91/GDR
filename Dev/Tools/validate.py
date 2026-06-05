@@ -403,6 +403,19 @@ def check() -> int:
             if cat not in categories:
                 errors.append(f"{key}: categoria non dichiarata ({cat})")
 
+    # infobox_relazioni: mappa categoria → [field di relazioni pinnate nell'infobox]. La
+    # categoria deve esistere e ogni field essere una relazione REALE di quella categoria
+    # (altrimenti identita_card non pinnerebbe nulla, in silenzio).
+    rel_fields = {cat: {r.get("field") for r in (rels or [])}
+                  for cat, rels in (core.get("relazioni", {}) or {}).items()}
+    for cat, flds in (core.get("infobox_relazioni", {}) or {}).items():
+        if cat not in categories:
+            errors.append(f"infobox_relazioni: categoria non dichiarata ({cat})")
+            continue
+        for fid in flds or []:
+            if fid not in rel_fields.get(cat, set()):
+                errors.append(f"infobox_relazioni[{cat}]: '{fid}' non è una relazione di {cat}")
+
     # Gruppi: ogni entità dichiara un `gruppo` che deve esistere in core.gruppi.
     gruppi_ids = {g.get("id") for g in core.get("gruppi", []) or []}
     for cid, cat in categories.items():
