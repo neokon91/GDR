@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 from pathlib import Path
 from typing import Any
@@ -156,6 +157,21 @@ def jinja_env() -> Environment:
     )
 
 
+def widget_options() -> dict[str, dict[str, Any]]:
+    """Opzioni enumerate dei widget Meta Bind select (plugins.yaml:metabind_inputs),
+    distillate per il wizard subtype-aware: {widget: {options: [...], multi: bool}}.
+    Solo le entry con `option(...)` literali (inlineSelect/inlineListSuggester); quelle
+    a query/slider (optionQuery, slider) non hanno opzioni enumerate → escluse, e i campi
+    `legame` non sono qui (sono link, li chiede il passo Collega)."""
+    plugins = load_yaml("plugins.yaml") if (SOURCE / "YAML" / "plugins.yaml").is_file() else {}
+    out: dict[str, dict[str, Any]] = {}
+    for widget, spec in (plugins.get("metabind_inputs") or {}).items():
+        opts = re.findall(r"option\(([^)]+)\)", str(spec))
+        if opts:
+            out[widget] = {"options": opts, "multi": "ListSuggester" in str(spec)}
+    return out
+
+
 def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> None:
     """Dati e script che il JS Engine legge a runtime: il payload core.json
     (modello distillato per views.js), le opzioni del rules-engine PG, gli script
@@ -202,6 +218,10 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         # (genera.js: nomi persona/toponimi/fazioni in italiano, a tema). Da generatori.yaml,
         # con i nomi-oggetto SRD iniettati in tesoro._srd (vedi sopra).
         "generatori": generatori,
+        # widget_options: opzioni dei select Meta Bind (plugins.yaml), per il wizard
+        # subtype-aware (create_entity chiede i campi del sottotipo come picker veri,
+        # non testo libero). Solo i widget enumerabili; i `legame` restano al passo Collega.
+        "widget_options": widget_options(),
         "creation": core.get("creation", {}),
         "templates": templates,
     }

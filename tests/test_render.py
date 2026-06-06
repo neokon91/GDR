@@ -1825,6 +1825,64 @@ def test_famiglia_preset(tmp_path):
     assert out["prim"] == {"presenza_cosmica": 1, "incarnazione": 1, "volonta": 1}  # preset divinità
 
 
+def test_widget_options():
+    """render.widget_options distilla le opzioni dei select Meta Bind (per il wizard
+    subtype-aware): inlineSelect -> singolo, inlineListSuggester -> multi; query/slider
+    esclusi. Guard anti-drift: OGNI widget usato da un campo-sottotipo dev'essere
+    chiedibile dal wizard (text/number/testo_area/legame oppure enumerato in
+    widget_options), altrimenti quel campo del tipo resterebbe muto in creazione."""
+    wo = render.widget_options()
+    assert wo["prosperita"]["options"] == ["misera", "modesta", "agiata", "ricca", "opulenta"]
+    assert wo["prosperita"]["multi"] is False
+    assert wo["servizi"]["multi"] is True                 # inlineListSuggester -> multi
+    assert "mondo" not in wo and "connessioni" not in wo  # optionQuery -> niente opzioni enumerate
+    askable = set(wo) | {"text", "number", "testo_area", "legame"}
+    fields = CORE.get("fields", {})
+    for cat, meta in CORE.get("categories", {}).items():
+        for tname, prof in (meta.get("subtype_profiles") or {}).items():
+            for fid in (prof.get("campi") or []):
+                w = (fields.get(fid) or {}).get("widget")
+                assert w in askable, f"{cat}/{tname}: campo '{fid}' widget '{w}' non chiedibile dal wizard"
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_subtype_field_question(tmp_path):
+    """create_entity.subtypeFieldQuestion mappa il widget del campo-sottotipo al modo
+    giusto di chiederlo: number->numero, select Meta Bind->lista (multi se ListSuggester),
+    text/testo_area->prompt (multiline per testo_area); legame -> null (passo Collega)."""
+    core = {
+        "fields": {
+            "pop": {"label": "Popolazione", "widget": "text"},
+            "liv": {"label": "Livelli", "widget": "number"},
+            "pr": {"label": "Prosperità", "widget": "prosperita"},
+            "srv": {"label": "Servizi", "widget": "servizi"},
+            "cap": {"label": "Capoluogo", "widget": "legame"},
+            "note": {"label": "Note", "widget": "testo_area"},
+        },
+        "widget_options": {
+            "prosperita": {"options": ["misera", "ricca"], "multi": False},
+            "servizi": {"options": ["mercato", "tempio"], "multi": True},
+        },
+    }
+    harness = tmp_path / "sfq.js"
+    harness.write_text(
+        f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
+        f'const core={json.dumps(core, ensure_ascii=False)};'
+        'const q=(f)=>crea.subtypeFieldQuestion(f,core);'
+        'process.stdout.write(JSON.stringify({'
+        'pop:q("pop"),liv:q("liv"),pr:q("pr"),srv:q("srv"),cap:q("cap"),note:q("note")}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["liv"]["from"] == "number"
+    assert out["pr"]["from"] == "list" and out["pr"]["options"] == ["misera", "ricca"] and out["pr"]["multi"] is False
+    assert out["srv"]["from"] == "list" and out["srv"]["multi"] is True
+    assert out["pop"].get("from") is None and out["pop"]["multiline"] is False   # text -> prompt
+    assert out["note"]["multiline"] is True                                      # testo_area -> multiline
+    assert out["cap"] is None                                                    # legame -> passo Collega
+
+
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_relations_to_ask(tmp_path):
     """create_entity.relationsToAsk: il wizard offre le relazioni della categoria

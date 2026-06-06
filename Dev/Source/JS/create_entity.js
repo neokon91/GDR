@@ -145,6 +145,26 @@ function emptyFor(question) {
   return question.multi ? [] : "";
 }
 
+// Domanda-wizard per un campo di SOTTOTIPO (subtype_profiles[tipo].campi): mappa il
+// widget del campo al modo giusto di chiederlo, riusando ask(). number → numero;
+// select Meta Bind (core.widget_options) → lista (multi se ListSuggester); text/
+// testo_area → prompt (multiline per testo_area). I `legame` (link) e i widget non
+// enumerabili → null: si compilano col passo Collega o dalle Proprietà.
+function subtypeFieldQuestion(fieldId, core) {
+  const spec = (core.fields || {})[fieldId] || {};
+  const widget = spec.widget;
+  const prompt = spec.label || fieldId;
+  if (widget === "number") return { field: fieldId, prompt, from: "number" };
+  const opt = (core.widget_options || {})[widget];
+  if (opt && Array.isArray(opt.options) && opt.options.length) {
+    return { field: fieldId, prompt, from: "list", options: opt.options, multi: !!opt.multi };
+  }
+  if (!widget || widget === "text" || widget === "testo_area") {
+    return { field: fieldId, prompt, multiline: widget === "testo_area" };
+  }
+  return null; // legame (link) o widget non enumerabile → passo Collega / Proprietà
+}
+
 // --- Archetipi (preset): valore-asse rappresentativo da un comparatore `quando`.
 // ">=N"/"N"/"==N" -> N ; ">N" -> N+1 ; "<N" -> N-1 ; "<=N" -> N ; "N-M" -> media.
 function presetValore(cond) {
@@ -283,6 +303,30 @@ async function runWizard(tp, template, core) {
     captured[q.field] = fillNow ? await ask(tp, q, template, core) : emptyFor(q);
   }
 
+  // Campi del SOTTOTIPO scelto: scelto `tipo`, il wizard chiede i campi propri di quel
+  // sottotipo (subtype_profiles[tipo].campi) — un luogo «insediamento» nasce con
+  // popolazione/servizi/prosperità, un «dungeon» con livelli/occupante. Data-driven: il
+  // widget del campo decide come si chiede (subtypeFieldQuestion). Opzionale e gated come
+  // i facoltativi; i campi già chiesti come creation.fields e i `legame` si saltano qui.
+  const tipoScelto = captured.tipo ?? template.default_type;
+  const profilo = (categorySpec.subtype_profiles ?? {})[tipoScelto] ?? {};
+  const campiQs = (profilo.campi ?? [])
+    .filter((fid) => !(fid in captured))
+    .map((fid) => subtypeFieldQuestion(fid, core))
+    .filter(Boolean);
+  if (campiQs.length) {
+    const fillTipo = await tp.system.suggester(
+      ["Sì, compila ora", "No, dopo nelle Proprietà"],
+      [true, false], false, `Compilare i campi del tipo «${tipoScelto}» ora?`
+    ) === true;
+    if (fillTipo) {
+      for (const q of campiQs) {
+        const v = await ask(tp, q, template, core);
+        if (Array.isArray(v) ? v.length : v !== "") captured[q.field] = v;
+      }
+    }
+  }
+
   // Collegamenti tipizzati (relazioni della categoria): il wizard li offre ALLA
   // CREAZIONE, così l'entità nasce agganciata al grafo invece che isola (prima
   // i legami erano solo un passo manuale post-creazione: macro Collegamenti /
@@ -386,4 +430,5 @@ create_entity.relationsToAsk = relationsToAsk;  // esposto per i test
 create_entity.writeInverses = writeInverses;    // esposto per i test
 create_entity.inverseRelation = inverseRelation; // esposto per i test
 create_entity.pickMulti = pickMulti;             // esposto per i test
+create_entity.subtypeFieldQuestion = subtypeFieldQuestion; // esposto per i test
 module.exports = create_entity;
