@@ -198,7 +198,7 @@ async function renderTimelineCorsie(app, dv) {
   for (const e of eventi) {
     const meta = [text(e.portata), text(e.tipo)].filter(Boolean).join(" · ");
     for (const a of attori(e)) {
-      lane(a.name, a.link).items.push({ quando: e.quando, txt: `**${text(e.quando) || "—"}** ${noteLink(e)}${meta ? ` · ${meta}` : ""}` });
+      lane(a.name, a.link).items.push({ quando: e.quando, et: (e.file && e.file.name) || text(e.quando), txt: `**${text(e.quando) || "—"}** ${noteLink(e)}${meta ? ` · ${meta}` : ""}` });
     }
   }
   // Tappe (linee di vita): ogni entità con `tappe` è una corsia di sé stessa.
@@ -206,7 +206,7 @@ async function renderTimelineCorsie(app, dv) {
     const L = lane(p.file.name, noteLink(p));
     for (const riga of asArray(p.tappe)) {
       const t = parseTappa(riga);
-      L.items.push({ quando: t.quando, txt: `📜 **${text(t.quando) || "—"}**${t.stato ? ` — ${t.stato}` : ""}` });
+      L.items.push({ quando: t.quando, et: t.stato || "tappa", txt: `📜 **${text(t.quando) || "—"}**${t.stato ? ` — ${t.stato}` : ""}` });
     }
   }
   if (!lanes.size) {
@@ -217,10 +217,29 @@ async function renderTimelineCorsie(app, dv) {
     const fa = firstWhen(a[1]), fb = firstWhen(b[1]);
     return (fa == null ? Infinity : fa) - (fb == null ? Infinity : fb) || a[0].localeCompare(b[0]);
   });
+  // Swimlane: con ≥2 istanti NUMERICI distinti, posiziona i punti sull'asse del tempo
+  // (left ∝ al «quando»). Le voci senza data numerica restano nel dettaglio pieghevole sotto.
+  const nums = ordered.flatMap(([, L]) => L.items.map((i) => quandoNum(i.quando)).filter((q) => q != null));
+  let swim = "";
+  if (nums.length >= 2) {
+    const min = Math.min(...nums), max = Math.max(...nums);
+    if (max > min) {
+      const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      const pos = (q) => Math.max(0, Math.min(100, ((q - min) / (max - min)) * 100));
+      const corsie = ordered.map(([name, L]) => {
+        const dots = L.items.map((it) => {
+          const q = quandoNum(it.quando);
+          return q == null ? "" : `<span class="gdr-sl-dot" style="left:${pos(q).toFixed(1)}%" title="${esc(text(it.quando))} — ${esc(it.et)}"></span>`;
+        }).join("");
+        return `<div class="gdr-sl-lane"><span class="gdr-sl-name">${esc(name)}</span><span class="gdr-sl-track">${dots}</span></div>`;
+      }).join("");
+      swim = `<div class="gdr-swimlane"><div class="gdr-sl-axis"><span>${esc(String(min))}</span><span>${esc(String(max))}</span></div>${corsie}</div>\n\n`;
+    }
+  }
   const blocchi = ordered.map(([, L]) => {
     const its = L.items.slice().sort((x, y) => cmpQuando(x.quando, y.quando));
     return [`> [!abstract]- 🎭 ${L.link} (${its.length})`, ...its.map((it) => `> - ${it.txt}`)].join("\n");
   });
-  return `**${ordered.length} fili paralleli** — chi fa cosa, nel tempo\n\n` + blocchi.join("\n\n");
+  return `**${ordered.length} fili paralleli** — chi fa cosa, nel tempo\n\n` + swim + blocchi.join("\n\n");
 }
 

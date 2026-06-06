@@ -64,6 +64,10 @@ async function meta_actions(tp, action = "") {
     return await usa_risorsa(tp, file);
   }
 
+  if (action === "tira_tabella") {
+    return await tira_tabella(tp, file);
+  }
+
   if (action === "sali_di_livello") {
     // Motore di level-up PG dedicato (script Templater autonomo).
     if (tp.user && tp.user.sali_pg) return await tp.user.sali_pg(tp);
@@ -116,3 +120,5 @@ meta_actions.avanza_fronte = avanza_fronte;      // esposto per i test
 meta_actions.scaffold_statblock = scaffold_statblock;  // esposto per i test
 meta_actions.propagaShock = propagaShock;        // esposto per i test (cascata, nucleo puro)
 meta_actions.avanzamentoDaPressione = avanzamentoDaPressione;  // esposto per i test
+meta_actions.pescaTabella = pescaTabella;        // esposto per i test (tiro pesato, nucleo puro)
+meta_actions.parseVoceTab = parseVoceTab;        // esposto per i test

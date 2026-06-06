@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC, META_ACTIONS_JS,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -575,7 +575,10 @@ def test_render_timeline_corsie(tmp_path):
     assert res.returncode == 0, res.stderr
     out = res.stdout
     assert "fili paralleli" in out
-    assert "🎭 [[Corvi]]" in out and "🎭 [[Re]]" in out           # una corsia per attore
+    assert "gdr-swimlane" in out and "gdr-sl-dot" in out          # swimlane posizionato sul tempo
+    axis = out.split("gdr-sl-axis")[1][:90]
+    assert "5" in axis and "20" in axis                           # asse min–max (anni 5 → 20)
+    assert "🎭 [[Corvi]]" in out and "🎭 [[Re]]" in out           # una corsia per attore (dettaglio)
     corvi = out.split("🎭 [[Corvi]]")[1].split("🎭")[0]          # blocco-corsia dei Corvi
     assert "[[Patto]]" in corvi and "[[Assedio]]" in corvi and "[[Vecchio]]" not in corvi  # niente archiviati
     assert corvi.index("[[Patto]]") < corvi.index("[[Assedio]]")  # ordine cronologico (anno 5 < 20)
@@ -603,5 +606,74 @@ def test_render_tabella(tmp_path):
     assert "dice: 1d3" in o["a"]                          # dado auto = n. voci
     assert "| 1 | Goblin |" in o["a"] and "| 2 | Lupi |" in o["a"] and "| 3 | Briganti |" in o["a"]  # prefissi rimossi
     assert "dice: 1d6" in o["b"] and "ritira" in o["b"]   # dado dichiarato > voci → alti = ritira
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_tabella_pesata(tmp_path):
+    """views.renderTabella: una voce pesata («3× testo») occupa più risultati → range
+    cumulativi (Comune=1, Raro=2–4, Leggendario=5) e dado auto = somma dei pesi (1d5)."""
+    harness = tmp_path / "tabp.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const p={categoria:"tabella",voci:"Comune\\n3\\u00d7 Raro\\nLeggendario"};'   # pesi 1,3,1 → tot 5
+        'm.exports.renderTabella({},p).then(o=>process.stdout.write(o));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "dice: 1d5" in out                              # dado = somma dei pesi
+    assert "| 1 | Comune |" in out and "| 2–4 | Raro |" in out and "| 5 | Leggendario |" in out  # range
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_pesca_tabella(tmp_path):
+    """meta_actions.pescaTabella/parseVoceTab: il parser legge i pesi («3× testo») e il
+    picker mappa il tiro al range giusto (rispettando i pesi); oltre la somma → ritira (null)."""
+    harness = tmp_path / "pesca.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(META_ACTIONS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const M=m.exports;'
+        'const v=["A","3\\u00d7 B","C"].map(M.parseVoceTab);'                          # pesi 1,3,1
+        'process.stdout.write(JSON.stringify({'
+        ' pesi:v.map(x=>x.peso), testi:v.map(x=>x.testo),'
+        ' r1:M.pescaTabella(v,1), r2:M.pescaTabella(v,2), r4:M.pescaTabella(v,4), r5:M.pescaTabella(v,5), r6:M.pescaTabella(v,6) }));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    o = json.loads(res.stdout)
+    assert o["pesi"] == [1, 3, 1] and o["testi"] == ["A", "B", "C"]   # «3× B» → peso 3, testo "B"
+    assert o["r1"] == "A" and o["r2"] == "B" and o["r4"] == "B" and o["r5"] == "C"  # range: A=1, B=2–4, C=5
+    assert o["r6"] is None                                            # oltre la somma dei pesi → ritira
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_adventure_board_edges(tmp_path):
+    """world_board.buildCanvas su dati d'avventura: scene/indizi/missione in colonne per
+    categoria e archi dalle relazioni tipizzate (conduce_a fra scene, rivela indizio→scena)."""
+    harness = tmp_path / "advb.js"
+    harness.write_text(
+        f'const wb=require({json.dumps(str(render.JS_DIR / "world_board.js"))});'
+        'const notes=['
+        ' {nome:"Indagine",categoria:"missione",fm:{},path:"m/Indagine.md"},'
+        ' {nome:"Apertura",categoria:"scena",fm:{missione:"[[Indagine]]",conduce_a:["[[Snodo]]"]},path:"s/Apertura.md"},'
+        ' {nome:"Snodo",categoria:"scena",fm:{missione:"[[Indagine]]"},path:"s/Snodo.md"},'
+        ' {nome:"Lettera",categoria:"indizio",fm:{rivela:["[[Snodo]]"],scena:"[[Apertura]]"},path:"i/Lettera.md"}];'
+        'const relazioni={scena:[{field:"missione",label:"Avventura"},{field:"conduce_a",label:"Conduce a"}],'
+        ' indizio:[{field:"rivela",label:"Rivela"},{field:"scena",label:"In scena"}]};'
+        'const b=wb.buildCanvas(notes,{categories:{missione:{},scena:{},indizio:{}},relazioni,colors:{},world:"Indagine"});'
+        'process.stdout.write(JSON.stringify({cards:b.nodes.filter(n=>n.type==="file").length,'
+        ' gruppi:b.nodes.filter(n=>n.type==="group").map(g=>g.label),'
+        ' edges:b.edges.map(e=>e.label).sort()}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    o = json.loads(res.stdout)
+    assert o["cards"] == 4 and set(o["gruppi"]) == {"Missione", "Scena", "Indizio"}
+    assert "Conduce a" in o["edges"] and "Rivela" in o["edges"] and "In scena" in o["edges"]
+    assert o["edges"].count("Avventura") == 2          # Apertura→Indagine, Snodo→Indagine
 
 

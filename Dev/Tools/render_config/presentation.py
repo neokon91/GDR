@@ -78,6 +78,18 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 .gdr-tl-span { font-size: var(--font-ui-smaller); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gdr-tl-count { font-size: var(--font-ui-smaller); color: var(--text-faint); }
 
+/* Swimlane (renderTimelineCorsie): un filo per attore, i punti posizionati sul tempo
+   (left ∝ al «quando» numerico) su un asse condiviso. Sopra il dettaglio pieghevole. */
+.gdr-swimlane { display: grid; gap: 5px; margin: 0.4em 0 0.8em; }
+.gdr-sl-axis { display: flex; justify-content: space-between; font-size: var(--font-ui-smaller); color: var(--text-faint); padding-left: 7.5em; }
+.gdr-sl-lane { display: grid; grid-template-columns: 7.5em 1fr; align-items: center; gap: 8px; }
+.gdr-sl-name { font-size: var(--font-ui-small); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gdr-sl-track { position: relative; height: 14px; background: var(--background-secondary); border-radius: 7px; }
+.gdr-sl-dot {
+  position: absolute; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px;
+  border-radius: 50%; background: var(--color-accent); border: 1px solid var(--background-primary);
+}
+
 /* === Feel wiki (rifinitura) — tutto su variabili del tema (chiaro/scuro). === */
 
 /* Infobox (macro identita_card): scheda d'identità in cima alla nota. Box

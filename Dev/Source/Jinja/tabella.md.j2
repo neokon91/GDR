@@ -5,8 +5,10 @@
 {% block lore %}
 {% import '_macros.j2' as m with context %}
 {{ m.scheda(template.category) }}
-> [!note] Voci della tabella — una per riga
+> [!note] Voci della tabella — una per riga (peso opzionale: `3× testo`)
 > {{ m.field('voci', label=false) }}
+
+> [!tip] Tira col bottone (rispetta i pesi e inserisce l'esito al cursore): `BUTTON[tira-tabella]`
 
 {{ m.vista('renderTabella') }}
 {{ m.wizard_body(template.category) }}

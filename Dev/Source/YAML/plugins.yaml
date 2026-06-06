@@ -301,6 +301,10 @@ buttons:
   - id: genera-locale
     label: Genera (locale)
     action: genera
+  # Tira sulla tabella casuale attiva (pesi rispettati): meta_actions.tira_tabella.
+  - id: tira-tabella
+    label: Tira sulla tabella
+    action: tira_tabella
   # Turno di bastione (DMG 2024): registra un turno nel Registro dei turni.
   - id: turno-bastione
     label: Turno di bastione

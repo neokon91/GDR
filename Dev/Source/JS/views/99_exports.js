@@ -9,7 +9,7 @@ module.exports = {
   renderVerificaGS, verificaGS, gsDifensivo, gsOffensivo, parseStatblockStats,
   renderProgressione,
   renderFiloAvventura,
-  renderTabella,
+  renderTabella, parseVoceTabella,
   renderRisorsePG, barPct, barRow,
   renderSpecieTratti, sezioniMarkdown,
   renderIncantesimi,

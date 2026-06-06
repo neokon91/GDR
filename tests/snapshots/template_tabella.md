@@ -30,8 +30,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Dado (vuoto = auto sul n. di voci): `INPUT[text:dado]`
 
-> [!note] Voci della tabella — una per riga
+> [!note] Voci della tabella — una per riga (peso opzionale: `3× testo`)
 > `INPUT[testo_area][:voci]`
+
+> [!tip] Tira col bottone (rispetta i pesi e inserisce l'esito al cursore): `BUTTON[tira-tabella]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTabella");
