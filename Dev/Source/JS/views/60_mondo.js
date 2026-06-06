@@ -85,6 +85,39 @@ async function renderMap(app, dv, page) {
   return `![[${base}]]`;
 }
 
+// Mappa-mondo GLOBALE (vista trasversale per l'Atlante): aggrega i Mondi (e i luoghi
+// -cornice continente/regione) che hanno una mappa-IMMAGINE e ne rende la zoom-map
+// navigabile — la porta d'ingresso visiva al worldbuilding, da cui i pin linkano le
+// note. Mondi prima. Diverso da renderMap (per-nota): questo scansiona il vault.
+async function renderWorldMap(app, dv) {
+  if (!dv) return "*Dataview non attivo.*";
+  const imgRe = /\.(png|jpe?g|webp|gif|svg|avif)$/i;
+  const resolve = (p) => {
+    const raw = p && p.mappa;
+    if (!raw) return "";
+    if (raw.path) return String(raw.path);
+    const n = text(raw).replace(/^!?\[\[/, "").replace(/\]\]$/, "").split("|")[0].trim();
+    const d = n && app && app.metadataCache && app.metadataCache.getFirstLinkpathDest
+      ? app.metadataCache.getFirstLinkpathDest(n, (p.file && p.file.path) || "") : null;
+    return d ? d.path : n;
+  };
+  const maps = dv.pages()
+    .where((p) => p && p.mappa && ["mondo", "luogo"].includes(text(p.categoria)))
+    .array()
+    .map((p) => ({ p, path: resolve(p) }))
+    .filter((m) => imgRe.test(m.path));
+  maps.sort((a, b) => (text(b.p.categoria) === "mondo") - (text(a.p.categoria) === "mondo"));
+  if (!maps.length) {
+    return "> [!tip] Nessuna mappa-mondo ancora\n> Imposta il campo **Mappa** su un **Mondo** (o un continente/regione): un'immagine diventa una mappa navigabile (zoom/pan, righello, segnaposto che linkano le note). Importa una mappa da **Azgaar / Watabou** come PNG/SVG/WebP.";
+  }
+  const out = [];
+  for (const m of maps) {
+    out.push("#### 🗺 " + noteLink(m.p) + "  ·  *" + text(m.p.categoria) + "*");
+    out.push("```zoommap\nimage: " + m.path + "\nheight: 520px\nminZoom: 0.3\nmaxZoom: 8\n```");
+  }
+  return out.join("\n\n");
+}
+
 // --- Dintorni (geografia spaziale) -------------------------------------------
 // Vista locale del luogo, due nozioni complementari di distanza: (1) per CONFINI
 // (BFS su confina_con — quante aree attraversi, "come ci si muove via terra") e

@@ -61,6 +61,7 @@ const PANELS = {
   renderEncounter: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderVerificaGS: { mode: "md", args: (a, d) => [a, d.page] },
   renderMap: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
+  renderWorldMap: { mode: "md", args: (a, d) => [a, d.dv] },
   renderDintorni: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderViaggio: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderPressioni: { mode: "md", args: (a, d) => [a, d.dv, d.page] },

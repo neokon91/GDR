@@ -13,6 +13,8 @@ pages:
     title: "🗺️ Atlante"
     category: luogo
     intro: Tutti i luoghi del mondo, dal più caldo al più quieto.
+    # Mappa-mondo navigabile (views.renderWorldMap): la zoom-map dei Mondi/cornici, in cima.
+    panel: map
     sort: "pressione desc"
     columns:
       - { field: tipo,      label: Tipo }

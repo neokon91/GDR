@@ -14,7 +14,7 @@ module.exports = {
   renderTappe, parseTappa,
   renderTipoProfilo,
   renderCausalita,
-  renderMap, renderDintorni, renderViaggio, parseCoord,
+  renderMap, renderWorldMap, renderDintorni, renderViaggio, parseCoord,
   renderPressioni, cosmicPush, spinteFronte, renderStatoMondo,
   renderProiezione, forecastHeat, renderTensioni, renderMemoria,
   renderCondizioni, condizioniMarkdown,
