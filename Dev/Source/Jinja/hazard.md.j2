@@ -4,6 +4,7 @@
 
 {{ m.identita_card(template) }}
 
+{{ m.guida(template.category, template.title) }}
 {% if core.get('categories', {}).get(template.category, {}).get('famiglie') %}
 {{ m.classificazione(template.category) }}
 {% endif %}

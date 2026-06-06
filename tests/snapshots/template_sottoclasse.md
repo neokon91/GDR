@@ -15,6 +15,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Sottoclasse
+> **Cos'è** · Una specializzazione di una tua classe homebrew, coi privilegi che si sbloccano salendo di livello.
+> **Campi chiave** · Collega la **Classe** (la lega al level-up); scrivi i **Privilegi** ai livelli canonici 3/6/10/14.
+
+
 ````tabs
 --- 🎓 Privilegi
 

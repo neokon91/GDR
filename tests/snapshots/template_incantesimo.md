@@ -22,6 +22,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Incantesimo
+> **Cos'è** · Un incantesimo che i giocatori possono memorizzare e lanciare, reso nella scheda PG con slot e link.
+> **Campi chiave** · **Livello** (0 = trucchetto) + **Classi che lo lanciano** per renderlo selezionabile; **Tempo di lancio**/**Durata** (concentrazione) governano l'uso in combattimento.
+
+
 ````tabs
 --- ⚙ Meccanica
 

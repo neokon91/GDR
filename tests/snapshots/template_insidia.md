@@ -21,6 +21,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Insidia
+> **Cos'è** · Una trappola o pericolo ambientale pronto da piazzare in una scena, con prova per individuarlo e danno/effetto.
+> **Campi chiave** · **Livello di gioco** + **Prova** (CD per individuare/disinnescare) + **Danno/Effetto**; **Innesco** e **Contromisure** dicono come scatta e come scamparla.
+
+
 > [!note]- Cosa significa ogni famiglia
 > **meccanica** — Trappola fisica: lame, fosse, pressione, congegni.
 > **magica** — Trappola arcana: glifi, maledizioni, effetti incantati.

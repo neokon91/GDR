@@ -1,6 +1,11 @@
 <% await tp.user.crea_sessione(tp) %>
 # `=this.nome`
 
+> [!info]- ℹ️ Guida — Sessione
+> **Cos'è** · Il foglio di una singola sessione: obiettivo, scena d'apertura e la checklist di prep (Tasks) per condurre il tavolo.
+> **Campi chiave** · **Mondo** + **Obiettivo** (cosa deve accadere) + **Scena d'apertura**; usa i tag #prep/#gancio per far comparire la sessione nei fili narrativi della Home.
+
+
 ````tabs
 --- ✅ Prepara
 

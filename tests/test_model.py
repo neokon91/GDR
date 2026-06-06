@@ -212,6 +212,17 @@ def test_panels_registered():
     assert not (panels - exported), f"PANELS senza export corrispondente in views.js: {sorted(panels - exported)}"
 
 
+@pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
+def test_guida_rendered(tpl):
+    """Guard anti-config-morta: ogni entità con un blocco `guida:` DEVE renderlo (callout
+    ℹ️ Guida). Un template standalone che non chiama m.guida() (né estende _entity_base)
+    la lascerebbe invisibile — bug scoperto su class/spell/hazard/subclass nella review."""
+    if not CORE.get("guida", {}).get(tpl["category"]):
+        return  # niente guida configurata per questa categoria → niente da rendere
+    out = _env().get_template(tpl["jinja"]).render(core=CORE, plugins=PLUGINS, template=tpl)
+    assert "ℹ️ Guida" in out, f"{tpl['id']}: ha guida config ma {tpl['jinja']} non la rende (config morta)"
+
+
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 @pytest.mark.parametrize("spec", render.SRD_GEN, ids=[s["dest"] for s in render.SRD_GEN])
 def test_srd_json_loads(spec):

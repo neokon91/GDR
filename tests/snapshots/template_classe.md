@@ -22,6 +22,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Classe
+> **Cos'è** · La classe homebrew che i tuoi giocatori potranno scegliere in creazione e far salire di livello come una ufficiale.
+> **Campi chiave** · Il **Tipo** (marziale/incantatore/…) è solo narrativo; a guidare la MECCANICA sono **Dado vita** + **Caratteristica primaria** + **Incantatore?** (nessuno/pieno/mezzo): da questi il motore deriva slot, competenza e ASI. ⚠️ imposta **Incantatore?** esplicitamente — il Tipo da solo NON dà gli slot.
+
+
 ````tabs
 --- 🛡 Classe
 
