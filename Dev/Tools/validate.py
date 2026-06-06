@@ -266,6 +266,27 @@ def validate_reciprocals(core: dict[str, Any]) -> list[str]:
     return errors
 
 
+def validate_subtype_gates(core: dict[str, Any]) -> list[str]:
+    """Coerenza flag-sottotipo ↔ gate-categoria. Un sottotipo che si dichiara Fronte
+    (`clock:true`) o evolvente (`evoluzione:true`) DEVE stare in una categoria abilitata
+    — clock ⟹ `fronte_categorie`, evoluzione ⟹ `tappe_categorie` — altrimenti
+    `renderTipoProfilo` prometterebbe al tavolo un Fronte / una Cronologia che il
+    template non emette per quella categoria (la classe-bug calamita/ecosistema, dove
+    un sottotipo `evoluzione:true` rinviava a una tab inesistente). Il vincolo è solo
+    flag ⟹ gate, NON il viceversa: i gate possono essere più ampi (Fronti curati a
+    livello-categoria senza flag per-sottotipo, es. il set cosmo di views.js)."""
+    errors: list[str] = []
+    fronte = set(core.get("fronte_categorie", []) or [])
+    tappe = set(core.get("tappe_categorie", []) or [])
+    for cid, cat in (core.get("categories", {}) or {}).items():
+        for sub, prof in ((cat or {}).get("subtype_profiles") or {}).items():
+            if (prof or {}).get("clock") and cid not in fronte:
+                errors.append(f"{cid}/{sub}: clock:true ma '{cid}' non è in fronte_categorie")
+            if (prof or {}).get("evoluzione") and cid not in tappe:
+                errors.append(f"{cid}/{sub}: evoluzione:true ma '{cid}' non è in tappe_categorie")
+    return errors
+
+
 def validate_aux_yaml() -> list[str]:
     """Shape degli YAML AUSILIARI letti a runtime dai JS/plugin ma non fusi nel
     modello core/system: astrologia (views.renderTemaNatale), generatori (genera.js),
@@ -431,6 +452,7 @@ def check() -> int:
             for fid in (prof or {}).get("campi", []) or []:
                 if fid not in fields:
                     errors.append(f"{cid}/{sub}: campo-profilo '{fid}' non in core.fields")
+    errors.extend(validate_subtype_gates(core))
 
     # Anti-drift: le opzioni del select 'stile_nomi' (plugins.metabind_inputs)
     # devono combaciare con gli stili di generatori.yaml, che genera.js legge a

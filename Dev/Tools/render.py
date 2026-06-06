@@ -71,6 +71,7 @@ from validate import (  # noqa: F401 (re-export per i test)
     validate_entity_schema,
     validate_reciprocals,
     validate_split,
+    validate_subtype_gates,
 )
 from render_config import (  # noqa: F401 (re-export per i test/usi storici)
     APP_SETTINGS,

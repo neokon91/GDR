@@ -519,6 +519,30 @@ def test_validate_reciprocals():
     assert errs and "reciprocal 'nonesiste'" in errs[0]
 
 
+def test_validate_subtype_gates():
+    """validate_subtype_gates: il modello reale è coerente (i flag clock/evoluzione dei
+    sottotipi stanno tutti in fronte_categorie/tappe_categorie); un sottotipo che si
+    dichiara Fronte/evolvente in una categoria FUORI dal gate è intercettato a build —
+    altrimenti renderTipoProfilo prometterebbe una macchina che il template non emette.
+    Il vincolo è uni-direzionale: i gate possono essere più ampi dei flag (no errori)."""
+    core = render.load_core()
+    assert render.validate_subtype_gates(core) == []
+    # clock:true in una categoria NON in fronte_categorie, e evoluzione:true fuori da
+    # tappe_categorie → due errori. 'incantesimo' non è né Fronte né tappe.
+    broken = {
+        "fronte_categorie": ["luogo"], "tappe_categorie": ["luogo"],
+        "categories": {"incantesimo": {"subtype_profiles": {
+            "rituale": {"clock": True, "evoluzione": True}}}},
+    }
+    errs = render.validate_subtype_gates(broken)
+    assert any("clock:true" in e and "fronte_categorie" in e for e in errs)
+    assert any("evoluzione:true" in e and "tappe_categorie" in e for e in errs)
+    # Gate più ampio del flag (categoria-Fronte curata senza flag) = nessun errore.
+    assert render.validate_subtype_gates(
+        {"fronte_categorie": ["piano"], "categories": {"piano": {"subtype_profiles": {
+            "elementale": {"descrizione": "x"}}}}}) == []
+
+
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_homebrew_bridge(tmp_path):
     """Ponte homebrew→motore (crea_pg/sali_pg): incantesimiHomebrew filtra le note
