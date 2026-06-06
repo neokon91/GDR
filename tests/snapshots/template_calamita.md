@@ -78,6 +78,17 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "calamita", component);
+```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+
 > [!abstract] Carattere
 > **Virulenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):virulenza]` → `VIEW[{virulenza} == 5 ? "5 · Fulminea" : ({virulenza} == 4 ? "4 · Galoppante" : ({virulenza} == 3 ? "3 · Crescente" : ({virulenza} == 2 ? "2 · Lenta" : ({virulenza} == 1 ? "1 · Stagnante" : ("—")))))]`
 > **Letalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):letalita]` → `VIEW[{letalita} == 5 ? "5 · Sterminatrice" : ({letalita} == 4 ? "4 · Devastante" : ({letalita} == 3 ? "3 · Mortale" : ({letalita} == 2 ? "2 · Fiaccante" : ({letalita} == 1 ? "1 · Debilitante" : ("—")))))]`
@@ -111,17 +122,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Contrastabile** — Si rallenta e si limita con sforzo e sacrificio.
 > **4 · Contenibile** — Con le misure giuste si circoscrive e si spegne.
 > **5 · Reversibile** — Esiste un rimedio chiaro: trovato quello, il danno si ripara.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "calamita", component);
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
-
-> [!tip] Profilo
-> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 
 --- 🔗 Collegamenti
 

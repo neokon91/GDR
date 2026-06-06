@@ -88,6 +88,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "legge_fondamentale", component);
+```
+
 > [!abstract] Carattere
 > **Rigidità** `INPUT[slider(minValue(1), maxValue(5), addLabels):rigidita]` → `VIEW[{rigidita} == 5 ? "5 · Aggirabile" : ({rigidita} == 4 ? "4 · Negoziabile" : ({rigidita} == 3 ? "3 · Flessibile" : ({rigidita} == 2 ? "2 · Ferrea" : ({rigidita} == 1 ? "1 · Inviolabile" : ("—")))))]`
 > **Equilibrio dei poli** `INPUT[slider(minValue(1), maxValue(5), addLabels):equilibrio]` → `VIEW[{equilibrio} == 5 ? "5 · Secondo polo egemone" : ({equilibrio} == 4 ? "4 · Bilanciata" : ({equilibrio} == 3 ? "3 · In tensione" : ({equilibrio} == 2 ? "2 · Sbilanciata" : ({equilibrio} == 1 ? "1 · Primo polo egemone" : ("—")))))]`
@@ -129,10 +133,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Segnata** — Lascia presagi e fenomeni leggibili.
 > **4 · Palese** — Evidente, innegabile a tutti.
 > **5 · Incarnata** — Ha un volto o una voce nel mondo.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "legge_fondamentale", component);
-```
 
 --- 🔗 Collegamenti
 

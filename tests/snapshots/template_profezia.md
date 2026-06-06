@@ -84,6 +84,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", component);
+```
+
 > [!abstract] Carattere
 > **Chiarezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):chiarezza]` → `VIEW[{chiarezza} == 5 ? "5 · Esplicita" : ({chiarezza} == 4 ? "4 · Chiara" : ({chiarezza} == 3 ? "3 · Allusiva" : ({chiarezza} == 2 ? "2 · Oscura" : ({chiarezza} == 1 ? "1 · Ermetica" : ("—")))))]`
 > **Avveramento** `INPUT[slider(minValue(1), maxValue(5), addLabels):avveramento]` → `VIEW[{avveramento} == 5 ? "5 · In atto" : ({avveramento} == 4 ? "4 · Imminente" : ({avveramento} == 3 ? "3 · In moto" : ({avveramento} == 2 ? "2 · Latente" : ({avveramento} == 1 ? "1 · Remota" : ("—")))))]`
@@ -117,10 +121,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Condizionata** — Dipende da scelte precise; ha bivi reali.
 > **4 · Fragile** — Facile da deviare; basta poco a spezzarla.
 > **5 · Aperta** — Solo una possibilità tra tante; il futuro è libero.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", component);
-```
 
 --- 🔗 Collegamenti
 

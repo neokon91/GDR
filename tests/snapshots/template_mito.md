@@ -59,6 +59,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mito", component);
+```
+
 > [!abstract] Carattere
 > **Veridicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):veridicita]` → `VIEW[{veridicita} == 5 ? "5 · Rivelato" : ({veridicita} == 4 ? "4 · Fedele" : ({veridicita} == 3 ? "3 · Romanzato" : ({veridicita} == 2 ? "2 · Distorto" : ({veridicita} == 1 ? "1 · Invenzione" : ("—")))))]`
 > **Diffusione** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione]` → `VIEW[{diffusione} == 5 ? "5 · Universale" : ({diffusione} == 4 ? "4 · Diffuso" : ({diffusione} == 3 ? "3 · Regionale" : ({diffusione} == 2 ? "2 · Esoterico" : ({diffusione} == 1 ? "1 · Perduto" : ("—")))))]`
@@ -92,10 +96,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Vivo** — Ispira riti, nomi, usanze ancora praticate.
 > **4 · Operante** — Muove fazioni e culti; orienta scelte e conflitti.
 > **5 · Profetico** — Si sta avverando; il mondo si muove sul suo copione.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mito", component);
-```
 
 --- 🔗 Collegamenti
 

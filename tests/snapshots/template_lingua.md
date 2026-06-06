@@ -66,6 +66,10 @@
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lingua", component);
+```
+
 > [!abstract] Carattere
 > **Complessità** `INPUT[slider(minValue(1), maxValue(5), addLabels):complessita]` → `VIEW[{complessita} == 5 ? "5 · Ipersistemica" : ({complessita} == 4 ? "4 · Complessa" : ({complessita} == 3 ? "3 · Bilanciata" : ({complessita} == 2 ? "2 · Ridotta" : ({complessita} == 1 ? "1 · Semplice" : ("—")))))]`
 > **Formalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):formalita]` → `VIEW[{formalita} == 5 ? "5 · Rituale" : ({formalita} == 4 ? "4 · Solenne" : ({formalita} == 3 ? "3 · Neutra" : ({formalita} == 2 ? "2 · Colloquiale" : ({formalita} == 1 ? "1 · Orale spontanea" : ("—")))))]`
@@ -131,10 +135,6 @@
 > **3 · Polisemica** — Ogni parola può significare più cose a seconda del contesto o dell'intonazione.
 > **4 · Simbolica** — Ogni parola è un simbolo con significati spirituali, mistici o archetipici.
 > **5 · Multiplanare** — Ogni parola esiste in più livelli semantici: reale, spirituale, magico, onirico. Serve un’iniziazione per comprenderla pienamente.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lingua", component);
-```
 
 --- 🔗 Collegamenti
 

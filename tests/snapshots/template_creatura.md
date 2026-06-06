@@ -127,6 +127,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "creatura", component);
+```
+
 > [!abstract] Carattere
 > **Indole** `INPUT[slider(minValue(1), maxValue(5), addLabels):indole]` → `VIEW[{indole} == 5 ? "5 · Feroce" : ({indole} == 4 ? "4 · Aggressiva" : ({indole} == 3 ? "3 · Territoriale" : ({indole} == 2 ? "2 · Schiva" : ({indole} == 1 ? "1 · Docile" : ("—")))))]`
 > **Socialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):socialita]` → `VIEW[{socialita} == 5 ? "5 · Ipercollettiva" : ({socialita} == 4 ? "4 · Comunitaria" : ({socialita} == 3 ? "3 · Aggregativa" : ({socialita} == 2 ? "2 · Individualista" : ({socialita} == 1 ? "1 · Solitaria" : ("—")))))]`
@@ -168,10 +172,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Senziente** — Linguaggio e ragionamento; cultura semplice possibile.
 > **4 · Sapiente** — Pensiero simbolico ed etico; strategie, inganni elaborati.
 > **5 · Geniale** — Mente superiore o aliena; piani secolari, concetti iperoggettivi.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "creatura", component);
-```
 
 --- 🔗 Collegamenti
 

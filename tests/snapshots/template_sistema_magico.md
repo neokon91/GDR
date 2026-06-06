@@ -90,6 +90,17 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "sistema_magico", component);
+```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+
 > [!abstract] Carattere
 > **Fonte della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):fonte_magia]` → `VIEW[{fonte_magia} == 5 ? "5 · Donata" : ({fonte_magia} == 4 ? "4 · Evocata" : ({fonte_magia} == 3 ? "3 · Equilibrata" : ({fonte_magia} == 2 ? "2 · Latente" : ({fonte_magia} == 1 ? "1 · Innata" : ("—")))))]`
 > **Metodo Magico** `INPUT[slider(minValue(1), maxValue(5), addLabels):metodo_magia]` → `VIEW[{metodo_magia} == 5 ? "5 · Meccanico" : ({metodo_magia} == 4 ? "4 · Codificato" : ({metodo_magia} == 3 ? "3 · Interpretativo" : ({metodo_magia} == 2 ? "2 · Alchemico" : ({metodo_magia} == 1 ? "1 · Selvaggio" : ("—")))))]`
@@ -155,17 +166,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Semi-autonoma** — La magia può manifestarsi spontaneamente o suggerire vie proprie, ma è generalmente controllabile.
 > **4 · Indipendente** — Agisce con volontà propria. L’incantatore può solo orientarne l’intento. Talvolta resiste o reagisce.
 > **5 · Vivente** — È un'entità senziente, spirituale o cosmica. Stabilisce un patto con l’incantatore. Agisce secondo i propri scopi o principi.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "sistema_magico", component);
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
-
-> [!tip] Profilo
-> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 
 --- 🔗 Collegamenti
 

@@ -86,6 +86,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "entita_primordiale", component);
+```
+
 > [!abstract] Carattere
 > **Coscienza** `INPUT[slider(minValue(1), maxValue(5), addLabels):coscienza]` → `VIEW[{coscienza} == 5 ? "5 · Sovrana" : ({coscienza} == 4 ? "4 · Volitiva" : ({coscienza} == 3 ? "3 · Senziente" : ({coscienza} == 2 ? "2 · Istintiva" : ({coscienza} == 1 ? "1 · Cieca" : ("—")))))]`
 > **Risveglio** `INPUT[slider(minValue(1), maxValue(5), addLabels):risveglio]` → `VIEW[{risveglio} == 5 ? "5 · Scatenata" : ({risveglio} == 4 ? "4 · Desta" : ({risveglio} == 3 ? "3 · Stirante" : ({risveglio} == 2 ? "2 · Dormiente" : ({risveglio} == 1 ? "1 · Sigillata" : ("—")))))]`
@@ -127,10 +131,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Aspetto** — Si mostra in forme transitorie.
 > **4 · Incarnata** — Ha un corpo o una sede fisica.
 > **5 · Onnipresente** — La sua sostanza pervade luoghi e stirpi.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "entita_primordiale", component);
-```
 
 --- 🔗 Collegamenti
 

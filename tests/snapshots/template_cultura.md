@@ -111,6 +111,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cultura", component);
+```
+
 > [!abstract] Carattere
 > **Valori Dominanti** `INPUT[slider(minValue(1), maxValue(5), addLabels):valori_dominanti]` → `VIEW[{valori_dominanti} == 5 ? "5 · Potere" : ({valori_dominanti} == 4 ? "4 · Conoscenza" : ({valori_dominanti} == 3 ? "3 · Onore" : ({valori_dominanti} == 2 ? "2 · Armonia" : ({valori_dominanti} == 1 ? "1 · Sopravvivenza" : ("—")))))]`
 > **Relazione con la Morte** `INPUT[slider(minValue(1), maxValue(5), addLabels):relazione_morte]` → `VIEW[{relazione_morte} == 5 ? "5 · Coabitazione" : ({relazione_morte} == 4 ? "4 · Trascendenza" : ({relazione_morte} == 3 ? "3 · Iniziazione" : ({relazione_morte} == 2 ? "2 · Sacralizzazione" : ({relazione_morte} == 1 ? "1 · Rimozione" : ("—")))))]`
@@ -176,10 +180,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Rappresentativa-narrativa** — L’estetica racconta storie: affreschi, statue, melodie rituali. Ogni opera è memoria, ogni suono è mito. L’arte ha scopo pedagogico, simbolico o mnemonico.
 > **4 · Liberatoria-esperienziale** — L’arte è mezzo di trasformazione personale. L’individuo si esprime attraverso colore, danza, suono, performance. L’estetica è sperimentazione e soglia di libertà.
 > **5 · Trascendente-sacrale** — L’arte è portale verso altri piani. Ogni opera è un sigillo, un’entità vivente, una soglia ontica. Le forme sono mantram visivi, e la bellezza è rivelazione del divino.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cultura", component);
-```
 
 --- 🕰 Cronologia
 

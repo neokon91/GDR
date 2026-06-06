@@ -99,6 +99,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cosmologia", component);
+```
+
 > [!abstract] Carattere
 > **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza]` → `VIEW[{presenza} == 5 ? "5 · Immanente" : ({presenza} == 4 ? "4 · Ancorata" : ({presenza} == 3 ? "3 · Focalizzata" : ({presenza} == 2 ? "2 · Diffusa" : ({presenza} == 1 ? "1 · Trascendente" : ("—")))))]`
 > **Attività** `INPUT[slider(minValue(1), maxValue(5), addLabels):attivita]` → `VIEW[{attivita} == 5 ? "5 · Interventista" : ({attivita} == 4 ? "4 · Attiva" : ({attivita} == 3 ? "3 · Reattiva" : ({attivita} == 2 ? "2 · Risonante" : ({attivita} == 1 ? "1 · Silente" : ("—")))))]`
@@ -140,10 +144,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Velata** — Si intuisce da segni e presagi; richiede interpretazione.
 > **4 · Occulta** — Nota solo a iniziati; celata sotto miti o falsità.
 > **5 · Ignota** — Nessuno la conosce; opera nell'ombra del mondo.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cosmologia", component);
-```
 
 --- 🔗 Collegamenti
 

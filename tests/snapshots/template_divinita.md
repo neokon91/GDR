@@ -91,6 +91,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "divinita", component);
+```
+
 > [!abstract] Carattere
 > **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_cosmica]` → `VIEW[{presenza_cosmica} == 5 ? "5 · Immanente" : ({presenza_cosmica} == 4 ? "4 · Ancorata" : ({presenza_cosmica} == 3 ? "3 · Focalizzata" : ({presenza_cosmica} == 2 ? "2 · Diffusa" : ({presenza_cosmica} == 1 ? "1 · Trascendente" : ("—")))))]`
 > **Volontà** `INPUT[slider(minValue(1), maxValue(5), addLabels):volonta]` → `VIEW[{volonta} == 5 ? "5 · Interventista" : ({volonta} == 4 ? "4 · Attiva" : ({volonta} == 3 ? "3 · Reattiva" : ({volonta} == 2 ? "2 · Risonante" : ({volonta} == 1 ? "1 · Silente" : ("—")))))]`
@@ -148,10 +152,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Condizionata** — Chiunque può cercare la divinità, ma solo in particolari condizioni: rituali, momenti cosmici, stati d’animo o purificazione. L’accesso è selettivo ma non chiuso.
 > **4 · Aperta** — La divinità è accessibile alla maggior parte degli esseri senzienti. Il culto è diffuso, i riti sono noti, l’interazione è incoraggiata ma richiede dedizione.
 > **5 · Universale** — Tutti, indipendentemente da cultura, status o preparazione, possono accedere alla divinità. Essa risponde anche a preghiere non rituali. È presente in ogni cuore e ogni luogo.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "divinita", component);
-```
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");

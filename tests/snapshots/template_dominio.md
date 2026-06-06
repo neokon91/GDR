@@ -87,6 +87,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "dominio", component);
+```
+
 > [!abstract] Carattere
 > **Ampiezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):ampiezza]` → `VIEW[{ampiezza} == 5 ? "5 · Totalità" : ({ampiezza} == 4 ? "4 · Pilastro" : ({ampiezza} == 3 ? "3 · Sfera" : ({ampiezza} == 2 ? "2 · Settore" : ({ampiezza} == 1 ? "1 · Aspetto" : ("—")))))]`
 > **Orientamento** `INPUT[slider(minValue(1), maxValue(5), addLabels):orientamento]` → `VIEW[{orientamento} == 5 ? "5 · Dissolutivo" : ({orientamento} == 4 ? "4 · Trasformativo" : ({orientamento} == 3 ? "3 · Neutro" : ({orientamento} == 2 ? "2 · Nutriente" : ({orientamento} == 1 ? "1 · Generativo" : ("—")))))]`
@@ -128,10 +132,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · In attrito** — Frizione costante coi domini rivali.
 > **4 · In lotta** — Conflitto aperto che muove la storia cosmica.
 > **5 · In guerra** — Lacera il cosmo; il suo scontro è cataclisma.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "dominio", component);
-```
 
 --- 🔗 Collegamenti
 

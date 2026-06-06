@@ -63,6 +63,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bioma", component);
+```
+
 > [!abstract] Carattere
 > **Ostilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):ostilita]` → `VIEW[{ostilita} == 5 ? "5 · Letale" : ({ostilita} == 4 ? "4 · Ostile" : ({ostilita} == 3 ? "3 · Aspro" : ({ostilita} == 2 ? "2 · Mite" : ({ostilita} == 1 ? "1 · Ospitale" : ("—")))))]`
 > **Fertilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):fertilita]` → `VIEW[{fertilita} == 5 ? "5 · Lussureggiante" : ({fertilita} == 4 ? "4 · Rigoglioso" : ({fertilita} == 3 ? "3 · Modesto" : ({fertilita} == 2 ? "2 · Magro" : ({fertilita} == 1 ? "1 · Sterile" : ("—")))))]`
@@ -96,10 +100,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Impervio** — Difficile; ostacoli naturali continui.
 > **4 · Remoto** — Isolato; pochi sanno come arrivarci.
 > **5 · Inaccessibile** — Quasi irraggiungibile; barriere estreme o magiche.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bioma", component);
-```
 
 --- 🔗 Collegamenti
 

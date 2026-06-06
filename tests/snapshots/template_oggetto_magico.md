@@ -55,6 +55,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "oggetto", component);
+```
+
 > [!abstract] Carattere
 > **Natura Materiale** `INPUT[slider(minValue(1), maxValue(5), addLabels):natura_materiale]` → `VIEW[{natura_materiale} == 5 ? "5 · Perfetta" : ({natura_materiale} == 4 ? "4 · Avanzata" : ({natura_materiale} == 3 ? "3 · Fine" : ({natura_materiale} == 2 ? "2 · Forgiata" : ({natura_materiale} == 1 ? "1 · Grezza" : ("—")))))]`
 > **Origine** `INPUT[slider(minValue(1), maxValue(5), addLabels):origine]` → `VIEW[{origine} == 5 ? "5 · Divina" : ({origine} == 4 ? "4 · Spirituale" : ({origine} == 3 ? "3 · Alchemica" : ({origine} == 2 ? "2 · Umana" : ({origine} == 1 ? "1 · Naturale" : ("—")))))]`
@@ -112,10 +116,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Neutrale** — L’oggetto non ha un orientamento etico o cosmico definito. Risponde al volere del portatore.
 > **4 · Tendente all’ordine** — Esprime armonia, regole, strutture. Funziona meglio in contesti rituali e gerarchici.
 > **5 · Legale** — Impone equilibrio, disciplina, coerenza spirituale o cosmica. Rifiuta l’uso improprio o deviante.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "oggetto", component);
-```
 
 --- 🔗 Collegamenti
 

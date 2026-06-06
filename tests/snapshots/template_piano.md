@@ -84,6 +84,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "piano", component);
+```
+
 > [!abstract] Carattere
 > **Materialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):materialita]` → `VIEW[{materialita} == 5 ? "5 · Iperreale" : ({materialita} == 4 ? "4 · Solido" : ({materialita} == 3 ? "3 · Fluido" : ({materialita} == 2 ? "2 · Eterico" : ({materialita} == 1 ? "1 · Immateriale" : ("—")))))]`
 > **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita]` → `VIEW[{stabilita} == 5 ? "5 · Immutabile" : ({stabilita} == 4 ? "4 · Stabile" : ({stabilita} == 3 ? "3 · Ciclico" : ({stabilita} == 2 ? "2 · Mutevole" : ({stabilita} == 1 ? "1 · Caotico" : ("—")))))]`
@@ -125,10 +129,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Indifferente** — Amorale, oltre il bene e il male.
 > **4 · Sinistro** — Inquietante, corruttore, tendente al male.
 > **5 · Maligno** — Ostile a ogni vita; male incarnato.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "piano", component);
-```
 
 --- 🔗 Collegamenti
 

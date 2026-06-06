@@ -90,6 +90,17 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "culto", component);
+```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+
 > [!abstract] Carattere
 > **Struttura** `INPUT[slider(minValue(1), maxValue(5), addLabels):struttura]` → `VIEW[{struttura} == 5 ? "5 · Dogmatico" : ({struttura} == 4 ? "4 · Gerarchico" : ({struttura} == 3 ? "3 · Semi-istituzionale" : ({struttura} == 2 ? "2 · Comunitario" : ({struttura} == 1 ? "1 · Anarchico" : ("—")))))]`
 > **Rivelazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):rivelazione]` → `VIEW[{rivelazione} == 5 ? "5 · Universale" : ({rivelazione} == 4 ? "4 · Aperta" : ({rivelazione} == 3 ? "3 · Misto" : ({rivelazione} == 2 ? "2 · Filtrata" : ({rivelazione} == 1 ? "1 · Iniziatico" : ("—")))))]`
@@ -155,17 +166,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Misto** — Alcuni accedono direttamente, altri tramite figure di guida (sciamani, profeti, oracoli). Il culto ammette forme parallele di connessione, combinando immediatezza e mediazione sociale.
 > **4 · Mediato flessibile** — Il contatto con il divino è affidato a ruoli specifici, ma non è necessariamente esclusivo. I riti ufficiali sono richiesti per le manifestazioni maggiori del sacro.
 > **5 · Mediato** — Solo tramite clero, testi sacri, liturgie o artefatti consacrati si può accedere al divino. La fede passa attraverso una struttura di mediazione istituzionale e rituale. Il fedele non può comunicare da sé.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "culto", component);
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
-
-> [!tip] Profilo
-> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");

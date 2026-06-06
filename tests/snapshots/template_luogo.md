@@ -118,6 +118,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luogo", component);
+```
+
 > [!abstract] Carattere
 > **Stabilità Spaziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_spaziale]` → `VIEW[{stabilita_spaziale} == 5 ? "5 · Mutante" : ({stabilita_spaziale} == 4 ? "4 · Instabile" : ({stabilita_spaziale} == 3 ? "3 · Anomalo" : ({stabilita_spaziale} == 2 ? "2 · Plastico" : ({stabilita_spaziale} == 1 ? "1 · Solido" : ("—")))))]`
 > **Coerenza Temporale** `INPUT[slider(minValue(1), maxValue(5), addLabels):coerenza_temporale]` → `VIEW[{coerenza_temporale} == 5 ? "5 · Atemporale" : ({coerenza_temporale} == 4 ? "4 · Fratturato" : ({coerenza_temporale} == 3 ? "3 · Distorto" : ({coerenza_temporale} == 2 ? "2 · Ondulato" : ({coerenza_temporale} == 1 ? "1 · Lineare" : ("—")))))]`
@@ -183,10 +187,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Suggestivo** — Il luogo influisce su stati d’animo e visioni. Genera ispirazioni, incubi, euforia o inquietudine. La sua presenza condiziona l’esperienza soggettiva.
 > **4 · Riflettente** — Il luogo si adatta alla mente di chi entra. Modifica forma, colori o eventi in base alle emozioni. Ogni visitatore lo percepisce diversamente.
 > **5 · Empatico** — Il luogo ha una volontà psichica attiva. Comunica, seduce, manipola o giudica. Può fondersi con la coscienza, rivelando traumi, desideri o verità.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luogo", component);
-```
 
 --- 🕰 Cronologia
 

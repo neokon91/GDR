@@ -121,6 +121,17 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "fazione", component);
+```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+
 > [!abstract] Carattere
 > **Struttura** `INPUT[slider(minValue(1), maxValue(5), addLabels):struttura]` → `VIEW[{struttura} == 5 ? "5 · Piramidale" : ({struttura} == 4 ? "4 · Gerarchica" : ({struttura} == 3 ? "3 · Semi-gerarchica" : ({struttura} == 2 ? "2 · Consiliare" : ({struttura} == 1 ? "1 · Orizzontale" : ("—")))))]`
 > **Scopo Primario** `INPUT[slider(minValue(1), maxValue(5), addLabels):scopo]` → `VIEW[{scopo} == 5 ? "5 · Pragmatico" : ({scopo} == 4 ? "4 · Opportunista" : ({scopo} == 3 ? "3 · Equilibrato" : ({scopo} == 2 ? "2 · Visionario" : ({scopo} == 1 ? "1 · Ideale puro" : ("—")))))]`
@@ -194,17 +205,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Pragmatica** — Scende a patti quando serve, ma tiene la barra.
 > **4 · Retta** — Fedele alla missione; gli abusi sono rari e puniti.
 > **5 · Esemplare** — Incorruttibile; incarna il proprio ideale.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "fazione", component);
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
-
-> [!tip] Profilo
-> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");

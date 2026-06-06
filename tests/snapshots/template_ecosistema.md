@@ -60,6 +60,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ecosistema", component);
+```
+
 > [!abstract] Carattere
 > **Equilibrio** `INPUT[slider(minValue(1), maxValue(5), addLabels):equilibrio]` → `VIEW[{equilibrio} == 5 ? "5 · Autopoietico" : ({equilibrio} == 4 ? "4 · Stabile" : ({equilibrio} == 3 ? "3 · Teso" : ({equilibrio} == 2 ? "2 · Fragile" : ({equilibrio} == 1 ? "1 · Collassante" : ("—")))))]`
 > **Diversità** `INPUT[slider(minValue(1), maxValue(5), addLabels):diversita]` → `VIEW[{diversita} == 5 ? "5 · Esuberante" : ({diversita} == 4 ? "4 · Ricco" : ({diversita} == 3 ? "3 · Vario" : ({diversita} == 2 ? "2 · Povero" : ({diversita} == 1 ? "1 · Monocultura" : ("—")))))]`
@@ -85,10 +89,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Gestito** — Coltivato o regolato da una civiltà.
 > **4 · Ingegnerizzato** — Progettato con magia o tecnica; funzionale a uno scopo.
 > **5 · Artificiale** — Interamente costruito; vive solo per intervento esterno.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ecosistema", component);
-```
 
 --- 🕰 Cronologia
 

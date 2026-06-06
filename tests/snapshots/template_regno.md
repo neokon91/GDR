@@ -99,6 +99,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "regno", component);
+```
+
 > [!abstract] Carattere
 > **Coesione Politica** `INPUT[slider(minValue(1), maxValue(5), addLabels):coesione_politica]` → `VIEW[{coesione_politica} == 5 ? "5 · Monolitica" : ({coesione_politica} == 4 ? "4 · Centralizzata" : ({coesione_politica} == 3 ? "3 · Policentrica" : ({coesione_politica} == 2 ? "2 · Confederale" : ({coesione_politica} == 1 ? "1 · Tribale" : ("—")))))]`
 > **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita]` → `VIEW[{stabilita} == 5 ? "5 · Granitica" : ({stabilita} == 4 ? "4 · Salda" : ({stabilita} == 3 ? "3 · Contesa" : ({stabilita} == 2 ? "2 · Fragile" : ({stabilita} == 1 ? "1 · Sull'orlo" : ("—")))))]`
@@ -132,10 +136,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Influente** — Pesa nella diplomazia regionale; gioca di sponda.
 > **4 · Espansionista** — Conquista o colonizza attivamente.
 > **5 · Egemonico** — Mira al dominio totale; impero in marcia.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "regno", component);
-```
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");

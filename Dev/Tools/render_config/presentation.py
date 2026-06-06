@@ -51,8 +51,8 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 .gdr-card.missing { border-left-color: var(--color-red); opacity: 0.85; }
 
 /* Radar degli assi tematici (views.js: radarMarkdownFromValues / renderAxesCompare). */
-.gdr-radar { display: flex; justify-content: center; margin: 8px 0; }
-.gdr-radar-svg { width: 100%; max-width: 300px; height: auto; }
+.gdr-radar { display: flex; justify-content: center; margin: 4px 0 14px; }
+.gdr-radar-svg { width: 100%; max-width: 400px; height: auto; }  /* in vetrina in cima alla tab Carattere */
 .gdr-radar-empty { color: var(--text-muted); font-size: var(--font-ui-small); }
 
 /* Barre risorse PG (views.js: renderRisorsePG). Max variabile calcolato a runtime

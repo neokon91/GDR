@@ -84,6 +84,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mondo", component);
+```
+
 > [!abstract] Carattere
 > **Diffusione della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione_magia]` → `VIEW[{diffusione_magia} == 5 ? "5 · Onnipresente" : ({diffusione_magia} == 4 ? "4 · Diffusa" : ({diffusione_magia} == 3 ? "3 · Presente" : ({diffusione_magia} == 2 ? "2 · Rara" : ({diffusione_magia} == 1 ? "1 · Assente" : ("—")))))]`
 > **Tono** `INPUT[slider(minValue(1), maxValue(5), addLabels):tono]` → `VIEW[{tono} == 5 ? "5 · Grimdark" : ({tono} == 4 ? "4 · Cupo" : ({tono} == 3 ? "3 · Ambiguo" : ({tono} == 2 ? "2 · Avventuroso" : ({tono} == 1 ? "1 · Luminoso" : ("—")))))]`
@@ -125,10 +129,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Apogeo** — Picco di splendore; grandi potenze al culmine.
 > **4 · Declino** — Decadenza; antichi splendori che si sgretolano.
 > **5 · Rovina** — Dopo un cataclisma; rovine di un'era perduta tra i sopravvissuti.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mondo", component);
-```
 
 --- 🕰 Cronologia
 

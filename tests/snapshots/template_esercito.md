@@ -82,6 +82,17 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "esercito", component);
+```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+
 > [!abstract] Carattere
 > **Disciplina** `INPUT[slider(minValue(1), maxValue(5), addLabels):disciplina]` → `VIEW[{disciplina} == 5 ? "5 · Ferrea" : ({disciplina} == 4 ? "4 · Salda" : ({disciplina} == 3 ? "3 · Addestrata" : ({disciplina} == 2 ? "2 · Irregolare" : ({disciplina} == 1 ? "1 · Sbandata" : ("—")))))]`
 > **Ferocia** `INPUT[slider(minValue(1), maxValue(5), addLabels):ferocia]` → `VIEW[{ferocia} == 5 ? "5 · Spietata" : ({ferocia} == 4 ? "4 · Brutale" : ({ferocia} == 3 ? "3 · Risoluta" : ({ferocia} == 2 ? "2 · Misurata" : ({ferocia} == 1 ? "1 · Cavalleresca" : ("—")))))]`
@@ -115,17 +126,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Manovriera** — Si sposta e reagisce a velocità normale di campagna.
 > **4 · Rapida** — Colonne veloci, cavalleria, sorpresa: arriva dove non l'aspetti.
 > **5 · Fulminea** — Razzia e sparisce: incursori, predoni a cavallo, corsari. Inafferrabile, vive di colpi di mano.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "esercito", component);
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
-
-> [!tip] Profilo
-> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");

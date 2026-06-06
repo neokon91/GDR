@@ -63,6 +63,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "specie", component);
+```
+
 > [!abstract] Carattere
 > **Socialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):socialita]` → `VIEW[{socialita} == 5 ? "5 · Ipercollettiva" : ({socialita} == 4 ? "4 · Comunitaria" : ({socialita} == 3 ? "3 · Aggregativa" : ({socialita} == 2 ? "2 · Individualista" : ({socialita} == 1 ? "1 · Solitaria" : ("—")))))]`
 > **Predisposizione Magica** `INPUT[slider(minValue(1), maxValue(5), addLabels):predisposizione_magica]` → `VIEW[{predisposizione_magica} == 5 ? "5 · Inerente totale" : ({predisposizione_magica} == 4 ? "4 · Inerente parziale" : ({predisposizione_magica} == 3 ? "3 · Intrinseca condizionata" : ({predisposizione_magica} == 2 ? "2 · Accessibile con fatica" : ({predisposizione_magica} == 1 ? "1 · Latente" : ("—")))))]`
@@ -104,10 +108,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Storica** — La specie costruisce miti, cronache e genealogie. Ha memoria lunga, mantiene archivi, insegna la storia. Le decisioni sono ponderate nel tempo. Il tempo è una linea da custodire.
 > **4 · Ciclica** — Il tempo è visto come ripetizione cosmica. La specie vive secondo cicli (epoche, eoni, rinascite). Il passato ritorna sotto nuove forme. La cultura è rituale, profetica o archetipica.
 > **5 · Atemporale** — La specie non percepisce il tempo come sequenza. Tutto è simultaneo, simbolico o mitico. Vive nel sogno, nella memoria eterna, nella coscienza collettiva. Il tempo lineare è illusione.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "specie", component);
-```
 
 --- 🔗 Collegamenti
 

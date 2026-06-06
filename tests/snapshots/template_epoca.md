@@ -70,6 +70,10 @@
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epoca", component);
+```
+
 > [!abstract] Carattere
 > **Presenza Divina** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_divina]` → `VIEW[{presenza_divina} == 5 ? "5 · Immanente" : ({presenza_divina} == 4 ? "4 · Attiva" : ({presenza_divina} == 3 ? "3 · Intermittente" : ({presenza_divina} == 2 ? "2 · Remota" : ({presenza_divina} == 1 ? "1 · Assente" : ("—")))))]`
 > **Accesso alla Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):accesso_magia]` → `VIEW[{accesso_magia} == 5 ? "5 · Pervasiva" : ({accesso_magia} == 4 ? "4 · Fluida" : ({accesso_magia} == 3 ? "3 · Regolata" : ({accesso_magia} == 2 ? "2 · Occulta" : ({accesso_magia} == 1 ? "1 · Sigillata" : ("—")))))]`
@@ -135,10 +139,6 @@
 > **3 · Penombra Ciclica** — L’equilibrio tra luce e ombra è dinamico. L’epoca attraversa fasi di rivelazione e oblio. La conoscenza è parziale, contestata o riservata a pochi. Vi è tensione tra chiarezza e oscuramento.
 > **4 · Rivelazione Progressiva** — La luce cosmica aumenta. Le forze sacre emergono, le leggi vengono comprese, la realtà è decifrabile. Il mondo diventa leggibile, i piani si ordinano, le divinità parlano o si manifestano.
 > **5 · Illuminazione Totale** — Tutto è chiaro. L’epoca culmina in un’apertura cosmica, in cui il sapere sacro, l’ordine metafisico e l’armonia sono pienamente manifesti. Le tenebre sono dissolte o integrate. L’universo è trasparente all’intelletto divino o mortale.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epoca", component);
-```
 
 --- 🕰 Cronologia
 

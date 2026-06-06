@@ -247,6 +247,16 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 {% macro carattere(category) -%}
 {% set assi = core.get('assi_tematici', {}).get(category, []) %}
 {% if assi %}
+{# Radar + archetipo IN CIMA (vetrina): è il differenziatore visivo. Poi gli slider
+   (editabili) e, in fondo, la legenda 1-5 di ogni asse come riferimento. #}
+{% if assi | length >= 3 %}
+{{ grafico_assi(category) }}
+
+{% endif %}
+{% if core.get('archetipi', {}).get(category) %}
+{{ profilo() }}
+
+{% endif %}
 > [!abstract] Carattere
 {% for a in assi %}
 > **{{ a.nome }}** `INPUT[slider(minValue(1), maxValue(5), addLabels):{{ a.id }}]` → {{ asse_etichetta(a) }}
@@ -258,14 +268,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **{{ k }} · {{ v.etichetta }}** — {{ v.get('descrizione', '') }}
 {% endfor %}
 {% endfor %}
-{% if assi | length >= 3 %}
-
-{{ grafico_assi(category) }}
-{% endif %}
-{% if core.get('archetipi', {}).get(category) %}
-
-{{ profilo() }}
-{% endif %}
 {% if category in core.get('coerenza_categorie', []) %}
 
 {{ coerenza() }}

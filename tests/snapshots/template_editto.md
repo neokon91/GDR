@@ -56,6 +56,17 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "editto", component);
+```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+
 > [!abstract] Carattere
 > **Severità** `INPUT[slider(minValue(1), maxValue(5), addLabels):severita]` → `VIEW[{severita} == 5 ? "5 · Spietata" : ({severita} == 4 ? "4 · Dura" : ({severita} == 3 ? "3 · Severa" : ({severita} == 2 ? "2 · Mite" : ({severita} == 1 ? "1 · Blanda" : ("—")))))]`
 > **Legittimità** `INPUT[slider(minValue(1), maxValue(5), addLabels):legittimita]` → `VIEW[{legittimita} == 5 ? "5 · Consensuale" : ({legittimita} == 4 ? "4 · Riconosciuta" : ({legittimita} == 3 ? "3 · Tollerata" : ({legittimita} == 2 ? "2 · Contestata" : ({legittimita} == 1 ? "1 · Arbitraria" : ("—")))))]`
@@ -89,17 +100,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **3 · Discontinua** — Fatta valere a seconda di chi governa e dove.
 > **4 · Vigilata** — Controlli regolari; trasgredire è rischioso.
 > **5 · Inflessibile** — Applicata senza eccezioni; informatori, controlli capillari, nessuno scampo.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "editto", component);
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
-
-> [!tip] Profilo
-> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 
 --- 🔗 Collegamenti
 
