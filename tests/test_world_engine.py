@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -26,7 +26,7 @@ def test_render_dintorni(tmp_path):
     harness = tmp_path / "dint.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const mk=(name,ex)=>Object.assign({file:{name,path:name+".md"},categoria:"luogo",stato:"pronto",mondo:L("Mondo")},ex);'
@@ -70,7 +70,7 @@ def test_render_viaggio(tmp_path):
     harness = tmp_path / "via.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const mk=(name,ex)=>Object.assign({file:{name,path:name+".md"},categoria:"luogo",stato:"pronto",mondo:L("Mondo")},ex);'
@@ -111,7 +111,7 @@ def test_render_pressioni(tmp_path):
     harness = tmp_path / "press.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const mk=(name,categoria,ex)=>Object.assign({file:{name,path:name+".md"},categoria,stato:"pronto"},ex);'
@@ -148,7 +148,7 @@ def test_cosmic_push(tmp_path):
     harness = tmp_path / "cosmic.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const C=m.exports.cosmicPush;'
         'process.stdout.write(JSON.stringify({'
@@ -174,7 +174,7 @@ def test_render_pressioni_cosmico(tmp_path):
     harness = tmp_path / "press_cosmo.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const all=[Object.assign({file:{name:"Voragine",path:"Voragine.md"},categoria:"luogo"},{pressione:8}),'
@@ -202,7 +202,7 @@ def test_spinte_teologiche(tmp_path):
     harness = tmp_path / "teo.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const all=[\n'
@@ -236,7 +236,7 @@ def test_spinte_fronte_assi_e_scarsita(tmp_path):
     harness = tmp_path / "assi.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const all=[\n'
@@ -273,7 +273,7 @@ def test_render_stato_mondo(tmp_path):
     harness = tmp_path / "stato.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const mk=(name,categoria,ex)=>Object.assign({file:{name,path:name+".md"},categoria,stato:"pronto"},ex);'
@@ -334,7 +334,7 @@ def test_forecast_heat_allineato(tmp_path):
     harness.write_text(
         'const fs=require("fs");'
         'const loadJ=(p)=>{const m={exports:{}};new Function("module","exports",fs.readFileSync(p,"utf8"))(m,m.exports);return m.exports;};'
-        f'const V=loadJ({json.dumps(str(render.JS_DIR / "views.js"))});'
+        f'const V=loadJ({json.dumps(VIEWS_JS)});'
         f'const M=loadJ({json.dumps(str(render.JS_DIR / "meta_actions.js"))});'
         'const out=[];for(let p=0;p<=10;p++)out.push([V.forecastHeat(p),M.avanzamentoDaPressione(p)]);'
         'process.stdout.write(JSON.stringify(out));',
@@ -353,7 +353,7 @@ def test_render_proiezione(tmp_path):
     harness = tmp_path / "proi.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const all=[\n'
@@ -384,7 +384,7 @@ def test_render_tensioni(tmp_path):
     harness = tmp_path / "tens.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const all=[\n'
@@ -414,7 +414,7 @@ def test_render_memoria(tmp_path):
     harness = tmp_path / "mem.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const all=[\n'
@@ -445,7 +445,7 @@ def test_spinte_fronte_scadenza_e_fede(tmp_path):
     harness = tmp_path / "scfe.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const all=[\n'
@@ -472,7 +472,7 @@ def test_coerenza_tematica(tmp_path):
     harness = tmp_path / "coer.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const axes=[{id:"struttura",nome:"Struttura",valori:{1:{etichetta:"Orizzontale"},5:{etichetta:"Piramidale"}}},'
         ' {id:"legalita",nome:"Legalita",valori:{4:{etichetta:"Legale"}}}];'
@@ -500,7 +500,7 @@ def test_render_tipo_profilo(tmp_path):
     harness = tmp_path / "tp.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const core={categories:{luogo:{subtype_profiles:{dungeon:{descrizione:"Complesso esplorabile.",'
         ' campi:["livelli","occupante"],clock:true,evoluzione:false,wizard:["Origine e scopo","Il guardiano principale"]},'
@@ -538,7 +538,7 @@ def test_parse_tappa(tmp_path):
     harness = tmp_path / "tappa.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const P=m.exports.parseTappa;'
         'process.stdout.write(JSON.stringify({'
@@ -588,7 +588,7 @@ def test_render_causalita(tmp_path):
     harness = tmp_path / "caus.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
         'const mk=(name,ex)=>Object.assign({file:{name,path:name+".md"},categoria:"evento",stato:"pronto"},ex);'
@@ -624,7 +624,7 @@ def test_render_incantesimi(tmp_path):
     harness = tmp_path / "inc.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         # personaggio.json: mago incantatore con pool per livello; ladra non incantatore.
         'const data={classi:{mago:{incantatore:true,incantesimi_pool:{'
@@ -682,7 +682,7 @@ def test_render_maestrie(tmp_path):
     harness = tmp_path / "ma.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const s=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const mod={exports:{}};new Function("module","exports",s)(mod,mod.exports);'
         f'const m={json.dumps(m, ensure_ascii=False)};'
         'process.stdout.write(mod.exports.maestrieMarkdown(m));',

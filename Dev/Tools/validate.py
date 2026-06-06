@@ -14,6 +14,7 @@ from common import (
     JS_DIR,
     apply_entities,
     deep_merge,
+    js_source,
     load_core_parts,
     load_entities,
     load_pages,
@@ -455,7 +456,7 @@ def check() -> int:
             errors.append("_comparators.js: blocco matchesCond fra i marker mancante")
         else:
             for js_name in ("views.js", "meta_actions.js"):
-                block = marked_block((JS_DIR / js_name).read_text(encoding="utf-8"), "matchesCond")
+                block = marked_block(js_source(js_name),"matchesCond")
                 if block is None:
                     errors.append(f"{js_name}: blocco matchesCond fra i marker // >>>matchesCond/<<<matchesCond mancante")
                 elif block != canonical:
@@ -473,7 +474,7 @@ def check() -> int:
             errors.append("_homebrew_bridge.js: blocco homebrew-bridge fra i marker mancante")
         else:
             for js_name in ("crea_pg.js", "sali_pg.js"):
-                block = marked_block((JS_DIR / js_name).read_text(encoding="utf-8"), "homebrew-bridge")
+                block = marked_block(js_source(js_name),"homebrew-bridge")
                 if block is None:
                     errors.append(f"{js_name}: blocco homebrew-bridge fra i marker // >>>homebrew-bridge/<<<homebrew-bridge mancante")
                 elif block != bridge:
@@ -491,7 +492,7 @@ def check() -> int:
             errors.append("_relations.js: blocco relations fra i marker mancante")
         else:
             for js_name in ("meta_actions.js", "create_entity.js"):
-                block = marked_block((JS_DIR / js_name).read_text(encoding="utf-8"), "relations")
+                block = marked_block(js_source(js_name),"relations")
                 if block is None:
                     errors.append(f"{js_name}: blocco relations fra i marker // >>>relations/<<<relations mancante")
                 elif block != canonical_rel:

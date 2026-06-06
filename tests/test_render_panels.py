@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -25,7 +25,7 @@ def test_render_timeline(tmp_path):
     harness = tmp_path / "timeline.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         # Dataset: 1 epoca + 3 eventi attivi (2 nell\'epoca, 1 senza) + 1 archiviato.
         'const era={file:{name:"Prima",path:"ep/Prima.md"},categoria:"epoca",inizio:"anno 0",fine:"anno 500"};'
@@ -64,7 +64,7 @@ def test_render_timeline_tappe(tmp_path):
     harness = tmp_path / "timeline_tappe.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const era={file:{name:"Prima",path:"ep/Prima.md"},categoria:"epoca",inizio:"anno 0",fine:"anno 500"};'
         'const all=[era,'
@@ -93,7 +93,7 @@ def test_render_condizioni(tmp_path):
     harness = tmp_path / "cond.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const cond=[{nome:"Accecato",descrizione:"Non vede.",effetti:['
         '{nome:"Vista",descrizione:"Fallisce le prove basate sulla vista."},'
@@ -117,7 +117,7 @@ def test_render_connessioni(tmp_path):
     harness = tmp_path / "conn.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const core={relazioni:{fazione:[{field:"alleati",label:"Alleati"},{field:"capi",label:"Capi"}]}};'
         'global.app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
@@ -145,7 +145,7 @@ def test_radar_markdown_from_values(tmp_path):
     harness = tmp_path / "radar.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const v5={1:{},2:{},3:{},4:{},5:{}};'
         'const ax=(id)=>({id,nome:id,valori:v5});'
@@ -168,7 +168,7 @@ def test_render_entity_panel(tmp_path):
     harness = tmp_path / "entitypanel.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const citante={file:{name:"Forte Cenere"},categoria:"luogo",pressione:5};'
         'const dv={page:(l)=>((((l&&l.path)?l.path:l)==="[[Forte Cenere]]")?citante:null)};'
@@ -195,7 +195,7 @@ def test_render_session_panel(tmp_path):
     harness = tmp_path / "sessionpanel.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const front={file:{name:"La Setta"},pressione:8,prossima_mossa:"Apre la Voragine"};'
         'const dv={page:(l)=>((((l&&l.path)?l.path:l)==="[[La Setta]]")?front:null)};'
@@ -232,7 +232,7 @@ def test_render_axes_compare(tmp_path):
     harness = tmp_path / "axescompare.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         + _DOM_HARNESS +
         'const v5={1:{},2:{},3:{},4:{},5:{}};const ax=(id)=>({id,nome:id,valori:v5});'
@@ -266,7 +266,7 @@ def test_emergenza_scala(tmp_path):
     harness = tmp_path / "scala.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         # core minimale: assi + relazioni per fazione (per renderCoerenza)
         'const ax=(id)=>({id,nome:id,valori:{1:{etichetta:"a"},2:{},3:{},4:{},5:{etichetta:"e"}}});'
@@ -348,7 +348,7 @@ def test_tema_natale(tmp_path):
     harness = tmp_path / "tema.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         f'const astro={json.dumps(a, ensure_ascii=False)};'
         'process.stdout.write(JSON.stringify({'
@@ -373,7 +373,7 @@ def test_render_map(tmp_path):
     harness = tmp_path / "map.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const link={mappa:{path:"Mondi/Mappe/Valdoria.excalidraw.md"}};'
         'const imgLink={mappa:{path:"Media/Atlante.webp"}};'

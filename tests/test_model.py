@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -171,12 +171,26 @@ def test_fileclass_well_formed(category):
 @pytest.mark.skipif(not shutil.which("node"), reason="node non disponibile")
 @pytest.mark.parametrize(
     "js",
-    sorted(render.JS_DIR.glob("*.js")) + sorted(render.JS_DIR.glob("*.mjs")),
-    ids=lambda p: p.name,
+    sorted(render.JS_DIR.glob("*.js")) + sorted(render.JS_DIR.glob("*/*.js")) + sorted(render.JS_DIR.glob("*.mjs")),
+    ids=lambda p: p.name if p.parent == render.JS_DIR else f"{p.parent.name}/{p.name}",
 )
 def test_js_syntax(js):
-    # node --check deduce CommonJS/ESM dall'estensione (.js vs .mjs).
+    # node --check deduce CommonJS/ESM dall'estensione (.js vs .mjs). Include i
+    # frammenti degli script bundlati (JS_DIR/<pkg>/*.js), come `npm run check`.
     assert subprocess.run(["node", "--check", str(js)], capture_output=True).returncode == 0
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node non disponibile")
+@pytest.mark.parametrize(
+    "pkg",
+    sorted(d.name for d in render.JS_DIR.iterdir() if d.is_dir() and any(d.glob("*.js"))),
+)
+def test_js_bundle_syntax(pkg, tmp_path):
+    """Il BUNDLE (concatenazione di JS_DIR/<pkg>/*.js) è l'artefatto runtime reale —
+    ciò che boot.mjs valuta: dev'essere JS valido, non solo i singoli frammenti."""
+    f = tmp_path / f"{pkg}.js"
+    f.write_text(render.bundle_js(pkg), encoding="utf-8")
+    assert subprocess.run(["node", "--check", str(f)], capture_output=True).returncode == 0
 
 
 def test_panels_registered():
@@ -188,7 +202,7 @@ def test_panels_registered():
     import re
     boot = (render.JS_DIR / "boot.mjs").read_text(encoding="utf-8")
     panels = set(re.findall(r"(\w+):\s*\{\s*mode:", boot))
-    views = (render.JS_DIR / "views.js").read_text(encoding="utf-8")
+    views = VIEWS_SRC
     exported = set(re.findall(r"\b(render\w+)\b", views.split("module.exports", 1)[1]))
     referenced = set()
     for j in render.JINJA_DIR.glob("*.j2"):

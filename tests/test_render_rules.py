@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -26,7 +26,7 @@ def test_profilo_match(tmp_path):
     harness = tmp_path / "profilo.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         f'const a={json.dumps(archetipi, ensure_ascii=False)};'
         'const r=m.exports.archetipiMatch(a,{struttura:5,legalita:5,rivelazione:3});'
@@ -65,7 +65,7 @@ def test_clock_svg(tmp_path):
     harness = tmp_path / "clock.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const svg=m.exports.clockSvg(6,2);'
         'process.stdout.write(JSON.stringify({ok:svg.startsWith("<svg")&&!svg.includes("undefined"),'
@@ -86,7 +86,7 @@ def test_encounter_xp(tmp_path):
     harness = tmp_path / "enc.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         f'const core={json.dumps({"xp": CORE.get("xp", {})}, ensure_ascii=False)};'
         'process.stdout.write(JSON.stringify({'
@@ -210,7 +210,7 @@ def test_verifica_gs(tmp_path):
     harness = tmp_path / "vgs.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         f'const table={json.dumps(table, ensure_ascii=False)};'
         f'const body={json.dumps(body, ensure_ascii=False)};'
@@ -274,7 +274,7 @@ def test_attacco_arma(tmp_path):
     harness = tmp_path / "att.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const A=m.exports.attaccoArma;'
         'const page={mod_forza:1, mod_destrezza:3, competenza:2};'
@@ -303,7 +303,7 @@ def test_armi_homebrew(tmp_path):
     harness = tmp_path / "hw.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const {armiHomebrew,attaccoArma}=m.exports;'
         'const fmOf={Fiammacupa:{categoria:"oggetto",tipo:"arma",danni:"1d8 taglienti",proprieta:"accurata, leggera",padronanza:"Affondo"},'
@@ -334,7 +334,7 @@ def test_parse_nodo(tmp_path):
     harness = tmp_path / "nodo.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const P=m.exports.parseNodo;'
         'process.stdout.write(JSON.stringify({'
@@ -361,7 +361,7 @@ def test_render_specie_tratti(tmp_path):
     harness = tmp_path / "spt.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         f'const data={json.dumps(data, ensure_ascii=False)};'
         'const app={vault:{adapter:{read:async()=>JSON.stringify(data)}}};'
@@ -388,7 +388,7 @@ def test_render_risorse_pg(tmp_path):
     harness = tmp_path / "risorse.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const pg={pf:10,pf_max:20,pf_temp:3,esaurimento:3,dadi_vita_max:4,dadi_vita_spesi:1,'
         '  risorse_pg:[{id:"ira",label:"Ira",max:5,ric:"lungo",icona:"🔥"}],usi_ira:1};'
@@ -420,7 +420,7 @@ def test_render_incantesimi_cd(tmp_path):
     harness = tmp_path / "inc.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const data={classi:{mago:{incantatore:true,caratteristica_primaria:["intelligenza"],'
         ' incantesimi_pool:{"0":["Mano magica"],"1":["Dardo incantato"]}}}};'

@@ -17,6 +17,26 @@ YAML_DIR = SOURCE / "YAML"
 JINJA_DIR = SOURCE / "Jinja"
 JS_DIR = SOURCE / "JS"
 SRD_DIR = SOURCE / "SRD"  # SRD 5.2.1 vendorizzata (JSON IT, CC-BY-4.0)
+
+
+def bundle_js(stem: str) -> str:
+    """Concatena i frammenti `JS_DIR/<stem>/*.js` (ordinati per nome) nel singolo
+    sorgente runtime. Gli script grandi (es. views) sono EDITATI a frammenti ma
+    CARICATI come un file solo: boot.mjs li valuta con `new Function` (niente
+    require/bundling a runtime). Join byte-esatto → l'ordine `00_`,`10_`,… conta;
+    `99_exports.js` (module.exports) va per ultimo."""
+    return "".join(p.read_text(encoding="utf-8")
+                   for p in sorted((JS_DIR / stem).glob("*.js")))
+
+
+def js_source(filename: str) -> str:
+    """Sorgente di uno script runtime per nome-file (es. 'views.js'): il bundle dei
+    frammenti se è un package (`JS_DIR/<stem>/`), altrimenti il file singolo. Usato
+    da check() (anti-drift) e dai test, agnostici a quali script sono frammentati."""
+    stem = filename[:-3] if filename.endswith(".js") else filename
+    if (JS_DIR / stem).is_dir():
+        return bundle_js(stem)
+    return (JS_DIR / filename).read_text(encoding="utf-8")
 STATBLOCKS_DIR = SOURCE / "statblocks"  # layout Fantasy Statblocks (uno per file)
 
 # Unico target di output: il vault Obsidian vivo. Si apre questa cartella in

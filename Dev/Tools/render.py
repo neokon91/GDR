@@ -33,8 +33,10 @@ from common import (  # noqa: F401 (re-export per i test/usi storici)
     STATBLOCKS_DIR,
     VAULT,
     apply_entities,
+    bundle_js,
     deep_merge,
     entity_templates,
+    js_source,
     generated_note_names,
     load_core,
     load_core_parts,
@@ -237,6 +239,12 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         if source.name.startswith("_"):
             continue
         shutil.copy2(source, VAULT / "z.automazioni" / source.name)
+    # Script grandi frammentati (es. views/): editati a frammenti in JS_DIR/<stem>/,
+    # qui CONCATENATI nel singolo file runtime z.automazioni/<stem>.js (boot.mjs li
+    # valuta con new Function: un file solo, niente require). Vedi bundle_js().
+    for pkg in sorted(JS_DIR.iterdir()):
+        if pkg.is_dir() and any(pkg.glob("*.js")):
+            write_text(VAULT / "z.automazioni" / f"{pkg.name}.js", bundle_js(pkg.name))
     for template in templates:
         if not (JS_DIR / f"crea_{template['id']}.js").is_file():
             write_text(VAULT / "z.automazioni" / f"crea_{template['id']}.js", crea_wrapper_js(template))
@@ -392,7 +400,9 @@ def main() -> int:
     rendered = build()
 
     rel = VAULT.relative_to(ROOT)
-    js_runtime = len([p for p in JS_DIR.glob('*.js') if not p.name.startswith('_')]) + len(list(JS_DIR.glob('*.mjs')))
+    js_runtime = (len([p for p in JS_DIR.glob('*.js') if not p.name.startswith('_')])
+                  + len(list(JS_DIR.glob('*.mjs')))
+                  + len([d for d in JS_DIR.iterdir() if d.is_dir() and any(d.glob('*.js'))]))
     print(f"Build OK: {len(rendered)} note generate, {js_runtime} JS runtime.")
     print(f"Vault: {rel}/  — apri questa cartella in Obsidian.")
     return 0

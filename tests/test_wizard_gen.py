@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -255,7 +255,7 @@ def test_preset_satisfies_matchescond(tmp_path):
         'const fs=require("fs");'
         'function load(p){const s=fs.readFileSync(p,"utf8");const m={exports:{}};'
         'new Function("module","exports",s)(m,m.exports);return m.exports;}'
-        f'const views=load({json.dumps(str(render.JS_DIR / "views.js"))});'
+        f'const views=load({json.dumps(VIEWS_JS)});'
         f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
         f'const archs={json.dumps(archetipi, ensure_ascii=False)};'
         'const inv=[];'

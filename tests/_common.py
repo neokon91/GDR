@@ -66,6 +66,19 @@ PLUGINS = render.load_yaml("plugins.yaml")
 TEMPLATES = render.load_templates()
 PAGES = render.load_pages()
 
+# views.js è frammentato (Dev/Source/JS/views/*.js) e CARICATO come file solo (bundle).
+# I test ne vogliono il sorgente bundlato: VIEWS_SRC (testo) per chi lo ispeziona,
+# VIEWS_JS (path a un tmp che lo contiene) per i loader node che fanno readFileSync.
+import atexit
+import tempfile
+
+VIEWS_SRC = render.bundle_js("views")
+_views_tmp = tempfile.NamedTemporaryFile("w", suffix="_views.js", delete=False, encoding="utf-8")
+_views_tmp.write(VIEWS_SRC)
+_views_tmp.close()
+VIEWS_JS = _views_tmp.name
+atexit.register(lambda: os.path.exists(VIEWS_JS) and os.unlink(VIEWS_JS))
+
 
 def _env() -> Environment:
     return Environment(
