@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC, META_ACTIONS_JS,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -121,7 +121,7 @@ def test_aggiorna_encounter_e2e(tmp_path):
         '  },\n'
         '  vault: { read: async () => body, modify: async (f, d) => { saved = d; } },\n'
         '};\n'
-        f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
         'meta({}, "aggiorna_encounter").then(() => process.stdout.write(saved));\n',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -176,7 +176,7 @@ def test_scaffold_statblock_e2e(tmp_path):
         '    adapter: { read: async () => JSON.stringify(core) },\n'
         '  },\n'
         '};\n'
-        f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
         'meta({}, "scaffold_statblock").then(() => process.stdout.write(saved));\n',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -255,7 +255,7 @@ def test_aggiorna_encounter_varianti(tmp_path):
         '  },\n'
         '  vault: { read: async () => body, modify: async (f, d) => { saved = d; } },\n'
         '};\n'
-        f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
         'meta({}, "aggiorna_encounter").then(() => process.stdout.write(saved));\n',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -454,7 +454,7 @@ def test_riposo_lungo_e2e(tmp_path):
         '  metadataCache: { getFileCache: () => ({ frontmatter: fm }) },\n'
         '  fileManager: { processFrontMatter: async (f, fn) => fn(fm) },\n'
         '};\n'
-        f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
         'meta({}, "riposo_lungo").then(() => process.stdout.write(JSON.stringify(fm)));\n',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -482,7 +482,7 @@ def test_riposo_breve_e2e(tmp_path):
             'global.app = { workspace:{ getActiveFile:()=>file },\n'
             '  metadataCache:{ getFileCache:()=>({ frontmatter: fm }) },\n'
             '  fileManager:{ processFrontMatter: async (f, fn) => fn(fm) } };\n'
-            f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+            f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
             'meta({}, "riposo_breve").then(() => process.stdout.write(JSON.stringify(fm)));\n',
             encoding="utf-8")
         res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -519,7 +519,7 @@ def test_usa_risorsa_e2e(tmp_path):
             '  metadataCache:{ getFileCache:()=>({ frontmatter: fm }) },\n'
             '  fileManager:{ processFrontMatter: async (f, fn) => fn(fm) } };\n'
             'const tp = { system:{ suggester: async (labels, items) => items[0] } };\n'
-            f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+            f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
             'meta(tp, "usa_risorsa").then(() => process.stdout.write(JSON.stringify(fm)));\n',
             encoding="utf-8")
         res = subprocess.run(["node", str(harness)], capture_output=True, text=True)

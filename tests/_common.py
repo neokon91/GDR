@@ -72,12 +72,17 @@ PAGES = render.load_pages()
 import atexit
 import tempfile
 
-VIEWS_SRC = render.bundle_js("views")
-_views_tmp = tempfile.NamedTemporaryFile("w", suffix="_views.js", delete=False, encoding="utf-8")
-_views_tmp.write(VIEWS_SRC)
-_views_tmp.close()
-VIEWS_JS = _views_tmp.name
-atexit.register(lambda: os.path.exists(VIEWS_JS) and os.unlink(VIEWS_JS))
+def _bundle_to_tmp(stem):
+    src = render.bundle_js(stem)
+    tmp = tempfile.NamedTemporaryFile("w", suffix=f"_{stem}.js", delete=False, encoding="utf-8")
+    tmp.write(src)
+    tmp.close()
+    atexit.register(lambda: os.path.exists(tmp.name) and os.unlink(tmp.name))
+    return src, tmp.name
+
+
+VIEWS_SRC, VIEWS_JS = _bundle_to_tmp("views")
+META_ACTIONS_SRC, META_ACTIONS_JS = _bundle_to_tmp("meta_actions")
 
 
 def _env() -> Environment:

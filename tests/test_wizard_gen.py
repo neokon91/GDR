@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC, META_ACTIONS_JS,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -457,7 +457,7 @@ def test_reciprocal_field(tmp_path):
     harness = tmp_path / "rf.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        f'const s=fs.readFileSync({json.dumps(META_ACTIONS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",s)(m,m.exports);'
         f'const rel={json.dumps(rel, ensure_ascii=False)};'
         'const rf=m.exports.reciprocalField;'
@@ -484,7 +484,7 @@ def test_inverse_relation(tmp_path):
     harness = tmp_path / "ir.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        f'const s=fs.readFileSync({json.dumps(META_ACTIONS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",s)(m,m.exports);'
         f'const core={json.dumps({"relazioni": rel}, ensure_ascii=False)};'
         'const find=(c,f)=>core.relazioni[c].find(r=>r.field===f);'

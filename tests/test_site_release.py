@@ -15,7 +15,7 @@ import build_site
 import publish_itch
 import release
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, META_ACTIONS_JS,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -361,7 +361,7 @@ def test_bastione_resolver_puro(tmp_path):
     → deterministico. License-safe: ordini/esiti sono autoriali, l'azione fa i conti."""
     harness = tmp_path / "bast.js"
     harness.write_text(
-        f'const meta=require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        f'const meta=require({json.dumps(META_ACTIONS_JS)});\n'
         'const zero=()=>0, hi=()=>0.99;\n'
         'const out={\n'
         '  min:meta.rollInline("1d6 lingotti", zero),\n'           # 1 -> "1 lingotti"
@@ -403,7 +403,7 @@ def test_bastione_turno_e2e(tmp_path):
         '  fileManager:{processFrontMatter:async(f,fn)=>{fn(fm);}},\n'
         '};\n'
         'const tp={date:{now:()=>"2026-06-04"}};\n'
-        f'const meta=require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        f'const meta=require({json.dumps(META_ACTIONS_JS)});\n'
         'meta(tp,"turno_bastione").then(()=>process.stdout.write(JSON.stringify({saved, turni:fm.turni, ultimo:fm.ultimo_turno})));\n',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -449,7 +449,7 @@ def test_inizia_incontro_e2e(tmp_path):
         '  plugins:{plugins:{"initiative-tracker":it}},\n'
         '  commands:{executeCommandById:()=>{}},\n'
         '};\n'
-        f'const meta=require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        f'const meta=require({json.dumps(META_ACTIONS_JS)});\n'
         'const pf=meta.playerFromPg({basename:"Vera"},fmByPath["Mondi/Personaggi/Vera.md"]);\n'
         'meta.inizia_incontro({}).then(()=>process.stdout.write(JSON.stringify({\n'
         '  pf, saved, party: it.data.parties.find(p=>p.name==="Gruppo").players,\n'

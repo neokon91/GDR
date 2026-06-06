@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 from _common import (
-    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
+    CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC, META_ACTIONS_JS,
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
@@ -306,7 +306,7 @@ def test_motori_mondo_vivo(tmp_path):
     harness = tmp_path / "motori.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        f'const src=fs.readFileSync({json.dumps(META_ACTIONS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const grafo={A:[{nome:"B",via:"rivali"},{nome:"C",via:"confina_con"}],'
         ' B:[{nome:"D",via:"alleati"},{nome:"A",via:"rivali"}], C:[], D:[]};'
@@ -335,7 +335,7 @@ def test_forecast_heat_allineato(tmp_path):
         'const fs=require("fs");'
         'const loadJ=(p)=>{const m={exports:{}};new Function("module","exports",fs.readFileSync(p,"utf8"))(m,m.exports);return m.exports;};'
         f'const V=loadJ({json.dumps(VIEWS_JS)});'
-        f'const M=loadJ({json.dumps(str(render.JS_DIR / "meta_actions.js"))});'
+        f'const M=loadJ({json.dumps(META_ACTIONS_JS)});'
         'const out=[];for(let p=0;p<=10;p++)out.push([V.forecastHeat(p),M.avanzamentoDaPressione(p)]);'
         'process.stdout.write(JSON.stringify(out));',
         encoding="utf-8")
@@ -558,7 +558,7 @@ def test_avanza_fronte(tmp_path):
     harness = tmp_path / "av.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        f'const s=fs.readFileSync({json.dumps(META_ACTIONS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",s)(m,m.exports);'
         'global.Notice=function(){};'
         'const fm={clock_dim:4,clock:2};'
@@ -701,7 +701,7 @@ def test_append_turno_log(tmp_path):
     harness = tmp_path / "tl.js"
     harness.write_text(
         'const fs=require("fs");'
-        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        f'const s=fs.readFileSync({json.dumps(META_ACTIONS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",s)(m,m.exports);'
         'const f=m.exports.appendTurnoLog;'
         'let c=f("# Bastione\\n\\nDesc.\\n","2026-06-01","Fabbricato un anello.");'
