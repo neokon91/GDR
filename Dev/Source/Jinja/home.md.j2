@@ -1,10 +1,33 @@
 # 🏠 GDR — Home
 
-> [!tip] Nuovo qui? Parti dal **[[LEGGIMI]]** o dal tour **[[Crea il tuo mondo]]** (5 tappe)
-> Il vault parte **vuoto**: i cruscotti qui sotto si popolano man mano che crei. Premi un
-> bottone **Crea** per la tua prima nota — ognuna ha in cima un callout **ℹ️ Guida** (cos'è,
-> come compilare i campi principali, spunti). Il principio del vault: *scrivi lore → la
-> superficie giocabile si calcola da sé*.
+> [!tip] Nuovo qui? Il tuo mondo prende vita in **5 tappe**. Tour con spunti: **[[Crea il tuo mondo]]** · panoramica: **[[LEGGIMI]]**.
+> Il vault parte **vuoto**: *scrivi lore → la superficie giocabile si calcola da sé*. Ogni nota ha in cima un callout **ℹ️ Guida** (cos'è, campi chiave, spunti).
+
+```dataviewjs
+// Spina di onboarding: il progresso delle 5 tappe «Crea il tuo mondo» derivato dallo
+// stato REALE del vault (conta le note + cerca legami/Fronti) → si aggiorna da sé.
+const p = dv.pages().where(x => !x.file.path.startsWith("z."));  // escludi i template z.modelli/z.*
+const has = v => v != null && (typeof v.length !== "number" || v.length > 0);
+const some = f => p.where(f).length > 0;
+const steps = [
+  [some(x => x.categoria == "mondo"),   "Il **Mondo** — la cornice"],
+  [some(x => x.categoria == "luogo"),   "Un **Luogo** dove inizia l'azione"],
+  [some(x => x.categoria == "fazione"), "Una **Fazione** che vuole qualcosa"],
+  [some(x => has(x.connessioni) || has(x.controllata_da) || has(x.regione) || has(x.fazioni) || has(x.alleati) || has(x.rivali)),
+                                        "**Collega** le note (tab *Collegamenti* → `Collega`)"],
+  [some(x => (x.pressione || 0) >= 1 || has(x.clock_dim)),
+                                        "**Accendi** un Fronte: Pressione + Prossima mossa → [[Fronti]]"],
+];
+const done = steps.filter(s => s[0]).length;
+const next = steps.findIndex(s => !s[0]);
+dv.header(3, `🧭 Crea il tuo mondo — ${done}/5`);
+dv.paragraph(steps.map((s, i) =>
+  `- ${s[0] ? "✅" : (i === next ? "👉" : "⬜")} **${i + 1}** · ${s[1]}` + (i === next ? "  ← *inizia da qui*" : "")
+).join("\n"));
+dv.paragraph(done === 5
+  ? "🎉 **Il tuo mondo è vivo.** Apri **[[Fronti]]** e gioca, o condividilo coi giocatori: **[[Occhi del giocatore]]**."
+  : "*I bottoni **Crea** sono qui sotto, organizzati per gruppo.*");
+```
 
 ````tabs
 --- 🌍 Worldbuilding
