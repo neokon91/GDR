@@ -35,6 +35,7 @@ from .writers import (
     write_folder_notes,
     write_tab_panels,
     write_calendarium,
+    write_hexmaker,
     write_metadata_menu,
     write_iconize,
     write_callout_manager,

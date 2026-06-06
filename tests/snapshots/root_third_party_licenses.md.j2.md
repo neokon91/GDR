@@ -26,6 +26,7 @@ la sorgente corrispondente, con il testo completo della licenza, è al rispettiv
 | Tasks | Obsidian Tasks contributors | MIT | [obsidian-tasks-group/obsidian-tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) |
 | Excalidraw | Zsolt Viczian | AGPL-3.0 | [zsviczian/obsidian-excalidraw-plugin](https://github.com/zsviczian/obsidian-excalidraw-plugin) |
 | TTRPG Tools - Maps | Jareika | MIT | [Jareika/zoom-map](https://github.com/Jareika/zoom-map) |
+| Hexmap World Creator | morkdev | MIT | [sbuffkin/hexmaker](https://github.com/sbuffkin/hexmaker) |
 | BRAT | TfTHacker | MIT | [TfTHacker/obsidian42-brat](https://github.com/TfTHacker/obsidian42-brat) |
 | Homepage | novov | MIT | [mirnovov/obsidian-homepage](https://github.com/mirnovov/obsidian-homepage) |
 | Initiative Tracker | Jeremy Valentine | GPL-3.0 | [Obsidian-TTRPG-Community/initiative-tracker](https://github.com/Obsidian-TTRPG-Community/initiative-tracker) |

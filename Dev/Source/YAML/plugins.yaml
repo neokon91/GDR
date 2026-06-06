@@ -94,6 +94,13 @@ plugins:
     author: Jareika
     repo: Jareika/zoom-map
     license: MIT
+  # Suite hexcrawl: griglia esagonale + wiki. write_hexmaker punta le sue cartelle
+  # alle nostre entità (Luoghi/Fazioni/Missioni/Tabelle) → gli esagoni linkano il grafo.
+  - id: hexmaker
+    name: Hexmap World Creator
+    author: morkdev
+    repo: sbuffkin/hexmaker
+    license: MIT
   - id: obsidian42-brat
     name: BRAT
     author: TfTHacker

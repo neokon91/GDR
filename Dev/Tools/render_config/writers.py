@@ -128,6 +128,27 @@ def write_calendarium(obsidian: Path) -> None:
     })
 
 
+def write_hexmaker(obsidian: Path, core: dict[str, Any]) -> None:
+    """Hexmap World Creator (hexcrawl): punta le cartelle del plugin alle ENTITÀ del
+    vault, così gli esagoni linkano i nostri Luoghi/Fazioni/Missioni/Tabelle/Regni —
+    UNA fonte di verità, niente store paralleli. Le note-esagono vanno in Mondi/Esagoni.
+    Merge NON distruttivo (mappe/stato dell'utente preservati): solo le chiavi-cartella
+    sono di proprietà della pipeline. Si applica solo se il plugin è installato."""
+    folders = core.get("folders", {}) or {}
+    luoghi = folders.get("luogo", "Mondi/Luoghi")
+    merge_plugin_config(obsidian, "hexmaker", {
+        "worldFolder": "Mondi",
+        "hexFolder": "Mondi/Esagoni",
+        "townsFolder": luoghi,
+        "dungeonsFolder": luoghi,
+        "featuresFolder": luoghi,
+        "factionsFolder": folders.get("fazione", "Mondi/Fazioni"),
+        "questsFolder": folders.get("missione", "Mondi/Missioni"),
+        "tablesFolder": folders.get("tabella", "Mondi/Tabelle"),
+        "regionsFolder": folders.get("regno", "Mondi/Regni"),
+    })
+
+
 # --- Config .obsidian (merge non distruttivo, un writer per plugin) ----------
 def write_metadata_menu(obsidian: Path, core: dict[str, Any]) -> None:
     """Metadata Menu: uno fileClass per categoria (schema campi tipizzati) in
@@ -299,6 +320,7 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_folder_notes(obsidian)
     write_tab_panels(obsidian)
     write_calendarium(obsidian)
+    write_hexmaker(obsidian, core)
     write_bookmarks(obsidian, pages)
     # Pulizia esploratore: nasconde le cartelle z.* + le esclude da ricerca/grafo.
     write_workspace_chrome(obsidian, plugins)

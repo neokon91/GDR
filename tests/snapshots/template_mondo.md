@@ -173,6 +173,8 @@ group by categoria as "Tipo"
 > - **Azgaar** (esporta **Export → Full JSON**, trascinalo in `Media/`): `BUTTON[importa-azgaar]` — import PROFONDO: crea `[[Cultura]]`/`[[Culto]]`/`[[Regno]]`/`[[Luogo]]` (burgs+marker) collegati, e i segnaposto a coordinate-pixel. *Controlla la posizione dei pin dopo l'import.*
 >
 > Alternative: `BUTTON[disegna-mappa]` (Excalidraw → `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con overlay/livelli).
+>
+> **Hexcrawl giocabile?** Apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, sottomappe, tiri incontri). Le sue cartelle sono già puntate alle tue note: gli esagoni linkano **Luoghi/Fazioni/Missioni** e usano le tue **Tabelle** per gli incontri — una sola fonte di verità.
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```
