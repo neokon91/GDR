@@ -701,3 +701,32 @@ def test_render_map_origine(tmp_path):
     assert "Rigenera" not in o["c"]                                  # schema non-http → ignorato (sicurezza)
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_importa_mappa_parse(tmp_path):
+    """importa_mappa.parseSvgMap/buildMarkers: estrae i toponimi-parola dall'SVG Watabou
+    sommando l'offset del gruppo di centratura, salta numeri/lettere singole, deduplica i
+    doppioni (outline+fill); buildMarkers produce il sidecar zoom-map coi pin linkati."""
+    harness = tmp_path / "im.js"
+    harness.write_text(
+        f'const im=require({json.dumps(str(render.JS_DIR / "importa_mappa.js"))});'
+        'const svg=`<svg width="1800" height="1800"><g transform="translate(900 900)">'
+        '<text transform="translate(-257 364)">Aster</text>'
+        '<text transform="translate(-257 364)">Aster</text>'
+        '<text transform="translate(20 255)">Chiarombra</text>'
+        '<text transform="translate(0 -32)">250</text>'
+        '<text transform="translate(-7 -11)">D</text></g></svg>`;'
+        'const r=im.parseSvgMap(svg);'
+        'const mk=im.buildMarkers("Media/c.svg",r.size,r.places,(n)=>"[["+n+"]]");'
+        'process.stdout.write(JSON.stringify({size:r.size,offset:r.offset,places:r.places,'
+        ' nMark:mk.markers.length,base:mk.bases[0],m0:mk.markers[0]}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    o = json.loads(res.stdout)
+    assert o["size"] == {"w": 1800, "h": 1800} and o["offset"] == {"x": 900, "y": 900}
+    assert [p["name"] for p in o["places"]] == ["Aster", "Chiarombra"]   # dedup + niente numeri/lettere
+    assert o["places"][0] == {"name": "Aster", "x": 643, "y": 1264}      # label + offset di centratura
+    assert o["nMark"] == 2 and o["base"] == "Media/c.svg"
+    assert o["m0"]["link"] == "[[Aster]]" and o["m0"]["x"] == 643        # pin linkato alla nota
+
+

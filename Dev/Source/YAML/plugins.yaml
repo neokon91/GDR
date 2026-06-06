@@ -305,6 +305,11 @@ buttons:
   - id: tira-tabella
     label: Tira sulla tabella
     action: tira_tabella
+  # Importa una mappa Watabou (SVG): imposta mappa/origine, crea luoghi dai toponimi e
+  # genera i segnaposto (tp.user.importa_mappa).
+  - id: importa-mappa
+    label: Importa mappa Watabou
+    action: importa_mappa
   # Turno di bastione (DMG 2024): registra un turno nel Registro dei turni.
   - id: turno-bastione
     label: Turno di bastione

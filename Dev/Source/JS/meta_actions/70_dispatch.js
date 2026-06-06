@@ -90,6 +90,13 @@ async function meta_actions(tp, action = "") {
     new Notice("world_board non disponibile."); return "";
   }
 
+  if (action === "importa_mappa") {
+    // Importa una mappa Watabou (SVG): imposta mappa/origine, crea i luoghi dai toponimi
+    // e genera i segnaposto (script autonomo, tp.user.importa_mappa).
+    if (tp.user && tp.user.importa_mappa) return await tp.user.importa_mappa(tp);
+    new Notice("importa_mappa non disponibile."); return "";
+  }
+
   if (action === "genera_sito") {
     // Esporta il sito dei giocatori (HTML statico, spoiler-free) dentro Obsidian,
     // senza Python né terminale (script autonomo, gemello di build_site.py).
