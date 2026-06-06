@@ -72,6 +72,20 @@ relazioni:
   label: Rivali
   category: personaggio
   multi: true
+# Inverso di profezia.riguarda: le profezie che riguardano questo personaggio,
+# come link tipizzati (auto-derivazione dal lato profezia: coppia univoca).
+- field: profezie
+  label: Profezie che lo riguardano
+  category: profezia
+  multi: true
+  reciprocal: riguarda
+# Inverso di missione.png: le missioni che questo PNG affida/coinvolge (chi assegna
+# la quest diventa tracciabile dal grafo, non solo dal lato missione).
+- field: missioni_assegnate
+  label: Missioni affidate
+  category: missione
+  multi: true
+  reciprocal: png
 creation:
   fields:
   - field: tipo

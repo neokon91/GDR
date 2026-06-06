@@ -61,6 +61,22 @@ def test_personaggio_options():
     bard = {r["id"]: r for r in opt["classi"]["bardo"]["risorse"]}
     assert bard["ispirazione"]["caratteristica"] == "carisma" and "valori" not in bard["ispirazione"]
     assert bard["ispirazione"]["ricarica"] == "lungo" and bard["ispirazione"]["ricarica_breve_da_livello"] == 5
+    # Multiclasse (2024): tipo incantatore per classe (livello-da-incantatore combinato),
+    # Patto del Warlock separato, tabella slot multiclasse SRD e overlay prereq/competenze.
+    assert opt["classi"]["mago"]["tipo_incantatore"] == "pieno"
+    assert opt["classi"]["paladino"]["tipo_incantatore"] == "mezzo"
+    assert opt["classi"]["warlock"]["tipo_incantatore"] == "patto"
+    assert opt["classi"]["guerriero"]["tipo_incantatore"] == "nessuno"
+    pact = opt["classi"]["warlock"]["pact"]
+    assert len(pact) == 20 and pact[0] == {"slot": 1, "liv": 1} and pact[19]["liv"] == 5  # Patto 1-20
+    assert "pact" not in opt["classi"]["mago"]  # solo le classi-patto hanno la tabella Patto
+    mc = opt["slot_multiclasse"]
+    assert len(mc) == 20 and mc[0] == {"1": 2} and mc[2] == {"1": 4, "2": 2}  # tabella SRD MC
+    assert max(int(k) for k in mc[19]) == 9  # al livello-incantatore 20 si arriva al 9º
+    prereq = opt["multiclasse"]["prerequisiti"]
+    assert prereq["guerriero"] == [{"forza": 13}, {"destrezza": 13}]   # Forza O Destrezza
+    assert prereq["monaco"] == [{"destrezza": 13, "saggezza": 13}]      # entrambe
+    assert opt["multiclasse"]["competenze"]["ladro"]["abilita_scelte"] == 1
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -260,5 +276,123 @@ def test_crea_pg_nome_clash(tmp_path):
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     assert json.loads(res.stdout)["moved"] == "Mondi/Personaggi/Test_PG_2"
+
+
+@pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
+def test_multiclasse_funzioni(tmp_path):
+    """sali_pg: funzioni pure della multiclasse (2024) sui DATI SRD reali — prerequisiti
+    (OR/AND), gate RAW, livello-incantatore combinato, slot a livello (1 vs 2+ caster) e
+    Patto del Warlock separato. Le regole vivono nell'overlay/SRD, non nel codice."""
+    import build_personaggio
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(build_personaggio.build_personaggio_options(CORE), ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "mc.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const opt=JSON.parse(fs.readFileSync({json.dumps(str(pj))},"utf8"));'
+        f'const s=require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});'
+        'const c=opt.classi, P=opt.multiclasse.prerequisiti;'
+        'process.stdout.write(JSON.stringify({'
+        '  prereq_or: s.prereqOk({forza:13,destrezza:8}, P.guerriero),'        # Forza O Destrezza
+        '  prereq_and_fail: s.prereqOk({destrezza:15,saggezza:10}, P.monaco),' # serve anche Saggezza
+        '  gate_block: s.multiclassGate({intelligenza:10,forza:15}, ["guerriero"], "mago", P),'
+        '  gate_ok: s.multiclassGate({intelligenza:13,forza:15}, ["guerriero"], "mago", P),'
+        '  combined_g3m2: s.combinedCasterLevel([{id:"guerriero",livello:3},{id:"mago",livello:2}], c),'
+        '  combined_p4m4: s.combinedCasterLevel([{id:"paladino",livello:4},{id:"mago",livello:4}], c),'
+        '  slots_single_mago3: s.leveledSlots([{id:"mago",livello:3}], opt, c),'
+        '  slots_mc_2caster: s.leveledSlots([{id:"chierico",livello:1},{id:"mago",livello:1}], opt, c),'
+        '  pact_w3: s.pactSlots([{id:"warlock",livello:3}], c),'
+        '  slots_warlock_alone: s.leveledSlots([{id:"warlock",livello:5}], opt, c) }));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    r = json.loads(res.stdout)
+    opt = build_personaggio.build_personaggio_options(CORE)
+    assert r["prereq_or"] is True and r["prereq_and_fail"] is False
+    assert r["gate_block"]["ok"] is False and "mago" in r["gate_block"]["mancanti"]  # RAW: blocca
+    assert r["gate_ok"]["ok"] is True
+    assert r["combined_g3m2"] == 2          # solo il mago conta (pieno ×1); il guerriero no
+    assert r["combined_p4m4"] == 6          # mago 4 + paladino floor(4/2)=2
+    # 1 sola classe incantatrice → la SUA tabella; 2+ → tabella multiclasse SRD combinata.
+    assert r["slots_single_mago3"] == opt["classi"]["mago"]["progressione"][2]["slot"]
+    assert r["slots_mc_2caster"] == opt["slot_multiclasse"][1]   # livello-incantatore 2
+    # Patto del Warlock: SEMPRE separato dagli slot a livello.
+    assert r["pact_w3"] == opt["classi"]["warlock"]["pact"][2]
+    assert r["slots_warlock_alone"] == {}   # il warlock non entra negli slot a livello
+
+
+def _sali_harness(tmp_path, fm0, picks):
+    """Esegue sali_pg.js col mock di un PG attivo (fm0) e un suggester guidato da `picks`
+    (dict: sotto-stringa del titolo -> valore scelto; default = primo). Ritorna {out, note}:
+    `out` = frontmatter finale (None se processFrontMatter non è stato chiamato)."""
+    import build_personaggio
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(build_personaggio.build_personaggio_options(CORE), ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "sali.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const data=fs.readFileSync({json.dumps(str(pj))},"utf8");'
+        'let out=null,note="";'
+        'global.Notice=class{constructor(m){note=String(m);}};'
+        'const file={path:"PG.md"};'
+        f'const fm0={json.dumps(fm0)};'
+        f'const picks={json.dumps(picks)};'
+        'global.app={'
+        ' workspace:{getActiveFile:()=>file},'
+        ' metadataCache:{getFileCache:()=>({frontmatter:fm0})},'
+        ' vault:{adapter:{read:async()=>data}},'
+        ' fileManager:{processFrontMatter:async(f,fn)=>{fn(fm0);out=JSON.parse(JSON.stringify(fm0));}}'
+        '};'
+        'const tp={system:{suggester:async(labels,values,_f,title)=>{'
+        '  title=String(title||"");'
+        '  for(const k of Object.keys(picks)) if(title.includes(k)) return picks[k];'
+        '  return values[0];'
+        '}}};'
+        f'require({json.dumps(str(render.JS_DIR / "sali_pg.js"))})(tp)'
+        '.then(()=>process.stdout.write(JSON.stringify({out,note})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    return json.loads(res.stdout)
+
+
+# PG di partenza per gli e2e di sali_pg: Guerriero 1, INT 13 (regge il prereq del Mago).
+_PG_GUERRIERO_L1 = {
+    "nome": "Multi", "categoria": "personaggio", "tipo": "pg",
+    "classe": "guerriero", "classi": [{"id": "guerriero", "livello": 1, "sottoclasse": ""}],
+    "livello": 1, "competenza": 2, "dado_vita": 10, "dadi_vita_max": 1, "pf": 13, "pf_max": 13,
+    "forza": 16, "destrezza": 14, "costituzione": 16, "intelligenza": 13, "saggezza": 10, "carisma": 8,
+}
+
+
+@pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
+def test_sali_pg_multiclasse_e2e(tmp_path):
+    """sali_pg end-to-end: un Guerriero 1 (INT 13) multiclassa in Mago. Risultato: breakdown
+    a 2 voci, livello-personaggio 2, competenza dal totale, slot da incantatore (Mago=unica
+    classe incantatrice → la sua tabella), flag incantatore e incantesimi assegnati."""
+    out = _sali_harness(tmp_path, dict(_PG_GUERRIERO_L1),
+                        {"in quale classe": "__multiclasse__", "Multiclasse: nuova classe": "mago"})["out"]
+    assert out is not None
+    assert out["classi"] == [{"id": "guerriero", "livello": 1, "sottoclasse": ""},
+                             {"id": "mago", "livello": 1, "sottoclasse": ""}]
+    assert out["livello"] == 2 and out["competenza"] == 2     # competenza dal livello TOTALE
+    assert out["classe"] == "guerriero"                       # primaria invariata
+    assert out["incantatore"] is True
+    assert out["slot_1"] == 2                                 # Mago L1 (unico caster) → sua tabella
+    assert isinstance(out.get("trucchetti"), list) and out["trucchetti"]
+    assert isinstance(out.get("incantesimi"), list) and out["incantesimi"]
+    # PF aumentati col dado del MAGO (d6: media 4 + mod COS 3 = 7).
+    assert out["pf_max"] == _PG_GUERRIERO_L1["pf_max"] + (4 + 3)
+
+
+@pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
+def test_sali_pg_multiclasse_prereq_blocca(tmp_path):
+    """sali_pg (prereq RAW): un Guerriero con INT 10 NON può multiclassare in Mago (serve
+    Intelligenza 13). Il frontmatter resta intatto e una Notice spiega il blocco."""
+    fm = dict(_PG_GUERRIERO_L1, intelligenza=10)
+    res = _sali_harness(tmp_path, fm,
+                       {"in quale classe": "__multiclasse__", "Multiclasse: nuova classe": "mago"})
+    assert res["out"] is None                  # processFrontMatter mai chiamato → niente scrittura
+    assert "negata" in res["note"].lower() and "mago" in res["note"].lower()
 
 

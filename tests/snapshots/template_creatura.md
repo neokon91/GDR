@@ -104,7 +104,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Com'è fatta, come si muove, che impressione dà. I numeri 5e sono nel tab Statblock.
 
 > [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
+> `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
 > [!note] Ecologia
 > `INPUT[textArea:ecologia]`

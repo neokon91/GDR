@@ -75,6 +75,10 @@ relazioni:
   # Regno/stato di cui la fazione è organo ufficiale (ex-istituzione, merge SYS-2).
   # Inverso: regno.fazioni ("Fazioni di corte"), auto-derivato (coppia univoca).
   - { field: regno, label: Regno / Stato, category: regno }
+  # Inverso di editto.fazioni: gli editti che toccano/emana la fazione.
+  - { field: editti, label: Editti, category: editto, multi: true, reciprocal: fazioni }
+  # Inverso di missione.fazione: le missioni commissionate/mosse dalla fazione.
+  - { field: missioni, label: Missioni, category: missione, multi: true, reciprocal: fazione }
 creation:
   fields:
     - { field: tipo, prompt: "Tipo di fazione", from: subtypes, required: true }

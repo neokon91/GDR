@@ -1,0 +1,40 @@
+# Schema per-entità: tabella (al tavolo). Una TABELLA CASUALE d'utente: scrivi le voci
+# (una per riga) e il pannello le numera e offre il tiro (1dN, N = n. di voci). Diversa
+# da `genera` (generatori CURATI di nomi/spunti): qui il GM autora le sue tavole — incontri
+# casuali, bottino, colpi di scena — da tirare al volo (ispirazione Alkemion: Random Tables).
+# Reso dallo scheletro condiviso + il pannello «Tira sulla tabella» (views.renderTabella).
+id: tabella
+folder: Mondi/Tabelle
+order: 44
+gruppo: tavolo
+templates:
+- id: tabella
+  title: Tabella casuale
+  default_type: tabella
+  target: z.modelli/Tabella.md
+  jinja: tabella.md.j2
+  area: gioco
+  primary: true
+# SOTTOTIPI: a COSA serve la tabella (puro orientamento; il tiro è identico per tutte).
+subtypes:
+- { nome: tabella,     descrizione: "Tabella generica: tira e leggi l'esito.",                     campi: [] }
+- { nome: incontri,    descrizione: "Incontri casuali: cosa si para davanti ai PG qui.",            campi: [] }
+- { nome: tesoro,      descrizione: "Bottino: cosa trovano frugando.",                              campi: [] }
+- { nome: png,         descrizione: "PNG al volo: chi incontrano per strada, con un tratto.",       campi: [] }
+- { nome: colpo_scena, descrizione: "Colpi di scena / complicazioni da pescare quando serve.",      campi: [] }
+- { nome: ambiente,    descrizione: "Dettagli d'ambiente: cosa rende viva e sensoriale la scena.",  campi: [] }
+fields:
+  voci: { label: Voci (una per riga), widget: testo_area }
+  dado: { label: Dado (vuoto = auto sul n. di voci), widget: text }
+scheda: [dado]
+relazioni:
+- { field: luogo, label: Dove si usa, category: luogo }
+creation:
+  fields:
+  - { field: tipo, prompt: Tipo di tabella, from: subtypes, required: true }
+  - { field: mondo, prompt: Mondo, from: notes, category: mondo, link: true, required: true }
+  body:
+  - { field: uso, prompt: 'Quando/perché tirarla (nota per te)', heading: Uso }
+guida:
+  scopo: "Una tabella casuale pronta al tavolo: scrivi le **Voci** (una per riga), poi tira nel pannello e leggi l'esito. Il dado si adatta al numero di voci (1dN)."
+  campi_chiave: "Le **Voci** sono i risultati (una per riga); il **Dado** è opzionale (auto = numero di voci). Il **Tipo** dice a cosa serve (incontri, tesoro, colpi di scena…)."

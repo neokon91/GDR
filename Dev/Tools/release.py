@@ -9,6 +9,7 @@ pulito e riproducibile. `python3 Dev/Tools/release.py` (o `npm run dist`)."""
 
 from __future__ import annotations
 
+import fnmatch
 import json
 import subprocess
 import sys
@@ -21,7 +22,15 @@ from build_site import SITE_OUT
 # Stato locale/utente da NON spedire: layout dei pannelli, cache, file di sistema.
 _EXCLUDE_NAMES = {".DS_Store", "workspace.json", "workspace-mobile.json",
                   "workspace.json.bak", "Thumbs.db"}
-_EXCLUDE_DIR_PARTS = {".trash", ".git"}
+# .trash/.git + la cartella OUTPUT del bottone «Genera sito giocatori» (Sito-giocatori/):
+# è il sito generato on-demand dal GM, non una sorgente → non si confeziona nello zip.
+_EXCLUDE_DIR_PARTS = {".trash", ".git", "Sito-giocatori"}
+# Artefatti di QA/test lasciati nel vault durante lo sviluppo (es. un PG di prova
+# `QA_Barbaro`): NON vanno nello zip — un file di test spedito agli utenti erode
+# fiducia ("è finito?"). Esclusi per PATTERN sul basename (case-insensitive, match
+# deterministico cross-OS via fnmatchcase su nome minuscolo). Non distruttivo: lo
+# stato locale resta intatto, semplicemente non viene confezionato.
+_EXCLUDE_GLOBS = ("qa_*", "tmp_*", "*_test.*", "*.tmp")
 
 
 def version() -> str:
@@ -30,7 +39,10 @@ def version() -> str:
 
 
 def _included(rel_parts: tuple[str, ...], name: str) -> bool:
-    return name not in _EXCLUDE_NAMES and not (_EXCLUDE_DIR_PARTS & set(rel_parts))
+    if name in _EXCLUDE_NAMES or (_EXCLUDE_DIR_PARTS & set(rel_parts)):
+        return False
+    low = name.lower()
+    return not any(fnmatch.fnmatchcase(low, glob) for glob in _EXCLUDE_GLOBS)
 
 
 def zip_tree(src: Path, zip_path: Path, arc_root: str) -> int:

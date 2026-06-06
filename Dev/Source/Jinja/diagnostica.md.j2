@@ -1,0 +1,33 @@
+{# Diagnostica: rete di sicurezza per l'utente non-tecnico. Se una nota mostra
+   «codice grezzo», di solito manca un plugin — qui scopre QUALE e come riattivarlo.
+   Doppio strato: (1) checklist DINAMICA (renderDiagnostica, JS Engine) che confronta
+   i plugin essenziali con quelli ATTIVI; (2) elenco STATICO sotto (markdown puro, si
+   vede sempre) per il caso-limite in cui è JS Engine stesso a mancare. #}
+{% import '_macros.j2' as m with context %}
+# 🩺 Diagnostica — il vault funziona?
+
+> [!info] A cosa serve
+> Se in una nota vedi del **codice grezzo** (es. `INPUT[...]`, o blocchi che iniziano
+> con ` ```dataview `) invece di pulsanti, schede o tabelle, quasi sempre manca un
+> **plugin**. Questa pagina ti dice quale e come riattivarlo. *(Consiglio: tieni le
+> note in modalità **Lettura** — i campi restano comunque cliccabili.)*
+
+> [!warning] Se qui sotto vedi del codice invece di una checklist
+> Allora manca **JS Engine** (è lui che disegna la checklist). Aprilo da *Impostazioni
+> → Plugin della community*, assicurati che il *Restricted mode* sia **off** e attiva
+> **JS Engine**; poi riapri questa nota. L'elenco completo è comunque più in basso.
+
+{{ m.vista('renderDiagnostica') }}
+
+> [!tip] Come si attiva un plugin
+> *Impostazioni* (⚙️, in basso a sinistra) → *Plugin della community* → trova il
+> plugin nell'elenco → interruttore su **on**. Se l'elenco è bloccato, disattiva
+> prima il *Restricted mode* (stesso pannello). I plugin sono **già nel vault**.
+
+> [!note]- Elenco completo dei plugin essenziali *(si vede sempre, anche senza plugin)*
+> Questi devono essere **attivi**. Senza, ecco cosa non si vede:
+>
+> | Plugin | Cosa non si vede senza |
+> |:--|:--|
+{% for p in plugins.plugins if p.get('critico') %}> | **{{ p.name }}** | {{ p.rompe }} |
+{% endfor %}

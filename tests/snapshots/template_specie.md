@@ -44,9 +44,9 @@
 
 > [!abstract] Scheda
 > Taglia: `INPUT[taglia][:taglia]`
-> Velocità: `INPUT[text:velocita]`
-> Tipo di creatura: `INPUT[text:tipo_creatura]`
-> Lignaggio: `INPUT[text:lignaggio]`
+> Velocità: `INPUT[text(placeholder(es. 9 m · volo 18 m)):velocita]`
+> Tipo di creatura: `INPUT[tipo_creatura][:tipo_creatura]`
+> Lignaggio: `INPUT[text(placeholder(es. Discendenza infernale)):lignaggio]`
 > Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
 
 --- 📖 Lore

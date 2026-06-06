@@ -422,11 +422,17 @@ function frontmatter(pg) {
     const righeTs = pg.ordine_caratteristiche.map(s => `ts_${s}: ${pg.ts_competenti.includes(s) ? 1 : 0}`).join("\n");
     const righeAb = pg.abilita_ids.map(id => `prof_${id}: ${pg.competenze_abilita.includes(id) ? 1 : 0}`).join("\n");
     const slotRighe = Object.entries(pg.slot || {}).map(([n, q]) => `slot_${n}: ${q}`).join("\n");
+    // Ripartizione per classe (fonte di verità della multiclasse): al 1º livello una sola
+    // voce. sali_pg vi aggiunge le classi prese in multiclasse; la `classe` piatta resta la primaria.
+    const classiRighe = `classi:\n  - { id: ${pg.classe}, livello: 1, sottoclasse: "" }`;
+    // Patto del Warlock (slot separati): scritti solo se la classe ha la tabella pact.
+    const pactRighe = pg.pact ? `slot_patto: ${pg.pact.slot}\nslot_patto_liv: ${pg.pact.liv}\nslot_patto_uso: 0\n` : "";
     return `---
 nome: ${JSON.stringify(String(pg.nome ?? ""))}
 categoria: personaggio
 tipo: pg
 classe: ${pg.classe}
+${classiRighe}
 specie: ${pg.specie}
 background: ${pg.background}
 livello: 1
@@ -455,7 +461,7 @@ inventario:${listaYamlQ(pg.inventario)}
 incantatore: ${pg.incantatore ? "true" : "false"}
 trucchetti:${listaYamlQ(pg.trucchetti)}
 incantesimi:${listaYamlQ(pg.incantesimi)}
-${slotRighe ? slotRighe + "\n" : ""}${pg.slot_ricarica ? `slot_ricarica: ${pg.slot_ricarica}\n` : ""}${risorseYaml(pg.risorse)}talenti:${listaYaml(pg.talenti)}
+${slotRighe ? slotRighe + "\n" : ""}${pactRighe}${pg.slot_ricarica && !pg.pact ? `slot_ricarica: ${pg.slot_ricarica}\n` : ""}${risorseYaml(pg.risorse)}talenti:${listaYaml(pg.talenti)}
 padronanze_armi:${listaYamlQ(pg.padronanze_armi)}
 stato: bozza
 ---
@@ -539,9 +545,12 @@ async function costruisciPG(tp, opt, nome) {
     return frontmatter({
         nome,
         classe: classeId,
-        // Risorse di classe a ricarica al 1º livello (Ki/Ira/Incanalare/Ispirazione...) +
-        // slot del Patto (Warlock) che ricaricano sul riposo breve. Vuoto per le altre classi.
+        // Risorse di classe a ricarica al 1º livello (Ki/Ira/Incanalare/Ispirazione...).
         risorse: risorseAtLevel(classe.risorse, 1, caratteristiche),
+        // Patto del Warlock (slot SEPARATI dagli slot a livello, ricarica a riposo breve):
+        // al 1º livello dalla tabella `pact` della classe. null per le altre classi (e per
+        // il warlock homebrew senza tabella → ricade su slot_ricarica:breve, come prima).
+        pact: classe.tipo_incantatore === "patto" && Array.isArray(classe.pact) ? classe.pact[0] : null,
         slot_ricarica: (opt.slot_ricarica_breve_classi || []).includes(classeId) ? "breve" : "",
         specie: specieId,
         background: backgroundId,

@@ -32,12 +32,12 @@
 
 > [!abstract] Scheda
 > Livello: `INPUT[number:livello]`
-> Tempo di lancio: `INPUT[text:tempo_lancio]`
-> Gittata: `INPUT[text:gittata]`
-> Componenti: `INPUT[text:componenti]`
-> Durata: `INPUT[text:durata]`
+> Tempo di lancio: `INPUT[text(placeholder(es. 1 azione oppure 1 reazione)):tempo_lancio]`
+> Gittata: `INPUT[text(placeholder(es. 9 m oppure contatto)):gittata]`
+> Componenti: `INPUT[text(placeholder(es. V S M con un pizzico di zolfo)):componenti]`
+> Durata: `INPUT[text(placeholder(es. Istantanea oppure Concentrazione fino a 1 minuto)):durata]`
 > Rituale: `INPUT[text:rituale]`
-> Classi: `INPUT[text:classi]`
+> Classi: `INPUT[classi][:classi]`
 
 --- ✨ Effetto
 

@@ -5,8 +5,10 @@ file-entità) e dei template/Jinja. Estratto da render.py: check() ritorna 0/1 e
 
 from __future__ import annotations
 
+import json
 import re
 import sys
+from pathlib import Path
 from typing import Any
 
 from common import (
@@ -21,6 +23,9 @@ from common import (
     load_templates,
     load_yaml,
 )
+
+# JSON Schema dei payload runtime (contratto Python→JS): vivono accanto a validate.py.
+SCHEMA_DIR = Path(__file__).resolve().parent / "schemas"
 
 # Cattura gli id usati nei Jinja come field('id') / field("id").
 FIELD_REF_RE = re.compile(r"""field\(\s*['"]([a-z0-9_]+)['"]""")
@@ -381,6 +386,29 @@ def validate_aux_yaml() -> list[str]:
     return errors
 
 
+def validate_runtime_payloads(core: dict[str, Any], templates: list[dict[str, Any]]) -> list[str]:
+    """Valida la SHAPE dei payload runtime (core.json, personaggio.json) contro i loro
+    JSON Schema (schemas/): è il contratto Python→JS reso ESPLICITO. Un drift di shape
+    — chiave rinominata/rimossa o tipo cambiato dal lato Python che il JS legge — si ferma
+    al build invece di rompere muto in-app. Costruisce i payload IN-MEMORY (non scrive file)."""
+    import jsonschema  # dev-dep (requirements-dev.txt): serve solo a check-time, non nel vault
+    from build_personaggio import build_personaggio_options
+    from render import engine_payload  # differito: render importa validate al load (no ciclo a runtime)
+
+    errors: list[str] = []
+    casi = [
+        ("core.json", engine_payload(core, templates), "core.schema.json"),
+        ("personaggio.json", build_personaggio_options(core), "personaggio.schema.json"),
+    ]
+    for name, data, schema_file in casi:
+        schema = json.loads((SCHEMA_DIR / schema_file).read_text(encoding="utf-8"))
+        for e in sorted(jsonschema.Draft202012Validator(schema).iter_errors(data),
+                        key=lambda e: list(map(str, e.path))):
+            loc = "/".join(str(p) for p in e.path) or "(radice)"
+            errors.append(f"{name} @ {loc}: {e.message}")
+    return errors
+
+
 def check() -> int:
     errors: list[str] = []
     core_raw, system_raw = load_core_parts()
@@ -390,6 +418,7 @@ def check() -> int:
     errors.extend(validate_entities(core_raw, system_raw, entities, core))
     errors.extend(validate_entity_schema(entities))
     errors.extend(validate_aux_yaml())
+    errors.extend(validate_runtime_payloads(core, load_templates()))
     plugins = load_yaml("plugins.yaml")
     categories = core.get("categories", {})
     folders = core.get("folders", {})
@@ -411,11 +440,22 @@ def check() -> int:
         if not (JINJA_DIR / jinja).exists():
             errors.append(f"{template.get('id')}: Jinja mancante ({jinja})")
 
-    # Ogni widget non-text/number del registro deve avere un template Meta Bind.
+    # Tipi Meta Bind INLINE (`INPUT[tipo:prop]`, resi dalla macro field()): non hanno
+    # bisogno di un template in metabind_inputs. Gli altri widget DEVONO avere un template.
+    inline_widgets = ("text", "number", "toggle", "date", "datePicker", "time")
+    # I caratteri che chiuderebbero/spezzerebbero `INPUT[text(placeholder(...)):prop]`.
+    placeholder_vietati = set("()[]:,`")
     for field_id, spec in fields.items():
-        widget = (spec or {}).get("widget")
-        if widget and widget not in ("text", "number") and widget not in metabind:
+        spec = spec or {}
+        widget = spec.get("widget")
+        if widget and widget not in inline_widgets and widget not in metabind:
             errors.append(f"campo {field_id}: widget '{widget}' assente da metabind_inputs")
+        ph = spec.get("placeholder")
+        if ph is not None:
+            if widget not in ("text", "number"):
+                errors.append(f"campo {field_id}: 'placeholder' ammesso solo su widget text/number (è '{widget}')")
+            if set(str(ph)) & placeholder_vietati:
+                errors.append(f"campo {field_id}: placeholder con caratteri vietati ()[]:,` — romperebbe il parser Meta Bind")
 
     # Anti-drift: gli elenchi-di-categorie di core.yaml (chi riceve il Fronte/clock,
     # le tappe, il motore di coerenza, il ritratto) devono nominare SOLO categorie
@@ -465,6 +505,15 @@ def check() -> int:
         opt_ids = set(re.findall(r"option\(\s*([a-z_]+)", str(metabind.get("stile_nomi", ""))))
         if opt_ids != gen_stili:
             errors.append(f"stile_nomi: opzioni metabind {sorted(opt_ids)} != stili generatori.yaml {sorted(gen_stili)}")
+
+    # Anti-drift: le opzioni del select 'padronanza' (le 8 maestrie d'arma 2024) devono
+    # combaciare con system.yaml:maestrie_armi (il quick-ref al tavolo). Un nome che diverge
+    # qui mostrerebbe nel picker una maestria diversa da quella documentata.
+    maestrie = {m.get("nome") for m in (core.get("maestrie_armi") or []) if isinstance(m, dict)}
+    if maestrie and "padronanza" in metabind:
+        pad_opts = set(re.findall(r"option\(([^)]+)\)", str(metabind.get("padronanza", ""))))
+        if pad_opts != maestrie:
+            errors.append(f"padronanza: opzioni metabind {sorted(pad_opts)} != maestrie_armi {sorted(maestrie)}")
 
     # JS — anti-drift strutturale dei comparatori `quando`: la grammatica matchesCond
     # ha UNA sorgente canonica (_comparators.js); views.js e meta_actions.js (script

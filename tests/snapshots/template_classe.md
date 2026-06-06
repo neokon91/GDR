@@ -32,11 +32,11 @@
 
 > [!abstract] Scheda
 > Dado vita: `INPUT[dado_vita][:dado_vita]`
-> Caratteristica primaria: `INPUT[text:car_primaria]`
-> TS competenti: `INPUT[text:ts_competenze]`
+> Caratteristica primaria: `INPUT[car_primaria][:car_primaria]`
+> TS competenti: `INPUT[text(placeholder(es. Forza e Costituzione)):ts_competenze]`
 > Competenze in armi: `INPUT[text:competenze_armi]`
 > Competenze in armature: `INPUT[text:competenze_armature]`
-> Competenza in strumenti: `INPUT[text:strumento]`
+> Competenza in strumenti: `INPUT[text(placeholder(es. Strumenti da fabbro)):strumento]`
 > Abilità a scelta (numero): `INPUT[number:abilita_numero]`
 
 --- 📈 Progressione

@@ -79,6 +79,12 @@ relazioni:
   label: Culti coinvolti
   category: culto
   multi: true
+# Inverso di profezia.evento: le profezie che predicono/riguardano questo evento.
+- field: profezie
+  label: Profezie collegate
+  category: profezia
+  multi: true
+  reciprocal: evento
 creation:
   fields:
   - field: tipo

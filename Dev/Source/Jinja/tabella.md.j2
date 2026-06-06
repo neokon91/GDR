@@ -1,0 +1,13 @@
+{# TABELLA CASUALE — template per-entità. Estende lo scheletro e in Lore mette le Voci
+   (campo testo, una per riga) + il pannello «Tira sulla tabella» (1dN sul Dice Roller).
+   Schema in YAML/entities/tabella.yaml, logica in views.renderTabella. #}
+{% extends '_entity_base.j2' %}
+{% block lore %}
+{% import '_macros.j2' as m with context %}
+{{ m.scheda(template.category) }}
+> [!note] Voci della tabella — una per riga
+> {{ m.field('voci', label=false) }}
+
+{{ m.vista('renderTabella') }}
+{{ m.wizard_body(template.category) }}
+{% endblock %}

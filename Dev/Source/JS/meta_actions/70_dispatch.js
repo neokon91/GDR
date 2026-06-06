@@ -86,6 +86,13 @@ async function meta_actions(tp, action = "") {
     new Notice("world_board non disponibile."); return "";
   }
 
+  if (action === "genera_sito") {
+    // Esporta il sito dei giocatori (HTML statico, spoiler-free) dentro Obsidian,
+    // senza Python né terminale (script autonomo, gemello di build_site.py).
+    if (tp.user && tp.user.genera_sito) return await tp.user.genera_sito(tp);
+    new Notice("genera_sito non disponibile."); return "";
+  }
+
   if (action === "inizia_incontro") {
     // Schiera il gruppo: auto-inietta il Party di Initiative Tracker dai PG (non serve file attivo).
     return await inizia_incontro(tp);

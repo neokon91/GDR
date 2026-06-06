@@ -178,7 +178,7 @@ def test_occhi_giocatore_dashboard():
     assert '!visibilita or !contains(list("dm", "gm", "master", "privato", "segreto")' in out
     assert 'visibilita and contains(list("dm", "gm", "master", "privato", "segreto")' in out
     assert 'where !contains(list("sessione", "incontro", "insidia"), categoria)' in out
-    assert "--reveal" in out                                       # rimanda al build
+    assert "BUTTON[genera-sito]" in out                            # esporta dentro Obsidian (no terminale)
 
 
 # --- Rivelazione PER-SEZIONE (callout [!rivela|tier]) ------------------------
@@ -253,6 +253,82 @@ def test_release_zip_tree_excludes_local_state(tmp_path):
     for excl in ("workspace.json", ".DS_Store", ".trash"):
         assert not any(excl in name for name in names), excl
     assert n == 2                                                      # nota + app.json
+
+
+def test_release_excludes_qa_artifacts(tmp_path):
+    """Lo zip di release NON deve contenere artefatti QA/test (es. un PG di prova
+    `QA_Barbaro.md`): un file di test spedito agli utenti erode fiducia. `_included` li
+    scarta per pattern (case-insensitive); le note vere restano. Non distruttivo: filtra
+    solo cosa si confeziona, non tocca il vault locale."""
+    import zipfile
+    # gate _included: scarta i pattern QA/test, tiene il resto
+    for excl in ("QA_Barbaro.md", "qa_scratch.md", "tmp_appunti.md", "scena_test.md"):
+        assert release._included(("Mondi", "Personaggi"), excl) is False, excl
+    for keep in ("Pontebello.md", "Astaria.md", "Casa_Rossa.md"):
+        assert release._included(("Mondi",), keep) is True, keep
+    # integrazione: zip_tree esclude davvero il file QA dal pacchetto, tiene la nota vera
+    src = tmp_path / "vault"
+    (src / "Mondi" / "Personaggi").mkdir(parents=True)
+    (src / "Mondi" / "Personaggi" / "QA_Barbaro.md").write_text("test", encoding="utf-8")
+    (src / "Mondi" / "Personaggi" / "Eroe.md").write_text("vero", encoding="utf-8")
+    zpath = tmp_path / "out.zip"
+    release.zip_tree(src, zpath, "GDR-vault")
+    names = zipfile.ZipFile(zpath).namelist()
+    assert not any("QA_Barbaro" in name for name in names), names
+    assert "GDR-vault/Mondi/Personaggi/Eroe.md" in names, names
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_genera_sito_parity(tmp_path):
+    """Parità Python↔JS dell'esportatore «sito dei giocatori» (build_site.py ↔
+    genera_sito.js, il bottone in-Obsidian): sugli STESSI dati, markdown_to_html e
+    page_model danno lo STESSO risultato → le due implementazioni non divergono (come
+    il test di parità del World Board). Fixture: prosa-frontmatter + prosa-corpo,
+    callout segreto (escluso) e [!rivela] (svelato), relazioni, ritratto, markdown inline."""
+    import build_site as bs
+    notes = [
+        {"name": "Casa Rossa", "fm": {"categoria": "fazione", "tipo": "gilda", "nome": "Casa Rossa",
+            "mondo": "[[Astaria]]", "portata": "regionale", "motto": "Niente per niente",
+            "ritratto": "rosso.png", "obiettivo": "Controllare i **moli**",
+            "metodo": "Corruzione e *coltelli* con `lame`", "segreto": "Serve Vorth",
+            "alleati": ["[[Gilda del Sale]]"], "rivali": ["[[Casa Nera]]"]},
+         "body": "# Casa Rossa\n\nUna gilda con [[Astaria|sede]] e ![[rosso.png]].\n\n"
+                 "> [!segreto] DM\n> trama riservata\n\n> [!rivela|incontrato] Verità\n> emersa col tempo\n\n"
+                 "## Collegamenti\nda non riportare\n\n- punto uno\n- punto due"},
+        {"name": "Pontebello", "fm": {"categoria": "luogo", "tipo": "insediamento",
+            "nome": "Pontebello", "mondo": "[[Astaria]]", "clima": "temperato", "popolazione": "5.000"},
+         "body": "Prosa **semplice** di un luogo.\n\n```dataview\nx\n```\n\nRiga finale con [esterno](https://z.io)."},
+    ]
+    md = ["## Titolo\n\n**b** *i* `c` con [[X|alias]] e link", "- uno\n- due\n\n1. a\n2. b"]
+    known = {"astaria", "gilda del sale", "casa nera", "pontebello", "x"}
+    IMG = (".png", ".svg", ".jpg", ".jpeg", ".webp", ".gif", ".avif")
+    link = lambda n: bs.slugify(n) + ".html" if str(n).lower() in known else None
+    image = lambda n: "media/" + str(n).split("/")[-1] if str(n).endswith(IMG) else None
+    py = {
+        "models": [bs.page_model(CORE, n["fm"], n["body"], n["name"], link, image, 1) for n in notes],
+        "md": [bs.markdown_to_html(x, link, image) for x in md],
+    }
+    harness = tmp_path / "parity.js"
+    harness.write_text(
+        f'const g=require({json.dumps(str(render.JS_DIR / "genera_sito.js"))});'
+        f'const CORE={json.dumps(CORE, ensure_ascii=False)};'
+        f'const notes={json.dumps(notes, ensure_ascii=False)};'
+        f'const md={json.dumps(md, ensure_ascii=False)};'
+        f'const known=new Set({json.dumps(sorted(known))});'
+        'const IMG=[".png",".svg",".jpg",".jpeg",".webp",".gif",".avif"];'
+        'const link=n=>known.has(String(n).toLowerCase())?g.slugify(n)+".html":null;'
+        'const image=n=>IMG.some(e=>String(n).endsWith(e))?"media/"+String(n).split("/").pop():null;'
+        'process.stdout.write(JSON.stringify({'
+        'models:notes.map(n=>g.pageModel(CORE,n.fm,n.body,n.name,link,image,1)),'
+        'md:md.map(x=>g.mdToHtml(x,link,image))}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    js = json.loads(res.stdout)
+    norm = lambda o: json.dumps(o, ensure_ascii=False, sort_keys=True)
+    assert norm(js["md"]) == norm(py["md"]), "markdown_to_html diverge JS↔Python"
+    for i, (pm, jm) in enumerate(zip(py["models"], js["models"])):
+        assert norm(jm) == norm(pm), f"page_model diverge su «{notes[i]['name']}»\nPY {norm(pm)}\nJS {norm(jm)}"
 
 
 def test_third_party_licenses_complete():

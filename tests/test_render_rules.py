@@ -432,7 +432,7 @@ def test_render_incantesimi_cd(tmp_path):
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = res.stdout
-    assert "CD incantesimo 13" in out          # 8 + 2 (PB) + 3 (mod INT 16)
+    assert "CD 13" in out                      # 8 + 2 (PB) + 3 (mod INT 16)
     assert "Attacco +5" in out                 # 2 (PB) + 3 (mod)
     assert "Intelligenza" in out               # caratteristica da incantatore
     assert "[[Dardo incantato]]" in out        # incantesimo elencato

@@ -60,7 +60,8 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
 
 > [!question]- Ho sbagliato qualcosa, si rompe?
 > No. Le note sono testo semplice: puoi modificarle o cancellarle liberamente. Se una
-> scheda sembra "testo grezzo", quasi sempre manca un plugin del *Setup iniziale*.
+> scheda sembra "testo grezzo", quasi sempre manca un plugin: apri **[[Diagnostica]]**,
+> ti dice quale riattivare.
 
 ---
 ## 🔧 Setup iniziale (una volta sola)
@@ -77,6 +78,7 @@ che **Restricted mode** sia OFF e che questi siano **abilitati**:
 > **Fantasy Statblocks** non vedi gli statblock né il blocco `encounter`; senza
 > **Meta Bind** i campi `INPUT`/`VIEW` (incluso il tab *Carattere*) restano testo grezzo;
 > senza **JS Engine** il pannello *Vista* (card "pronto al tavolo?" + "Citato da") non si rende.
+> **Controllo automatico**: apri **[[Diagnostica]]** — ti dice quali mancano e come riattivarli.
 
 ## 2. Impostazioni (già pronte)
 La build imposta da sé le opzioni che servono — di norma **non devi toccare nulla**:

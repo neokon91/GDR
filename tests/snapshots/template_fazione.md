@@ -51,7 +51,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Portata: `INPUT[portata][:portata]`
 > Motto: `INPUT[text:motto]`
 > Epoca di fondazione: `INPUT[text:fondazione]`
-> Simbolo: `INPUT[text:simbolo]`
+> Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
 
 > [!tip]- Genera nome/spunto
 > `BUTTON[genera-locale]` (italiano, a tema) — scegli **cosa generare**: nomi (persona/luogo/fazione), PNG, taverne, bevande, ganci, dicerie, tesori (SRD), insediamenti, oggetti, meteo, stanze di dungeon… — dallo *stile* della cultura/specie collegata. Inserisce al cursore.
@@ -59,7 +59,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Cosa rappresenta la fazione, simboli, reputazione e percezione pubblica.
 
 > [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
+> `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
 > [!note] Obiettivo
 > `INPUT[textArea:obiettivo]`
@@ -94,7 +94,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
 > Pressione: `INPUT[pressione][:pressione]`
 >
-> Prossima mossa: `INPUT[text:prossima_mossa]`
+> Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
 
 **⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
 ```js-engine
@@ -225,6 +225,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):rivali]`
 > **Controlla le risorse**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):controlla_risorse]`
 > **Regno / Stato**: `INPUT[suggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):regno]`
+> **Editti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Editti"), useLinks(partial), allowOther):editti]`
+> **Missioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial), allowOther):missioni]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

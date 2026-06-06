@@ -30,6 +30,8 @@ relazioni:
 - { field: luogo,   label: Dove,           category: luogo }
 - { field: png,     label: PNG coinvolti,  category: personaggio, multi: true }
 - { field: fazione, label: Fazione dietro, category: fazione }
+# Scene dell'avventura (inverso di scena.missione): il filo dei beat che la compongono.
+- { field: scene,   label: Scene,          category: scena, multi: true, reciprocal: missione }
 creation:
   fields:
   - { field: tipo, prompt: Tipo di missione, from: subtypes, required: true }

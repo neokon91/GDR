@@ -28,10 +28,10 @@
 --- 📋 Scheda
 
 > [!abstract] Scheda
-> Caratteristiche: `INPUT[text:car_background]`
+> Caratteristiche: `INPUT[text(placeholder(es. Forza oppure Costituzione)):car_background]`
 > Competenze in abilità: `INPUT[text:abilita_background]`
-> Competenza in strumenti: `INPUT[text:strumento]`
-> Talento d'origine: `INPUT[text:talento_origine]`
+> Competenza in strumenti: `INPUT[text(placeholder(es. Strumenti da fabbro)):strumento]`
+> Talento d'origine: `INPUT[text(placeholder(es. Fortunato)):talento_origine]`
 
 --- 📖 Lore
 

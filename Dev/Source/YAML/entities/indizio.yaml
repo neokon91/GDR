@@ -1,0 +1,44 @@
+# Schema per-entità: indizio (al tavolo). Un appiglio che i PG possono trovare e che
+# RIVELA qualcosa (una scena-snodo, una verità). Con `scena` forma il design dei
+# misteri (ispirazione Alkemion Studio): ogni indizio è un nodo della ragnatela e
+# punta a una conclusione. La «regola dei 3 indizi» (views.renderFiloAvventura) vuole
+# ≥3 indizi indipendenti per ogni rivelazione-chiave. Reso dallo scheletro condiviso.
+id: indizio
+folder: Mondi/Indizi
+order: 43
+gruppo: tavolo
+templates:
+- id: indizio
+  title: Indizio
+  default_type: indizio
+  target: z.modelli/Indizio.md
+  area: gioco
+  primary: true
+# SOTTOTIPI con PROFILO: la NATURA dell'appiglio (varietà delle vie d'accesso: un
+# mistero regge se la stessa verità si può raggiungere in modi diversi).
+subtypes:
+- { nome: indizio,       descrizione: "Un appiglio generico che punta verso una verità.",                       campi: [] }
+- { nome: fisico,        descrizione: "Prova materiale: un oggetto, una traccia, la scena di un evento.",        campi: [] }
+- { nome: testimonianza, descrizione: "Qualcuno che sa: un PNG che parla, sotto pressione o per tornaconto.",    campi: [] }
+- { nome: documento,     descrizione: "Carta, lettera, registro, mappa: informazione scritta.",                 campi: [] }
+- { nome: voce,          descrizione: "Diceria/pettegolezzo: incerto, da verificare, forse depistante.",         campi: [] }
+fields:
+  affidabilita: { label: Affidabilità, widget: text }
+scheda: [affidabilita]
+relazioni:
+- { field: rivela, label: Rivela (conclusione/scena), category: scena,       multi: true, reciprocal: indizi }
+- { field: scena,  label: Si trova nella scena,       category: scena,                    reciprocal: indizi_qui }
+- { field: luogo,  label: Dove si trova,              category: luogo }
+- { field: png,    label: Chi lo detiene / testimone, category: personaggio, multi: true }
+creation:
+  fields:
+  - { field: tipo, prompt: Tipo di indizio, from: subtypes, required: true }
+  - { field: mondo, prompt: Mondo, from: notes, category: mondo, link: true, required: true }
+  - { field: rivela, prompt: Cosa rivela (scena/snodo), from: notes, category: scena, link: true, multi: true, optional: true }
+  - { field: scena, prompt: In quale scena si trova (opz.), from: notes, category: scena, link: true, optional: true }
+  body:
+  - { field: contenuto,     prompt: 'Cosa apprendono i PG da questo indizio',        heading: Contenuto }
+  - { field: come_trovarlo, prompt: 'Come si scopre: prova, domanda, azione, luogo', heading: Come trovarlo }
+guida:
+  scopo: "Un indizio è ciò che i PG possono trovare per arrivare a una verità. Collega «Rivela» alla scena-conclusione: la regola dei 3 indizi vuole almeno 3 vie indipendenti verso ogni rivelazione."
+  campi_chiave: "**Rivela** (la conclusione che sostiene) e **Si trova nella scena**; il **Tipo** (fisico/testimonianza/documento/voce) dà varietà alle vie d'accesso."

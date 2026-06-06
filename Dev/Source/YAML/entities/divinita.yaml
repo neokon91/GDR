@@ -61,6 +61,12 @@ relazioni:
   label: Divinità opposte
   category: divinita
   multi: true
+# Inverso di mito.divinita: i miti su questa divinità (dal lato mito si auto-deriva).
+- field: miti
+  label: Miti
+  category: mito
+  multi: true
+  reciprocal: divinita
 # NB: "di cosa è dio/dea" vive nella relazione tipizzata `domini`→dominio (link),
 # non in un campo-scheda `dominio` di testo libero che la duplicherebbe.
 scheda:

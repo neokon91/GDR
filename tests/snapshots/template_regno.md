@@ -39,8 +39,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Sovrano / capo: `INPUT[text:sovrano]`
 > Portata: `INPUT[portata][:portata]`
-> Popolazione: `INPUT[text:popolazione]`
-> Simbolo: `INPUT[text:simbolo]`
+> Popolazione: `INPUT[text(placeholder(es. 5.000 o «poche centinaia»)):popolazione]`
+> Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
 
 > [!note] Storia
 > `INPUT[textArea:storia_regno]`
@@ -72,7 +72,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
 > Pressione: `INPUT[pressione][:pressione]`
 >
-> Prossima mossa: `INPUT[text:prossima_mossa]`
+> Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
 
 **⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
 ```js-engine
@@ -156,6 +156,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Organi e fazioni di stato**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazioni]`
 > **Regni alleati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):alleati]`
 > **Regni rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):rivali]`
+> **Editti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Editti"), useLinks(partial), allowOther):editti]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

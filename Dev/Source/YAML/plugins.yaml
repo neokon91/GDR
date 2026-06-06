@@ -7,31 +7,44 @@ purpose: Solo plugin fondamentali usati dai template.
 # GitHub / package.json il 2026-06-04). Inclusi NON MODIFICATI come mera aggregazione
 # (non relicenzia il codice MIT del progetto). GPL/AGPL: sorgente al repo.
 plugins:
+  # critico: il vault non funziona senza. `rompe` = cosa NON si vede (in italiano
+  # semplice), mostrato dalla nota Diagnostica (views.renderDiagnostica) quando il
+  # plugin è spento → l'utente non-tecnico sa quale riattivare invece di vedere codice.
   - id: templater-obsidian
     name: Templater
     author: SilentVoid
     repo: silentvoid13/Templater
     license: AGPL-3.0
+    critico: true
+    rompe: "I pulsanti «Crea» non funzionano: non puoi creare nuove note."
   - id: dataview
     name: Dataview
     author: Michael Brenan
     repo: blacksmithgu/obsidian-dataview
     license: MIT
+    critico: true
+    rompe: "La Home e gli indici (Atlante, Cast, Fronti…) restano vuoti o come codice."
   - id: obsidian-meta-bind-plugin
     name: Meta Bind
     author: Moritz Jung
     repo: mProjectsCode/obsidian-meta-bind-plugin
     license: GPL-3.0
+    critico: true
+    rompe: "I campi da compilare (slider, menu, testo) restano come codice grezzo."
   - id: js-engine
     name: JS Engine
     author: Moritz Jung
     repo: mProjectsCode/obsidian-js-engine-plugin
     license: GPL-3.0
+    critico: true
+    rompe: "I pannelli dinamici (radar, Stato del Mondo, questa diagnostica) non si disegnano."
   - id: tab-panels
     name: Tab Panels
     author: GnoxNahte
     repo: GnoxNahte/obsidian-tab-panels
     license: MIT
+    critico: true
+    rompe: "Le note a schede (Lore / Al tavolo / Collegamenti) appaiono come testo grezzo."
   - id: callout-manager
     name: Callout Manager
     author: eth-p
@@ -42,6 +55,8 @@ plugins:
     author: Jeremy Valentine
     repo: Obsidian-TTRPG-Community/fantasy-statblocks
     license: MIT
+    critico: true
+    rompe: "Gli statblock dei mostri e il blocco incontro non si vedono."
   - id: metadata-menu
     name: Metadata Menu
     author: mdelobelle
@@ -62,6 +77,8 @@ plugins:
     author: Jeremy Valentine
     repo: Obsidian-TTRPG-Community/dice-roller
     license: MIT
+    critico: true
+    rompe: "I tiri di dado sulla scheda e negli incontri non funzionano."
   - id: obsidian-tasks-plugin
     name: Tasks
     author: Obsidian Tasks contributors
@@ -92,6 +109,8 @@ plugins:
     author: Jeremy Valentine
     repo: Obsidian-TTRPG-Community/initiative-tracker
     license: GPL-3.0
+    critico: true
+    rompe: "Il tracciatore d'iniziativa per i combattimenti non è disponibile."
   - id: folder-notes
     name: Folder Notes
     author: Lost Paul
@@ -131,6 +150,17 @@ metabind_inputs:
   scarsita: INPUT[inlineSelect(option(abbondante), option(comune), option(scarsa), option(rara), option(esaurita))]
   dado_vita: INPUT[inlineSelect(option(d6), option(d8), option(d10), option(d12))]
   incantesimi: INPUT[inlineSelect(option(nessuno), option(metà), option(piena), option(patto))]
+  # Enum prima a TESTO LIBERO (set chiusi 5.5e): widget → picker su nota e (via
+  # widget_options) nel wizard. padronanza = le 8 maestrie d'arma 2024 (combaciano con
+  # system.yaml:maestrie_armi); tipo_creatura = i 14 tipi 5e (specie). car_primaria ha i
+  # casi «o/e» → suggester con allowOther (scegli una o digita la combo).
+  padronanza: INPUT[inlineSelect(option(Doppio fendente), option(Graffio), option(Colpo di striscio), option(Spinta), option(Fiaccare), option(Lentezza), option(Rovesciamento), option(Vessazione))]
+  tipo_creatura: INPUT[inlineSelect(option(Aberrazione), option(Bestia), option(Celestiale), option(Costrutto), option(Drago), option(Elementale), option(Folletto), option(Gigante), option(Immondo), option(Melma), option(Mostruosità), option(Non morto), option(Pianta), option(Umanoide))]
+  car_primaria: INPUT[suggester(option(Forza), option(Destrezza), option(Costituzione), option(Intelligenza), option(Saggezza), option(Carisma), allowOther)]
+  # classi (incantesimo): chi può lanciarlo. Multi-pick dei 12 nomi-classe SRD + allowOther
+  # (homebrew). VALORI in chiaro (NON link): l'import SRD scrive così e crea_pg/sali_pg li
+  # leggono per sottostringa (lo spell-pool si romperebbe coi [[wikilink]]).
+  classi: INPUT[inlineListSuggester(option(Barbaro), option(Bardo), option(Chierico), option(Druido), option(Guerriero), option(Ladro), option(Mago), option(Monaco), option(Paladino), option(Ranger), option(Stregone), option(Warlock), allowOther)]
   taglia: INPUT[inlineSelect(option(minuscola), option(piccola), option(media), option(grande), option(enorme), option(mastodontica))]
   dieta: INPUT[inlineSelect(option(carnivoro), option(erbivoro), option(onnivoro), option(spazzino), option(si nutre di magia), option(non si nutre))]
   genere: INPUT[inlineSelect(option(high fantasy), option(dark fantasy), option(sword & sorcery), option(grimdark), option(eroico), option(weird))]
@@ -279,6 +309,10 @@ buttons:
   - id: world-board
     label: Genera World Board
     action: world_board
+  # Sito dei giocatori: esporta HTML statico spoiler-free DENTRO Obsidian (no Python/terminale).
+  - id: genera-sito
+    label: Genera sito giocatori
+    action: genera_sito
   # Ponte Initiative Tracker: auto-popola il Party dai PG (così players: true risolve).
   - id: prepara-gruppo
     label: Prepara il gruppo (IT)

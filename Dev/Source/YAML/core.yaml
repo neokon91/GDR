@@ -20,7 +20,7 @@ fields:
   connessioni:    { label: Connessioni,          widget: connessioni }
   sessioni:       { label: Sessioni,             widget: sessioni }
   pressione:      { label: Pressione,            widget: pressione }
-  prossima_mossa: { label: Prossima mossa,       widget: text }
+  prossima_mossa: { label: Prossima mossa,       widget: text, placeholder: "es. il barone raddoppia le guardie" }
   # Clock & conseguenze (Fase 2): un fronte traccia un orologio a segmenti che,
   # pieno, scatena una conseguenza nel mondo (vedi macro clock() + meta_actions).
   clock_dim:      { label: "Clock (segmenti)",   widget: clock_dim }
@@ -32,16 +32,16 @@ fields:
   conseguenza_su: { label: Conseguenza su,       widget: legame }
   uso_al_tavolo:  { label: Uso al tavolo,        widget: testo_area }
   gancio:         { label: Gancio,               widget: testo_area }
-  player_safe:    { label: Versione player-safe, widget: text }
+  player_safe:    { label: Versione player-safe, widget: text, placeholder: "cosa possono sapere i giocatori" }
   # Rivelazione progressiva (sito-giocatori): QUANDO la nota entra nel portale dei
   # giocatori. Asse temporale, ortogonale a `visibilita` (che è il «mai»: dm/meta).
   # pubblico < incontrato < segreto; il build del sito sceglie il livello (`--reveal`)
   # e include una nota se il suo tier <= livello. Default (assente) = pubblico.
   rivelazione:    { label: Rivelazione, widget: rivelazione }
-  obiettivo:      { label: Obiettivo,            widget: text }
-  apertura:       { label: Apertura,             widget: text }
-  scena_corrente: { label: Scena corrente,       widget: text }
-  quando:         { label: Quando,               widget: text }
+  obiettivo:      { label: Obiettivo,            widget: text, placeholder: "es. fermare il rito prima dell'alba" }
+  apertura:       { label: Apertura,             widget: text, placeholder: "la scena con cui apri la sessione" }
+  scena_corrente: { label: Scena corrente,       widget: text, placeholder: "dove si trova il gruppo adesso" }
+  quando:         { label: Quando,               widget: text, placeholder: "es. anno 312 o un'epoca del mondo" }
   # Ponte Calendarium ('tempo del mondo'): chiavi fc-* lette dal plugin per far
   # comparire un evento sul calendario/agenda. 'quando' resta l'etichetta in
   # prosa (e alimenta la nostra timeline); fc-date è la data macchina nel formato
@@ -57,12 +57,12 @@ fields:
   genere:         { label: Genere,               widget: genere }
   temi:           { label: Temi,                 widget: temi }
   clima:          { label: Clima,                widget: clima }
-  popolazione:    { label: Popolazione,          widget: text }
+  popolazione:    { label: Popolazione,          widget: text, placeholder: "es. 5.000 o «poche centinaia»" }
   # Mappa collegata (luogo/mondo): link a un disegno Excalidraw, un'immagine o una nota.
   mappa:          { label: Mappa,                widget: mappa }
   portata:        { label: Portata,              widget: portata }
-  pronomi:        { label: Pronomi,              widget: text }
-  eta:            { label: Età,                  widget: text }
+  pronomi:        { label: Pronomi,              widget: text, placeholder: "es. lei / lui / loro" }
+  eta:            { label: Età,                  widget: text, placeholder: "es. 34 o «secoli»" }
   # Tema natale (recupero #9, astrologia.yaml): segno → profilo derivato; arcano opzionale.
   segno:          { label: Segno,                widget: segno }
   arcano:         { label: Arcano,               widget: arcano }

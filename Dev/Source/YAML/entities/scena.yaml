@@ -1,0 +1,52 @@
+# Schema per-entità: scena (al tavolo). Un BEAT dell'avventura — dove sei, cosa
+# succede, dove conduce. Insieme a `indizio` porta nel vault il design d'avventura
+# NON-LINEARE (ispirazione Alkemion Studio): il grafo delle scene collegate da
+# «Conduce a» + la ragnatela degli indizi, con la «regola dei 3 indizi». Reso dallo
+# scheletro condiviso + il pannello «Filo dell'avventura» (views.renderFiloAvventura).
+id: scena
+folder: Mondi/Scene
+order: 42
+gruppo: tavolo
+templates:
+- id: scena
+  title: Scena
+  default_type: scena
+  target: z.modelli/Scena.md
+  jinja: scena.md.j2
+  area: gioco
+  primary: true
+# SOTTOTIPI con PROFILO: il RUOLO della scena nell'arco. `chiave: true` marca gli SNODI
+# (rivelazioni/conclusioni a cui i PG DEVONO poter arrivare): renderFiloAvventura vi
+# applica la «regola dei 3 indizi» (≥3 indizi indipendenti che la rivelano, o i PG
+# rischiano di bloccarsi). Non è un Fronte né evolve → niente clock/evoluzione.
+subtypes:
+- { nome: scena,      descrizione: "Un beat generico: una situazione che si sviluppa e porta altrove.",         campi: [] }
+- { nome: apertura,   descrizione: "L'aggancio: come l'avventura prende i PG e li mette in moto.",               campi: [] }
+- { nome: snodo,      descrizione: "Rivelazione o bivio CHIAVE: i PG devono poterci arrivare per più strade.",   campi: [], chiave: true, wizard: ["Quale verità o scelta si rivela qui?", "Quali 3 vie INDIPENDENTI ci conducono?"] }
+- { nome: climax,     descrizione: "Il culmine: lo scontro o la scelta finale dell'arco.",                       campi: [], chiave: true }
+- { nome: interludio, descrizione: "Respiro/transizione: viaggio, riposo, raccordo fra due beat.",               campi: [] }
+fields:
+  esito: { label: Esito / cosa cambia, widget: text }
+scheda: [esito]
+relazioni:
+- { field: missione,   label: Avventura,              category: missione,    reciprocal: scene }
+- { field: conduce_a,  label: Conduce a,              category: scena,       multi: true }
+- { field: luogo,      label: Dove,                   category: luogo }
+- { field: png,        label: PNG in scena,           category: personaggio, multi: true }
+- { field: incontri,   label: Incontri,               category: incontro,    multi: true }
+# Ragnatela indizi (inversi auto-derivati dal lato `indizio` via reciprocal):
+- { field: indizi,     label: Rivelata dagli indizi,  category: indizio,     multi: true, reciprocal: rivela }
+- { field: indizi_qui, label: Indizi presenti qui,    category: indizio,     multi: true, reciprocal: scena }
+creation:
+  fields:
+  - { field: tipo, prompt: Ruolo della scena, from: subtypes, required: true }
+  - { field: mondo, prompt: Mondo, from: notes, category: mondo, link: true, required: true }
+  - { field: missione, prompt: Avventura/Missione (opz.), from: notes, category: missione, link: true, optional: true }
+  - { field: luogo, prompt: Dove avviene (opz.), from: notes, category: luogo, link: true, optional: true }
+  body:
+  - { field: situazione,    prompt: 'Situazione: cosa trovano i PG quando arrivano',          heading: Situazione }
+  - { field: complicazione, prompt: 'Complicazione: cosa la rende difficile o interessante',   heading: Complicazione }
+  - { field: uscite,        prompt: 'Uscite: come e dove si può proseguire',                   heading: Uscite }
+guida:
+  scopo: "Una scena è un beat dell'avventura: dove sei, cosa succede, dove puoi andare. Le scene collegate da «Conduce a» formano il flusso non-lineare; gli «Indizi» le legano in un mistero."
+  campi_chiave: "**Ruolo** (apertura/snodo/climax…); **Conduce a** per il flusso; **Indizi** + gli snodi **chiave** per la regola dei 3 indizi (≥3 vie a ogni rivelazione)."

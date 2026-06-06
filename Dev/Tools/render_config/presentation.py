@@ -217,7 +217,7 @@ CATEGORY_ACCENTS = {
     "cyan":   ["epoca", "evento", "mito", "profezia"],                       # tempo / storia / mito
     "blue":   ["classe", "sottoclasse", "specie", "background", "talento",   # regole & scheda 5e
                "incantesimo", "regola", "oggetto", "bastione"],
-    "yellow": ["incontro", "insidia", "sessione"],                          # al tavolo / gioco
+    "yellow": ["incontro", "insidia", "sessione", "scena", "indizio", "tabella"],  # al tavolo / gioco
 }
 
 

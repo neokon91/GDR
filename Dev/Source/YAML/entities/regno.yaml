@@ -67,6 +67,12 @@ relazioni:
   label: Regni rivali
   category: regno
   multi: true
+# Inverso di editto.regno: gli editti emanati dal regno (query «editti del regno»).
+- field: editti
+  label: Editti
+  category: editto
+  multi: true
+  reciprocal: regno
 creation:
   fields:
   - field: tipo

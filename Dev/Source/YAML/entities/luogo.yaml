@@ -153,6 +153,29 @@ relazioni:
   category: luogo
   multi: true
   reciprocal: rotta_con
+# Inversi tipizzati: editti in vigore qui (editto.luoghi) e miti del luogo (mito.luogo).
+- field: editti
+  label: Editti in vigore
+  category: editto
+  multi: true
+  reciprocal: luoghi
+- field: miti
+  label: Miti del luogo
+  category: mito
+  multi: true
+  reciprocal: luogo
+# Inversi tavolo↔luogo (prep di sessione: «cosa c'è QUI»): gli incontri ambientati
+# nel luogo (incontro.luogo) e le insidie/trappole presenti (insidia.luoghi).
+- field: incontri
+  label: Incontri qui
+  category: incontro
+  multi: true
+  reciprocal: luogo
+- field: insidie
+  label: Insidie qui
+  category: insidia
+  multi: true
+  reciprocal: luoghi
 creation:
   fields:
   - field: tipo

@@ -55,7 +55,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderRisorsePG");
 ```
 
-> [!note]- Slot incantesimo (caster)
+> [!note]- Slot incantesimo (caster) — slot a livello + Patto del Warlock
 > | Liv | Max | Spesi | Rimasti |
 > |:-:|:-:|:-:|:-:|
 > | 1° | `VIEW[{slot_1} ?? "—"]` | `INPUT[number:slot_uso_1]` | `VIEW[({slot_1} ?? 0) > 0 ? (({slot_1}) - ({slot_uso_1} ?? 0)) : "—"]` |
@@ -67,6 +67,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > | 7° | `VIEW[{slot_7} ?? "—"]` | `INPUT[number:slot_uso_7]` | `VIEW[({slot_7} ?? 0) > 0 ? (({slot_7}) - ({slot_uso_7} ?? 0)) : "—"]` |
 > | 8° | `VIEW[{slot_8} ?? "—"]` | `INPUT[number:slot_uso_8]` | `VIEW[({slot_8} ?? 0) > 0 ? (({slot_8}) - ({slot_uso_8} ?? 0)) : "—"]` |
 > | 9° | `VIEW[{slot_9} ?? "—"]` | `INPUT[number:slot_uso_9]` | `VIEW[({slot_9} ?? 0) > 0 ? (({slot_9}) - ({slot_uso_9} ?? 0)) : "—"]` |
+> | 🩸 Patto `VIEW[({slot_patto_liv} ?? 0) > 0 ? ({slot_patto_liv} + "º") : ""]` | `VIEW[{slot_patto} ?? "—"]` | `INPUT[number:slot_patto_uso]` | `VIEW[({slot_patto} ?? 0) > 0 ? (({slot_patto}) - ({slot_patto_uso} ?? 0)) : "—"]` |
 
 **Caratteristiche**
 
@@ -143,14 +144,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Titolo: `INPUT[text:titolo]`
 > Rango: `INPUT[rango][:rango]`
 > Allineamento: `INPUT[allineamento][:allineamento]`
-> Pronomi: `INPUT[text:pronomi]`
-> Età: `INPUT[text:eta]`
+> Pronomi: `INPUT[text(placeholder(es. lei / lui / loro)):pronomi]`
+> Età: `INPUT[text(placeholder(es. 34 o «secoli»)):eta]`
 
 > [!note]- Descrizione
 > Chi è, com'è, cosa porta in scena.
 
 > [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
+> `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
 > [!note] Ruolo
 > `INPUT[textArea:ruolo]`
@@ -196,7 +197,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
 > Pressione: `INPUT[pressione][:pressione]`
 >
-> Prossima mossa: `INPUT[text:prossima_mossa]`
+> Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
 
 **⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
 ```js-engine
@@ -292,6 +293,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Base**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 > **Alleati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):alleati]`
 > **Rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):rivali]`
+> **Profezie che lo riguardano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Profezie"), useLinks(partial), allowOther):profezie]`
+> **Missioni affidate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial), allowOther):missioni_assegnate]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

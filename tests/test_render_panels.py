@@ -213,6 +213,37 @@ def test_render_session_panel(tmp_path):
     assert "Apri la sessione" in out["empty"]
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_diagnostica(tmp_path):
+    """views.renderDiagnostica: confronta i plugin ESSENZIALI (core.json:plugins) coi
+    plugin ATTIVI in Obsidian. Tutti attivi -> messaggio OK; qualcuno spento -> avviso
+    + tabella (nome + cosa rompe) coi SOLI mancanti. Non usa Dataview (gira anche se
+    Dataview è spento, il caso da diagnosticare). pluginAttivi normalizza Set/array."""
+    harness = tmp_path / "diag.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const core={plugins:[{id:"a",name:"Alpha",rompe:"Le X non si vedono."},'
+        '{id:"b",name:"Beta",rompe:"Le Y non funzionano."}]};'
+        'const mk=(on)=>({vault:{adapter:{read:async()=>JSON.stringify(core)}},'
+        'plugins:{enabledPlugins:new Set(on)}});'
+        'Promise.all(['
+        '  m.exports.renderDiagnostica(mk(["a","b"])),'
+        '  m.exports.renderDiagnostica(mk(["a"])),'
+        ']).then(([ok,miss])=>process.stdout.write(JSON.stringify({ok,miss,'
+        'arr:[...m.exports.pluginAttivi({plugins:{enabledPlugins:["x"]}})]})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "✅" in out["ok"] and "essenziali sono attivi" in out["ok"]      # tutti attivi -> OK
+    assert "Manca 1 plugin essenziale su 2" in out["miss"]                  # singolare corretto
+    assert "**Beta**" in out["miss"] and "Le Y non funzionano." in out["miss"]  # mancante + cosa rompe
+    assert "Alpha" not in out["miss"]                                       # gli attivi non compaiono
+    assert out["arr"] == ["x"]                                              # pluginAttivi normalizza l'array
+
+
 # Mock minimale dell'elemento Obsidian (createEl) per testare il percorso di
 # INJECTION nel DOM dei radar — la classe di bug che si è rotta in-app (il radar
 # non disegnava). snap() riassume i figli iniettati: classe, presenza di <svg>, testo.
@@ -459,5 +490,118 @@ def test_sali_pg_sottoclasse_homebrew_e2e(tmp_path):
     fm = json.loads(res.stdout)
     assert fm["livello"] == 3
     assert fm["sottoclasse"] == "Via della Cenere"  # sottoclasse homebrew assegnata al 3º livello
+
+
+def test_scena_indizio_model():
+    """Modello entità scena/indizio (design d'avventura): gruppo tavolo, snodo/climax
+    CHIAVE (regola dei 3 indizi), relazioni tipizzate e reciproci coerenti (scena↔
+    indizio↔missione). L'integrità degli inversi regge a livello globale."""
+    cats = CORE["categories"]
+    assert cats.get("scena", {}).get("gruppo") == "tavolo"
+    assert cats.get("indizio", {}).get("gruppo") == "tavolo"
+    prof = cats["scena"]["subtype_profiles"]
+    assert prof["snodo"].get("chiave") is True and prof["climax"].get("chiave") is True
+    assert not prof["scena"].get("chiave") and not prof["apertura"].get("chiave")  # solo gli snodi
+    rel = {r["field"]: r for r in CORE["relazioni"]["scena"]}
+    assert rel["missione"]["reciprocal"] == "scene"
+    assert rel["conduce_a"]["category"] == "scena"  # flusso (self-relation direzionale)
+    assert rel["indizi"]["reciprocal"] == "rivela" and rel["indizi_qui"]["reciprocal"] == "scena"
+    irel = {r["field"]: r for r in CORE["relazioni"]["indizio"]}
+    assert irel["rivela"]["category"] == "scena" and irel["rivela"]["reciprocal"] == "indizi"
+    assert irel["scena"]["reciprocal"] == "indizi_qui"
+    assert any(r["field"] == "scene" and r["reciprocal"] == "missione" for r in CORE["relazioni"]["missione"])
+    import validate
+    assert validate.validate_reciprocals(CORE) == []  # nessun inverso fantasma
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_filo_avventura_tre_indizi(tmp_path):
+    """views.renderFiloAvventura: elenca le scene dell'avventura col flusso «Conduce a»
+    e applica la REGOLA DEI 3 INDIZI — uno snodo CHIAVE rivelato da <3 indizi finisce
+    nell'avviso (con conteggio n/3); una scena non-chiave no."""
+    core = {"categories": {"scena": {"subtype_profiles": {"snodo": {"chiave": True}, "climax": {"chiave": True}}}}}
+    harness = tmp_path / "filo.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        f'const core={json.dumps(core)};'
+        'const app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
+        'const P=(name,fm)=>Object.assign({file:{name,path:name+".md"}},fm);'
+        # Avventura: Apertura (corrente) → Snodo (chiave) rivelato da soli 2 indizi.
+        'const apertura=P("Apertura",{categoria:"scena",tipo:"apertura",missione:{path:"M.md"},conduce_a:[{path:"Snodo.md"}]});'
+        'const snodo=P("Snodo",{categoria:"scena",tipo:"snodo",missione:{path:"M.md"}});'
+        'const miss={file:{name:"M",path:"M.md"},categoria:"missione"};'
+        'const c1=P("C1",{categoria:"indizio",rivela:[{path:"Snodo.md"}]});'
+        'const c2=P("C2",{categoria:"indizio",rivela:[{path:"Snodo.md"}]});'
+        'const all=[apertura,snodo,miss,c1,c2];'
+        'const byp={};all.forEach(p=>byp[p.file.path]=p);'
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),page:(l)=>byp[(l&&l.path)||l]||null};'
+        'm.exports.renderFiloAvventura(app,dv,apertura).then(out=>process.stdout.write(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "Filo dell'avventura" in out
+    assert "[[Apertura]]" in out and "[[Snodo]]" in out          # entrambe le scene elencate
+    assert "conduce a: [[Snodo]]" in out                          # flusso «Conduce a»
+    assert "🔴 2/3 indizi" in out                                 # snodo chiave sotto-soglia
+    warn = out.split("Regola dei 3 indizi")[1]                    # sezione avviso
+    assert "[[Snodo]] (2/3)" in warn
+    assert "[[Apertura]]" not in warn                             # la scena non-chiave non è segnalata
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_timeline_corsie(tmp_path):
+    """views.renderTimelineCorsie: una corsia per ATTORE — ogni Fazione/PNG coinvolto
+    riceve gli eventi nel proprio filo (esclusi gli archiviati), le entità con `tappe`
+    formano la propria corsia, e ogni filo è ordinato cronologicamente."""
+    harness = tmp_path / "corsie.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const corvi={file:{name:"Corvi",path:"f/Corvi.md"},categoria:"fazione"};'
+        'const re={file:{name:"Re",path:"p/Re.md"},categoria:"personaggio",tappe:["anno 10 | incoronato"]};'
+        'const all=[corvi,re,'
+        ' {file:{name:"Assedio",path:"e/A.md"},categoria:"evento",stato:"pronto",quando:"anno 20",fazioni:[{path:"f/Corvi.md"}],coinvolti:[{path:"p/Re.md"}],portata:"regionale"},'
+        ' {file:{name:"Patto",path:"e/P.md"},categoria:"evento",stato:"pronto",quando:"anno 5",fazioni:[{path:"f/Corvi.md"}]},'
+        ' {file:{name:"Vecchio",path:"e/V.md"},categoria:"evento",stato:"archiviata",quando:"anno 1",fazioni:[{path:"f/Corvi.md"}]}];'
+        'const byp={};all.forEach(p=>byp[p.file.path]=p);'
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),page:(l)=>byp[(l&&l.path)||l]||null};'
+        'm.exports.renderTimelineCorsie({},dv).then(out=>process.stdout.write(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "fili paralleli" in out
+    assert "🎭 [[Corvi]]" in out and "🎭 [[Re]]" in out           # una corsia per attore
+    corvi = out.split("🎭 [[Corvi]]")[1].split("🎭")[0]          # blocco-corsia dei Corvi
+    assert "[[Patto]]" in corvi and "[[Assedio]]" in corvi and "[[Vecchio]]" not in corvi  # niente archiviati
+    assert corvi.index("[[Patto]]") < corvi.index("[[Assedio]]")  # ordine cronologico (anno 5 < 20)
+    reblock = out.split("🎭 [[Re]]")[1]                           # Re: evento da coinvolto + tappa
+    assert "[[Assedio]]" in reblock and "incoronato" in reblock
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_tabella(tmp_path):
+    """views.renderTabella: numera le voci (una per riga, prefissi di elenco tollerati) e
+    offre il tiro 1dN; un `dado` dichiarato più grande lascia i risultati alti a «ritira»."""
+    harness = tmp_path / "tab.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const auto={categoria:"tabella",voci:"- Goblin\\n2. Lupi\\nBriganti"};'        # 3 voci, prefissi misti
+        'const d6={categoria:"tabella",dado:"d6",voci:"Pioggia\\nNebbia\\nVento"};'       # 3 voci, dado dichiarato 6
+        'Promise.all([m.exports.renderTabella({},auto),m.exports.renderTabella({},d6)])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    o = json.loads(res.stdout)
+    assert "dice: 1d3" in o["a"]                          # dado auto = n. voci
+    assert "| 1 | Goblin |" in o["a"] and "| 2 | Lupi |" in o["a"] and "| 3 | Briganti |" in o["a"]  # prefissi rimossi
+    assert "dice: 1d6" in o["b"] and "ritira" in o["b"]   # dado dichiarato > voci → alti = ritira
 
 

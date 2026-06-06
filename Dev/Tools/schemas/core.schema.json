@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gdr/core.json",
+  "title": "core.json — contratto Python→JS del payload runtime (render.engine_payload → views.js/create_entity.js/genera.js)",
+  "description": "Validato in check() (validate.validate_runtime_payloads). Altitudine: chiavi top-level + tipo-contenitore SEMPRE; campi annidati richiesti SOLO dove un consumatore JS li legge (così un drift di shape si ferma al build, non in-app). additionalProperties:true ovunque → aggiungere chiavi NON rompe; rimuoverne/cambiarne il tipo sì.",
+  "type": "object",
+  "required": [
+    "folders", "fields", "categories", "states", "assi_tematici", "relazioni",
+    "archetipi", "canvas_colors", "xp", "condizioni", "maestrie", "gs_baseline",
+    "astrologia", "generatori", "widget_options", "creation", "templates", "plugins"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "folders": { "type": "object", "additionalProperties": { "type": "string" } },
+    "fields": {
+      "type": "object",
+      "description": "registro campi: field('id') legge widget/label; placeholder opzionale",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["label", "widget"],
+        "properties": {
+          "label": { "type": "string" },
+          "widget": { "type": "string" },
+          "placeholder": { "type": "string" }
+        }
+      }
+    },
+    "categories": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["folder"],
+        "properties": { "folder": { "type": "string" }, "gruppo": { "type": "string" } }
+      }
+    },
+    "states": { "type": "array" },
+    "assi_tematici": { "type": "object" },
+    "relazioni": { "type": "object" },
+    "archetipi": { "type": "object" },
+    "canvas_colors": { "type": "object" },
+    "xp": { "type": "object" },
+    "condizioni": { "type": "array" },
+    "maestrie": {
+      "type": "array",
+      "items": { "type": "object", "required": ["nome"] }
+    },
+    "gs_baseline": { "type": "object" },
+    "astrologia": { "type": "object" },
+    "generatori": { "type": "object" },
+    "widget_options": {
+      "type": "object",
+      "description": "per il wizard subtype-aware: options (enumerate) + multi",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["options", "multi"],
+        "properties": {
+          "options": { "type": "array", "items": { "type": "string" } },
+          "multi": { "type": "boolean" }
+        }
+      }
+    },
+    "creation": { "type": "object" },
+    "templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "jinja", "target"],
+        "properties": {
+          "id": { "type": "string" },
+          "category": { "type": "string" },
+          "jinja": { "type": "string" },
+          "target": { "type": "string" }
+        }
+      }
+    },
+    "plugins": {
+      "type": "array",
+      "description": "plugin ESSENZIALI (critico) per views.renderDiagnostica",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "rompe"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "rompe": { "type": "string" }
+        }
+      }
+    }
+  }
+}

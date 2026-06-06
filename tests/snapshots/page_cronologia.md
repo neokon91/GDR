@@ -11,6 +11,12 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTimeline");
 ```
 
+### 🎭 Fili paralleli
+> [!tip] Le **corsie** qui sotto mostrano la stessa cronologia per ATTORE — un filo per Fazione/PNG (dai campi *Fazioni*/*Coinvolti* degli eventi) e per le entità con *tappe*: «cosa fa ciascuno nel tempo».
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTimelineCorsie");
+```
+
 ## Tutte le voci
 ```dataview
 table without id file.link as Nome, quando as "Quando", mondo as "Mondo"

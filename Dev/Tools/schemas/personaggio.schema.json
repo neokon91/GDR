@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gdr/personaggio.json",
+  "title": "personaggio.json — contratto Python→JS del rules-engine PG (build_personaggio_options → crea_pg.js/sali_pg.js/views.js)",
+  "description": "Validato in check() (validate.validate_runtime_payloads). Stesse regole di core.schema.json. I campi annidati di classi/specie/talenti/armi sono quelli letti da crea_pg/sali_pg/renderAttacchi. SRD assente → mappe vuote: lo schema regge (additionalProperties vacuo).",
+  "type": "object",
+  "required": [
+    "caratteristiche", "abilita", "generazione_caratteristiche", "aumento_background",
+    "armature", "lingue", "classi", "specie", "background", "talenti",
+    "slot_incantatore", "slot_ricarica_breve_classi", "armi_padronanza", "armi"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "caratteristiche": { "type": "array", "items": { "type": "string" } },
+    "abilita": { "type": "object" },
+    "generazione_caratteristiche": { "type": "object" },
+    "aumento_background": { "type": "object" },
+    "armature": { "type": "object" },
+    "lingue": { "type": "object" },
+    "classi": {
+      "type": "object",
+      "description": "crea_pg/sali_pg leggono dado_vita/progressione/incantatore",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["label", "dado_vita", "progressione", "incantatore"],
+        "properties": {
+          "label": { "type": "string" },
+          "dado_vita": { "type": "integer" },
+          "progressione": { "type": "array" },
+          "incantatore": { "type": "boolean" }
+        }
+      }
+    },
+    "specie": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["label", "taglia", "velocita"],
+        "properties": {
+          "label": { "type": "string" },
+          "taglia": { "type": "string" },
+          "velocita": { "type": "integer" }
+        }
+      }
+    },
+    "background": {
+      "type": "object",
+      "additionalProperties": { "type": "object", "required": ["label"] }
+    },
+    "talenti": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["label", "categoria"],
+        "properties": { "label": { "type": "string" }, "categoria": { "type": "string" } }
+      }
+    },
+    "slot_incantatore": { "type": "object" },
+    "slot_ricarica_breve_classi": { "type": "array" },
+    "armi_padronanza": { "type": "object", "additionalProperties": { "type": "string" } },
+    "armi": {
+      "type": "object",
+      "description": "catalogo armi per views.renderAttacchi",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["nome", "danni"],
+        "properties": { "nome": { "type": "string" }, "danni": { "type": "string" } }
+      }
+    }
+  }
+}

@@ -1,53 +1,32 @@
-#!/usr/bin/env python3
-"""Converter del rules-engine PG: fonde i JSON SRD (classi/specie/background/
-talenti) con l'overlay curato pg_rules.yaml e produce le OPZIONI del personaggio
-(z.automazioni/data/personaggio.json) che crea_personaggio.js legge a runtime.
-
-Dove l'SRD è strutturato lo usa direttamente (dado vita, TS, abilità/ASI di
-background); dove è in prosa (scelte-abilità di classe) lo PARSA in {scelte,
-opzioni} mappando i nomi-in-prosa -> id abilità. Niente dati hard-coded di
-regole qui se non l'overlay curato."""
+"""Classi del rules-engine PG: parsing della progressione SRD (slot/competenza/
+privilegi), scelte-abilità in prosa, equipaggiamento/armature, padronanza d'armi e
+risorse di classe a ricarica → opzioni-classe del personaggio (build_classes)."""
 
 from __future__ import annotations
 
 import re
-import unicodedata
-from typing import Any
+from typing import Any, Callable
 
 from build_srd import load_srd
-from common import load_core, load_yaml
 
-# Parole-numero italiane per "N a scelta".
-_COUNT_WORDS = {"una": 1, "uno": 1, "due": 2, "tre": 3, "quattro": 4, "cinque": 5}
-
-
-def _norm(value: Any) -> str:
-    """Minuscolo, senza accenti, spazi normalizzati: per confronti robusti fra i
-    nomi-in-prosa SRD e le label dell'overlay."""
-    text = unicodedata.normalize("NFD", str(value or ""))
-    text = "".join(c for c in text if unicodedata.category(c) != "Mn")
-    return re.sub(r"\s+", " ", text).strip().lower()
+from ._helpers import _COUNT_WORDS, _hit_die, _int_or_none, _norm
+from .spells import _pact_table, _spell_pool
 
 
-def _slug(value: Any) -> str:
-    return re.sub(r"[^a-z0-9]+", "_", _norm(value)).strip("_") or "voce"
-
-
-def _hit_die(value: Any) -> int:
-    """'D12' -> 12; valore non parsabile -> 8 (default 5e)."""
-    digits = re.sub(r"\D", "", str(value or ""))
-    return int(digits) if digits else 8
-
-
-def _speed(value: Any) -> int:
-    """'9 m' / '10' -> 9 / 10; default 9."""
-    match = re.search(r"\d+", str(value or ""))
-    return int(match.group()) if match else 9
-
-
-def _int_or_none(value: Any) -> int | None:
-    s = str(value if value is not None else "").strip()
-    return int(s) if s.isdigit() else None
+def _caster_kind(cls: dict[str, Any], prog: list[dict[str, Any]]) -> str:
+    """Tipo di incantatore per la multiclasse: 'patto' (Warlock, colonne SRD dedicate),
+    'pieno' (slot fino al 9º), 'mezzo' (fino al 5º: Paladino/Ranger), 'nessuno'. Deriva
+    dalla riga di L20 della progressione (niente hard-code)."""
+    raw = cls.get("progressione") or []
+    if any(isinstance(r, dict) and ("Slot incantesimo" in r or "Livello slot" in r) for r in raw):
+        return "patto"
+    last = prog[-1] if prog else {}
+    top = max((int(k) for k in (last.get("slot") or {})), default=0)
+    if top >= 9:
+        return "pieno"
+    if 1 <= top <= 5:
+        return "mezzo"
+    return "nessuno"
 
 
 def _armor_categories(prose: str) -> list[str]:
@@ -93,44 +72,6 @@ def _prog_row(row: dict[str, Any]) -> dict[str, Any]:
 def _progressione(prog: list[Any]) -> list[dict[str, Any]]:
     """Tabella di progressione 1-20 normalizzata (lista di _prog_row)."""
     return [_prog_row(r) for r in (prog or []) if isinstance(r, dict)]
-
-
-def _spell_pool(liste: list[Any]) -> dict[str, list[str]]:
-    """Da liste_incantesimi -> pool per livello {'0': [trucchetti], '1': [...], ...,
-    '9': [...]} (ordinati). '0' = trucchetti; serve alla selezione incantesimi a
-    ogni livello (creazione + sali di livello)."""
-    pool: dict[str, list[str]] = {}
-    for lista in liste or []:
-        for riga in lista.get("righe", []) or []:
-            liv = _norm(riga.get("Livello"))
-            nome = str(riga.get("Incantesimo", "")).strip()
-            if not nome:
-                continue
-            key = "0" if liv.startswith("trucch") else (liv if liv.isdigit() else None)
-            if key is None:
-                continue
-            pool.setdefault(key, [])
-            if nome not in pool[key]:
-                pool[key].append(nome)
-    return {k: sorted(v) for k, v in pool.items()}
-
-
-def _caster_slot_tables(classi: dict[str, Any]) -> dict[str, list[dict[str, int]]]:
-    """Tabelle slot STANDARD per i caster HOMEBREW, derivate dall'SRD (niente
-    hard-code): 'pieno' = una classe che arriva al 9º livello di slot, 'mezzo' = una
-    che si ferma al 5º. Ogni tabella è la lista degli slot per livello PG (1-20).
-    crea_pg/sali_pg le usano per i caster homebrew (tipo_incantatore pieno/mezzo)."""
-    out: dict[str, list[dict[str, int]]] = {}
-    for cid, c in classi.items():
-        prog = c.get("progressione") or []
-        if len(prog) < 20:
-            continue
-        top = max((int(k) for k in (prog[19].get("slot") or {})), default=0)
-        if top >= 9 and "pieno" not in out:
-            out["pieno"] = [r.get("slot", {}) for r in prog]
-        elif top == 5 and "mezzo" not in out:
-            out["mezzo"] = [r.get("slot", {}) for r in prog]
-    return out
 
 
 def _class_resources(raw_prog: list[Any], risorse_map: dict[str, Any]) -> list[dict[str, Any]]:
@@ -182,33 +123,6 @@ def parse_class_skills(prose: str, all_skill_ids: list[str], label_to_id: dict[s
 _MASTERY_RE = re.compile(r"adronanza d['’]armi", re.I)
 
 
-def _weapon_mastery_map() -> dict[str, str]:
-    """Mappa nome-arma -> padronanza (dal SRD equipment, chiave `padronanza`)."""
-    out: dict[str, str] = {}
-    for x in load_srd("srd_5_2_1_equipment.json"):
-        if isinstance(x, dict) and str(x.get("tipo")) == "arma" and x.get("padronanza"):
-            out[x["nome"]] = x["padronanza"]
-    return out
-
-
-def _weapon_catalog() -> dict[str, dict[str, Any]]:
-    """Catalogo armi (dal SRD equipment): nome -> {danni, categoria, proprieta,
-    padronanza}. Lo usa la scheda PG (views.renderAttacchi) per gli attacchi con
-    maestria: caratteristica d'attacco (finesse/distanza), dado di danno ed effetto
-    della padronanza, per ciascuna arma di cui il PG ha padronanza."""
-    out: dict[str, dict[str, Any]] = {}
-    for x in load_srd("srd_5_2_1_equipment.json"):
-        if isinstance(x, dict) and str(x.get("tipo")) == "arma" and x.get("nome"):
-            out[x["nome"]] = {
-                "nome": x["nome"],
-                "danni": x.get("danni", ""),
-                "categoria": x.get("categoria", ""),
-                "proprieta": x.get("proprieta", []) or [],
-                "padronanza": x.get("padronanza", ""),
-            }
-    return out
-
-
 def _weapon_mastery_count(cls: dict[str, Any], privilegi_l1: list[str], fallback: int) -> int:
     """Padronanze d'armi note al L1: dalla colonna di progressione se presente
     (Barbaro 2, Guerriero 3); altrimenti il fallback 2024 se la classe ha il
@@ -237,24 +151,11 @@ def _weapon_mastery_count(cls: dict[str, Any], privilegi_l1: list[str], fallback
     return fallback if any(_MASTERY_RE.search(p) for p in privilegi_l1) else 0
 
 
-def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, Any]:
-    """Costruisce il dizionario di opzioni PG (da scrivere in personaggio.json).
-    SRD assente -> classi/specie/background vuoti (rules-engine degradato)."""
-    core = core if core is not None else load_core()
-    pg_rules = load_yaml("pg_rules.yaml")
-
-    car_ids = [c["id"] for c in core.get("caratteristiche", []) or []]
-    name_to_stat = {_norm(cid): cid for cid in car_ids}
-    abilita = core.get("abilita", {}) or {}
-    label_to_id = {_norm(spec.get("label")): aid for aid, spec in abilita.items()}
-    all_skill_ids = list(abilita.keys())
-
-    def stats(names: Any) -> list[str]:
-        return [name_to_stat[_norm(n)] for n in (names or []) if _norm(n) in name_to_stat]
-
-    def skills(names: Any) -> list[str]:
-        return [label_to_id[_norm(n)] for n in (names or []) if _norm(n) in label_to_id]
-
+def build_classes(pg_rules: dict[str, Any], stats: Callable[[Any], list[str]],
+                  label_to_id: dict[str, str], all_skill_ids: list[str]) -> dict[str, Any]:
+    """Opzioni-classe dal SRD classes + overlay pg_rules. `stats` mappa i nomi-in-prosa
+    sugli id di caratteristica (chiusura dall'orchestratore). Include le risorse a
+    ricarica (dalle colonne SRD) e quelle il cui max = mod. di una caratteristica."""
     mastery_fallback = int(pg_rules.get("padronanza_armi_fallback", 2))
     risorse_map = pg_rules.get("risorse_classe", {}) or {}
     classi: dict[str, Any] = {}
@@ -279,6 +180,9 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
             "equipaggiamento": _equipment_options(cls.get("equipaggiamento_iniziale", "")),
             "privilegi_l1": prog1["privilegi"],
             "incantatore": incantatore,
+            # Tipo di incantatore per la multiclasse (pieno/mezzo/patto/nessuno):
+            # sali_pg lo usa per il livello-da-incantatore combinato e per il Patto.
+            "tipo_incantatore": _caster_kind(cls, prog),
             "trucchetti_noti": prog1["trucchetti"],
             "incantesimi_preparati": prog1["preparati"],
             "slot_l1": prog1["slot"],
@@ -295,6 +199,10 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
             # dalle colonne SRD + ricarica curata (pg_rules). crea_pg/sali_pg → risorse_pg.
             "risorse": _class_resources(cls.get("progressione"), risorse_map),
         }
+        # Patto del Warlock (slot SEPARATI dagli slot a livello, ricarica a riposo
+        # breve): tabella 1-20 dalle colonne SRD dedicate. Solo per le classi-patto.
+        if classi[cls["id"]]["tipo_incantatore"] == "patto":
+            classi[cls["id"]]["pact"] = _pact_table(cls)
 
     # Risorse il cui max = mod. di una caratteristica (Ispirazione bardica = mod CAR):
     # non in tabella SRD → appese qui alla classe; crea_pg/sali_pg ne calcolano il max.
@@ -307,59 +215,4 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
                 "caratteristica": spec.get("caratteristica"),
                 "icona": spec.get("icona", ""),
             })
-
-    specie: dict[str, Any] = {}
-    for sp in load_srd("srd_5_2_1_species.json"):
-        tratti = sp.get("tratti_sintesi", "")
-        specie[sp["id"]] = {
-            "label": sp.get("nome", sp["id"]),
-            "taglia": sp.get("taglia", ""),
-            "velocita": _speed(sp.get("velocita")),
-            "tratti": tratti,
-            "scurovisione": "scurovision" in _norm(tratti),
-            # Sezioni SRD strutturate (descrizioni + tabelle: soffio, antenati
-            # draconici...): la scheda PG (views.renderSpecieTratti) ne mostra i
-            # dettagli giocabili senza saltare alla nota SRD.
-            "sezioni": sp.get("sezioni", []) or [],
-        }
-
-    background: dict[str, Any] = {}
-    for bg in load_srd("srd_5_2_1_backgrounds.json"):
-        comp = bg.get("competenze", {}) or {}
-        background[bg["id"]] = {
-            "label": bg.get("nome", bg["id"]),
-            "punteggi_caratteristica": stats(bg.get("punteggi_caratteristica")),
-            "talento_origine": bg.get("talento_origine", ""),
-            "competenze_abilita": skills(comp.get("abilita")),
-            "strumenti": comp.get("strumenti", ""),
-        }
-
-    # categoria (Origini / Generale / Stile di combattimento / Dono epico): serve al
-    # gating dei talenti a un ASI (sali_pg.talentoAmmesso) — solo i Generali, e i Doni
-    # epici dal 19. Origine = dal background; Stile = dai privilegi di classe.
-    talenti = {_slug(f.get("nome")): {"label": f.get("nome", ""), "categoria": f.get("categoria", "")}
-               for f in load_srd("srd_5_2_1_feats.json") if f.get("nome")}
-
-    return {
-        "caratteristiche": car_ids,
-        "abilita": abilita,
-        "generazione_caratteristiche": pg_rules.get("generazione_caratteristiche", {}),
-        "aumento_background": pg_rules.get("aumento_background", {}),
-        "armature": pg_rules.get("armature", {}),
-        "lingue": pg_rules.get("lingue", {}),
-        "classi": classi,
-        "specie": specie,
-        "background": background,
-        "talenti": talenti,
-        # Tabelle slot standard (pieno/mezzo) per i caster homebrew, dall'SRD.
-        "slot_incantatore": _caster_slot_tables(classi),
-        # Classi le cui SLOT ricaricano sul riposo BREVE (Patto del Warlock 2024):
-        # crea_pg/sali_pg scrivono `slot_ricarica: breve`; riposo_breve azzera gli slot.
-        "slot_ricarica_breve_classi": pg_rules.get("slot_ricarica_breve_classi", []) or [],
-        # Mappa nome-arma -> padronanza (Weapon Mastery 2024): crea_pg la usa per
-        # offrire le armi alla scelta delle padronanze e per mostrarne l'effetto.
-        "armi_padronanza": _weapon_mastery_map(),
-        # Catalogo armi (danni/categoria/proprietà/padronanza): la scheda PG ne deriva
-        # gli attacchi con maestria (views.renderAttacchi).
-        "armi": _weapon_catalog(),
-    }
+    return classi

@@ -176,3 +176,51 @@ async function renderTimeline(app, dv, page) {
   return `${head}\n\n${ribbon}\n\n` + blocchi.join("\n\n");
 }
 
+// --- Fili paralleli: la timeline a CORSIE (per attore) ---------------------------
+// Ispirazione Alkemion Studio (lanes): accanto alla vista per-epoca, una corsia per
+// ATTORE — ogni Fazione/PNG coinvolto negli eventi (campi `fazioni`/`coinvolti`) e
+// ogni entità con `tappe` (la sua linea di vita) ottiene un filo cronologico proprio.
+// Risponde a «cosa sta facendo CIASCUNO nel tempo», che la vista per-epoca non dà.
+// Reso come blocchi pieghevoli (stile coerente con renderTimeline). Pure-ish (usa dv).
+async function renderTimelineCorsie(app, dv) {
+  if (!dv) return "*Dataview non attivo.*";
+  const lanes = new Map();  // nome attore → { link, items:[{quando, txt}] }
+  const lane = (name, link) => {
+    if (!lanes.has(name)) lanes.set(name, { link: link || `[[${name}]]`, items: [] });
+    return lanes.get(name);
+  };
+  const attori = (page) => asArray(page.fazioni).concat(asArray(page.coinvolti))
+    .map((l) => resolve(dv, l)).filter((p) => p && p.file)
+    .map((p) => ({ name: p.file.name, link: noteLink(p) }));
+
+  // Eventi: ogni attore coinvolto prende l'evento nella propria corsia.
+  const eventi = dv.pages().where((p) => p && text(p.categoria) === "evento" && text(p.stato) !== "archiviata").array();
+  for (const e of eventi) {
+    const meta = [text(e.portata), text(e.tipo)].filter(Boolean).join(" · ");
+    for (const a of attori(e)) {
+      lane(a.name, a.link).items.push({ quando: e.quando, txt: `**${text(e.quando) || "—"}** ${noteLink(e)}${meta ? ` · ${meta}` : ""}` });
+    }
+  }
+  // Tappe (linee di vita): ogni entità con `tappe` è una corsia di sé stessa.
+  for (const p of dv.pages().where((q) => q && asArray(q.tappe).length && text(q.stato) !== "archiviata").array()) {
+    const L = lane(p.file.name, noteLink(p));
+    for (const riga of asArray(p.tappe)) {
+      const t = parseTappa(riga);
+      L.items.push({ quando: t.quando, txt: `📜 **${text(t.quando) || "—"}**${t.stato ? ` — ${t.stato}` : ""}` });
+    }
+  }
+  if (!lanes.size) {
+    return "> [!info] Nessuna corsia\n> Collega gli **Eventi** a **Fazioni**/**PNG** (campi *Fazioni*/*Coinvolti*), o aggiungi *tappe* alle entità, per vedere i fili paralleli nel tempo.";
+  }
+  const firstWhen = (L) => L.items.map((i) => quandoNum(i.quando)).filter((n) => n != null).sort((a, b) => a - b)[0];
+  const ordered = [...lanes.entries()].sort((a, b) => {
+    const fa = firstWhen(a[1]), fb = firstWhen(b[1]);
+    return (fa == null ? Infinity : fa) - (fb == null ? Infinity : fb) || a[0].localeCompare(b[0]);
+  });
+  const blocchi = ordered.map(([, L]) => {
+    const its = L.items.slice().sort((x, y) => cmpQuando(x.quando, y.quando));
+    return [`> [!abstract]- 🎭 ${L.link} (${its.length})`, ...its.map((it) => `> - ${it.txt}`)].join("\n");
+  });
+  return `**${ordered.length} fili paralleli** — chi fa cosa, nel tempo\n\n` + blocchi.join("\n\n");
+}
+

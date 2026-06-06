@@ -106,12 +106,37 @@ async function chooseNotes(tp, question, req) {
   return choice ? `[[${choice.basename}]]` : "";
 }
 
+// Etichetta arricchita per i suggester: "nome — descrizione (troncata)". Il VALORE
+// restituito NON cambia (resta il nome/oggetto): cambia solo ciò che l'utente LEGGE
+// al momento della scelta, così non sceglie alla cieca. Le descrizioni sono già nel
+// modello (subtype_profiles[..].descrizione, famiglie[].descrizione): qui si limita a
+// esporle nel picker. Tronca a parola intera per tenere il modale scorrevole.
+function withDesc(nome, descrizione, max = 90) {
+  const d = String(descrizione ?? "").trim();
+  if (!d) return String(nome);
+  const short = d.length > max ? d.slice(0, max - 1).replace(/\s+\S*$/, "") + "…" : d;
+  return `${nome} — ${short}`;
+}
+
 async function ask(tp, question, template, core) {
   const req = Boolean(question.required);
+  // Campo creation senza `from` esplicito: se il suo widget è ENUMERABILE (inlineSelect/
+  // ListSuggester in plugins.yaml → widget_options), il wizard offre le opzioni come picker
+  // invece del testo libero — stessa derivazione del subtype-aware (subtypeFieldQuestion).
+  // Così cambiare il `widget` di un campo aggiorna NOTA e WIZARD insieme (single source);
+  // i widget non enumerabili (text/number/legame) restano col comportamento di prima.
+  if (!question.from) {
+    const wq = subtypeFieldQuestion(question.field, core);
+    if (wq && wq.from === "list") question = { ...question, from: "list", options: wq.options, multi: wq.multi };
+  }
   switch (question.from) {
     case "subtypes": {
-      const subs = core.categories[template.category]?.subtypes ?? [template.default_type];
-      const v = await tp.system.suggester(subs, subs, req, question.prompt);
+      const catSpec = core.categories[template.category] ?? {};
+      const subs = catSpec.subtypes ?? [template.default_type];
+      // Display = nome + descrizione del sottotipo (subtype_profiles); valore = nome.
+      const profili = catSpec.subtype_profiles ?? {};
+      const labels = subs.map((s) => withDesc(s, (profili[s] ?? {}).descrizione));
+      const v = await tp.system.suggester(labels, subs, req, question.prompt);
       return String(v ?? template.default_type);
     }
     case "list": {
@@ -358,7 +383,7 @@ async function runWizard(tp, template, core) {
   let preFamiglia = {};
   if (famiglie.length) {
     const chosen = await tp.system.suggester(
-      ["(nessuna)", ...famiglie.map((f) => f.nome)],
+      ["(nessuna)", ...famiglie.map((f) => withDesc(f.nome, f.descrizione))],
       [null, ...famiglie], false,
       `${categorySpec.famiglia_label ?? "Famiglia"} di ${template.title} (opzionale)`);
     if (chosen) { famiglia = chosen.nome; preFamiglia = famigliaPreset(categorySpec, chosen.nome); }
@@ -431,4 +456,5 @@ create_entity.writeInverses = writeInverses;    // esposto per i test
 create_entity.inverseRelation = inverseRelation; // esposto per i test
 create_entity.pickMulti = pickMulti;             // esposto per i test
 create_entity.subtypeFieldQuestion = subtypeFieldQuestion; // esposto per i test
+create_entity.withDesc = withDesc;               // esposto per i test
 module.exports = create_entity;

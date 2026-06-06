@@ -85,3 +85,45 @@ lingue:
   comune: Comune
   numero_a_scelta: 2
   standard: [Comune, Nanico, Elfico, Gigante, Gnomesco, Goblin, Halfling, Orchesco, Draconico, Silvano, Abissale, Celestiale, Infernale, Profondo, Primordiale, Sottocomune]
+
+# Multiclasse (2024, regola OPZIONALE). Mai in creazione: al 1º livello si parte
+# sempre mono-classe; si multiclassa SOLO salendo di livello (sali_pg). Gli slot
+# combinati vengono dalla tabella SRD «Incantatore multiclasse» (build li espone in
+# slot_multiclasse) sommando i livelli da incantatore PIENO (×1) e MEZZO (÷2, arrot.
+# in difetto), MA solo con 2+ classi incantatrici; con UNA sola si usa la sua tabella.
+# Il Patto del Warlock (slot_patto) resta SEMPRE separato e ricarica a riposo breve.
+multiclasse:
+  # Prerequisiti RAW: 13+ nella/e caratteristica/he chiave (della NUOVA classe e di
+  # quelle già possedute). Lista di ALTERNATIVE: ne basta una soddisfatta; dentro
+  # un'alternativa servono TUTTE le caratteristiche elencate. Guerriero = Forza O
+  # Destrezza; Monaco/Paladino/Ranger = entrambe. sali_pg blocca se nessuna regge.
+  prerequisiti:
+    barbaro:   [{ forza: 13 }]
+    bardo:     [{ carisma: 13 }]
+    chierico:  [{ saggezza: 13 }]
+    druido:    [{ saggezza: 13 }]
+    guerriero: [{ forza: 13 }, { destrezza: 13 }]
+    ladro:     [{ destrezza: 13 }]
+    mago:      [{ intelligenza: 13 }]
+    monaco:    [{ destrezza: 13, saggezza: 13 }]
+    paladino:  [{ forza: 13, carisma: 13 }]
+    ranger:    [{ destrezza: 13, saggezza: 13 }]
+    stregone:  [{ carisma: 13 }]
+    warlock:   [{ carisma: 13 }]
+  # Competenze ottenute ENTRANDO in una classe via multiclasse (sottoinsieme del 1º
+  # livello, 2024). `armature_cat` = categorie indossabili (per la CA, come in classes);
+  # armi/armature/strumenti = prosa appesa alle competenze; `abilita_scelte` = n. di
+  # abilità extra a scelta. Classi assenti o {} (Mago/Stregone) = nessuna competenza extra.
+  competenze:
+    barbaro:   { armi: "Armi marziali", armature: "Scudi", armature_cat: [scudo] }
+    bardo:     { armature: "Armature leggere", armature_cat: [leggera], abilita_scelte: 1, strumenti: "Uno strumento musicale" }
+    chierico:  { armature: "Armature leggere e medie, scudi", armature_cat: [leggera, media, scudo] }
+    druido:    { armature: "Armature leggere e medie, scudi (non di metallo)", armature_cat: [leggera, media, scudo] }
+    guerriero: { armi: "Armi semplici e marziali", armature: "Armature leggere e medie, scudi", armature_cat: [leggera, media, scudo] }
+    ladro:     { armature: "Armature leggere", armature_cat: [leggera], abilita_scelte: 1, strumenti: "Attrezzi da scasso" }
+    monaco:    { armi: "Armi semplici e armi marziali con la proprietà Leggera" }
+    paladino:  { armi: "Armi semplici e marziali", armature: "Armature leggere e medie, scudi", armature_cat: [leggera, media, scudo] }
+    ranger:    { armi: "Armi semplici e marziali", armature: "Armature leggere e medie, scudi", armature_cat: [leggera, media, scudo], abilita_scelte: 1 }
+    stregone:  {}
+    mago:      {}
+    warlock:   { armi: "Armi semplici", armature: "Armature leggere", armature_cat: [leggera] }

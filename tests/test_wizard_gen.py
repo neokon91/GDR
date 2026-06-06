@@ -358,6 +358,46 @@ def test_famiglia_preset(tmp_path):
     assert out["prim"] == {"presenza_cosmica": 1, "incarnazione": 1, "volonta": 1}  # preset divinità
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_with_desc(tmp_path):
+    """create_entity.withDesc: arricchisce l'etichetta del suggester con la descrizione
+    («nome — descrizione») così si sceglie il sottotipo/famiglia CON contesto, non alla
+    cieca; senza descrizione resta il solo nome; descrizione lunga troncata a parola con «…»."""
+    harness = tmp_path / "withdesc.js"
+    harness.write_text(
+        f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
+        'const lungo="Fratellanza votata a un credo: cavalieri, monaci e custodi, con voti e riti di iniziazione e una gerarchia rigida";'
+        'process.stdout.write(JSON.stringify({'
+        'plain:crea.withDesc("gilda",""),'
+        'full:crea.withDesc("gilda","Corporazione di mestiere"),'
+        'trunc:crea.withDesc("ordine",lungo)}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["plain"] == "gilda"                              # niente descrizione -> solo nome (valore invariato)
+    assert out["full"] == "gilda — Corporazione di mestiere"    # nome — descrizione
+    assert out["trunc"].startswith("ordine — ") and out["trunc"].endswith("…")  # lunga -> troncata
+    assert len(out["trunc"]) <= len("ordine — ") + 90           # entro il cap (modale scorrevole)
+
+
+def test_enum_widgets_conversi():
+    """Campi prima a TESTO LIBERO ora hanno un widget ENUMERABILE → picker su nota e (via
+    widget_options) nel wizard: padronanza (8 maestrie d'arma), tipo_creatura (14 tipi 5e,
+    incl. il valore SRD «Umanoide»), car_primaria (6 caratteristiche). Anti-drift: le opzioni
+    di padronanza coincidono coi nomi di system.yaml:maestrie_armi (lo impone anche check())."""
+    wo = render.widget_options()
+    fields = CORE.get("fields", {})
+    assert fields["padronanza"]["widget"] == "padronanza" and len(wo["padronanza"]["options"]) == 8
+    assert fields["tipo_creatura"]["widget"] == "tipo_creatura" and "Umanoide" in wo["tipo_creatura"]["options"]
+    assert fields["car_primaria"]["widget"] == "car_primaria" and "Forza" in wo["car_primaria"]["options"]
+    # classi (incantesimo): multi-pick dei 12 nomi-classe SRD in CHIARO (no link → SRD/JS-safe).
+    assert fields["classi"]["widget"] == "classi" and wo["classi"]["multi"] is True
+    assert {"Mago", "Chierico", "Warlock"} <= set(wo["classi"]["options"]) and len(wo["classi"]["options"]) == 12
+    maestrie = {m["nome"] for m in CORE.get("maestrie_armi", [])}
+    assert set(wo["padronanza"]["options"]) == maestrie     # anti-drift padronanza ↔ maestrie_armi
+
+
 def test_widget_options():
     """render.widget_options distilla le opzioni dei select Meta Bind (per il wizard
     subtype-aware): inlineSelect -> singolo, inlineListSuggester -> multi; query/slider

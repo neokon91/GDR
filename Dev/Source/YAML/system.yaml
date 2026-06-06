@@ -13,48 +13,48 @@ purpose: >-
 fields:
   # Oggetti magici
   rarita:         { label: Rarità,               widget: rarita }
-  sintonia:       { label: Sintonia,             widget: text }
+  sintonia:       { label: Sintonia,             widget: text, placeholder: "es. sì oppure solo da un incantatore" }
   # Armi / equipaggiamento — STESSI nomi-campo dell'SRD (srd_..._equipment.json):
   # una nota oggetto homebrew porta gli stessi dati dell'equip ufficiale → arma
   # giocabile in renderAttacchi (tiro+danni+maestria), come le armi SRD.
-  danni:          { label: Danni,                widget: text }
-  proprieta:      { label: Proprietà,            widget: text }
-  padronanza:     { label: Padronanza,           widget: text }
-  costo:          { label: Costo,                widget: text }
-  peso:           { label: Peso,                 widget: text }
-  classe_armatura: { label: Classe armatura,     widget: text }
+  danni:          { label: Danni,                widget: text, placeholder: "es. 1d8 perforante" }
+  proprieta:      { label: Proprietà,            widget: text, placeholder: "es. accurata · leggera · lancio 6/18 m" }
+  padronanza:     { label: Padronanza,           widget: padronanza }
+  costo:          { label: Costo,                widget: text, placeholder: "es. 50 mo" }
+  peso:           { label: Peso,                 widget: text, placeholder: "es. 1 kg" }
+  classe_armatura: { label: Classe armatura,     widget: text, placeholder: "es. 14 oppure 11 + Des" }
   # Bastione (2024): numero di difensori del bastione (livello = PG min, 5+).
   difensori:      { label: Difensori,            widget: number }
   # Incantesimi
   livello:        { label: Livello,              widget: number }
-  tempo_lancio:   { label: Tempo di lancio,      widget: text }
-  gittata:        { label: Gittata,              widget: text }
-  componenti:     { label: Componenti,           widget: text }
-  durata:         { label: Durata,               widget: text }
-  classi:         { label: Classi,               widget: text }
+  tempo_lancio:   { label: Tempo di lancio,      widget: text, placeholder: "es. 1 azione oppure 1 reazione" }
+  gittata:        { label: Gittata,              widget: text, placeholder: "es. 9 m oppure contatto" }
+  componenti:     { label: Componenti,           widget: text, placeholder: "es. V S M con un pizzico di zolfo" }
+  durata:         { label: Durata,               widget: text, placeholder: "es. Istantanea oppure Concentrazione fino a 1 minuto" }
+  classi:         { label: Classi,               widget: classi }
   # Insidie (trappole/pericoli)
   tier:           { label: Livello di gioco,     widget: tier }
   minaccia:       { label: Minaccia,             widget: minaccia }
-  prova:          { label: Prova,                widget: text }
-  danno:          { label: Danno / Effetto,      widget: text }
+  prova:          { label: Prova,                widget: text, placeholder: "es. Destrezza CD 15" }
+  danno:          { label: Danno / Effetto,      widget: text, placeholder: "es. 2d6 da fuoco · TS Destrezza dimezza" }
   # Classe homebrew
   dado_vita:      { label: Dado vita,            widget: dado_vita }
-  car_primaria:   { label: Caratteristica primaria, widget: text }
-  ts_competenze:  { label: TS competenti,        widget: text }
+  car_primaria:   { label: Caratteristica primaria, widget: car_primaria }
+  ts_competenze:  { label: TS competenti,        widget: text, placeholder: "es. Forza e Costituzione" }
   incantesimi:    { label: Incantesimi,          widget: incantesimi }
   # Specie
   taglia:         { label: Taglia,               widget: taglia }
-  velocita:       { label: Velocità,             widget: text }
-  tipo_creatura:  { label: Tipo di creatura,     widget: text }
-  lignaggio:      { label: Lignaggio,            widget: text }
+  velocita:       { label: Velocità,             widget: text, placeholder: "es. 9 m · volo 18 m" }
+  tipo_creatura:  { label: Tipo di creatura,     widget: tipo_creatura }
+  lignaggio:      { label: Lignaggio,            widget: text, placeholder: "es. Discendenza infernale" }
   # Background / talento / divinità
-  car_background: { label: Caratteristiche,      widget: text }
-  strumento:      { label: Competenza in strumenti, widget: text }
-  talento_origine: { label: "Talento d'origine", widget: text }
-  prerequisito:   { label: Prerequisito,         widget: text }
-  ripetibile:     { label: Ripetibile,           widget: text }
-  dominio:        { label: Dominio,              widget: text }
-  simbolo:        { label: Simbolo,              widget: text }
+  car_background: { label: Caratteristiche,      widget: text, placeholder: "es. Forza oppure Costituzione" }
+  strumento:      { label: Competenza in strumenti, widget: text, placeholder: "es. Strumenti da fabbro" }
+  talento_origine: { label: "Talento d'origine", widget: text, placeholder: "es. Fortunato" }
+  prerequisito:   { label: Prerequisito,         widget: text, placeholder: "es. Forza 13 oppure competenza in Atletica" }
+  ripetibile:     { label: Ripetibile,           widget: toggle }
+  dominio:        { label: Dominio,              widget: text, placeholder: "es. guerra · morte · natura" }
+  simbolo:        { label: Simbolo,              widget: text, placeholder: "es. un sole infranto su campo nero" }
 
 # Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock``` (creature
 # + mostri SRD). I layout IT sono vendorizzati in statblocks/ e iniettati in FS.

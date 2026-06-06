@@ -48,7 +48,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 > [!abstract] Scheda
 > Clima: `INPUT[clima][:clima]`
-> Popolazione: `INPUT[text:popolazione]`
+> Popolazione: `INPUT[text(placeholder(es. 5.000 o «poche centinaia»)):popolazione]`
 
 > [!tip]- Genera nome/spunto
 > `BUTTON[genera-locale]` (italiano, a tema) — scegli **cosa generare**: nomi (persona/luogo/fazione), PNG, taverne, bevande, ganci, dicerie, tesori (SRD), insediamenti, oggetti, meteo, stanze di dungeon… — dallo *stile* della cultura/specie collegata. Inserisce al cursore.
@@ -56,7 +56,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Cos'è il luogo, che impressione dà entrandoci, perché conta nella storia.
 
 > [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
+> `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
 > [!note] Geografia
 > `INPUT[textArea:geografia]`
@@ -91,7 +91,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
 > Pressione: `INPUT[pressione][:pressione]`
 >
-> Prossima mossa: `INPUT[text:prossima_mossa]`
+> Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
 
 **⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
 ```js-engine
@@ -228,6 +228,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Produce**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):produce]`
 > **Dipende da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):dipende_da]`
 > **Rotta commerciale con**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):rotta_con]`
+> **Editti in vigore**: `INPUT[inlineListSuggester(optionQuery("Mondi/Editti"), useLinks(partial), allowOther):editti]`
+> **Miti del luogo**: `INPUT[inlineListSuggester(optionQuery("Mondi/Miti"), useLinks(partial), allowOther):miti]`
+> **Incontri qui**: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
+> **Insidie qui**: `INPUT[inlineListSuggester(optionQuery("Mondi/Insidie"), useLinks(partial), allowOther):insidie]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

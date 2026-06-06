@@ -2,6 +2,7 @@
 
 > [!tip] Nuovo qui? Il tuo mondo prende vita in **5 tappe**. Tour con spunti: **[[Crea il tuo mondo]]** · panoramica: **[[LEGGIMI]]**.
 > Il vault parte **vuoto**: *scrivi lore → la superficie giocabile si calcola da sé*. Ogni nota ha in cima un callout **ℹ️ Guida** (cos'è, campi chiave, spunti).
+> Vedi del **codice** al posto di pulsanti o tabelle? Manca un plugin → **[[Diagnostica]]**.
 
 ```dataviewjs
 // Spina di onboarding: il progresso delle 5 tappe «Crea il tuo mondo» derivato dallo
@@ -59,38 +60,26 @@ dv.paragraph(done === 5
 {% endif %}
 {%- endfor %}
 
-## 🤝 Trame (alleati / rivali)
-```dataview
-table without id file.link as Chi, alleati as Alleati, rivali as Rivali
-from ""
-where alleati or rivali
-sort file.name asc
-```
-
-## Cronologia eventi
-```dataview
-table without id file.link as Evento, quando as Quando, mondo as Mondo
-from ""
-where categoria = "evento"
-sort quando asc
-```
-
-## Note per categoria
-```dataview
-table without id Categoria, length(rows) as Note
-from ""
-where categoria
-group by categoria as Categoria
-sort Categoria asc
-```
-
-## Da rifinire (bozze)
-```dataview
-table without id file.link as Nota, categoria as Categoria, mondo as Mondo
-from ""
-where stato = "bozza" and categoria
-sort file.mtime desc
-limit 20
+```dataviewjs
+// Cruscotti del mondo, PROGRESSIVI: ogni tabella si disegna SOLO se ha contenuto, così
+// un vault vuoto non mostra 4 tabelle vuote (overload/"è rotto?"). Si popolano da sé man
+// mano che crei. (Stesso approccio della spina di onboarding sopra.)
+const p = dv.pages().where(x => !x.file.path.startsWith("z."));
+const has = v => v != null && (!Array.isArray(v) || v.length > 0);
+let shown = false;
+const trame = p.where(x => has(x.alleati) || has(x.rivali)).sort(x => x.file.name, "asc");
+if (trame.length) { shown = true; dv.header(2, "🤝 Trame (alleati / rivali)");
+  dv.table(["Chi", "Alleati", "Rivali"], trame.map(x => [x.file.link, x.alleati, x.rivali])); }
+const eventi = p.where(x => x.categoria == "evento").sort(x => x.quando, "asc");
+if (eventi.length) { shown = true; dv.header(2, "Cronologia eventi");
+  dv.table(["Evento", "Quando", "Mondo"], eventi.map(x => [x.file.link, x.quando, x.mondo])); }
+const conCat = p.where(x => x.categoria);
+if (conCat.length) { shown = true; dv.header(2, "Note per categoria");
+  dv.table(["Categoria", "Note"], conCat.groupBy(x => x.categoria).sort(g => g.key, "asc").map(g => [g.key, g.rows.length])); }
+const bozze = p.where(x => x.stato == "bozza" && x.categoria).sort(x => x.file.mtime, "desc").limit(20);
+if (bozze.length) { shown = true; dv.header(2, "Da rifinire (bozze)");
+  dv.table(["Nota", "Categoria", "Mondo"], bozze.map(x => [x.file.link, x.categoria, x.mondo])); }
+if (!shown) dv.paragraph("*📊 I cruscotti del mondo (trame, cronologia, bozze) compaiono qui man mano che crei le note.*");
 ```
 
 --- 🎲 Al tavolo
@@ -105,27 +94,22 @@ limit 20
 > Apri lo strumento giusto in un clic, senza cercarlo nelle impostazioni:
 > `BUTTON[avanza-mondo]` (fa girare il mondo: avanza i Fronti, scatena i pieni, propaga le onde) · `BUTTON[apri-calendario]` (calendario del mondo · timeline) · `BUTTON[world-board]` (Canvas «a colpo d'occhio») · `BUTTON[prepara-gruppo]` (schiera i PG in Initiative Tracker)
 
-## Sessione attiva
-```dataview
-list
-where categoria = "sessione" and attiva = true
-```
-
-## In gioco
-```dataview
-list
-where stato = "in gioco"
-```
-
-## 🔥 Fronti caldi
-Cosa preme nel mondo adesso — ordina per pressione. Ogni riga è una mossa pronta da giocare;
-`Clock` mostra il progresso del fronte e `Conseguenza` cosa accade quando si riempie.
-```dataview
-table without id file.link as Fronte, pressione as Pressione, prossima_mossa as "Prossima mossa", (clock + "/" + clock_dim) as Clock, conseguenza as Conseguenza
-from ""
-where (pressione >= 5 or clock_dim) and stato != "archiviata"
-sort (default(clock, 0) / default(clock_dim, 1)) + (default(pressione, 0) / 10) desc
-limit 12
+```dataviewjs
+// Cruscotti del tavolo, PROGRESSIVI: sessione attiva, scene in gioco e Fronti caldi si
+// disegnano solo se esistono → su un vault vuoto niente tabelle vuote. Compaiono quando giochi.
+const p = dv.pages().where(x => !x.file.path.startsWith("z."));
+let shown = false;
+const sess = p.where(x => x.categoria == "sessione" && x.attiva == true);
+if (sess.length) { shown = true; dv.header(2, "Sessione attiva"); dv.list(sess.file.link); }
+const inGioco = p.where(x => x.stato == "in gioco");
+if (inGioco.length) { shown = true; dv.header(2, "In gioco"); dv.list(inGioco.file.link); }
+const fronti = p.where(x => (x.pressione >= 5 || x.clock_dim) && x.stato != "archiviata")
+  .sort(x => (x.clock || 0) / (x.clock_dim || 1) + (x.pressione || 0) / 10, "desc").limit(12);
+if (fronti.length) { shown = true; dv.header(2, "🔥 Fronti caldi");
+  dv.paragraph("Cosa preme nel mondo adesso. Ogni riga è una mossa pronta; *Clock* è il progresso del fronte, *Conseguenza* cosa accade quando si riempie.");
+  dv.table(["Fronte", "Pressione", "Prossima mossa", "Clock", "Conseguenza"], fronti.map(x =>
+    [x.file.link, x.pressione, x.prossima_mossa, (x.clock_dim ? (x.clock || 0) + "/" + x.clock_dim : "—"), x.conseguenza])); }
+if (!shown) dv.paragraph("*🎲 Sessione attiva, scene «in gioco» e Fronti caldi compaiono qui quando inizi a giocare.*");
 ```
 
 ## 🧵 Fili narrativi

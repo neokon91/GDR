@@ -45,12 +45,19 @@ async function renderIncantesimi(app, dv, page) {
   if (!page) return "*Apri una scheda PG.*";
   const trucchetti = asArray(page.trucchetti), incantesimi = asArray(page.incantesimi);
   const data = await loadPersonaggio(app);
-  const classe = (data.classi || {})[text(page.classe)] || {};
-  if (!classe.incantatore && !trucchetti.length && !incantesimi.length) return "";  // non caster
-  // nome → livello, invertendo il pool della classe (SRD).
+  const classiOpt = data.classi || {};
+  // Classi del PG (breakdown multiclasse, o la classe piatta). Le incantatrici (incluso
+  // il Patto del Warlock) forniscono i pool e le CD; con più caster i pool si UNISCONO.
+  const bd = Array.isArray(page.classi) && page.classi.length
+    ? page.classi.map((c) => text(c.id))
+    : [text(page.classe)];
+  const casterClasses = bd.map((id) => classiOpt[id]).filter((cl) => cl && (cl.incantatore || cl.tipo_incantatore === "patto"));
+  if (!casterClasses.length && !trucchetti.length && !incantesimi.length) return "";  // non caster
+  // nome → livello, unendo i pool di TUTTE le classi incantatrici (SRD).
   const levelOf = new Map();
-  for (const [L, names] of Object.entries(classe.incantesimi_pool || {}))
-    for (const n of names || []) levelOf.set(n, Number(L));
+  for (const cl of casterClasses)
+    for (const [L, names] of Object.entries(cl.incantesimi_pool || {}))
+      for (const n of names || []) if (!levelOf.has(n)) levelOf.set(n, Number(L));
   // Homebrew: il livello dalla nota stessa (categoria incantesimo) se non nel pool
   // della classe — così gli incantesimi homebrew si raggruppano bene, non sotto "ignoto".
   // Stessa passata raccoglie chi richiede CONCENTRAZIONE (durata SRD) → 🌀.
@@ -90,15 +97,24 @@ async function renderIncantesimi(app, dv, page) {
   // così SRD e homebrew funzionano senza un campo dedicato. Il mod si calcola dal
   // punteggio nel frontmatter → corretto a ogni ri-render (non serve mod_<car>).
   const MENTALE = ["intelligenza", "saggezza", "carisma"];
-  const carInc = classe.caratteristica_incantesimi
-    || asArray(classe.caratteristica_primaria).map(text).find((c) => MENTALE.includes(c));
-  let testa = "";
-  if (carInc && page[carInc] != null) {
-    const mod = Math.floor((Number(page[carInc]) - 10) / 2);
-    const pb = Number(page.competenza) || 0;
-    const cd = 8 + pb + mod, atk = pb + mod;
+  const pb = Number(page.competenza) || 0;
+  const teste = [];
+  for (const id of bd) {
+    const cl = classiOpt[id];
+    if (!cl || !(cl.incantatore || cl.tipo_incantatore === "patto")) continue;
+    const carInc = cl.caratteristica_incantesimi || asArray(cl.caratteristica_primaria).map(text).find((c) => MENTALE.includes(c));
+    if (!carInc || page[carInc] == null) continue;
+    const m = Math.floor((Number(page[carInc]) - 10) / 2);
+    const cd = 8 + pb + m, atk = pb + m;
     const lab = carInc.charAt(0).toUpperCase() + carInc.slice(1);
-    testa = `> **CD incantesimo ${cd}** · **Attacco ${atk >= 0 ? "+" : ""}${atk}** · ${lab}\n>\n`;
+    const pre = casterClasses.length > 1 ? `${cl.label}: ` : "";
+    teste.push(`${pre}**CD ${cd}** · **Attacco ${atk >= 0 ? "+" : ""}${atk}** · ${lab}`);
+  }
+  let testa = teste.length ? "> " + teste.join("\n> ") + "\n>\n" : "";
+  // Patto del Warlock: slot SEPARATI dagli slot a livello (riga dedicata, ricarica breve).
+  if (Number(page.slot_patto) > 0) {
+    const rem = Math.max(0, Number(page.slot_patto) - (Number(page.slot_patto_uso) || 0));
+    testa += `> 🩸 **Patto** — ${rem}/${Number(page.slot_patto)} slot di ${page.slot_patto_liv}º livello (ricarica a riposo breve)\n>\n`;
   }
   const leg = [];
   if (concentra.size) leg.push("🌀 = concentrazione");

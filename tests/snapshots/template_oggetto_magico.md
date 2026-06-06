@@ -31,7 +31,7 @@
 
 > [!abstract] Scheda
 > Rarità: `INPUT[rarita][:rarita]`
-> Sintonia: `INPUT[text:sintonia]`
+> Sintonia: `INPUT[text(placeholder(es. sì oppure solo da un incantatore)):sintonia]`
 > Cariche: `INPUT[text:cariche]`
 > Ricarica: `INPUT[text:ricarica]`
 

@@ -53,6 +53,18 @@ relazioni:
   label: Culti rivali
   category: culto
   multi: true
+# Inversi tipizzati: le profezie custodite e i miti tramandati dal culto (dal lato
+# profezia.culti / mito.culti l'inverso si auto-deriva — coppie univoche).
+- field: profezie
+  label: Profezie custodite
+  category: profezia
+  multi: true
+  reciprocal: culti
+- field: miti
+  label: Miti tramandati
+  category: mito
+  multi: true
+  reciprocal: culti
 creation:
   fields:
   - field: tipo

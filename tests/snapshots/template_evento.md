@@ -41,7 +41,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 > [!abstract] Cronologia
-> Quando: `INPUT[text:quando]`
+> Quando: `INPUT[text(placeholder(es. anno 312 o un'epoca del mondo)):quando]`
 >
 > Portata: `INPUT[portata][:portata]`
 
@@ -58,7 +58,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Cosa accade, chi coinvolge e perche' conta al tavolo.
 
 > [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
+> `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
 > [!note] Cause
 > `INPUT[textArea:cause]`
@@ -116,6 +116,7 @@ sort quando asc
 > **Miti generati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Miti"), useLinks(partial), allowOther):miti]`
 > **Divinità coinvolte**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
 > **Culti coinvolti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti]`
+> **Profezie collegate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Profezie"), useLinks(partial), allowOther):profezie]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

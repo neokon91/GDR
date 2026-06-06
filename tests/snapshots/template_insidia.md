@@ -39,8 +39,8 @@
 > [!abstract] Scheda
 > Livello di gioco: `INPUT[tier][:tier]`
 > Minaccia: `INPUT[minaccia][:minaccia]`
-> Prova: `INPUT[text:prova]`
-> Danno / Effetto: `INPUT[text:danno]`
+> Prova: `INPUT[text(placeholder(es. Destrezza CD 15)):prova]`
+> Danno / Effetto: `INPUT[text(placeholder(es. 2d6 da fuoco · TS Destrezza dimezza)):danno]`
 
 --- 🎬 Scena
 

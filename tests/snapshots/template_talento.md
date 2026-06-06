@@ -26,8 +26,8 @@
 --- 📋 Scheda
 
 > [!abstract] Scheda
-> Prerequisito: `INPUT[text:prerequisito]`
-> Ripetibile: `INPUT[text:ripetibile]`
+> Prerequisito: `INPUT[text(placeholder(es. Forza 13 oppure competenza in Atletica)):prerequisito]`
+> Ripetibile: `INPUT[toggle:ripetibile]`
 
 --- 📖 Lore
 

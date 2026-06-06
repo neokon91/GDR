@@ -9,6 +9,7 @@ async function riposo_lungo(file) {
     for (let n = 1; n <= 9; n++) {
       if (fm["slot_uso_" + n] != null) fm["slot_uso_" + n] = 0;
     }
+    if (fm.slot_patto_uso != null) fm.slot_patto_uso = 0;  // Patto del Warlock: ricarica anche al riposo lungo
     if (fm.dadi_vita_max != null) {
       const rec = Math.max(1, Math.floor((Number(fm.dadi_vita_max) || 0) / 2));
       fm.dadi_vita_spesi = Math.max(0, (Number(fm.dadi_vita_spesi) || 0) - rec);
@@ -43,6 +44,8 @@ async function riposo_breve(file) {
       for (let n = 1; n <= 9; n++) if (fm["slot_uso_" + n] != null && (Number(fm["slot_uso_" + n]) || 0) > 0) { fm["slot_uso_" + n] = 0; any = true; }
       if (any) ric.push("slot del Patto");
     }
+    // Patto del Warlock (slot separati dagli slot a livello): ricaricano SEMPRE a riposo breve.
+    if (fm.slot_patto != null && (Number(fm.slot_patto_uso) || 0) > 0) { fm.slot_patto_uso = 0; ric.push("slot del Patto"); }
     // Cura: spende 1 Dado Vita, se disponibile.
     const max = Number(fm.dadi_vita_max) || 0;
     const spesi = Number(fm.dadi_vita_spesi) || 0;

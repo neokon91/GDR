@@ -175,18 +175,27 @@ def widget_options() -> dict[str, dict[str, Any]]:
     return out
 
 
-def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> None:
-    """Dati e script che il JS Engine legge a runtime: il payload core.json
-    (modello distillato per views.js), le opzioni del rules-engine PG, gli script
-    Templater (copia 1:1) e un wizard di creazione per-template (wrapper sul
-    motore create_entity.js, salvo override hand-authored crea_<id>.js in JS/)."""
+def critical_plugins() -> list[dict[str, str]]:
+    """Plugin ESSENZIALI (plugins.yaml: `critico`) + cosa si rompe senza, per la nota
+    Diagnostica: views.renderDiagnostica li confronta con i plugin attivi in Obsidian
+    e mostra una checklist azionabile (quale riattivare) invece di lasciare codice grezzo."""
+    plugins = load_yaml("plugins.yaml") if (SOURCE / "YAML" / "plugins.yaml").is_file() else {}
+    return [{"id": p["id"], "name": p["name"], "rompe": p.get("rompe", "")}
+            for p in (plugins.get("plugins") or []) if p.get("critico")]
+
+
+def engine_payload(core: dict[str, Any], templates: list[dict[str, Any]]) -> dict[str, Any]:
+    """Payload core.json: il modello distillato che views.js (e gli altri JS) leggono a
+    runtime. Estratto da write_engine_data così check()/validate ne verificano la SHAPE
+    contro lo schema (schemas/core.schema.json) SENZA scrivere file — è il contratto
+    Python→JS reso esplicito."""
     # generatori homebrew: catalogo da generatori.yaml + iniezione dei nomi-oggetto
     # REALI dell'SRD nel generatore `tesoro` (per fascia/rarità). Vivono qui, non in
     # YAML, così il bottino cita item veri/CC-BY senza ricopiarli a mano.
     generatori = load_yaml("generatori.yaml") if (SOURCE / "YAML" / "generatori.yaml").is_file() else {}
     if isinstance(generatori.get("tesoro"), dict):
         generatori["tesoro"]["_srd"] = srd_loot_pool()
-    payload = {
+    return {
         "folders": core.get("folders", {}),
         "fields": core.get("fields", {}),
         "categories": core.get("categories", {}),
@@ -227,9 +236,19 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         "widget_options": widget_options(),
         "creation": core.get("creation", {}),
         "templates": templates,
+        # plugins: i plugin ESSENZIALI (+ cosa rompono) per views.renderDiagnostica,
+        # la nota Diagnostica che dice all'utente non-tecnico quale riattivare.
+        "plugins": critical_plugins(),
     }
+
+
+def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> None:
+    """Dati e script che il JS Engine legge a runtime: il payload core.json
+    (modello distillato per views.js), le opzioni del rules-engine PG, gli script
+    Templater (copia 1:1) e un wizard di creazione per-template (wrapper sul
+    motore create_entity.js, salvo override hand-authored crea_<id>.js in JS/)."""
     # YAML -> JSON che gli script JS leggono a runtime via app.vault.adapter.read.
-    write_json(VAULT / "z.automazioni" / "data" / "core.json", payload)
+    write_json(VAULT / "z.automazioni" / "data" / "core.json", engine_payload(core, templates))
     # Opzioni del rules-engine PG (SRD + pg_rules.yaml) per crea_personaggio.js.
     write_json(VAULT / "z.automazioni" / "data" / "personaggio.json", build_personaggio_options(core))
     # Gli script Templater (.js CommonJS) e il guscio JS Engine (.mjs ESM) sono
@@ -249,6 +268,12 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
     for template in templates:
         if not (JS_DIR / f"crea_{template['id']}.js").is_file():
             write_text(VAULT / "z.automazioni" / f"crea_{template['id']}.js", crea_wrapper_js(template))
+    # site.css per l'esportatore JS del sito-giocatori (genera_sito.js): sorgente
+    # unica SiteJinja/site.css (la stessa di build_site.py), spedita nel vault così
+    # il bottone «Genera sito giocatori» la emette accanto alle pagine HTML.
+    site_css = SOURCE / "SiteJinja" / "site.css"
+    if site_css.is_file():
+        write_text(VAULT / "z.automazioni" / "site.css", site_css.read_text(encoding="utf-8"))
 
 
 # Categorie senza nota-cartella auto-indice: 'mondo' (la sua cartella è la radice
@@ -308,6 +333,7 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2"),
                              ("THIRD-PARTY-LICENSES.md", "third_party_licenses.md.j2"),
                              ("Crea il tuo mondo.md", "crea_il_tuo_mondo.md.j2"),
+                             ("Diagnostica.md", "diagnostica.md.j2"),
                              (f"{INDEX_DIR}/Ponte Mondo-Sistema.md", "ponte.md.j2"),
                              (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2"),
                              (f"{INDEX_DIR}/Rete del mondo.md", "rete.md.j2"),

@@ -44,17 +44,34 @@ Un mondo si muove quando qualcuno vuole qualcosa che non può avere senza scontr
 > `BUTTON[crea-fazione]`
 
 ## 4 · Collega ciò che hai creato
-Un mondo è una **rete**, non un elenco. Apri il tuo Luogo → tab *Collegamenti* →
-**`Collega`**, scegli la Fazione (es. *chi lo controlla*): il legame inverso si scrive
-da sé. Poi apri **[[Rete del mondo]]** e guarda il grafo prendere forma.
+Un mondo è una **rete**, non un elenco: un *legame* dice come due note si toccano
+(*chi controlla un luogo*, *chi è alleato di chi*). Collegarle è ciò che farà
+«accendere» i cruscotti alla tappa dopo.
+
+> [!check] Come si collega (sulla nota, non qui)
+> 1. Apri la nota che hai creato — es. il tuo **Luogo**.
+> 2. Vai nel tab **Collegamenti** e premi **`Collega`**.
+> 3. Scegli il tipo di legame (es. *Controllata da*) e la nota da agganciare (la tua **Fazione**).
+>
+> Il legame inverso si scrive **da sé** sull'altra nota. *(Se hai creato il Luogo dopo
+> la Fazione, il wizard te l'ha già chiesto — «Collegare ad altre note ora?».)*
+
+Poi apri **[[Rete del mondo]]** e guarda il grafo prendere forma.
 
 ## 5 · Accendi la superficie giocabile — *il cuore*
-Qui sta il differenziatore. Sul Luogo (o sulla Fazione) che **preme** di più, nel tab
-*Al tavolo*: imposta una **Pressione** e una **Prossima mossa**. Poi apri **[[Fronti]]**:
-il tuo mondo non è più una wiki, è un **cruscotto che si aggiorna da solo** — la lore
-accende il tavolo.
+Qui sta il differenziatore: la lore diventa **giocabile**. Su una nota, nel tab
+**Al tavolo**, bastano due campi:
+- **Pressione** *(0–10)* — quanto questa cosa **scotta adesso**: 0 = quieta, 10 = sta per esplodere.
+- **Prossima mossa** — cosa succede **al passo seguente** se nessuno interviene (una frase).
+
+> [!info] Cos'è un «Fronte»
+> Una nota con una Pressione (o un *clock* — l'orologio a tacche che riempi mano a mano)
+> diventa un **Fronte**: una minaccia viva che il mondo porta avanti da solo.
+
+Compila quei due campi sul Luogo (o sulla Fazione) che **preme** di più, poi apri
+**[[Fronti]]**: non è più una wiki, è un **cruscotto che si aggiorna da solo**.
 
 > [!tip] E poi?
 > Aggiungi una **Divinità**, una **Cultura**, una **Specie**… ogni nota che colleghi
-> rende il mondo più vivo (e ognuna ha i suoi 💡 *Spunti* nel tab Lore). Quando vuoi
-> condividerlo coi giocatori: **[[Occhi del giocatore]]** + `npm run site`.
+> rende il mondo più vivo (e ognuna ha i suoi 💡 *Spunti* nel tab Lore). Per mostrare
+> il mondo ai giocatori **senza spoiler**, parti da **[[Occhi del giocatore]]**.

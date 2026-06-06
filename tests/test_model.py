@@ -22,6 +22,18 @@ def test_check_passes():
     assert render.check() == 0
 
 
+def test_runtime_payloads_schema():
+    """I payload runtime (core.json/personaggio.json) conformano ai loro JSON Schema —
+    il contratto Python→JS reso esplicito. E lo schema RIFIUTA un payload malformato
+    (testa la guardia, non solo i dati buoni → un drift di shape si fermerebbe al build)."""
+    import validate
+    assert validate.validate_runtime_payloads(CORE, TEMPLATES) == []
+    import jsonschema
+    schema = json.loads((validate.SCHEMA_DIR / "core.schema.json").read_text(encoding="utf-8"))
+    errs = list(jsonschema.Draft202012Validator(schema).iter_errors({"folders": {}}))
+    assert errs, "lo schema core dovrebbe rifiutare un payload senza le chiavi richieste"
+
+
 def test_no_duplicate_ids():
     """Lo split è una partizione: nessun id condiviso fra core.yaml e system.yaml
     nelle sezioni-mappa (folders/fields/categories/creation/relazioni)."""
@@ -95,7 +107,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "third_party_licenses.md.j2", "crea_il_tuo_mondo.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "missioni.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "third_party_licenses.md.j2", "crea_il_tuo_mondo.md.j2", "diagnostica.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "missioni.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)

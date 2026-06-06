@@ -5,7 +5,14 @@
 {% macro field(id, label=true) -%}
 {%- set f = core.fields[id] -%}
 {%- if label %}{{ f.label }}: {% endif -%}
-{%- if f.widget in ['text', 'number'] -%}`INPUT[{{ f.widget }}:{{ id }}]`
+{#- Tipi Meta Bind INLINE (`INPUT[tipo:prop]`): oltre a text/number anche toggle (sì/no),
+    date/time (calendario nativo). Gli altri widget sono TEMPLATE (`INPUT[nome][:prop]`,
+    da plugins.yaml:metabind_inputs). `placeholder` (solo text/number) dà la guida inline
+    «es. …» che toglie l'attrito del campo vuoto — validate vieta i caratteri che romperebbero
+    il parser MB. -#}
+{%- set inline = f.widget in ['text', 'number', 'toggle', 'date', 'datePicker', 'time'] -%}
+{%- set ph = ('(placeholder(' ~ f.get('placeholder') ~ '))') if (f.get('placeholder') and f.widget in ['text', 'number']) else '' -%}
+{%- if inline -%}`INPUT[{{ f.widget }}{{ ph }}:{{ id }}]`
 {%- else -%}`INPUT[{{ f.widget }}][:{{ id }}]`{%- endif -%}
 {%- endmacro %}
 
@@ -445,12 +452,13 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderRisorsePG");
 ```
 
-> [!note]- Slot incantesimo (caster)
+> [!note]- Slot incantesimo (caster) — slot a livello + Patto del Warlock
 > | Liv | Max | Spesi | Rimasti |
 > |:-:|:-:|:-:|:-:|
 {% for n in range(1, 10) %}
 > | {{ n }}° | {{ computed('{slot_' ~ n ~ '} ?? "—"') }} | `INPUT[number:slot_uso_{{ n }}]` | {{ computed('({slot_' ~ n ~ '} ?? 0) > 0 ? (({slot_' ~ n ~ '}) - ({slot_uso_' ~ n ~ '} ?? 0)) : "—"') }} |
 {% endfor %}
+> | 🩸 Patto {{ computed('({slot_patto_liv} ?? 0) > 0 ? ({slot_patto_liv} + "º") : ""') }} | {{ computed('{slot_patto} ?? "—"') }} | `INPUT[number:slot_patto_uso]` | {{ computed('({slot_patto} ?? 0) > 0 ? (({slot_patto}) - ({slot_patto_uso} ?? 0)) : "—"') }} |
 
 **Caratteristiche**
 

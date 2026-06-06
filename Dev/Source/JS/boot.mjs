@@ -49,11 +49,14 @@ function dvPage(app) {
 //   mode "dom" -> disegna direttamente nel container (nessun valore di ritorno)
 // args(app, {dv, page}, container) -> array di argomenti per la funzione.
 const PANELS = {
+  renderDiagnostica: { mode: "md", args: (a) => [a] },
   renderEntityPanel: { mode: "md", args: (a, d) => [d.dv, d.page] },
   renderSessionPanel: { mode: "md", args: (a, d) => [d.dv, d.page] },
   renderProfilo: { mode: "md", args: (a, d) => [a, d.page] },
   renderTemaNatale: { mode: "md", args: (a, d) => [a, d.page] },
   renderProgressione: { mode: "md", args: (a, d) => [a, d.page] },
+  renderFiloAvventura: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
+  renderTabella: { mode: "md", args: (a, d) => [a, d.page] },
   renderRisorsePG: { mode: "md", args: (a, d) => [d.page] },
   renderSpecieTratti: { mode: "md", args: (a, d) => [a, d.page] },
   renderIncantesimi: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
@@ -78,6 +81,7 @@ const PANELS = {
   renderTensioni: { mode: "md", args: (a, d) => [a, d.dv] },
   renderMemoria: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderTimeline: { mode: "md", args: (a, d) => [a, d.dv] },
+  renderTimelineCorsie: { mode: "md", args: (a, d) => [a, d.dv] },
   renderClock: { mode: "dom", args: (a, d, cont) => [cont, a, d.page] },
   renderAxesCompare: { mode: "dom", args: (a, d, cont) => [cont, a, d.dv, d.page] },
 };

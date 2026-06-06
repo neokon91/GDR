@@ -10,15 +10,15 @@
 --- ✅ Prepara
 
 > [!tip] Obiettivo
-> `INPUT[text:obiettivo]`
+> `INPUT[text(placeholder(es. fermare il rito prima dell'alba)):obiettivo]`
 
 > [!quote]- Apertura
-> `INPUT[text:apertura]`
+> `INPUT[text(placeholder(la scena con cui apri la sessione)):apertura]`
 
 > [!warning]- Pressioni
 > Pressione: `INPUT[pressione][:pressione]`
 >
-> Prossima mossa: `INPUT[text:prossima_mossa]`
+> Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
 
 > [!todo]- Prep di sessione
 > Spunta mentre prepari. Compaiono in Home → *Al tavolo* finché aperte.
@@ -30,7 +30,7 @@
 --- 🎲 Tavolo
 
 > [!info] Live
-> Scena corrente: `INPUT[text:scena_corrente]`
+> Scena corrente: `INPUT[text(placeholder(dove si trova il gruppo adesso)):scena_corrente]`
 >
 > Tiro rapido: `dice: 1d20` · Data in gioco: `BUTTON[inserisci-data]`
 

@@ -1,0 +1,11 @@
+{# SCENA — template per-entità. Estende lo scheletro condiviso e aggiunge in Lore il
+   pannello «Filo dell'avventura» (flusso delle scene + ragnatela indizi + regola dei
+   3 indizi). Tutto il resto (tavolo/collegamenti/vista) viene da _entity_base.j2;
+   schema in YAML/entities/scena.yaml, logica in views.renderFiloAvventura. #}
+{% extends '_entity_base.j2' %}
+{% block lore %}
+{% import '_macros.j2' as m with context %}
+{{ m.scheda(template.category) }}
+{{ m.vista('renderFiloAvventura') }}
+{{ m.wizard_body(template.category) }}
+{% endblock %}

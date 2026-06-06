@@ -54,9 +54,31 @@ async function renderRisorsePG(page) {
 async function renderProgressione(app, page) {
   if (!page) return "*Apri la scheda PG.*";
   const opt = await loadPersonaggio(app);
-  const classe = (opt.classi || {})[page.classe];
+  const classiOpt = opt.classi || {};
+  const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+  // Ripartizione per classe (multiclasse) o classe piatta. `livello` = totale personaggio.
+  const bd = Array.isArray(page.classi) && page.classi.length
+    ? page.classi.map((c) => ({ id: text(c.id), livello: num(c.livello), sottoclasse: text(c.sottoclasse) }))
+    : [{ id: text(page.classe), livello: num(page.livello) || 1, sottoclasse: text(page.sottoclasse) }];
+  const totale = bd.reduce((s, c) => s + c.livello, 0) || 1;
+
+  // Multiclasse: riepilogo della ripartizione + privilegi acquisiti (dal frontmatter, già
+  // etichettati per classe da sali_pg). Le tabelle 1-20 complete restano nelle note SRD.
+  if (bd.length > 1) {
+    const parti = bd.map((c) => {
+      const cl = classiOpt[c.id] || {};
+      return `${cl.label || c.id} ${c.livello}${c.sottoclasse ? ` (${c.sottoclasse})` : ""}`;
+    });
+    const priv = asArray(page.privilegi_classe).map(text).filter(Boolean);
+    let out = `> [!abstract] Progressione — ${parti.join(" / ")} · personaggio ${totale}\n`;
+    out += `> **Privilegi**: ${priv.length ? priv.join(", ") : "—"}\n`;
+    out += `>\n> Per salire scegli la classe col bottone «Sali di livello». Le tabelle 1-20 sono nelle note SRD delle classi.\n`;
+    return out;
+  }
+
+  const classe = classiOpt[bd[0].id];
   if (!classe || !Array.isArray(classe.progressione)) return "*Classe senza progressione.*";
-  const liv = Math.max(1, Math.min(20, Math.floor(Number(page.livello) || 1)));
+  const liv = Math.max(1, Math.min(20, Math.floor(totale)));
   const rows = classe.progressione;
   const noASI = (p) => !/aumento dei punteggi/i.test(p);
   const acquisiti = rows.slice(0, liv).flatMap((r) => r.privilegi || []).filter(noASI);
