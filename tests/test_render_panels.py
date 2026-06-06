@@ -677,3 +677,27 @@ def test_adventure_board_edges(tmp_path):
     assert o["edges"].count("Avventura") == 2          # Apertura→Indagine, Snodo→Indagine
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_map_origine(tmp_path):
+    """views.renderMap: un'immagine-mappa (es. SVG Watabou) diventa blocco zoommap; se c'è
+    `mappa_origine` (URL http) sopra appare il link «Rigenera». Schemi non-http ignorati (sicurezza)."""
+    harness = tmp_path / "map.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const conU={file:{path:"x.md"},mappa:"Media/costa.svg",mappa_origine:"https://watabou.github.io/perilous-shores/?seed=1"};'
+        'const senza={file:{path:"x.md"},mappa:"Media/costa.svg"};'
+        'const evil={file:{path:"x.md"},mappa:"Media/costa.svg",mappa_origine:"javascript:alert(1)"};'
+        'Promise.all([m.exports.renderMap({},null,conU),m.exports.renderMap({},null,senza),m.exports.renderMap({},null,evil)])'
+        '.then(([a,b,c])=>process.stdout.write(JSON.stringify({a,b,c})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    o = json.loads(res.stdout)
+    assert "```zoommap" in o["a"] and "image: Media/costa.svg" in o["a"]
+    assert "Rigenera" in o["a"] and "watabou.github.io" in o["a"]   # link all'origine
+    assert "Rigenera" not in o["b"]                                  # senza origine → nessun link
+    assert "Rigenera" not in o["c"]                                  # schema non-http → ignorato (sicurezza)
+
+

@@ -78,7 +78,11 @@ async function renderMap(app, dv, page) {
   // pin con [[link]] alle note). Verificato in-app: zoom-map processa il blocco anche se
   // iniettato da JS Engine (engine.markdown.create). I marker si piazzano a mano (Shift+clic).
   if (/\.(png|jpe?g|webp|gif|svg|avif)$/i.test(path)) {
-    return "```zoommap\nimage: " + path + "\nheight: 480px\nminZoom: 0.3\nmaxZoom: 8\n```";
+    // Link «rigenera» se la mappa ha un'origine (URL Watabou/Azgaar col seed): un clic
+    // per riaprire/modificare la mappa nel generatore. Solo http(s), per sicurezza.
+    const orig = text(page.mappa_origine);
+    const tip = /^https?:\/\//i.test(orig) ? `> [!tip] 🔗 [Rigenera o modifica la mappa originale](${orig})\n\n` : "";
+    return tip + "```zoommap\nimage: " + path + "\nheight: 480px\nminZoom: 0.3\nmaxZoom: 8\n```";
   }
   // Nota o disegno Excalidraw → embed (zone cliccabili disegnate a mano).
   const base = (nameStr || path.split("/").pop()).replace(/\.md$/, "");

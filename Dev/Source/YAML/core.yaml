@@ -60,6 +60,9 @@ fields:
   popolazione:    { label: Popolazione,          widget: text, placeholder: "es. 5.000 o «poche centinaia»" }
   # Mappa collegata (luogo/mondo): link a un disegno Excalidraw, un'immagine o una nota.
   mappa:          { label: Mappa,                widget: mappa }
+  # Origine della mappa: l'URL del generatore (Watabou/Azgaar) con seed/parametri, per
+  # rigenerarla o modificarla. renderMap lo mostra come link cliccabile sopra la zoom-map.
+  mappa_origine:  { label: "Origine mappa (URL)", widget: text, placeholder: "incolla l'URL Watabou o Azgaar col seed" }
   portata:        { label: Portata,              widget: portata }
   pronomi:        { label: Pronomi,              widget: text, placeholder: "es. lei / lui / loro" }
   eta:            { label: Età,                  widget: text, placeholder: "es. 34 o «secoli»" }
