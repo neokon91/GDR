@@ -71,7 +71,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 --- 🔗 Collegamenti
 
 > [!example] Relazioni
-> **Controllata da**: `INPUT[suggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):controllata_da]`
+> **Controllata da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):controllata_da]`
 > **Prodotta in**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):prodotta_in]`
 > **Consumata da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):consumata_da]`
 > **Trasportata su**: `INPUT[inlineListSuggester(optionQuery("Mondi/Rotte"), useLinks(partial), allowOther):trasportata_su]`

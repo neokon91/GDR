@@ -88,4 +88,4 @@ creation:
 
 guida:
   scopo: La classe homebrew che i tuoi giocatori potranno scegliere in creazione e far salire di livello come una ufficiale.
-  campi_chiave: '**Tipo** + **Dado vita** + **Caratteristica primaria** + **Incantatore?** (pieno/mezzo): da questi il motore deriva slot, competenza e ASI.'
+  campi_chiave: 'Il **Tipo** (marziale/incantatore/…) è solo narrativo; a guidare la MECCANICA sono **Dado vita** + **Caratteristica primaria** + **Incantatore?** (nessuno/pieno/mezzo): da questi il motore deriva slot, competenza e ASI. ⚠️ imposta **Incantatore?** esplicitamente — il Tipo da solo NON dà gli slot.'

@@ -53,7 +53,10 @@ relazioni:
   label: Piano di dimora
   category: piano
 # Divinità opposte (rivalità divina: Ordine vs Caos, antagonismi di pantheon):
-# alimenta il grafo e genera trame. Non reciproca, come gli altri 'rivali'.
+# alimenta il grafo e genera trame. È RECIPROCA: 'rivali' è l'UNICA self-relation
+# di divinita → reciprocalField la auto-deriva e Collega scrive l'inverso simmetrico
+# (A opposta a B ⇒ B opposta ad A). Diverso da personaggio.rivali (3 self-relation,
+# ambiguo → 'connessioni').
 - field: rivali
   label: Divinità opposte
   category: divinita

@@ -35,8 +35,10 @@ fields:
   usi:      { label: Usi,        widget: text }
 scheda: [fonte, scarsita, usi]
 relazioni:
-  # Inverso pulito (1:1) di fazione.controlla_risorse → chi la controlla.
-  - { field: controllata_da, label: Controllata da, category: fazione }
+  # Inverso di fazione.controlla_risorse → chi la controlla. È 1:N (multi): una
+  # fazione controlla molte risorse, e una risorsa può essere CONTESA fra più fazioni
+  # (il motore di Economia / spinteFronte percorre il grafo da entrambi i lati).
+  - { field: controllata_da, label: Controllata da, category: fazione, multi: true }
   # Inversi TIPIZZATI del grafo economico (luogo.produce/dipende_da, rotta.risorse):
   # così dalla risorsa si vede dove nasce, dove serve e su quali rotte viaggia — e la
   # dashboard Economia / spinteFronte percorrono il grafo da entrambi i lati.

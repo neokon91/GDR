@@ -45,7 +45,10 @@ relazioni:
   label: Braccio politico
   category: fazione
 # Culti rivali (rivalità dottrinale: eresie, scismi, fedi in competizione):
-# alimenta il grafo e genera trame. Non reciproca, come gli altri 'rivali'.
+# alimenta il grafo e genera trame. È RECIPROCA: 'rivali' è l'UNICA self-relation
+# di culto → reciprocalField la auto-deriva e Collega scrive l'inverso simmetrico
+# (A rivale di B ⇒ B rivale di A). Diverso da personaggio.rivali, che con 3
+# self-relation (parenti/alleati/rivali) è ambiguo e cade su 'connessioni'.
 - field: rivali
   label: Culti rivali
   category: culto

@@ -52,10 +52,15 @@ relazioni:
 - field: fazione
   label: Affiliazione
   category: fazione
+# Parentela: SIMMETRICA → reciprocal ESPLICITO (se A è parente di B, B lo è di A).
+# Serve l'esplicito perché personaggio ha 3 self-relation (parenti/alleati/rivali):
+# l'auto-derivazione sarebbe ambigua e cadrebbe su 'connessioni'. alleati/rivali
+# restano asimmetrici di proposito (un PNG può considerare alleato chi non ricambia).
 - field: parenti
   label: Parenti / stirpe
   category: personaggio
   multi: true
+  reciprocal: parenti
 - field: luogo
   label: Base
   category: luogo

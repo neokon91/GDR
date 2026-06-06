@@ -58,9 +58,10 @@ creation:
     link: true
     required: true
   body:
-  - field: polarita
-    prompt: 'Polarità: i due poli in tensione (es. Vita ↔ Morte)'
-    heading: Polarità
+  # NB: i due poli NON sono un body-prosa (sarebbe doppione): vivono nel campo-scheda
+  # `poli` (query-abile, "Vita ↔ Morte") + l'asse `Equilibrio` (verso quale polo pende
+  # il mondo ora). Il body racconta il RUOLO (principio) e la dinamica (rottura/
+  # manifestazioni), non ri-elenca i poli.
   - field: principio
     prompt: 'Principio: cosa regola, come tiene insieme la realtà'
     heading: Principio

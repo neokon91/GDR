@@ -57,6 +57,13 @@ relazioni:
   label: Divinità che vi dimorano
   category: divinita
   multi: true
+# Inverso tipizzato di sistema_magico.piani: un piano elenca i sistemi che vi
+# risuonano (coppia univoca → auto-derivata da Collega; prima l'inverso ricadeva
+# su 'connessioni', a differenza di legge_fondamentale/entita_primordiale).
+- field: sistemi_magici
+  label: Sistemi magici di risonanza
+  category: sistema_magico
+  multi: true
 creation:
   fields:
   - field: tipo

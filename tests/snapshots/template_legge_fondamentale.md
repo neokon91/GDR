@@ -37,9 +37,6 @@
 > [!abstract] Scheda
 > Poli: `INPUT[text:poli]`
 
-> [!note] Polarità
-> `INPUT[textArea:polarita]`
-
 > [!note] Principio
 > `INPUT[textArea:principio]`
 

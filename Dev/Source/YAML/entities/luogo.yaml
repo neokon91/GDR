@@ -92,7 +92,7 @@ fields:
   servizi:             { label: Servizi & edifici,      widget: servizi }
   quartieri:           { label: Quartieri / distretti,  widget: text }
   prosperita:          { label: Prosperità,             widget: prosperita }
-  pericolosita:        { label: Pericolosità,           widget: pericolosita }
+  pericolosita:        { label: Rischio locale,         widget: pericolosita }  # ≠ asse 'Pericolosità Ontologica': qui è il rischio MONDANO dell'insediamento (guardia/crimine)
   livelli:             { label: Livelli / aree,         widget: number }
   occupante:           { label: Occupante,              widget: legame }
   ricompensa:          { label: Ricompensa chiave,      widget: text }

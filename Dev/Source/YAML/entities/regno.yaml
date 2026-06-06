@@ -56,7 +56,7 @@ relazioni:
   category: personaggio
   multi: true
 - field: fazioni
-  label: Fazioni di corte
+  label: Organi e fazioni di stato   # qualunque organo ufficiale (gilda, tribunale, accademia, corte…), non solo la 'corte'
   category: fazione
   multi: true
 - field: alleati
