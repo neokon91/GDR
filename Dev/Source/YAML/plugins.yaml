@@ -310,6 +310,11 @@ buttons:
   - id: importa-mappa
     label: Importa mappa Watabou
     action: importa_mappa
+  # Import PROFONDO da Azgaar (FULL JSON): crea cultura/culto/regno/luogo + segnaposto
+  # (tp.user.importa_azgaar).
+  - id: importa-azgaar
+    label: Importa mappa Azgaar (Full JSON)
+    action: importa_azgaar
   # Turno di bastione (DMG 2024): registra un turno nel Registro dei turni.
   - id: turno-bastione
     label: Turno di bastione

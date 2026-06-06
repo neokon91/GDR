@@ -168,7 +168,9 @@ group by categoria as "Tipo"
 > - **Realm / Perilous Shores** (regione, continente) e **City / Village** (insediamento) → l'**SVG** è la mappa; dal **JSON** copia nome e URL (incollalo in *Origine*).
 > - **One Page Dungeon** → esporta in **Markdown**: incollalo nel corpo di un `[[Luogo]]`-dungeon (descrizioni stanza-per-stanza) e usa l'**SVG/PNG** come sua mappa.
 >
-> **Automatico** (SVG regionale con toponimi): `BUTTON[importa-mappa]` — imposta la mappa + l'origine, crea un `[[Luogo]]` per ogni toponimo e ne piazza i segnaposto. *Controlla la posizione dei pin dopo l'import.*
+> **Import automatico:**
+> - **Watabou** (SVG regionale coi toponimi): `BUTTON[importa-mappa]` — imposta mappa+origine e crea un `[[Luogo]]` per toponimo coi segnaposto.
+> - **Azgaar** (esporta **Export → Full JSON**, trascinalo in `Media/`): `BUTTON[importa-azgaar]` — import PROFONDO: crea `[[Cultura]]`/`[[Culto]]`/`[[Regno]]`/`[[Luogo]]` (burgs+marker) collegati, e i segnaposto a coordinate-pixel. *Controlla la posizione dei pin dopo l'import.*
 >
 > Alternative: `BUTTON[disegna-mappa]` (Excalidraw → `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con overlay/livelli).
 ```js-engine

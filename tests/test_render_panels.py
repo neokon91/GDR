@@ -730,3 +730,43 @@ def test_importa_mappa_parse(tmp_path):
     assert o["m0"]["link"] == "[[Aster]]" and o["m0"]["x"] == 643        # pin linkato alla nota
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_importa_azgaar_parse(tmp_path):
+    """importa_azgaar.parseAzgaar: dal FULL JSON Azgaar estrae cultura/culto/regno/burgs/
+    markers — salta il placeholder [0] e i `removed`, risolve i riferimenti per nome
+    (regno/cultura dei burg), tiene le coord pixel; buildMarkers usa size = info.w×h."""
+    full = {
+        "info": {"mapName": "Aether", "width": 1800, "height": 1600, "seed": "123"},
+        "notes": [{"id": "marker3", "legend": "Cripta perduta"}],
+        "pack": {
+            "cultures": [{"i": 0, "name": ""}, {"i": 1, "name": "Silvani"}, {"i": 2, "name": "Nani", "removed": True}],
+            "religions": [{"i": 0, "name": ""}, {"i": 1, "name": "Culto del Sole", "culture": 1}],
+            "states": [{"i": 0, "name": "Neutrals"}, {"i": 1, "name": "Eldoria", "fullName": "Regno di Eldoria", "culture": 1}],
+            "burgs": [{"i": 0, "name": ""}, {"i": 1, "name": "Capitale", "x": 900, "y": 800, "state": 1, "culture": 1, "capital": 1, "port": 1, "population": 12.5}],
+            "markers": [{"i": 3, "name": "", "type": "dungeon", "x": 500, "y": 600}],
+        },
+    }
+    harness = tmp_path / "az.js"
+    harness.write_text(
+        f'const az=require({json.dumps(str(render.JS_DIR / "importa_azgaar.js"))});'
+        f'const full={json.dumps(full)};'
+        'const r=az.parseAzgaar(full);'
+        'const mk=az.buildMarkers("Media/m.svg",{w:r.info.width,h:r.info.height},'
+        ' [...r.burgs,...r.markers].map(p=>({nome:p.nome,x:p.x,y:p.y})));'
+        'process.stdout.write(JSON.stringify({info:r.info,culture:r.culture,culti:r.culti,'
+        ' regni:r.regni,burgs:r.burgs,markers:r.markers,nMark:mk.markers.length,size:mk.size}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    o = json.loads(res.stdout)
+    assert o["info"] == {"nome": "Aether", "width": 1800, "height": 1600, "seed": "123"}
+    assert [c["nome"] for c in o["culture"]] == ["Silvani"]                       # [0] e `removed` saltati
+    assert o["culti"][0] == {"nome": "Culto del Sole", "cultura": "Silvani"}      # cultura risolta per nome
+    assert o["regni"][0]["nome"] == "Eldoria" and o["regni"][0]["fullName"] == "Regno di Eldoria"
+    b = o["burgs"][0]
+    assert b["nome"] == "Capitale" and b["x"] == 900 and b["regno"] == "Eldoria" and b["cultura"] == "Silvani"
+    assert b["capitale"] is True and b["porto"] is True                          # attributi del burg
+    assert o["markers"][0]["nome"] == "dungeon" and "Cripta" in o["markers"][0]["legenda"]  # nome→tipo · legenda da notes
+    assert o["nMark"] == 2 and o["size"] == {"w": 1800, "h": 1600}               # 1 burg + 1 marker, size = info
+
+

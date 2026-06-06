@@ -97,6 +97,13 @@ async function meta_actions(tp, action = "") {
     new Notice("importa_mappa non disponibile."); return "";
   }
 
+  if (action === "importa_azgaar") {
+    // Import PROFONDO da Azgaar (FULL JSON): crea cultura/culto/regno/luogo + segnaposto
+    // (script autonomo, tp.user.importa_azgaar).
+    if (tp.user && tp.user.importa_azgaar) return await tp.user.importa_azgaar(tp);
+    new Notice("importa_azgaar non disponibile."); return "";
+  }
+
   if (action === "genera_sito") {
     // Esporta il sito dei giocatori (HTML statico, spoiler-free) dentro Obsidian,
     // senza Python né terminale (script autonomo, gemello di build_site.py).
