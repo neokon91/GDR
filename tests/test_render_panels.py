@@ -770,3 +770,45 @@ def test_importa_azgaar_parse(tmp_path):
     assert o["nMark"] == 2 and o["size"] == {"w": 1800, "h": 1600}               # 1 burg + 1 marker, size = info
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_importa_azgaar_estensioni(tmp_path):
+    """importa_azgaar.parseAzgaar (estensioni Azgaar↔vault): catena città (burg→Watabou),
+    eserciti (military→esercito+burg schierato), rotte (estremi dai burg), zone (no hidden),
+    province, fiumi nominati, biomi PRESENTI (tipi, niente Marine), diplomazia (nemici)."""
+    full = {
+        "info": {"mapName": "Aether", "width": 1800, "height": 1600, "seed": "42"},
+        "settings": {"populationRate": 1000},
+        "biomesData": {"name": ["Marine", "Hot desert", "Taiga"]},
+        "pack": {
+            "cells": {"biome": [0, 1, 2, 2]},
+            "cultures": [{"i": 0, "name": ""}, {"i": 1, "name": "Silvani"}],
+            "states": [{"i": 0, "name": "Neutrals", "diplomacy": []},
+                       {"i": 1, "name": "Eldoria", "culture": 1, "diplomacy": ["x", "x", "Enemy"], "military": [{"i": 1, "name": "1a Legione", "x": 910, "y": 810, "cell": 3}]},
+                       {"i": 2, "name": "Orcheim", "diplomacy": ["x", "Enemy", "x"]}],
+            "burgs": [{"i": 0, "name": ""}, {"i": 1, "name": "Capitale", "x": 900, "y": 800, "cell": 3, "state": 1, "population": 8, "MFCG": 777, "walls": 1}],
+            "provinces": [{"i": 0, "name": ""}, {"i": 1, "name": "Marca Sud", "state": 1}],
+            "routes": [{"i": 1, "name": "Via Regia", "group": "roads", "points": [[900, 800, 3], [400, 300, 3]]}],
+            "zones": [{"i": 1, "name": "Invasione", "type": "Invasion"}, {"i": 2, "name": "X", "hidden": True}],
+            "rivers": [{"i": 1, "name": "ArgentoRio"}, {"i": 2, "name": ""}],
+        },
+    }
+    harness = tmp_path / "aze.js"
+    harness.write_text(
+        f'const az=require({json.dumps(str(render.JS_DIR / "importa_azgaar.js"))});'
+        f'const r=az.parseAzgaar({json.dumps(full)});'
+        'process.stdout.write(JSON.stringify({regni:r.regni,burg:r.burgs[0],eserciti:r.eserciti,'
+        ' rotte:r.rotte,zone:r.zone,province:r.province,fiumi:r.fiumi,biomi:r.biomi}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    o = json.loads(res.stdout)
+    assert o["regni"][0]["nemici"] == ["Orcheim"]                                # diplomazia → nemici per nome
+    assert "watabou.github.io/city-generator" in o["burg"]["citta_url"] and "seed=777" in o["burg"]["citta_url"]  # catena città
+    assert o["eserciti"][0] == {"nome": "1a Legione", "x": 910, "y": 810, "regno": "Eldoria", "schierato": "Capitale"}
+    assert o["rotte"][0]["nome"] == "Via Regia" and o["rotte"][0]["estremi"] == ["Capitale"]  # capi nella cella 3 = Capitale (dedup)
+    assert [z["nome"] for z in o["zone"]] == ["Invasione"]                        # hidden saltata
+    assert o["province"][0]["regno"] == "Eldoria"
+    assert [f["nome"] for f in o["fiumi"]] == ["ArgentoRio"]                      # fiume senza nome saltato
+    assert [b["nome"] for b in o["biomi"]] == ["Hot desert", "Taiga"]            # Marine escluso, solo tipi presenti
+
+
