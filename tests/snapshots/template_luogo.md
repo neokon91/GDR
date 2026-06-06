@@ -212,7 +212,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > Alternative: `BUTTON[disegna-mappa]` (Excalidraw → `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con overlay/livelli).
 >
-> **Hexcrawl giocabile?** Apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, sottomappe, tiri incontri). Le sue cartelle sono già puntate alle tue note: gli esagoni linkano **Luoghi/Fazioni/Missioni** e usano le tue **Tabelle** per gli incontri — una sola fonte di verità.
+> **Hexcrawl giocabile?** Apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, sottomappe, tiri incontri). Le cartelle sono pre-puntate alle tue note (Towns/Dungeons→`Mondi/Luoghi`, Factions→`Mondi/Fazioni`, Quests→`Mondi/Missioni`, Tables→`Mondi/Tabelle`, Regions→`Mondi/Regni`) → gli esagoni linkano il tuo grafo, una sola fonte di verità. *Al primo avvio il suo wizard propone sottocartella di default: scegli «Don't show again», oppure nello step cartelle attiva «Configure each folder path individually» e reimposta quei path.*
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```
