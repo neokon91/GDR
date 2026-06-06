@@ -24,6 +24,9 @@
 ````tabs
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
 > Stato d'avveramento: `INPUT[stato_profezia][:stato_profezia]`
 

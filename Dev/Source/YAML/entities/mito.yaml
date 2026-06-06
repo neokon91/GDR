@@ -11,11 +11,21 @@ templates:
   default_type: leggenda
   target: z.modelli/Mito.md
 subtypes:
-- mito di origine
-- leggenda
-- diceria
-- dottrina
-- sogno profetico
+- nome: mito di origine
+  descrizione: "Racconta come qualcosa ebbe inizio — il mondo, un popolo, una legge — e ne fonda il senso."
+  wizard: ["Cosa giustifica o legittima, oggi, questo inizio", "Chi avrebbe interesse a raccontarlo diverso"]
+- nome: leggenda
+  descrizione: "Storia di eroi e imprese, gonfiata dal tempo ma con un seme di verità."
+  wizard: ["Il nucleo reale sotto l'esagerazione", "Cosa ispira o pretende da chi la ascolta"]
+- nome: diceria
+  descrizione: "Voce che corre di bocca in bocca: incerta, mutevole, viva proprio perché non provata."
+  wizard: ["Da dove parte e perché si diffonde ora", "Chi ci guadagna a tenerla in circolo"]
+- nome: dottrina
+  descrizione: "Verità tramandata come fede: non si discute, si professa — struttura un culto o un popolo."
+  wizard: ["Chi la custodisce e come punisce l'eresia", "Quale condotta impone a chi vi crede"]
+- nome: sogno profetico
+  descrizione: "Un mito ricevuto in visione, sospeso tra ricordo del futuro e simbolo da decifrare."
+  wizard: ["Chi l'ha sognato e cosa ne è seguito", "L'immagine-chiave che tutti ricordano"]
 # La «veridicità» del mito (quanto corrisponde alla verità del mondo) vive come ASSE
 # tematico (assi/mito.yaml): slider 1-5 con legenda + radar, non un campo-scheda
 # doppione che colliderebbe sulla stessa chiave di frontmatter.

@@ -25,6 +25,9 @@
 ````tabs
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
 > Stato: `INPUT[stato_cosmico][:stato_cosmico]`
 > Allineamento: `INPUT[allineamento][:allineamento]`

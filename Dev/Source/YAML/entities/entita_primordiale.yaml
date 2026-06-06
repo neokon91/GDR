@@ -13,11 +13,21 @@ templates:
   default_type: forza primordiale
   target: z.modelli/Entita primordiale.md
 subtypes:
-- forza primordiale
-- titano
-- entità del vuoto
-- aspetto incarnato
-- dormiente
+- nome: forza primordiale
+  descrizione: "Un principio bruto del cosmo fatto essere: non pensa come noi — È, e tutto ne consegue."
+  wizard: ["La legge o la forza che incarna", "Come la sua sola esistenza piega il mondo"]
+- nome: titano
+  descrizione: "Un colosso dell'era prima delle divinità: corpo immane, volontà antica, spesso incatenato."
+  wizard: ["Cosa fece nell'era prima — e perché fu fermato", "Dove giace ora e cosa lo trattiene"]
+- nome: entità del vuoto
+  descrizione: "Ciò che viene da fuori, o da prima della realtà: nega, divora o disfa l'ordine."
+  wizard: ["Cosa minaccia di dissolvere", "Quale segno ne annuncia l'attenzione"]
+- nome: aspetto incarnato
+  descrizione: "Una primordiale che ha preso forma e cammina nel mondo — in carne, idolo o avatar."
+  wizard: ["In che forma si manifesta e cosa rivela di sé", "Cosa vuole, ora che è qui"]
+- nome: dormiente
+  descrizione: "Una potenza sigillata o assopita: la sua quiete è una conta alla rovescia."
+  wizard: ["Cosa la tiene sopita — e cosa la sveglierebbe", "Quali segni precedono il risveglio"]
 # Campi query-abili (stato nel cosmo + allineamento): "tutte le primordiali dormienti".
 fields:
   stato_cosmico: { label: Stato, widget: stato_cosmico }

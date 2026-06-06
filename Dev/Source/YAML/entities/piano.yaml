@@ -13,12 +13,24 @@ templates:
   default_type: piano spirituale
   target: z.modelli/Piano.md
 subtypes:
-- piano elementale
-- piano spirituale
-- piano onirico
-- piano astrale
-- semipiano
-- aldilà
+- nome: piano elementale
+  descrizione: "Un piano fatto di una sostanza prima — fuoco, acqua, aria, terra o loro confini — dove un solo elemento detta legge."
+  wizard: ["Quale elemento lo domina e come piega chi vi entra", "Cosa vi prospera e cosa lo attraversa soltanto"]
+- nome: piano spirituale
+  descrizione: "Regno di anime, dèi o forze morali, dove conta l'essenza più della materia."
+  wizard: ["Quali entità o defunti lo abitano", "Quale legge spirituale o morale vi regna"]
+- nome: piano onirico
+  descrizione: "Il regno del sogno, della memoria e dell'inconscio: instabile, simbolico, a volte condiviso."
+  wizard: ["Le sue regole oniriche: cosa è reale, come cambia chi sogna", "Chi o cosa vi entra senza volerlo"]
+- nome: piano astrale
+  descrizione: "La distesa di mezzo che collega i piani: si attraversa più che abitarla."
+  wizard: ["Cosa vi naviga e cosa vi si perde", "Come ci si orienta — o ci si arena"]
+- nome: semipiano
+  descrizione: "Una sacca di realtà piccola e creata: rifugio, prigione o demanio di un potere."
+  wizard: ["Chi l'ha creato e perché", "I suoi confini e cosa accade a varcarli"]
+- nome: aldilà
+  descrizione: "Dove vanno i morti di questo mondo: giudizio, riposo o un viaggio ulteriore."
+  wizard: ["Cosa attende le anime che vi giungono", "Chi lo governa e con quali regole"]
 # Campo query-abile: "tutti i piani accessibili solo per rituale".
 fields:
   accessibilita: { label: Accessibilità, widget: accessibilita }

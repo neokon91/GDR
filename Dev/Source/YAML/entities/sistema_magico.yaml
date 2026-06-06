@@ -13,11 +13,21 @@ templates:
   default_type: tradizione arcana
   target: z.modelli/Sistema magico.md
 subtypes:
-- tradizione arcana
-- disciplina elementale
-- arte proibita
-- dono innato
-- tecnica rituale
+- nome: tradizione arcana
+  descrizione: "Magia studiata e codificata: formule, scuole, biblioteche — il potere si impara."
+  wizard: ["Dove e come si insegna, e chi ne ha il monopolio", "Cosa separa l'iniziato dal profano"]
+- nome: disciplina elementale
+  descrizione: "Potere attinto da una forza naturale o elementale e piegato col metodo."
+  wizard: ["Quale elemento o forza canalizza", "Il prezzo fisico di tendere quella corda"]
+- nome: arte proibita
+  descrizione: "Magia bandita per ciò che esige o scatena: necromanzia, patti, sangue."
+  wizard: ["Perché è proibita — chi l'ha messa al bando e cosa teme", "Cosa corrompe in chi la pratica"]
+- nome: dono innato
+  descrizione: "Potere che si nasce avendo, non si impara: stirpe, marchio, benedizione o maledizione."
+  wizard: ["Da dove viene il dono e chi lo porta", "Come la società tratta i nati-dotati"]
+- nome: tecnica rituale
+  descrizione: "Magia lenta e collettiva: funziona col rito, il luogo e il tempo giusto, non a comando."
+  wizard: ["Cosa serve al rito: tempo, luogo, offerte, numeri", "Cosa accade se è spezzato a metà"]
 # Campo query-abile: "tutti i sistemi a fonte divina".
 fields:
   fonte_potere: { label: Fonte del potere, widget: fonte_potere }

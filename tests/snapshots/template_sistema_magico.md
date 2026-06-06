@@ -24,6 +24,9 @@
 ````tabs
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
 > Fonte del potere: `INPUT[fonte_potere][:fonte_potere]`
 

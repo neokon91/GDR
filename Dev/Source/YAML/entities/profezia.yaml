@@ -11,11 +11,21 @@ templates:
   default_type: divinatoria
   target: z.modelli/Profezia.md
 subtypes:
-- cosmica
-- divinatoria
-- di rinascita
-- distruttiva
-- personale
+- nome: cosmica
+  descrizione: "Riguarda la sorte del mondo o del cosmo: fini, ere, equilibri che si rovesciano."
+  wizard: ["La posta: cosa finisce o muta su scala di mondo", "Il segno annunciato che nessuno può ignorare"]
+- nome: divinatoria
+  descrizione: "Lettura del probabile da segni, astri o arti: indica una direzione, non una condanna."
+  wizard: ["Con quale arte è stata tratta e quanto è affidabile", "Cosa suggerisce di fare o evitare"]
+- nome: di rinascita
+  descrizione: "Annuncia un ritorno o una riscoperta: un re, un dio, un'età che torna."
+  wizard: ["Chi o cosa dovrebbe tornare, e chi lo attende", "Il segno che ne riconoscerà la venuta"]
+- nome: distruttiva
+  descrizione: "Predice rovina: una fine, un flagello, un crollo — un orologio che corre."
+  wizard: ["Cosa annuncia di distruggere, e quando", "Cosa, se fatto, potrebbe ancora scongiurarla"]
+- nome: personale
+  descrizione: "Lega il destino di una persona sola: un nome, un compito, una morte annunciata."
+  wizard: ["Chi riguarda — e se lo sa", "Il dettaglio che la rende inevitabile, o aggirabile"]
 # Campo query-abile per il DM: "tutte le profezie ancora in corso".
 fields:
   stato_profezia: { label: Stato d'avveramento, widget: stato_profezia }
