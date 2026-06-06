@@ -97,7 +97,9 @@ async function importa_mappa(tp) {
 
   // 4) Imposta mappa + origine sul bersaglio.
   await app.fileManager.processFrontMatter(target, (fm) => {
-    fm.mappa = `[[${img.basename}]]`;
+    // Link CON estensione: per i file non-markdown (immagini) Obsidian risolve `[[nome.svg]]`,
+    // non `[[nome]]` (che cercherebbe una nota .md) → renderMap entra nel ramo immagine→zoom-map.
+    fm.mappa = `[[${img.name}]]`;
     if (origine) fm.mappa_origine = origine;
   });
 

@@ -812,3 +812,26 @@ def test_importa_azgaar_estensioni(tmp_path):
     assert [b["nome"] for b in o["biomi"]] == ["Hot desert", "Taiga"]            # Marine escluso, solo tipi presenti
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_map_link_estensione(tmp_path):
+    """views.renderMap: il link `mappa` di un'IMMAGINE deve avere l'estensione — `[[x.svg]]`
+    entra nel ramo zoom-map, `[[x]]` (senza estensione) NO (Obsidian cercherebbe una nota .md).
+    Regressione del bug import: gli importer devono usare img.name, non img.basename. (Verificato
+    in-app durante la QA: una mappa importata con link senza estensione mostrava «Nessuna mappa».)"""
+    harness = tmp_path / "maplink.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const ext={file:{path:"x.md"},mappa:"[[costa_dellombra.svg]]"};'
+        'const noext={file:{path:"x.md"},mappa:"[[costa_dellombra]]"};'
+        'Promise.all([m.exports.renderMap({},null,ext),m.exports.renderMap({},null,noext)])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    o = json.loads(res.stdout)
+    assert "```zoommap" in o["a"] and "image: costa_dellombra.svg" in o["a"]   # con estensione → zoom-map
+    assert "```zoommap" not in o["b"]                                          # senza estensione → NO zoom-map
+
+

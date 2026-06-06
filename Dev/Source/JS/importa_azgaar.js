@@ -207,7 +207,7 @@ async function importa_azgaar(tp) {
       ["— nessuna immagine, solo le note —", ...svgs.map((f) => f.path)],
       [null, ...svgs], false, "Immagine-mappa Azgaar (SVG/PNG) per i segnaposto?");
     if (img) {
-      await app.fileManager.processFrontMatter(mondoFile, (fm) => { fm.mappa = `[[${img.basename}]]`; });
+      await app.fileManager.processFrontMatter(mondoFile, (fm) => { fm.mappa = `[[${img.name}]]`; });
       const markersPath = img.path + ".markers.json";
       if (!app.vault.getAbstractFileByPath(markersPath)) {
         const punti = [...data.burgs, ...data.markers].map((p) => ({ nome: p.nome, x: p.x, y: p.y, link: `[[${_file(p.nome)}]]` }));
