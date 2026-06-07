@@ -41,7 +41,7 @@ vault Obsidian + sito dei giocatori opzionale.
   2024 + alleati, ponte homebrew→motore (incl. classe/sottoclasse), scaffolder GS→statblock.
 
 ### Onboarding & condivisione
-- Mondo-esempio *Valdombra* + nota «Inizia da qui», on-ramp Home, LEGGIMI,
+- Mondo-esempio *Astaria* (seme `seed-example`) + nota «Inizia da qui», on-ramp Home, LEGGIMI,
   sito dei giocatori statico spoiler-free.
 
 ### Solidità

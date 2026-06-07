@@ -39,13 +39,15 @@ contendono le risorse; gli eventi muovono i Fronti.
   (anche singole sezioni di una nota).
 
 **Locale, tuo, per sempre**
-- è una cartella sul tuo disco: **nessun account, 100% offline, i tuoi dati non vanno da
+- è una cartella sul tuo disco: **nessun account, funziona offline, i tuoi dati non vanno da
   nessuna parte**;
 - **gratis** e aperto; i plugin community sono inclusi (apri e usa).
 
 ### Come si parte
-Scarica il vault, scompattalo e in Obsidian fai **«Apri cartella come vault»**. Parti da un
-**foglio bianco**: un tour **«Crea il tuo mondo»** ti accompagna e ogni nota ha in cima un
+Scarica il vault, scompattalo e in Obsidian fai **«Apri cartella come vault»**. Dentro trovi un
+**mondo-esempio giocabile** — *Astaria*, sulla mappa *Costa dell'Ombra* (luoghi coi segnaposto e
+una fazione collegata) — per vedere subito *lore → superficie giocabile*. Cancella la sua cartella
+per il **foglio bianco**: un tour **«Crea il tuo mondo»** ti accompagna, e ogni nota ha in cima un
 callout **ℹ️ Guida** che spiega cos'è e come compilarla.
 
 > Include materiale dal **SRD 5.2.1** (CC-BY-4.0) di Wizards of the Coast. Non affiliato né

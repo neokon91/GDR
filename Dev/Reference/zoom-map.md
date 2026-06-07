@@ -20,8 +20,8 @@ riapre per modifica un blocco esistente.
 ## Blocco `zoommap` (sintassi ufficiale)
 ````
 ```zoommap
-image: Media/Mappe/Valdombra.jpg                 # RICHIESTO: immagine base nel vault
-markers: Media/Mappe/Valdombra.jpg.markers.json  # opz.: default <image>.markers.json
+image: Media/costa_dellombra.svg                 # RICHIESTO: immagine base nel vault
+markers: Media/costa_dellombra.svg.markers.json  # opz.: default <image>.markers.json
 minZoom: 0.3
 maxZoom: 8
 height: 560px

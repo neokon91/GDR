@@ -8,8 +8,9 @@ la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e
 ## Stato (2026-06-04)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` → vault Obsidian (+ sito giocatori
-opzionale). Vault parte vuoto: onboarding via wizard + callout **ℹ️ Guida** per-entità (il
-mondo-esempio Valdombra è stato rimosso).
+opzionale). Build vuota; lo zip spedito ha un mondo-esempio **Astaria** seminato da
+`seed-example` (Dev/Tools), cancellabile per il foglio bianco. Onboarding via wizard +
+callout **ℹ️ Guida** per-entità.
 
 Mergiato su `main`: **refactor a GRUPPI + profili-sottotipo**. Tassonomia a 3 strati
 (gruppo → tipo → famiglia); i sottotipi portano campi/clock/evoluzione dedicati
