@@ -62,7 +62,11 @@ function main() {
     genere: "dark fantasy",
     temi: ["oscurità che si ridesta", "frontiera senza legge", "eredità maledetta", "il prezzo della salvezza"],
     diffusione_magia: 3, tono: 4, ordine_politico: 4, civilta_natura: 4, eta_storica: 4,
-    conflitto: "Sepolta sotto la Costa dell'Ombra, la Ziggurat Oscura si ridesta e l'Ombra cola lungo i moli, corrompendo mare e uomini. Tre poteri si contendono il risveglio: i Corsari dell'Ombra (ne salvano e vendono le reliquie), la Veglia dei Sepolti (il culto che vuole completarlo) e Chiarombra (l'ultima città di legge, che cerca di fermarlo).",
+    conflitto: "Sotto la Costa dell'Ombra qualcosa di antico si ridesta, e l'Ombra cola lungo i moli corrompendo mare e uomini. Tre poteri se ne contendono il controllo: i Corsari dell'Ombra, che dal porto di Aster trafficano le reliquie riaffiorate dalle rovine; la Veglia dei Sepolti, la confraternita incappucciata che custodisce la Ziggurat; e Chiarombra, l'ultima città di legge che cerca di arginare la marea.",
+    // verita_nascosta → callout `segreto`: resta nella nota (la vede il DM) ma il sito
+    // dei giocatori la ESCLUDE. È il «sotto» del conflitto, e mostra in concreto la
+    // separazione DM/giocatori che il sito promette.
+    verita_nascosta: "La Veglia dei Sepolti non custodisce la Ziggurat: la sta risvegliando. È un culto che nel Risveglio vede salvezza, e ogni reliquia che i Corsari trafugano è un tassello che manca al rito della Terza Porta — così chi vende ai Corsari, ignaro, lavora per il culto. Chiarombra lo sospetta, ma il faro dell'Artiglio Nero è già stato spento da dentro.",
     player_safe: "Una costa di nebbie, relitti e contrabbando, dove si mormora che qualcosa di antico si stia svegliando sotto le onde.",
     gancio: "I PG sbarcano ad Aster con un carico da consegnare e scoprono che il committente è scomparso — il suo ultimo messaggio nominava la Ziggurat.",
     uso_al_tavolo: "Sandbox costiero: tre poteri tirano i PG in direzioni opposte. Ogni mossa fa avanzare il clock del Risveglio.",
@@ -136,6 +140,115 @@ function main() {
     connessioni: [], sessioni: [], tags: ["gdr/bozza"],
   }) + fazBody);
 
-  console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (4 con lore) + mappa + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6).`);
+  // 5) Un PG d'esempio — la METÀ «al tavolo» che mancava al mondo-esempio. Korbin
+  //    Salmastro (Ladro 1 · Umano · Criminale) è la scheda 5.5e prodotta dal wizard
+  //    «Crea PG», curata e soprattutto COLLEGATA: mondo → [[Astaria]], fazione →
+  //    [[Corsari dell'Ombra]]. Così la demo mostra il loop completo: worldbuilding →
+  //    tavolo. Derivati RAW-2024 (CA 14 = cuoio+DES; PF 10 = d8+COS; TS DES/INT; 6
+  //    competenze classe+background senza doppioni). Ritratto VUOTO (aggancio immagine).
+  write("Mondi/Personaggi/Korbin_Salmastro.md", KORBIN_FM + modelBody("PG.md"));
+
+  console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (4 con lore) + mappa + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6) + 1 PG collegato (Korbin Salmastro, Ladro 1).`);
 }
+
+// Frontmatter del PG-esempio: la build del wizard «Crea PG», con in più i CAMPI DI
+// COLLEGAMENTO (mondo, fazione) e qualche tratto narrativo per l'infobox. Tenuto come
+// stringa grezza perché contiene `classi:` (array di oggetti) che fm() non serializza.
+const KORBIN_FM = `---
+nome: "Korbin Salmastro"
+categoria: personaggio
+tipo: pg
+mondo: "[[Astaria]]"
+fazione: "[[Corsari dell'Ombra]]"
+titolo: "Contrabbandiere"
+allineamento: "Caotico Neutrale"
+pronomi: "lui"
+eta: 34
+classe: ladro
+classi:
+  - { id: ladro, livello: 1, sottoclasse: "" }
+specie: umano
+background: criminale
+livello: 1
+competenza: 2
+taglia: Piccola o Media
+velocita: 9
+scurovisione: false
+ca: 14
+pf: 10
+pf_max: 10
+dado_vita: 8
+dadi_vita_max: 1
+armatura: cuoio
+scudo: false
+forza: 8
+destrezza: 17
+costituzione: 15
+intelligenza: 12
+saggezza: 13
+carisma: 10
+mod_forza: -1
+mod_destrezza: 3
+mod_costituzione: 2
+mod_intelligenza: 1
+mod_saggezza: 1
+mod_carisma: 0
+ts_forza: 0
+ts_destrezza: 1
+ts_costituzione: 0
+ts_intelligenza: 1
+ts_saggezza: 0
+ts_carisma: 0
+prof_acrobazia: 1
+prof_addestrare_animali: 0
+prof_arcano: 0
+prof_atletica: 0
+prof_furtivita: 1
+prof_indagare: 0
+prof_inganno: 1
+prof_intimidire: 0
+prof_intrattenere: 0
+prof_intuizione: 1
+prof_medicina: 0
+prof_natura: 0
+prof_percezione: 1
+prof_persuasione: 0
+prof_rapidita_di_mano: 1
+prof_religione: 0
+prof_sopravvivenza: 0
+prof_storia: 0
+tratti_specie: "intraprendente, pluriabilita e un talento Origini a scelta"
+competenze_armi: "Armi semplici e armi da guerra con proprieta accurata o leggera."
+competenze_armature: "Armature leggere."
+competenze_strumenti: "Arnesi da scasso"
+lingue:
+  - "Comune"
+  - "Sottocomune"
+  - "Goblin"
+privilegi_classe:
+  - "Maestria"
+  - "Attacco furtivo"
+  - "Gergo ladresco"
+  - "Padronanza d'armi"
+inventario:
+  - "armatura di cuoio"
+  - "2 pugnali"
+  - "spada corta"
+  - "arco corto"
+  - "20 frecce"
+  - "faretra"
+  - "arnesi da scasso"
+  - "dotazione da scassinatore e 8 mo"
+incantatore: false
+trucchetti: []
+incantesimi: []
+talenti:
+  - allerta
+padronanze_armi:
+  - "Pugnale — Graffio"
+  - "Arco corto — Vessazione"
+stato: bozza
+---
+`;
+
 main();
