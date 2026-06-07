@@ -14,7 +14,7 @@ const VAULT = path.join(ROOT, "dist", "GDR-vault");
 const SRC = path.join(ROOT, "Dev", "Source", "Esempio");
 const im = require(path.join(ROOT, "Dev", "Source", "JS", "importa_mappa.js"));
 
-const nomeFile = (n) => String(n || "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_") || "Luogo";
+const nomeFile = (n) => String(n || "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, " ") || "Luogo";
 
 // Corpo di un modello (z.modelli/<Nome>.md), saltando la riga 1 (tag Templater <% ... %>).
 function modelBody(name) {
@@ -85,19 +85,19 @@ function main() {
     Aster: { tipo: "insediamento", clima: "umido, salmastro", popolazione: "~4.000",
       gancio: "Nei vicoli della Città Bassa si compra tutto, anche un nome nuovo.",
       mappa: "[[aster.svg]]" },
-    Ziggurat_Oscura: { tipo: "dungeon", clima: "nebbia perenne",
+    "Ziggurat Oscura": { tipo: "dungeon", clima: "nebbia perenne",
       gancio: "Sotto le fondamenta, una porta che nessuno ricorda di aver chiuso." },
     Chiarombra: { tipo: "insediamento", clima: "ventoso",
       gancio: "L'ultima campana che suona ancora il coprifuoco contro la nebbia." },
-    Artiglio_Nero: { tipo: "struttura",
+    "Artiglio Nero": { tipo: "struttura",
       gancio: "Il faro è spento da una stagione, eppure qualcosa lassù risponde ai segnali." },
-    Porto_Rivombrosa: { tipo: "insediamento", clima: "nebbioso", popolazione: "~1.200",
+    "Porto Rivombrosa": { tipo: "insediamento", clima: "nebbioso", popolazione: "~1.200",
       gancio: "Da quando la Veglia ci ha messo radici, le barche partono cariche e tornano vuote — e nessuno chiede dove sia finito l'equipaggio." },
-    Porto_Lontano: { tipo: "insediamento", clima: "battuto dai venti", popolazione: "~800",
+    "Porto Lontano": { tipo: "insediamento", clima: "battuto dai venti", popolazione: "~800",
       gancio: "L'ultimo scalo prima del mare aperto: chi vuole sparire dalla costa paga i Corsari e si imbarca qui." },
     Boscombroso: { tipo: "luogo", clima: "umido, fitto",
       gancio: "Gli alberi crescono storti verso la Ziggurat, e di notte il bosco sussurra in una lingua che nessuno ammette di capire." },
-    Grotta_Dimenticata: { tipo: "dungeon", clima: "buio, umido",
+    "Grotta Dimenticata": { tipo: "dungeon", clima: "buio, umido",
       gancio: "I pescatori giurano che là dentro la marea sale anche quando fuori cala — come se qualcosa, sotto, respirasse." },
   };
   const { size, places } = im.parseSvgMap(fs.readFileSync(path.join(SRC, "costa_dellombra.svg"), "utf8"));
@@ -107,12 +107,12 @@ function main() {
   for (const p of luoghi) {
     const key = nomeFile(p.name), extra = lore[key] || {};
     write(`Mondi/Luoghi/${key}.md`, fm({
-      id: key.toLowerCase().replace(/_/g, "-"), nome: p.name, categoria: "luogo",
+      id: key.toLowerCase().replace(/\s+/g, "-"), nome: p.name, categoria: "luogo",
       tipo: extra.tipo || "luogo", stato: "bozza", mondo: "[[Astaria]]",
       coord: `${p.x}, ${p.y}`, mappa: extra.mappa,
       clima: extra.clima, popolazione: extra.popolazione, gancio: extra.gancio,
       controllata_da: key === "Aster" ? "[[Corsari dell'Ombra]]"
-        : key === "Ziggurat_Oscura" ? "[[La Veglia dei Sepolti]]" : undefined,
+        : key === "Ziggurat Oscura" ? "[[La Veglia dei Sepolti]]" : undefined,
       connessioni: [], sessioni: [], tags: ["gdr/bozza"],
     }) + luogoBody);
   }
@@ -146,7 +146,7 @@ function main() {
   }) + fazBody);
   write("Mondi/Fazioni/La Veglia dei Sepolti.md", fm({
     id: "la-veglia-dei-sepolti", nome: "La Veglia dei Sepolti", categoria: "fazione", tipo: "ordine",
-    stato: "bozza", mondo: "[[Astaria]]", famiglia: "religiosa", sede: "[[Ziggurat_Oscura]]",
+    stato: "bozza", mondo: "[[Astaria]]", famiglia: "religiosa", sede: "[[Ziggurat Oscura]]",
     rivali: ["[[Corsari dell'Ombra]]"],
     credo: "Che l'Ombra Sepolta torni a regnare sulla costa; servirla è salvezza.",
     player_safe: "Una confraternita incappucciata che veglia le rovine sotto Aster.",
@@ -164,7 +164,7 @@ function main() {
   //    [[Corsari dell'Ombra]]. Così la demo mostra il loop completo: worldbuilding →
   //    tavolo. Derivati RAW-2024 (CA 14 = cuoio+DES; PF 10 = d8+COS; TS DES/INT; 6
   //    competenze classe+background senza doppioni). Ritratto VUOTO (aggancio immagine).
-  write("Mondi/Personaggi/Korbin_Salmastro.md", KORBIN_FM + modelBody("PG.md"));
+  write("Mondi/Personaggi/Korbin Salmastro.md", KORBIN_FM + modelBody("PG.md"));
 
   console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (tutti con lore) + 2 mappe (regionale coi pin + città di Aster) + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6) + 1 PG collegato (Korbin Salmastro, Ladro 1).`);
 }

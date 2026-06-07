@@ -44,7 +44,7 @@ function normNum(valore, fallback = 10) {
 function nomeFile(nome) {
     // Default se il nome è vuoto o resta vuoto dopo la pulizia (solo spazi o soli
     // caratteri proibiti): altrimenti tp.file.move produrrebbe una nota orfana ".md".
-    return String(nome ?? "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_") || "Nuovo_PG";
+    return String(nome ?? "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, " ") || "Nuovo PG";
 }
 
 function sigla(stat) {
@@ -646,7 +646,7 @@ async function crea_pg(tp) {
     // Escape (prompt → null) annulla in modo pulito. Senza il guard un nome vuoto
     // cadeva sul default "Nuovo_PG" (nomeFile) creando un PG mal-nominato. Poi
     // exists() evita di SOVRASCRIVERE un PG omonimo già esistente (tp.file.move
-    // clobbererebbe la nota): disambigua con un suffisso _2, _3, …
+    // clobbererebbe la nota): disambigua con un suffisso « 2», « 3», …
     let nome = "";
     for (let i = 0; i < 3 && !nome; i++) {
         const raw = await tp.system.prompt(i ? "Nome del personaggio — obbligatorio" : "Nome del personaggio", "");
@@ -660,7 +660,7 @@ async function crea_pg(tp) {
     const base = nomeFile(nome);
     let dest = base;
     for (let n = 2; typeof tp.file.exists === "function" && await tp.file.exists(`Mondi/Personaggi/${dest}.md`); n++) {
-        dest = `${base}_${n}`;
+        dest = `${base} ${n}`;
     }
     await tp.file.move(`Mondi/Personaggi/${dest}`);
     try {

@@ -154,7 +154,7 @@ function luogoFrontmatter(nome, mondo, x, y) {
 }
 
 function nomeFileLuogo(nome) {
-  return String(nome || "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_") || "Luogo";
+  return String(nome || "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, " ") || "Luogo";
 }
 
 // --- Runtime ------------------------------------------------------------------

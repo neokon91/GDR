@@ -93,8 +93,8 @@ def test_crea_pg_nome_vuoto(tmp_path):
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
     assert all(out), f"basename vuoto prodotto: {out}"
-    assert out[0] == out[1] == out[2] == "Nuovo_PG"   # vuoto/spazi/proibiti -> default
-    assert out[3] == "Eroe_di_Prova"                  # nome valido invariato
+    assert out[0] == out[1] == out[2] == "Nuovo PG"   # vuoto/spazi/proibiti -> default
+    assert out[3] == "Eroe di Prova"                  # nome valido invariato (spazi preservati)
 
 
 @pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
@@ -256,7 +256,7 @@ def test_crea_pg_annullamento_manuale(tmp_path):
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_crea_pg_nome_clash(tmp_path):
     """crea_pg.js: se esiste già un PG omonimo, tp.file.exists fa disambiguare il
-    nome-file (Test_PG → Test_PG_2) invece di sovrascrivere la nota esistente."""
+    nome-file (Test PG → «Test PG 2») invece di sovrascrivere la nota esistente."""
     import build_personaggio
     pj = tmp_path / "personaggio.json"
     pj.write_text(json.dumps(build_personaggio.build_personaggio_options(CORE), ensure_ascii=False), encoding="utf-8")
@@ -267,7 +267,7 @@ def test_crea_pg_nome_clash(tmp_path):
         'global.Notice=class{constructor(m){}};'
         'global.app={vault:{adapter:{read:async()=>data}}};'
         'let moved=null;'
-        'const taken=new Set(["Mondi/Personaggi/Test_PG.md"]);'  # un PG omonimo esiste già
+        'const taken=new Set(["Mondi/Personaggi/Test PG.md"]);'  # un PG omonimo esiste già
         'const tp={system:{prompt:async()=>"Test PG", suggester:async(l,v)=>v[0]},'
         ' file:{ move:async(p)=>{moved=p;}, exists:async(p)=>taken.has(p) }};'
         f'require({json.dumps(str(render.JS_DIR / "crea_pg.js"))})(tp)'
@@ -275,7 +275,7 @@ def test_crea_pg_nome_clash(tmp_path):
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
-    assert json.loads(res.stdout)["moved"] == "Mondi/Personaggi/Test_PG_2"
+    assert json.loads(res.stdout)["moved"] == "Mondi/Personaggi/Test PG 2"
 
 
 @pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")

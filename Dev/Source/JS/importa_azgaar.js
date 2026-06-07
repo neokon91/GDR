@@ -107,7 +107,7 @@ function buildMarkers(imagePath, size, punti) {
 }
 
 function _file(nome) {
-  return String(nome || "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_") || "Nota";
+  return String(nome || "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, " ") || "Nota";
 }
 function _q(v) { return JSON.stringify(String(v == null ? "" : v)); }
 // Frontmatter minimo-VALIDO (id stabili) + corpo coi link incrociati (così il grafo si
