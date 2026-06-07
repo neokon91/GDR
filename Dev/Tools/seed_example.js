@@ -212,7 +212,7 @@ prof_intuizione: 1
 prof_medicina: 0
 prof_natura: 0
 prof_percezione: 1
-prof_persuasione: 0
+prof_persuasione: 1
 prof_rapidita_di_mano: 1
 prof_religione: 0
 prof_sopravvivenza: 0
@@ -244,6 +244,7 @@ trucchetti: []
 incantesimi: []
 talenti:
   - allerta
+  - aggressore_selvaggio
 padronanze_armi:
   - "Pugnale — Graffio"
   - "Arco corto — Vessazione"
