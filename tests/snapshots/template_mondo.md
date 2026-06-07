@@ -189,6 +189,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Passo di viaggio (km/giorno): `INPUT[number:passo_viaggio]` — km al giorno a piedi (default 30): la tab *Viaggio* dei luoghi stima i tempi.
 --- 🔗 Collegamenti
 
+> [!tip] Collega
+> Modo rapido e **guidato**: `BUTTON[collega-nota]` — scegli relazione e nota da una lista (scrive anche l'inverso). In alternativa compila i campi qui sotto: l'icona **☰** apre la **lista** delle note, la **✏️** è solo la modifica a mano.
+
 > [!example] Relazioni
 > **Cosmologia**: `INPUT[suggester(optionQuery("Mondi/Cosmologia"), useLinks(partial), allowOther):cosmologia]`
 > **Sistemi magici**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
@@ -199,9 +202,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Connessioni: `INPUT[connessioni][:connessioni]`
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
-
-> [!tip] Collega
-> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");

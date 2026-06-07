@@ -195,6 +195,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 --- 🔗 Collegamenti
 
+> [!tip] Collega
+> Modo rapido e **guidato**: `BUTTON[collega-nota]` — scegli relazione e nota da una lista (scrive anche l'inverso). In alternativa compila i campi qui sotto: l'icona **☰** apre la **lista** delle note, la **✏️** è solo la modifica a mano.
+
 > [!example] Relazioni
 > **Affiliazione**: `INPUT[suggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazione]`
 > **Parenti / stirpe**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):parenti]`
@@ -210,9 +213,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Connessioni: `INPUT[connessioni][:connessioni]`
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
-
-> [!tip] Collega
-> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");

@@ -47,9 +47,6 @@
 >
 > Connessioni: `INPUT[connessioni][:connessioni]`
 
-> [!tip] Collega
-> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
-
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```

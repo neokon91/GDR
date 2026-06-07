@@ -154,6 +154,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epo
 > Manca il calendario del mondo (mesi/ere)? `BUTTON[apri-calendario]` — crealo o aprilo in un clic; poi i datati vi compaiono soli.
 --- 🔗 Collegamenti
 
+> [!tip] Collega
+> Modo rapido e **guidato**: `BUTTON[collega-nota]` — scegli relazione e nota da una lista (scrive anche l'inverso). In alternativa compila i campi qui sotto: l'icona **☰** apre la **lista** delle note, la **✏️** è solo la modifica a mano.
+
 > [!example] Relazioni
 > **Eventi principali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):eventi]`
 > **Divinità dominanti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
@@ -164,9 +167,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epo
 > Connessioni: `INPUT[connessioni][:connessioni]`
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
-
-> [!tip] Collega
-> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");

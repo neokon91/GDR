@@ -320,6 +320,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    target. Single source: core.relazioni[categoria]. Vuoto = niente callout. #}
 {% macro relazioni(category) -%}
 {% set rels = core.get('relazioni', {}).get(category, []) %}
+> [!tip] Collega
+> Modo rapido e **guidato**: `BUTTON[collega-nota]` — scegli relazione e nota da una lista (scrive anche l'inverso). In alternativa compila i campi qui sotto: l'icona **☰** apre la **lista** delle note, la **✏️** è solo la modifica a mano.
+
 {% if rels %}
 > [!example] Relazioni
 {% for r in rels %}
@@ -346,9 +349,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > {{ field('sessioni') }}
 {% endif %}
-
-> [!tip] Collega
-> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 
 {{ rete() }}
 {{ memoria() }}

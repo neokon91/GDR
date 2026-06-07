@@ -103,6 +103,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bio
 
 --- 🔗 Collegamenti
 
+> [!tip] Collega
+> Modo rapido e **guidato**: `BUTTON[collega-nota]` — scegli relazione e nota da una lista (scrive anche l'inverso). In alternativa compila i campi qui sotto: l'icona **☰** apre la **lista** delle note, la **✏️** è solo la modifica a mano.
+
 > [!example] Relazioni
 > **Luoghi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
 > **Specie tipiche**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):specie]`
@@ -113,9 +116,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bio
 > Connessioni: `INPUT[connessioni][:connessioni]`
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
-
-> [!tip] Collega
-> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");

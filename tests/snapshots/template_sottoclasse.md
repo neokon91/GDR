@@ -31,6 +31,9 @@ I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 
 --- 🔗 Collegamenti
 
+> [!tip] Collega
+> Modo rapido e **guidato**: `BUTTON[collega-nota]` — scegli relazione e nota da una lista (scrive anche l'inverso). In alternativa compila i campi qui sotto: l'icona **☰** apre la **lista** delle note, la **✏️** è solo la modifica a mano.
+
 > [!example] Relazioni
 > **Classe**: `INPUT[suggester(optionQuery("Mondi/Classi"), useLinks(partial), allowOther):classe]`
 
@@ -38,9 +41,6 @@ I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Connessioni: `INPUT[connessioni][:connessioni]`
-
-> [!tip] Collega
-> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");

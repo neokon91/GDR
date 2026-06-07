@@ -119,6 +119,9 @@ from ""
 where categoria = "personaggio" and lower(string(specie)) = lower(this.file.name)
 sort tipo asc, file.name asc
 ```
+> [!tip] Collega
+> Modo rapido e **guidato**: `BUTTON[collega-nota]` — scegli relazione e nota da una lista (scrive anche l'inverso). In alternativa compila i campi qui sotto: l'icona **☰** apre la **lista** delle note, la **✏️** è solo la modifica a mano.
+
 > [!example] Relazioni
 > **Regione d'origine**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):origine]`
 > **Culture associate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`
@@ -127,9 +130,6 @@ sort tipo asc, file.name asc
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Connessioni: `INPUT[connessioni][:connessioni]`
-
-> [!tip] Collega
-> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");

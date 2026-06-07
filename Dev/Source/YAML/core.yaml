@@ -113,7 +113,7 @@ banner_categorie:
 # relazioni reali della categoria (validato). Reso da identita_card.
 infobox_relazioni:
   luogo:    [regione, controllata_da]
-  fazione:  [regno]
+  fazione:  [sede, regno]
   culto:    [luogo_sacro]
   regno:    [capitale]
   evento:   [epoca, luogo]
