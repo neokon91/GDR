@@ -1,0 +1,3023 @@
+{
+  "name": "Costa dell'Ombra",
+  "origin": "https://watabou.github.io/perilous-shores/?seed=2058216983&tags=highland,neutral,coast&w=1800&h=1800",
+  "bp": {
+    "width": 1800,
+    "height": 1800,
+    "tags": [
+      "highland",
+      "neutral",
+      "coast"
+    ]
+  },
+  "layout": "odd-r",
+  "hexes": {
+    "q20_r0": {
+      "q": 20,
+      "r": 0,
+      "terrain": "water"
+    },
+    "q17_r1": {
+      "q": 17,
+      "r": 1,
+      "terrain": "water"
+    },
+    "q18_r1": {
+      "q": 18,
+      "r": 1,
+      "terrain": "water"
+    },
+    "q19_r1": {
+      "q": 19,
+      "r": 1,
+      "terrain": "water"
+    },
+    "q20_r1": {
+      "q": 20,
+      "r": 1,
+      "terrain": "water"
+    },
+    "q16_r2": {
+      "q": 16,
+      "r": 2,
+      "terrain": "water"
+    },
+    "q17_r2": {
+      "q": 17,
+      "r": 2,
+      "terrain": "water"
+    },
+    "q18_r2": {
+      "q": 18,
+      "r": 2,
+      "terrain": "water"
+    },
+    "q19_r2": {
+      "q": 19,
+      "r": 2,
+      "terrain": "water"
+    },
+    "q20_r2": {
+      "q": 20,
+      "r": 2,
+      "terrain": "water"
+    },
+    "q14_r3": {
+      "q": 14,
+      "r": 3,
+      "terrain": "water"
+    },
+    "q15_r3": {
+      "q": 15,
+      "r": 3,
+      "terrain": "water"
+    },
+    "q16_r3": {
+      "q": 16,
+      "r": 3,
+      "terrain": "water"
+    },
+    "q17_r3": {
+      "q": 17,
+      "r": 3,
+      "terrain": "water"
+    },
+    "q18_r3": {
+      "q": 18,
+      "r": 3,
+      "terrain": "water"
+    },
+    "q19_r3": {
+      "q": 19,
+      "r": 3,
+      "terrain": "water"
+    },
+    "q20_r3": {
+      "q": 20,
+      "r": 3,
+      "terrain": "water"
+    },
+    "q12_r4": {
+      "q": 12,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q13_r4": {
+      "q": 13,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q14_r4": {
+      "q": 14,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q15_r4": {
+      "q": 15,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q16_r4": {
+      "q": 16,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q17_r4": {
+      "q": 17,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q18_r4": {
+      "q": 18,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q19_r4": {
+      "q": 19,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q20_r4": {
+      "q": 20,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q21_r4": {
+      "q": 21,
+      "r": 4,
+      "terrain": "water"
+    },
+    "q10_r5": {
+      "q": 10,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q11_r5": {
+      "q": 11,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q12_r5": {
+      "q": 12,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q13_r5": {
+      "q": 13,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q14_r5": {
+      "q": 14,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q15_r5": {
+      "q": 15,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q16_r5": {
+      "q": 16,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q17_r5": {
+      "q": 17,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q18_r5": {
+      "q": 18,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q19_r5": {
+      "q": 19,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q20_r5": {
+      "q": 20,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q21_r5": {
+      "q": 21,
+      "r": 5,
+      "terrain": "water"
+    },
+    "q9_r6": {
+      "q": 9,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q10_r6": {
+      "q": 10,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q11_r6": {
+      "q": 11,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q12_r6": {
+      "q": 12,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q13_r6": {
+      "q": 13,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q14_r6": {
+      "q": 14,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q15_r6": {
+      "q": 15,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q16_r6": {
+      "q": 16,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q17_r6": {
+      "q": 17,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q18_r6": {
+      "q": 18,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q19_r6": {
+      "q": 19,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q20_r6": {
+      "q": 20,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q21_r6": {
+      "q": 21,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q22_r6": {
+      "q": 22,
+      "r": 6,
+      "terrain": "water"
+    },
+    "q6_r7": {
+      "q": 6,
+      "r": 7,
+      "terrain": "forest-light"
+    },
+    "q7_r7": {
+      "q": 7,
+      "r": 7,
+      "terrain": "forest-light"
+    },
+    "q8_r7": {
+      "q": 8,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q9_r7": {
+      "q": 9,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q10_r7": {
+      "q": 10,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q11_r7": {
+      "q": 11,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q12_r7": {
+      "q": 12,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q13_r7": {
+      "q": 13,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q14_r7": {
+      "q": 14,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q15_r7": {
+      "q": 15,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q16_r7": {
+      "q": 16,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q17_r7": {
+      "q": 17,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q18_r7": {
+      "q": 18,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q19_r7": {
+      "q": 19,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q20_r7": {
+      "q": 20,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q21_r7": {
+      "q": 21,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q22_r7": {
+      "q": 22,
+      "r": 7,
+      "terrain": "water"
+    },
+    "q5_r8": {
+      "q": 5,
+      "r": 8,
+      "terrain": "forest-light"
+    },
+    "q6_r8": {
+      "q": 6,
+      "r": 8,
+      "terrain": "forest-light"
+    },
+    "q7_r8": {
+      "q": 7,
+      "r": 8,
+      "terrain": "forest-light"
+    },
+    "q8_r8": {
+      "q": 8,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q9_r8": {
+      "q": 9,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q10_r8": {
+      "q": 10,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q11_r8": {
+      "q": 11,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q12_r8": {
+      "q": 12,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q13_r8": {
+      "q": 13,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q14_r8": {
+      "q": 14,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q15_r8": {
+      "q": 15,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q16_r8": {
+      "q": 16,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q17_r8": {
+      "q": 17,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q18_r8": {
+      "q": 18,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q19_r8": {
+      "q": 19,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q20_r8": {
+      "q": 20,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q21_r8": {
+      "q": 21,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q22_r8": {
+      "q": 22,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q23_r8": {
+      "q": 23,
+      "r": 8,
+      "terrain": "water"
+    },
+    "q3_r9": {
+      "q": 3,
+      "r": 9,
+      "terrain": "forest-light"
+    },
+    "q4_r9": {
+      "q": 4,
+      "r": 9,
+      "terrain": "forest-light"
+    },
+    "q5_r9": {
+      "q": 5,
+      "r": 9,
+      "terrain": "forest-light"
+    },
+    "q6_r9": {
+      "q": 6,
+      "r": 9,
+      "terrain": "forest-light"
+    },
+    "q7_r9": {
+      "q": 7,
+      "r": 9,
+      "terrain": "forest-light"
+    },
+    "q8_r9": {
+      "q": 8,
+      "r": 9,
+      "town": {
+        "name": "Porto Rivombrosa",
+        "type": "town",
+        "info": "",
+        "link": "https://watabou.github.io/city-generator/?size=20&seed=808141692&name=Porto%20Rivombrosa&citadel=0&urban_castle=0&walls=1&shantytown=0&gates=1&plaza=1&temple=0&river=0&coast=1&sea=-0.6905738487951025&from=perilous"
+      }
+    },
+    "q9_r9": {
+      "q": 9,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q10_r9": {
+      "q": 10,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q11_r9": {
+      "q": 11,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q12_r9": {
+      "q": 12,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q13_r9": {
+      "q": 13,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q14_r9": {
+      "q": 14,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q15_r9": {
+      "q": 15,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q16_r9": {
+      "q": 16,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q17_r9": {
+      "q": 17,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q18_r9": {
+      "q": 18,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q19_r9": {
+      "q": 19,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q20_r9": {
+      "q": 20,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q21_r9": {
+      "q": 21,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q22_r9": {
+      "q": 22,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q23_r9": {
+      "q": 23,
+      "r": 9,
+      "terrain": "water"
+    },
+    "q2_r10": {
+      "q": 2,
+      "r": 10,
+      "terrain": "forest-light"
+    },
+    "q3_r10": {
+      "q": 3,
+      "r": 10,
+      "terrain": "forest-light"
+    },
+    "q4_r10": {
+      "q": 4,
+      "r": 10,
+      "terrain": "forest-light"
+    },
+    "q5_r10": {
+      "q": 5,
+      "r": 10,
+      "terrain": "forest-light"
+    },
+    "q6_r10": {
+      "q": 6,
+      "r": 10,
+      "terrain": "forest-light"
+    },
+    "q7_r10": {
+      "q": 7,
+      "r": 10,
+      "terrain": "forest-light"
+    },
+    "q8_r10": {
+      "q": 8,
+      "r": 10
+    },
+    "q9_r10": {
+      "q": 9,
+      "r": 10
+    },
+    "q10_r10": {
+      "q": 10,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q11_r10": {
+      "q": 11,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q12_r10": {
+      "q": 12,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q13_r10": {
+      "q": 13,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q14_r10": {
+      "q": 14,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q15_r10": {
+      "q": 15,
+      "r": 10,
+      "terrain": "rocks"
+    },
+    "q16_r10": {
+      "q": 16,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q17_r10": {
+      "q": 17,
+      "r": 10
+    },
+    "q18_r10": {
+      "q": 18,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q19_r10": {
+      "q": 19,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q20_r10": {
+      "q": 20,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q21_r10": {
+      "q": 21,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q22_r10": {
+      "q": 22,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q23_r10": {
+      "q": 23,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q24_r10": {
+      "q": 24,
+      "r": 10,
+      "terrain": "water"
+    },
+    "q0_r11": {
+      "q": 0,
+      "r": 11,
+      "terrain": "mountain"
+    },
+    "q1_r11": {
+      "q": 1,
+      "r": 11,
+      "terrain": "forest-light"
+    },
+    "q2_r11": {
+      "q": 2,
+      "r": 11,
+      "terrain": "forest-light"
+    },
+    "q3_r11": {
+      "q": 3,
+      "r": 11,
+      "terrain": "forest-light"
+    },
+    "q4_r11": {
+      "q": 4,
+      "r": 11,
+      "terrain": "forest-light"
+    },
+    "q5_r11": {
+      "q": 5,
+      "r": 11,
+      "terrain": "forest-light"
+    },
+    "q6_r11": {
+      "q": 6,
+      "r": 11,
+      "terrain": "forest-light"
+    },
+    "q7_r11": {
+      "q": 7,
+      "r": 11
+    },
+    "q8_r11": {
+      "q": 8,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q9_r11": {
+      "q": 9,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q10_r11": {
+      "q": 10,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q11_r11": {
+      "q": 11,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q12_r11": {
+      "q": 12,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q13_r11": {
+      "q": 13,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q14_r11": {
+      "q": 14,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q15_r11": {
+      "q": 15,
+      "r": 11,
+      "town": {
+        "name": "Artiglio Nero",
+        "type": "town",
+        "info": "A remote whaling town of abundant food but scarce water.",
+        "link": "https://watabou.github.io/city-generator/?size=23&seed=1592607703&name=Artiglio%20Nero&citadel=0&urban_castle=0&walls=0&shantytown=1&gates=0&plaza=0&temple=1&river=0&coast=1&sea=-1.1905738487951028&from=perilous"
+      }
+    },
+    "q16_r11": {
+      "q": 16,
+      "r": 11
+    },
+    "q17_r11": {
+      "q": 17,
+      "r": 11
+    },
+    "q18_r11": {
+      "q": 18,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q19_r11": {
+      "q": 19,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q20_r11": {
+      "q": 20,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q21_r11": {
+      "q": 21,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q22_r11": {
+      "q": 22,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q23_r11": {
+      "q": 23,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q24_r11": {
+      "q": 24,
+      "r": 11,
+      "terrain": "water"
+    },
+    "q1_r12": {
+      "q": 1,
+      "r": 12,
+      "terrain": "forest-light"
+    },
+    "q2_r12": {
+      "q": 2,
+      "r": 12,
+      "terrain": "forest-light"
+    },
+    "q3_r12": {
+      "q": 3,
+      "r": 12,
+      "terrain": "forest-light"
+    },
+    "q4_r12": {
+      "q": 4,
+      "r": 12,
+      "terrain": "forest-light"
+    },
+    "q5_r12": {
+      "q": 5,
+      "r": 12,
+      "terrain": "forest-light"
+    },
+    "q6_r12": {
+      "q": 6,
+      "r": 12,
+      "danger": {
+        "name": "Ziggurat Oscura",
+        "link": "https://watabou.github.io/one-page-dungeon/?seed=419923647&name=Ziggurat%20Oscura&from=perilous"
+      },
+      "terrain": "forest-light"
+    },
+    "q7_r12": {
+      "q": 7,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q8_r12": {
+      "q": 8,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q9_r12": {
+      "q": 9,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q10_r12": {
+      "q": 10,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q11_r12": {
+      "q": 11,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q12_r12": {
+      "q": 12,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q13_r12": {
+      "q": 13,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q14_r12": {
+      "q": 14,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q15_r12": {
+      "q": 15,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q16_r12": {
+      "q": 16,
+      "r": 12,
+      "terrain": "forest-dark"
+    },
+    "q17_r12": {
+      "q": 17,
+      "r": 12
+    },
+    "q18_r12": {
+      "q": 18,
+      "r": 12
+    },
+    "q19_r12": {
+      "q": 19,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q20_r12": {
+      "q": 20,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q21_r12": {
+      "q": 21,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q22_r12": {
+      "q": 22,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q23_r12": {
+      "q": 23,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q24_r12": {
+      "q": 24,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q25_r12": {
+      "q": 25,
+      "r": 12,
+      "terrain": "water"
+    },
+    "q1_r13": {
+      "q": 1,
+      "r": 13
+    },
+    "q2_r13": {
+      "q": 2,
+      "r": 13,
+      "terrain": "forest-light"
+    },
+    "q3_r13": {
+      "q": 3,
+      "r": 13,
+      "terrain": "forest-light"
+    },
+    "q4_r13": {
+      "q": 4,
+      "r": 13,
+      "terrain": "forest-light"
+    },
+    "q5_r13": {
+      "q": 5,
+      "r": 13,
+      "terrain": "forest-light"
+    },
+    "q6_r13": {
+      "q": 6,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q7_r13": {
+      "q": 7,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q8_r13": {
+      "q": 8,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q9_r13": {
+      "q": 9,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q10_r13": {
+      "q": 10,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q11_r13": {
+      "q": 11,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q12_r13": {
+      "q": 12,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q13_r13": {
+      "q": 13,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q14_r13": {
+      "q": 14,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q15_r13": {
+      "q": 15,
+      "r": 13,
+      "terrain": "forest-dark"
+    },
+    "q16_r13": {
+      "q": 16,
+      "r": 13
+    },
+    "q17_r13": {
+      "q": 17,
+      "r": 13
+    },
+    "q18_r13": {
+      "q": 18,
+      "r": 13
+    },
+    "q19_r13": {
+      "q": 19,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q20_r13": {
+      "q": 20,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q21_r13": {
+      "q": 21,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q22_r13": {
+      "q": 22,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q23_r13": {
+      "q": 23,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q24_r13": {
+      "q": 24,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q25_r13": {
+      "q": 25,
+      "r": 13,
+      "terrain": "water"
+    },
+    "q2_r14": {
+      "q": 2,
+      "r": 14,
+      "terrain": "forest-light"
+    },
+    "q3_r14": {
+      "q": 3,
+      "r": 14,
+      "terrain": "forest-light"
+    },
+    "q4_r14": {
+      "q": 4,
+      "r": 14,
+      "terrain": "forest-light"
+    },
+    "q5_r14": {
+      "q": 5,
+      "r": 14,
+      "terrain": "forest-light"
+    },
+    "q6_r14": {
+      "q": 6,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q7_r14": {
+      "q": 7,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q8_r14": {
+      "q": 8,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q9_r14": {
+      "q": 9,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q10_r14": {
+      "q": 10,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q11_r14": {
+      "q": 11,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q12_r14": {
+      "q": 12,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q13_r14": {
+      "q": 13,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q14_r14": {
+      "q": 14,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q15_r14": {
+      "q": 15,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q16_r14": {
+      "q": 16,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q17_r14": {
+      "q": 17,
+      "r": 14
+    },
+    "q18_r14": {
+      "q": 18,
+      "r": 14
+    },
+    "q19_r14": {
+      "q": 19,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q20_r14": {
+      "q": 20,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q21_r14": {
+      "q": 21,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q22_r14": {
+      "q": 22,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q23_r14": {
+      "q": 23,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q24_r14": {
+      "q": 24,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q25_r14": {
+      "q": 25,
+      "r": 14,
+      "terrain": "water"
+    },
+    "q2_r15": {
+      "q": 2,
+      "r": 15,
+      "terrain": "forest-light"
+    },
+    "q3_r15": {
+      "q": 3,
+      "r": 15,
+      "terrain": "forest-light"
+    },
+    "q4_r15": {
+      "q": 4,
+      "r": 15,
+      "terrain": "forest-light"
+    },
+    "q5_r15": {
+      "q": 5,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q6_r15": {
+      "q": 6,
+      "r": 15,
+      "terrain": "rocks"
+    },
+    "q7_r15": {
+      "q": 7,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q8_r15": {
+      "q": 8,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q9_r15": {
+      "q": 9,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q10_r15": {
+      "q": 10,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q11_r15": {
+      "q": 11,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q12_r15": {
+      "q": 12,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q13_r15": {
+      "q": 13,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q14_r15": {
+      "q": 14,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q15_r15": {
+      "q": 15,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q16_r15": {
+      "q": 16,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q17_r15": {
+      "q": 17,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q18_r15": {
+      "q": 18,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q19_r15": {
+      "q": 19,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q20_r15": {
+      "q": 20,
+      "r": 15,
+      "terrain": "rocks"
+    },
+    "q21_r15": {
+      "q": 21,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q22_r15": {
+      "q": 22,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q23_r15": {
+      "q": 23,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q24_r15": {
+      "q": 24,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q25_r15": {
+      "q": 25,
+      "r": 15,
+      "terrain": "water"
+    },
+    "q3_r16": {
+      "q": 3,
+      "r": 16,
+      "terrain": "forest-light"
+    },
+    "q4_r16": {
+      "q": 4,
+      "r": 16,
+      "terrain": "forest-light"
+    },
+    "q5_r16": {
+      "q": 5,
+      "r": 16,
+      "terrain": "forest-light"
+    },
+    "q6_r16": {
+      "q": 6,
+      "r": 16,
+      "terrain": "forest-light"
+    },
+    "q7_r16": {
+      "q": 7,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q8_r16": {
+      "q": 8,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q9_r16": {
+      "q": 9,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q10_r16": {
+      "q": 10,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q11_r16": {
+      "q": 11,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q12_r16": {
+      "q": 12,
+      "r": 16,
+      "terrain": "swamp"
+    },
+    "q13_r16": {
+      "q": 13,
+      "r": 16,
+      "terrain": "swamp"
+    },
+    "q14_r16": {
+      "q": 14,
+      "r": 16,
+      "terrain": "swamp"
+    },
+    "q15_r16": {
+      "q": 15,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q16_r16": {
+      "q": 16,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q17_r16": {
+      "q": 17,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q18_r16": {
+      "q": 18,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q19_r16": {
+      "q": 19,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q20_r16": {
+      "q": 20,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q21_r16": {
+      "q": 21,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q22_r16": {
+      "q": 22,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q23_r16": {
+      "q": 23,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q24_r16": {
+      "q": 24,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q25_r16": {
+      "q": 25,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q26_r16": {
+      "q": 26,
+      "r": 16,
+      "terrain": "water"
+    },
+    "q3_r17": {
+      "q": 3,
+      "r": 17,
+      "terrain": "forest-light"
+    },
+    "q4_r17": {
+      "q": 4,
+      "r": 17,
+      "terrain": "forest-light"
+    },
+    "q5_r17": {
+      "q": 5,
+      "r": 17,
+      "terrain": "forest-light"
+    },
+    "q6_r17": {
+      "q": 6,
+      "r": 17,
+      "terrain": "forest-light"
+    },
+    "q7_r17": {
+      "q": 7,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q8_r17": {
+      "q": 8,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q9_r17": {
+      "q": 9,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q10_r17": {
+      "q": 10,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q11_r17": {
+      "q": 11,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q12_r17": {
+      "q": 12,
+      "r": 17,
+      "terrain": "swamp"
+    },
+    "q13_r17": {
+      "q": 13,
+      "r": 17
+    },
+    "q14_r17": {
+      "q": 14,
+      "r": 17
+    },
+    "q15_r17": {
+      "q": 15,
+      "r": 17
+    },
+    "q16_r17": {
+      "q": 16,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q17_r17": {
+      "q": 17,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q18_r17": {
+      "q": 18,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q19_r17": {
+      "q": 19,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q20_r17": {
+      "q": 20,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q21_r17": {
+      "q": 21,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q22_r17": {
+      "q": 22,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q23_r17": {
+      "q": 23,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q24_r17": {
+      "q": 24,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q25_r17": {
+      "q": 25,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q26_r17": {
+      "q": 26,
+      "r": 17,
+      "terrain": "water"
+    },
+    "q4_r18": {
+      "q": 4,
+      "r": 18,
+      "terrain": "forest-light"
+    },
+    "q5_r18": {
+      "q": 5,
+      "r": 18,
+      "terrain": "forest-light"
+    },
+    "q6_r18": {
+      "q": 6,
+      "r": 18,
+      "terrain": "forest-light"
+    },
+    "q7_r18": {
+      "q": 7,
+      "r": 18,
+      "terrain": "forest-light"
+    },
+    "q8_r18": {
+      "q": 8,
+      "r": 18,
+      "terrain": "forest-light"
+    },
+    "q9_r18": {
+      "q": 9,
+      "r": 18,
+      "terrain": "forest-light"
+    },
+    "q10_r18": {
+      "q": 10,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q11_r18": {
+      "q": 11,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q12_r18": {
+      "q": 12,
+      "r": 18,
+      "terrain": "swamp"
+    },
+    "q13_r18": {
+      "q": 13,
+      "r": 18,
+      "terrain": "swamp"
+    },
+    "q14_r18": {
+      "q": 14,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q15_r18": {
+      "q": 15,
+      "r": 18
+    },
+    "q16_r18": {
+      "q": 16,
+      "r": 18
+    },
+    "q17_r18": {
+      "q": 17,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q18_r18": {
+      "q": 18,
+      "r": 18
+    },
+    "q19_r18": {
+      "q": 19,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q20_r18": {
+      "q": 20,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q21_r18": {
+      "q": 21,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q22_r18": {
+      "q": 22,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q23_r18": {
+      "q": 23,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q24_r18": {
+      "q": 24,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q25_r18": {
+      "q": 25,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q26_r18": {
+      "q": 26,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q27_r18": {
+      "q": 27,
+      "r": 18,
+      "terrain": "water"
+    },
+    "q4_r19": {
+      "q": 4,
+      "r": 19,
+      "terrain": "forest-light"
+    },
+    "q5_r19": {
+      "q": 5,
+      "r": 19,
+      "terrain": "forest-light"
+    },
+    "q6_r19": {
+      "q": 6,
+      "r": 19,
+      "terrain": "forest-light"
+    },
+    "q7_r19": {
+      "q": 7,
+      "r": 19,
+      "terrain": "forest-light"
+    },
+    "q8_r19": {
+      "q": 8,
+      "r": 19,
+      "terrain": "forest-light"
+    },
+    "q9_r19": {
+      "q": 9,
+      "r": 19,
+      "terrain": "forest-light"
+    },
+    "q10_r19": {
+      "q": 10,
+      "r": 19
+    },
+    "q11_r19": {
+      "q": 11,
+      "r": 19,
+      "terrain": "swamp"
+    },
+    "q12_r19": {
+      "q": 12,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q13_r19": {
+      "q": 13,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q14_r19": {
+      "q": 14,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q15_r19": {
+      "q": 15,
+      "r": 19
+    },
+    "q16_r19": {
+      "q": 16,
+      "r": 19,
+      "town": {
+        "name": "Chiarombra",
+        "type": "village",
+        "info": "A coastal village of scarce safety. Touchstone: a shrine.",
+        "link": "https://watabou.github.io/village-generator/?seed=468253576&name=Chiarombra&tags=coast&from=perilous"
+      }
+    },
+    "q17_r19": {
+      "q": 17,
+      "r": 19
+    },
+    "q18_r19": {
+      "q": 18,
+      "r": 19
+    },
+    "q19_r19": {
+      "q": 19,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q20_r19": {
+      "q": 20,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q21_r19": {
+      "q": 21,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q22_r19": {
+      "q": 22,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q23_r19": {
+      "q": 23,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q24_r19": {
+      "q": 24,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q25_r19": {
+      "q": 25,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q26_r19": {
+      "q": 26,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q27_r19": {
+      "q": 27,
+      "r": 19,
+      "terrain": "water"
+    },
+    "q4_r20": {
+      "q": 4,
+      "r": 20,
+      "terrain": "forest-light"
+    },
+    "q5_r20": {
+      "q": 5,
+      "r": 20,
+      "terrain": "mountain"
+    },
+    "q6_r20": {
+      "q": 6,
+      "r": 20,
+      "terrain": "forest-light"
+    },
+    "q7_r20": {
+      "q": 7,
+      "r": 20,
+      "terrain": "forest-light"
+    },
+    "q8_r20": {
+      "q": 8,
+      "r": 20,
+      "terrain": "forest-light"
+    },
+    "q9_r20": {
+      "q": 9,
+      "r": 20,
+      "terrain": "forest-light"
+    },
+    "q10_r20": {
+      "q": 10,
+      "r": 20,
+      "terrain": "swamp"
+    },
+    "q11_r20": {
+      "q": 11,
+      "r": 20,
+      "terrain": "swamp"
+    },
+    "q12_r20": {
+      "q": 12,
+      "r": 20,
+      "terrain": "swamp"
+    },
+    "q13_r20": {
+      "q": 13,
+      "r": 20
+    },
+    "q14_r20": {
+      "q": 14,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q15_r20": {
+      "q": 15,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q16_r20": {
+      "q": 16,
+      "r": 20
+    },
+    "q17_r20": {
+      "q": 17,
+      "r": 20
+    },
+    "q18_r20": {
+      "q": 18,
+      "r": 20
+    },
+    "q19_r20": {
+      "q": 19,
+      "r": 20
+    },
+    "q20_r20": {
+      "q": 20,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q21_r20": {
+      "q": 21,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q22_r20": {
+      "q": 22,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q23_r20": {
+      "q": 23,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q24_r20": {
+      "q": 24,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q25_r20": {
+      "q": 25,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q26_r20": {
+      "q": 26,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q27_r20": {
+      "q": 27,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q28_r20": {
+      "q": 28,
+      "r": 20,
+      "terrain": "water"
+    },
+    "q4_r21": {
+      "q": 4,
+      "r": 21,
+      "terrain": "forest-light"
+    },
+    "q5_r21": {
+      "q": 5,
+      "r": 21,
+      "terrain": "mountain"
+    },
+    "q6_r21": {
+      "q": 6,
+      "r": 21,
+      "terrain": "forest-light"
+    },
+    "q7_r21": {
+      "q": 7,
+      "r": 21,
+      "terrain": "mountain"
+    },
+    "q8_r21": {
+      "q": 8,
+      "r": 21,
+      "terrain": "forest-light"
+    },
+    "q9_r21": {
+      "q": 9,
+      "r": 21,
+      "terrain": "forest-light"
+    },
+    "q10_r21": {
+      "q": 10,
+      "r": 21,
+      "terrain": "swamp"
+    },
+    "q11_r21": {
+      "q": 11,
+      "r": 21,
+      "terrain": "swamp"
+    },
+    "q12_r21": {
+      "q": 12,
+      "r": 21
+    },
+    "q13_r21": {
+      "q": 13,
+      "r": 21
+    },
+    "q14_r21": {
+      "q": 14,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q15_r21": {
+      "q": 15,
+      "r": 21
+    },
+    "q16_r21": {
+      "q": 16,
+      "r": 21
+    },
+    "q17_r21": {
+      "q": 17,
+      "r": 21
+    },
+    "q18_r21": {
+      "q": 18,
+      "r": 21
+    },
+    "q19_r21": {
+      "q": 19,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q20_r21": {
+      "q": 20,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q21_r21": {
+      "q": 21,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q22_r21": {
+      "q": 22,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q23_r21": {
+      "q": 23,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q24_r21": {
+      "q": 24,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q25_r21": {
+      "q": 25,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q26_r21": {
+      "q": 26,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q27_r21": {
+      "q": 27,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q28_r21": {
+      "q": 28,
+      "r": 21,
+      "terrain": "water"
+    },
+    "q5_r22": {
+      "q": 5,
+      "r": 22,
+      "terrain": "swamp"
+    },
+    "q6_r22": {
+      "q": 6,
+      "r": 22,
+      "terrain": "mountain"
+    },
+    "q7_r22": {
+      "q": 7,
+      "r": 22,
+      "terrain": "mountain"
+    },
+    "q8_r22": {
+      "q": 8,
+      "r": 22,
+      "terrain": "mountain"
+    },
+    "q9_r22": {
+      "q": 9,
+      "r": 22,
+      "terrain": "forest-light"
+    },
+    "q10_r22": {
+      "q": 10,
+      "r": 22,
+      "terrain": "forest-light"
+    },
+    "q11_r22": {
+      "q": 11,
+      "r": 22,
+      "terrain": "swamp"
+    },
+    "q12_r22": {
+      "q": 12,
+      "r": 22,
+      "terrain": "swamp"
+    },
+    "q13_r22": {
+      "q": 13,
+      "r": 22
+    },
+    "q14_r22": {
+      "q": 14,
+      "r": 22,
+      "town": {
+        "name": "Aster",
+        "type": "city",
+        "info": "A busy seaside city of abundant happyness but scarce leadership. Touchstone: a colledge.",
+        "link": "https://watabou.github.io/city-generator/?size=34&seed=2122268697&name=Aster&citadel=1&urban_castle=1&walls=1&shantytown=1&gates=2&plaza=1&temple=1&river=0&coast=1&sea=-0.6905738487951026&from=perilous"
+      }
+    },
+    "q15_r22": {
+      "q": 15,
+      "r": 22
+    },
+    "q16_r22": {
+      "q": 16,
+      "r": 22
+    },
+    "q17_r22": {
+      "q": 17,
+      "r": 22
+    },
+    "q18_r22": {
+      "q": 18,
+      "r": 22
+    },
+    "q19_r22": {
+      "q": 19,
+      "r": 22
+    },
+    "q20_r22": {
+      "q": 20,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q21_r22": {
+      "q": 21,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q22_r22": {
+      "q": 22,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q23_r22": {
+      "q": 23,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q24_r22": {
+      "q": 24,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q25_r22": {
+      "q": 25,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q26_r22": {
+      "q": 26,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q27_r22": {
+      "q": 27,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q28_r22": {
+      "q": 28,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q29_r22": {
+      "q": 29,
+      "r": 22,
+      "terrain": "water"
+    },
+    "q5_r23": {
+      "q": 5,
+      "r": 23,
+      "terrain": "mountain"
+    },
+    "q6_r23": {
+      "q": 6,
+      "r": 23,
+      "terrain": "mountain"
+    },
+    "q7_r23": {
+      "q": 7,
+      "r": 23,
+      "terrain": "mountain"
+    },
+    "q8_r23": {
+      "q": 8,
+      "r": 23,
+      "terrain": "forest-light"
+    },
+    "q9_r23": {
+      "q": 9,
+      "r": 23,
+      "terrain": "forest-light"
+    },
+    "q10_r23": {
+      "q": 10,
+      "r": 23,
+      "danger": {
+        "name": "Grotta Dimenticata",
+        "link": "https://watabou.github.io/one-page-dungeon/?seed=329305587&name=Grotta%20Dimenticata&from=perilous"
+      }
+    },
+    "q11_r23": {
+      "q": 11,
+      "r": 23
+    },
+    "q12_r23": {
+      "q": 12,
+      "r": 23
+    },
+    "q13_r23": {
+      "q": 13,
+      "r": 23
+    },
+    "q14_r23": {
+      "q": 14,
+      "r": 23
+    },
+    "q15_r23": {
+      "q": 15,
+      "r": 23
+    },
+    "q16_r23": {
+      "q": 16,
+      "r": 23
+    },
+    "q17_r23": {
+      "q": 17,
+      "r": 23
+    },
+    "q18_r23": {
+      "q": 18,
+      "r": 23
+    },
+    "q19_r23": {
+      "q": 19,
+      "r": 23,
+      "town": {
+        "name": "Porto Lontano",
+        "type": "town",
+        "info": "",
+        "link": "https://watabou.github.io/city-generator/?size=26&seed=15160193&name=Porto%20Lontano&citadel=0&urban_castle=0&walls=1&shantytown=0&gates=1&plaza=1&temple=1&river=1&coast=1&sea=-0.3572405154617692&from=perilous"
+      }
+    },
+    "q20_r23": {
+      "q": 20,
+      "r": 23,
+      "terrain": "water"
+    },
+    "q21_r23": {
+      "q": 21,
+      "r": 23,
+      "terrain": "water"
+    },
+    "q22_r23": {
+      "q": 22,
+      "r": 23,
+      "terrain": "water"
+    },
+    "q23_r23": {
+      "q": 23,
+      "r": 23,
+      "terrain": "water"
+    },
+    "q24_r23": {
+      "q": 24,
+      "r": 23,
+      "terrain": "water"
+    },
+    "q25_r23": {
+      "q": 25,
+      "r": 23,
+      "terrain": "water"
+    },
+    "q26_r23": {
+      "q": 26,
+      "r": 23,
+      "terrain": "water"
+    },
+    "q27_r23": {
+      "q": 27,
+      "r": 23,
+      "terrain": "water"
+    },
+    "q6_r24": {
+      "q": 6,
+      "r": 24,
+      "terrain": "mountain"
+    },
+    "q7_r24": {
+      "q": 7,
+      "r": 24,
+      "terrain": "mountain"
+    },
+    "q8_r24": {
+      "q": 8,
+      "r": 24,
+      "terrain": "mountain"
+    },
+    "q9_r24": {
+      "q": 9,
+      "r": 24,
+      "terrain": "mountain"
+    },
+    "q10_r24": {
+      "q": 10,
+      "r": 24,
+      "terrain": "mountain"
+    },
+    "q11_r24": {
+      "q": 11,
+      "r": 24,
+      "terrain": "mountain"
+    },
+    "q12_r24": {
+      "q": 12,
+      "r": 24,
+      "terrain": "mountain"
+    },
+    "q13_r24": {
+      "q": 13,
+      "r": 24,
+      "terrain": "mountain"
+    },
+    "q14_r24": {
+      "q": 14,
+      "r": 24
+    },
+    "q15_r24": {
+      "q": 15,
+      "r": 24
+    },
+    "q16_r24": {
+      "q": 16,
+      "r": 24
+    },
+    "q17_r24": {
+      "q": 17,
+      "r": 24
+    },
+    "q18_r24": {
+      "q": 18,
+      "r": 24
+    },
+    "q19_r24": {
+      "q": 19,
+      "r": 24
+    },
+    "q20_r24": {
+      "q": 20,
+      "r": 24,
+      "terrain": "water"
+    },
+    "q21_r24": {
+      "q": 21,
+      "r": 24,
+      "terrain": "water"
+    },
+    "q22_r24": {
+      "q": 22,
+      "r": 24,
+      "terrain": "water"
+    },
+    "q23_r24": {
+      "q": 23,
+      "r": 24,
+      "terrain": "water"
+    },
+    "q24_r24": {
+      "q": 24,
+      "r": 24,
+      "terrain": "water"
+    },
+    "q25_r24": {
+      "q": 25,
+      "r": 24,
+      "terrain": "water"
+    },
+    "q26_r24": {
+      "q": 26,
+      "r": 24,
+      "terrain": "water"
+    },
+    "q6_r25": {
+      "q": 6,
+      "r": 25,
+      "terrain": "mountain"
+    },
+    "q7_r25": {
+      "q": 7,
+      "r": 25,
+      "terrain": "mountain"
+    },
+    "q8_r25": {
+      "q": 8,
+      "r": 25,
+      "terrain": "mountain"
+    },
+    "q9_r25": {
+      "q": 9,
+      "r": 25,
+      "terrain": "mountain"
+    },
+    "q10_r25": {
+      "q": 10,
+      "r": 25,
+      "terrain": "mountain"
+    },
+    "q11_r25": {
+      "q": 11,
+      "r": 25,
+      "terrain": "mountain"
+    },
+    "q12_r25": {
+      "q": 12,
+      "r": 25,
+      "terrain": "mountain"
+    },
+    "q13_r25": {
+      "q": 13,
+      "r": 25,
+      "terrain": "mountain"
+    },
+    "q14_r25": {
+      "q": 14,
+      "r": 25
+    },
+    "q15_r25": {
+      "q": 15,
+      "r": 25
+    },
+    "q16_r25": {
+      "q": 16,
+      "r": 25
+    },
+    "q17_r25": {
+      "q": 17,
+      "r": 25
+    },
+    "q18_r25": {
+      "q": 18,
+      "r": 25
+    },
+    "q19_r25": {
+      "q": 19,
+      "r": 25
+    },
+    "q20_r25": {
+      "q": 20,
+      "r": 25
+    },
+    "q21_r25": {
+      "q": 21,
+      "r": 25
+    },
+    "q22_r25": {
+      "q": 22,
+      "r": 25,
+      "terrain": "water"
+    },
+    "q23_r25": {
+      "q": 23,
+      "r": 25,
+      "terrain": "water"
+    },
+    "q24_r25": {
+      "q": 24,
+      "r": 25,
+      "terrain": "water"
+    },
+    "q7_r26": {
+      "q": 7,
+      "r": 26
+    },
+    "q8_r26": {
+      "q": 8,
+      "r": 26
+    },
+    "q9_r26": {
+      "q": 9,
+      "r": 26
+    },
+    "q10_r26": {
+      "q": 10,
+      "r": 26,
+      "terrain": "mountain"
+    },
+    "q11_r26": {
+      "q": 11,
+      "r": 26,
+      "terrain": "forest-dark"
+    },
+    "q12_r26": {
+      "q": 12,
+      "r": 26
+    },
+    "q13_r26": {
+      "q": 13,
+      "r": 26,
+      "terrain": "mountain"
+    },
+    "q14_r26": {
+      "q": 14,
+      "r": 26,
+      "terrain": "mountain"
+    },
+    "q15_r26": {
+      "q": 15,
+      "r": 26
+    },
+    "q16_r26": {
+      "q": 16,
+      "r": 26
+    },
+    "q17_r26": {
+      "q": 17,
+      "r": 26
+    },
+    "q18_r26": {
+      "q": 18,
+      "r": 26
+    },
+    "q19_r26": {
+      "q": 19,
+      "r": 26
+    },
+    "q20_r26": {
+      "q": 20,
+      "r": 26
+    },
+    "q21_r26": {
+      "q": 21,
+      "r": 26
+    },
+    "q22_r26": {
+      "q": 22,
+      "r": 26
+    },
+    "q23_r26": {
+      "q": 23,
+      "r": 26,
+      "terrain": "water"
+    },
+    "q7_r27": {
+      "q": 7,
+      "r": 27,
+      "terrain": "mountain"
+    },
+    "q8_r27": {
+      "q": 8,
+      "r": 27
+    },
+    "q9_r27": {
+      "q": 9,
+      "r": 27
+    },
+    "q10_r27": {
+      "q": 10,
+      "r": 27,
+      "terrain": "mountain"
+    },
+    "q11_r27": {
+      "q": 11,
+      "r": 27,
+      "terrain": "mountain"
+    },
+    "q12_r27": {
+      "q": 12,
+      "r": 27,
+      "terrain": "mountain"
+    },
+    "q13_r27": {
+      "q": 13,
+      "r": 27,
+      "terrain": "mountain"
+    },
+    "q14_r27": {
+      "q": 14,
+      "r": 27,
+      "terrain": "mountain"
+    },
+    "q15_r27": {
+      "q": 15,
+      "r": 27
+    },
+    "q16_r27": {
+      "q": 16,
+      "r": 27
+    },
+    "q17_r27": {
+      "q": 17,
+      "r": 27
+    },
+    "q18_r27": {
+      "q": 18,
+      "r": 27
+    },
+    "q19_r27": {
+      "q": 19,
+      "r": 27
+    },
+    "q20_r27": {
+      "q": 20,
+      "r": 27
+    },
+    "q8_r28": {
+      "q": 8,
+      "r": 28,
+      "terrain": "mountain"
+    },
+    "q9_r28": {
+      "q": 9,
+      "r": 28,
+      "terrain": "mountain"
+    },
+    "q10_r28": {
+      "q": 10,
+      "r": 28,
+      "terrain": "mountain"
+    },
+    "q11_r28": {
+      "q": 11,
+      "r": 28,
+      "terrain": "mountain"
+    },
+    "q12_r28": {
+      "q": 12,
+      "r": 28,
+      "terrain": "mountain"
+    },
+    "q13_r28": {
+      "q": 13,
+      "r": 28,
+      "terrain": "mountain"
+    },
+    "q14_r28": {
+      "q": 14,
+      "r": 28,
+      "terrain": "mountain"
+    },
+    "q15_r28": {
+      "q": 15,
+      "r": 28
+    },
+    "q16_r28": {
+      "q": 16,
+      "r": 28,
+      "terrain": "mountain"
+    },
+    "q17_r28": {
+      "q": 17,
+      "r": 28
+    },
+    "q18_r28": {
+      "q": 18,
+      "r": 28
+    },
+    "q19_r28": {
+      "q": 19,
+      "r": 28
+    },
+    "q8_r29": {
+      "q": 8,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q9_r29": {
+      "q": 9,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q10_r29": {
+      "q": 10,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q11_r29": {
+      "q": 11,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q12_r29": {
+      "q": 12,
+      "r": 29,
+      "terrain": "forest-light"
+    },
+    "q13_r29": {
+      "q": 13,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q14_r29": {
+      "q": 14,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q15_r29": {
+      "q": 15,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q16_r29": {
+      "q": 16,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q17_r29": {
+      "q": 17,
+      "r": 29,
+      "terrain": "mountain"
+    },
+    "q9_r30": {
+      "q": 9,
+      "r": 30,
+      "terrain": "mountain"
+    },
+    "q10_r30": {
+      "q": 10,
+      "r": 30,
+      "terrain": "mountain"
+    },
+    "q11_r30": {
+      "q": 11,
+      "r": 30,
+      "terrain": "forest-light"
+    },
+    "q12_r30": {
+      "q": 12,
+      "r": 30,
+      "terrain": "mountain"
+    },
+    "q13_r30": {
+      "q": 13,
+      "r": 30,
+      "terrain": "mountain"
+    },
+    "q14_r30": {
+      "q": 14,
+      "r": 30
+    },
+    "q15_r30": {
+      "q": 15,
+      "r": 30,
+      "terrain": "mountain"
+    },
+    "q9_r31": {
+      "q": 9,
+      "r": 31
+    },
+    "q10_r31": {
+      "q": 10,
+      "r": 31,
+      "terrain": "forest-light"
+    },
+    "q11_r31": {
+      "q": 11,
+      "r": 31,
+      "terrain": "forest-light"
+    },
+    "q12_r31": {
+      "q": 12,
+      "r": 31,
+      "terrain": "mountain"
+    },
+    "q13_r31": {
+      "q": 13,
+      "r": 31,
+      "terrain": "mountain"
+    },
+    "q9_r32": {
+      "q": 9,
+      "r": 32
+    },
+    "q10_r32": {
+      "q": 10,
+      "r": 32,
+      "terrain": "forest-light"
+    },
+    "q11_r32": {
+      "q": 11,
+      "r": 32,
+      "terrain": "forest-light"
+    },
+    "q12_r32": {
+      "q": 12,
+      "r": 32,
+      "terrain": "forest-light"
+    },
+    "q9_r33": {
+      "q": 9,
+      "r": 33
+    }
+  },
+  "rivers": {
+    "q19_r23:q19_r24-q13_r30:q13_r29": {
+      "parent": null,
+      "channel": [
+        "q19_r23:q19_r24",
+        "q18_r23:q19_r24",
+        "q18_r23:q18_r24",
+        "q17_r23:q18_r24",
+        "q17_r23:q17_r24",
+        "q16_r23:q17_r24",
+        "q16_r24:q17_r24",
+        "q16_r25:q17_r24",
+        "q16_r25:q17_r25",
+        "q16_r25:q17_r26",
+        "q16_r26:q17_r26",
+        "q16_r26:q16_r27",
+        "q15_r27:q16_r27",
+        "q15_r27:q16_r28",
+        "q15_r27:q15_r28",
+        "q14_r27:q15_r28",
+        "q14_r27:q14_r28",
+        "q13_r27:q14_r28",
+        "q13_r27:q13_r28",
+        "q12_r27:q13_r28",
+        "q12_r28:q13_r28",
+        "q12_r29:q13_r28",
+        "q12_r29:q13_r29",
+        "q13_r30:q13_r29"
+      ]
+    },
+    "q19_r23:q18_r23-q17_r22:q17_r23": {
+      "parent": "q19_r23:q19_r24-q13_r30:q13_r29",
+      "channel": [
+        "q19_r23:q18_r23",
+        "q19_r22:q18_r23",
+        "q18_r22:q18_r23",
+        "q18_r22:q17_r23",
+        "q17_r22:q17_r23"
+      ]
+    },
+    "q16_r24:q16_r25-q9_r25:q10_r26": {
+      "parent": "q19_r23:q19_r24-q13_r30:q13_r29",
+      "channel": [
+        "q16_r24:q16_r25",
+        "q15_r25:q16_r25",
+        "q15_r25:q16_r26",
+        "q15_r26:q16_r26",
+        "q15_r26:q15_r27",
+        "q15_r26:q14_r27",
+        "q14_r26:q14_r27",
+        "q14_r26:q13_r27",
+        "q14_r26:q13_r26",
+        "q13_r25:q13_r26",
+        "q12_r25:q13_r26",
+        "q12_r25:q12_r26",
+        "q11_r25:q12_r26",
+        "q11_r25:q11_r26",
+        "q10_r25:q11_r26",
+        "q10_r25:q10_r26",
+        "q9_r25:q10_r26"
+      ]
+    },
+    "q18_r13:q18_r14-q17_r12:q16_r12": {
+      "parent": null,
+      "channel": [
+        "q18_r13:q18_r14",
+        "q17_r13:q18_r14",
+        "q17_r13:q17_r14",
+        "q17_r13:q16_r13",
+        "q17_r12:q16_r13",
+        "q17_r12:q16_r12"
+      ]
+    }
+  },
+  "roads": {
+    "q14_r22-q16_r19": [
+      "q14_r22",
+      "q15_r22",
+      "q15_r21",
+      "q16_r20",
+      "q16_r19"
+    ],
+    "q19_r23-q16_r19": [
+      "q19_r23",
+      "q19_r22",
+      "q18_r21",
+      "q18_r20",
+      "q17_r20",
+      "q16_r19"
+    ],
+    "q4_r20-q14_r22": [
+      "q4_r20",
+      "q4_r19",
+      "q5_r19",
+      "q6_r19",
+      "q7_r20",
+      "q8_r20",
+      "q8_r21",
+      "q9_r22",
+      "q10_r22",
+      "q11_r22",
+      "q12_r22",
+      "q13_r22",
+      "q14_r22"
+    ],
+    "q4_r20-q8_r9": [
+      "q4_r20",
+      "q4_r19",
+      "q4_r18",
+      "q3_r17",
+      "q4_r16",
+      "q4_r15",
+      "q5_r14",
+      "q5_r13",
+      "q6_r12",
+      "q6_r11",
+      "q7_r10",
+      "q8_r10",
+      "q8_r9"
+    ]
+  },
+  "searoutes": {
+    "q15_r11-q8_r9": [
+      "q15_r11",
+      "q15_r10",
+      "q14_r9",
+      "q13_r9",
+      "q12_r9",
+      "q11_r9",
+      "q10_r9",
+      "q9_r9",
+      "q8_r9"
+    ],
+    "q15_r11-q16_r19": [
+      "q15_r11",
+      "q15_r12",
+      "q14_r13",
+      "q15_r14",
+      "q15_r15",
+      "q16_r16",
+      "q16_r17",
+      "q17_r18",
+      "q16_r19"
+    ]
+  },
+  "features": [
+    {
+      "name": "Chiarombra",
+      "hexes": [
+        "q16_r19"
+      ]
+    },
+    {
+      "name": "Aster",
+      "hexes": [
+        "q14_r22"
+      ]
+    },
+    {
+      "name": "Artiglio Nero",
+      "hexes": [
+        "q15_r11"
+      ]
+    },
+    {
+      "name": "Ziggurat Oscura",
+      "hexes": [
+        "q6_r12"
+      ]
+    },
+    {
+      "name": "Boscombroso",
+      "hexes": [
+        "q5_r16",
+        "q4_r16",
+        "q3_r16",
+        "q2_r15",
+        "q3_r14",
+        "q4_r14",
+        "q5_r14",
+        "q5_r13",
+        "q6_r12",
+        "q6_r11",
+        "q7_r10",
+        "q7_r9",
+        "q7_r8",
+        "q6_r8",
+        "q5_r8",
+        "q4_r9",
+        "q3_r9",
+        "q3_r10",
+        "q2_r10",
+        "q1_r11",
+        "q1_r12",
+        "q2_r12",
+        "q3_r12",
+        "q4_r12",
+        "q4_r11",
+        "q2_r11",
+        "q3_r11",
+        "q4_r10",
+        "q5_r10",
+        "q5_r9",
+        "q7_r7",
+        "q6_r7",
+        "q6_r9",
+        "q6_r10",
+        "q5_r11",
+        "q5_r12",
+        "q4_r13",
+        "q3_r13",
+        "q2_r13",
+        "q2_r14",
+        "q3_r17",
+        "q4_r18",
+        "q4_r19",
+        "q4_r20",
+        "q4_r21",
+        "q5_r19",
+        "q6_r20",
+        "q6_r21",
+        "q7_r20",
+        "q8_r20",
+        "q8_r21",
+        "q9_r22",
+        "q8_r23",
+        "q9_r23",
+        "q10_r22",
+        "q9_r21",
+        "q9_r20",
+        "q9_r19",
+        "q9_r18",
+        "q8_r18",
+        "q7_r18",
+        "q6_r17",
+        "q8_r19",
+        "q7_r19",
+        "q6_r19",
+        "q6_r18",
+        "q5_r18",
+        "q3_r15",
+        "q4_r17",
+        "q5_r17",
+        "q6_r16",
+        "q4_r15"
+      ]
+    },
+    {
+      "name": "Porto Rivombrosa",
+      "hexes": [
+        "q8_r9"
+      ]
+    },
+    {
+      "name": "Grotta Dimenticata",
+      "hexes": [
+        "q10_r23"
+      ]
+    },
+    {
+      "name": "Porto Lontano",
+      "hexes": [
+        "q19_r23"
+      ]
+    }
+  ]
+}

@@ -71,6 +71,9 @@ def build_artifacts() -> None:
 def main() -> int:
     ver = version()
     build_artifacts()
+    # Semina il MONDO-ESEMPIO nel vault prima di confezionarlo, così lo zip spedito ne ha
+    # uno giocabile (il «Valdombra» della pagina). Idempotente: salta se l'utente ce l'ha già.
+    subprocess.run(["node", str(common.ROOT / "Dev" / "Tools" / "seed_example.js")], check=False)
     dist = common.ROOT / "dist"
     targets = [
         (common.VAULT, dist / f"GDR-vault-v{ver}.zip", "GDR-vault",
