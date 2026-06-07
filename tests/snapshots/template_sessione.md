@@ -10,7 +10,7 @@
 --- ✅ Prepara
 
 > [!tip] Obiettivo
-> `INPUT[text(placeholder(es. fermare il rito prima dell'alba)):obiettivo]`
+> `INPUT[text(placeholder(es. fermare il rito prima dell’alba)):obiettivo]`
 
 > [!quote]- Apertura
 > `INPUT[text(placeholder(la scena con cui apri la sessione)):apertura]`

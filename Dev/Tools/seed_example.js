@@ -50,7 +50,9 @@ function main() {
 
   // 1) Asset mappa nel vault (l'SVG ha i toponimi; il JSON gemello ha nome + origine).
   fs.mkdirSync(path.join(VAULT, "Media"), { recursive: true });
-  for (const f of ["costa_dellombra.svg", "costa_dellombra.json"]) {
+  // costa_dellombra = mappa REGIONALE (toponimi→luoghi); aster = mappa di CITTÀ di Aster
+  // (drill-down: dal pin sulla regione alla pianta della città).
+  for (const f of ["costa_dellombra.svg", "costa_dellombra.json", "aster.svg"]) {
     fs.copyFileSync(path.join(SRC, f), path.join(VAULT, "Media", f));
   }
   const twin = JSON.parse(fs.readFileSync(path.join(SRC, "costa_dellombra.json"), "utf8"));
@@ -81,7 +83,8 @@ function main() {
   //    regione vera ha anche luoghi minori). Scarta il titolo-mappa. + sidecar dei segnaposto.
   const lore = {
     Aster: { tipo: "insediamento", clima: "umido, salmastro", popolazione: "~4.000",
-      gancio: "Nei vicoli della Città Bassa si compra tutto, anche un nome nuovo." },
+      gancio: "Nei vicoli della Città Bassa si compra tutto, anche un nome nuovo.",
+      mappa: "[[aster.svg]]" },
     Ziggurat_Oscura: { tipo: "dungeon", clima: "nebbia perenne",
       gancio: "Sotto le fondamenta, una porta che nessuno ricorda di aver chiuso." },
     Chiarombra: { tipo: "insediamento", clima: "ventoso",
@@ -98,7 +101,7 @@ function main() {
     write(`Mondi/Luoghi/${key}.md`, fm({
       id: key.toLowerCase().replace(/_/g, "-"), nome: p.name, categoria: "luogo",
       tipo: extra.tipo || "luogo", stato: "bozza", mondo: "[[Astaria]]",
-      coord: `${p.x}, ${p.y}`,
+      coord: `${p.x}, ${p.y}`, mappa: extra.mappa,
       clima: extra.clima, popolazione: extra.popolazione, gancio: extra.gancio,
       controllata_da: key === "Aster" ? "[[Corsari dell'Ombra]]"
         : key === "Ziggurat_Oscura" ? "[[La Veglia dei Sepolti]]" : undefined,

@@ -160,7 +160,7 @@ group by categoria as "Tipo"
 > [!info] Mappa
 > Pesca l'**immagine** della mappa: `INPUT[mappa][:mappa]`
 >
-> **Origine** (URL del generatore, per rigenerarla): `INPUT[text(placeholder(incolla l'URL Watabou o Azgaar col seed)):mappa_origine]`
+> **Origine** (URL del generatore, per rigenerarla): `INPUT[text(placeholder(incolla l’URL Watabou o Azgaar col seed)):mappa_origine]`
 >
 > Diventa **interattiva** sotto — zoom/pan e righello distanze→tempi (TTRPG Tools - Maps); aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]` (restano salvati accanto all'immagine).
 >

@@ -38,10 +38,10 @@ fields:
   # pubblico < incontrato < segreto; il build del sito sceglie il livello (`--reveal`)
   # e include una nota se il suo tier <= livello. Default (assente) = pubblico.
   rivelazione:    { label: Rivelazione, widget: rivelazione }
-  obiettivo:      { label: Obiettivo,            widget: text, placeholder: "es. fermare il rito prima dell'alba" }
+  obiettivo:      { label: Obiettivo,            widget: text, placeholder: "es. fermare il rito prima dell’alba" }
   apertura:       { label: Apertura,             widget: text, placeholder: "la scena con cui apri la sessione" }
   scena_corrente: { label: Scena corrente,       widget: text, placeholder: "dove si trova il gruppo adesso" }
-  quando:         { label: Quando,               widget: text, placeholder: "es. anno 312 o un'epoca del mondo" }
+  quando:         { label: Quando,               widget: text, placeholder: "es. anno 312 o un’epoca del mondo" }
   # Ponte Calendarium ('tempo del mondo'): chiavi fc-* lette dal plugin per far
   # comparire un evento sul calendario/agenda. 'quando' resta l'etichetta in
   # prosa (e alimenta la nostra timeline); fc-date è la data macchina nel formato
@@ -62,7 +62,7 @@ fields:
   mappa:          { label: Mappa,                widget: mappa }
   # Origine della mappa: l'URL del generatore (Watabou/Azgaar) con seed/parametri, per
   # rigenerarla o modificarla. renderMap lo mostra come link cliccabile sopra la zoom-map.
-  mappa_origine:  { label: "Origine mappa (URL)", widget: text, placeholder: "incolla l'URL Watabou o Azgaar col seed" }
+  mappa_origine:  { label: "Origine mappa (URL)", widget: text, placeholder: "incolla l’URL Watabou o Azgaar col seed" }
   portata:        { label: Portata,              widget: portata }
   pronomi:        { label: Pronomi,              widget: text, placeholder: "es. lei / lui / loro" }
   eta:            { label: Età,                  widget: text, placeholder: "es. 34 o «secoli»" }

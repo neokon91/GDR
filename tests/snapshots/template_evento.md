@@ -41,7 +41,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 > [!abstract] Cronologia
-> Quando: `INPUT[text(placeholder(es. anno 312 o un'epoca del mondo)):quando]`
+> Quando: `INPUT[text(placeholder(es. anno 312 o un’epoca del mondo)):quando]`
 >
 > Portata: `INPUT[portata][:portata]`
 

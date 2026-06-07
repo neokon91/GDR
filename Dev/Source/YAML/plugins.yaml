@@ -187,9 +187,13 @@ metabind_inputs:
   # digitare il path (il caso dominante: export PNG/SVG da Azgaar/Watabou in Media/).
   # renderMap risolve path/[[link]]/![[embed]]; il disegno Excalidraw a mano passa
   # dal bottone «Disegna mappa», non da questo campo (immagini-only).
-  mappa: INPUT[imageSuggester()]
-  ritratto: INPUT[imageSuggester()]
-  banner: INPUT[imageSuggester()]
+  # optionQuery("") è OBBLIGATORIO: senza, Meta Bind non interroga nessuna cartella e
+  # il suggester resta VUOTO (sembrava «non trova le immagini / non supporta SVG»). ""
+  # = radice del vault, ricorsivo → trova le immagini ovunque, Media/ inclusa. SVG ok
+  # (è fra le estensioni immagine di Meta Bind: apng/avif/gif/jpg/png/svg/webp).
+  mappa: INPUT[imageSuggester(optionQuery(""))]
+  ritratto: INPUT[imageSuggester(optionQuery(""))]
+  banner: INPUT[imageSuggester(optionQuery(""))]
   segno: INPUT[inlineSelect(option(Ariete), option(Toro), option(Gemelli), option(Cancro), option(Leone), option(Vergine), option(Bilancia), option(Scorpione), option(Sagittario), option(Capricorno), option(Acquario), option(Pesci))]
   arcano: INPUT[inlineSelect(option(Il Matto), option(Il Bagatto), option(La Papessa), option(L’Imperatrice), option(L’Imperatore), option(Il Papa), option(Gli Amanti), option(Il Carro), option(La Giustizia), option(L’Eremita), option(La Ruota della Fortuna), option(La Forza), option(L’Appeso), option(La Morte), option(La Temperanza), option(Il Diavolo), option(La Torre), option(La Stella), option(La Luna), option(Il Sole), option(Il Giudizio), option(Il Mondo))]
   # Stili del generatore homebrew (genera.js): le opzioni DEVONO combaciare con

@@ -443,8 +443,11 @@ def check() -> int:
     # Tipi Meta Bind INLINE (`INPUT[tipo:prop]`, resi dalla macro field()): non hanno
     # bisogno di un template in metabind_inputs. Gli altri widget DEVONO avere un template.
     inline_widgets = ("text", "number", "toggle", "date", "datePicker", "time")
-    # I caratteri che chiuderebbero/spezzerebbero `INPUT[text(placeholder(...)):prop]`.
-    placeholder_vietati = set("()[]:,`")
+    # Il placeholder è emesso GREZZO in `INPUT[text(placeholder(...)):prop]`: Meta Bind NON
+    # accetta valori-argomento quotati (né '…' né "…"). Vietati i caratteri che spezzano il
+    # parser argomenti (MB_PARSINOM): () [] : , ` e gli apici DRITTI ' e ". Per un apostrofo
+    # nel testo usa quello tipografico ' (U+2019), che il parser tratta come lettera normale.
+    placeholder_vietati = set("()[]:,`'") | {'"'}
     for field_id, spec in fields.items():
         spec = spec or {}
         widget = spec.get("widget")
@@ -455,7 +458,7 @@ def check() -> int:
             if widget not in ("text", "number"):
                 errors.append(f"campo {field_id}: 'placeholder' ammesso solo su widget text/number (è '{widget}')")
             if set(str(ph)) & placeholder_vietati:
-                errors.append(f"campo {field_id}: placeholder con caratteri vietati ()[]:,` — romperebbe il parser Meta Bind")
+                errors.append(f"campo {field_id}: placeholder con caratteri che rompono il parser Meta Bind — ()[]:,` o apici dritti ' \" (usa l'apostrofo tipografico ’)")
 
     # Anti-drift: gli elenchi-di-categorie di core.yaml (chi riceve il Fronte/clock,
     # le tappe, il motore di coerenza, il ritratto) devono nominare SOLO categorie
