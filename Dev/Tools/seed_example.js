@@ -79,7 +79,7 @@ function main() {
     connessioni: [], sessioni: [], tags: ["gdr/bozza"],
   }) + modelBody("Mondo.md"));
 
-  // 3) Luoghi dai toponimi (TEMPLATI) + lore curata sui chiave; gli altri restano spilli (una
+  // 3) Luoghi dai toponimi (TEMPLATI) + lore curata su OGNI luogo (ogni pin è un posto vero); (una
   //    regione vera ha anche luoghi minori). Scarta il titolo-mappa. + sidecar dei segnaposto.
   const lore = {
     Aster: { tipo: "insediamento", clima: "umido, salmastro", popolazione: "~4.000",
@@ -91,6 +91,14 @@ function main() {
       gancio: "L'ultima campana che suona ancora il coprifuoco contro la nebbia." },
     Artiglio_Nero: { tipo: "struttura",
       gancio: "Il faro è spento da una stagione, eppure qualcosa lassù risponde ai segnali." },
+    Porto_Rivombrosa: { tipo: "insediamento", clima: "nebbioso", popolazione: "~1.200",
+      gancio: "Da quando la Veglia ci ha messo radici, le barche partono cariche e tornano vuote — e nessuno chiede dove sia finito l'equipaggio." },
+    Porto_Lontano: { tipo: "insediamento", clima: "battuto dai venti", popolazione: "~800",
+      gancio: "L'ultimo scalo prima del mare aperto: chi vuole sparire dalla costa paga i Corsari e si imbarca qui." },
+    Boscombroso: { tipo: "luogo", clima: "umido, fitto",
+      gancio: "Gli alberi crescono storti verso la Ziggurat, e di notte il bosco sussurra in una lingua che nessuno ammette di capire." },
+    Grotta_Dimenticata: { tipo: "dungeon", clima: "buio, umido",
+      gancio: "I pescatori giurano che là dentro la marea sale anche quando fuori cala — come se qualcosa, sotto, respirasse." },
   };
   const { size, places } = im.parseSvgMap(fs.readFileSync(path.join(SRC, "costa_dellombra.svg"), "utf8"));
   const norm = (x) => String(x || "").toLowerCase().replace(/\s+/g, " ").trim();
@@ -110,6 +118,13 @@ function main() {
   }
   write("Media/costa_dellombra.svg.markers.json",
     JSON.stringify(im.buildMarkers("Media/costa_dellombra.svg", size, luoghi, (n) => nomeFile(n)), null, 2));
+  // Pin CURATO sulla mappa-città di Aster: la sede dei Corsari al porto → completa il
+  // drill-down regione → città → fazione. Un solo pin a mano (i toponimi fitti della
+  // pianta-città non si parsano puliti: niente auto-pin qui). Link "Corsari dell'Ombra"
+  // (identità: il file-fazione ha gli spazi, risolve diretto).
+  write("Media/aster.svg.markers.json", JSON.stringify(
+    im.buildMarkers("Media/aster.svg", { w: 720, h: 794 },
+      [{ name: "Corsari dell'Ombra", x: 319, y: 561 }], (n) => n), null, 2));
 
   // 4) Due fazioni in CONFLITTO (il grafo che racconta una storia): i Corsari (banda mercantile,
   //    sede Aster) ⚔ la Veglia dei Sepolti (ordine religioso, sede la Ziggurat). Rivali a vicenda;
@@ -151,7 +166,7 @@ function main() {
   //    competenze classe+background senza doppioni). Ritratto VUOTO (aggancio immagine).
   write("Mondi/Personaggi/Korbin_Salmastro.md", KORBIN_FM + modelBody("PG.md"));
 
-  console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (4 con lore) + mappa + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6) + 1 PG collegato (Korbin Salmastro, Ladro 1).`);
+  console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (tutti con lore) + 2 mappe (regionale coi pin + città di Aster) + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6) + 1 PG collegato (Korbin Salmastro, Ladro 1).`);
 }
 
 // Frontmatter del PG-esempio: la build del wizard «Crea PG», con in più i CAMPI DI
