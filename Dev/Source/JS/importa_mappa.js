@@ -79,11 +79,14 @@ function parseSvgMap(svg) {
     if (name.length < 3 || /^\d+$/.test(name)) return;       // barra-scala / rumore
     if (!byName.has(name)) byName.set(name, { name, x: Math.round(x), y: Math.round(FLIP_Y ? size.h - y : y) });
   };
-  // Soglia di "salto" RELATIVA al FONT (in spazio-tela), non un 80px fisso: regge sia le mappe
-  // regionali grandi (font grande) sia le città piccole (font piccolo), dove un valore fisso
-  // fondeva le label (CASTELLOCASTELLO, PEARL MILLPORTO). Dentro una parola le lettere distano
-  // ~1 font; un salto > ~1.6 font = duplicato outline+fill o label adiacente → spezza. Il
-  // collasso-doppioni è una rete di sicurezza per gli outline+fill che sfuggono.
+  // Soglia di "salto" RELATIVA al FONT (in spazio-tela), non un 80px fisso: regge sia le
+  // mappe regionali (font grande) sia le città (font piccolo). Dentro una label le lettere
+  // distano ~1 font; un salto > ~2.5 font = label adiacente → spezza. 2.5 (non 1.6) perché
+  // le label CURVE delle città distanziano le lettere lungo l'arco: a 1.6 si frammentavano
+  // (CIT|TÀ ESTERNA, CITTÀ A); a 2.5 reggono (→ «CITTÀ ESTERNA», «CITTÀ ALTA»). collapseDouble
+  // resta la rete per gli outline+fill sovrapposti (CASTELLOCASTELLO). LIMITE NOTO: due label
+  // molto vicine con stesso orientamento possono ancora fondersi (es. «PORTOCITTÀ ALTA»);
+  // per le piante-città fitte conviene il pin curato a mano.
   let run = null;
   const collapseDouble = (s) => {                            // "CASTELLOCASTELLO" → "CASTELLO"
     const h = s.length / 2;
@@ -97,7 +100,7 @@ function parseSvgMap(svg) {
     const wordChar = /^[\p{L}'’\-]$/u.test(c), space = /^\s$/.test(c);
     if (run && (wordChar || space)) {                        // salto di posizione → spezza il run
       const d = Math.hypot(t.x - run.lx, t.y - run.ly);
-      if (d > Math.max(20, run.fs * 1.6)) flush();
+      if (d > Math.max(20, run.fs * 2.5)) flush();
     }
     if (wordChar) {                                          // lettera/apostrofo → label su curva
       if (!run) run = { chars: [], x: t.x, y: t.y, lx: t.x, ly: t.y, fs: t.fs };
