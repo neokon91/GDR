@@ -46,6 +46,14 @@ actions:
   - id: scaffold_statblock
     title: Genera statblock dal GS
     target: z.modelli/azioni/Genera statblock dal GS.md
+  # Import mappe: senza queste entry il BUTTON[importa-mappa]/[importa-azgaar] punta a un
+  # file-azione INESISTENTE (clic = errore). target = z.modelli/azioni/<label del button>.md.
+  - id: importa_mappa
+    title: Importa mappa Watabou
+    target: z.modelli/azioni/Importa mappa Watabou.md
+  - id: importa_azgaar
+    title: Importa mappa Azgaar (Full JSON)
+    target: z.modelli/azioni/Importa mappa Azgaar (Full JSON).md
   - id: genera
     title: Genera (locale)
     target: z.modelli/azioni/Genera (locale).md

@@ -87,13 +87,18 @@ function parseAzgaar(json) {
 }
 
 // Sidecar `<immagine>.markers.json` del plugin zoom-map dai punti (burgs+markers).
+// Schema VERIFICATO in-app contro «TTRPG Tools - Maps» v2.0.2 (vedi importa_mappa.buildMarkers):
+// type "pin"; x/y NORMALIZZATE 0..1; `layer`+`iconKey`; `link` SENZA `[[ ]]`; `tooltipLabelAlways`.
 function buildMarkers(imagePath, size, punti) {
+  const w = (size && size.w) || 1, h = (size && size.h) || 1;
   return {
     size,
     layers: [{ id: "default", name: "Default", visible: true, locked: false }],
     markers: (punti || []).map((p, i) => ({
-      id: "az-" + i, x: p.x, y: p.y, label: p.nome, tooltip: p.nome,
-      link: p.link || `[[${p.nome}]]`, icon: "",
+      type: "pin", id: "az-" + i,
+      x: p.x / w, y: p.y / h,
+      layer: "default", iconKey: "pinRed",
+      link: p.link || p.nome, tooltip: p.nome, tooltipLabelAlways: true,
     })),
     bases: [imagePath], overlays: [], activeBase: imagePath,
     measurement: { scales: {}, customUnitPxPerUnit: {}, travelTimePresetIds: [], travelDaysEnabled: false },
@@ -210,7 +215,7 @@ async function importa_azgaar(tp) {
       await app.fileManager.processFrontMatter(mondoFile, (fm) => { fm.mappa = `[[${img.name}]]`; });
       const markersPath = img.path + ".markers.json";
       if (!app.vault.getAbstractFileByPath(markersPath)) {
-        const punti = [...data.burgs, ...data.markers].map((p) => ({ nome: p.nome, x: p.x, y: p.y, link: `[[${_file(p.nome)}]]` }));
+        const punti = [...data.burgs, ...data.markers].map((p) => ({ nome: p.nome, x: p.x, y: p.y, link: _file(p.nome) }));
         try { await app.vault.create(markersPath, JSON.stringify(buildMarkers(img.path, { w: data.info.width, h: data.info.height }, punti), null, 2)); pin = punti.length; } catch (e) { /* ignora */ }
       }
     }

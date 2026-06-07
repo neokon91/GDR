@@ -716,7 +716,7 @@ def test_importa_mappa_parse(tmp_path):
         '<text transform="translate(0 -32)">250</text>'
         '<text transform="translate(-7 -11)">D</text></g></svg>`;'
         'const r=im.parseSvgMap(svg);'
-        'const mk=im.buildMarkers("Media/c.svg",r.size,r.places,(n)=>"[["+n+"]]");'
+        'const mk=im.buildMarkers("Media/c.svg",r.size,r.places,(n)=>n);'
         'process.stdout.write(JSON.stringify({size:r.size,offset:r.offset,places:r.places,'
         ' nMark:mk.markers.length,base:mk.bases[0],m0:mk.markers[0]}));',
         encoding="utf-8")
@@ -727,7 +727,10 @@ def test_importa_mappa_parse(tmp_path):
     assert [p["name"] for p in o["places"]] == ["Aster", "Chiarombra"]   # dedup + niente numeri/lettere
     assert o["places"][0] == {"name": "Aster", "x": 643, "y": 1264}      # label + offset di centratura
     assert o["nMark"] == 2 and o["base"] == "Media/c.svg"
-    assert o["m0"]["link"] == "[[Aster]]" and o["m0"]["x"] == 643        # pin linkato alla nota
+    # Schema zoom-map verificato in-app: type "pin", coord normalizzate 0..1, layer/iconKey,
+    # link SENZA [[ ]] (li mette il plugin). Lo schema vecchio (label/icon/pixel) non renderizzava.
+    assert o["m0"]["type"] == "pin" and o["m0"]["layer"] == "default" and o["m0"]["iconKey"] == "pinRed"
+    assert o["m0"]["link"] == "Aster" and abs(o["m0"]["x"] - 643 / 1800) < 1e-9   # pin linkato + normalizzato
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

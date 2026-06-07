@@ -82,7 +82,9 @@ async function renderMap(app, dv, page) {
     // per riaprire/modificare la mappa nel generatore. Solo http(s), per sicurezza.
     const orig = text(page.mappa_origine);
     const tip = /^https?:\/\//i.test(orig) ? `> [!tip] 🔗 [Rigenera o modifica la mappa originale](${orig})\n\n` : "";
-    return tip + "```zoommap\nimage: " + path + "\nheight: 480px\nminZoom: 0.3\nmaxZoom: 8\n```";
+    // minZoom basso: una mappa raster grande (es. PNG 4095²) a 0.3 non rientra nel pannello
+    // 480px e si apre/incastra sull'angolo; 0.05 lascia rimpicciolire fino a vederla tutta.
+    return tip + "```zoommap\nimage: " + path + "\nheight: 480px\nminZoom: 0.05\nmaxZoom: 8\n```";
   }
   // Nota o disegno Excalidraw → embed (zone cliccabili disegnate a mano).
   const base = (nameStr || path.split("/").pop()).replace(/\.md$/, "");
@@ -117,7 +119,7 @@ async function renderWorldMap(app, dv) {
   const out = [];
   for (const m of maps) {
     out.push("#### 🗺 " + noteLink(m.p) + "  ·  *" + text(m.p.categoria) + "*");
-    out.push("```zoommap\nimage: " + m.path + "\nheight: 520px\nminZoom: 0.3\nmaxZoom: 8\n```");
+    out.push("```zoommap\nimage: " + m.path + "\nheight: 520px\nminZoom: 0.05\nmaxZoom: 8\n```");
   }
   return out.join("\n\n");
 }
