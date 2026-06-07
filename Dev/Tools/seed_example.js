@@ -166,7 +166,23 @@ function main() {
   //    competenze classe+background senza doppioni). Ritratto VUOTO (aggancio immagine).
   write("Mondi/Personaggi/Korbin Salmastro.md", KORBIN_FM + modelBody("PG.md"));
 
-  console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (tutti con lore) + 2 mappe (regionale coi pin + città di Aster) + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6) + 1 PG collegato (Korbin Salmastro, Ladro 1).`);
+  // 6) Un INCONTRO al tavolo agganciato al mondo: «Guardiani della Terza Porta» alla
+  //    Ziggurat — la Veglia che difende il rito. Chiude il loop worldbuilding →
+  //    combattimento: luogo + creature SRD (risolte dal bestiario Fantasy Statblocks) +
+  //    budget 2024 (pg_livello/pg_numero → difficoltà). Blocco encounter PRE-GENERATO (il
+  //    seed non gira Templater, che lascerebbe il tag <% %> grezzo nel name:).
+  const encBlock = "```encounter\nname: Guardiani della Terza Porta\nplayers: 4\ncreatures:\n  - 4: Cultista\n  - 1: Ombra\n```";
+  write("Mondi/Incontri/Guardiani della Terza Porta.md", fm({
+    id: "guardiani-terza-porta", nome: "Guardiani della Terza Porta", categoria: "incontro",
+    stato: "bozza", mondo: "[[Astaria]]", luogo: "[[Ziggurat Oscura]]",
+    pg_livello: 1, pg_numero: 4,
+    creature: ["[[Cultista]]", "[[Cultista]]", "[[Cultista]]", "[[Cultista]]", "[[Ombra]]"],
+    gancio: "Oltre la soglia, gli incappucciati della Veglia salmodiano attorno a una porta che non dovrebbe esistere — e qualcosa, dietro, risponde ai loro versi.",
+    uso_al_tavolo: "Lo scontro che chiude il primo atto. I Guardiani difendono la Terza Porta, ma accolgono «chi l'Ombra ha scelto»: con la parola (o la faccia) giusta si passa senza sangue. Altrimenti, i cultisti e un'Ombra che cola dalle fessure.",
+    connessioni: [], sessioni: [], tags: ["gdr/bozza"],
+  }) + modelBody("Incontro.md").replace(/```encounter[\s\S]*?```/, encBlock));
+
+  console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (tutti con lore) + 2 mappe (regionale coi pin + città di Aster) + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6) + 1 PG collegato (Korbin) + 1 incontro alla Ziggurat (budget 2024).`);
 }
 
 // Frontmatter del PG-esempio: la build del wizard «Crea PG», con in più i CAMPI DI
