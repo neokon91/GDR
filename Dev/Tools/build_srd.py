@@ -255,8 +255,110 @@ def srd_header(entry: dict[str, Any], cat: str) -> str:
     return ""
 
 
+# --- Auto-link incrociato delle schede SRD ----------------------------------
+# Dove una scheda CITA un'altra entità (un incantesimo nomina una condizione, un
+# privilegio nomina un incantesimo…), avvolgiamo il nome in [[ ]]. Conservativo per
+# non sporcare la prosa: solo categorie ad alta distintività (condizioni, incantesimi
+# multi-parola o lunghi, specie/classi/background/talenti), PRIMA occorrenza per nota,
+# niente auto-link, niente omonimi ambigui. Le parole troppo comuni restano escluse.
+_AUTOLINK_STOP = {
+    "guida", "luce", "paura", "salto", "sonno", "aiuto", "scudo", "volare", "arma",
+    "azione", "danni", "morte", "magia", "tiro", "difesa", "studio", "abile", "ferire",
+    "celare", "esilio", "fatale", "clone", "sogno", "unto",
+}
+
+
+def _autolink_forme(nome: str, condizione: bool) -> set[str]:
+    """Forme di superficie (minuscole) con cui un nome può comparire nella prosa. Le
+    condizioni (participi/aggettivi) sono declinate o/a/i/e per genere e numero, così
+    «affascinata», «proni»… linkano alla scheda «Affascinato»/«Prono»."""
+    nome = str(nome or "").strip()
+    if not nome:
+        return set()
+    if condizione:
+        parole = nome.split()
+        testa = parole[0]
+        coda = (" " + " ".join(parole[1:])) if len(parole) > 1 else ""
+        ult = testa[-1:].lower()
+        if ult in "oa":
+            basi = [testa[:-1] + v for v in "oaie"]
+        elif ult == "e":
+            basi = [testa[:-1] + v for v in "ei"]
+        else:
+            basi = [testa]
+        return {(b + coda).lower() for b in basi}
+    return {nome.lower()}
+
+
+def autolink_index() -> dict[str, str]:
+    """{forma_minuscola: «Nome canonico»} per l'auto-link incrociato. Categorie
+    distintive; incantesimi solo MULTI-PAROLA («Palla di fuoco» sì, «Resistenza»/
+    «Guarigione»/«Scurovisione» no: sono anche termini di gioco comuni e darebbero
+    falsi positivi). Omonimi (stessa forma, entità diverse) scartati."""
+    idx: dict[str, str] = {}
+    ambigui: set[str] = set()
+
+    def add(nome: str, condizione: bool = False) -> None:
+        for forma in _autolink_forme(nome, condizione):
+            if len(forma) < 4 or forma in _AUTOLINK_STOP:
+                continue
+            canon = idx.get(forma)
+            if canon is not None and canon != nome:
+                ambigui.add(forma)
+            else:
+                idx[forma] = nome
+
+    for jf in ("srd_5_2_1_species.json", "srd_5_2_1_backgrounds.json",
+               "srd_5_2_1_feats.json", "srd_5_2_1_classes.json"):
+        for e in load_srd(jf):
+            if isinstance(e, dict) and e.get("nome"):
+                add(e["nome"])
+    for e in load_srd("srd_5_2_1_spells.json"):
+        nome = str(e.get("nome", "")) if isinstance(e, dict) else ""
+        if nome and " " in nome:  # solo multi-parola: evita i single-word comuni
+            add(nome)
+    for g in load_srd("srd_5_2_1_rules_glossary.json"):
+        if isinstance(g, dict) and g.get("descrittore") == "condizione" and g.get("nome"):
+            add(g["nome"], condizione=True)
+    for forma in ambigui:
+        idx.pop(forma, None)
+    return idx
+
+
+def autolink_regex(idx: dict[str, str]):
+    """Regex unica (forme più lunghe prima → greedy) con confini di parola Unicode."""
+    if not idx:
+        return None
+    alt = "|".join(re.escape(f) for f in sorted(idx, key=len, reverse=True))
+    return re.compile(rf"(?<![\w'])(?:{alt})(?![\w'])", re.IGNORECASE)
+
+
+def autolink(text: str, regex, idx: dict[str, str], self_nome: str, seen: set[str]) -> str:
+    """Avvolge in [[ ]] la PRIMA occorrenza di ogni entità citata (non sé stessa).
+    Conserva il testo originale come alias quando differisce dal nome canonico."""
+    if not regex or not text:
+        return text
+
+    def repl(m):
+        trovato = m.group(0)
+        canon = idx.get(trovato.lower())
+        if not canon or canon == self_nome or canon in seen:
+            return trovato
+        seen.add(canon)
+        return f"[[{canon}]]" if trovato == canon else f"[[{canon}|{trovato}]]"
+
+    return regex.sub(repl, text)
+
+
 def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
-             links: dict[str, str] | None = None) -> str:
+             links: dict[str, str] | None = None,
+             al_re=None, al_idx: dict[str, str] | None = None) -> str:
+    self_nome = str(entry.get("nome", ""))
+    seen_links: set[str] = set()
+
+    def link(text: str) -> str:
+        return autolink(text, al_re, al_idx or {}, self_nome, seen_links)
+
     fm: dict[str, Any] = {"nome": entry.get("nome", ""), "categoria": cat, "srd": True, "fonte": "SRD 5.2.1"}
     for key in fm_fields:
         val = entry.get(key)
@@ -283,7 +385,7 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
 
     for key in ("descrizione", "beneficio"):
         if isinstance(entry.get(key), str) and entry[key].strip() and once(entry[key]):
-            parts.append(entry[key].strip())
+            parts.append(link(entry[key].strip()))
     for sez in entry.get("sezioni") or []:
         if not isinstance(sez, dict):
             continue
@@ -292,7 +394,7 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
             blocco.append(f"### {sez['titolo']}")
         desc = str(sez.get("descrizione") or "").strip()
         if desc and once(desc):
-            blocco.append(desc)
+            blocco.append(link(desc))
         if sez.get("blocchi"):
             blocco.append(_blocchi(sez["blocchi"]))
         if sez.get("righe"):
@@ -497,18 +599,21 @@ def build_srd(core: dict[str, Any]) -> int:
     write_text(VAULT / "SRD" / "LICENZA.md", f"# Licenza SRD\n\n{SRD_ATTRIBUTION}\n")
     # Indice id->nome su tutte le voci, per risolvere i link 'vedi_anche'/evocate.
     links = srd_id_index()
+    # Indice forma->Nome per l'auto-link incrociato della prosa (costruito una volta).
+    al_idx = autolink_index()
+    al_re = autolink_regex(al_idx)
     written = 0
     for spec in SRD_GEN:
         for entry in load_srd(spec["json"]):
             write_text(VAULT / "SRD" / spec["dest"] / f"{srd_slug(entry.get('nome'))}.md",
-                       srd_note(entry, spec["cat"], spec["fm"], links))
+                       srd_note(entry, spec["cat"], spec["fm"], links, al_re, al_idx))
             written += 1
     # Glossario: condizioni in una cartella dedicata, il resto in Glossario.
     for entry in load_srd("srd_5_2_1_rules_glossary.json"):
         cond = entry.get("descrittore") == "condizione"
         dest, cat = ("Condizioni", "srd-condizione") if cond else ("Glossario", "srd-glossario")
         write_text(VAULT / "SRD" / dest / f"{srd_slug(entry.get('nome'))}.md",
-                   srd_note(entry, cat, ["descrittore"], links))
+                   srd_note(entry, cat, ["descrittore"], links, al_re, al_idx))
         written += 1
     # Mostri -> statblock (statblock: inline => entra nel bestiario di Fantasy Statblocks).
     layout = (core.get("statblock", {}) or {}).get("layout", "Basic 5e Layout")
