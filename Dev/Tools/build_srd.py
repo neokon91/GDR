@@ -262,9 +262,30 @@ def srd_header(entry: dict[str, Any], cat: str) -> str:
 # multi-parola o lunghi, specie/classi/background/talenti), PRIMA occorrenza per nota,
 # niente auto-link, niente omonimi ambigui. Le parole troppo comuni restano escluse.
 _AUTOLINK_STOP = {
-    "guida", "luce", "paura", "salto", "sonno", "aiuto", "scudo", "volare", "arma",
-    "azione", "danni", "morte", "magia", "tiro", "difesa", "studio", "abile", "ferire",
-    "celare", "esilio", "fatale", "clone", "sogno", "unto",
+    # incantesimi il cui nome è anche parola comune (link sbagliati nella prosa)
+    "aiuto", "allarme", "benedizione", "capanna", "celare", "clone", "comando",
+    "compulsione", "comunione", "confusione", "contagio", "costrizione", "creazione",
+    "desiderio", "divinazione", "eroismo", "esilio", "estasiare", "fabbricare", "fatale",
+    "ferire", "frantumare", "fulmine", "fuorviare", "guarigione", "guida", "identificare",
+    "inaridire", "intralciare", "intermittenza", "inviare", "lentezza", "levitazione",
+    "luce", "luminescenza", "messaggio", "oscurità", "paura", "portale", "presagio",
+    "previsione", "proibizione", "resistenza", "riparare", "rinascita", "risveglio",
+    "salto", "santificare", "santuario", "scassinare", "scrutare", "scudo", "scurovisione",
+    "sembrare", "sfocatura", "silenzio", "simbolo", "sogno", "sonno", "suggestione",
+    "terremoto", "trasformazione", "unto", "velocità", "volare", "disorientare", "ragnatela",
+    # glossario strutturale (compare ovunque: linkarlo è rumore)
+    "azione", "reazione", "arma", "armi", "danni", "danno", "magia", "creatura",
+    "competenza", "taglia", "mostro", "attacco", "bersaglio", "oggetto", "oggetti",
+    "avventura", "campagna", "incontro", "pericolo", "pericoli", "morte", "caduta",
+    "studio", "ricerca", "utilizzo", "influenza", "cono", "cubo", "sfera", "linea",
+    "cilindro", "emanazione", "portata", "alleato", "nemico", "ostile", "amichevole",
+    "indifferente", "atteggiamento", "allineamento", "sorpresa", "stabile", "condizione",
+    "incantesimo", "bonus", "prova", "prove", "illusioni", "maledizioni", "immunità",
+    "vulnerabilità", "iniziativa", "tiro", "difesa", "abile", "linguaggi", "sapiente",
+    # mostri-ruolo generici / parole comuni (gli animali distintivi restano linkabili)
+    "ombra", "spia", "guardia", "nobile", "bruto", "incubo", "gladiatore", "bandito",
+    "pirata", "sacerdote", "popolano", "cultista", "assassino", "esploratore",
+    "cavaliere", "berserker", "arcimago", "fantasma",
 }
 
 
@@ -291,37 +312,54 @@ def _autolink_forme(nome: str, condizione: bool) -> set[str]:
 
 
 def autolink_index() -> dict[str, str]:
-    """{forma_minuscola: «Nome canonico»} per l'auto-link incrociato. Categorie
-    distintive; incantesimi solo MULTI-PAROLA («Palla di fuoco» sì, «Resistenza»/
-    «Guarigione»/«Scurovisione» no: sono anche termini di gioco comuni e darebbero
-    falsi positivi). Omonimi (stessa forma, entità diverse) scartati."""
-    idx: dict[str, str] = {}
-    ambigui: set[str] = set()
+    """{forma_minuscola: «Nome canonico»} per l'auto-link incrociato. Aggressivo ma
+    pulito: incantesimi (anche single-word, meno i comuni in stop-list), condizioni
+    declinate, specie/classi/background/talenti, glossario (meno lo strutturale) e
+    mostri (per i richiami in prosa e negli statblock). Si SCARTANO: le forme ambigue
+    (stesso testo → entità diverse) e gli omonimi cross-categoria (stesso nome in più
+    note, es. «Mago» classe vs mostro → in Obsidian [[Mago]] sarebbe irrisolvibile)."""
+    forme: dict[str, set[str]] = {}   # forma_lower -> nomi canonici
+    fonti: dict[str, set[str]] = {}   # nome canonico -> file-sorgente (per gli omonimi)
 
-    def add(nome: str, condizione: bool = False) -> None:
+    def reg(nome: str, fonte: str, condizione: bool = False) -> None:
+        nome = str(nome or "").strip()
+        if not nome:
+            return
+        fonti.setdefault(nome, set()).add(fonte)
         for forma in _autolink_forme(nome, condizione):
             if len(forma) < 4 or forma in _AUTOLINK_STOP:
                 continue
-            canon = idx.get(forma)
-            if canon is not None and canon != nome:
-                ambigui.add(forma)
-            else:
-                idx[forma] = nome
+            forme.setdefault(forma, set()).add(nome)
 
     for jf in ("srd_5_2_1_species.json", "srd_5_2_1_backgrounds.json",
-               "srd_5_2_1_feats.json", "srd_5_2_1_classes.json"):
+               "srd_5_2_1_feats.json", "srd_5_2_1_classes.json",
+               "srd_5_2_1_spells.json", "srd_5_2_1_monsters.json"):
         for e in load_srd(jf):
             if isinstance(e, dict) and e.get("nome"):
-                add(e["nome"])
-    for e in load_srd("srd_5_2_1_spells.json"):
-        nome = str(e.get("nome", "")) if isinstance(e, dict) else ""
-        if nome and " " in nome:  # solo multi-parola: evita i single-word comuni
-            add(nome)
+                reg(e["nome"], jf)
+    # Glossario: le CONDIZIONI sempre; degli altri termini SOLO una allowlist di concetti
+    # distintivi e NON ubiquitari (linkare «tiro salvezza»/«punti ferita»/«vantaggio»,
+    # presenti in ogni scheda, sarebbe puro rumore).
+    gloss_allow = {
+        "Copertura", "Afferrare", "Schivata", "Disimpegno", "Scatto", "Sintonia",
+        "Maestria", "Rituale", "Telepatia", "Possessione", "Mutaforma", "Trucchetto",
+        "Nascondersi", "Soffocamento",
+    }
     for g in load_srd("srd_5_2_1_rules_glossary.json"):
-        if isinstance(g, dict) and g.get("descrittore") == "condizione" and g.get("nome"):
-            add(g["nome"], condizione=True)
-    for forma in ambigui:
-        idx.pop(forma, None)
+        if not isinstance(g, dict) or not g.get("nome"):
+            continue
+        cond = g.get("descrittore") == "condizione"
+        if cond or g["nome"] in gloss_allow:
+            reg(g["nome"], "glossario", condizione=cond)
+
+    idx: dict[str, str] = {}
+    for forma, nomi in forme.items():
+        if len(nomi) != 1:
+            continue                       # stessa forma → entità diverse: ambigua
+        nome = next(iter(nomi))
+        if len(fonti.get(nome, ())) != 1:
+            continue                       # stesso nome in più note: omonimo, irrisolvibile
+        idx[forma] = nome
     return idx
 
 
@@ -338,11 +376,14 @@ def autolink(text: str, regex, idx: dict[str, str], self_nome: str, seen: set[st
     Conserva il testo originale come alias quando differisce dal nome canonico."""
     if not regex or not text:
         return text
+    # Parole del nome proprio della scheda: «Lupo invernale» che dice «il lupo» riferisce
+    # a sé, non al mostro [[Lupo]] → niente auto-link su una parola del proprio nome.
+    self_parole = set(self_nome.lower().split())
 
     def repl(m):
         trovato = m.group(0)
         canon = idx.get(trovato.lower())
-        if not canon or canon == self_nome or canon in seen:
+        if not canon or canon == self_nome or canon in seen or trovato.lower() in self_parole:
             return trovato
         seen.add(canon)
         return f"[[{canon}]]" if trovato == canon else f"[[{canon}|{trovato}]]"
@@ -434,7 +475,8 @@ def _csv(value: Any) -> str:
     return str(value or "")
 
 
-def srd_statblock_yaml(monster: dict[str, Any], layout: str, core: dict[str, Any] | None = None) -> str:
+def srd_statblock_yaml(monster: dict[str, Any], layout: str, core: dict[str, Any] | None = None,
+                       al_re=None, al_idx: dict[str, str] | None = None) -> str:
     """Mappa un mostro JSON IT sul formato statblock di Fantasy Statblocks (5.5e).
     Emette TUTTI i campi 2024 che il layout sa mostrare: iniziativa, tiri salvezza
     competenti, abilità, resistenze/immunità/vulnerabilità, equipaggiamento, azioni
@@ -454,8 +496,17 @@ def srd_statblock_yaml(monster: dict[str, Any], layout: str, core: dict[str, Any
     leg = monster.get("azioni_leggendarie", {}) or {}
     lingue = monster.get("lingue", [])
 
+    # Auto-link nelle descrizioni dello statblock (Fantasy Statblocks rende i [[ ]]):
+    # una condizione inflitta, un incantesimo lanciato, una creatura evocata diventano
+    # navigabili. Una sola occorrenza per statblock (seen), mai un auto-link.
+    self_nome = str(monster.get("nome", ""))
+    seen_links: set[str] = set()
+
+    def lk(text: str) -> str:
+        return autolink(str(text or ""), al_re, al_idx or {}, self_nome, seen_links)
+
     def actions(key: str) -> list[dict[str, str]]:
-        return [{"name": a.get("nome", ""), "desc": a.get("descrizione", "")}
+        return [{"name": a.get("nome", ""), "desc": lk(a.get("descrizione", ""))}
                 for a in (monster.get(key) or []) if isinstance(a, dict)]
 
     # Tiri salvezza: solo quelli COMPETENTI (ts != modificatore), in formato FS.
@@ -495,8 +546,8 @@ def srd_statblock_yaml(monster: dict[str, Any], layout: str, core: dict[str, Any
         "actions": actions("azioni"),
         "bonus_actions": actions("azioni_bonus"),
         "reactions": actions("reazioni"),
-        "legendary_description": leg.get("descrizione_utilizzi", ""),
-        "legendary_actions": [{"name": a.get("nome", ""), "desc": a.get("descrizione", "")}
+        "legendary_description": lk(leg.get("descrizione_utilizzi", "")),
+        "legendary_actions": [{"name": a.get("nome", ""), "desc": lk(a.get("descrizione", ""))}
                               for a in (leg.get("azioni") or []) if isinstance(a, dict)],
     }
     # Omette i campi vuoti (il layout li nasconderebbe comunque): note più pulite.
@@ -627,7 +678,7 @@ def build_srd(core: dict[str, Any]) -> int:
                 fm["gs"] = str(gs["valore"])
             if gs.get("punti_esperienza") is not None:
                 fm["pe"] = gs["punti_esperienza"]
-        content = frontmatter_block(fm) + f"# {monster.get('nome', '')}\n\n```statblock\n{srd_statblock_yaml(monster, layout, core)}```\n"
+        content = frontmatter_block(fm) + f"# {monster.get('nome', '')}\n\n```statblock\n{srd_statblock_yaml(monster, layout, core, al_re, al_idx)}```\n"
         write_text(VAULT / "SRD" / "Mostri" / f"{srd_slug(monster.get('nome'))}.md", content)
         written += 1
     index = (
