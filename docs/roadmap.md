@@ -5,7 +5,7 @@ Il **come** sta nei doc tecnici ([architecture](architecture.md) · [data_model]
 [rules_layer](rules_layer.md) · [play_layer](play_layer.md) · [plugin_contracts](plugin_contracts.md));
 la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e cosa manca.
 
-## Stato (2026-06-04)
+## Stato (2026-06-07)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` → vault Obsidian (+ sito giocatori
 opzionale). Build vuota; lo zip spedito ha un mondo-esempio **Astaria** seminato da
@@ -19,14 +19,17 @@ Mergiato su `main`: **refactor a GRUPPI + profili-sottotipo**. Tassonomia a 3 st
 direzione di lungo periodo è la **modularizzazione del modello** per espansione/evoluzione:
 aggiungere entità/gruppi/sottotipi resta un'operazione di DATI (YAML), non di codice.
 
-**Ultima sessione** (2026-06-03): consolidamento ontologia (principio di inclusione + merge
-`istituzione→fazione`); irrobustimento (harness + copertura pannelli/radar, **cap a scala** dei
-cruscotti); onboarding «Inizia da qui»; **fix Tab Panels↔Meta Bind** (crash `onCacheChanged` risolto:
-`enableCaching:false`); **scaffolder mostri GS→statblock** (boss homebrew giocabili, base da mediane
-SRD); **inversi reciproci nel wizard** (`_relations.js` canonico); **generatori in-casa Stage 1→3**
-(14 tipi: nomi + PNG/taverna/bevanda/gancio/diceria/bottino/insediamento/oggetto/meteo/dungeon +
-**tesoro legato all'SRD** — parità FCG raggiunta → **dipendenza FCG ritirata**). Pubblicazione
-decisa: **no-ZIP**, repo + sito statico condivisibile, licenze verificate (pulite).
+**Ultima sessione** (2026-06-07): **demo Astaria pubblicata su itch** (v0.1.0, canali vault +
+sito). Demo arricchita e dogfoggata da beta-tester: 8 luoghi **tutti con lore + pin**,
+**mappa-città di Aster** (drill-down regione→città con pin curato dei Corsari), **PG collegato**
+(Korbin Salmastro, RAW-completo) e **incontro** «Guardiani della Terza Porta» alla Ziggurat
+(budget 2024 + creature SRD) → la demo copre **entrambe le suite**. **Auto-link incrociato delle
+schede SRD** (condizioni/incantesimi/mostri, anche dentro gli statblock). Wizard PG: step «Mondo»,
+**tratti-scelta Umano 2024** (Versatile + Skillful), maestrie d'arma in scheda. **Fix**: selettore
+immagini vuoto (`imageSuggester` senza `optionQuery` → SVG ora trovati); `placeholder` rompeva Meta
+Bind (apostrofo dritto → tipografico); **ASI/Dono epico del 19° per TUTTE le classi**; nomi-file
+luoghi/PG con **spazi** (coerenti con le fazioni); **parser città** `1.6→2.5` (label curve non più
+frammentate). 438 test verdi.
 
 **Verdetto 4-lenti** (analisi fresca 2026-06-04, tarata sui competitor — World Anvil/Kanka/
 LegendKeeper/Foundry/D&D Beyond): Architetto **8** · World-builder **8.5** · Game-designer 5.5e
@@ -71,7 +74,7 @@ loop di sessione, tocca metà delle classi).
   incantesimi inline, condizioni, maestrie armi; **encounter** budget XP 2024 + auto-riscrittura
   + **alleati** (`ally`); clock/Fronti; **ponte homebrew→motore** (incantesimi/talenti/background/
   specie/classe/**sottoclasse** giocabili); **tiri Dice Roller col bonus reale** sulla scheda PG.
-- **Onboarding & condivisione** — mondo-esempio Valdombra + **nota guidata «Inizia da qui»**
+- **Onboarding & condivisione** — mondo-esempio Astaria + **nota guidata «Inizia da qui»**
   (UX-1, momento-aha: in 3 passi mostra lore→superficie giocabile calcolata, col bottone
   `crea-luogo` e il link al cruscotto Fronti; read-only, `visibilita: dm`, vive/muore con
   l'esempio); **on-ramp Home** (6 tipi primari, metafisica opt-in; il tip apre «Inizia da qui»);
@@ -101,10 +104,10 @@ loop di sessione, tocca metà delle classi).
   sceglie il livello (`npm run site -- --reveal <tier>`) e include una nota se il suo tier
   ≤ livello → il portale «svela per gradi» man mano che la campagna procede (modello Kanka).
   Selettore 👁 *Condivisione* nel tab *Al tavolo*; l'indice mostra il livello e quante voci
-  restano. Demo: Valdombra (La Voragine=incontrato, Vorth=segreto). (FATTO)
+  restano. Demo: Astaria (la *verità nascosta* sulla Veglia dei Sepolti = `segreto`). (FATTO)
   ✅ **Rivelazione per-sezione**: callout `[!rivela|<tier>]` (player-facing, gated dal
   build) → una nota pubblica può celare una verità che emerge a un livello più alto
-  (demo: Forte Cenere «cosa sogna sotto le cantine» a `--reveal segreto`). (FATTO)
+  (demo: Astaria, la *verità nascosta* del mondo — cosa fa davvero la Veglia — a `--reveal segreto`). (FATTO)
   ✅ **Anteprima «occhi del giocatore» in-vault**: dashboard Dataview che mostra cosa
   vedono i giocatori per tier, senza buildare il sito (in Home). (FATTO)
 - **Onboarding guidato** — ✅ il **momento-aha** è coperto dalla nota «Inizia da qui» (UX-1).
@@ -156,8 +159,8 @@ loop di sessione, tocca metà delle classi).
   **culto rivale** in ascesa (i culti-rivali passano dal grafo economico generico al
   teologico, niente doppioni), una **profezia/mito** che lo riguarda che matura (inlink che
   avanza). `culto` aveva già assi ricchi (`assi/culto.yaml`) ed era già in `coerenza_categorie`.
-  Demo Valdombra: *La Setta della Voragine* venera *Vorth il Sepolto* (che freme) e custodisce
-  *La Profezia del Risveglio* (4/6, che matura) → entrambe spingono la Setta nel cruscotto Fronti.
+  Es.: un *culto* che venera una *divinità* (che freme) e custodisce una *profezia* (4/6, che
+  matura) → entrambe spingono il culto nel cruscotto Fronti.
   Riusa il motore `spinteFronte`/`COSMO`; visibile in *Stato del Mondo* come le spinte cosmiche. (FATTO)
 - **Recuperi da FantasyWorld**: ✅ **alberi evolutivi / skill-tree** — nuova entità
   `albero_evolutivo` (progressioni *lore* ramificate: tradizione/lignaggio/evoluzione/
