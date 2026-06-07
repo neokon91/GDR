@@ -201,14 +201,18 @@ async function renderStatoMondo(app, dv) {
   // resta visibile nell'intestazione (no silent cap). Per la prep di sessione
   // contano i fronti caldi in cima, non l'elenco esaustivo.
   const TOP = 12;
-  // "Caldo" = sta per scattare: ha spinte dal grafo, è al penultimo segmento, O è in
-  // pressione di Crisi (≥7) — così la pressione autoriale tinge anche l'icona/stato.
+  // Icona = CALORE (pressione): combacia con la legenda del giro del mondo
+  // («🔴 Crisi +2 · 🟠 Tensione +1 · 🟢 Calma fermo») e PREDICE l'avanzamento, così il
+  // colore non mente (un 🟢 Calma non figura più "stabile" e poi avanza). Le stesse bande
+  // di pressureLabel/forecastHeat (≥7 / ≥4). L'imminenza ("caldo": spinte dal grafo,
+  // penultimo segmento o Crisi) sta nel TESTO con ⚡ — segnale separato dal calore.
+  const heatIcona = (p) => (Number(p) || 0) >= 7 ? "🔴" : (Number(p) || 0) >= 4 ? "🟠" : "🟢";
   const caldo = (f, cur, dim, spinte) => spinte.length || cur >= dim - 1 || (Number(f.pressione) || 0) >= 7;
   const blocchi = rows.slice(0, TOP).map(({ f, dim, cur, spinte }) => {
     const pieno = cur >= dim;
     const hot = caldo(f, cur, dim, spinte);
-    const icona = pieno ? "🔴" : hot ? "🟠" : "🟢";
-    const stato = pieno ? "PIENO — scatena la conseguenza" : hot ? "sta per scattare" : "stabile";
+    const icona = pieno ? "🔴" : heatIcona(f.pressione);
+    const stato = pieno ? "PIENO — scatena la conseguenza" : hot ? "⚡ sta per scattare" : "stabile";
     const next = text(f.prossima_mossa) ? ` · *${text(f.prossima_mossa)}*` : "";
     let blocco = `> ${icona} **${noteLink(f)}** ${cur}/${dim} — ${stato}${next}`;
     for (const s of spinte.slice(0, 2)) blocco += `\n> - ${s}`;

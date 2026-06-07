@@ -301,6 +301,16 @@ function classeHomebrew(opt) {
 }
 // <<<homebrew-bridge
 
+// Mondo di appartenenza (opzionale): le note-mondo del vault → "[[Nome]]" (o "" se si
+// salta / non ci sono mondi). Collega il PG al worldbuilding (cruscotti, sito giocatori).
+async function scegliMondo(tp) {
+  const mondi = noteVault("mondo").map(({ f }) => f.basename).sort();
+  if (!mondi.length) return "";
+  const SALTA = "— nessuno —";
+  const scelto = await tp.system.suggester([SALTA, ...mondi], [SALTA, ...mondi], false, "Mondo di appartenenza (opzionale)");
+  return scelto && scelto !== SALTA ? `[[${scelto}]]` : "";
+}
+
 // Background homebrew → opzioni nella forma del motore, mappando le label umane del
 // frontmatter agli id (caratteristiche/abilità). Campi vuoti → liste vuote (bg
 // selezionabile ma "neutro" finché non lo compili nella scheda).
@@ -431,7 +441,7 @@ function frontmatter(pg) {
 nome: ${JSON.stringify(String(pg.nome ?? ""))}
 categoria: personaggio
 tipo: pg
-classe: ${pg.classe}
+${pg.mondo ? `mondo: ${JSON.stringify(String(pg.mondo))}\n` : ""}classe: ${pg.classe}
 ${classiRighe}
 specie: ${pg.specie}
 background: ${pg.background}
@@ -488,15 +498,29 @@ async function costruisciPG(tp, opt, nome) {
     const classe = classiOpt[classeId] || {};
     const specie = specieOpt[specieId] || {};
     const background = backgroundOpt[backgroundId] || {};
+    // Mondo di appartenenza (opzionale): collega il PG al worldbuilding.
+    const mondo = await scegliMondo(tp);
 
     fase.n = 2;  // fase 2: Caratteristiche (metodo, assegnazioni, aumento background)
     let caratteristiche = await generaCaratteristiche(tp, opt);
     caratteristiche = await applicaAumentoBackground(tp, caratteristiche, background, opt);
 
-    fase.n = 3;  // fase 3: Competenze (abilità di classe)
+    fase.n = 3;  // fase 3: Competenze (abilità di background + classe + bonus di specie)
+    const abilita = opt.abilita || {};
     const abilitaBackground = background.competenze_abilita || [];
-    const abilitaClasse = await scegliAbilitaClasse(tp, classe, abilitaBackground, opt.abilita || {});
+    const abilitaClasse = await scegliAbilitaClasse(tp, classe, abilitaBackground, abilita);
     const competenzeAbilita = Array.from(new Set([...abilitaBackground, ...abilitaClasse]));
+    // Bonus-abilità di specie (Umano «pluriabilità», 2024): N competenze in più, da
+    // QUALSIASI abilità non ancora competente. Data-driven da specie.abilita_extra.
+    const skillExtra = Number(specie.abilita_extra) || 0;
+    if (skillExtra > 0) {
+        const labelToId = Object.fromEntries(Object.keys(abilita).map(id => [(abilita[id] && abilita[id].label) || id, id]));
+        const pool = Object.keys(abilita).filter(id => !competenzeAbilita.includes(id))
+            .map(id => (abilita[id] && abilita[id].label) || id);
+        for (const lbl of await scegliMulti(tp, "Competenza d'abilità (specie)", pool, skillExtra)) {
+            if (labelToId[lbl]) competenzeAbilita.push(labelToId[lbl]);
+        }
+    }
 
     fase.n = 4;  // fase 4: Equipaggiamento (equip iniziale, armatura, scudo)
     // Equipaggiamento iniziale (scelta SRD A/B) -> inventario.
@@ -532,6 +556,19 @@ async function costruisciPG(tp, opt, nome) {
     const talentoOrigine = background.talento_origine
         ? String(background.talento_origine).trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
         : "";
+    // Talento d'origine di specie (Umano «Versatile», 2024): N talenti d'ORIGINE in più,
+    // diversi da quello del background. Data-driven da specie.talento_origine_extra.
+    const talentiSpecie = [];
+    const featExtra = Number(specie.talento_origine_extra) || 0;
+    if (featExtra > 0) {
+        const pool = Object.entries(opt.talenti || {})
+            .filter(([id, t]) => /origin/i.test((t && t.categoria) || "") && id !== talentoOrigine)
+            .map(([id, t]) => ({ id, label: (t && t.label) || id }));
+        const labelToId = Object.fromEntries(pool.map(p => [p.label, p.id]));
+        for (const lbl of await scegliMulti(tp, "Talento d'origine (specie)", pool.map(p => p.label), featExtra)) {
+            if (labelToId[lbl]) talentiSpecie.push(labelToId[lbl]);
+        }
+    }
     // Strumenti da classe + background, deduplicati senza badare al maiuscolo
     // (es. classe "Arnesi da scasso" + Criminale "arnesi da scasso" → uno solo).
     const strumenti = (() => {
@@ -589,8 +626,9 @@ async function costruisciPG(tp, opt, nome) {
         trucchetti: magia.trucchetti,
         incantesimi: magia.preparati,
         slot: magia.slot,
-        talenti: talentoOrigine ? [talentoOrigine] : [],
+        talenti: [talentoOrigine, ...talentiSpecie].filter(Boolean),
         padronanze_armi,
+        mondo,
     });
 }
 

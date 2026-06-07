@@ -120,6 +120,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > **Privilegi di classe**: `= default(this.privilegi_classe, "—")` · **Talenti**: `= default(this.talenti, "—")`
 >
+> **Padronanze d'arma**: `= default(this.padronanze_armi, "—")`
+>
 > **Tratti di specie**: `= default(this.tratti_specie, "—")`
 
 ```js-engine
