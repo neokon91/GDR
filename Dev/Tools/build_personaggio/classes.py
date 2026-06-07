@@ -48,7 +48,9 @@ def _equipment_options(prose: str) -> dict[str, str]:
     return {"A": text.strip(" .;")}
 
 
-_ASI_RE = re.compile(r"aumento dei punteggi", re.I)
+# Livelli ASI: "Aumento dei punteggi" (4/8/12/16 + extra di classe) E il "Dono epico"
+# del 19° (2024) — anch'esso uno slot ASI/talento, altrimenti ogni classe perdeva il 19°.
+_ASI_RE = re.compile(r"aumento dei punteggi|dono epico", re.I)
 _SUB_RE = re.compile(r"sottoclasse", re.I)
 
 

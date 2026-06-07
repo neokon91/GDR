@@ -532,8 +532,19 @@ async function costruisciPG(tp, opt, nome) {
     const talentoOrigine = background.talento_origine
         ? String(background.talento_origine).trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
         : "";
-    const strumenti = [classe.competenze_strumenti, background.strumenti]
-        .map(s => String(s || "").trim().replace(/\.$/, "")).filter(Boolean).join("; ");
+    // Strumenti da classe + background, deduplicati senza badare al maiuscolo
+    // (es. classe "Arnesi da scasso" + Criminale "arnesi da scasso" → uno solo).
+    const strumenti = (() => {
+        const visti = new Set(), out = [];
+        for (const fonte of [classe.competenze_strumenti, background.strumenti]) {
+            for (const tok of String(fonte || "").replace(/\.$/, "").split(/\s*[;,]\s*/)) {
+                const t = tok.trim(); if (!t) continue;
+                const k = t.toLowerCase();
+                if (!visti.has(k)) { visti.add(k); out.push(t); }
+            }
+        }
+        return out.join("; ");
+    })();
 
     // Padronanza delle armi (2024): le classi che la ottengono scelgono N armi di
     // cui conoscono la padronanza (mappa arma->padronanza dal SRD + armi homebrew del

@@ -340,7 +340,9 @@ def page_model(core: dict[str, Any], fm: dict[str, Any], body: str,
         val = fm.get(fid)
         if val and fid not in _NEVER_FACT:
             label = (fields.get(fid, {}) or {}).get("label", fid.capitalize())
-            facts.append({"label": _esc(label), "value": _esc(str(val))})
+            # Le liste (es. `temi`) vanno unite leggibili, non con il repr Python.
+            text = ", ".join(str(x) for x in val) if isinstance(val, list) else str(val)
+            facts.append({"label": _esc(label), "value": _esc(text)})
 
     # Sezioni narrative: i campi creation.body con `heading` (NO `callout: segreto`).
     sections: list[dict[str, str]] = []
