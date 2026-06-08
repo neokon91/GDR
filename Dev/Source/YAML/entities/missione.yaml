@@ -24,7 +24,7 @@ fields:
   bersaglio:      { label: Bersaglio,      widget: legame }
   da_recuperare:  { label: Da recuperare,  widget: text }
   ricompensa:     { label: Ricompensa,     widget: text }
-  stato_missione: { label: Stato,          widget: stato_missione }
+  stato_missione: { label: Stato della missione, widget: stato_missione }
 scheda: [stato_missione, ricompensa]
 relazioni:
 - { field: luogo,   label: Dove,           category: luogo }

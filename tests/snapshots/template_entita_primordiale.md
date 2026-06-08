@@ -6,7 +6,7 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Stato** | `VIEW[{stato_cosmico} ?? "—"]` |
+> | **Stato cosmico** | `VIEW[{stato_cosmico} ?? "—"]` |
 > | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
@@ -29,7 +29,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 > [!abstract] Scheda
-> Stato: `INPUT[stato_cosmico][:stato_cosmico]`
+> Stato cosmico: `INPUT[stato_cosmico][:stato_cosmico]`
 > Allineamento: `INPUT[allineamento][:allineamento]`
 
 > [!note] Ruolo cosmico

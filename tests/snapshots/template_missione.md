@@ -8,7 +8,7 @@
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Dove** | `VIEW[{luogo}][text(renderMarkdown)]` |
 > | **Fazione dietro** | `VIEW[{fazione}][text(renderMarkdown)]` |
-> | **Stato** | `VIEW[{stato_missione} ?? "—"]` |
+> | **Stato della missione** | `VIEW[{stato_missione} ?? "—"]` |
 > | **Ricompensa** | `VIEW[{ricompensa} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
@@ -31,7 +31,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 > [!abstract] Scheda
-> Stato: `INPUT[stato_missione][:stato_missione]`
+> Stato della missione: `INPUT[stato_missione][:stato_missione]`
 > Ricompensa: `INPUT[text:ricompensa]`
 
 > [!note] Obiettivo

@@ -19,7 +19,7 @@ subtypes:
 - { nome: monarchia,      descrizione: "Un sovrano regna a vita, di norma per linea dinastica.",                       campi: [legge_successione], clock: true, evoluzione: true, wizard: ["Quanto è saldo il diritto al trono dell'attuale sovrano?", "Chi avanza una pretesa rivale?"] }
 - { nome: impero,         descrizione: "Potere espansionista che governa molte province e popoli sotto un imperatore.", campi: [province, motore_espansione], clock: true, evoluzione: true, wizard: ["Cosa lo tiene unito malgrado l'estensione?", "Quale provincia freme per staccarsi?"] }
 - { nome: repubblica,     descrizione: "Il potere è eletto e a tempo: senato, consoli, magistrature.",                 campi: [organo_governo, durata_carica], clock: true, evoluzione: true, wizard: ["Chi muove i fili dietro le cariche elette?", "Quale fazione vorrebbe abolire il voto?"] }
-- { nome: teocrazia,      descrizione: "Governa il clero in nome di una divinità: la legge è dottrina.",               campi: [divinita_di_stato], clock: true, evoluzione: true, wizard: ["Cosa attende chi dubita della dottrina?", "Potere sacro e temporale sono in pace?"] }
+- { nome: teocrazia,      descrizione: "Governa il clero in nome di una divinità: la legge è dottrina.",               campi: [divinita_stato], clock: true, evoluzione: true, wizard: ["Cosa attende chi dubita della dottrina?", "Potere sacro e temporale sono in pace?"] }
 - { nome: oligarchia,     descrizione: "Poche casate, gilde o famiglie detengono il potere reale.",                    campi: [organo_governo], clock: true, evoluzione: true, wizard: ["Quali casate spartiscono il potere, e quale sale?", "Cosa tiene il popolo fuori dalla stanza?"] }
 - { nome: magocrazia,     descrizione: "Governano gli incantatori: l'accesso al potere passa dalla magia.",            campi: [organo_governo, sistema_magico_stato], clock: true, evoluzione: true, wizard: ["Chi resta escluso perché non sa usare la magia?", "Cosa attende l'incantatore che sfida l'ordine?"] }
 - { nome: città-stato,    descrizione: "Una sola città sovrana col suo contado, retta da consiglio o signore.",       campi: [organo_governo], clock: true, evoluzione: true, wizard: ["Da cosa dipende la sua sopravvivenza (commercio, mura, alleanze)?", "Quale vicino la vorrebbe sottomessa?"] }
@@ -33,7 +33,7 @@ fields:
   motore_espansione:    { label: Spinta all'espansione,   widget: text }
   organo_governo:       { label: Organo di governo,       widget: text }
   durata_carica:        { label: Durata delle cariche,    widget: text }
-  divinita_di_stato:    { label: Divinità di stato,       widget: legame }
+  divinita_stato:    { label: Divinità di stato,       widget: legame }
   sistema_magico_stato: { label: Magia di stato,          widget: legame }
   membri:               { label: Membri / firmatari,      widget: text }
   sovrano_feudale:      { label: Fedeltà a,               widget: legame }
