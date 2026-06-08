@@ -5,6 +5,22 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 
 ## [Non rilasciato]
 
+### Corretto
+- **Etichette di stato disambiguate**: «Stato della missione» e «Stato cosmico» non
+  collidono più con lo **Stato** (editoriale) nell'infobox — niente più due righe «Stato»
+  sulla stessa nota. Campo-profilo `divinita_di_stato`→`divinita_stato` (coerente coi gemelli).
+
+### Solidità
+- **Guardia di copertura dei campi** (`validate_field_coverage` in `check()`): ogni campo
+  che il wizard fa compilare deve comparire su almeno una superficie della nota
+  (scheda/tavolo/relazioni/profilo) — un campo «settabile ma mai mostrato» è ora un errore
+  di build, non un orfano silenzioso.
+
+## [0.1.0] — 2026-06-08
+
+Prima **release pubblica** (beta). Pipeline sorgenti `YAML/Jinja/JS` → `render.py` → vault
+Obsidian + sito dei giocatori opzionale. Canali: **itch.io** (vault + sito) e **GitHub**.
+
 ### Aggiunto
 - **Condivisione v2 — rivelazione progressiva** del sito dei giocatori: campo
   `rivelazione` (`pubblico` < `incontrato` < `segreto`), ortogonale a `visibilita`
@@ -39,7 +55,7 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   nessuna cartella → il picker non mostrava NIENTE (sembrava «non trova le immagini / niente
   SVG»). Ora `optionQuery("")` lista ogni immagine del vault, **SVG inclusi**.
 - **`placeholder` rompeva Meta Bind** (`MB_PARSINOM`): l'apostrofo dritto `'` (es. «l'URL»)
-  spezzava il parser argomenti → testo con apostrofo tipografico `'`, e `validate` ora vieta
+  spezzava il parser argomenti → testo con apostrofo tipografico `’`, e `validate` ora vieta
   gli apici dritti `'` `"`.
 - **ASI/Dono epico del 19° mancante per TUTTE le 12 classi**: la regex che deriva i livelli
   di Aumento dei punteggi non intercettava il privilegio «Dono epico» → ora sì (extra di
@@ -50,11 +66,6 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   label curve nelle piante-città. Competenza-strumento duplicata (classe+background) dedotta;
   campi-lista resi «a, b» nel sito (non col `repr` Python); schema marker dei pin allineato
   al plugin zoom-map.
-
-## [0.1.0]
-
-Prima base completa (beta chiuso). Pipeline sorgenti `YAML/Jinja/JS` → `render.py` →
-vault Obsidian + sito dei giocatori opzionale.
 
 ### Worldbuilding
 - 36+ categorie con classificazione `famiglia`+`tipo`, relazioni tipizzate con inversi

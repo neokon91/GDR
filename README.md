@@ -9,8 +9,9 @@ ricostruibile** generato in `dist/GDR-vault/` (gitignorato).
 
 ## Per i Game Master — usarlo (niente sviluppo)
 
-Scarica l'ultimo **vault pronto** dalle [Releases](../../releases) (`GDR-vault-v*.zip`),
-scompattalo e in Obsidian fai **«Apri cartella come vault»** (i plugin sono inclusi). Dentro:
+Scarica l'ultimo **vault pronto** da **[itch.io](https://neokon91.itch.io/gdr-italian-vault)**
+(*name-your-price*) o dalle [Releases GitHub](../../releases) (`GDR-vault-v*.zip`), scompattalo e in
+Obsidian fai **«Apri cartella come vault»** (i plugin sono inclusi). Dentro:
 
 - worldbuilding profondo *connesso* al tavolo **D&D 5.5e** — schede PG, statblock, incontri
   (budget 2024), condizioni, dadi — **locale e gratis**, i tuoi dati restano tuoi;

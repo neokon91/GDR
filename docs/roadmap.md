@@ -5,7 +5,7 @@ Il **come** sta nei doc tecnici ([architecture](architecture.md) · [data_model]
 [rules_layer](rules_layer.md) · [play_layer](play_layer.md) · [plugin_contracts](plugin_contracts.md));
 la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e cosa manca.
 
-## Stato (2026-06-07)
+## Stato (2026-06-08)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` → vault Obsidian (+ sito giocatori
 opzionale). Build vuota; lo zip spedito ha un mondo-esempio **Astaria** seminato da
@@ -31,28 +31,33 @@ Bind (apostrofo dritto → tipografico); **ASI/Dono epico del 19° per TUTTE le 
 luoghi/PG con **spazi** (coerenti con le fazioni); **parser città** `1.6→2.5` (label curve non più
 frammentate). 438 test verdi.
 
-**Verdetto 4-lenti** (analisi fresca 2026-06-04, tarata sui competitor — World Anvil/Kanka/
-LegendKeeper/Foundry/D&D Beyond): Architetto **8** · World-builder **8.5** · Game-designer 5.5e
-**8.5** · PM **4.5**. Il *wedge* difendibile — grafo-di-mondo che **compila in superficie
+**Sessione 2026-06-08**: igiene-release — CHANGELOG tagliato a `v0.1.0`, roadmap riallineata (la
+porta è aperta, il vincolo è la **trazione**); **guardia di copertura campi**
+(`validate_field_coverage`) + etichette di stato disambiguate; **checklist QA clean-install**
+([qa_clean_install.md](qa_clean_install.md)). 439 test verdi.
+
+**Verdetto 4-lenti** (analisi fresca 2026-06-08, tarata sui competitor — World Anvil/Kanka/
+LegendKeeper/Foundry/D&D Beyond): Architetto **8.5** · World-builder **9** · Game-designer 5.5e
+**9** · PM **6.5**. Il *wedge* difendibile — grafo-di-mondo che **compila in superficie
 giocabile** (econ+geo+cosmo+**teologico**) + motore-regole 2024 + locale/proprietà del dato — non
-è coperto da nessun competitor: profondità ormai **abbondante e matura**.
+è coperto da nessun competitor: profondità **abbondante e matura**, e le tre lenti di prodotto
+hanno **chiuso i loro gap #1 storici** (mappe→Azgaar/Watabou, loop-sessione→multiclasse+risorse,
+modularità→monoliti spezzati in frammenti).
 
-⚠️ **Divergenza che conta: il PM è CROLLATO a 4.5** (era 6.5) e non per qualità — per **adozione
-≈ 0**: niente è raggiungibile da un umano esterno. Prove concrete dall'audit: il repo GitHub
-risponde **404** (privato/non pushato), gli screenshot citati dal README (`docs/images/*.png`)
-**non esistono**, nessuna *release* (solo `git tag v0.1.0-rc1` locale), CHANGELOG «Non rilasciato».
-Tre audit di fila convergono: **il vincolo è la DISTRIBUZIONE, non il prodotto.** Verdetto PM sulle
-feature recenti (grafo teologico, ponte IT, World Board): ottime ma **ritorno decrescente** —
-*product debt mascherato da progresso*, aggiunte senza un solo utente reale. La prima ora spesa a
-**pubblicare** ha ROI potenzialmente infinito; ogni ora di nuove feature prima del push, marginale.
+✅ **Il vincolo si è SPOSTATO: la porta è aperta.** Per tre audit il muro era *pubblicare*; ora è
+giù — **itch live** (`gdr-italian-vault`, HTTP 200), **repo pubblico** (`neokon91/GDR`, pushato),
+**screenshot presenti** (`docs/images/*.png`). Il PM risale dal crollo (4.5 «porta chiusa») a
+**6.5**: non oltre, perché ora è «porta aperta, **stanza vuota**» — pubblicato ma **senza trazione**
+(nessun utente reale, nessun loop di feedback chiuso). Il nuovo vincolo binding non è più *spedire*
+ma il **funnel dopo la porta**: scoperta → primi DM → feedback → retention. Verdetto immutato sul
+*costruire*: nuove feature prima di un utente reale = **ritorno decrescente** (product debt
+mascherato da progresso). La profondità è abbondante; ciò che manca è **qualcuno che la usi**.
 
-Pronto per **beta chiuso** da molte sessioni; il blocco è SOLO il gesto di pubblicazione (vedi
-§«Come ripartire»). Le mosse #1 delle altre lenti (tutte «altro build») restano valide ma secondarie
-al push: **architect** = `node` obbligatorio in `check()`/CI (79 test oggi `skipif(not node)` →
-spariscono in verde senza node) + smoke-test di contratto sull'API IT bundlata; **world-builder** =
-**importer Azgaar** (unico punto dietro a tutti i competitor: mappa→grafo calibrato); **game-designer**
-= **tracker risorse-di-classe a ricarica** (Ki/Rabbia/Incanalare/patto-Warlock: ultimo buco SRD del
-loop di sessione, tocca metà delle classi).
+**Beta pubblico aperto** (itch name-your-price): il prossimo segnale è **i primi DM**. Le mosse #1
+storiche delle altre lenti sono ormai **chiuse** (world-builder = importer Azgaar/Watabou; game-designer
+= tracker risorse-classe). Resta aperto solo l'**architect**: `node` obbligatorio in `check()`/CI
+(79 test oggi `skipif(not node)` → verdi-perché-saltati) + smoke-test di contratto sull'API IT
+bundlata — ma anche questo è **secondario al primo utente reale**.
 
 ## Fatto (consolidato)
 
@@ -231,31 +236,29 @@ non testabile headless → ogni QA in-app ha storicamente trovato bug reali.
 
 Leggi questo file + i doc tecnici + le memorie.
 
-### 🔴 LA cosa, non «una delle»: PUBBLICARE (il verdetto unanime, ora critico)
-Tre audit di fila lo dicono e il PM è crollato a **4.5** perché il funnel **inizia con una porta
-chiusa**. Non è «idealmente»: è **il** lavoro. Sforzo ~1-2 ore, ROI potenzialmente infinito.
-Fatti concreti da sistemare (rilevati dall'audit, in ordine):
-1. **Screenshot mancanti** — il README/itch citano `docs/images/*.png` (nota+mappa, radar Carattere,
-   World Board, sito-giocatori) che **NON esistono**: catturarli e committarli. Senza immagini un tool
-   *visuale* non si scarica (vvd vince sul colpo d'occhio).
-2. **Repo 404** — `git push` rendendo il repo **pubblico** (oggi irraggiungibile).
-3. **Release** — `npm run dist` + `gh release create v0.1.0` (oggi solo `git tag v0.1.0-rc1` locale,
-   CHANGELOG «Non rilasciato» → aggiornarlo).
-4. **itch** — `npm run publish:itch` (butler già agganciato) con gli screenshot sulla pagina.
-5. Poi i **3-5 DM beta** (template «🎲 Feedback beta» già live) → il primo segnale esterno.
+### 🔴 LA cosa: i PRIMI DM (la porta è aperta, la stanza è vuota)
+Pubblicare era il muro dei primi tre audit — ora è **fatto**: **itch live** (`gdr-italian-vault`),
+**repo pubblico** (`neokon91/GDR`), screenshot presenti. Il vincolo si è spostato dalla *spedizione*
+alla **trazione**: serve il **primo segnale esterno**.
+1. **Igiene-release** (quasi fatta) — CHANGELOG tagliato a `v0.1.0` ✓. Resta il gesto outward:
+   `npm run dist` poi `git tag v0.1.0 && gh release create v0.1.0 dist/*.zip --notes-file CHANGELOG.md`
+   (oggi solo `v0.1.0-rc1` locale).
+2. **Giro QA clean-install** ([qa_clean_install.md](qa_clean_install.md)) PRIMA dei beta: il primo-open
+   con Restricted Mode è il make-or-break per un DM non-tecnico (plugin da attivare → Diagnostica).
+3. **3-5 DM beta** — template «🎲 Feedback beta» già live, zip turnkey pronto → il primo segnale esterno.
+4. **Scoperta** — tagline/tag itch ([itch-page.md](itch-page.md)); tieni coerenti repo (`GDR`) e slug
+   itch (`gdr-italian-vault`) nei cross-link.
 
-⚠️ Tutto il tooling (`release.py`, `publish_itch.py`) è **pronto e mai eseguito** verso il pubblico.
-Ogni nuova feature prima di questo push è **ritorno decrescente** (product debt).
+⚠️ Ogni nuova feature **prima del primo utente reale** è **ritorno decrescente** (product debt
+mascherato da progresso). La profondità è abbondante; manca solo chi la usi.
 
-### Candidati build (DOPO il push — secondari per ogni lente)
-- **architect**: `node` obbligatorio in `check()`/CI — oggi 79 test `skipif(not node)` spariscono in
-  verde senza node (1 fallisce pure: `"node"` hard-coded non guardato); + smoke-test di *contratto*
-  sull'API IT bundlata (`savePlayer`/`saveSettings`), che oggi è mock-only e fragile a un update del plugin.
-- **world-builder**: **importer Azgaar** (mappa→grafo calibrato) — l'unico punto dietro a TUTTI i
-  competitor; hai già il grafo curato in cui far atterrare i dati (containment→regione, adiacenza→
-  `confina_con`, routes→`rotta_con`, coord→`coord` sui pixel) → chiude il gap mappa E popola il geo che
-  alimenta `spinteFronte`.
-- **game-designer**: **tracker risorse-di-classe a ricarica** (campo `usi_<risorsa>`/`usi_max` generico
-  nella scheda PG + reset nei riposi per tipo): Ki/Punti Stregoneria/Incanalare/Rabbia/**patto Warlock**
-  (ricarica su riposo *breve*). Ultimo vero buco SRD del loop di sessione, tocca metà delle classi.
+### Candidati build (DOPO i primi DM — secondari al feedback)
+- **architect** (l'unico gap di lente ancora aperto): `node` obbligatorio in `check()`/CI — oggi 79
+  test `skipif(not node)` spariscono in verde senza node (1 fallisce pure: `"node"` hard-coded non
+  guardato); + smoke-test di *contratto* sull'API IT bundlata (`savePlayer`/`saveSettings`), oggi
+  mock-only e fragile a un update del plugin.
+- **world-builder** — ✅ *fatto*: **importer Azgaar/Watabou** (containment→regione, adiacenza→
+  `confina_con`, routes→`rotta_con`, coord→`coord`) → il gap-mappa sui competitor è chiuso.
+- **game-designer** — ✅ *fatto*: **tracker risorse-di-classe a ricarica** (`renderRisorsePG` +
+  `usa-risorsa` + reset ai riposi: Ki/Stregoneria/Incanalare/Rabbia/patto Warlock).
 - Esplorativi: memoria-di-campagna AI locale (frontiera); timeline multi-scala / vista «mappa del sacro».
