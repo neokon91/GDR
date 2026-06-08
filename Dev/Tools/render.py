@@ -69,6 +69,7 @@ from validate import (  # noqa: F401 (re-export per i test)
     validate_aux_yaml,
     validate_entities,
     validate_entity_schema,
+    validate_field_coverage,
     validate_reciprocals,
     validate_split,
     validate_subtype_gates,

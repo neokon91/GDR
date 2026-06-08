@@ -30,6 +30,11 @@ SCHEMA_DIR = Path(__file__).resolve().parent / "schemas"
 # Cattura gli id usati nei Jinja come field('id') / field("id").
 FIELD_REF_RE = re.compile(r"""field\(\s*['"]([a-z0-9_]+)['"]""")
 
+# Cattura il campo legato in un input Meta Bind inline: INPUT[tipo(...):prop].
+# Solo binding LETTERALI (`:canonico]`, `:visibilita]`); quelli dinamici
+# (`:{{ r.field }}]`) sono coperti dalle liste data-driven (relazioni/scheda).
+INPUT_BIND_RE = re.compile(r"INPUT\[[^\]]*:([a-z0-9_]+)\]")
+
 # Identificatore che diventa chiave di frontmatter / cartella: snake_case.
 SNAKE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 
@@ -292,6 +297,57 @@ def validate_subtype_gates(core: dict[str, Any]) -> list[str]:
     return errors
 
 
+def validate_field_coverage(core: dict[str, Any]) -> list[str]:
+    """Copertura dei campi (il verso «ogni campo dichiarato raggiunge una superficie»).
+    Il check inverso — ogni field('id') nei Jinja esiste in core.fields — impedisce di
+    RENDERE un campo inesistente; questo impedisce il silenzio opposto: un campo che il
+    WIZARD fa compilare (creation.fields -> frontmatter) ma che nessuna superficie della
+    nota mostra (scheda / tavolo / relazioni / profilo-sottotipo / assi / macro universali
+    o template bespoke). Un orfano così: il GM lo riempie e non lo rivede mai.
+
+    I campi `creation.body` sono PROSA (sezioni auto-rese), non frontmatter -> esclusi.
+    L'insieme RESO è globale (un campo reso per UNA categoria conta come reso ovunque):
+    pragmatico e senza falsi positivi; un raro «settato in A, mostrato solo in B» sfugge
+    (i campi-entità sono per-categoria, quindi in pratica non capita)."""
+    errors: list[str] = []
+    fields = core.get("fields", {}) or {}
+
+    # Insieme RESO: ogni campo che una qualunque superficie della nota mostra.
+    rendered: set[str] = set()
+    # Jinja, template E partial: le macro universali (opzioni/tavolo/collegamenti)
+    # rendono stato/visibilità/mondo/connessioni… via field('id') o INPUT[...:id].
+    for path in sorted(JINJA_DIR.glob("*.j2")):
+        text = path.read_text(encoding="utf-8")
+        rendered.update(FIELD_REF_RE.findall(text))
+        rendered.update(INPUT_BIND_RE.findall(text))
+    for entry in core.get("tavolo", []) or []:                       # superficie giocabile
+        if entry.get("field"):
+            rendered.add(entry["field"])
+    for campi in (core.get("scheda", {}) or {}).values():            # scheda di sistema
+        rendered.update(campi or [])
+    for rels in (core.get("relazioni", {}) or {}).values():          # relazioni tipizzate
+        rendered.update(r.get("field") for r in (rels or []) if r.get("field"))
+    for cat in (core.get("categories", {}) or {}).values():          # profili-sottotipo
+        for prof in ((cat or {}).get("subtype_profiles") or {}).values():
+            rendered.update((prof or {}).get("campi", []) or [])
+    for assi in (core.get("assi_tematici", {}) or {}).values():      # assi (carattere/radar)
+        rendered.update(a.get("id") for a in (assi or []) if a.get("id"))
+
+    # Per categoria: i campi-frontmatter che il wizard fa SETTARE devono essere resi.
+    for cat, spec in (core.get("creation", {}) or {}).items():
+        for q in (spec or {}).get("fields", []) or []:
+            fid = q.get("field")
+            # INTEROP_FIELDS (fc-*) li rende il PLUGIN: Calendarium li legge dal
+            # frontmatter e li mostra sul calendario — sono resi, non orfani.
+            if not fid or fid not in fields or fid in INTEROP_FIELDS:
+                continue
+            if fid not in rendered:
+                errors.append(
+                    f"copertura: creation[{cat}].{fid} è settato dal wizard ma non compare "
+                    f"su nessuna superficie (scheda/tavolo/relazioni/profilo/template)")
+    return errors
+
+
 def validate_aux_yaml() -> list[str]:
     """Shape degli YAML AUSILIARI letti a runtime dai JS/plugin ma non fusi nel
     modello core/system: astrologia (views.renderTemaNatale), generatori (genera.js),
@@ -496,6 +552,7 @@ def check() -> int:
                 if fid not in fields:
                     errors.append(f"{cid}/{sub}: campo-profilo '{fid}' non in core.fields")
     errors.extend(validate_subtype_gates(core))
+    errors.extend(validate_field_coverage(core))
 
     # Anti-drift: le opzioni del select 'stile_nomi' (plugins.metabind_inputs)
     # devono combaciare con gli stili di generatori.yaml, che genera.js legge a

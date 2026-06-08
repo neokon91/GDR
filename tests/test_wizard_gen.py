@@ -583,6 +583,27 @@ def test_validate_subtype_gates():
             "elementale": {"descrizione": "x"}}}}}) == []
 
 
+def test_validate_field_coverage():
+    """validate_field_coverage: ogni campo che il wizard fa SETTARE (creation.fields)
+    è reso da almeno una superficie della nota; il modello reale non ha orfani. Un
+    campo registrato e chiesto al wizard ma mai reso (né field()/INPUT nei Jinja, né
+    scheda/tavolo/relazioni/profilo-sottotipo/assi) è intercettato a build — altrimenti
+    il GM lo compila e non lo rivede mai. I fc-* (Calendarium) li rende il plugin."""
+    core = render.load_core()
+    assert render.validate_field_coverage(core) == []
+    # Campo registrato e chiesto dal wizard, ma assente da OGNI superficie → orfano.
+    broken = {
+        "fields": {"campo_orfano_test": {"label": "X", "widget": "text"}},
+        "creation": {"luogo": {"fields": [{"field": "campo_orfano_test", "prompt": "p"}]}},
+    }
+    errs = render.validate_field_coverage(broken)
+    assert any("campo_orfano_test" in e for e in errs)
+    # Un campo universale (stato, reso da opzioni()) NON è orfano, anche se chiesto al wizard.
+    assert render.validate_field_coverage(
+        {"fields": {"stato": {"label": "S", "widget": "text"}},
+         "creation": {"luogo": {"fields": [{"field": "stato", "prompt": "p"}]}}}) == []
+
+
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_homebrew_bridge(tmp_path):
     """Ponte homebrew→motore (crea_pg/sali_pg): incantesimiHomebrew filtra le note
