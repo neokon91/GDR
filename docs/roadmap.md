@@ -5,7 +5,7 @@ Il **come** sta nei doc tecnici ([architecture](architecture.md) · [data_model]
 [rules_layer](rules_layer.md) · [play_layer](play_layer.md) · [plugin_contracts](plugin_contracts.md));
 la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e cosa manca.
 
-## Stato (2026-06-08)
+## Stato (2026-06-09)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` → vault Obsidian (+ sito giocatori
 opzionale). Build vuota; lo zip spedito ha un mondo-esempio **Astaria** seminato da
@@ -40,6 +40,19 @@ segreti→`[!rivela]`; sito gemello via `strip_body`); **guardia di copertura ca
 **«Inizia da qui» restituita** (era persa in un refactor). **Tavolo/mappe**: **dadi tirabili negli
 statblock** (regole `diceParsing` IT + layout aggiornati per-id), **sync pin→coord**
 (`.markers.json`→`coord`). **Checklist QA clean-install** ([qa_clean_install.md](qa_clean_install.md)). 441 test verdi.
+
+**Sessione 2026-06-09**: **la prosa-corpo raggiunge il sito** — il «prosa→sezioni `##`» del giro
+precedente era **inerte lato-sito** (le sezioni vivono nel blocco `tabs`, scartato in blocco da
+`strip_body`): ora `wizard_body` marca la prosa con `%%prosa%%…%%/prosa%%` (commenti invisibili) e il
+builder (Py + gemello JS in parità) estrae solo quella, ovunque viva nel layout; demo *Astaria*
+riempita di **prosa vera** + segreti gated. **Pass UX non-tecnico** (vincolo = **trazione**/attrito-beta
+vs LegendKeeper/World Anvil/Kanka): **🔎 Esplora.base** (Bases no-code su tutto il mondo),
+**infobox editabile**, **LEGGIMI→Manuale** (benvenuto breve + riferimento), **segnalibri auto-pulenti**,
+**pulsanti Crea** sui cruscotti (Cronologia/Quest log/Geografia/Economia), **tab mappa** a 2 passi + nota
+SVG/PNG. **Fix**: `sintonia` unificata (colonna Ponte non più vuota); relazioni infobox come `[link]`
+(niente «null»); **caveat radar stale rimosso** (è reattivo). **Verifica a schermo in Obsidian** di tutte
+le modifiche (radar-live, infobox, Esplora, mappa); i 2 minori risolti con soluzioni dai doc-plugin/web
+(`[link]` per le relazioni, `isEmpty()` per il filtro Bases). 445 test verdi.
 
 **Verdetto 4-lenti** (analisi fresca 2026-06-08, tarata sui competitor — World Anvil/Kanka/
 LegendKeeper/Foundry/D&D Beyond): Architetto **8.5** · World-builder **9** · Game-designer 5.5e

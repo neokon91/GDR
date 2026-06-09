@@ -6,6 +6,21 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **La prosa-corpo raggiunge davvero il sito**: le sezioni `##` del wizard vivono dentro il
+  blocco `tabs` (layout Obsidian), che `strip_body` scartava in blocco → sul sito dei giocatori
+  non arrivava NIENTE (solo `player_safe`). Ora `wizard_body` marca la prosa con
+  `%%prosa%%…%%/prosa%%` (commenti Obsidian invisibili) e il builder — `build_site.py` + gemello
+  `genera_sito.js`, in parità — estrae **solo** quella, ovunque viva nel layout a tab; gli heading
+  rimasti vuoti spariscono. *(Completa il «prosa→sezioni ##» del giro precedente, che lato-sito era inerte.)*
+- **Demo *Astaria* con prosa vera sul sito**: il seed riempie le sezioni `##` (conflitto,
+  obiettivi/metodi delle fazioni, atmosfera dei luoghi, carattere del PG) e i segreti gated.
+- **🔎 Esplora il mondo** (`Indici/Esplora.base`, nei segnalibri): una vista **Bases** nativa su
+  **tutto** il mondo — filtra, ordina, raggruppa **senza scrivere codice** dall'UI; prima il
+  no-code c'era solo sui 6 indici-categoria.
+- **Manuale separato dal benvenuto**: il `LEGGIMI` torna un benvenuto breve (da 287 a ~60 righe);
+  il riferimento completo (setup plugin, mappe, statblock, sito…) vive in **`Manuale.md`** (nei segnalibri).
+- **Pulsanti «Crea» sui cruscotti** che li nominavano ma non li offrivano: *Cronologia* → epoca;
+  *Quest log* → missione/scena/indizio; *Geografia* → luogo/rotta; *Economia* → risorsa/rotta.
 - **Prosa in sezioni `##` native**: i campi di prosa lunga (storia, obiettivo, descrizione…)
   non sono più textArea legate al frontmatter — diventano **sezioni `##` nel corpo nota**, con
   uno spunto pieghevole come hint; i segreti usano il callout `[!rivela|<tier>]`. Il sito legge
@@ -21,7 +36,23 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 - **Campi più ricchi**: alcuni campi-testo vincolati diventano menu a tendina (ruolo ecologico,
   affidabilità d'indizio, pena/ambito d'editto, dottrina d'esercito) e «rituale» un sì/no.
 
+### Migliorato
+- **Infobox editabile**: i campi-contenuto (clima, popolazione, genere…) si modificano
+  direttamente nell'infobox; prima erano sola-lettura lì ed editabili solo in un form duplicato.
+- **Relazioni dell'infobox come link nativi** (view type `[link]` di Meta Bind): cliccabili, e
+  **vuote = vuote** — niente più «null» sulle relazioni non compilate.
+- **Tab Mappa più chiaro**: da muro di 7 sezioni a 2 passi + nota **SVG vs PNG** (SVG = nitido a
+  ogni zoom e crea i pin dai nomi; PNG = solo immagine, pin a mano) + import e pin in callout pieghevoli.
+- **Segnalibri auto-pulenti**: `write_bookmarks` rimuove i bookmark morti (target inesistente) →
+  niente più doppioni accumulati quando un indice si sposta.
+
 ### Corretto
+- **`sintonia` unificata**: gli oggetti SRD esponevano la chiave grezza `richiede_sintonia` mentre
+  il modello (e la tabella del **Ponte**) usano `sintonia` → la colonna *Sintonia* era vuota per i
+  256 oggetti SRD. Ora derivano `sintonia`.
+- **Caveat del radar rimosso dal benvenuto**: il radar del *Carattere* **è reattivo** (si ridisegna
+  live muovendo lo slider, confermato a schermo) — il `LEGGIMI` diceva il contrario, non più vero.
+- **Esplora esclude le note-cartella vuote** (`categoria.isEmpty() == false`): solo le entità vere.
 - **Etichette di stato disambiguate**: «Stato della missione» e «Stato cosmico» non
   collidono più con lo **Stato** (editoriale) nell'infobox — niente più due righe «Stato»
   sulla stessa nota. Campo-profilo `divinita_di_stato`→`divinita_stato` (coerente coi gemelli).
@@ -29,6 +60,10 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   precedente per una riga vuota mancante — ora rende come callout separato.
 
 ### Solidità
+- **Test dell'estrazione-prosa** (Python + **parità** JS): marcatori `%%prosa%%`, heading vuoti
+  droppati, tab non-prosa esclusi, callout-rivela svelati per tier; più un test della `sintonia` SRD. 445 test verdi.
+- **Verifica a schermo in Obsidian** di tutte le modifiche del giro: radar reattivo, infobox
+  editabile, Esplora no-code, tab mappa, relazioni-link — confermate renderizzate.
 - **Guardia di copertura dei campi** (`validate_field_coverage` in `check()`): ogni campo
   che il wizard fa compilare deve comparire su almeno una superficie della nota
   (scheda/tavolo/relazioni/profilo) — un campo «settabile ma mai mostrato» è ora un errore
