@@ -36,7 +36,7 @@
 > Gittata: `INPUT[text(placeholder(es. 9 m oppure contatto)):gittata]`
 > Componenti: `INPUT[text(placeholder(es. V S M con un pizzico di zolfo)):componenti]`
 > Durata: `INPUT[text(placeholder(es. Istantanea oppure Concentrazione fino a 1 minuto)):durata]`
-> Rituale: `INPUT[text:rituale]`
+> Rituale: `INPUT[toggle:rituale]`
 > Classi: `INPUT[classi][:classi]`
 
 --- ✨ Effetto

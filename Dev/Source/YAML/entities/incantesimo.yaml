@@ -26,7 +26,7 @@ relazioni:
   label: Sistema magico
   category: sistema_magico
 fields:
-  rituale: { label: Rituale, widget: text }
+  rituale: { label: Rituale, widget: toggle }
 scheda:
 - livello
 - tempo_lancio
