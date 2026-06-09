@@ -47,8 +47,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
+
 > [!tip]- Tiri
 > Normale `dice: 1d20` · Vantaggio `dice: 2d20kh1` · Svantaggio `dice: 2d20kl1`
+
 
 --- ⚔ Combattimento
 

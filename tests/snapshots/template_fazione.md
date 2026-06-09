@@ -56,6 +56,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 > [!tip]- Genera nome/spunto
 > `BUTTON[genera-locale]` (italiano, a tema) — scegli **cosa generare**: nomi (persona/luogo/fazione), PNG, taverne, bevande, ganci, dicerie, tesori (SRD), insediamenti, oggetti, meteo, stanze di dungeon… — dallo *stile* della cultura/specie collegata. Inserisce al cursore.
+
 > [!note]- Identità
 > Cosa rappresenta la fazione, simboli, reputazione e percezione pubblica.
 

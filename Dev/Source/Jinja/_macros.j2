@@ -398,7 +398,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 {% macro genera_nome() -%}
 > [!tip]- Genera nome/spunto
 > `BUTTON[genera-locale]` (italiano, a tema) — scegli **cosa generare**: nomi (persona/luogo/fazione), PNG, taverne, bevande, ganci, dicerie, tesori (SRD), insediamenti, oggetti, meteo, stanze di dungeon… — dallo *stile* della cultura/specie collegata. Inserisce al cursore.
-{%- endmacro %}
+{% endmacro %}{# riga vuota finale: separa il callout dal blocco seguente (niente merge) #}
 
 {# Tiri rapidi (Dice Roller): d20 normale/vantaggio/svantaggio, inline e
    cliccabili (richiede Dice Roller attivo). Aggiungi a mano il bonus dalla
@@ -406,7 +406,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 {% macro tiri() -%}
 > [!tip]- Tiri
 > Normale `dice: 1d20` · Vantaggio `dice: 2d20kh1` · Svantaggio `dice: 2d20kl1`
-{%- endmacro %}
+{% endmacro %}{# newline finale: il callout Tiri non si fonde col blocco seguente (es. Sistema sul PG) #}
 
 {# Scheda statistiche PG (5e): caratteristiche editabili + modificatori calcolati.
    Iniziativa via computed; ogni modificatore via compute_into -> salvato in

@@ -105,6 +105,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 > [!tip]- Tiri
 > Normale `dice: 1d20` · Vantaggio `dice: 2d20kh1` · Svantaggio `dice: 2d20kl1`
+
 > [!abstract] Sistema
 > **Classe**: `= default(this.classe, "—")` · **Specie**: `= default(this.specie, "—")` · **Background**: `= default(this.background, "—")`
 >
