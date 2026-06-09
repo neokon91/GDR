@@ -326,6 +326,11 @@ buttons:
   - id: importa-azgaar
     label: Importa mappa Azgaar (Full JSON)
     action: importa_azgaar
+  # Sync inverso: i pin piazzati a mano (markers.json) scrivono il `coord` delle note
+  # linkate → la mappa diventa la fonte della geografia (meta_actions.sincronizza_pin).
+  - id: sincronizza-pin
+    label: Sincronizza pin dalla mappa
+    action: sincronizza_pin
   # Turno di bastione (DMG 2024): registra un turno nel Registro dei turni.
   - id: turno-bastione
     label: Turno di bastione

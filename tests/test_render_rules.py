@@ -197,6 +197,34 @@ def test_scaffold_statblock_e2e(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_pin_to_coord(tmp_path):
+    """meta_actions.pinToCoord: un marker zoom-map (x/y NORMALIZZATI 0..1) + le dimensioni
+    dell'immagine → coord-pixel "x, y" (stesso spazio degli import, letto da renderDintorni
+    × scala_mappa). È il nucleo del sync pin→coord: la posizione che il GM piazza a mano
+    sulla mappa diventa DATO. Input non valido (size o coord) → null."""
+    harness = tmp_path / "pin.js"
+    harness.write_text(
+        f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
+        'const out = {\n'
+        '  mid: meta.pinToCoord({x: 0.5, y: 0.25}, {w: 1000, h: 800}),\n'
+        '  edge: meta.pinToCoord({x: 1, y: 0}, {w: 200, h: 200}),\n'
+        '  round: meta.pinToCoord({x: 0.3333, y: 0.6666}, {w: 300, h: 300}),\n'
+        '  noSize: meta.pinToCoord({x: 0.5, y: 0.5}, {w: 0, h: 800}),\n'
+        '  bad: meta.pinToCoord({x: "abc", y: 0.5}, {w: 100, h: 100}),\n'
+        '};\n'
+        'process.stdout.write(JSON.stringify(out));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["mid"] == "500, 200"      # 0.5*1000, 0.25*800
+    assert out["edge"] == "200, 0"       # bordo della mappa
+    assert out["round"] == "100, 200"    # arrotondamento al pixel
+    assert out["noSize"] is None         # dimensioni non valide → null
+    assert out["bad"] is None            # coord non numerica → null
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_verifica_gs(tmp_path):
     """views.verificaGS + parseStatblockStats + renderVerificaGS: invertono gs_baseline
     per stimare il GS difensivo (AC+PF) e offensivo (attacco+danno per colpo) e

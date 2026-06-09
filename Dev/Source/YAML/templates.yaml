@@ -54,6 +54,9 @@ actions:
   - id: importa_azgaar
     title: Importa mappa Azgaar (Full JSON)
     target: z.modelli/azioni/Importa mappa Azgaar (Full JSON).md
+  - id: sincronizza_pin
+    title: Sincronizza pin dalla mappa
+    target: z.modelli/azioni/Sincronizza pin dalla mappa.md
   - id: genera
     title: Genera (locale)
     target: z.modelli/azioni/Genera (locale).md

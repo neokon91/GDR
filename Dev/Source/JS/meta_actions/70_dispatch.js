@@ -104,6 +104,12 @@ async function meta_actions(tp, action = "") {
     new Notice("importa_azgaar non disponibile."); return "";
   }
 
+  if (action === "sincronizza_pin") {
+    // Sync inverso: i pin del sidecar markers.json → scrivono il `coord` delle note linkate
+    // (la mappa diventa la fonte della geografia).
+    return await sincronizza_pin(tp, file);
+  }
+
   if (action === "genera_sito") {
     // Esporta il sito dei giocatori (HTML statico, spoiler-free) dentro Obsidian,
     // senza Python né terminale (script autonomo, gemello di build_site.py).
@@ -136,3 +142,4 @@ meta_actions.propagaShock = propagaShock;        // esposto per i test (cascata,
 meta_actions.avanzamentoDaPressione = avanzamentoDaPressione;  // esposto per i test
 meta_actions.pescaTabella = pescaTabella;        // esposto per i test (tiro pesato, nucleo puro)
 meta_actions.parseVoceTab = parseVoceTab;        // esposto per i test
+meta_actions.pinToCoord = pinToCoord;            // esposto per i test (sync pin→coord, nucleo puro)
