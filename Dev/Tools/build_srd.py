@@ -19,7 +19,7 @@ from common import SRD_DIR, VAULT, frontmatter_block, write_text
 # Config: { json, dest (sottocartella), cat (categoria), fm (campi -> frontmatter) }.
 SRD_GEN = [
     {"json": "srd_5_2_1_spells.json",      "dest": "Incantesimi",     "cat": "srd-incantesimo", "fm": ["livello", "scuola", "classi", "tempo_lancio", "gittata", "componenti", "durata"]},
-    {"json": "srd_5_2_1_magic_items.json", "dest": "Oggetti",         "cat": "srd-oggetto",     "fm": ["tipo_base", "rarita", "richiede_sintonia"]},
+    {"json": "srd_5_2_1_magic_items.json", "dest": "Oggetti",         "cat": "srd-oggetto",     "fm": ["tipo_base", "rarita"]},  # `sintonia` (campo del modello) derivato da richiede_sintonia, sotto
     {"json": "srd_5_2_1_feats.json",       "dest": "Talenti",         "cat": "srd-talento",     "fm": ["categoria", "prerequisito", "ripetibile"]},
     {"json": "srd_5_2_1_species.json",     "dest": "Specie",          "cat": "srd-specie",      "fm": ["tipo_creatura", "taglia", "velocita"]},
     {"json": "srd_5_2_1_backgrounds.json", "dest": "Background",      "cat": "srd-background",  "fm": ["talento_origine"]},
@@ -407,6 +407,11 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
             fm[key] = val
         elif isinstance(val, list) and val:
             fm[key] = val
+    # L'SRD usa `richiede_sintonia` (booleano); il MODELLO usa `sintonia` (testo, vedi
+    # system.yaml) — è lo stesso dato. Unifichiamo sul nome del modello, così la tabella
+    # del Ponte (oggetti) e le note SRD/utente combaciano (niente colonna Sintonia vuota).
+    if cat == "srd-oggetto" and entry.get("richiede_sintonia") not in (None, False, "", "no", "No"):
+        fm["sintonia"] = "sì"
     parts: list[str] = [f"# {entry.get('nome', '')}"]
     header = srd_header(entry, cat)
     if header:

@@ -102,6 +102,18 @@ def test_srd_note_dedup_and_extras():
     assert "id inesistente" in out                      # id non risolto -> testo in chiaro
 
 
+def test_srd_oggetto_sintonia_unificata():
+    """Gli oggetti SRD espongono `sintonia` (il campo del MODELLO, system.yaml), non il
+    grezzo `richiede_sintonia`: così la colonna Sintonia del Ponte si popola per gli SRD
+    come per gli oggetti dell'utente. Booleano → testo del modello: True→«sì», False→assente."""
+    si = render.srd_note({"nome": "Spada", "richiede_sintonia": True, "rarita": "raro"},
+                         "srd-oggetto", ["tipo_base", "rarita"], {})
+    assert "sintonia: sì" in si and "richiede_sintonia" not in si
+    no = render.srd_note({"nome": "Torcia", "richiede_sintonia": False, "rarita": "comune"},
+                         "srd-oggetto", ["tipo_base", "rarita"], {})
+    assert "sintonia:" not in no and "richiede_sintonia" not in no   # niente sintonia se non richiesta
+
+
 def test_generatori_catalog():
     """generatori.yaml (generatore homebrew): stili con parti-nome complete +
     affissi toponimi + forme fazioni; le opzioni del select stile_nomi combaciano
