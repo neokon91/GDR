@@ -7,11 +7,11 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Taglia** | `VIEW[{taglia} ?? "—"]` |
-> | **Grado di sfida** | `VIEW[{gs} ?? "—"]` |
-> | **Ruolo ecologico** | `VIEW[{ruolo_ecologico} ?? "—"]` |
-> | **Dieta** | `VIEW[{dieta} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Taglia** | `INPUT[taglia][:taglia]` |
+> | **Grado di sfida** | `INPUT[gs][:gs]` |
+> | **Ruolo ecologico** | `INPUT[ruolo_ecologico][:ruolo_ecologico]` |
+> | **Dieta** | `INPUT[dieta][:dieta]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -94,11 +94,6 @@ monster: <% tp.config.target_file.basename %>
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Taglia: `INPUT[taglia][:taglia]`
-> Grado di sfida: `INPUT[gs][:gs]`
-> Ruolo ecologico: `INPUT[ruolo_ecologico][:ruolo_ecologico]`
-> Dieta: `INPUT[dieta][:dieta]`
 
 > [!note]- Aspetto e indole
 > Com'è fatta, come si muove, che impressione dà. I numeri 5e sono nel tab Statblock.
@@ -106,6 +101,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
+%%prosa%%
 ## Ecologia
 > [!question]- 💡 Ecologia: habitat, ruolo nell'ecosistema, dieta
 
@@ -125,6 +121,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Segreto o debolezza nascosta*
 >
 
+%%/prosa%%
 
 --- 📊 Carattere
 

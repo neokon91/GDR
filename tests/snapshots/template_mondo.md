@@ -10,8 +10,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Genere** | `VIEW[{genere} ?? "—"]` |
-> | **Temi** | `VIEW[{temi} ?? "—"]` |
+> | **Genere** | `INPUT[genere][:genere]` |
+> | **Temi** | `INPUT[temi][:temi]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -29,9 +29,6 @@
 ````tabs
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Genere: `INPUT[genere][:genere]`
-> Temi: `INPUT[temi][:temi]`
 
 > [!note]- Premessa
 > L'idea in una frase: il pitch del mondo, cosa lo rende unico, che storie ci si giocano.
@@ -39,6 +36,7 @@
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
+%%prosa%%
 ## Conflitto centrale
 > [!question]- 💡 Conflitto centrale della campagna
 
@@ -46,6 +44,7 @@
 > 💡 *La verità nascosta del mondo*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 
@@ -159,25 +158,21 @@ group by categoria as "Tipo"
 --- 🗺 Mappa
 
 > [!info] Mappa
-> Pesca l'**immagine** della mappa: `INPUT[mappa][:mappa]`
+> **1.** Pesca l'**immagine**: `INPUT[mappa][:mappa]` — compare interattiva qui sotto (zoom/pan, righello distanze→tempi).
+> **2.** Aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]` (restano salvati accanto all'immagine).
 >
-> **Origine** (URL del generatore, per rigenerarla): `INPUT[text(placeholder(incolla l’URL Watabou o Azgaar col seed)):mappa_origine]`
->
-> Diventa **interattiva** sotto — zoom/pan e righello distanze→tempi (TTRPG Tools - Maps); aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]` (restano salvati accanto all'immagine).
->
-> **Importare da Watabou** (esporta, trascina in `Media/`, pescala sopra):
-> - **Realm / Perilous Shores** (regione, continente) e **City / Village** (insediamento) → l'**SVG** è la mappa; dal **JSON** copia nome e URL (incollalo in *Origine*).
-> - **One Page Dungeon** → esporta in **Markdown**: incollalo nel corpo di un `[[Luogo]]`-dungeon (descrizioni stanza-per-stanza) e usa l'**SVG/PNG** come sua mappa.
->
-> **Import automatico:**
-> - **Watabou** (SVG regionale coi toponimi): `BUTTON[importa-mappa]` — imposta mappa+origine e crea un `[[Luogo]]` per toponimo coi segnaposto.
-> - **Azgaar** (esporta **Export → Full JSON**, trascinalo in `Media/`): `BUTTON[importa-azgaar]` — import PROFONDO: crea `[[Cultura]]`/`[[Culto]]`/`[[Regno]]`/`[[Luogo]]` (burgs+marker) collegati, e i segnaposto a coordinate-pixel. *Controlla la posizione dei pin dopo l'import.*
->
-> **Dalla mappa al grafo** (per immagini caricate a mano): piazza i segnaposto (*Shift+clic*) e linkali ai `[[Luoghi]]`, poi `BUTTON[sincronizza-pin]` riscrive le **coordinate** delle note dai pin — così le distanze in linea d'aria (e i Dintorni) si calcolano da sé.
->
-> Alternative: `BUTTON[disegna-mappa]` (Excalidraw → `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con overlay/livelli).
->
-> **Hexcrawl giocabile?** Apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, sottomappe, tiri incontri). Le cartelle sono pre-puntate alle tue note (Towns/Dungeons→`Mondi/Luoghi`, Factions→`Mondi/Fazioni`, Quests→`Mondi/Missioni`, Tables→`Mondi/Tabelle`, Regions→`Mondi/Regni`) → gli esagoni linkano il tuo grafo, una sola fonte di verità. *Al primo avvio il suo wizard propone sottocartella di default: scegli «Don't show again», oppure nello step cartelle attiva «Configure each folder path individually» e reimposta quei path.*
+> *Quale formato? **SVG** (Watabou/Azgaar) = resta nitido a ogni zoom **e** crea i pin dai nomi sulla carta. **PNG/JPG** = solo l'immagine, pin a mano (nessun nome da leggere). Con **Azgaar** i pin arrivano dal Full JSON, qualunque sia l'immagine.*
+
+> [!tip]- 📥 Importa da un generatore — crea Luoghi e pin da solo
+> Esporta dal generatore, trascina in `Media/`, poi:
+> - **Watabou** (Realm/Perilous Shores, City, Village → **SVG**): `BUTTON[importa-mappa]` — imposta mappa+origine e crea un `[[Luogo]]` per ogni toponimo, coi segnaposto.
+> - **Azgaar** (Export → **Full JSON**): `BUTTON[importa-azgaar]` — import PROFONDO: `[[Cultura]]`/`[[Culto]]`/`[[Regno]]`/`[[Luogo]]` (burgs+marker) collegati + pin a coordinate. *Controlla la posizione dei pin dopo.*
+> - **One Page Dungeon** → esporta in **Markdown** e incollalo nel corpo di un `[[Luogo]]`-dungeon; usa l'SVG/PNG come sua mappa.
+
+> [!tip]- 🧭 Pin a mano, disegno e hexcrawl
+> - **Immagine caricata da te:** piazza i pin (*Shift+clic*), linkali ai `[[Luoghi]]`, poi `BUTTON[sincronizza-pin]` riscrive le **coordinate** delle note dai pin → distanze in linea d'aria e *Dintorni* si calcolano da sé.
+> - **Disegna tu:** `BUTTON[disegna-mappa]` (Excalidraw → `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con livelli/overlay).
+> - **Hexcrawl giocabile:** apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, tiri incontri). Le cartelle sono già puntate alle tue note (Towns/Dungeons→`Mondi/Luoghi`, Factions→`Mondi/Fazioni`, Quests→`Mondi/Missioni`, Regions→`Mondi/Regni`). *Al 1° avvio del suo wizard scegli «Don't show again».*
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```

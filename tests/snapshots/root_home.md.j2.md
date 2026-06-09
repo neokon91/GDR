@@ -44,6 +44,9 @@ dv.paragraph(done === 5
 > [[Missioni|🗺 Quest log]]
 > [[Occhi del giocatore|👁 Occhi del giocatore]]
 
+> [!tip] 🔎 Cerchi qualcosa? **Esplora il mondo** (nei segnalibri ⭐)
+> Una tabella di **tutto** il tuo mondo: **filtra, ordina e raggruppa senza scrivere codice** (è una vista *Bases*). Aggiungi le tue viste col **+**. Ogni indice qui sopra ha anche la sua vista *· Base*.
+
 > [!example] 🌍 La cornice
 > `BUTTON[crea-mondo]`
 

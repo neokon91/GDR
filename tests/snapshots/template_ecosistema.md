@@ -8,7 +8,7 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -30,6 +30,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 
+%%prosa%%
 ## Composizione
 > [!question]- 💡 Composizione: chi e cosa lo abita
 
@@ -46,6 +47,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Il segreto dell'ecosistema*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

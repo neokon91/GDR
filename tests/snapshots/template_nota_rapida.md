@@ -5,7 +5,7 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni

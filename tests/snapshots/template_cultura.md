@@ -10,13 +10,13 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Lingua** | `VIEW[{lingua}][text(renderMarkdown)]` |
-> | **Portata** | `VIEW[{portata} ?? "—"]` |
-> | **Stile dei nomi** | `VIEW[{stile_nomi} ?? "—"]` |
-> | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
-> | **Festività & ricorrenze** | `VIEW[{festivita} ?? "—"]` |
+> | **Lingua** | `VIEW[{lingua}][link]` |
+> | **Portata** | `INPUT[portata][:portata]` |
+> | **Stile dei nomi** | `INPUT[stile_nomi][:stile_nomi]` |
+> | **Simbolo** | `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]` |
+> | **Festività & ricorrenze** | `INPUT[testo_area][:festivita]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -48,12 +48,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Portata: `INPUT[portata][:portata]`
-> Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
-> Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
-> Festività & ricorrenze: `INPUT[testo_area][:festivita]`
 
+%%prosa%%
 ## Valori
 > [!question]- 💡 Valori fondanti
 
@@ -72,6 +68,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Tensione
 > [!question]- 💡 Attrito con altre culture
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

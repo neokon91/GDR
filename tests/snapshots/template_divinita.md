@@ -7,11 +7,11 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Piano di dimora** | `VIEW[{piano}][text(renderMarkdown)]` |
-> | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
-> | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
+> | **Piano di dimora** | `VIEW[{piano}][link]` |
+> | **Allineamento** | `INPUT[allineamento][:allineamento]` |
+> | **Simbolo** | `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -42,16 +42,15 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Allineamento: `INPUT[allineamento][:allineamento]`
-> Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
 
+%%prosa%%
 ## Dogmi
 > [!question]- 💡 Dogmi e aspettative
 
 ## Culto
 > [!question]- 💡 Culto: fedeli, riti, templi
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

@@ -7,13 +7,13 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Ruolo narrativo** | `VIEW[{famiglia} ?? "—"]` |
-> | **Titolo** | `VIEW[{titolo} ?? "—"]` |
-> | **Rango** | `VIEW[{rango} ?? "—"]` |
-> | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
-> | **Pronomi** | `VIEW[{pronomi} ?? "—"]` |
-> | **Età** | `VIEW[{eta} ?? "—"]` |
+> | **Titolo** | `INPUT[text:titolo]` |
+> | **Rango** | `INPUT[rango][:rango]` |
+> | **Allineamento** | `INPUT[allineamento][:allineamento]` |
+> | **Pronomi** | `INPUT[text(placeholder(es. lei / lui / loro)):pronomi]` |
+> | **Età** | `INPUT[text(placeholder(es. 34 o «secoli»)):eta]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -143,12 +143,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Applica PF/competenza/slot e guida le scelte (ASI/talento/sottoclasse/incantesimi): `BUTTON[sali-di-livello]`
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Titolo: `INPUT[text:titolo]`
-> Rango: `INPUT[rango][:rango]`
-> Allineamento: `INPUT[allineamento][:allineamento]`
-> Pronomi: `INPUT[text(placeholder(es. lei / lui / loro)):pronomi]`
-> Età: `INPUT[text(placeholder(es. 34 o «secoli»)):eta]`
 
 > [!note]- Descrizione
 > Chi è, com'è, cosa porta in scena.
@@ -156,6 +150,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
+%%prosa%%
 ## Ruolo
 > [!question]- 💡 Ruolo o occupazione
 
@@ -184,6 +179,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Segreto (non mostrare ai giocatori)*
 >
 
+%%/prosa%%
 
 > [!abstract] Tema natale
 > Segno: `INPUT[segno][:segno]` · Arcano: `INPUT[arcano][:arcano]`

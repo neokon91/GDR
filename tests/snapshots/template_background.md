@@ -5,11 +5,11 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Caratteristiche** | `VIEW[{car_background} ?? "—"]` |
-> | **Competenze in abilità** | `VIEW[{abilita_background} ?? "—"]` |
-> | **Competenza in strumenti** | `VIEW[{strumento} ?? "—"]` |
-> | **Talento d'origine** | `VIEW[{talento_origine} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Caratteristiche** | `INPUT[text(placeholder(es. Forza oppure Costituzione)):car_background]` |
+> | **Competenze in abilità** | `INPUT[text:abilita_background]` |
+> | **Competenza in strumenti** | `INPUT[text(placeholder(es. Strumenti da fabbro)):strumento]` |
+> | **Talento d'origine** | `INPUT[text(placeholder(es. Fortunato)):talento_origine]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,23 +27,20 @@
 ````tabs
 --- 📋 Scheda
 
-> [!abstract] Scheda
-> Caratteristiche: `INPUT[text(placeholder(es. Forza oppure Costituzione)):car_background]`
-> Competenze in abilità: `INPUT[text:abilita_background]`
-> Competenza in strumenti: `INPUT[text(placeholder(es. Strumenti da fabbro)):strumento]`
-> Talento d'origine: `INPUT[text(placeholder(es. Fortunato)):talento_origine]`
 
 --- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
+%%prosa%%
 ## Descrizione
 > [!question]- 💡 Chi era prima dell'avventura
 
 ## Equipaggiamento
 > [!question]- 💡 Equipaggiamento iniziale
 
+%%/prosa%%
 
 --- 🔗 Collegamenti
 

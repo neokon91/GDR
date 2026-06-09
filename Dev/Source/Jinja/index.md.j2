@@ -8,6 +8,9 @@
 {% for t in templates if t.category == page.category %}
 > `BUTTON[crea-{{ t.id }}]`
 {% endfor %}
+{% if page.get('panel') == 'timeline' %}
+> `BUTTON[crea-epoca]` — le **ere** che raggruppano gli eventi sulla linea del tempo
+{% endif %}
 
 {% if page.get('panel') == 'timeline' %}
 ## 🕰 Linea del tempo

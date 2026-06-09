@@ -5,7 +5,7 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
@@ -39,6 +39,7 @@
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
+%%prosa%%
 ## Natura
 > [!question]- 💡 Cos'e' / come si manifesta
 
@@ -61,6 +62,7 @@
 > 💡 *Verita' nascosta*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

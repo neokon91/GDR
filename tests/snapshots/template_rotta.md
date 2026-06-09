@@ -5,9 +5,9 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Merci trasportate** | `VIEW[{merci} ?? "—"]` |
-> | **Pericoli** | `VIEW[{pericoli} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Merci trasportate** | `INPUT[text:merci]` |
+> | **Pericoli** | `INPUT[text:pericoli]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -28,10 +28,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Merci trasportate: `INPUT[text:merci]`
-> Pericoli: `INPUT[text:pericoli]`
 
+%%prosa%%
 ## Percorso
 > [!question]- 💡 Percorso: da dove a dove, attraverso cosa
 
@@ -41,6 +39,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Rischi
 > [!question]- 💡 Rischi: chi la minaccia, cosa succede se si chiude
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

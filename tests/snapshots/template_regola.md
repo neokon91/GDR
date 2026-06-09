@@ -5,7 +5,7 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -26,6 +26,7 @@
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
+%%prosa%%
 ## Cosa
 > [!question]- 💡 Cosa regola / cosa fa
 
@@ -35,6 +36,7 @@
 ## Eccezioni
 > [!question]- 💡 Eccezioni e casi limite
 
+%%/prosa%%
 
 --- 🔗 Collegamenti
 

@@ -5,8 +5,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Affidabilità** | `VIEW[{affidabilita} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Affidabilità** | `INPUT[affidabilita][:affidabilita]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,15 +27,15 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Affidabilità: `INPUT[affidabilita][:affidabilita]`
 
+%%prosa%%
 ## Contenuto
 > [!question]- 💡 Cosa apprendono i PG da questo indizio
 
 ## Come trovarlo
 > [!question]- 💡 Come si scopre: prova, domanda, azione, luogo
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

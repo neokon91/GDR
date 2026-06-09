@@ -5,12 +5,12 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Livello di gioco** | `VIEW[{tier} ?? "—"]` |
-> | **Minaccia** | `VIEW[{minaccia} ?? "—"]` |
-> | **Prova** | `VIEW[{prova} ?? "—"]` |
-> | **Danno / Effetto** | `VIEW[{danno} ?? "—"]` |
+> | **Livello di gioco** | `INPUT[tier][:tier]` |
+> | **Minaccia** | `INPUT[minaccia][:minaccia]` |
+> | **Prova** | `INPUT[text(placeholder(es. Destrezza CD 15)):prova]` |
+> | **Danno / Effetto** | `INPUT[text(placeholder(es. 2d6 da fuoco · TS Destrezza dimezza)):danno]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -36,14 +36,10 @@
 ````tabs
 --- ⚠ Insidia
 
-> [!abstract] Scheda
-> Livello di gioco: `INPUT[tier][:tier]`
-> Minaccia: `INPUT[minaccia][:minaccia]`
-> Prova: `INPUT[text(placeholder(es. Destrezza CD 15)):prova]`
-> Danno / Effetto: `INPUT[text(placeholder(es. 2d6 da fuoco · TS Destrezza dimezza)):danno]`
 
 --- 🎬 Scena
 
+%%prosa%%
 ## Innesco
 > [!question]- 💡 Innesco: cosa la attiva
 
@@ -53,6 +49,7 @@
 ## Contromisure
 > [!question]- 💡 Contromisure: individuare / disinnescare
 
+%%/prosa%%
 
 > [!tip]- Tiri
 > `dice: 1d20`

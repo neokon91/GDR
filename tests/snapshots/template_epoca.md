@@ -5,10 +5,10 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Inizio** | `VIEW[{inizio} ?? "—"]` |
-> | **Fine** | `VIEW[{fine} ?? "—"]` |
+> | **Inizio** | `INPUT[text:inizio]` |
+> | **Fine** | `INPUT[text:fine]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -36,10 +36,8 @@
 ````tabs
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Inizio: `INPUT[text:inizio]`
-> Fine: `INPUT[text:fine]`
 
+%%prosa%%
 ## Panorama
 > [!question]- 💡 Panorama dell'epoca (com'era il mondo)
 
@@ -56,6 +54,7 @@
 > 💡 *Verità nascosta dell'epoca*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

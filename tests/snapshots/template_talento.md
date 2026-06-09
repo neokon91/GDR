@@ -5,9 +5,9 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Prerequisito** | `VIEW[{prerequisito} ?? "—"]` |
-> | **Ripetibile** | `VIEW[{ripetibile} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Prerequisito** | `INPUT[text(placeholder(es. Forza 13 oppure competenza in Atletica)):prerequisito]` |
+> | **Ripetibile** | `INPUT[toggle:ripetibile]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -25,18 +25,17 @@
 ````tabs
 --- 📋 Scheda
 
-> [!abstract] Scheda
-> Prerequisito: `INPUT[text(placeholder(es. Forza 13 oppure competenza in Atletica)):prerequisito]`
-> Ripetibile: `INPUT[toggle:ripetibile]`
 
 --- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
+%%prosa%%
 ## Benefici
 > [!question]- 💡 Benefici del talento
 
+%%/prosa%%
 
 --- 🔗 Collegamenti
 

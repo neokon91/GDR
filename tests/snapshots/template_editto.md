@@ -5,9 +5,9 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Emanato da** | `VIEW[{emanato_da} ?? "—"]` |
-> | **Pena / sanzione** | `VIEW[{pena} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Emanato da** | `INPUT[legame][:emanato_da]` |
+> | **Pena / sanzione** | `INPUT[pena][:pena]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -28,10 +28,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Emanato da: `INPUT[legame][:emanato_da]`
-> Pena / sanzione: `INPUT[pena][:pena]`
 
+%%prosa%%
 ## Contenuto
 > [!question]- 💡 Cosa stabilisce, nei fatti
 
@@ -41,6 +39,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Applicazione
 > [!question]- 💡 Come viene fatta rispettare — e chi la aggira
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

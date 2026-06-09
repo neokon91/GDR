@@ -7,6 +7,9 @@
 > con** (i luoghi adiacenti) e **Rotta commerciale con** (i collegamenti di viaggio).
 > La *distanza in confini* fra due luoghi si legge nella tab **Dintorni** di ciascun luogo.
 
+> [!example] Crea
+> `BUTTON[crea-luogo]` · `BUTTON[crea-rotta]` — poi collega *Regione* / *Confina con* / *Rotta* sui Luoghi.
+
 ## 🗺 Cosa contiene cosa — gerarchia
 > [!tip]- Come leggerla
 > Ogni riga è un luogo e l'area che lo contiene (campo **Regione**). Ordinata per

@@ -10,12 +10,12 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Capitale** | `VIEW[{capitale}][text(renderMarkdown)]` |
-> | **Sovrano / capo** | `VIEW[{sovrano} ?? "—"]` |
-> | **Portata** | `VIEW[{portata} ?? "—"]` |
-> | **Popolazione** | `VIEW[{popolazione} ?? "—"]` |
-> | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Capitale** | `VIEW[{capitale}][link]` |
+> | **Sovrano / capo** | `INPUT[text:sovrano]` |
+> | **Portata** | `INPUT[portata][:portata]` |
+> | **Popolazione** | `INPUT[text(placeholder(es. 5.000 o «poche centinaia»)):popolazione]` |
+> | **Simbolo** | `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -36,12 +36,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Sovrano / capo: `INPUT[text:sovrano]`
-> Portata: `INPUT[portata][:portata]`
-> Popolazione: `INPUT[text(placeholder(es. 5.000 o «poche centinaia»)):popolazione]`
-> Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
 
+%%prosa%%
 ## Storia
 > [!question]- 💡 Storia: fondazione, ascesa, crisi
 
@@ -61,6 +57,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Il segreto del trono*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

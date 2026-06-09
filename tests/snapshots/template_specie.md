@@ -7,13 +7,13 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Taglia** | `VIEW[{taglia} ?? "—"]` |
-> | **Velocità** | `VIEW[{velocita} ?? "—"]` |
-> | **Tipo di creatura** | `VIEW[{tipo_creatura} ?? "—"]` |
-> | **Lignaggio** | `VIEW[{lignaggio} ?? "—"]` |
-> | **Stile dei nomi** | `VIEW[{stile_nomi} ?? "—"]` |
+> | **Taglia** | `INPUT[taglia][:taglia]` |
+> | **Velocità** | `INPUT[text(placeholder(es. 9 m · volo 18 m)):velocita]` |
+> | **Tipo di creatura** | `INPUT[tipo_creatura][:tipo_creatura]` |
+> | **Lignaggio** | `INPUT[text(placeholder(es. Discendenza infernale)):lignaggio]` |
+> | **Stile dei nomi** | `INPUT[stile_nomi][:stile_nomi]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -42,12 +42,6 @@
 ````tabs
 --- 📋 Scheda
 
-> [!abstract] Scheda
-> Taglia: `INPUT[taglia][:taglia]`
-> Velocità: `INPUT[text(placeholder(es. 9 m · volo 18 m)):velocita]`
-> Tipo di creatura: `INPUT[tipo_creatura][:tipo_creatura]`
-> Lignaggio: `INPUT[text(placeholder(es. Discendenza infernale)):lignaggio]`
-> Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
 
 --- 📖 Lore
 
@@ -57,9 +51,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
+%%prosa%%
 ## Tratti
 > [!question]- 💡 Tratti di specie (scrivi "scurovisione" se la concede)
 
+%%/prosa%%
 
 --- 📊 Carattere
 

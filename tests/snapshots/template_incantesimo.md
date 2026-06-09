@@ -5,14 +5,14 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Livello** | `VIEW[{livello} ?? "—"]` |
-> | **Tempo di lancio** | `VIEW[{tempo_lancio} ?? "—"]` |
-> | **Gittata** | `VIEW[{gittata} ?? "—"]` |
-> | **Componenti** | `VIEW[{componenti} ?? "—"]` |
-> | **Durata** | `VIEW[{durata} ?? "—"]` |
-> | **Rituale** | `VIEW[{rituale} ?? "—"]` |
-> | **Classi** | `VIEW[{classi} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Livello** | `INPUT[number:livello]` |
+> | **Tempo di lancio** | `INPUT[text(placeholder(es. 1 azione oppure 1 reazione)):tempo_lancio]` |
+> | **Gittata** | `INPUT[text(placeholder(es. 9 m oppure contatto)):gittata]` |
+> | **Componenti** | `INPUT[text(placeholder(es. V S M con un pizzico di zolfo)):componenti]` |
+> | **Durata** | `INPUT[text(placeholder(es. Istantanea oppure Concentrazione fino a 1 minuto)):durata]` |
+> | **Rituale** | `INPUT[toggle:rituale]` |
+> | **Classi** | `INPUT[classi][:classi]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -30,23 +30,17 @@
 ````tabs
 --- ⚙ Meccanica
 
-> [!abstract] Scheda
-> Livello: `INPUT[number:livello]`
-> Tempo di lancio: `INPUT[text(placeholder(es. 1 azione oppure 1 reazione)):tempo_lancio]`
-> Gittata: `INPUT[text(placeholder(es. 9 m oppure contatto)):gittata]`
-> Componenti: `INPUT[text(placeholder(es. V S M con un pizzico di zolfo)):componenti]`
-> Durata: `INPUT[text(placeholder(es. Istantanea oppure Concentrazione fino a 1 minuto)):durata]`
-> Rituale: `INPUT[toggle:rituale]`
-> Classi: `INPUT[classi][:classi]`
 
 --- ✨ Effetto
 
+%%prosa%%
 ## Effetto
 > [!question]- 💡 Effetto dell'incantesimo
 
 ## Ai livelli superiori
 > [!question]- 💡 Ai livelli superiori
 
+%%/prosa%%
 
 --- 🔗 Collegamenti
 

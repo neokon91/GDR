@@ -7,11 +7,11 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Rarità** | `VIEW[{rarita} ?? "—"]` |
-> | **Sintonia** | `VIEW[{sintonia} ?? "—"]` |
-> | **Cariche** | `VIEW[{cariche} ?? "—"]` |
-> | **Ricarica** | `VIEW[{ricarica} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Rarità** | `INPUT[rarita][:rarita]` |
+> | **Sintonia** | `INPUT[text(placeholder(es. sì oppure solo da un incantatore)):sintonia]` |
+> | **Cariche** | `INPUT[text:cariche]` |
+> | **Ricarica** | `INPUT[text:ricarica]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -29,11 +29,6 @@
 ````tabs
 --- 📋 Scheda
 
-> [!abstract] Scheda
-> Rarità: `INPUT[rarita][:rarita]`
-> Sintonia: `INPUT[text(placeholder(es. sì oppure solo da un incantatore)):sintonia]`
-> Cariche: `INPUT[text:cariche]`
-> Ricarica: `INPUT[text:ricarica]`
 
 --- 📖 Lore
 
@@ -43,6 +38,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
+%%prosa%%
 ## Aspetto
 > [!question]- 💡 Aspetto e fattura
 
@@ -52,6 +48,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Provenienza
 > [!question]- 💡 Costo, come si ottiene
 
+%%/prosa%%
 
 --- 📊 Carattere
 

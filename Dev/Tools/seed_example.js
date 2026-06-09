@@ -40,6 +40,33 @@ const write = (rel, text) => {
   fs.writeFileSync(p, text);
 };
 
+// Riempie le SEZIONI ## del corpo-modello con la prosa della demo (l'area-scrittura
+// sotto lo spunto), così le note-esempio mostrano prosa vera sul sito-giocatori, che
+// ora la legge dal corpo (build_site.strip_body). `fills` = { "Titolo sezione": "prosa" }.
+// Le sezioni assenti restano vuote (lo strip le toglie dal sito). Un titolo che combacia
+// con un callout segreto ([!rivela|segreto]) riceve la prosa DENTRO il callout (gated per tier).
+function fillBody(body, fills) {
+  for (const [heading, prose] of Object.entries(fills || {})) {
+    if (!prose) continue;
+    let lines = body.split("\n");
+    const hi = lines.findIndex((l) => l.trim() === `## ${heading}`);
+    if (hi >= 0) {  // sezione ## normale: prosa nell'area-scrittura sotto lo spunto
+      let j = hi + 1;
+      while (j < lines.length && lines[j].trim().startsWith(">")) j += 1;  // salta lo spunto
+      while (j < lines.length && lines[j].trim() === "") j += 1;            // salta le righe vuote
+      lines.splice(j, 0, prose, "");
+    } else {  // callout segreto col titolo dato: prosa come righe '> ...' dentro il callout
+      const si = lines.findIndex((l) => l.includes("[!rivela|segreto]") && l.includes(heading));
+      if (si < 0) continue;
+      let j = si + 1;
+      while (j < lines.length && lines[j].trim().startsWith(">")) j += 1;   // fine del blockquote
+      lines.splice(j, 0, ...prose.split("\n").map((p) => (p.trim() ? `> ${p}` : ">")));
+    }
+    body = lines.join("\n");
+  }
+  return body;
+}
+
 function main() {
   if (!fs.existsSync(path.join(VAULT, "Mondi"))) {
     console.error("Vault non costruito: esegui prima `npm run build`."); process.exit(1);
@@ -64,11 +91,10 @@ function main() {
     genere: "dark fantasy",
     temi: ["oscurità che si ridesta", "frontiera senza legge", "eredità maledetta", "il prezzo della salvezza"],
     diffusione_magia: 3, tono: 4, ordine_politico: 4, civilta_natura: 4, eta_storica: 4,
-    conflitto: "Sotto la Costa dell'Ombra qualcosa di antico si ridesta, e l'Ombra cola lungo i moli corrompendo mare e uomini. Tre poteri se ne contendono il controllo: i Corsari dell'Ombra, che dal porto di Aster trafficano le reliquie riaffiorate dalle rovine; la Veglia dei Sepolti, la confraternita incappucciata che custodisce la Ziggurat; e Chiarombra, l'ultima città di legge che cerca di arginare la marea.",
-    // verita_nascosta → callout `segreto`: resta nella nota (la vede il DM) ma il sito
-    // dei giocatori la ESCLUDE. È il «sotto» del conflitto, e mostra in concreto la
-    // separazione DM/giocatori che il sito promette.
-    verita_nascosta: "La Veglia dei Sepolti non custodisce la Ziggurat: la sta risvegliando. È un culto che nel Risveglio vede salvezza, e ogni reliquia che i Corsari trafugano è un tassello che manca al rito della Terza Porta — così chi vende ai Corsari, ignaro, lavora per il culto. Chiarombra lo sospetta, ma il faro dell'Artiglio Nero è già stato spento da dentro.",
+    // conflitto e verita_nascosta NON sono più campi-frontmatter: vivono come SEZIONI del
+    // corpo (sotto), riempite via fillBody. La «Verità nascosta» è un callout segreto →
+    // resta nella nota (la vede il DM) ma il sito-giocatori la ESCLUDE: mostra in concreto
+    // la separazione DM/giocatori che il sito promette.
     player_safe: "Una costa di nebbie, relitti e contrabbando, dove si mormora che qualcosa di antico si stia svegliando sotto le onde.",
     gancio: "I PG sbarcano ad Aster con un carico da consegnare e scoprono che il committente è scomparso — il suo ultimo messaggio nominava la Ziggurat.",
     uso_al_tavolo: "Sandbox costiero: tre poteri tirano i PG in direzioni opposte. Ogni mossa fa avanzare il clock del Risveglio.",
@@ -77,28 +103,51 @@ function main() {
     clock: 4, clock_dim: 6,
     conseguenza: "Il Risveglio: l'Ombra dilaga sulla costa e ogni porto deve scegliere un padrone — o sprofondare.",
     connessioni: [], sessioni: [], tags: ["gdr/bozza"],
-  }) + modelBody("Mondo.md"));
+  }) + fillBody(modelBody("Mondo.md"), {
+    "Conflitto centrale": "Sotto la Costa dell'Ombra qualcosa di antico si ridesta, e l'Ombra cola lungo i moli corrompendo mare e uomini. Tre poteri se ne contendono il controllo: i **Corsari dell'Ombra**, che dal porto di Aster trafficano le reliquie riaffiorate dalle rovine; **La Veglia dei Sepolti**, la confraternita incappucciata che custodisce la Ziggurat; e **Chiarombra**, l'ultima città di legge che cerca di arginare la marea.",
+    "Verità nascosta": "La Veglia dei Sepolti non custodisce la Ziggurat: la sta *risvegliando*. È un culto che nel Risveglio vede salvezza, e ogni reliquia che i Corsari trafugano è un tassello che manca al rito della Terza Porta — così chi vende ai Corsari, ignaro, lavora per il culto. Chiarombra lo sospetta, ma il faro dell'Artiglio Nero è già stato spento da dentro.",
+  }));
 
   // 3) Luoghi dai toponimi (TEMPLATI) + lore curata su OGNI luogo (ogni pin è un posto vero); (una
   //    regione vera ha anche luoghi minori). Scarta il titolo-mappa. + sidecar dei segnaposto.
+  // Ogni luogo: campi-scheda (clima/popolazione), `gancio` (hook del DM, tab Al tavolo →
+  // fuori dal sito), `player_safe` (blurb player-facing → APRE la pagina-sito) e, per gli
+  // snodi-chiave, `body` = prosa nelle sezioni ## (Atmosfera/Funzione/Segreto…) che il
+  // sito legge dal corpo. Così ogni segnaposto sulla mappa ha una sua pagina vera.
   const lore = {
     Aster: { tipo: "insediamento", clima: "umido, salmastro", popolazione: "~4.000",
       gancio: "Nei vicoli della Città Bassa si compra tutto, anche un nome nuovo.",
-      mappa: "[[aster.svg]]" },
+      mappa: "[[aster.svg]]",
+      player_safe: "Il porto più grande della Costa dell'Ombra: moli affollati, mercati che non chiudono mai e una Città Bassa dove conviene tenere una mano sulla borsa.",
+      body: {
+        Atmosfera: "Nebbia salmastra, legno marcio e lanterne che ondeggiano sui moli. Di giorno è un mercato che non chiude; di notte la Città Bassa appartiene a chi non vuole essere visto.",
+        Funzione: "Il porto franco della Costa: tutto passa per Aster, e tutto ha un prezzo — comprese le reliquie che riaffiorano dalle rovine e le cose che nessun'altra città venderebbe.",
+      } },
     "Ziggurat Oscura": { tipo: "dungeon", clima: "nebbia perenne",
-      gancio: "Sotto le fondamenta, una porta che nessuno ricorda di aver chiuso." },
+      gancio: "Sotto le fondamenta, una porta che nessuno ricorda di aver chiuso.",
+      player_safe: "Una rovina a gradoni che affiora dalla nebbia nell'entroterra di Aster. I locali la evitano e non ne pronunciano il nome dopo il tramonto.",
+      body: {
+        Atmosfera: "Gradoni di pietra nera inghiottiti dalla nebbia perenne. Più ci si avvicina, più il silenzio si fa spesso, finché anche il rumore del mare svanisce.",
+        Segreto: "La Veglia non la custodisce: la apre. In fondo ai gradoni, oltre la Terza Porta, qualcosa risponde alle loro salmodie.",
+      } },
     Chiarombra: { tipo: "insediamento", clima: "ventoso",
-      gancio: "L'ultima campana che suona ancora il coprifuoco contro la nebbia." },
+      gancio: "L'ultima campana che suona ancora il coprifuoco contro la nebbia.",
+      player_safe: "Una città murata che tiene acceso il faro e suona il coprifuoco contro la nebbia: l'ultimo avamposto di legge sulla Costa." },
     "Artiglio Nero": { tipo: "struttura",
-      gancio: "Il faro è spento da una stagione, eppure qualcosa lassù risponde ai segnali." },
+      gancio: "Il faro è spento da una stagione, eppure qualcosa lassù risponde ai segnali.",
+      player_safe: "Un faro su uno sperone roccioso all'imboccatura della baia di Aster. La sua luce è spenta da una stagione." },
     "Porto Rivombrosa": { tipo: "insediamento", clima: "nebbioso", popolazione: "~1.200",
-      gancio: "Da quando la Veglia ci ha messo radici, le barche partono cariche e tornano vuote — e nessuno chiede dove sia finito l'equipaggio." },
+      gancio: "Da quando la Veglia ci ha messo radici, le barche partono cariche e tornano vuote — e nessuno chiede dove sia finito l'equipaggio.",
+      player_safe: "Un piccolo scalo peschereccio avvolto nella foschia, dove di recente attraccano più navi straniere che barche da pesca." },
     "Porto Lontano": { tipo: "insediamento", clima: "battuto dai venti", popolazione: "~800",
-      gancio: "L'ultimo scalo prima del mare aperto: chi vuole sparire dalla costa paga i Corsari e si imbarca qui." },
+      gancio: "L'ultimo scalo prima del mare aperto: chi vuole sparire dalla costa paga i Corsari e si imbarca qui.",
+      player_safe: "L'ultimo approdo prima del mare aperto: un pugno di moli battuti dal vento, buon posto per imbarcarsi senza farsi domande." },
     Boscombroso: { tipo: "luogo", clima: "umido, fitto",
-      gancio: "Gli alberi crescono storti verso la Ziggurat, e di notte il bosco sussurra in una lingua che nessuno ammette di capire." },
+      gancio: "Gli alberi crescono storti verso la Ziggurat, e di notte il bosco sussurra in una lingua che nessuno ammette di capire.",
+      player_safe: "Una pineta costiera fitta e umida, attraversata da pochi sentieri. Le guide locali preferiscono aggirarla." },
     "Grotta Dimenticata": { tipo: "dungeon", clima: "buio, umido",
-      gancio: "I pescatori giurano che là dentro la marea sale anche quando fuori cala — come se qualcosa, sotto, respirasse." },
+      gancio: "I pescatori giurano che là dentro la marea sale anche quando fuori cala — come se qualcosa, sotto, respirasse.",
+      player_safe: "Una caverna marina lungo la costa, nota ai pescatori per le maree che non seguono le regole." },
   };
   const { size, places } = im.parseSvgMap(fs.readFileSync(path.join(SRC, "costa_dellombra.svg"), "utf8"));
   const norm = (x) => String(x || "").toLowerCase().replace(/\s+/g, " ").trim();
@@ -111,10 +160,11 @@ function main() {
       tipo: extra.tipo || "luogo", stato: "bozza", mondo: "[[Astaria]]",
       coord: `${p.x}, ${p.y}`, mappa: extra.mappa,
       clima: extra.clima, popolazione: extra.popolazione, gancio: extra.gancio,
+      player_safe: extra.player_safe,
       controllata_da: key === "Aster" ? "[[Corsari dell'Ombra]]"
         : key === "Ziggurat Oscura" ? "[[La Veglia dei Sepolti]]" : undefined,
       connessioni: [], sessioni: [], tags: ["gdr/bozza"],
-    }) + luogoBody);
+    }) + fillBody(luogoBody, extra.body));
   }
   write("Media/costa_dellombra.svg.markers.json",
     JSON.stringify(im.buildMarkers("Media/costa_dellombra.svg", size, luoghi, (n) => nomeFile(n)), null, 2));
@@ -143,7 +193,11 @@ function main() {
     clock: 2, clock_dim: 4,
     conseguenza: "Monopolio: i Corsari controllano ogni rotta della costa — e il prezzo delle reliquie.",
     connessioni: [], sessioni: [], tags: ["gdr/bozza"],
-  }) + fazBody);
+  }) + fillBody(fazBody, {
+    Obiettivo: "Spremere ogni moneta dalla Costa dell'Ombra. Il mare e i suoi traffici sono loro: chi vuole solcarli — o sparire da qui — paga il pedaggio ai Corsari.",
+    Metodi: "Squadre veloci, lame discrete e un molo dove non si fanno domande. Pagano bene chi recupera reliquie dalla Ziggurat e dimentica in fretta cosa ha visto laggiù.",
+    Segreto: "Non sanno per chi lavorano davvero. Ogni reliquia che strappano alle rovine è un tassello del rito della Veglia: credono di derubare la Ziggurat, e invece la stanno aprendo.",
+  }));
   write("Mondi/Fazioni/La Veglia dei Sepolti.md", fm({
     id: "la-veglia-dei-sepolti", nome: "La Veglia dei Sepolti", categoria: "fazione", tipo: "ordine",
     stato: "bozza", mondo: "[[Astaria]]", famiglia: "religiosa", sede: "[[Ziggurat Oscura]]",
@@ -156,7 +210,11 @@ function main() {
     clock: 4, clock_dim: 6,
     conseguenza: "Il Risveglio si compie: l'Ombra Sepolta cammina di nuovo.",
     connessioni: [], sessioni: [], tags: ["gdr/bozza"],
-  }) + fazBody);
+  }) + fillBody(fazBody, {
+    Obiettivo: "Che l'Ombra Sepolta torni a camminare sulla Costa. Ogni reliquia ritrovata, ogni naufrago accolto, ogni porta dischiusa avvicina il Risveglio.",
+    Metodi: "Pazienza e fede, non ferro. Lasciano che siano i Corsari, avidi, a portare loro i frammenti del rito — e accolgono come fratelli chi «l'Ombra ha scelto».",
+    Segreto: "La confraternita non veglia la Ziggurat: la risveglia. La luce dell'Artiglio Nero è già stata spenta da dentro, da una delle loro mani.",
+  }));
 
   // 5) Un PG d'esempio — la METÀ «al tavolo» che mancava al mondo-esempio. Korbin
   //    Salmastro (Ladro 1 · Umano · Criminale) è la scheda 5.5e prodotta dal wizard
@@ -164,7 +222,14 @@ function main() {
   //    [[Corsari dell'Ombra]]. Così la demo mostra il loop completo: worldbuilding →
   //    tavolo. Derivati RAW-2024 (CA 14 = cuoio+DES; PF 10 = d8+COS; TS DES/INT; 6
   //    competenze classe+background senza doppioni). Ritratto VUOTO (aggancio immagine).
-  write("Mondi/Personaggi/Korbin Salmastro.md", KORBIN_FM + modelBody("PG.md"));
+  write("Mondi/Personaggi/Korbin Salmastro.md", KORBIN_FM + fillBody(modelBody("PG.md"), {
+    Ruolo: "Contrabbandiere e galoppino dei **Corsari dell'Ombra**: utile perché non fa domande e conosce ogni vicolo della Città Bassa di Aster.",
+    Aspetto: "Magro e nodoso, la pelle cotta dal sale. Una cicatrice gli taglia il sopracciglio sinistro; le mani non stanno mai ferme.",
+    Vuole: "Un colpo solo, abbastanza grosso da sparire dalla Costa per sempre — e, un giorno, una nave tutta sua.",
+    Teme: "Di finire come l'ultima squadra che i Corsari hanno mandato alla Ziggurat: scomparsa, senza nemmeno un nome inciso sul molo.",
+    Storia: "Cresciuto nei vicoli di Aster, dove ha imparato presto che un nome nuovo si compra come tutto il resto. Oggi corre per i Corsari, e finge che il committente scomparso non lo riguardi.",
+    Segreto: "Sa più di quanto dica sull'ultima spedizione alla Ziggurat: c'era anche lui, ed è l'unico che ne è tornato indietro.",
+  }));
 
   // 6) Un INCONTRO al tavolo agganciato al mondo: «Guardiani della Terza Porta» alla
   //    Ziggurat — la Veglia che difende il rito. Chiude il loop worldbuilding →
@@ -180,7 +245,11 @@ function main() {
     gancio: "Oltre la soglia, gli incappucciati della Veglia salmodiano attorno a una porta che non dovrebbe esistere — e qualcosa, dietro, risponde ai loro versi.",
     uso_al_tavolo: "Lo scontro che chiude il primo atto. I Guardiani difendono la Terza Porta, ma accolgono «chi l'Ombra ha scelto»: con la parola (o la faccia) giusta si passa senza sangue. Altrimenti, i cultisti e un'Ombra che cola dalle fessure.",
     connessioni: [], sessioni: [], tags: ["gdr/bozza"],
-  }) + modelBody("Incontro.md").replace(/```encounter[\s\S]*?```/, encBlock));
+  }) + fillBody(modelBody("Incontro.md").replace(/```encounter[\s\S]*?```/, encBlock), {
+    Obiettivo: "Oltrepassare la soglia che la Veglia difende — con la parola giusta, o con le lame.",
+    Complicazione: "I Guardiani accolgono «chi l'Ombra ha scelto»: la faccia o la frase giusta apre la porta senza sangue. Ma un'Ombra cola già dalle fessure, e non distingue gli amici dai nemici.",
+    "Posta in gioco": "Dietro la porta c'è il rito della Terza Porta. Se i PG arrivano troppo tardi, il clock del Risveglio avanza — e la nebbia entra a Chiarombra.",
+  }));
 
   // 7) Nota-AHA «Inizia da qui» — la guida-lampo che ADDITA il differenziatore sull'esempio
   //    (lore → Fronti che si auto-ordinano → tavolo, in 3 sguardi su entità reali). Tua-DM

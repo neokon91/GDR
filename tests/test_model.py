@@ -107,7 +107,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "third_party_licenses.md.j2", "crea_il_tuo_mondo.md.j2", "diagnostica.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "missioni.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "manuale.md.j2", "third_party_licenses.md.j2", "crea_il_tuo_mondo.md.j2", "diagnostica.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "missioni.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)

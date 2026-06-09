@@ -120,6 +120,7 @@ def clean() -> None:
     z.classi, SRD, Home/LEGGIMI, pagine-indice). NON tocca .obsidian (config e
     plugin dell'utente) ne' i contenuti. Pulisce anche residui legacy in ROOT."""
     notes = generated_note_names() + [f"{INDEX_DIR}/{p['file']}.base" for p in load_pages()]
+    notes.append(f"{INDEX_DIR}/Esplora.base")  # hub no-code trasversale (querabile)
     # Note-cartella auto-indice (Folder Notes): derivate dal modello, rimosse qui.
     notes += [fp["target"] for fp in folder_index_pages(load_core(), load_yaml("plugins.yaml"))]
     for base in (VAULT, ROOT):
@@ -332,6 +333,7 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
         rendered[action["target"]] = text
 
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2"),
+                             ("Manuale.md", "manuale.md.j2"),
                              ("THIRD-PARTY-LICENSES.md", "third_party_licenses.md.j2"),
                              ("Crea il tuo mondo.md", "crea_il_tuo_mondo.md.j2"),
                              ("Diagnostica.md", "diagnostica.md.j2"),

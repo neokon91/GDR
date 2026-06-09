@@ -49,6 +49,48 @@ def test_site_strip_body_removes_dynamic_and_callouts():
         assert leak not in out, leak
 
 
+def test_strip_body_extracts_prosa_region():
+    """La prosa-giocatore vive in QUALSIASI tab del layout (Lore, ma anche Scheda/Statblock
+    per il PG): wizard_body la marca con %%prosa%%…%%/prosa%% e strip_body estrae SOLO quella.
+    Così la prosa raggiunge il sito ovunque sia, e tutto il resto fuori dai marcatori
+    (statblock, tabelle, righe-etichetta, pannelli) NON trapela — anche se viene PRIMA."""
+    body = ("# `=this.nome`\n\n"
+            "````tabs\n"
+            "--- 📋 Scheda\n\n"                                # tab PRIMA della prosa (come il PG)
+            "**Caratteristiche**\n\n| Car | Val |\n|:--|:-:|\n| FOR | 8 |\n\n```js-engine\nx\n```\n\n"
+            "--- 📖 Lore\n\n"
+            "%%prosa%%\n"
+            "## Conflitto centrale\n> [!question]- 💡 spunto del DM\n\n"
+            "La marea nera sale sotto i moli di Aster.\n\n"
+            "## Vuota\n> [!question]- 💡 mai compilata\n\n"
+            "%%/prosa%%\n"
+            "--- 🎲 Al tavolo\n\n"
+            "**⏳ Fronte** — clock `INPUT[number:clock]`\n"
+            "````\n")
+    out = build_site.strip_body(body)
+    assert "## Conflitto centrale" in out                      # heading della prosa marcata
+    assert "La marea nera sale sotto i moli di Aster." in out  # prosa → sito
+    assert "## Vuota" not in out                               # sezione vuota → droppata
+    for leak in ["Caratteristiche", "| Car", "| FOR", "js-engine",   # tab Scheda (fuori marcatori)
+                 "⏳ Fronte", "clock", "INPUT[", "spunto del DM", "%%"]:  # chrome / marcatori
+        assert leak not in out, leak
+
+
+def test_strip_body_drops_empty_headings():
+    """Una sezione del wizard lasciata in bianco (heading + solo spunto-callout, poi
+    strippato) non deve restare come titolo nudo sul sito. Un heading con prosa resta;
+    uno con soli sotto-heading vuoti cade; se un discendente ha prosa, l'antenato resta."""
+    body = ("## Piena\nHa del contenuto.\n\n"
+            "## Vuota\n> [!question]- 💡 mai compilata\n\n"
+            "## Genitore\n### Figlia piena\nProsa della figlia.\n\n"
+            "## Genitore vuoto\n### Figlia vuota\n\n## Coda vuota\n")
+    out = build_site.strip_body(body)
+    assert "## Piena" in out and "Ha del contenuto." in out
+    assert "## Genitore" in out and "### Figlia piena" in out  # antenato di prosa → resta
+    for gone in ["## Vuota", "## Genitore vuoto", "### Figlia vuota", "## Coda vuota"]:
+        assert gone not in out, gone
+
+
 def test_site_is_public():
     assert build_site.is_public({"categoria": "luogo"})
     assert not build_site.is_public({"categoria": "luogo", "visibilita": "dm"})
@@ -283,18 +325,23 @@ def test_genera_sito_parity(tmp_path):
     """Parità Python↔JS dell'esportatore «sito dei giocatori» (build_site.py ↔
     genera_sito.js, il bottone in-Obsidian): sugli STESSI dati, markdown_to_html e
     page_model danno lo STESSO risultato → le due implementazioni non divergono (come
-    il test di parità del World Board). Fixture: prosa-frontmatter + prosa-corpo,
-    callout segreto (escluso) e [!rivela] (svelato), relazioni, ritratto, markdown inline."""
+    il test di parità del World Board). Fixture: player_safe + regione di prosa marcata
+    %%prosa%%…%%/prosa%% dentro ````tabs (estratta ovunque viva), sezione vuota (heading
+    droppato), callout segreto (escluso) e [!rivela] (svelato), chrome fuori-marcatori
+    scartato, relazioni, ritratto, markdown inline."""
     import build_site as bs
     notes = [
         {"name": "Casa Rossa", "fm": {"categoria": "fazione", "tipo": "gilda", "nome": "Casa Rossa",
             "mondo": "[[Astaria]]", "portata": "regionale", "motto": "Niente per niente",
-            "ritratto": "rosso.png", "obiettivo": "Controllare i **moli**",
-            "metodo": "Corruzione e *coltelli* con `lame`", "segreto": "Serve Vorth",
+            "ritratto": "rosso.png", "player_safe": "La gilda che tiene i **moli**.",
             "alleati": ["[[Gilda del Sale]]"], "rivali": ["[[Casa Nera]]"]},
-         "body": "# Casa Rossa\n\nUna gilda con [[Astaria|sede]] e ![[rosso.png]].\n\n"
+         "body": "# Casa Rossa\n\n````tabs\n--- 📖 Lore\n\n%%prosa%%\n"
+                 "Una gilda con [[Astaria|sede]] e ![[rosso.png]].\n\n"
+                 "## Obiettivo\n> [!question]- 💡 cosa vuole?\n\nControllare i **moli** con *coltelli*.\n\n"
                  "> [!segreto] DM\n> trama riservata\n\n> [!rivela|incontrato] Verità\n> emersa col tempo\n\n"
-                 "## Collegamenti\nda non riportare\n\n- punto uno\n- punto due"},
+                 "## Metodo\n> [!question]- 💡 mai compilata\n\n%%/prosa%%\n"
+                 "--- 🎲 Al tavolo\n\n**⏳ Fronte** — clock `INPUT[number:clock]`\n\n"
+                 "```dataview\nlist\n```\n````"},
         {"name": "Pontebello", "fm": {"categoria": "luogo", "tipo": "insediamento",
             "nome": "Pontebello", "mondo": "[[Astaria]]", "clima": "temperato", "popolazione": "5.000"},
          "body": "Prosa **semplice** di un luogo.\n\n```dataview\nx\n```\n\nRiga finale con [esterno](https://z.io)."},

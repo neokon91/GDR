@@ -12,6 +12,9 @@
 > le risorse** (tab *Collegamenti*). Una risorsa contesa con `pressione` alta è un
 > **Fronte economico** pronto da giocare.
 
+> [!example] Crea
+> `BUTTON[crea-risorsa]` · `BUTTON[crea-rotta]` — poi collega *Produce* / *Dipende da* / *Controlla le risorse*.
+
 ## ⚒️ Produzione — chi genera cosa
 ```dataview
 table without id file.link as Luogo, produce as Produce, controllata_da as "Controllato da"
@@ -50,4 +53,4 @@ sort file.name asc
 > [!note] Dal materiale al tavolo
 > Una **dipendenza** + una **rotta** = un piano: chi vuole piegare un luogo gli taglia
 > la fornitura. Lega una risorsa contesa a un **Fronte** (`pressione`/`clock`) e il suo
-> commercio diventa il motore della crisi — vedi **Fronti**.
+> commercio diventa il motore della crisi — vedi **[[Fronti]]**.

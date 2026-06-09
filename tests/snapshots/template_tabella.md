@@ -5,8 +5,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Dado (vuoto = auto sul n. di voci)** | `VIEW[{dado} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Dado (vuoto = auto sul n. di voci)** | `INPUT[text:dado]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,8 +27,6 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Dado (vuoto = auto sul n. di voci): `INPUT[text:dado]`
 
 > [!note] Voci della tabella — una per riga (peso opzionale: `3× testo`)
 > `INPUT[testo_area][:voci]`
@@ -38,9 +36,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTabella");
 ```
+%%prosa%%
 ## Uso
 > [!question]- 💡 Quando/perché tirarla (nota per te)
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

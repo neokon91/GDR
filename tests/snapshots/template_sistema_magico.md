@@ -5,8 +5,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Fonte del potere** | `VIEW[{fonte_potere} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Fonte del potere** | `INPUT[fonte_potere][:fonte_potere]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,9 +27,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Fonte del potere: `INPUT[fonte_potere][:fonte_potere]`
 
+%%prosa%%
 ## Fonte
 > [!question]- 💡 Fonte: da dove viene il potere
 
@@ -52,6 +51,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *La verità nascosta sulla sua origine o sul suo prezzo*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

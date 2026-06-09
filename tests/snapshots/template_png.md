@@ -7,13 +7,13 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Ruolo narrativo** | `VIEW[{famiglia} ?? "—"]` |
-> | **Titolo** | `VIEW[{titolo} ?? "—"]` |
-> | **Rango** | `VIEW[{rango} ?? "—"]` |
-> | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
-> | **Pronomi** | `VIEW[{pronomi} ?? "—"]` |
-> | **Età** | `VIEW[{eta} ?? "—"]` |
+> | **Titolo** | `INPUT[text:titolo]` |
+> | **Rango** | `INPUT[rango][:rango]` |
+> | **Allineamento** | `INPUT[allineamento][:allineamento]` |
+> | **Pronomi** | `INPUT[text(placeholder(es. lei / lui / loro)):pronomi]` |
+> | **Età** | `INPUT[text(placeholder(es. 34 o «secoli»)):eta]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -57,12 +57,6 @@
 
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Titolo: `INPUT[text:titolo]`
-> Rango: `INPUT[rango][:rango]`
-> Allineamento: `INPUT[allineamento][:allineamento]`
-> Pronomi: `INPUT[text(placeholder(es. lei / lui / loro)):pronomi]`
-> Età: `INPUT[text(placeholder(es. 34 o «secoli»)):eta]`
 
 > [!tip]- Genera nome/spunto
 > `BUTTON[genera-locale]` (italiano, a tema) — scegli **cosa generare**: nomi (persona/luogo/fazione), PNG, taverne, bevande, ganci, dicerie, tesori (SRD), insediamenti, oggetti, meteo, stanze di dungeon… — dallo *stile* della cultura/specie collegata. Inserisce al cursore.
@@ -73,6 +67,7 @@
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
+%%prosa%%
 ## Ruolo
 > [!question]- 💡 Ruolo o occupazione
 
@@ -101,6 +96,7 @@
 > 💡 *Segreto (non mostrare ai giocatori)*
 >
 
+%%/prosa%%
 
 > [!abstract] Tema natale
 > Segno: `INPUT[segno][:segno]` · Arcano: `INPUT[arcano][:arcano]`

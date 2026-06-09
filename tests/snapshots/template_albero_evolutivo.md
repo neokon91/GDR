@@ -5,8 +5,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Portata** | `INPUT[portata][:portata]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -24,15 +24,15 @@
 ````tabs
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Portata: `INPUT[portata][:portata]`
 
+%%prosa%%
 ## Origine
 > [!question]- 💡 Origine: da dove nasce questa progressione, chi la custodisce
 
 ## Accesso e avanzamento
 > [!question]- 💡 Accesso e avanzamento: come si entra, prove e costi per salire di grado
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

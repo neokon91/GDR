@@ -8,8 +8,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Clima** | `VIEW[{clima} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Clima** | `INPUT[clima][:clima]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -30,9 +30,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Clima: `INPUT[clima][:clima]`
 
+%%prosa%%
 ## Geografia
 > [!question]- 💡 Geografia: com'è fatto, cosa lo distingue
 
@@ -49,6 +48,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Cosa nasconde il bioma*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

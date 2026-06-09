@@ -5,8 +5,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Gravità** | `VIEW[{gravita} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Gravità** | `INPUT[gravita][:gravita]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,9 +27,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Gravità: `INPUT[gravita][:gravita]`
 
+%%prosa%%
 ## Cosa accade
 > [!question]- 💡 Cosa accade, e a chi
 
@@ -39,6 +38,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Come finisce
 > [!question]- 💡 Cosa la ferma o la spegne
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

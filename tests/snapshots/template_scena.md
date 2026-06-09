@@ -5,8 +5,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Esito / cosa cambia** | `VIEW[{esito} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Esito / cosa cambia** | `INPUT[text:esito]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,12 +27,11 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Esito / cosa cambia: `INPUT[text:esito]`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderFiloAvventura");
 ```
+%%prosa%%
 ## Situazione
 > [!question]- 💡 Situazione: cosa trovano i PG quando arrivano
 
@@ -42,6 +41,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Uscite
 > [!question]- 💡 Uscite: come e dove si può proseguire
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

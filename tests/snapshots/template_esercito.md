@@ -5,11 +5,11 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Stato / regno** | `VIEW[{regno}][text(renderMarkdown)]` |
-> | **Comandante** | `VIEW[{comandante}][text(renderMarkdown)]` |
-> | **Consistenza** | `VIEW[{consistenza} ?? "—"]` |
-> | **Morale** | `VIEW[{morale} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Stato / regno** | `VIEW[{regno}][link]` |
+> | **Comandante** | `VIEW[{comandante}][link]` |
+> | **Consistenza** | `INPUT[consistenza][:consistenza]` |
+> | **Morale** | `INPUT[morale][:morale]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -30,10 +30,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Consistenza: `INPUT[consistenza][:consistenza]`
-> Morale: `INPUT[morale][:morale]`
 
+%%prosa%%
 ## Composizione
 > [!question]- 💡 Composizione: fanteria, cavalleria, arcieri, bestie, macchine
 
@@ -43,6 +41,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Obiettivo
 > [!question]- 💡 Obiettivo: cosa marcia a fare (la posta del clock)
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

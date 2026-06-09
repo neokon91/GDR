@@ -7,9 +7,9 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Luogo sacro** | `VIEW[{luogo_sacro}][text(renderMarkdown)]` |
-> | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Luogo sacro** | `VIEW[{luogo_sacro}][link]` |
+> | **Portata** | `INPUT[portata][:portata]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -30,9 +30,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Portata: `INPUT[portata][:portata]`
 
+%%prosa%%
 ## Dottrina
 > [!question]- 💡 Dottrina: cosa insegna, cosa promette
 
@@ -52,6 +51,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Il segreto del culto (eresia, verità occulta)*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

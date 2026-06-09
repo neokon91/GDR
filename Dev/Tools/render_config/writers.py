@@ -291,20 +291,32 @@ def write_bookmarks(obsidian: Path, pages: list[dict[str, Any]]) -> None:
     se generata, Base per pagina). Non distruttivo: aggiunge solo le voci mancanti,
     preservando i bookmark dell'utente. Va dopo build_srd (referenzia SRD/Indice)."""
     bookmark_targets = [("LEGGIMI.md", "👋 LEGGIMI"), ("Home.md", "🏠 Home"),
+                        ("Manuale.md", "📖 Manuale"),
                         *((f"{INDEX_DIR}/{p['file']}.md", p["title"]) for p in pages)]
     if (VAULT / "SRD" / "Indice.md").is_file():
         bookmark_targets.append(("SRD/Indice.md", "📚 SRD"))
+    # Hub no-code trasversale (querabile per non-tecnici): filtra/ordina tutto il mondo.
+    bookmark_targets.append((f"{INDEX_DIR}/Esplora.base", "🔎 Esplora il mondo"))
     bookmark_targets += [(f"{INDEX_DIR}/{p['file']}.base", f"{p['title']} · Base") for p in pages]
     bookmarks = read_json(obsidian / "bookmarks.json")
     bookmarks = bookmarks if isinstance(bookmarks, dict) else {}
     items = bookmarks.get("items") if isinstance(bookmarks.get("items"), list) else []
+    # Auto-pulizia: togli i bookmark-file MORTI (target inesistente) — gli indici sono
+    # migrati dalla radice a Indici/, e i bookmark vecchi alla radice (es. «Atlante.md»)
+    # restavano come doppioni. Preserva i bookmark dell'utente a file VERI e i non-file
+    # (cartelle/ricerche/heading). Gira dopo build+SRD: i target generati esistono già.
+    before = len(items)
+    items = [it for it in items if not (
+        isinstance(it, dict) and it.get("type") == "file"
+        and not (VAULT / str(it.get("path", ""))).is_file())]
+    pruned = before - len(items)
     known = {it.get("path") for it in items if isinstance(it, dict)}
-    added = False
+    added = 0
     for path, title in bookmark_targets:
         if path not in known:
             items.append({"type": "file", "path": path, "title": title})
-            added = True
-    if added:
+            added += 1
+    if added or pruned:
         bookmarks["items"] = items
         write_json(obsidian / "bookmarks.json", bookmarks)
 

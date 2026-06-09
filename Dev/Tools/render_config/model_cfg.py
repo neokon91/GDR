@@ -178,8 +178,39 @@ def bases_doc(page: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def explora_base() -> dict[str, Any]:
+    """Hub Bases NO-CODE trasversale a tutto il mondo del DM (cartella Mondi/): una
+    vista-database nativa, filtrabile/ordinabile/raggruppabile dall'UI di Bases SENZA
+    scrivere query. È il «querabile per non-tecnici» orizzontale (gli indici .base sono
+    uno per-categoria); il DM aggiunge le sue viste/filtri col + di Bases. Resta dentro
+    Mondi/ → esclude l'SRD (sola lettura) e i template z.*."""
+    return {
+        "filters": {"and": ['file.inFolder("Mondi")', 'categoria.isEmpty() == false', 'stato != "archiviata"']},
+        "properties": {
+            "file.name": {"displayName": "Nome"},
+            "note.categoria": {"displayName": "Categoria"},
+            "note.tipo": {"displayName": "Tipo"},
+            "note.mondo": {"displayName": "Mondo"},
+            "note.stato": {"displayName": "Stato"},
+            "note.pressione": {"displayName": "Pressione"},
+        },
+        "views": [
+            {"type": "table", "name": "Tutto il mondo",
+             "order": ["file.name", "categoria", "tipo", "mondo", "stato"],
+             "sort": [{"property": "categoria", "direction": "ASC"},
+                      {"property": "file.name", "direction": "ASC"}]},
+            {"type": "table", "name": "Cosa scotta",
+             "order": ["file.name", "categoria", "pressione", "mondo"],
+             "sort": [{"property": "pressione", "direction": "DESC"}]},
+        ],
+    }
+
+
 def write_bases(pages: list[dict[str, Any]]) -> None:
-    """Scrive una vista Base (.base) per pagina in INDEX_DIR/ (accanto all'hub)."""
+    """Scrive una vista Base (.base) per pagina in INDEX_DIR/ (accanto all'hub), più
+    l'hub no-code trasversale Esplora.base (querabile per non-tecnici)."""
     for page in pages:
         dumped = yaml.safe_dump(bases_doc(page), allow_unicode=True, sort_keys=False)
         write_text(VAULT / INDEX_DIR / f"{page['file']}.base", dumped)
+    write_text(VAULT / INDEX_DIR / "Esplora.base",
+               yaml.safe_dump(explora_base(), allow_unicode=True, sort_keys=False))

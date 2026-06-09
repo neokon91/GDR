@@ -5,7 +5,7 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
@@ -36,6 +36,7 @@
 --- 📖 Lore
 
 
+%%prosa%%
 ## Natura
 > [!question]- 💡 Natura: cosa governa, di cosa è la sfera
 
@@ -48,6 +49,7 @@
 ## Manifestazioni
 > [!question]- 💡 Manifestazioni: segni del dominio nel mondo mortale
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

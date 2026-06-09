@@ -5,9 +5,9 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Stato cosmico** | `VIEW[{stato_cosmico} ?? "—"]` |
-> | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Stato cosmico** | `INPUT[stato_cosmico][:stato_cosmico]` |
+> | **Allineamento** | `INPUT[allineamento][:allineamento]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -28,10 +28,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Stato cosmico: `INPUT[stato_cosmico][:stato_cosmico]`
-> Allineamento: `INPUT[allineamento][:allineamento]`
 
+%%prosa%%
 ## Ruolo cosmico
 > [!question]- 💡 Ruolo cosmico: la sua funzione nell'ordine (o disordine) del cosmo
 
@@ -48,6 +46,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Il vero nome o la verità sigillata su di essa*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

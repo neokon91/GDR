@@ -5,9 +5,9 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Vitalità** | `VIEW[{vitalita} ?? "—"]` |
+> | **Vitalità** | `INPUT[vitalita][:vitalita]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -36,9 +36,8 @@
 ````tabs
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Vitalità: `INPUT[vitalita][:vitalita]`
 
+%%prosa%%
 ## Parlanti
 > [!question]- 💡 Chi la parla
 
@@ -51,6 +50,7 @@
 ## Lessico
 > [!question]- 💡 Parole/frasi chiave usabili al tavolo
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

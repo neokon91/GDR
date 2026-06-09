@@ -128,6 +128,45 @@ _DROP_HEADINGS = {"collegamenti", "connessioni", "relazioni", "carattere",
 # player-facing — compare nel sito se il suo tier <= livello del build (default
 # tier = incontrato). Gli altri callout restano fuori. Header del blocco-callout.
 _RIVELA = re.compile(r"^>\s*\[!rivela(?:\|([a-z]+))?\]-?\s*(.*)$", re.IGNORECASE)
+_HEADING = re.compile(r"^(#{1,6})\s")
+# Regione di prosa-giocatore: wizard_body avvolge le sue sezioni ## in %%prosa%%…%%/prosa%%
+# (commenti Obsidian, invisibili nella nota). Estraendo SOLO questa regione la prosa
+# raggiunge il sito ovunque viva nel layout a tab (Lore/Progressione/Scena/Effetto…),
+# senza affidarsi all'etichetta della tab, e nient'altro (statblock, pannelli, chrome) trapela.
+_PROSA = re.compile(r"%%prosa%%(.*?)%%/prosa%%", re.DOTALL)
+
+
+def _extract_prosa(body: str) -> str:
+    """Se il corpo marca regioni di prosa-giocatore (%%prosa%%…%%/prosa%%), ritorna SOLO
+    quelle; altrimenti il corpo intero (note senza modello-prosa → le ripulisce lo strip)."""
+    regions = _PROSA.findall(body)
+    return "\n\n".join(regions) if regions else body
+
+
+def _drop_empty_headings(text: str) -> str:
+    """Toglie gli heading di contenuto rimasti senza prosa sotto (fino al prossimo
+    heading di livello <= o EOF): una sezione del wizard lasciata in bianco non deve
+    comparire come titolo nudo sul sito. Un heading con soli sotto-heading a loro volta
+    vuoti cade anch'esso; se un discendente ha prosa, l'antenato resta (lo scan supera
+    gli heading più profondi)."""
+    lines = text.split("\n")
+    keep = [True] * len(lines)
+    for i, line in enumerate(lines):
+        m = _HEADING.match(line)
+        if not m:
+            continue
+        level = len(m.group(1))
+        has_content = False
+        for j in range(i + 1, len(lines)):
+            hj = _HEADING.match(lines[j])
+            if hj and len(hj.group(1)) <= level:
+                break
+            if not hj and lines[j].strip():
+                has_content = True
+                break
+        if not has_content:
+            keep[i] = False
+    return "\n".join(l for l, k in zip(lines, keep) if k)
 
 
 def strip_body(body: str, reveal_level: int = 0) -> str:
@@ -138,6 +177,7 @@ def strip_body(body: str, reveal_level: int = 0) -> str:
     heading di contenuto. I callout `[!rivela|<tier>]` col tier <= `reveal_level`
     vengono SVELATI (contenuto emesso come prosa); gli altri tier restano celati."""
     body = _TEMPLATER.sub("", body)
+    body = _extract_prosa(body)  # solo la regione di prosa-giocatore marcata da wizard_body
     out: list[str] = []
     lines = body.splitlines()
     i = 0
@@ -164,6 +204,7 @@ def strip_body(body: str, reveal_level: int = 0) -> str:
                 if tier <= reveal_level:
                     if riv.group(2).strip():
                         out.append(f"### {riv.group(2).strip()}")
+                        out.append("")  # riga vuota: il titolo si rende come heading
                     for bl in block[1:]:
                         content = re.sub(r"^\s*>\s?", "", bl).rstrip()
                         if content:
@@ -183,6 +224,7 @@ def strip_body(body: str, reveal_level: int = 0) -> str:
     text = _METABIND.sub("", text)
     text = _DVINLINE.sub("", text)
     text = _DICE.sub("", text)
+    text = _drop_empty_headings(text)  # sezioni del wizard lasciate in bianco → via
     return re.sub(r"\n{3,}", "\n\n", text).strip()
 
 

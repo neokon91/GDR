@@ -5,11 +5,11 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Epoca** | `VIEW[{epoca}][text(renderMarkdown)]` |
-> | **Luogo** | `VIEW[{luogo}][text(renderMarkdown)]` |
-> | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Epoca** | `VIEW[{epoca}][link]` |
+> | **Luogo** | `VIEW[{luogo}][link]` |
+> | **Portata** | `INPUT[portata][:portata]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -60,6 +60,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
+%%prosa%%
 ## Cause
 > [!question]- 💡 Cause: perché è successo
 
@@ -72,6 +73,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Eredità
 > [!question]- 💡 Cosa ne resta oggi (ganci vivi)
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

@@ -4,6 +4,7 @@
 
 > [!example] Crea
 > `BUTTON[crea-evento]`
+> `BUTTON[crea-epoca]` — le **ere** che raggruppano gli eventi sulla linea del tempo
 
 ## 🕰 Linea del tempo
 > [!tip] La nostra timeline (nastro qui sotto) si popola sola dagli eventi e dalle tappe. Per il **calendario navigabile** (mesi/ere, agenda dei datati): `BUTTON[apri-calendario]`

@@ -5,10 +5,10 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Livello del gruppo** | `VIEW[{pg_livello} ?? "—"]` |
-> | **Numero di PG** | `VIEW[{pg_numero} ?? "—"]` |
+> | **Livello del gruppo** | `INPUT[number:pg_livello]` |
+> | **Numero di PG** | `INPUT[number:pg_numero]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni

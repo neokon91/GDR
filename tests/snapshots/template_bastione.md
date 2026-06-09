@@ -7,9 +7,9 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Livello** | `VIEW[{livello} ?? "—"]` |
-> | **Difensori** | `VIEW[{difensori} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Livello** | `INPUT[number:livello]` |
+> | **Difensori** | `INPUT[number:difensori]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,21 +27,20 @@
 ````tabs
 --- 📋 Scheda
 
-> [!abstract] Scheda
-> Livello: `INPUT[number:livello]`
-> Difensori: `INPUT[number:difensori]`
 
 --- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
+%%prosa%%
 ## Descrizione
 > [!question]- 💡 Cos'è il bastione: aspetto, storia, ruolo
 
 ## Strutture
 > [!question]- 💡 Strutture (base e speciali): cosa sono, aspetto, ruolo (la descrizione narrativa)
 
+%%/prosa%%
 
 > [!quote]- 🏰 Ordini di bastione 2024 (quick-ref)
 > Ogni **struttura speciale** emette un ordine al **turno di bastione** (ogni 7 giorni):

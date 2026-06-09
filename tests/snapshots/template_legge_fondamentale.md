@@ -5,9 +5,9 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Poli** | `VIEW[{poli} ?? "—"]` |
+> | **Poli** | `INPUT[text:poli]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -34,9 +34,8 @@
 ````tabs
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Poli: `INPUT[text:poli]`
 
+%%prosa%%
 ## Principio
 > [!question]- 💡 Principio: cosa regola, come tiene insieme la realtà
 
@@ -50,6 +49,7 @@
 > 💡 *La verità che pochi conoscono su questa legge*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

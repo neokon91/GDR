@@ -58,9 +58,41 @@ const RE_DVINLINE = /`=[^`]*`/g;
 const RE_DICE = /`dice(?:-mod)?:[^`]*`/g;
 const RE_FENCE = /^(`{3,}|~{3,})/;
 const RE_RIVELA = /^>\s*\[!rivela(?:\|([a-z]+))?\]-?\s*(.*)$/i;
+const RE_HEADING = /^(#{1,6})\s/;
+// Regione di prosa-giocatore marcata da wizard_body (%%prosa%%…%%/prosa%%, commenti
+// Obsidian): estraendo solo questa, la prosa raggiunge il sito ovunque viva nel layout a
+// tab — gemello di build_site._extract_prosa / _drop_empty_headings (parità Python↔JS).
+const RE_PROSA = /%%prosa%%([\s\S]*?)%%\/prosa%%/g;
+
+function extractProsa(body) {
+  const regions = [];
+  let m;
+  RE_PROSA.lastIndex = 0;
+  while ((m = RE_PROSA.exec(String(body))) !== null) regions.push(m[1]);
+  return regions.length ? regions.join("\n\n") : body;
+}
+
+function dropEmptyHeadings(text) {
+  const lines = text.split("\n");
+  const keep = new Array(lines.length).fill(true);
+  for (let i = 0; i < lines.length; i++) {
+    const m = RE_HEADING.exec(lines[i]);
+    if (!m) continue;
+    const level = m[1].length;
+    let hasContent = false;
+    for (let j = i + 1; j < lines.length; j++) {
+      const hj = RE_HEADING.exec(lines[j]);
+      if (hj && hj[1].length <= level) break;
+      if (!hj && lines[j].trim()) { hasContent = true; break; }
+    }
+    if (!hasContent) keep[i] = false;
+  }
+  return lines.filter((_, idx) => keep[idx]).join("\n");
+}
 
 function stripBody(body, revealLevel = 0) {
   body = String(body || "").replace(RE_TEMPLATER, "");
+  body = extractProsa(body);  // solo la regione di prosa-giocatore marcata da wizard_body
   const out = [];
   const lines = body.split("\n");
   let i = 0;
@@ -85,7 +117,7 @@ function stripBody(body, revealLevel = 0) {
       if (riv) {  // callout di rivelazione: svela se il tier è già raggiunto
         const tier = REVEAL_RANK[(riv[1] || "incontrato").toLowerCase()] ?? 1;
         if (tier <= revealLevel) {
-          if (riv[2].trim()) out.push(`### ${riv[2].trim()}`);
+          if (riv[2].trim()) { out.push(`### ${riv[2].trim()}`); out.push(""); }  // riga vuota → heading
           for (const bl of block.slice(1)) {
             const content = bl.replace(/^\s*>\s?/, "").replace(/\s+$/, "");
             if (content) out.push(content);
@@ -102,6 +134,7 @@ function stripBody(body, revealLevel = 0) {
   }
   let text = out.join("\n");
   text = text.replace(RE_METABIND, "").replace(RE_DVINLINE, "").replace(RE_DICE, "");
+  text = dropEmptyHeadings(text);  // sezioni del wizard lasciate in bianco → via
   return text.replace(/\n{3,}/g, "\n\n").trim();
 }
 

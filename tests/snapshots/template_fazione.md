@@ -10,14 +10,14 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Sede** | `VIEW[{sede}][text(renderMarkdown)]` |
-> | **Regno / Stato** | `VIEW[{regno}][text(renderMarkdown)]` |
-> | **Portata** | `VIEW[{portata} ?? "—"]` |
-> | **Motto** | `VIEW[{motto} ?? "—"]` |
-> | **Epoca di fondazione** | `VIEW[{fondazione} ?? "—"]` |
-> | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
+> | **Sede** | `VIEW[{sede}][link]` |
+> | **Regno / Stato** | `VIEW[{regno}][link]` |
+> | **Portata** | `INPUT[portata][:portata]` |
+> | **Motto** | `INPUT[text:motto]` |
+> | **Epoca di fondazione** | `INPUT[text:fondazione]` |
+> | **Simbolo** | `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -48,11 +48,6 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Portata: `INPUT[portata][:portata]`
-> Motto: `INPUT[text:motto]`
-> Epoca di fondazione: `INPUT[text:fondazione]`
-> Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
 
 > [!tip]- Genera nome/spunto
 > `BUTTON[genera-locale]` (italiano, a tema) — scegli **cosa generare**: nomi (persona/luogo/fazione), PNG, taverne, bevande, ganci, dicerie, tesori (SRD), insediamenti, oggetti, meteo, stanze di dungeon… — dallo *stile* della cultura/specie collegata. Inserisce al cursore.
@@ -63,6 +58,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
+%%prosa%%
 ## Obiettivo
 > [!question]- 💡 Cosa vuole ottenere la fazione
 
@@ -85,6 +81,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Segreto della fazione*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

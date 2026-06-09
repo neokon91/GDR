@@ -5,11 +5,11 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Dove** | `VIEW[{luogo}][text(renderMarkdown)]` |
-> | **Fazione dietro** | `VIEW[{fazione}][text(renderMarkdown)]` |
-> | **Stato della missione** | `VIEW[{stato_missione} ?? "—"]` |
-> | **Ricompensa** | `VIEW[{ricompensa} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Dove** | `VIEW[{luogo}][link]` |
+> | **Fazione dietro** | `VIEW[{fazione}][link]` |
+> | **Stato della missione** | `INPUT[stato_missione][:stato_missione]` |
+> | **Ricompensa** | `INPUT[text:ricompensa]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -30,10 +30,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Stato della missione: `INPUT[stato_missione][:stato_missione]`
-> Ricompensa: `INPUT[text:ricompensa]`
 
+%%prosa%%
 ## Obiettivo
 > [!question]- 💡 Obiettivo: cosa devono ottenere i PG
 
@@ -43,6 +41,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Posta in gioco
 > [!question]- 💡 Posta in gioco: cosa succede a successo / fallimento
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

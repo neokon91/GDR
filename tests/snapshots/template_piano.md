@@ -5,8 +5,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Accessibilità** | `VIEW[{accessibilita} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Accessibilità** | `INPUT[accessibilita][:accessibilita]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,9 +27,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Accessibilità: `INPUT[accessibilita][:accessibilita]`
 
+%%prosa%%
 ## Natura
 > [!question]- 💡 Natura: cos'è, che aspetto e sostanza ha
 
@@ -45,6 +44,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ## Influenza
 > [!question]- 💡 Influenza: come tocca il mondo materiale
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

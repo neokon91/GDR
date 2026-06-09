@@ -7,7 +7,7 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -29,6 +29,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 
+%%prosa%%
 ## Narrazione
 > [!question]- 💡 La narrazione (il racconto come si tramanda)
 
@@ -45,6 +46,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Cosa nasconde o distorce il mito (la verità vera)*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

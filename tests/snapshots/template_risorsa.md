@@ -5,11 +5,11 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Fonte** | `VIEW[{fonte} ?? "—"]` |
-> | **Scarsità** | `VIEW[{scarsita} ?? "—"]` |
-> | **Usi** | `VIEW[{usi} ?? "—"]` |
+> | **Fonte** | `INPUT[text:fonte]` |
+> | **Scarsità** | `INPUT[scarsita][:scarsita]` |
+> | **Usi** | `INPUT[text:usi]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -38,11 +38,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Fonte: `INPUT[text:fonte]`
-> Scarsità: `INPUT[scarsita][:scarsita]`
-> Usi: `INPUT[text:usi]`
 
+%%prosa%%
 ## Produzione
 > [!question]- 💡 Come si ottiene / si produce e dove
 
@@ -56,6 +53,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *Segreto della risorsa*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

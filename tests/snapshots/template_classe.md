@@ -5,14 +5,14 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Dado vita** | `VIEW[{dado_vita} ?? "—"]` |
-> | **Caratteristica primaria** | `VIEW[{car_primaria} ?? "—"]` |
-> | **TS competenti** | `VIEW[{ts_competenze} ?? "—"]` |
-> | **Competenze in armi** | `VIEW[{competenze_armi} ?? "—"]` |
-> | **Competenze in armature** | `VIEW[{competenze_armature} ?? "—"]` |
-> | **Competenza in strumenti** | `VIEW[{strumento} ?? "—"]` |
-> | **Abilità a scelta (numero)** | `VIEW[{abilita_numero} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Dado vita** | `INPUT[dado_vita][:dado_vita]` |
+> | **Caratteristica primaria** | `INPUT[car_primaria][:car_primaria]` |
+> | **TS competenti** | `INPUT[text(placeholder(es. Forza e Costituzione)):ts_competenze]` |
+> | **Competenze in armi** | `INPUT[text:competenze_armi]` |
+> | **Competenze in armature** | `INPUT[text:competenze_armature]` |
+> | **Competenza in strumenti** | `INPUT[text(placeholder(es. Strumenti da fabbro)):strumento]` |
+> | **Abilità a scelta (numero)** | `INPUT[number:abilita_numero]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -30,17 +30,10 @@
 ````tabs
 --- 🛡 Classe
 
-> [!abstract] Scheda
-> Dado vita: `INPUT[dado_vita][:dado_vita]`
-> Caratteristica primaria: `INPUT[car_primaria][:car_primaria]`
-> TS competenti: `INPUT[text(placeholder(es. Forza e Costituzione)):ts_competenze]`
-> Competenze in armi: `INPUT[text:competenze_armi]`
-> Competenze in armature: `INPUT[text:competenze_armature]`
-> Competenza in strumenti: `INPUT[text(placeholder(es. Strumenti da fabbro)):strumento]`
-> Abilità a scelta (numero): `INPUT[number:abilita_numero]`
 
 --- 📈 Progressione
 
+%%prosa%%
 ## Concept
 > [!question]- 💡 Concept della classe
 
@@ -50,6 +43,7 @@
 ## Progressione
 > [!question]- 💡 Privilegi salienti per livello
 
+%%/prosa%%
 
 > [!example]- Tabella dei livelli
 > | Liv | Comp. | Privilegi |

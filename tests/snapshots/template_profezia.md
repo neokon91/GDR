@@ -5,8 +5,8 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Stato d'avveramento** | `VIEW[{stato_profezia} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
+> | **Stato d'avveramento** | `INPUT[stato_profezia][:stato_profezia]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -27,9 +27,8 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
-> [!abstract] Scheda
-> Stato d'avveramento: `INPUT[stato_profezia][:stato_profezia]`
 
+%%prosa%%
 ## Testo
 > [!question]- 💡 Il testo della profezia (le parole, anche criptiche)
 
@@ -46,6 +45,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > 💡 *La verità sull'avveramento (cosa il DM sa davvero)*
 >
 
+%%/prosa%%
 
 --- 🎲 Al tavolo
 

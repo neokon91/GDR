@@ -5,7 +5,7 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Mondo** | `VIEW[{mondo}][link]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -25,9 +25,11 @@
 
 I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 
+%%prosa%%
 ## Privilegi
 > [!question]- 💡 Privilegi (livelli 3/6/10/14)
 
+%%/prosa%%
 
 --- 🔗 Collegamenti
 
