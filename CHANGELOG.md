@@ -5,10 +5,28 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 
 ## [Non rilasciato]
 
+### Aggiunto
+- **Prosa in sezioni `##` native**: i campi di prosa lunga (storia, obiettivo, descrizione…)
+  non sono più textArea legate al frontmatter — diventano **sezioni `##` nel corpo nota**, con
+  uno spunto pieghevole come hint; i segreti usano il callout `[!rivela|<tier>]`. Il sito legge
+  la prosa dal corpo. Modello articolo + infobox (lo strutturato resta Meta Bind).
+- **Dadi tirabili negli statblock**: regole `diceParsing` italiane nei layout (danno e «+N a
+  colpire»→`1d20+N`); i layout vendorizzati ora si **aggiornano** sui vault esistenti, non solo
+  sui nuovi. *(Serve il plugin Dice Roller attivo; Fantasy Statblocks rilegge i layout al riavvio.)*
+- **Sincronizza pin → coordinate**: un'azione legge i segnaposto piazzati a mano sulla mappa
+  (`<immagine>.markers.json`) e scrive le `coord` delle note linkate → la mappa diventa la fonte
+  della geografia (distanze in linea d'aria e Dintorni si calcolano da sé).
+- **Nota-guida «Inizia da qui»** nel mondo-esempio: una guida-lampo (solo-DM) che mostra il
+  differenziatore in 3 sguardi (lore → Fronti che si auto-ordinano → tavolo) su entità reali di Astaria.
+- **Campi più ricchi**: alcuni campi-testo vincolati diventano menu a tendina (ruolo ecologico,
+  affidabilità d'indizio, pena/ambito d'editto, dottrina d'esercito) e «rituale» un sì/no.
+
 ### Corretto
 - **Etichette di stato disambiguate**: «Stato della missione» e «Stato cosmico» non
   collidono più con lo **Stato** (editoriale) nell'infobox — niente più due righe «Stato»
   sulla stessa nota. Campo-profilo `divinita_di_stato`→`divinita_stato` (coerente coi gemelli).
+- **Callout di guida non più «incastrati»**: in 5 entità un callout di guida si fondeva nel
+  precedente per una riga vuota mancante — ora rende come callout separato.
 
 ### Solidità
 - **Guardia di copertura dei campi** (`validate_field_coverage` in `check()`): ogni campo

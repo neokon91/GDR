@@ -19,7 +19,7 @@ Mergiato su `main`: **refactor a GRUPPI + profili-sottotipo**. Tassonomia a 3 st
 direzione di lungo periodo è la **modularizzazione del modello** per espansione/evoluzione:
 aggiungere entità/gruppi/sottotipi resta un'operazione di DATI (YAML), non di codice.
 
-**Ultima sessione** (2026-06-07): **demo Astaria pubblicata su itch** (v0.1.0, canali vault +
+**Sessione 2026-06-07**: **demo Astaria pubblicata su itch** (v0.1.0, canali vault +
 sito). Demo arricchita e dogfoggata da beta-tester: 8 luoghi **tutti con lore + pin**,
 **mappa-città di Aster** (drill-down regione→città con pin curato dei Corsari), **PG collegato**
 (Korbin Salmastro, RAW-completo) e **incontro** «Guardiani della Terza Porta» alla Ziggurat
@@ -31,10 +31,15 @@ Bind (apostrofo dritto → tipografico); **ASI/Dono epico del 19° per TUTTE le 
 luoghi/PG con **spazi** (coerenti con le fazioni); **parser città** `1.6→2.5` (label curve non più
 frammentate). 438 test verdi.
 
-**Sessione 2026-06-08**: igiene-release — CHANGELOG tagliato a `v0.1.0`, roadmap riallineata (la
-porta è aperta, il vincolo è la **trazione**); **guardia di copertura campi**
-(`validate_field_coverage`) + etichette di stato disambiguate; **checklist QA clean-install**
-([qa_clean_install.md](qa_clean_install.md)). 439 test verdi.
+**Sessione 2026-06-08** (giro enorme): **igiene-release** — CHANGELOG tagliato a `v0.1.0`, roadmap
+riallineata (porta aperta, vincolo = **trazione**), README→itch. **Modello**: **prosa→sezioni `##`
+native** (la prosa lunga non è più textArea su frontmatter → sezioni nel corpo + spunto pieghevole;
+segreti→`[!rivela]`; sito gemello via `strip_body`); **guardia di copertura campi**
+(`validate_field_coverage`); **widget audit** (5 `text` vincolati→`select` + `rituale`→toggle).
+**Coerenza/beta-UX**: doppio-stato disambiguato, **callout-merge** fixato (5 entità), nota-aha
+**«Inizia da qui» restituita** (era persa in un refactor). **Tavolo/mappe**: **dadi tirabili negli
+statblock** (regole `diceParsing` IT + layout aggiornati per-id), **sync pin→coord**
+(`.markers.json`→`coord`). **Checklist QA clean-install** ([qa_clean_install.md](qa_clean_install.md)). 441 test verdi.
 
 **Verdetto 4-lenti** (analisi fresca 2026-06-08, tarata sui competitor — World Anvil/Kanka/
 LegendKeeper/Foundry/D&D Beyond): Architetto **8.5** · World-builder **9** · Game-designer 5.5e
