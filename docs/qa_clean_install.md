@@ -40,8 +40,12 @@ veri. Falla **una volta, dall'alto in basso, su una copia pristina**.
       *Stato del Mondo*/Fronti, *Scheda*
 - [ ] **Reattività**: muovi uno **slider asse** → il radar si **ridisegna live** (senza riaprire la nota);
       avanza un Fronte → il **clock** aggiorna
-- [ ] **Auto-link SRD**: in una scheda i nomi (condizioni/incantesimi/mostri) sono `[[link]]` navigabili,
-      anche dentro gli statblock
+- [ ] **Auto-link SRD**: in una scheda i nomi (condizioni/incantesimi/mostri) sono `[[link]]` navigabili
+- [ ] **Statblock — link `[[ ]]`**: apri un mostro SRD (es. **Aboleth**); nel `desc` di un'azione le
+      condizioni inflitte (`[[Afferrato]]`, `[[Affascinato]]`) sono **link cliccabili**, non testo grezzo `[[…]]`
+- [ ] **Statblock — dadi**: nello stesso statblock il **danno** `(2d6 + 5)` è **tirabile** (Dice Roller) e
+      il **«+9 a colpire»** è tirabile. ⚠️ Se i dadi NON si tirano: è il gap `diceParsing: []` del layout
+      custom (regole assenti, da popolare e adattare all'italiano «colpire/danni/CD» — vedi nota tecnica)
 - [ ] **(fix di questo giro)** apri una **Missione**: l'infobox mostra **«Stato della missione»** *e*
       **«Stato»** (distinti — non più due «Stato»); idem una **primordiale** → «Stato cosmico» + «Stato»
 

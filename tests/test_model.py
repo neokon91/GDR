@@ -255,5 +255,15 @@ def test_fs_layouts_valid():
     for layout in layouts:
         assert layout.get("name")
         assert isinstance(layout.get("blocks"), list) and layout["blocks"]
+        # Guardia anti-regressione: su un layout CUSTOM i dadi si tirano solo se il
+        # layout porta le proprie regole diceParsing (vuoto = attacchi/danni non
+        # tirabili, issue FS #353). Ri-esportare il layout da Fantasy Statblocks le
+        # azzererebbe in silenzio: qui lo intercettiamo.
+        dice = layout.get("diceParsing")
+        assert isinstance(dice, list) and dice, \
+            f"layout {layout['id']}: diceParsing vuoto → dadi non tirabili negli statblock"
+        for rule in dice:
+            assert rule.get("regex") and rule.get("parser"), \
+                f"layout {layout['id']}: regola diceParsing senza regex/parser"
 
 

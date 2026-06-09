@@ -457,5 +457,18 @@
   ],
   "name": "D&D 5.5 Layout ITA - Compatibile 5e",
   "id": "094b38db081b",
-  "diceParsing": []
+  "diceParsing": [
+    {
+      "id": "srd-it-danno",
+      "desc": "Danno: «12 (2d6 + 5)» → tira la formula fra parentesi (language-agnostic, regola di default di Fantasy Statblocks).",
+      "regex": "(\\d+)\\s\\((\\d+d\\d+(?:\\s*[+\\-]\\s*\\d+)?)\\)",
+      "parser": "let [, base, dice] = matches; let text; if (!isNaN(Number(base)) && dice) { text = dice; } return { text, original: dice ?? original };"
+    },
+    {
+      "id": "srd-it-colpire",
+      "desc": "Tiro per colpire (IT): «+9, portata/gittata» → 1d20+9. Adattamento italiano della regola «to hit» di default.",
+      "regex": "([\\+\\-])(\\d+)(?=,?\\s*(?:portata|gittata))",
+      "parser": "let [, sign, number] = matches; let mult = sign === '-' ? -1 : 1; if (!isNaN(Number(number))) { return { text: `1d20+${mult * Number(number)}`, original }; }"
+    }
+  ]
 }
