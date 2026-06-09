@@ -224,7 +224,8 @@ def write_statblock_layouts(obsidian: Path) -> None:
             # lo stesso id (build precedente), lo AGGIORNIAMO in posto — così le nuove
             # regole diceParsing raggiungono i vault esistenti; se è nuovo lo aggiungiamo.
             # La posizione nell'array e fs_data["default"] non cambiano (default intatto).
-            for fs_layout in load_statblock_layouts():
+            src_layouts = load_statblock_layouts()
+            for fs_layout in src_layouts:
                 lid = fs_layout.get("id")
                 if lid in by_id:
                     if layouts[by_id[lid]] != fs_layout:
@@ -234,6 +235,20 @@ def write_statblock_layouts(obsidian: Path) -> None:
                     by_id[lid] = len(layouts)
                     layouts.append(fs_layout)
                     changed = True
+            # Backfill diceParsing sui layout SENZA quella chiave (es. un layout
+            # 2024 legacy/dell'utente come "GDR — 5.5e (2024)"). FS rende i dadi con
+            # `layout.diceParsing ?? regole_default`: un layout privo di diceParsing
+            # ricade sulle regole DEFAULT, che sono in INGLESE («+N to hit») → in
+            # italiano («+N, portata») il tiro PER COLPIRE non diventa cliccabile
+            # (il danno «N (XdY)» sì, perché la regola di default lo riconosce).
+            # Diamo a ogni layout privo di regole le NOSTRE (danno + tiro per colpire
+            # italiani). Un diceParsing esplicitamente vuoto [] è rispettato.
+            dice_rules = next((l.get("diceParsing") for l in src_layouts if l.get("diceParsing")), None)
+            if dice_rules:
+                for l in layouts:
+                    if isinstance(l, dict) and "diceParsing" not in l:
+                        l["diceParsing"] = [dict(r) for r in dice_rules]
+                        changed = True
             if changed:
                 fs_data["layouts"] = layouts
                 write_json(fs_dir / "data.json", fs_data)

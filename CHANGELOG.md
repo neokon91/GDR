@@ -47,6 +47,13 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   niente più doppioni accumulati quando un indice si sposta.
 
 ### Corretto
+- **Tiro per colpire tirabile su TUTTI i layout statblock**: un layout Fantasy
+  Statblocks privo della chiave `diceParsing` (es. «GDR — 5.5e (2024)», il default
+  legacy) faceva ricadere FS sulle regole di **default in inglese** («+N to hit»),
+  così in italiano («+N, portata») il **tiro per colpire** non era cliccabile (il
+  danno «N (XdY)» sì, lo riconosce la regola default). Ora il build fa **backfill**
+  delle regole `diceParsing` IT (danno + tiro per colpire) su ogni layout che ne è
+  privo; un `diceParsing` esplicitamente vuoto resta una scelta dell'utente.
 - **`sintonia` unificata**: gli oggetti SRD esponevano la chiave grezza `richiede_sintonia` mentre
   il modello (e la tabella del **Ponte**) usano `sintonia` → la colonna *Sintonia* era vuota per i
   256 oggetti SRD. Ora derivano `sintonia`.

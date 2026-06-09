@@ -267,3 +267,28 @@ def test_fs_layouts_valid():
                 f"layout {layout['id']}: regola diceParsing senza regex/parser"
 
 
+def test_fs_backfills_diceparsing_on_ruleless_layouts(tmp_path):
+    """Regressione: un layout SENZA chiave diceParsing (es. il layout 2024 legacy
+    «GDR — 5.5e (2024)») fa ricadere FS sulle regole DEFAULT, che sono in INGLESE
+    («+N to hit») → in italiano («+N, portata») il tiro PER COLPIRE non è cliccabile
+    (il danno «N (XdY)» sì, lo riconosce la default). write_statblock_layouts deve
+    fare BACKFILL delle nostre regole su ogni layout privo della chiave; un
+    diceParsing esplicitamente vuoto [] è una scelta dell'utente e resta intatto."""
+    fs_dir = tmp_path / "plugins" / "obsidian-5e-statblocks"
+    fs_dir.mkdir(parents=True)
+    (fs_dir / "data.json").write_text(json.dumps({"layouts": [
+        {"id": "gdr-5e-2024", "name": "GDR — 5.5e (2024)", "blocks": [{"type": "heading"}]},
+        {"id": "utente-vuoto", "name": "Custom", "blocks": [{"type": "heading"}], "diceParsing": []},
+    ]}), encoding="utf-8")
+
+    render.write_statblock_layouts(tmp_path)
+
+    by_id = {l["id"]: l for l in json.loads((fs_dir / "data.json").read_text(encoding="utf-8"))["layouts"]}
+    backfilled = by_id["gdr-5e-2024"].get("diceParsing")
+    assert isinstance(backfilled, list) and backfilled, "diceParsing non backfillato sul layout 2024"
+    assert any("portata" in (r.get("regex") or "") for r in backfilled), \
+        "manca la regola tiro-per-colpire italiana («+N, portata» → 1d20+N)"
+    # diceParsing esplicitamente [] = scelta dell'utente → non sovrascritto
+    assert by_id["utente-vuoto"]["diceParsing"] == []
+
+
