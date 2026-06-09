@@ -46,11 +46,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Allineamento: `INPUT[allineamento][:allineamento]`
 > Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
 
-> [!note] Dogmi
-> `INPUT[textArea:dogmi]`
+## Dogmi
+> [!question]- 💡 Dogmi e aspettative
 
-> [!note] Culto
-> `INPUT[textArea:culto]`
+## Culto
+> [!question]- 💡 Culto: fedeli, riti, templi
 
 
 --- 🎲 Al tavolo

@@ -59,26 +59,27 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
-> [!note] Geografia
-> `INPUT[textArea:geografia]`
+## Geografia
+> [!question]- 💡 Geografia: dov'e', com'e' fatto, cosa lo circonda
 
-> [!note] Funzione
-> `INPUT[textArea:funzione]`
+## Funzione
+> [!question]- 💡 Cos'e' / a cosa serve, perche' importa
 
-> [!note] Atmosfera
-> `INPUT[textArea:atmosfera]`
+## Atmosfera
+> [!question]- 💡 Atmosfera: cosa si vede, sente, odora
 
-> [!note] Abitanti
-> `INPUT[textArea:abitanti]`
+## Abitanti
+> [!question]- 💡 Chi o cosa lo abita (popolo, fazioni, creature)
 
-> [!note] Storia
-> `INPUT[textArea:storia]`
+## Storia
+> [!question]- 💡 Cosa è successo qui (passato che pesa)
 
-> [!note] Tensione
-> `INPUT[textArea:tensione]`
+## Tensione
+> [!question]- 💡 Tensione o pericolo presente
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Segreto del luogo*
+>
 
 
 --- 🎲 Al tavolo

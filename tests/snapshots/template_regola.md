@@ -26,14 +26,14 @@
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
-> [!note] Cosa
-> `INPUT[textArea:cosa_regola]`
+## Cosa
+> [!question]- 💡 Cosa regola / cosa fa
 
-> [!note] Come
-> `INPUT[textArea:come_funziona]`
+## Come
+> [!question]- 💡 Come funziona al tavolo
 
-> [!note] Eccezioni
-> `INPUT[textArea:eccezioni]`
+## Eccezioni
+> [!question]- 💡 Eccezioni e casi limite
 
 
 --- 🔗 Collegamenti

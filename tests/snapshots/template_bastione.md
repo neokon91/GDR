@@ -36,11 +36,11 @@
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
-> [!note] Descrizione
-> `INPUT[textArea:descrizione]`
+## Descrizione
+> [!question]- 💡 Cos'è il bastione: aspetto, storia, ruolo
 
-> [!note] Strutture
-> `INPUT[textArea:strutture]`
+## Strutture
+> [!question]- 💡 Strutture (base e speciali): cosa sono, aspetto, ruolo (la descrizione narrativa)
 
 
 > [!quote]- 🏰 Ordini di bastione 2024 (quick-ref)

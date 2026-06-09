@@ -34,14 +34,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Stato della missione: `INPUT[stato_missione][:stato_missione]`
 > Ricompensa: `INPUT[text:ricompensa]`
 
-> [!note] Obiettivo
-> `INPUT[textArea:obiettivo]`
+## Obiettivo
+> [!question]- 💡 Obiettivo: cosa devono ottenere i PG
 
-> [!note] Complicazione
-> `INPUT[textArea:complicazione]`
+## Complicazione
+> [!question]- 💡 Complicazione: cosa va storto o si nasconde
 
-> [!note] Posta in gioco
-> `INPUT[textArea:posta]`
+## Posta in gioco
+> [!question]- 💡 Posta in gioco: cosa succede a successo / fallimento
 
 
 --- 🎲 Al tavolo

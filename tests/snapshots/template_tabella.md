@@ -38,8 +38,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTabella");
 ```
-> [!note] Uso
-> `INPUT[textArea:uso]`
+## Uso
+> [!question]- 💡 Quando/perché tirarla (nota per te)
 
 
 --- 🎲 Al tavolo

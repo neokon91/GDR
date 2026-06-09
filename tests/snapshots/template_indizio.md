@@ -30,11 +30,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Affidabilità: `INPUT[affidabilita][:affidabilita]`
 
-> [!note] Contenuto
-> `INPUT[textArea:contenuto]`
+## Contenuto
+> [!question]- 💡 Cosa apprendono i PG da questo indizio
 
-> [!note] Come trovarlo
-> `INPUT[textArea:come_trovarlo]`
+## Come trovarlo
+> [!question]- 💡 Come si scopre: prova, domanda, azione, luogo
 
 
 --- 🎲 Al tavolo

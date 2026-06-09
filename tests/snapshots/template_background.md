@@ -38,11 +38,11 @@
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
-> [!note] Descrizione
-> `INPUT[textArea:descrizione]`
+## Descrizione
+> [!question]- 💡 Chi era prima dell'avventura
 
-> [!note] Equipaggiamento
-> `INPUT[textArea:equipaggiamento]`
+## Equipaggiamento
+> [!question]- 💡 Equipaggiamento iniziale
 
 
 --- 🔗 Collegamenti

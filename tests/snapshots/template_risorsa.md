@@ -43,17 +43,18 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Scarsità: `INPUT[scarsita][:scarsita]`
 > Usi: `INPUT[text:usi]`
 
-> [!note] Produzione
-> `INPUT[textArea:produzione]`
+## Produzione
+> [!question]- 💡 Come si ottiene / si produce e dove
 
-> [!note] Ruolo economico
-> `INPUT[textArea:ruolo_economico]`
+## Ruolo economico
+> [!question]- 💡 Ruolo economico: chi la vuole e perché conta
 
-> [!note] Tensione
-> `INPUT[textArea:tensione]`
+## Tensione
+> [!question]- 💡 Conflitto attorno alla risorsa (chi se la contende)
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Segreto della risorsa*
+>
 
 
 --- 🎲 Al tavolo

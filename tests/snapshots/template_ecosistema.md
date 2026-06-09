@@ -30,20 +30,21 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 
-> [!note] Composizione
-> `INPUT[textArea:composizione]`
+## Composizione
+> [!question]- 💡 Composizione: chi e cosa lo abita
 
-> [!note] Equilibri
-> `INPUT[textArea:equilibri]`
+## Equilibri
+> [!question]- 💡 Equilibri: catene, simbiosi, predatori/prede
 
-> [!note] Cicli
-> `INPUT[textArea:cicli]`
+## Cicli
+> [!question]- 💡 Cicli: stagioni, migrazioni, rigenerazione
 
-> [!note] Minacce
-> `INPUT[textArea:minacce]`
+## Minacce
+> [!question]- 💡 Minacce: cosa lo sta spezzando
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Il segreto dell'ecosistema*
+>
 
 
 --- 🎲 Al tavolo

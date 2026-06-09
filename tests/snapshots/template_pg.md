@@ -156,32 +156,33 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
-> [!note] Ruolo
-> `INPUT[textArea:ruolo]`
+## Ruolo
+> [!question]- 💡 Ruolo o occupazione
 
-> [!note] Aspetto
-> `INPUT[textArea:aspetto]`
+## Aspetto
+> [!question]- 💡 Tratto distintivo: voce, aspetto, manierismo
 
-> [!note] Vuole
-> `INPUT[textArea:desiderio]`
+## Vuole
+> [!question]- 💡 Cosa vuole davvero
 
-> [!note] Teme
-> `INPUT[textArea:paura]`
+## Teme
+> [!question]- 💡 Cosa teme o evita
 
-> [!note] Storia
-> `INPUT[textArea:storia]`
+## Storia
+> [!question]- 💡 Storia: da dove viene, cosa l'ha formato
 
-> [!note] Voce
-> `INPUT[textArea:voce]`
+## Voce
+> [!question]- 💡 Come parla: tono, tic, cadenza
 
-> [!note] Oggetto
-> `INPUT[textArea:oggetto]`
+## Oggetto
+> [!question]- 💡 Un oggetto che porta sempre con sé
 
-> [!quote] Frase tipica
-> `INPUT[textArea:frase]`
+## Frase tipica
+> [!question]- 💡 Una battuta tipica (da dire al tavolo)
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Segreto (non mostrare ai giocatori)*
+>
 
 
 > [!abstract] Tema natale

@@ -32,14 +32,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Merci trasportate: `INPUT[text:merci]`
 > Pericoli: `INPUT[text:pericoli]`
 
-> [!note] Percorso
-> `INPUT[textArea:percorso]`
+## Percorso
+> [!question]- 💡 Percorso: da dove a dove, attraverso cosa
 
-> [!note] Traffico
-> `INPUT[textArea:traffico]`
+## Traffico
+> [!question]- 💡 Traffico: chi la usa, cosa vi passa, quanto vale
 
-> [!note] Rischi
-> `INPUT[textArea:rischi]`
+## Rischi
+> [!question]- 💡 Rischi: chi la minaccia, cosa succede se si chiude
 
 
 --- 🎲 Al tavolo

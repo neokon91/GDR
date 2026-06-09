@@ -39,17 +39,17 @@
 > [!abstract] Scheda
 > Vitalità: `INPUT[vitalita][:vitalita]`
 
-> [!note] Parlanti
-> `INPUT[textArea:chi_parla]`
+## Parlanti
+> [!question]- 💡 Chi la parla
 
-> [!note] Suono
-> `INPUT[textArea:suono]`
+## Suono
+> [!question]- 💡 Come suona
 
-> [!note] Scrittura
-> `INPUT[textArea:scrittura]`
+## Scrittura
+> [!question]- 💡 Sistema di scrittura / alfabeto
 
-> [!note] Lessico
-> `INPUT[textArea:lessico]`
+## Lessico
+> [!question]- 💡 Parole/frasi chiave usabili al tavolo
 
 
 --- 🎲 Al tavolo

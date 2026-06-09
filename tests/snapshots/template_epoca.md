@@ -40,20 +40,21 @@
 > Inizio: `INPUT[text:inizio]`
 > Fine: `INPUT[text:fine]`
 
-> [!note] Panorama
-> `INPUT[textArea:panorama]`
+## Panorama
+> [!question]- 💡 Panorama dell'epoca (com'era il mondo)
 
-> [!note] Principi dominanti
-> `INPUT[textArea:principi]`
+## Principi dominanti
+> [!question]- 💡 Principi dominanti (leggi, divinità, forze)
 
-> [!note] Sviluppi
-> `INPUT[textArea:sviluppi]`
+## Sviluppi
+> [!question]- 💡 Sviluppi narrativi (cosa è cambiato)
 
-> [!note] Eredità
-> `INPUT[textArea:eredita]`
+## Eredità
+> [!question]- 💡 Tracce nel presente (cosa ne resta oggi)
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Verità nascosta dell'epoca*
+>
 
 
 --- 🎲 Al tavolo

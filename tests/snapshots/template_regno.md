@@ -42,23 +42,24 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Popolazione: `INPUT[text(placeholder(es. 5.000 o «poche centinaia»)):popolazione]`
 > Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
 
-> [!note] Storia
-> `INPUT[textArea:storia_regno]`
+## Storia
+> [!question]- 💡 Storia: fondazione, ascesa, crisi
 
-> [!note] Società
-> `INPUT[textArea:societa]`
+## Società
+> [!question]- 💡 Società: popolo, classi, vita quotidiana
 
-> [!note] Economia
-> `INPUT[textArea:economia]`
+## Economia
+> [!question]- 💡 Economia e risorse: di cosa vive
 
-> [!note] Forza
-> `INPUT[textArea:forza]`
+## Forza
+> [!question]- 💡 Forza: esercito, magia, alleanze
 
-> [!note] Tensione
-> `INPUT[textArea:tensione]`
+## Tensione
+> [!question]- 💡 Tensione presente (cosa minaccia il regno)
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Il segreto del trono*
+>
 
 
 --- 🎲 Al tavolo

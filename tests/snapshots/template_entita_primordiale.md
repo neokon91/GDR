@@ -32,20 +32,21 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Stato cosmico: `INPUT[stato_cosmico][:stato_cosmico]`
 > Allineamento: `INPUT[allineamento][:allineamento]`
 
-> [!note] Ruolo cosmico
-> `INPUT[textArea:ruolo_cosmico]`
+## Ruolo cosmico
+> [!question]- 💡 Ruolo cosmico: la sua funzione nell'ordine (o disordine) del cosmo
 
-> [!note] Volontà
-> `INPUT[textArea:volonta]`
+## Volontà
+> [!question]- 💡 Volontà: cosa vuole, cosa muove la sua azione
 
-> [!note] Eredità
-> `INPUT[textArea:eredita]`
+## Eredità
+> [!question]- 💡 Eredità: cosa ha lasciato (divinità, stirpi, luoghi, leggi)
 
-> [!note] Manifestazioni
-> `INPUT[textArea:manifestazioni]`
+## Manifestazioni
+> [!question]- 💡 Manifestazioni: segni del suo risveglio o della sua presenza
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Il vero nome o la verità sigillata su di essa*
+>
 
 
 --- 🎲 Al tavolo

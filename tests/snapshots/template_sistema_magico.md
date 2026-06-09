@@ -30,26 +30,27 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Fonte del potere: `INPUT[fonte_potere][:fonte_potere]`
 
-> [!note] Fonte
-> `INPUT[textArea:fonte]`
+## Fonte
+> [!question]- 💡 Fonte: da dove viene il potere
 
-> [!note] Metodo
-> `INPUT[textArea:metodo]`
+## Metodo
+> [!question]- 💡 Metodo: come si pratica (parole, gesti, sangue, patti)
 
-> [!note] Dottrina
-> `INPUT[textArea:dottrina]`
+## Dottrina
+> [!question]- 💡 Dottrina: la visione del mondo, l'etica o la filosofia che la magia incarna
 
-> [!note] Costo
-> `INPUT[textArea:costo]`
+## Costo
+> [!question]- 💡 Costo e limiti: cosa esige da chi la usa
 
-> [!note] Rischi
-> `INPUT[textArea:rischi]`
+## Rischi
+> [!question]- 💡 Rischi: cosa va storto, corruzione, ricaduta
 
-> [!note] Manifestazioni
-> `INPUT[textArea:manifestazioni]`
+## Manifestazioni
+> [!question]- 💡 Manifestazioni: come si riconosce nel mondo
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *La verità nascosta sulla sua origine o sul suo prezzo*
+>
 
 
 --- 🎲 Al tavolo

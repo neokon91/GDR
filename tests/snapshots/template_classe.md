@@ -41,14 +41,14 @@
 
 --- 📈 Progressione
 
-> [!note] Concept
-> `INPUT[textArea:descrizione]`
+## Concept
+> [!question]- 💡 Concept della classe
 
-> [!note] Equipaggiamento
-> `INPUT[textArea:equipaggiamento]`
+## Equipaggiamento
+> [!question]- 💡 Equipaggiamento iniziale (es. A: ...; oppure B: ...)
 
-> [!note] Progressione
-> `INPUT[textArea:progressione]`
+## Progressione
+> [!question]- 💡 Privilegi salienti per livello
 
 
 > [!example]- Tabella dei livelli

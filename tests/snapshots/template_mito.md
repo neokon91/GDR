@@ -29,20 +29,21 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 
-> [!note] Narrazione
-> `INPUT[textArea:narrazione]`
+## Narrazione
+> [!question]- 💡 La narrazione (il racconto come si tramanda)
 
-> [!note] Nucleo simbolico
-> `INPUT[textArea:nucleo]`
+## Nucleo simbolico
+> [!question]- 💡 Nucleo simbolico: cosa significa davvero
 
-> [!note] Interpretazioni
-> `INPUT[textArea:interpretazioni]`
+## Interpretazioni
+> [!question]- 💡 Interpretazioni: ortodossa, eretica, esoterica
 
-> [!note] Nel presente
-> `INPUT[textArea:presente]`
+## Nel presente
+> [!question]- 💡 Funzione nel presente: riti, simboli, ganci vivi
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Cosa nasconde o distorce il mito (la verità vera)*
+>
 
 
 --- 🎲 Al tavolo

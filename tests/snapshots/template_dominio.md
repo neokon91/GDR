@@ -36,17 +36,17 @@
 --- 📖 Lore
 
 
-> [!note] Natura
-> `INPUT[textArea:natura]`
+## Natura
+> [!question]- 💡 Natura: cosa governa, di cosa è la sfera
 
-> [!note] Dinamica
-> `INPUT[textArea:dinamica]`
+## Dinamica
+> [!question]- 💡 Dinamica: come opera, cosa mette in moto nel cosmo
 
-> [!note] Tensione
-> `INPUT[textArea:tensione]`
+## Tensione
+> [!question]- 💡 Tensione: con quali domini confligge o si bilancia
 
-> [!note] Manifestazioni
-> `INPUT[textArea:manifestazioni]`
+## Manifestazioni
+> [!question]- 💡 Manifestazioni: segni del dominio nel mondo mortale
 
 
 --- 🎲 Al tavolo

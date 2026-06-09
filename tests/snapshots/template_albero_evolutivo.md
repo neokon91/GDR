@@ -27,11 +27,11 @@
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
 
-> [!note] Origine
-> `INPUT[textArea:origine]`
+## Origine
+> [!question]- 💡 Origine: da dove nasce questa progressione, chi la custodisce
 
-> [!note] Accesso e avanzamento
-> `INPUT[textArea:accesso]`
+## Accesso e avanzamento
+> [!question]- 💡 Accesso e avanzamento: come si entra, prove e costi per salire di grado
 
 
 --- 🎲 Al tavolo

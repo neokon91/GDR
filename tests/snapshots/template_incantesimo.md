@@ -41,11 +41,11 @@
 
 --- ✨ Effetto
 
-> [!note] Effetto
-> `INPUT[textArea:effetto]`
+## Effetto
+> [!question]- 💡 Effetto dell'incantesimo
 
-> [!note] Ai livelli superiori
-> `INPUT[textArea:a_livello_superiore]`
+## Ai livelli superiori
+> [!question]- 💡 Ai livelli superiori
 
 
 --- 🔗 Collegamenti

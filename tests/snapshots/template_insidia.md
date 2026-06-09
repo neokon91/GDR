@@ -44,14 +44,14 @@
 
 --- 🎬 Scena
 
-> [!note] Innesco
-> `INPUT[textArea:innesco]`
+## Innesco
+> [!question]- 💡 Innesco: cosa la attiva
 
-> [!note] Effetto
-> `INPUT[textArea:effetto]`
+## Effetto
+> [!question]- 💡 Effetto: cosa succede (TxC/CD + danno)
 
-> [!note] Contromisure
-> `INPUT[textArea:contromisure]`
+## Contromisure
+> [!question]- 💡 Contromisure: individuare / disinnescare
 
 
 > [!tip]- Tiri

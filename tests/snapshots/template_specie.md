@@ -57,8 +57,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
-> [!note] Tratti
-> `INPUT[textArea:tratti]`
+## Tratti
+> [!question]- 💡 Tratti di specie (scrivi "scurovisione" se la concede)
 
 
 --- 📊 Carattere

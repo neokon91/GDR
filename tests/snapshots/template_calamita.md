@@ -30,14 +30,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Gravità: `INPUT[gravita][:gravita]`
 
-> [!note] Cosa accade
-> `INPUT[textArea:cosa_accade]`
+## Cosa accade
+> [!question]- 💡 Cosa accade, e a chi
 
-> [!note] Avanzata
-> `INPUT[textArea:avanzata]`
+## Avanzata
+> [!question]- 💡 Come avanza se nessuno interviene (la posta del clock)
 
-> [!note] Come finisce
-> `INPUT[textArea:fine]`
+## Come finisce
+> [!question]- 💡 Cosa la ferma o la spegne
 
 
 --- 🎲 Al tavolo

@@ -33,23 +33,24 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
 
-> [!note] Dottrina
-> `INPUT[textArea:dottrina]`
+## Dottrina
+> [!question]- 💡 Dottrina: cosa insegna, cosa promette
 
-> [!note] Riti
-> `INPUT[textArea:riti]`
+## Riti
+> [!question]- 💡 Riti e pratiche: come si onora il sacro
 
-> [!note] Gerarchia
-> `INPUT[textArea:gerarchia]`
+## Gerarchia
+> [!question]- 💡 Clero e gerarchia: chi comanda, come si entra
 
-> [!note] Tabù
-> `INPUT[textArea:tabu]`
+## Tabù
+> [!question]- 💡 Tabù e peccati: cosa è proibito
 
-> [!note] Nel presente
-> `INPUT[textArea:presente]`
+## Nel presente
+> [!question]- 💡 Stato attuale: diffusione, alleati, nemici
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Il segreto del culto (eresia, verità occulta)*
+>
 
 
 --- 🎲 Al tavolo

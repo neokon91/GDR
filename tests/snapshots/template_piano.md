@@ -30,20 +30,20 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Accessibilità: `INPUT[accessibilita][:accessibilita]`
 
-> [!note] Natura
-> `INPUT[textArea:natura]`
+## Natura
+> [!question]- 💡 Natura: cos'è, che aspetto e sostanza ha
 
-> [!note] Funzione cosmica
-> `INPUT[textArea:funzione_cosmica]`
+## Funzione cosmica
+> [!question]- 💡 Funzione cosmica: che ruolo svolge nel multiverso
 
-> [!note] Caratteristiche
-> `INPUT[textArea:caratteristiche]`
+## Caratteristiche
+> [!question]- 💡 Caratteristiche: leggi fisiche, ambiente, pericoli
 
-> [!note] Accesso
-> `INPUT[textArea:accesso]`
+## Accesso
+> [!question]- 💡 Accesso: come si entra e si esce (soglie, riti, condizioni)
 
-> [!note] Influenza
-> `INPUT[textArea:influenza]`
+## Influenza
+> [!question]- 💡 Influenza: come tocca il mondo materiale
 
 
 --- 🎲 Al tavolo

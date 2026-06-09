@@ -54,23 +54,23 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Simbolo: `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]`
 > Festività & ricorrenze: `INPUT[testo_area][:festivita]`
 
-> [!note] Valori
-> `INPUT[textArea:valori]`
+## Valori
+> [!question]- 💡 Valori fondanti
 
-> [!note] Vita
-> `INPUT[textArea:vita]`
+## Vita
+> [!question]- 💡 Vita quotidiana
 
-> [!note] Riti
-> `INPUT[textArea:riti]`
+## Riti
+> [!question]- 💡 Riti di passaggio, feste
 
-> [!note] Tabù
-> `INPUT[textArea:tabu]`
+## Tabù
+> [!question]- 💡 Tabù: cosa è proibito
 
-> [!note] Estetica
-> `INPUT[textArea:estetica]`
+## Estetica
+> [!question]- 💡 Estetica: arte, moda, architettura
 
-> [!note] Tensione
-> `INPUT[textArea:tensione]`
+## Tensione
+> [!question]- 💡 Attrito con altre culture
 
 
 --- 🎲 Al tavolo

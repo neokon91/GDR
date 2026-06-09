@@ -33,14 +33,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderFiloAvventura");
 ```
-> [!note] Situazione
-> `INPUT[textArea:situazione]`
+## Situazione
+> [!question]- 💡 Situazione: cosa trovano i PG quando arrivano
 
-> [!note] Complicazione
-> `INPUT[textArea:complicazione]`
+## Complicazione
+> [!question]- 💡 Complicazione: cosa la rende difficile o interessante
 
-> [!note] Uscite
-> `INPUT[textArea:uscite]`
+## Uscite
+> [!question]- 💡 Uscite: come e dove si può proseguire
 
 
 --- 🎲 Al tavolo

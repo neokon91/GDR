@@ -106,23 +106,24 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
-> [!note] Ecologia
-> `INPUT[textArea:ecologia]`
+## Ecologia
+> [!question]- 💡 Ecologia: habitat, ruolo nell'ecosistema, dieta
 
-> [!note] Aspetto
-> `INPUT[textArea:aspetto]`
+## Aspetto
+> [!question]- 💡 Aspetto: taglia, corporatura, tratti distintivi, segni di pericolo
 
-> [!note] Comportamento
-> `INPUT[textArea:comportamento]`
+## Comportamento
+> [!question]- 💡 Comportamento: indole, abitudini, come caccia o si difende
 
-> [!note] Tattiche
-> `INPUT[textArea:tattiche]`
+## Tattiche
+> [!question]- 💡 Tattiche in combattimento (apertura, asso nella manica, fuga)
 
-> [!note] Mito e reputazione
-> `INPUT[textArea:mito]`
+## Mito e reputazione
+> [!question]- 💡 Mito e reputazione (leggende, come la vedono le civilta')
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Segreto o debolezza nascosta*
+>
 
 
 --- 📊 Carattere

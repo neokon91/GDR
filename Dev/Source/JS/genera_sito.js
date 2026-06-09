@@ -236,18 +236,13 @@ function pageModel(core, fm, body, name, link, image, revealLevel = 0) {
     }
   }
 
+  // Sezioni narrative: la prosa vive nel CORPO della nota (sezioni ## + i callout
+  // [!rivela|tier] gated), letta da stripBody — NON più dai campi creation.body del
+  // frontmatter. Gemello di build_site.page_model (il test di parità impone l'uguaglianza).
   const sections = [];
   if (fm.player_safe) sections.push({ heading: "", html: mdToHtml(String(fm.player_safe), link, img) });
-  for (const entry of (((core.creation || {})[cat] || {}).body || [])) {
-    if (entry.callout) continue;  // es. segreto → DM-only
-    const riv = entry.rivelazione;
-    if (riv && (REVEAL_RANK[String(riv).trim().toLowerCase()] || 0) > revealLevel) continue;
-    const val = fm[entry.field];
-    if (entry.heading && val) sections.push({ heading: entry.heading, html: mdToHtml(String(val), link, img) });
-  }
-
   const bodyHtml = mdToHtml(stripBody(body, revealLevel), link, img);
-  if (bodyHtml) sections.unshift({ heading: "", html: bodyHtml });
+  if (bodyHtml) sections.push({ heading: "", html: bodyHtml });
 
   const rels = [];
   for (const rel of ((core.relazioni || {})[cat] || [])) {

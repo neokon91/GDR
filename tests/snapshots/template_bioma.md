@@ -33,20 +33,21 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Clima: `INPUT[clima][:clima]`
 
-> [!note] Geografia
-> `INPUT[textArea:geografia]`
+## Geografia
+> [!question]- 💡 Geografia: com'è fatto, cosa lo distingue
 
-> [!note] Flora e fauna
-> `INPUT[textArea:flora_fauna]`
+## Flora e fauna
+> [!question]- 💡 Flora e fauna caratteristiche
 
-> [!note] Fenomeni
-> `INPUT[textArea:fenomeni]`
+## Fenomeni
+> [!question]- 💡 Fenomeni: meteo, magia ambientale, pericoli naturali
 
-> [!note] Risorse
-> `INPUT[textArea:risorse]`
+## Risorse
+> [!question]- 💡 Risorse: cosa offre (e cosa attira)
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Cosa nasconde il bioma*
+>
 
 
 --- 🎲 Al tavolo

@@ -34,14 +34,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Consistenza: `INPUT[consistenza][:consistenza]`
 > Morale: `INPUT[morale][:morale]`
 
-> [!note] Composizione
-> `INPUT[textArea:composizione]`
+## Composizione
+> [!question]- 💡 Composizione: fanteria, cavalleria, arcieri, bestie, macchine
 
-> [!note] Tattica
-> `INPUT[textArea:tattica]`
+## Tattica
+> [!question]- 💡 Tattica e punti di forza / debolezza
 
-> [!note] Obiettivo
-> `INPUT[textArea:obiettivo_militare]`
+## Obiettivo
+> [!question]- 💡 Obiettivo: cosa marcia a fare (la posta del clock)
 
 
 --- 🎲 Al tavolo

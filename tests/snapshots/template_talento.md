@@ -34,8 +34,8 @@
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
-> [!note] Benefici
-> `INPUT[textArea:benefici]`
+## Benefici
+> [!question]- 💡 Benefici del talento
 
 
 --- 🔗 Collegamenti

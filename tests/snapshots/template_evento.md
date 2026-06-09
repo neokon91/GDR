@@ -60,17 +60,17 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
-> [!note] Cause
-> `INPUT[textArea:cause]`
+## Cause
+> [!question]- 💡 Cause: perché è successo
 
-> [!note] Cosa accade
-> `INPUT[textArea:cosa]`
+## Cosa accade
+> [!question]- 💡 Cosa accade
 
-> [!note] Conseguenza
-> `INPUT[textArea:conseguenza]`
+## Conseguenza
+> [!question]- 💡 Conseguenza per il presente
 
-> [!note] Eredità
-> `INPUT[textArea:eredita]`
+## Eredità
+> [!question]- 💡 Cosa ne resta oggi (ganci vivi)
 
 
 --- 🎲 Al tavolo

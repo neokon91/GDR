@@ -25,8 +25,8 @@
 
 I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 
-> [!note] Privilegi
-> `INPUT[textArea:privilegi]`
+## Privilegi
+> [!question]- 💡 Privilegi (livelli 3/6/10/14)
 
 
 --- 🔗 Collegamenti

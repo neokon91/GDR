@@ -39,11 +39,12 @@
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
-> [!note] Conflitto centrale
-> `INPUT[textArea:conflitto]`
+## Conflitto centrale
+> [!question]- 💡 Conflitto centrale della campagna
 
-> [!segreto]- Verità nascosta
-> `INPUT[textArea:verita_nascosta]`
+> [!rivela|segreto]- Verità nascosta
+> 💡 *La verità nascosta del mondo*
+>
 
 
 --- 🎲 Al tavolo

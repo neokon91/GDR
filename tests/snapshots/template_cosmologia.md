@@ -39,26 +39,27 @@
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
-> [!note] Natura
-> `INPUT[textArea:natura]`
+## Natura
+> [!question]- 💡 Cos'e' / come si manifesta
 
-> [!note] Principio
-> `INPUT[textArea:principio]`
+## Principio
+> [!question]- 💡 Cosa governa o definisce (il principio attivo)
 
-> [!note] Influenza
-> `INPUT[textArea:influenza]`
+## Influenza
+> [!question]- 💡 Come tocca il mondo mortale (magia, destino, vita)
 
-> [!note] Manifestazioni
-> `INPUT[textArea:manifestazioni]`
+## Manifestazioni
+> [!question]- 💡 Come si vede nel mondo (segni, fenomeni, presagi)
 
-> [!note] Abitanti
-> `INPUT[textArea:abitanti]`
+## Abitanti
+> [!question]- 💡 Chi o cosa la abita/incarna (per piani e forze)
 
-> [!note] Accesso
-> `INPUT[textArea:accesso]`
+## Accesso
+> [!question]- 💡 Come ci si arriva o vi si attinge (per piani, riti, soglie)
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Verita' nascosta*
+>
 
 
 --- 🎲 Al tavolo

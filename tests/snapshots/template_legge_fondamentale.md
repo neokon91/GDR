@@ -37,17 +37,18 @@
 > [!abstract] Scheda
 > Poli: `INPUT[text:poli]`
 
-> [!note] Principio
-> `INPUT[textArea:principio]`
+## Principio
+> [!question]- 💡 Principio: cosa regola, come tiene insieme la realtà
 
-> [!note] Quando si spezza
-> `INPUT[textArea:rottura]`
+## Quando si spezza
+> [!question]- 💡 Rottura: cosa accade se la legge si spezza o si sbilancia
 
-> [!note] Manifestazioni
-> `INPUT[textArea:manifestazioni]`
+## Manifestazioni
+> [!question]- 💡 Manifestazioni: come si percepisce nel mondo (fenomeni, presagi)
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *La verità che pochi conoscono su questa legge*
+>
 
 
 --- 🎲 Al tavolo

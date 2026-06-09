@@ -344,25 +344,16 @@ def page_model(core: dict[str, Any], fm: dict[str, Any], body: str,
             text = ", ".join(str(x) for x in val) if isinstance(val, list) else str(val)
             facts.append({"label": _esc(label), "value": _esc(text)})
 
-    # Sezioni narrative: i campi creation.body con `heading` (NO `callout: segreto`).
+    # Sezioni narrative: la prosa ora vive nel CORPO della nota (sezioni ## + i callout
+    # [!rivela|tier] gated per-sezione), letta da strip_body — NON più dai campi
+    # creation.body del frontmatter (il frontmatter tiene solo lo strutturato). Il
+    # player_safe (riassunto giocatore) resta un campo e apre le sezioni.
     sections: list[dict[str, str]] = []
     if fm.get("player_safe"):
         sections.append({"heading": "", "html": markdown_to_html(str(fm["player_safe"]), link, img)})
-    for entry in ((core.get("creation", {}).get(cat) or {}).get("body") or []):
-        if entry.get("callout"):  # es. segreto → DM-only
-            continue
-        riv = entry.get("rivelazione")  # campo a rivelazione progressiva (per-sezione)
-        if riv and REVEAL_RANK.get(str(riv).strip().lower(), 0) > reveal_level:
-            continue
-        fid = entry.get("field")
-        val = fm.get(fid)
-        if entry.get("heading") and val:
-            sections.append({"heading": entry["heading"], "html": markdown_to_html(str(val), link, img)})
-
-    # Prosa dal corpo (note-esempio): aggiunta come sezione introduttiva.
     body_html = markdown_to_html(strip_body(body, reveal_level), link, img)
     if body_html:
-        sections.insert(0, {"heading": "", "html": body_html})
+        sections.append({"heading": "", "html": body_html})
 
     # Relazioni player-safe (core.relazioni[categoria]) → link navigabili.
     rels: list[dict[str, Any]] = []

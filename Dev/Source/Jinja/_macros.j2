@@ -36,12 +36,23 @@
 
 {# Rende i campi 'body' del wizard (core.creation[categoria]) come callout
    editabili (pre-compilati dal wizard nel frontmatter). #}
+{# Corpo-prosa come SEZIONI ## native (non textArea su frontmatter): si scrive a corpo
+   nota, con uno spunto pieghexvole come hint. I body `callout: segreto` diventano un
+   callout `[!rivela|segreto]` (il sito li gatekeepa per tier). Il sito legge la prosa dal
+   corpo via build_site.strip_body — NON più dal frontmatter. #}
 {% macro wizard_body(category) -%}
 {% set wiz = core.get('creation', {}).get(category, {}) %}
 {% for q in wiz.get('body', []) %}
-> [!{{ q.get('callout', 'note') }}]{{ '-' if q.get('fold') else '' }} {{ q.get('title') or q.get('heading') or q.field }}
-> `INPUT[textArea:{{ q.field }}]`
+{% if q.get('callout') == 'segreto' -%}
+> [!rivela|segreto]{{ '-' if q.get('fold') else '' }} {{ q.get('title') or q.get('heading') or q.field }}
+> 💡 *{{ q.prompt }}*
+>
 
+{% else -%}
+## {{ q.get('title') or q.get('heading') or q.field }}
+> [!question]- 💡 {{ q.prompt }}
+
+{% endif %}
 {% endfor %}
 {%- endmacro %}
 

@@ -63,26 +63,27 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`
 
-> [!note] Obiettivo
-> `INPUT[textArea:obiettivo]`
+## Obiettivo
+> [!question]- 💡 Cosa vuole ottenere la fazione
 
-> [!note] Metodi
-> `INPUT[textArea:metodo]`
+## Metodi
+> [!question]- 💡 Come opera (metodi, stile)
 
-> [!note] Gerarchia
-> `INPUT[textArea:gerarchia]`
+## Gerarchia
+> [!question]- 💡 Ruoli, capi, come si entra
 
-> [!note] Influenza
-> `INPUT[textArea:influenza]`
+## Influenza
+> [!question]- 💡 Impatto su civiltà, culti e riti associati
 
-> [!note] Nel presente
-> `INPUT[textArea:presente]`
+## Nel presente
+> [!question]- 💡 Stato attuale, tracce nel mondo, segreti rivelati
 
-> [!note] Tensione
-> `INPUT[textArea:tensione]`
+## Tensione
+> [!question]- 💡 Conflitto o rivalita'
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *Segreto della fazione*
+>
 
 
 --- 🎲 Al tavolo

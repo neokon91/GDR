@@ -30,20 +30,21 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Stato d'avveramento: `INPUT[stato_profezia][:stato_profezia]`
 
-> [!note] Testo
-> `INPUT[textArea:testo]`
+## Testo
+> [!question]- 💡 Il testo della profezia (le parole, anche criptiche)
 
-> [!note] Interpretazioni
-> `INPUT[textArea:interpretazioni]`
+## Interpretazioni
+> [!question]- 💡 Interpretazioni possibili (cosa si crede significhi)
 
-> [!note] Condizioni
-> `INPUT[textArea:condizioni]`
+## Condizioni
+> [!question]- 💡 Condizioni di avveramento (cosa deve accadere)
 
-> [!note] Segni
-> `INPUT[textArea:segni]`
+## Segni
+> [!question]- 💡 Segni e manifestazioni: come capire che si avvera
 
-> [!segreto]- Segreto
-> `INPUT[textArea:segreto]`
+> [!rivela|segreto]- Segreto
+> 💡 *La verità sull'avveramento (cosa il DM sa davvero)*
+>
 
 
 --- 🎲 Al tavolo

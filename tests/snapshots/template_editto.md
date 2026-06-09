@@ -32,14 +32,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Emanato da: `INPUT[legame][:emanato_da]`
 > Pena / sanzione: `INPUT[pena][:pena]`
 
-> [!note] Contenuto
-> `INPUT[textArea:contenuto]`
+## Contenuto
+> [!question]- 💡 Cosa stabilisce, nei fatti
 
-> [!note] Movente
-> `INPUT[textArea:motivo]`
+## Movente
+> [!question]- 💡 Perché è stata emanata (chi ci guadagna)
 
-> [!note] Applicazione
-> `INPUT[textArea:applicazione]`
+## Applicazione
+> [!question]- 💡 Come viene fatta rispettare — e chi la aggira
 
 
 --- 🎲 Al tavolo

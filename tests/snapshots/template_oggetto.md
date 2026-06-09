@@ -43,14 +43,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
-> [!note] Aspetto
-> `INPUT[textArea:descrizione_oggetto]`
+## Aspetto
+> [!question]- 💡 Aspetto e fattura
 
-> [!note] Effetto
-> `INPUT[textArea:effetto]`
+## Effetto
+> [!question]- 💡 Cosa fa: regole/effetto al tavolo
 
-> [!note] Provenienza
-> `INPUT[textArea:provenienza]`
+## Provenienza
+> [!question]- 💡 Costo, come si ottiene
 
 
 --- 📊 Carattere
