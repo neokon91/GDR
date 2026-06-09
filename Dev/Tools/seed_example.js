@@ -182,7 +182,34 @@ function main() {
     connessioni: [], sessioni: [], tags: ["gdr/bozza"],
   }) + modelBody("Incontro.md").replace(/```encounter[\s\S]*?```/, encBlock));
 
-  console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (tutti con lore) + 2 mappe (regionale coi pin + città di Aster) + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6) + 1 PG collegato (Korbin) + 1 incontro alla Ziggurat (budget 2024).`);
+  // 7) Nota-AHA «Inizia da qui» — la guida-lampo che ADDITA il differenziatore sull'esempio
+  //    (lore → Fronti che si auto-ordinano → tavolo, in 3 sguardi su entità reali). Tua-DM
+  //    (visibilita: dm), a root per la scoperta; senza `categoria` per non inquinare i cruscotti.
+  //    È il momento-aha UX-1, perso nel rebuild della demo e qui restituito; ogni [[link]] punta
+  //    a una nota che QUESTO seed crea (Astaria/Corsari/Aster/Veglia/Ziggurat/Korbin/incontro/Fronti).
+  const ahaBody = `
+# 👋 Inizia da qui — Astaria in 3 sguardi
+
+> [!info] Di sola lettura · tua-DM
+> Guida-lampo all'esempio **Astaria**: *vedi* cosa fa il vault prima del foglio bianco. Fuori dal sito giocatori (*visibilita: dm*). Quando cancelli l'esempio per il tuo mondo, **cancella anche questa nota**.
+
+## 1 · La lore — *cosa scrivi*
+Apri **[[Astaria]]**: i **[[Corsari dell'Ombra]]** trafficano reliquie dal porto di **[[Aster]]**; **[[La Veglia dei Sepolti]]** veglia (o risveglia?) la **[[Ziggurat Oscura]]**. Worldbuilding come su qualsiasi wiki.
+
+## 2 · La superficie giocabile — *cosa si calcola da sé (il cuore)*
+Ma quella lore ha due campi in più — **Pressione** e **Prossima mossa** — e così Astaria, i Corsari e la Veglia non sono voci di wiki: sono **Fronti**, minacce vive con un *clock*. Apri **[[Fronti]]**: un **cruscotto che si ordina da solo** per imminenza, col *Risveglio* (4/6, 🔴 Crisi) in cima. È il differenziatore: la tua lore **compila in un pannello di regia** che si aggiorna mentre giochi — nessun competitor lo fa.
+
+## 3 · Il tavolo — *lo stesso vault*
+Lo stesso mondo regge la sessione: **[[Korbin Salmastro]]** è un PG 5.5e collegato ad Astaria e ai Corsari; **[[Guardiani della Terza Porta]]** è un incontro alla Ziggurat, budget 2024 e creature SRD pronte da tirare. Worldbuilding → tavolo, una sola fonte di verità.
+
+> [!tip] E adesso?
+> - **Esplora** Astaria: ogni nota ha la sua **ℹ️ Guida** e i suoi **💡 Spunti**.
+> - **Fai il tuo mondo**: **[[Crea il tuo mondo]]** ti accompagna dal foglio bianco in 5 tappe.
+> - Per il foglio bianco, cancella la cartella **Mondi/** dell'esempio (e questa nota).
+`;
+  write("Inizia da qui.md", fm({ visibilita: "dm", tags: ["gdr/guida"] }) + ahaBody);
+
+  console.log(`Mondo-esempio «Astaria» creato: ${luoghi.length} luoghi (tutti con lore) + 2 mappe (regionale coi pin + città di Aster) + 2 fazioni in conflitto (Corsari ⚔ Veglia dei Sepolti) + Fronte del Risveglio acceso (clock 4/6) + 1 PG collegato (Korbin) + 1 incontro alla Ziggurat (budget 2024) + nota-guida «Inizia da qui».`);
 }
 
 // Frontmatter del PG-esempio: la build del wizard «Crea PG», con in più i CAMPI DI
