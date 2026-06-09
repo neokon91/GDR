@@ -97,7 +97,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!abstract] Scheda
 > Taglia: `INPUT[taglia][:taglia]`
 > Grado di sfida: `INPUT[gs][:gs]`
-> Ruolo ecologico: `INPUT[text:ruolo_ecologico]`
+> Ruolo ecologico: `INPUT[ruolo_ecologico][:ruolo_ecologico]`
 > Dieta: `INPUT[dieta][:dieta]`
 
 > [!note]- Aspetto e indole

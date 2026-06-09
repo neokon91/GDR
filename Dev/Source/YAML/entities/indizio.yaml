@@ -23,7 +23,7 @@ subtypes:
 - { nome: documento,     descrizione: "Carta, lettera, registro, mappa: informazione scritta.",                 campi: [] }
 - { nome: voce,          descrizione: "Diceria/pettegolezzo: incerto, da verificare, forse depistante.",         campi: [] }
 fields:
-  affidabilita: { label: Affidabilità, widget: text }
+  affidabilita: { label: Affidabilità, widget: affidabilita }
 scheda: [affidabilita]
 relazioni:
 - { field: rivela, label: Rivela (conclusione/scena), category: scena,       multi: true, reciprocal: indizi }

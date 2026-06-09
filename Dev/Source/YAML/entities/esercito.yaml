@@ -22,7 +22,7 @@ subtypes:
 - { nome: guardia,           descrizione: "Corpo scelto di protezione: guardia cittadina, pretoriana o personale di un signore.",             campi: [consistenza, dottrina, morale], clock: true, evoluzione: false }
 fields:
   consistenza: { label: Consistenza,     widget: consistenza }
-  dottrina:    { label: Dottrina / arma, widget: text }
+  dottrina:    { label: Dottrina / arma, widget: dottrina }
   ingaggio:    { label: Ingaggio / paga,  widget: text }
   navi:        { label: Navi,             widget: text }
   morale:      { label: Morale,           widget: morale }

@@ -135,6 +135,12 @@ metabind_inputs:
   # Profondità città: ricchezza e sicurezza di un insediamento a colpo d'occhio.
   prosperita: INPUT[inlineSelect(option(misera), option(modesta), option(agiata), option(ricca), option(opulenta))]
   pericolosita: INPUT[inlineSelect(option(sicura), option(sorvegliata), option(malfamata), option(pericolosa), option(senza legge))]
+  # Audit widget #2 — campi-text con valore VINCOLATO (tassonomia/scala) → select che GUIDA l'input.
+  ruolo_ecologico: INPUT[inlineSelect(option(predatore), option(preda), option(spazzino), option(erbivoro), option(onnivoro), option(decompositore), option(parassita), option(simbionte))]
+  affidabilita: INPUT[inlineSelect(option(solida), option(attendibile), option(incerta), option(dubbia), option(depistaggio))]
+  pena: INPUT[inlineSelect(option(ammenda), option(fustigazione), option(gogna), option(prigione), option(esilio), option(marchio), option(lavori forzati), option(morte))]
+  ambito: INPUT[inlineSelect(option(personale), option(locale), option(cittadino), option(provinciale), option(nazionale), option(universale))]
+  dottrina: INPUT[inlineSelect(option(fanteria), option(cavalleria), option(arcieri), option(marina), option(assedio), option(magica), option(mista))]
   # Forma di successione (sottotipi di regno).
   successione: INPUT[inlineSelect(option(ereditaria), option(elettiva), option(per conquista), option(divina), option(nessuna))]
   # Esercito (consistenza = scala della forza; morale = tenuta in battaglia).

@@ -36,7 +36,7 @@ subtypes:
 # condiviso con specie e resta in system.yaml). Pensati per query future
 # (dieta/ruolo come filtri nel bestiario Bases/Dataview).
 fields:
-  ruolo_ecologico: { label: Ruolo ecologico, widget: text }
+  ruolo_ecologico: { label: Ruolo ecologico, widget: ruolo_ecologico }
   dieta:           { label: Dieta,           widget: dieta }
   gs:              { label: Grado di sfida,   widget: gs }
 scheda: [taglia, gs, ruolo_ecologico, dieta]

@@ -20,8 +20,8 @@ subtypes:
 - { nome: trattato,   descrizione: "Patto fra poteri: pace, alleanza, confini, commercio; vincola i firmatari.",          campi: [firmatari, ambito], clock: false, evoluzione: false }
 fields:
   emanato_da:   { label: Emanato da,    widget: legame }
-  pena:         { label: Pena / sanzione, widget: text }
-  ambito:       { label: Ambito / giurisdizione, widget: text }
+  pena:         { label: Pena / sanzione, widget: pena }
+  ambito:       { label: Ambito / giurisdizione, widget: ambito }
   beneficiario: { label: Beneficiario,  widget: legame }
   firmatari:    { label: Firmatari,     widget: text }
 scheda: [emanato_da, pena]

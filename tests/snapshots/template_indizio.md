@@ -28,7 +28,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
 ```
 > [!abstract] Scheda
-> Affidabilità: `INPUT[text:affidabilita]`
+> Affidabilità: `INPUT[affidabilita][:affidabilita]`
 
 > [!note] Contenuto
 > `INPUT[textArea:contenuto]`

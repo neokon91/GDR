@@ -30,7 +30,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 > [!abstract] Scheda
 > Emanato da: `INPUT[legame][:emanato_da]`
-> Pena / sanzione: `INPUT[text:pena]`
+> Pena / sanzione: `INPUT[pena][:pena]`
 
 > [!note] Contenuto
 > `INPUT[textArea:contenuto]`
