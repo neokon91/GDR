@@ -45,29 +45,26 @@
 
 %%/prosa%%
 
-> [!example]- Tabella dei livelli
-> | Liv | Comp. | Privilegi |
-> |----|----|----|
-> | 1 | | |
-> | 2 | | |
-> | 3 | | |
-> | 4 | | |
-> | 5 | | |
-> | 6 | | |
-> | 7 | | |
-> | 8 | | |
-> | 9 | | |
-> | 10 | | |
-> | 11 | | |
-> | 12 | | |
-> | 13 | | |
-> | 14 | | |
-> | 15 | | |
-> | 16 | | |
-> | 17 | | |
-> | 18 | | |
-> | 19 | | |
-> | 20 | | |
+**Tabella dei livelli** — competenza calcolata; i **privilegi** vengono dal frontmatter `privilegi:`
+(se presente), con gli effetti `concede` **automatizzati** ⚙️ (applicati a creazione/level-up).
+```dataviewjs
+const p = dv.current().privilegi;
+const conc = (c) => {
+  if (!c) return "";
+  const parts = [];
+  if (c.caratteristica) parts.push(Object.entries(c.caratteristica).map(([k, v]) => `+${v} ${k}`).join(", "));
+  if (c.abilita) parts.push("comp. " + [].concat(c.abilita).join("/"));
+  for (const k of ["armi", "armature", "strumenti"]) if (c[k]) parts.push(String(c[k]));
+  return parts.length ? ` ⚙️ *${parts.join("; ")}*` : "";
+};
+const rows = [];
+for (let L = 1; L <= 20; L++) {
+  const feats = Array.isArray(p) ? p.filter((x) => (Number(x?.livello) || 1) === L) : [];
+  const txt = feats.map((f) => `**${f?.nome || ""}**${conc(f?.concede)}`).join(" · ");
+  rows.push([L, "+" + (2 + Math.floor((L - 1) / 4)), txt]);
+}
+dv.table(["Liv", "Comp.", "Privilegi"], rows);
+```
 
 --- 🎓 Sottoclassi
 

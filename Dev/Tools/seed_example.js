@@ -222,6 +222,15 @@ function main() {
   //    [[Corsari dell'Ombra]]. Così la demo mostra il loop completo: worldbuilding →
   //    tavolo. Derivati RAW-2024 (CA 14 = cuoio+DES; PF 10 = d8+COS; TS DES/INT; 6
   //    competenze classe+background senza doppioni). Ritratto VUOTO (aggancio immagine).
+  // 4b) Classe homebrew d'esempio: «Corsaro dell'Ombra» (a tema Costa dell'Ombra). Mostra i
+  //     PRIVILEGI PER LIVELLO con `concede`: «Andatura nell'Ombra» → competenza Furtività,
+  //     «Armi del Corsaro» → competenze in armi. A creazione/level-up il motore li applica
+  //     da solo (la tabella dei livelli nella nota è generata dai `privilegi`).
+  write("Mondi/Classi/Corsaro dell'Ombra.md", CORSARO_FM + fillBody(modelBody("Classe.md"), {
+    Concept: "I corsari che solcano la Costa dell'Ombra: lame veloci, ombre amiche e nessuna lealtà oltre la ciurma. Marziali agili, a metà tra il bucaniere e la lama silenziosa.",
+    Progressione: "Al 1º livello ti muovi non visto e maneggi le armi del mestiere; al 3º la **Lama della Risacca**; al 5º l'**Attacco Extra**. *(La tabella qui sopra è generata dai `privilegi` del frontmatter.)*",
+  }));
+
   write("Mondi/Personaggi/Korbin Salmastro.md", KORBIN_FM + fillBody(modelBody("PG.md"), {
     Ruolo: "Contrabbandiere e galoppino dei **Corsari dell'Ombra**: utile perché non fa domande e conosce ogni vicolo della Città Bassa di Aster.",
     Aspetto: "Magro e nodoso, la pelle cotta dal sale. Una cicatrice gli taglia il sopracciglio sinistro; le mani non stanno mai ferme.",
@@ -284,6 +293,31 @@ Lo stesso mondo regge la sessione: **[[Korbin Salmastro]]** è un PG 5.5e colleg
 // Frontmatter del PG-esempio: la build del wizard «Crea PG», con in più i CAMPI DI
 // COLLEGAMENTO (mondo, fazione) e qualche tratto narrativo per l'infobox. Tenuto come
 // stringa grezza perché contiene `classi:` (array di oggetti) che fm() non serializza.
+// Classe homebrew demo: frontmatter raw (il helper fm() non gestisce liste-di-oggetti come
+// `privilegi`). I `privilegi` per livello con `concede` sono letti dal ponte homebrew→motore.
+const CORSARO_FM = `---
+id: corsaro-dell-ombra
+nome: Corsaro dell'Ombra
+categoria: classe
+tipo: marziale
+mondo: "[[Astaria]]"
+dado_vita: d10
+car_primaria: Destrezza
+ts_competenze: Forza, Destrezza
+tipo_incantatore: nessuno
+competenze_armi: Armi semplici e da guerra
+competenze_armature: Armature leggere e medie; scudi
+abilita_numero: 2
+livello_sottoclasse: 3
+privilegi:
+  - { livello: 1, nome: "Andatura nell'Ombra", concede: { abilita: [Furtività] } }
+  - { livello: 1, nome: "Armi del Corsaro", concede: { armi: "Reti e fioretti" } }
+  - { livello: 3, nome: "Lama della Risacca", descrizione: "Quando schivi un attacco in mischia, una volta per turno puoi rispondere con un attacco di lama leggera." }
+  - { livello: 5, nome: "Attacco Extra", descrizione: "Attacchi due volte, invece di una, quando esegui l'azione di Attacco." }
+stato: bozza
+---
+`;
+
 const KORBIN_FM = `---
 nome: "Korbin Salmastro"
 categoria: personaggio
