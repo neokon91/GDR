@@ -11,7 +11,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   `abilita: [Furtività]` (competenze → `prof_<id>`), `armi`/`armature`/`strumenti` — e il motore lo
   **applica al PG** quando il talento è preso (al level-up), non più solo prosa. Helper condiviso
   `applyConcede` nel ponte homebrew (crea_pg/sali_pg, parity-enforced). Gli effetti non dichiarabili
-  («hai vantaggio quando…») restano prosa. *(Prossimi step: stessa logica per privilegi di classe e tratti di specie.)*
+  («hai vantaggio quando…») restano prosa.
+- **Privilegi di classe homebrew per livello + `concede`**: una classe homebrew dichiara i privilegi
+  per livello (frontmatter `privilegi:` con `{livello, nome, descrizione, concede}`, fuso col legacy
+  `privilegi_l1`); al level-up il motore **mostra** la feature acquisita a quel livello e ne **applica
+  il `concede`** (punteggi/competenze). Prima i privilegi oltre il 1° erano solo prosa non applicata.
 - **Dadi tirabili negli incantesimi/oggetti/talenti SRD**: le espressioni-dado nella prosa
   (danno, cura, scaling — es. «3d8 danni psichici», «i danni aumentano di 1d8») diventano
   **cliccabili in-vault** via Dice Roller (avvolte in `` `dice: …` `` a build-time), come già

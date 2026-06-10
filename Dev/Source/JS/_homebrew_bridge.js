@@ -84,6 +84,7 @@ function classeHomebrew(opt) {
       competenze_strumenti: String(fm.strumento || ""),
       equipaggiamento: parseEquip(fm.equipaggiamento),
       privilegi_l1: String(fm.privilegi_l1 || "").split(/[;\n]/).map((s) => s.trim()).filter(Boolean),
+      privilegi_livello: privilegiPerLivello(fm),
       livello_sottoclasse: Number.parseInt(fm.livello_sottoclasse, 10) || 3,
       incantatore: caster,
       trucchetti_noti: caster ? (tipoInc === "pieno" ? 3 : 2) : 0,
@@ -95,6 +96,19 @@ function classeHomebrew(opt) {
       risorse: Array.isArray(fm.risorse) ? fm.risorse : [],
     };
   }
+  return out;
+}
+
+// Privilegi di classe homebrew per livello: la lista frontmatter `privilegi`
+// ([{livello, nome, descrizione, concede}]) → {N: [{nome, desc, concede}]}, fusa col legacy
+// `privilegi_l1` (stringa → feature di livello 1 senza effetti). Letta da crea_pg (L1) e
+// sali_pg (a ogni livello): mostra la feature e ne applica il `concede`.
+function privilegiPerLivello(fm) {
+  const out = {};
+  const push = (L, nome, desc, concede) => { if (nome) (out[L] = out[L] || []).push({ nome, desc: desc || "", concede: concede || null }); };
+  for (const p of Array.isArray(fm.privilegi) ? fm.privilegi : [])
+    if (p && typeof p === "object") push(Number.parseInt(p.livello, 10) || 1, String(p.nome || "").trim(), String(p.descrizione || p.desc || ""), p.concede);
+  for (const nome of String(fm.privilegi_l1 || "").split(/[;\n]/).map((s) => s.trim()).filter(Boolean)) push(1, nome, "", null);
   return out;
 }
 

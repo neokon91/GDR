@@ -123,6 +123,30 @@ def test_applyconcede_homebrew_effetti(tmp_path):
     assert out["u2"] == {} and out["eff2"] == []  # niente `concede` (SRD/prosa) → inerte
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_privilegi_per_livello(tmp_path):
+    """I privilegi di una CLASSE homebrew si dichiarano per livello (`privilegi:` con
+    `{livello, nome, concede}`) e si fondono col legacy `privilegi_l1`. sali_pg li mostra al
+    livello giusto e ne applica il `concede` (qui verifichiamo il parsing per-livello)."""
+    h = tmp_path / "priv.js"
+    h.write_text(
+        f'const s = require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});\n'
+        'const fm = { privilegi: ['
+        '{livello: 5, nome: "Attacco Extra"},'
+        '{livello: 1, nome: "Furia", concede: {risorsa: {nome: "Ira"}}}'
+        '], privilegi_l1: "Difesa senza armatura; Foga" };\n'
+        'process.stdout.write(JSON.stringify(s.privilegiPerLivello(fm)));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(h)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    nomi1 = [p["nome"] for p in out["1"]]
+    assert "Furia" in nomi1 and "Difesa senza armatura" in nomi1 and "Foga" in nomi1  # struttura + legacy → L1
+    assert [p["nome"] for p in out["5"]] == ["Attacco Extra"]                          # feature di livello 5
+    furia = next(p for p in out["1"] if p["nome"] == "Furia")
+    assert furia["concede"] == {"risorsa": {"nome": "Ira"}}                            # concede preservato
+
+
 @pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
 def test_crea_personaggio_padronanze(tmp_path):
     """crea_pg: una classe con padronanza d'armi (Barbaro, 2) sceglie 2 armi in

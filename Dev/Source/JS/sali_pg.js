@@ -92,6 +92,7 @@ function classeHomebrew(opt) {
       competenze_strumenti: String(fm.strumento || ""),
       equipaggiamento: parseEquip(fm.equipaggiamento),
       privilegi_l1: String(fm.privilegi_l1 || "").split(/[;\n]/).map((s) => s.trim()).filter(Boolean),
+      privilegi_livello: privilegiPerLivello(fm),
       livello_sottoclasse: Number.parseInt(fm.livello_sottoclasse, 10) || 3,
       incantatore: caster,
       trucchetti_noti: caster ? (tipoInc === "pieno" ? 3 : 2) : 0,
@@ -103,6 +104,19 @@ function classeHomebrew(opt) {
       risorse: Array.isArray(fm.risorse) ? fm.risorse : [],
     };
   }
+  return out;
+}
+
+// Privilegi di classe homebrew per livello: la lista frontmatter `privilegi`
+// ([{livello, nome, descrizione, concede}]) → {N: [{nome, desc, concede}]}, fusa col legacy
+// `privilegi_l1` (stringa → feature di livello 1 senza effetti). Letta da crea_pg (L1) e
+// sali_pg (a ogni livello): mostra la feature e ne applica il `concede`.
+function privilegiPerLivello(fm) {
+  const out = {};
+  const push = (L, nome, desc, concede) => { if (nome) (out[L] = out[L] || []).push({ nome, desc: desc || "", concede: concede || null }); };
+  for (const p of Array.isArray(fm.privilegi) ? fm.privilegi : [])
+    if (p && typeof p === "object") push(Number.parseInt(p.livello, 10) || 1, String(p.nome || "").trim(), String(p.descrizione || p.desc || ""), p.concede);
+  for (const nome of String(fm.privilegi_l1 || "").split(/[;\n]/).map((s) => s.trim()).filter(Boolean)) push(1, nome, "", null);
   return out;
 }
 
@@ -391,6 +405,13 @@ async function sali_pg(tp) {
     if (sc) { tgt.sottoclasse = sc; if (targetId === breakdown[0].id) u.sottoclasse = sc; note.push(`sottoclasse ${sc}`); }
   }
 
+  // Privilegi di classe homebrew acquisiti a QUESTO livello: mostrali e applica il loro `concede`
+  // (gli SRD non hanno privilegi_livello → no-op; i privilegi freeform restano prosa nella nota).
+  const abMap = {}; for (const id of Object.keys(opt.abilita || {})) { abMap[normTxt(id)] = id; abMap[normTxt((opt.abilita[id] || {}).label || id)] = id; }
+  for (const pv of (classe.privilegi_livello || {})[lvCls] || []) {
+    const eff = applyConcede(u, fm, pv.concede, CARS, abMap);
+    note.push(`privilegio ${pv.nome}${eff.length ? ` (${eff.join(", ")})` : ""}`);
+  }
   // ASI / Talento: ai livelli DI CLASSE giusti (gli ASI sono per-classe, 2024). Gating
   // dono epico sul livello-personaggio.
   const asiLevels = (classe.livelli_asi && classe.livelli_asi.length) ? classe.livelli_asi : [4, 8, 12, 16, 19];
@@ -414,8 +435,7 @@ async function sali_pg(tp) {
       const t = await tp.system.suggester(ids.map(id => talenti[id].label || id), ids, false, `Quale talento (generale${nuovoTot >= 19 ? " o dono epico" : ""})?`);
       if (t) {
         const l = Array.isArray(fm.talenti) ? [...fm.talenti] : []; if (!l.includes(t)) l.push(t); u.talenti = l;
-        const ab = {}; for (const id of Object.keys(opt.abilita || {})) { ab[normTxt(id)] = id; ab[normTxt((opt.abilita[id] || {}).label || id)] = id; }
-        const eff = applyConcede(u, fm, (talenti[t] || {}).concede, CARS, ab);  // homebrew: effetti strutturati → automazione
+        const eff = applyConcede(u, fm, (talenti[t] || {}).concede, CARS, abMap);  // homebrew: effetti strutturati → automazione
         note.push(`talento ${t}${eff.length ? ` (${eff.join(", ")})` : ""}`);
       }
     }
@@ -502,6 +522,7 @@ module.exports.risorseBreakdown = risorseBreakdown;
 module.exports.incantesimiHomebrew = incantesimiHomebrew;
 module.exports.talentiHomebrew = talentiHomebrew;
 module.exports.applyConcede = applyConcede;
+module.exports.privilegiPerLivello = privilegiPerLivello;
 module.exports.talentoAmmesso = talentoAmmesso;
 module.exports.sottoclasseHomebrew = sottoclasseHomebrew;
 module.exports.fondiPool = fondiPool;
