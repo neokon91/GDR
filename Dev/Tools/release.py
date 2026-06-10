@@ -71,9 +71,10 @@ def build_artifacts() -> None:
 def main() -> int:
     ver = version()
     build_artifacts()
-    # Semina il MONDO-ESEMPIO nel vault prima di confezionarlo, così lo zip spedito ne ha
-    # uno giocabile (il mondo-esempio Astaria della pagina). Idempotente: salta se c'è già.
-    subprocess.run(["node", str(common.ROOT / "Dev" / "Tools" / "seed_example.js")], check=False)
+    # (Ri)semina il MONDO-ESEMPIO nel vault prima di confezionarlo, così lo zip spedito ne ha
+    # uno giocabile e SEMPRE aggiornato. `--force` rigenera il demo da zero (Mondi/ del vault
+    # buildato è tutto mondo-esempio) → le modifiche al seed raggiungono lo zip senza passi manuali.
+    subprocess.run(["node", str(common.ROOT / "Dev" / "Tools" / "seed_example.js"), "--force"], check=False)
     dist = common.ROOT / "dist"
     targets = [
         (common.VAULT, dist / f"GDR-vault-v{ver}.zip", "GDR-vault",

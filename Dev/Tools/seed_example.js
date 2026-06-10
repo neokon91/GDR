@@ -12,6 +12,10 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..", "..");
 const VAULT = path.join(ROOT, "dist", "GDR-vault");
 const SRC = path.join(ROOT, "Dev", "Source", "Esempio");
+// --force: RIGENERA il mondo-esempio da zero (usato da release.py per lo zip, così le modifiche
+// al seed arrivano sempre). Senza il flag il seed è idempotente (salta se c'è già): un utente che
+// lancia `npm run seed-example` sul proprio vault NON perde mai il suo mondo.
+const FORCE = process.argv.slice(2).includes("--force");
 const im = require(path.join(ROOT, "Dev", "Source", "JS", "importa_mappa.js"));
 
 const nomeFile = (n) => String(n || "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, " ") || "Luogo";
@@ -72,7 +76,11 @@ function main() {
     console.error("Vault non costruito: esegui prima `npm run build`."); process.exit(1);
   }
   if (fs.existsSync(path.join(VAULT, "Mondi", "Astaria.md"))) {
-    console.log("Mondo-esempio già presente (Mondi/Astaria.md) — niente da fare."); return;
+    if (!FORCE) { console.log("Mondo-esempio già presente (Mondi/Astaria.md) — niente da fare."); return; }
+    // --force: Mondi/ nel vault buildato è INTERAMENTE il mondo-esempio → azzerala e ri-semina
+    // fresca (niente orfani da note rinominate/rimosse nel seed). Solo release: mai sul vault utente.
+    fs.rmSync(path.join(VAULT, "Mondi"), { recursive: true, force: true });
+    console.log("Mondo-esempio rigenerato da zero (--force).");
   }
 
   // 1) Asset mappa nel vault (l'SVG ha i toponimi; il JSON gemello ha nome + origine).

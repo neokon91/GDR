@@ -68,6 +68,10 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   niente più doppioni accumulati quando un indice si sposta.
 
 ### Corretto
+- **Mondo-esempio sempre aggiornato nello zip**: `npm run dist` ora rigenera il demo da zero
+  (`seed_example.js --force`) prima di confezionarlo; il seed resta idempotente quando lo lancia
+  l'utente (`npm run seed-example` non tocca il suo mondo). Prima il seed saltava se Astaria
+  esisteva → lo zip poteva spedire un demo stantio (le modifiche al seed non lo raggiungevano).
 - **Tiro per colpire tirabile su TUTTI i layout statblock**: un layout Fantasy
   Statblocks privo della chiave `diceParsing` (es. «GDR — 5.5e (2024)», il default
   legacy) faceva ricadere FS sulle regole di **default in inglese** («+N to hit»),
