@@ -97,6 +97,41 @@ function classeHomebrew(opt) {
   }
   return out;
 }
+
+// Effetti STRUTTURATI di un talento/privilegio/tratto homebrew (campo `concede`) applicati a `u`,
+// leggendo lo stato corrente da `fm`. Automatizza: caratteristica (+N, cap 20), abilita (competenze
+// → prof_<id>), armi/armature/strumenti (competenze testuali). Ritorna le note per il log; gli
+// effetti freeform restano nella prosa. carIds = id caratteristiche; abilMap = {forma: id_abilita}
+// (label e id normalizzati). Non applica nulla che non sia dichiarato.
+function applyConcede(u, fm, concede, carIds, abilMap) {
+  const note = [];
+  if (!concede || typeof concede !== "object") return note;
+  const car = concede.caratteristica || concede.punteggi;
+  if (car && typeof car === "object") {
+    for (const [k, raw] of Object.entries(car)) {
+      const id = (carIds || []).indexOf(normTxt(k)) >= 0 ? normTxt(k) : null;
+      const v = Number(raw) || 0;
+      if (id && v) {
+        const cur = Number(u[id] != null ? u[id] : fm[id]) || 10;
+        u[id] = Math.min(cur + v, 20);
+        note.push(`${v >= 0 ? "+" : ""}${v} ${id}`);
+      }
+    }
+  }
+  const abil = concede.abilita || concede.competenze_abilita;
+  for (const a of Array.isArray(abil) ? abil : abil ? [abil] : []) {
+    const id = (abilMap || {})[normTxt(a)];
+    if (id) { u["prof_" + id] = 1; note.push(`competenza ${id}`); }
+  }
+  for (const [campo, key] of [["armi", "competenze_armi"], ["armature", "competenze_armature"], ["strumenti", "competenze_strumenti"]]) {
+    const add = String(concede[campo] || "").trim();
+    if (!add) continue;
+    const cur = String((u[key] != null ? u[key] : fm[key]) || "").trim();
+    u[key] = cur ? `${cur}, ${add}` : add;
+    note.push(add);
+  }
+  return note;
+}
 // <<<homebrew-bridge
 
 module.exports = { noteVault, normTxt, toIds, incantesimiHomebrew, fondiPool, armorCats, parseEquip, classeHomebrew };

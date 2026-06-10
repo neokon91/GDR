@@ -19,7 +19,7 @@
 
 > [!info]- ℹ️ Guida — Talento
 > **Cos'è** · Un talento che un PG può prendere a creazione o salendo di livello, coi suoi benefici meccanici.
-> **Campi chiave** · **Categoria** (Origine dal background; Generale richiede liv. 4+) e **Prerequisito**; segna **Ripetibile** se cumulabile.
+> **Campi chiave** · **Categoria** (Origine dal background; Generale richiede liv. 4+) e **Prerequisito**; segna **Ripetibile** se cumulabile. **Automazione (opzionale):** un blocco frontmatter `concede:` con `caratteristica: {destrezza: 1}`, `abilita: [Furtività]`, `armi`/`armature`/`strumenti` viene **applicato al PG** quando prende il talento; gli effetti non automatizzabili restano prosa nei Benefici.
 
 
 ````tabs

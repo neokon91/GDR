@@ -97,6 +97,32 @@ def test_crea_pg_nome_vuoto(tmp_path):
     assert out[3] == "Eroe di Prova"                  # nome valido invariato (spazi preservati)
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_applyconcede_homebrew_effetti(tmp_path):
+    """Il campo `concede` di un talento/privilegio/tratto homebrew ALIMENTA l'automazione:
+    bonus ai punteggi (cap 20), competenze di abilità (prof_<id>, accento normalizzato) e
+    armi/armature/strumenti. Solo gli effetti dichiarati; senza `concede` è inerte (prosa SRD)."""
+    req = f'const s = require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});\n'
+    h = tmp_path / "concede.js"
+    h.write_text(
+        req +
+        'const CARS = ["forza","destrezza","costituzione","intelligenza","saggezza","carisma"];\n'
+        'const abil = { furtivita: "furtivita", atletica: "atletica" };\n'
+        'const u = {}; const fm = { destrezza: 15, forza: 20 };\n'
+        'const eff = s.applyConcede(u, fm, {caratteristica:{destrezza:1, forza:1}, abilita:["Furtività"], armi:"asce"}, CARS, abil);\n'
+        'const u2 = {}; const eff2 = s.applyConcede(u2, {}, undefined, CARS, abil);\n'
+        'process.stdout.write(JSON.stringify({u, eff, u2, eff2}));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(h)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["u"]["destrezza"] == 16            # +1 → punteggio aggiornato
+    assert out["u"]["forza"] == 20                # cap 20 (era 20 → resta 20, non 21)
+    assert out["u"]["prof_furtivita"] == 1        # competenza d'abilità (label con accento risolta)
+    assert out["u"]["competenze_armi"] == "asce"  # competenza testuale
+    assert out["u2"] == {} and out["eff2"] == []  # niente `concede` (SRD/prosa) → inerte
+
+
 @pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
 def test_crea_personaggio_padronanze(tmp_path):
     """crea_pg: una classe con padronanza d'armi (Barbaro, 2) sceglie 2 armi in

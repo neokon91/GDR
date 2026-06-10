@@ -105,13 +105,48 @@ function classeHomebrew(opt) {
   }
   return out;
 }
+
+// Effetti STRUTTURATI di un talento/privilegio/tratto homebrew (campo `concede`) applicati a `u`,
+// leggendo lo stato corrente da `fm`. Automatizza: caratteristica (+N, cap 20), abilita (competenze
+// → prof_<id>), armi/armature/strumenti (competenze testuali). Ritorna le note per il log; gli
+// effetti freeform restano nella prosa. carIds = id caratteristiche; abilMap = {forma: id_abilita}
+// (label e id normalizzati). Non applica nulla che non sia dichiarato.
+function applyConcede(u, fm, concede, carIds, abilMap) {
+  const note = [];
+  if (!concede || typeof concede !== "object") return note;
+  const car = concede.caratteristica || concede.punteggi;
+  if (car && typeof car === "object") {
+    for (const [k, raw] of Object.entries(car)) {
+      const id = (carIds || []).indexOf(normTxt(k)) >= 0 ? normTxt(k) : null;
+      const v = Number(raw) || 0;
+      if (id && v) {
+        const cur = Number(u[id] != null ? u[id] : fm[id]) || 10;
+        u[id] = Math.min(cur + v, 20);
+        note.push(`${v >= 0 ? "+" : ""}${v} ${id}`);
+      }
+    }
+  }
+  const abil = concede.abilita || concede.competenze_abilita;
+  for (const a of Array.isArray(abil) ? abil : abil ? [abil] : []) {
+    const id = (abilMap || {})[normTxt(a)];
+    if (id) { u["prof_" + id] = 1; note.push(`competenza ${id}`); }
+  }
+  for (const [campo, key] of [["armi", "competenze_armi"], ["armature", "competenze_armature"], ["strumenti", "competenze_strumenti"]]) {
+    const add = String(concede[campo] || "").trim();
+    if (!add) continue;
+    const cur = String((u[key] != null ? u[key] : fm[key]) || "").trim();
+    u[key] = cur ? `${cur}, ${add}` : add;
+    note.push(add);
+  }
+  return note;
+}
 // <<<homebrew-bridge
 
 // Talenti homebrew → {nome:{label, categoria}}, da fondere con opt.talenti (SRD).
 // `categoria` dal subtype della nota (origine/generale/stile/epico) → gating.
 function talentiHomebrew() {
   const out = {};
-  for (const { f, fm } of noteVault("talento")) out[f.basename] = { label: f.basename, categoria: fm.tipo || "" };
+  for (const { f, fm } of noteVault("talento")) out[f.basename] = { label: f.basename, categoria: fm.tipo || "", concede: fm.concede };
   return out;
 }
 
@@ -377,7 +412,12 @@ async function sali_pg(tp) {
       const talenti = { ...(opt.talenti || {}), ...talentiHomebrew() };  // SRD + homebrew
       const ids = Object.keys(talenti).filter(id => talentoAmmesso(talenti[id], nuovoTot));  // gating 2024
       const t = await tp.system.suggester(ids.map(id => talenti[id].label || id), ids, false, `Quale talento (generale${nuovoTot >= 19 ? " o dono epico" : ""})?`);
-      if (t) { const l = Array.isArray(fm.talenti) ? [...fm.talenti] : []; if (!l.includes(t)) l.push(t); u.talenti = l; note.push(`talento ${t}`); }
+      if (t) {
+        const l = Array.isArray(fm.talenti) ? [...fm.talenti] : []; if (!l.includes(t)) l.push(t); u.talenti = l;
+        const ab = {}; for (const id of Object.keys(opt.abilita || {})) { ab[normTxt(id)] = id; ab[normTxt((opt.abilita[id] || {}).label || id)] = id; }
+        const eff = applyConcede(u, fm, (talenti[t] || {}).concede, CARS, ab);  // homebrew: effetti strutturati → automazione
+        note.push(`talento ${t}${eff.length ? ` (${eff.join(", ")})` : ""}`);
+      }
     }
   }
   // Risincronizza mod_<car> per le caratteristiche cambiate dall'ASI (e aggiorna scores,
@@ -461,6 +501,7 @@ module.exports.risorseBreakdown = risorseBreakdown;
 // Esposti per i test del ponte homebrew→motore.
 module.exports.incantesimiHomebrew = incantesimiHomebrew;
 module.exports.talentiHomebrew = talentiHomebrew;
+module.exports.applyConcede = applyConcede;
 module.exports.talentoAmmesso = talentoAmmesso;
 module.exports.sottoclasseHomebrew = sottoclasseHomebrew;
 module.exports.fondiPool = fondiPool;

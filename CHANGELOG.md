@@ -6,6 +6,12 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Homebrew che alimenta l'automazione (`concede`)**: un **talento** homebrew può dichiarare nel
+  frontmatter un blocco `concede:` — `caratteristica: {destrezza: 1}` (bonus al punteggio, cap 20),
+  `abilita: [Furtività]` (competenze → `prof_<id>`), `armi`/`armature`/`strumenti` — e il motore lo
+  **applica al PG** quando il talento è preso (al level-up), non più solo prosa. Helper condiviso
+  `applyConcede` nel ponte homebrew (crea_pg/sali_pg, parity-enforced). Gli effetti non dichiarabili
+  («hai vantaggio quando…») restano prosa. *(Prossimi step: stessa logica per privilegi di classe e tratti di specie.)*
 - **Dadi tirabili negli incantesimi/oggetti/talenti SRD**: le espressioni-dado nella prosa
   (danno, cura, scaling — es. «3d8 danni psichici», «i danni aumentano di 1d8») diventano
   **cliccabili in-vault** via Dice Roller (avvolte in `` `dice: …` `` a build-time), come già
