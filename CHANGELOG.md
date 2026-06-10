@@ -14,8 +14,10 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   («hai vantaggio quando…») restano prosa.
 - **Privilegi di classe homebrew per livello + `concede`**: una classe homebrew dichiara i privilegi
   per livello (frontmatter `privilegi:` con `{livello, nome, descrizione, concede}`, fuso col legacy
-  `privilegi_l1`); al level-up il motore **mostra** la feature acquisita a quel livello e ne **applica
-  il `concede`** (punteggi/competenze). Prima i privilegi oltre il 1° erano solo prosa non applicata.
+  `privilegi_l1`); **a creazione** (1º livello) e **a ogni level-up** il motore **mostra** la feature
+  acquisita a quel livello e ne **applica il `concede`** (punteggi/competenze) — creazione e level-up
+  coerenti. Prima i privilegi oltre il 1° erano solo prosa non applicata. Guida `privilegi`/`concede`
+  nel template Classe.
 - **Dadi tirabili negli incantesimi/oggetti/talenti SRD**: le espressioni-dado nella prosa
   (danno, cura, scaling — es. «3d8 danni psichici», «i danni aumentano di 1d8») diventano
   **cliccabili in-vault** via Dice Roller (avvolte in `` `dice: …` `` a build-time), come già

@@ -24,7 +24,7 @@
 
 > [!info]- ℹ️ Guida — Classe
 > **Cos'è** · La classe homebrew che i tuoi giocatori potranno scegliere in creazione e far salire di livello come una ufficiale.
-> **Campi chiave** · Il **Tipo** (marziale/incantatore/…) è solo narrativo; a guidare la MECCANICA sono **Dado vita** + **Caratteristica primaria** + **Incantatore?** (nessuno/pieno/mezzo): da questi il motore deriva slot, competenza e ASI. ⚠️ imposta **Incantatore?** esplicitamente — il Tipo da solo NON dà gli slot.
+> **Campi chiave** · Il **Tipo** (marziale/incantatore/…) è solo narrativo; a guidare la MECCANICA sono **Dado vita** + **Caratteristica primaria** + **Incantatore?** (nessuno/pieno/mezzo): da questi il motore deriva slot, competenza e ASI. ⚠️ imposta **Incantatore?** esplicitamente — il Tipo da solo NON dà gli slot. **Privilegi automatizzati (opzionale):** un blocco frontmatter `privilegi:` con voci `{livello, nome, concede}` viene **mostrato e applicato** al livello giusto (e a creazione per il 1º) — `concede` come per i talenti (punteggi/competenze); i privilegi freeform restano prosa nella Progressione.
 
 
 ````tabs

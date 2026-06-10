@@ -639,6 +639,15 @@ async function costruisciPG(tp, opt, nome) {
     const padronanzePool = Object.keys(armiPad).map(a => `${a} — ${armiPad[a]}`);
     const padronanze_armi = await scegliMulti(tp, "Padronanza d'arma", padronanzePool, classe.padronanza_armi || 0);
 
+    // Privilegi di classe homebrew di LIVELLO 1: applica il loro `concede` a CREAZIONE
+    // (punteggi/competenze d'abilità), come sali_pg fa ai livelli successivi → coerenza
+    // creazione↔level-up. Gli SRD non hanno privilegi_livello → no-op; i freeform restano prosa.
+    const abMapL1 = {}; for (const id of Object.keys(abilita)) { abMapL1[normTxt(id)] = id; abMapL1[normTxt((abilita[id] || {}).label || id)] = id; }
+    const uL1 = {};
+    for (const pv of (classe.privilegi_livello || {})[1] || []) applyConcede(uL1, caratteristiche, pv.concede, opt.caratteristiche || [], abMapL1);
+    for (const id of opt.caratteristiche || []) if (uL1[id] != null) caratteristiche[id] = uL1[id];
+    for (const id of Object.keys(abilita)) if (uL1["prof_" + id] && !competenzeAbilita.includes(id)) competenzeAbilita.push(id);
+
     return frontmatter({
         nome,
         classe: classeId,
