@@ -42,6 +42,9 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   affidabilità d'indizio, pena/ambito d'editto, dottrina d'esercito) e «rituale» un sì/no.
 
 ### Migliorato
+- **Attacco da incantatore tirabile sulla scheda PG**: il pannello 🪄 *Incantesimi* mostrava
+  «Attacco +X» come testo morto; ora è un tiro **Dice Roller cliccabile** (`1d20 + X`), come gli
+  attacchi con arma e i tiri salvezza. La **CD** resta testo (è la soglia del TS del bersaglio).
 - **Infobox editabile**: i campi-contenuto (clima, popolazione, genere…) si modificano
   direttamente nell'infobox; prima erano sola-lettura lì ed editabili solo in un form duplicato.
 - **Relazioni dell'infobox come link nativi** (view type `[link]` di Meta Bind): cliccabili, e

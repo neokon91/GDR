@@ -108,7 +108,10 @@ async function renderIncantesimi(app, dv, page) {
     const cd = 8 + pb + m, atk = pb + m;
     const lab = carInc.charAt(0).toUpperCase() + carInc.slice(1);
     const pre = casterClasses.length > 1 ? `${cl.label}: ` : "";
-    teste.push(`${pre}**CD ${cd}** · **Attacco ${atk >= 0 ? "+" : ""}${atk}** · ${lab}`);
+    // Attacco da incantatore TIRABILE (come gli attacchi con arma e i TS): clic → 1d20+atk.
+    // La CD resta testo: è la soglia del TS del bersaglio, non un tiro del PG.
+    const atkDice = atk >= 0 ? `1d20 + ${atk}` : `1d20 - ${Math.abs(atk)}`;
+    teste.push(`${pre}**CD ${cd}** · Attacco \`dice: ${atkDice}\` · ${lab}`);
   }
   let testa = teste.length ? "> " + teste.join("\n> ") + "\n>\n" : "";
   // Patto del Warlock: slot SEPARATI dagli slot a livello (riga dedicata, ricarica breve).
