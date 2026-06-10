@@ -102,6 +102,23 @@ def test_srd_note_dedup_and_extras():
     assert "id inesistente" in out                      # id non risolto -> testo in chiaro
 
 
+def test_srd_note_dice_rollable():
+    """Le espressioni-dado nella prosa di incantesimi/oggetti/talenti vengono avvolte nella
+    sintassi inline di Dice Roller (`dice: …`) → tirabili in-vault come in un VTT (danno,
+    cura, scaling). I numeri NON-dado (gittata, durata in metri/ore) restano intatti."""
+    entry = {
+        "nome": "Saetta di prova",
+        "descrizione": "Il bersaglio subisce 3d8 danni; un alleato recupera 2d6 + 5 PF; gittata 18 metri.",
+        "scaling": [{"nome": "Slot superiore", "descrizione": "I danni aumentano di 1d8 per slot."}],
+    }
+    out = render.srd_note(entry, "srd-incantesimo", [], {})
+    assert "`dice: 3d8`" in out                      # danno → tirabile
+    assert "`dice: 2d6 + 5`" in out                  # cura col modificatore → tirabile
+    assert "`dice: 1d8`" in out                      # scaling → tirabile
+    assert "subisce 3d8 danni" not in out            # niente più dado "morto" in prosa
+    assert "18 metri" in out and "`dice: 18`" not in out   # numero non-dado intatto
+
+
 def test_srd_oggetto_sintonia_unificata():
     """Gli oggetti SRD espongono `sintonia` (il campo del MODELLO, system.yaml), non il
     grezzo `richiede_sintonia`: così la colonna Sintonia del Ponte si popola per gli SRD

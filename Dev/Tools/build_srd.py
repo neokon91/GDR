@@ -391,6 +391,17 @@ def autolink(text: str, regex, idx: dict[str, str], self_nome: str, seen: set[st
     return regex.sub(repl, text)
 
 
+# Dadi tirabili in-vault: avvolge le espressioni-dado della prosa (3d8, 2d6 + 5, 1d8…)
+# nella sintassi inline di Dice Roller `dice: …` → cliccabili come in un VTT (danno, cura,
+# scaling di incantesimi/oggetti/talenti). NON si applica agli statblock dei mostri: lì i
+# dadi li rende Fantasy Statblocks (diceParsing), e un `dice:` dentro il blocco li romperebbe.
+_DICE_RE = re.compile(r"(?<![\w`\[])(\d*d\d+(?:\s*[+-]\s*\d+)?)(?![\w])", re.IGNORECASE)
+
+
+def _wrap_dice(text: str) -> str:
+    return _DICE_RE.sub(lambda m: f"`dice: {m.group(1)}`", text)
+
+
 def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
              links: dict[str, str] | None = None,
              al_re=None, al_idx: dict[str, str] | None = None) -> str:
@@ -398,7 +409,7 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
     seen_links: set[str] = set()
 
     def link(text: str) -> str:
-        return autolink(text, al_re, al_idx or {}, self_nome, seen_links)
+        return _wrap_dice(autolink(text, al_re, al_idx or {}, self_nome, seen_links))
 
     fm: dict[str, Any] = {"nome": entry.get("nome", ""), "categoria": cat, "srd": True, "fonte": "SRD 5.2.1"}
     for key in fm_fields:
@@ -451,7 +462,7 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
             parts.append("\n\n".join(contenuto))
     scaling = [s for s in (entry.get("scaling") or []) if isinstance(s, dict)]
     if scaling:
-        body = "\n>\n".join(f"> **{s.get('nome', '')}** — {s.get('descrizione', '')}" for s in scaling)
+        body = "\n>\n".join(f"> **{s.get('nome', '')}** — {_wrap_dice(str(s.get('descrizione', '')))}" for s in scaling)
         parts.append(f"> [!tip]- Potenziamento\n{body}")
     # Creature evocate inline (incantesimi): statblock di gioco completo.
     evocate = _creatura_evocata(entry.get("creature_evocate_inline") or [])

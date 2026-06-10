@@ -6,6 +6,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Dadi tirabili negli incantesimi/oggetti/talenti SRD**: le espressioni-dado nella prosa
+  (danno, cura, scaling — es. «3d8 danni psichici», «i danni aumentano di 1d8») diventano
+  **cliccabili in-vault** via Dice Roller (avvolte in `` `dice: …` `` a build-time), come già
+  negli statblock — potenza/automazione da VTT senza lasciare Obsidian. ~130 incantesimi + ~102
+  oggetti. Gli statblock dei mostri restano gestiti da Fantasy Statblocks (non toccati).
 - **La prosa-corpo raggiunge davvero il sito**: le sezioni `##` del wizard vivono dentro il
   blocco `tabs` (layout Obsidian), che `strip_body` scartava in blocco → sul sito dei giocatori
   non arrivava NIENTE (solo `player_safe`). Ora `wizard_body` marca la prosa con
