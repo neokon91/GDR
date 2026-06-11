@@ -70,6 +70,10 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   affidabilità d'indizio, pena/ambito d'editto, dottrina d'esercito) e «rituale» un sì/no.
 
 ### Migliorato
+- **Generatore — liste molto più ampie**: le tabelle delle categorie-staple sono ~raddoppiate —
+  **PNG** (ruolo 15→35, aspetto/tratto/manierismo/vuole/segreto), **gancio** (chi/cosa/cosa_capita/
+  twist) e **diceria** (soggetto/fatto/fatto2) → molta più varietà, meno ripetizione. Stesso pattern
+  estendibile alle altre categorie (taverna/dungeon/meteo/…).
 - **Attacco da incantatore tirabile sulla scheda PG**: il pannello 🪄 *Incantesimi* mostrava
   «Attacco +X» come testo morto; ora è un tiro **Dice Roller cliccabile** (`1d20 + X`), come gli
   attacchi con arma e i tiri salvezza. La **CD** resta testo (è la soglia del TS del bersaglio).
