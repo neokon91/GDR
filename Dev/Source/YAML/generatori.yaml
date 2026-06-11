@@ -304,3 +304,75 @@ tesoro:
     - "{oggetto}, insieme a {monete}"
     - "{monete}, più {oggetto}"
     - "{oggetto} e {monete}"
+
+# Trappola / insidia: innesco + effetto + prova (CD) + dettaglio. Per dungeon e luoghi
+# pericolosi; l'entità `insidia` ne è la versione persistente (questa è lo spunto rapido).
+trappola:
+  forme:
+    - "{innesco} → {effetto}; TS {prova} (dimezza)."
+    - "{innesco}: {effetto}. TS {prova}; {dettaglio_t}."
+    - "{innesco} — {effetto} [TS {prova}]; {dettaglio_t}."
+  innesco:
+    - "Una piastra a pressione sotto la polvere"
+    - "Un filo teso all'altezza delle caviglie"
+    - "Una serratura sigillata da una runa"
+    - "Uno scrigno con un falso fondo"
+    - "Una maniglia unta di veleno da contatto"
+    - "Una lastra di pietra che cede sotto il peso"
+    - "Un glifo inciso sull'arco della porta"
+    - "Una statua che ruota su un perno nascosto"
+  effetto:
+    - "una rosa di dardi avvelenati ({danno} veleno)"
+    - "una fossa di {profondita} con punte sul fondo ({danno} perforanti)"
+    - "una lama oscilla dal soffitto ({danno} taglienti)"
+    - "un getto di fiamme investe il corridoio ({danno} da fuoco)"
+    - "un gas soporifero riempie la stanza"
+    - "il soffitto cala lentamente, un metro a round"
+    - "una scarica necrotica corre sul pavimento ({danno} necrotici)"
+    - "blocchi di pietra sigillano ogni uscita"
+  prova:
+    - "CD 12 Destrezza"
+    - "CD 13 Destrezza"
+    - "CD 14 Destrezza"
+    - "CD 15 Costituzione"
+  dettaglio_t:
+    - "Percezione CD 13 per scovarla in tempo"
+    - "disinnescarla (Arnesi CD 15) rivela un piccolo tesoro"
+    - "si riarma dopo un minuto"
+    - "il rumore attira ciò che vive più in fondo"
+    - "è già scattata: una vittima giace lì da tempo"
+    - "una seconda trappola protegge la prima"
+  danno: ["2d6", "3d6", "1d10", "4d6", "2d10"]
+  profondita: ["3 metri", "6 metri", "9 metri"]
+
+# Evento di viaggio (overland / hexcrawl): una situazione lungo la strada + dettaglio o
+# complicazione. Da tirare a ogni esagono/tappa per dare vita al viaggio.
+evento_viaggio:
+  forme:
+    - "{situazione}: {dettaglio_v}."
+    - "{situazione} — {complicazione_v}."
+    - "{situazione}: {dettaglio_v}, e {complicazione_v}."
+  situazione:
+    - "Tracce fresche tagliano il sentiero"
+    - "Una colonna di fumo si alza all'orizzonte"
+    - "Un viandante solitario viene incontro al gruppo"
+    - "Il tempo cambia di colpo"
+    - "Un ponte è crollato di recente"
+    - "Rovine soffocate dalla vegetazione"
+    - "Un accampamento abbandonato da poco"
+    - "Il verso di una bestia grossa, troppo vicina"
+    - "Una carovana ferma sul ciglio della strada"
+    - "Un cippo di confine sfregiato"
+  dettaglio_v:
+    - "sembrano dirigersi proprio dove andate voi"
+    - "qualcuno vi osserva da lontano"
+    - "c'è odore di sangue nell'aria"
+    - "il silenzio è innaturale, nessun uccello"
+    - "qualcosa di utile è rimasto indietro da chi è passato di qui"
+    - "i locali, se interrogati, eviterebbero questo posto"
+  complicazione_v:
+    - "il gruppo non è d'accordo sul da farsi"
+    - "aggirarlo costa mezza giornata di marcia"
+    - "è un'esca, o lo sembra"
+    - "qualcuno chiede aiuto — ma a quale prezzo?"
+    - "le provviste rischiano di non bastare fino a sera"

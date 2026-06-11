@@ -6,6 +6,10 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Generatore — nuove categorie**: `trappola/insidia` (innesco + effetto coi dadi + TS/CD +
+  dettaglio individuazione/disinnesco) ed `evento di viaggio` (overland/hexcrawl: situazione +
+  dettaglio/complicazione). Data-driven come le altre (sezione `forme` in `generatori.yaml` + 1
+  riga nel registro), variabilità combinatoria ampia.
 - **Homebrew che alimenta l'automazione (`concede`)**: un **talento** homebrew può dichiarare nel
   frontmatter un blocco `concede:` — `caratteristica: {destrezza: 1}` (bonus al punteggio, cap 20),
   `abilita: [Furtività]` (competenze → `prof_<id>`), `armi`/`armature`/`strumenti` — e il motore lo

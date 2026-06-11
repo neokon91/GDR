@@ -130,6 +130,8 @@ const GENERATORI = {
   meteo: { fn: (g, s, r) => generaDaForme(g, "meteo", s, r), label: "Meteo / presagio" },
   dungeon_stanza: { fn: (g, s, r) => generaDaForme(g, "dungeon_stanza", s, r), label: "Stanza di dungeon" },
   bevanda: { fn: (g, s, r) => generaDaForme(g, "bevanda", s, r), label: "Bevanda" },
+  trappola: { fn: (g, s, r) => generaDaForme(g, "trappola", s, r), label: "Trappola / insidia" },
+  evento_viaggio: { fn: (g, s, r) => generaDaForme(g, "evento_viaggio", s, r), label: "Evento di viaggio" },
   tesoro: { fn: generaTesoro, label: "Tesoro (SRD)" },
 };
 
