@@ -230,6 +230,10 @@ function main() {
   //    [[Corsari dell'Ombra]]. Così la demo mostra il loop completo: worldbuilding →
   //    tavolo. Derivati RAW-2024 (CA 14 = cuoio+DES; PF 10 = d8+COS; TS DES/INT; 6
   //    competenze classe+background senza doppioni). Ritratto VUOTO (aggancio immagine).
+  // 4c) Libreria di TABELLE CASUALI rollabili col Dice Roller (nota di riferimento, a root →
+  //     fuori da Mondi/, così sopravvive al --force che azzera Mondi/). Lookup table native.
+  write("Tabelle casuali.md", TABELLE_MD);
+
   // 4b) Classe homebrew d'esempio: «Corsaro dell'Ombra» (a tema Costa dell'Ombra). Mostra i
   //     PRIVILEGI PER LIVELLO con `concede`: «Andatura nell'Ombra» → competenza Furtività,
   //     «Armi del Corsaro» → competenze in armi. A creazione/level-up il motore li applica
@@ -301,6 +305,115 @@ Lo stesso mondo regge la sessione: **[[Korbin Salmastro]]** è un PG 5.5e colleg
 // Frontmatter del PG-esempio: la build del wizard «Crea PG», con in più i CAMPI DI
 // COLLEGAMENTO (mondo, fazione) e qualche tratto narrativo per l'infobox. Tenuto come
 // stringa grezza perché contiene `classi:` (array di oggetti) che fm() non serializza.
+// Libreria di TABELLE CASUALI rollabili col Dice Roller (formato lookup nativo del plugin:
+// header `dice: 1dN`, righe a range, block-id `^id`; si tira con `dice: [[Tabelle casuali#^id]]`).
+// Nota di RIFERIMENTO (a root, fuori da Mondi/ → sopravvive al --force che azzera Mondi/).
+const TABELLE_MD = `# 🎲 Tabelle casuali
+
+> [!tip] Come si tira
+> Clicca il **dado** accanto a «Tira» sotto ogni tabella — il Dice Roller pesca una riga
+> (mostra numero + esito). Sono **lookup table native**: copiale dove vuoi, o aggiungine
+> con lo stesso formato. *(Le tavole personali del tuo mondo: crea una nota **Tabella**.)*
+
+## Ninnoli e cianfrusaglie
+| dice: 1d12 | Trovi… |
+| --- | --- |
+| 1 | un anello di ferro inciso con un nome che non è il tuo |
+| 2 | una chiave d'ottone che non apre nulla di noto |
+| 3 | un dado truccato, ancora caldo |
+| 4 | il ritratto in miniatura di uno sconosciuto sorridente |
+| 5 | una fiala di liquido ambrato dal tappo di cera rossa |
+| 6 | una mappa strappata a metà, l'altra metà manca |
+| 7 | un dente troppo grande per essere umano |
+| 8 | una moneta straniera fuori corso da secoli |
+| 9 | un occhio di vetro che sembra seguirti |
+| 10 | una ciocca di capelli legata da un nastro nero |
+| 11 | un fischietto d'osso che non emette suono udibile |
+| 12 | una lettera mai spedita, l'inchiostro ancora fresco |
+^ninnoli
+
+Tira: \`dice: [[Tabelle casuali#^ninnoli]]\`
+
+## Complicazioni di viaggio
+| dice: 1d10 | Lungo la strada… |
+| --- | --- |
+| 1 | un ponte è crollato di recente: deviazione o guado rischioso |
+| 2 | il tempo cambia di colpo, peggiorando |
+| 3 | tracce fresche di qualcosa di grosso tagliano il sentiero |
+| 4 | un viandante chiede aiuto — sincero o esca? |
+| 5 | una carovana ferma, nervosa, poco disposta a parlare |
+| 6 | le provviste sono andate a male prima del previsto |
+| 7 | il sentiero si biforca e nessuna mappa concorda |
+| 8 | rovine non segnate, e qualcosa le abita |
+| 9 | un posto di blocco con pedaggio "informale" |
+| 10 | due nel gruppo non sono d'accordo sulla via: tira o discuti |
+^viaggio
+
+Tira: \`dice: [[Tabelle casuali#^viaggio]]\`
+
+## Voci di taverna
+| dice: 1d10 | Al bancone sussurrano che… |
+| --- | --- |
+| 1 | il signore del luogo non vedrà la primavera |
+| 2 | sotto il vecchio cimitero c'è una porta che non andrebbe aperta |
+| 3 | qualcuno paga in oro troppo antico per essere onesto |
+| 4 | i lupi, quest'anno, non sono lupi |
+| 5 | un tesoro aspetta chi risolve l'enigma giusto |
+| 6 | sparisce gente ai moli, e nessuno indaga |
+| 7 | il prete e l'oste litigano per qualcosa di sepolto |
+| 8 | una nave senza equipaggio è stata avvistata al largo |
+| 9 | le tasse raddoppieranno alla luna nuova |
+| 10 | qualcuno è tornato dai morti, e cammina di notte |
+^voci
+
+Tira: \`dice: [[Tabelle casuali#^voci]]\`
+
+## Colpo di fato (critico / fallimento drammatico)
+| dice: 1d8 | E poi… |
+| --- | --- |
+| 1 | l'arma si incastra: la prossima azione è a svantaggio |
+| 2 | un colpo di fortuna: il bersaglio è anche stordito fino al suo turno |
+| 3 | l'ambiente cede (un mobile, una balaustra, il ghiaccio) |
+| 4 | un alleato vicino può usare la reazione per un attacco gratuito |
+| 5 | la voce rimbomba: ogni nemico entro 9 m nota lo scontro |
+| 6 | qualcosa di prezioso cade nella mischia |
+| 7 | il nemico indietreggia di 3 m, scoprendo un passaggio |
+| 8 | scintille: materiale infiammabile vicino prende fuoco |
+^fato
+
+Tira: \`dice: [[Tabelle casuali#^fato]]\`
+
+## Incontri — Bosco / foresta
+| dice: 1d8 | Incontri… |
+| --- | --- |
+| 1 | un branco di lupi affamati, magri per la stagione |
+| 2 | un orso bruno che difende il suo territorio |
+| 3 | predoni appostati dietro un albero caduto di traverso |
+| 4 | sciami di insetti, e qualcosa che li ha disturbati |
+| 5 | un cervo bianco — e chi lo segue da tempo |
+| 6 | un eremita diffidente, che sa più di quanto dice |
+| 7 | ragni giganti e i loro bozzoli appesi in alto |
+| 8 | silenzio totale: nessun animale. Perché? |
+^bosco
+
+Tira: \`dice: [[Tabelle casuali#^bosco]]\`
+
+## Incontri — Costa / mare (Costa dell'Ombra)
+| dice: 1d8 | Sulla costa… |
+| --- | --- |
+| 1 | contrabbandieri che scaricano casse non dichiarate |
+| 2 | un relitto fresco, e i sopravvissuti (o i predatori) |
+| 3 | granchi giganti tra gli scogli alla bassa marea |
+| 4 | una sirena, o ciò che ne ha preso la voce |
+| 5 | la nebbia dell'Ombra cola dai moli, e con essa qualcosa |
+| 6 | una pattuglia dei Corsari dell'Ombra, di malumore |
+| 7 | un faro spento — e nessuno alla guardia |
+| 8 | reliquie riaffiorate dalla rovina, e chi le reclama |
+^costa
+
+Tira: \`dice: [[Tabelle casuali#^costa]]\`
+`;
+
 // Classe homebrew demo: frontmatter raw (il helper fm() non gestisce liste-di-oggetti come
 // `privilegi`). I `privilegi` per livello con `concede` sono letti dal ponte homebrew→motore.
 const CORSARO_FM = `---

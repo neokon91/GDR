@@ -16,6 +16,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   del mondo (helper `worldPool`, dal `mondo` della nota), con fallback alla generazione se il mondo
   è vuoto. Estende ai *contenuti* la contestualizzazione che il generatore aveva già sui *nomi*
   (via `stile_nomi`). Es.: «Corsari dell'Ombra sta per…», «…lo stesso volto ad Aster».
+- **Libreria di tabelle casuali (Dice Roller)**: nota di riferimento `Tabelle casuali.md` con
+  **lookup table NATIVE** del plugin (header `dice: 1dN`, righe a range, block-id `^id`) rollabili
+  inline — `` `dice: [[Tabelle casuali#^id]]` `` → numero + esito, con UI/cronologia del Dice Roller.
+  Sei tavole pronte: ninnoli, complicazioni di viaggio, voci di taverna, colpo di fato, e **incontri
+  per terreno** (bosco, costa/mare). Copiabili ed estendibili con lo stesso formato.
 - **Homebrew che alimenta l'automazione (`concede`)**: un **talento** homebrew può dichiarare nel
   frontmatter un blocco `concede:` — `caratteristica: {destrezza: 1}` (bonus al punteggio, cap 20),
   `abilita: [Furtività]` (competenze → `prof_<id>`), `armi`/`armature`/`strumenti` — e il motore lo
