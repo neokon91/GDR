@@ -12,19 +12,9 @@
 
 {{ m.vista('renderTabella') }}
 
-> [!tip]- 🎲 Versione Dice Roller (alternativa al bottone, roll nativo)
-> Per il tiro NATIVO del plugin (animazione + cronologia): compila la **lookup-table** qui sotto
-> — adatta il dado nell'intestazione e le righe/range — e clicca il dado in fondo. La sintassi è
-> `header dice: 1dN` + le righe a range + il `^id` sotto la tabella. Esempi pronti da copiare in
-> **[[Tabelle casuali]]**.
-
-| dice: 1d6 | Esito |
-| --- | --- |
-| 1-2 |  |
-| 3-4 |  |
-| 5-6 |  |
-^tabella-dr
-
-Tira (Dice Roller): `dice: [[#^tabella-dr]]`
+> [!tip]- 🎲 Vuoi il roll NATIVO del Dice Roller (animazione + cronologia)?
+> Le **lookup-table** del Dice Roller vanno a livello-radice di una nota: un block-id dentro i
+> tab non è raggiungibile dal link. Tienile nella libreria **[[Tabelle casuali]]** (formato pronto
+> da copiare) e richiamale da qui con `` `dice: [[Tabelle casuali#^id]]` ``.
 {{ m.wizard_body(template.category) }}
 {% endblock %}

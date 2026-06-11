@@ -21,10 +21,13 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   inline — `` `dice: [[Tabelle casuali#^id]]` `` → numero + esito, con UI/cronologia del Dice Roller.
   Sei tavole pronte: ninnoli, complicazioni di viaggio, voci di taverna, colpo di fato, e **incontri
   per terreno** (bosco, costa/mare). Copiabili ed estendibili con lo stesso formato.
-- **Entità `tabella` → opzione Dice Roller nativa**: oltre al bottone pesato (che resta), ogni
-  nota-tabella ha ora una **lookup-table DR-native** compilabile (skeleton `dice: 1dN` a range +
-  block-id `^id` + tiro `` `dice: [[#^tabella-dr]]` ``) con guida → roll nativo del plugin
-  (animazione/cronologia), e rimanda a `[[Tabelle casuali]]` per esempi pronti.
+- **Tabelle Dice Roller native — verificate a schermo + confine chiarito**: le lookup-table della
+  libreria `[[Tabelle casuali]]` rendono e **scattano** (confermato in-app: `^ninnoli` 1d12 e
+  `^viaggio` 1d10 ri-tirano a esiti diversi). L'opzione DR-native *dentro* l'entità `tabella` è stata
+  **rimossa**: un block-id dentro il fence ````tabs non è indicizzato da Obsidian, quindi
+  `dice: [[…#^id]]` resta codice grezzo (non risolve) anche col nome-nota giusto — lì non poteva
+  funzionare. L'entità tiene il suo roller JS (Voci + bottone pesato + pannello, che funziona nei
+  tab) e rimanda a `[[Tabelle casuali]]` per il roll nativo del plugin (a livello-radice, dove va).
 - **Homebrew che alimenta l'automazione (`concede`)**: un **talento** homebrew può dichiarare nel
   frontmatter un blocco `concede:` — `caratteristica: {destrezza: 1}` (bonus al punteggio, cap 20),
   `abilita: [Furtività]` (competenze → `prof_<id>`), `armi`/`armature`/`strumenti` — e il motore lo
