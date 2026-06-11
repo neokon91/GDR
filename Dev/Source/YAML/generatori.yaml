@@ -376,3 +376,36 @@ evento_viaggio:
     - "è un'esca, o lo sembra"
     - "qualcuno chiede aiuto — ma a quale prezzo?"
     - "le provviste rischiano di non bastare fino a sera"
+
+# Incontro casuale: creatura SRD (per banda di GS) + numero + cosa fa. Le creature NON stanno
+# qui: render.py inietta i nomi REALI in `incontro._srd` (per banda, CC-BY). NESSUNA chiave
+# `forme` via generaDaForme → funzione dedicata (genera.js: generaIncontro), come `tesoro`.
+incontro:
+  fasce: [debole, medio, tosto, letale]   # banda di GS: debole≤1, medio≤5, tosto≤10, letale>10
+  pesi:  [40, 35, 18, 7]
+  numero: ["una", "una", "una coppia di", "1d4", "1d4+1", "un branco di", "2d4"]
+  forme:
+    - "{numero} {creatura} — {attivita}."
+    - "{numero} {creatura}: {attivita}, ma {twist_i}."
+    - "{numero} {creatura} ({atteggiamento}); {attivita}."
+  attivita:
+    - "in cerca di prede lungo il sentiero"
+    - "che si contendono una carcassa"
+    - "accampate attorno a un fuoco"
+    - "a guardia di un passaggio obbligato"
+    - "intente a depredare un carro rovesciato"
+    - "ferite, in ritirata da un altro scontro"
+    - "in agguato: hanno teso un'imboscata e aspettano"
+    - "smarrite, lontane dal loro territorio"
+  atteggiamento:
+    - "ostili a vista"
+    - "diffidenti ma trattabili"
+    - "spaventate, pronte a fuggire"
+    - "affamate e imprevedibili"
+    - "indifferenti, finché non le provochi"
+  twist_i:
+    - "qualcosa dà la caccia a loro, a sua volta"
+    - "una di loro porta un oggetto fuori posto"
+    - "non sono ciò che sembrano a prima vista"
+    - "il vero pericolo è ciò che le ha attirate qui"
+    - "una tregua è possibile, al prezzo giusto"

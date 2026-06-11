@@ -55,6 +55,7 @@ from build_srd import (  # noqa: F401 (re-export per i test)
     gs_baselines,
     load_srd,
     srd_condizioni,
+    srd_creature_pool,
     srd_loot_pool,
     srd_note,
     srd_statblock_yaml,
@@ -197,6 +198,8 @@ def engine_payload(core: dict[str, Any], templates: list[dict[str, Any]]) -> dic
     generatori = load_yaml("generatori.yaml") if (SOURCE / "YAML" / "generatori.yaml").is_file() else {}
     if isinstance(generatori.get("tesoro"), dict):
         generatori["tesoro"]["_srd"] = srd_loot_pool()
+    if isinstance(generatori.get("incontro"), dict):
+        generatori["incontro"]["_srd"] = srd_creature_pool()
     return {
         "folders": core.get("folders", {}),
         "fields": core.get("fields", {}),

@@ -85,6 +85,26 @@ def srd_loot_pool() -> dict[str, list[str]]:
     return {k: sorted(set(v)) for k, v in pool.items() if v}
 
 
+def srd_creature_pool() -> dict[str, list[str]]:
+    """Nomi di creature REALI dell'SRD raggruppate per BANDA di grado-sfida, per il
+    generatore `incontro` (genera.js: generaIncontro). Bande: debole (GS≤1), medio (≤5),
+    tosto (≤10), letale (>10). Iniettato in core.json sotto generatori.incontro._srd così
+    l'incontro casuale cita mostri veri e CC-BY (mai inventati)."""
+    bande: dict[str, list[str]] = {"debole": [], "medio": [], "tosto": [], "letale": []}
+    for x in load_srd("srd_5_2_1_monsters.json"):
+        if not (isinstance(x, dict) and x.get("nome")):
+            continue
+        gs = x.get("grado_sfida")
+        cr = gs.get("valore") if isinstance(gs, dict) else gs
+        try:
+            cr = float(cr)
+        except (TypeError, ValueError):
+            continue
+        banda = "debole" if cr <= 1 else "medio" if cr <= 5 else "tosto" if cr <= 10 else "letale"
+        bande[banda].append(x["nome"])
+    return {k: sorted(set(v)) for k, v in bande.items() if v}
+
+
 def _join(value: Any) -> str:
     return ", ".join(str(v) for v in value) if isinstance(value, list) else str(value or "")
 

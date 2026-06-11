@@ -116,6 +116,27 @@ function generaTesoro(gen, stileId, rng) {
   return conn.replace("{monete}", monete).replace("{oggetto}", oggetto).replace(/\s+/g, " ").trim();
 }
 
+// Incontro casuale legato all'SRD: pesca una BANDA di GS, una creatura REALE da
+// gen.incontro._srd[banda] (iniettata da render.py), poi riempie una forma con numero/
+// attività/atteggiamento/twist. NON usa generaDaForme: {creatura} viene dall'SRD, non da YAML.
+function generaIncontro(gen, stileId, rng) {
+  const sec = (gen && gen.incontro) || {};
+  const fasce = Array.isArray(sec.fasce) ? sec.fasce : [];
+  if (!fasce.length || !Array.isArray(sec.forme) || !sec.forme.length) return "";
+  const srd = sec._srd || {};
+  let banda = pickWeighted(fasce, sec.pesi, rng);
+  let pool = Array.isArray(srd[banda]) ? srd[banda] : [];
+  if (!pool.length) { banda = fasce.find((f) => (srd[f] || []).length) || banda; pool = srd[banda] || []; }
+  const creatura = pool.length ? pick(pool, rng) : "creature ignote";
+  const resolve = (str, depth) => String(str).replace(/\{(\w+)\}/g, (_, key) => {
+    if (depth > 5) return "";
+    if (key === "creatura") return creatura;
+    const list = sec[key];
+    return list ? resolve(pick(list, rng), depth + 1) : "";
+  });
+  return resolve(pick(sec.forme, rng), 0).replace(/\s+/g, " ").trim();
+}
+
 const GENERATORI = {
   persona: { fn: generaPersona, label: "Nome di persona" },
   toponimo: { fn: generaToponimo, label: "Toponimo / luogo" },
@@ -133,6 +154,7 @@ const GENERATORI = {
   trappola: { fn: (g, s, r) => generaDaForme(g, "trappola", s, r), label: "Trappola / insidia" },
   evento_viaggio: { fn: (g, s, r) => generaDaForme(g, "evento_viaggio", s, r), label: "Evento di viaggio" },
   tesoro: { fn: generaTesoro, label: "Tesoro (SRD)" },
+  incontro: { fn: generaIncontro, label: "Incontro casuale (SRD)" },
 };
 
 // N opzioni distinte (per quanto possibile) di un tipo, dato lo stile.
@@ -243,5 +265,6 @@ genera.generaToponimo = generaToponimo;
 genera.generaFazione = generaFazione;
 genera.generaLista = generaLista;
 genera.generaDaForme = generaDaForme;
+genera.generaIncontro = generaIncontro;
 genera.generaTesoro = generaTesoro;
 module.exports = genera;

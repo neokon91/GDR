@@ -406,12 +406,14 @@ def validate_aux_yaml() -> list[str]:
         # nelle liste) deve avere una lista omonima nella sezione, eccetto i terminali
         # {nome}/{luogo}. Cattura i refusi (lista mancante → output silenziosamente
         # vuoto). Auto-rileva le sezioni: aggiungere un generatore non tocca il check.
+        # Terminali speciali risolti a runtime (non liste in YAML): {nome}/{luogo} (stile_nomi)
+        # e {creatura} (genera.js: generaIncontro la pesca da incontro._srd, iniettata da render.py).
         for sec, block in gen.items():
             if sec == "fazioni" or not (isinstance(block, dict) and block.get("forme")):
                 continue
             testo = " ".join(str(x) for v in block.values()
                               for x in (v if isinstance(v, list) else [v]))
-            missing = (set(re.findall(r"\{(\w+)\}", testo)) - {"nome", "luogo"}) - set(block)
+            missing = (set(re.findall(r"\{(\w+)\}", testo)) - {"nome", "luogo", "creatura"}) - set(block)
             if missing:
                 errors.append(f"generatori: {sec} usa placeholder senza lista: {sorted(missing)}")
 
