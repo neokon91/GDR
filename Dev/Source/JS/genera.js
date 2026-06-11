@@ -83,12 +83,17 @@ function generaFazione(gen, stileId, rng) {
 // persona dello stile, {luogo} = toponimo: così PNG/taverne/ganci riusano i nomi a
 // tema. Stessa meccanica di generaFazione, parametrica sulla sezione (estendibile:
 // aggiungi una sezione con `forme` in generatori.yaml e una voce nel registro).
-function generaDaForme(gen, sectionKey, stileId, rng) {
+// `ctx` (opzionale) = entità REALI del mondo attivo {fazioni, luoghi, png} (da worldPool):
+// i terminali {nome}/{luogo}/{fazione} pescano dal mondo se disponibile, così ganci/dicerie
+// citano fazioni/luoghi/PNG veri; senza ctx (test, o nessun mondo) si GENERA come prima.
+function generaDaForme(gen, sectionKey, stileId, rng, ctx) {
   const section = gen[sectionKey] || {};
+  const w = ctx || {};
   const resolve = (str, depth) => String(str).replace(/\{(\w+)\}/g, (_, key) => {
     if (depth > 5) return "";
-    if (key === "nome") return nomePersona(gen, stileId, rng);
-    if (key === "luogo") return generaToponimo(gen, stileId, rng);
+    if (key === "nome") return (w.png && w.png.length) ? pick(w.png, rng) : nomePersona(gen, stileId, rng);
+    if (key === "luogo") return (w.luoghi && w.luoghi.length) ? pick(w.luoghi, rng) : generaToponimo(gen, stileId, rng);
+    if (key === "fazione") return (w.fazioni && w.fazioni.length) ? pick(w.fazioni, rng) : generaFazione(gen, stileId, rng);
     const list = section[key];
     return list ? resolve(pick(list, rng), depth + 1) : "";
   });
@@ -143,8 +148,8 @@ const GENERATORI = {
   fazione: { fn: generaFazione, label: "Nome di fazione" },
   png: { fn: (g, s, r) => generaDaForme(g, "png", s, r), label: "PNG (schizzo)" },
   taverna: { fn: (g, s, r) => generaDaForme(g, "taverna", s, r), label: "Taverna / locanda" },
-  gancio: { fn: (g, s, r) => generaDaForme(g, "gancio", s, r), label: "Gancio di trama" },
-  diceria: { fn: (g, s, r) => generaDaForme(g, "diceria", s, r), label: "Diceria / voce" },
+  gancio: { fn: (g, s, r, ctx) => generaDaForme(g, "gancio", s, r, ctx), label: "Gancio di trama" },
+  diceria: { fn: (g, s, r, ctx) => generaDaForme(g, "diceria", s, r, ctx), label: "Diceria / voce" },
   bottino: { fn: (g, s, r) => generaDaForme(g, "bottino", s, r), label: "Bottino / tesoro" },
   insediamento: { fn: (g, s, r) => generaDaForme(g, "insediamento", s, r), label: "Insediamento" },
   oggetto: { fn: (g, s, r) => generaDaForme(g, "oggetto", s, r), label: "Oggetto / curiosità" },
@@ -158,12 +163,12 @@ const GENERATORI = {
 };
 
 // N opzioni distinte (per quanto possibile) di un tipo, dato lo stile.
-function generaLista(gen, tipo, stileId, n, rng) {
+function generaLista(gen, tipo, stileId, n, rng, ctx) {
   const spec = GENERATORI[tipo] || GENERATORI.persona;
   const out = [];
   const seen = new Set();
   for (let i = 0; i < n * 4 && out.length < n; i++) {
-    const v = spec.fn(gen, stileId, rng);
+    const v = spec.fn(gen, stileId, rng, ctx);
     if (v && !seen.has(v)) { seen.add(v); out.push(v); }
   }
   return out;
@@ -189,6 +194,29 @@ function linkDest(link, sourcePath) {
 
 function fmOf(file) {
   return (file && app.metadataCache.getFileCache(file)?.frontmatter) || {};
+}
+
+// id del mondo attivo dalla nota: il suo `mondo` ([[link]] o testo), o il basename se la
+// nota È un mondo. "" se indeterminabile.
+function _mondoId(s) {
+  return String(s ?? "").replace(/\[\[|\]\]/g, "").split("|")[0].split("#")[0].trim().toLowerCase();
+}
+// Entità REALI del mondo attivo per ganci/dicerie contestualizzati: {fazioni, luoghi, png}
+// = basename delle note (categoria fazione/luogo/personaggio) che appartengono a quel mondo.
+// Best-effort: fuori da Obsidian (test) o senza mondo → vuoto (si genera come prima).
+function worldPool(file) {
+  const out = { fazioni: [], luoghi: [], png: [] };
+  if (!app.vault || !app.vault.getMarkdownFiles) return out;
+  const fm = fmOf(file);
+  const mondo = _mondoId(fm.mondo) || (fm.categoria === "mondo" && file ? file.basename.toLowerCase() : "");
+  if (!mondo) return out;
+  const cat2key = { fazione: "fazioni", luogo: "luoghi", personaggio: "png" };
+  for (const f of app.vault.getMarkdownFiles()) {
+    const m = app.metadataCache.getFileCache(f)?.frontmatter || {};
+    const key = cat2key[m.categoria];
+    if (key && (_mondoId(m.mondo) === mondo || f.basename.toLowerCase() === mondo)) out[key].push(f.basename);
+  }
+  return out;
 }
 
 // Stili candidati (ordine di preferenza) dai link della nota: lo stile_nomi
@@ -241,7 +269,7 @@ async function genera(tp) {
   if (!stile) return "";
 
   // Genera e fai scegliere.
-  const opzioni = generaLista(gen, tipo, stile, 8, null);
+  const opzioni = generaLista(gen, tipo, stile, 8, null, worldPool(file));
   if (!opzioni.length) { new Notice("Nessun risultato generato."); return ""; }
   const scelto = await tp.system.suggester([...opzioni, "↻ Rigenera"], [...opzioni, "__rigenera__"], false, `${GENERATORI[tipo].label} — scegli`);
   if (!scelto) return "";

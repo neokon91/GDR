@@ -165,6 +165,8 @@ gancio:
     - "{cosa_capita} a {luogo}; chi indaga scopre che {twist}."
     - "Gira voce che {voce}. Chi arriva primo {posta}."
     - "{chi} sta per {azione} — e nessuno sa che {twist}."
+    - "{fazione} sta per {azione} — e nessuno sa che {twist}."
+    - "{cosa_capita} a {luogo}: dicono che dietro ci sia {fazione}."
   chi: ["Un mercante nervoso", "Una vedova in lutto", "Il capitano della guardia", "Un chierico pallido", "Un nobile in disgrazia", "Una vecchia del mercato", "Un bambino lasciato solo", "Un rivale di vecchia data"]
   cosa: ["la figlia è sparita tre notti fa", "un carico è stato rubato lungo la strada", "qualcuno profana le tombe di famiglia", "un debito va riscosso a {luogo}", "serve una scorta che non faccia domande", "un nome va cancellato dai registri"]
   cosa_capita: ["Il bestiame muore senza una ferita", "Le campane suonano da sole di notte", "I pozzi danno acqua salmastra", "Un incendio non lascia cenere", "La gente sogna lo stesso volto", "Spariscono solo i primogeniti"]
@@ -179,6 +181,7 @@ gancio:
 diceria:
   forme:
     - "Dicono che {soggetto} {fatto}."
+    - "Dicono che {fazione} {fatto}."
     - "Al mercato sussurrano che {fatto2}."
     - "{soggetto} giura di aver visto {visione} verso {luogo}."
     - "C'è chi scommette che {predizione}."

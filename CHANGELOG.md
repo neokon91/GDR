@@ -11,6 +11,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   che pesca una **creatura REALE dell'SRD** per banda di GS (`srd_creature_pool` → `incontro._srd`,
   come il tesoro) + numero (1d4/branco…) + attività/atteggiamento/twist. Data-driven (le prime due
   via `forme`; l'incontro ha funzione dedicata `generaIncontro` come `tesoro`).
+- **Generatore world-aware**: ganci e dicerie ora citano le **fazioni/luoghi/PNG REALI del mondo
+  attivo**, non più solo generici — i terminali `{fazione}`/`{luogo}`/`{nome}` pescano dalle note
+  del mondo (helper `worldPool`, dal `mondo` della nota), con fallback alla generazione se il mondo
+  è vuoto. Estende ai *contenuti* la contestualizzazione che il generatore aveva già sui *nomi*
+  (via `stile_nomi`). Es.: «Corsari dell'Ombra sta per…», «…lo stesso volto ad Aster».
 - **Homebrew che alimenta l'automazione (`concede`)**: un **talento** homebrew può dichiarare nel
   frontmatter un blocco `concede:` — `caratteristica: {destrezza: 1}` (bonus al punteggio, cap 20),
   `abilita: [Furtività]` (competenze → `prof_<id>`), `armi`/`armature`/`strumenti` — e il motore lo

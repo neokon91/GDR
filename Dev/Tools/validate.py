@@ -413,7 +413,7 @@ def validate_aux_yaml() -> list[str]:
                 continue
             testo = " ".join(str(x) for v in block.values()
                               for x in (v if isinstance(v, list) else [v]))
-            missing = (set(re.findall(r"\{(\w+)\}", testo)) - {"nome", "luogo", "creatura"}) - set(block)
+            missing = (set(re.findall(r"\{(\w+)\}", testo)) - {"nome", "luogo", "creatura", "fazione"}) - set(block)
             if missing:
                 errors.append(f"generatori: {sec} usa placeholder senza lista: {sorted(missing)}")
 
