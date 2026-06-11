@@ -36,6 +36,21 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTabella");
 ```
+
+> [!tip]- 🎲 Versione Dice Roller (alternativa al bottone, roll nativo)
+> Per il tiro NATIVO del plugin (animazione + cronologia): compila la **lookup-table** qui sotto
+> — adatta il dado nell'intestazione e le righe/range — e clicca il dado in fondo. La sintassi è
+> `header dice: 1dN` + le righe a range + il `^id` sotto la tabella. Esempi pronti da copiare in
+> **[[Tabelle casuali]]**.
+
+| dice: 1d6 | Esito |
+| --- | --- |
+| 1-2 |  |
+| 3-4 |  |
+| 5-6 |  |
+^tabella-dr
+
+Tira (Dice Roller): `dice: [[#^tabella-dr]]`
 %%prosa%%
 ## Uso
 > [!question]- 💡 Quando/perché tirarla (nota per te)
