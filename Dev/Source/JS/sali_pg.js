@@ -421,7 +421,7 @@ async function sali_pg(tp) {
       ["asi2", "asi11", "talento"], false, `${classe.label} ${lvCls}: Aumento dei punteggi o Talento`);
     if (scelta === "asi2") {
       const c = await tp.system.suggester(CARS.map(sigla), CARS, false, "+2 a quale caratteristica?");
-      if (c) { u[c] = (Number(fm[c]) || 10) + 2; note.push(`+2 ${sigla(c)}`); }
+      if (c) { u[c] = (Number(u[c] != null ? u[c] : fm[c]) || 10) + 2; note.push(`+2 ${sigla(c)}`); }
     } else if (scelta === "asi11") {
       const disp = [...CARS];
       for (let i = 0; i < 2 && disp.length; i++) {
@@ -443,6 +443,12 @@ async function sali_pg(tp) {
   // Risincronizza mod_<car> per le caratteristiche cambiate dall'ASI (e aggiorna scores,
   // così Ispirazione bardica = mod CAR e gli altri derivati restano corretti qui sotto).
   for (const c of CARS) if (u[c] != null) { u["mod_" + c] = mod(u[c]); scores[c] = u[c]; }
+
+  // PF retroattivi: se ASI o privilegio-`concede` di questo livello hanno cambiato la
+  // Costituzione, il nuovo mod COS vale per TUTTI i livelli (RAW 5.5e: +1 PF per livello per
+  // ogni +1 di mod). dpf (sopra) usava il mod PRE-cambio → qui correggiamo l'intero pf_max.
+  const dConMod = mod(scores.costituzione) - mod(fm.costituzione);
+  if (dConMod) { u.pf_max = Math.max(nuovoTot, u.pf_max + dConMod * nuovoTot); u.pf = u.pf_max; note.push(`PF ${dConMod > 0 ? "+" : ""}${dConMod * nuovoTot} (mod COS)`); }
 
   // Slot incantesimo: ricomputati da TUTTO il breakdown (tabella della singola classe o
   // tabella multiclasse SRD coi 2+ caster) + Patto del Warlock SEPARATO. Gli usi sono

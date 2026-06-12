@@ -446,3 +446,25 @@ def test_sali_pg_multiclasse_prereq_blocca(tmp_path):
     assert "negata" in res["note"].lower() and "mago" in res["note"].lower()
 
 
+@pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
+def test_sali_pg_asi_costituzione_pf_retroattivi(tmp_path):
+    """ASI che alza la Costituzione: i PF si ricalcolano su TUTTI i livelli (RAW 5.5e:
+    +1 PF per livello per ogni +1 di mod COS), non solo sul livello nuovo. Regressione del
+    bug «pf_max fissato col mod COS pre-ASI»."""
+    pg = {
+        "nome": "Robusto", "categoria": "personaggio", "tipo": "pg",
+        "classe": "guerriero", "classi": [{"id": "guerriero", "livello": 3, "sottoclasse": ""}],
+        "livello": 3, "competenza": 2, "dado_vita": 10, "dadi_vita_max": 3, "pf": 31, "pf_max": 31,
+        "forza": 16, "destrezza": 14, "costituzione": 16, "intelligenza": 10, "saggezza": 12, "carisma": 8,
+    }
+    out = _sali_harness(tmp_path, pg, {
+        "in quale classe": "guerriero",          # sale il guerriero (non multiclasse)
+        "Aumento dei punteggi": "asi2",           # +2 a una caratteristica
+        "quale caratteristica": "costituzione",   # COS 16 -> 18 (mod +3 -> +4)
+    })["out"]
+    assert out is not None
+    assert out["costituzione"] == 18 and out["mod_costituzione"] == 4
+    # L4 guerriero d10 COS18: 14 + 10 + 10 + 10 = 44 (col bug sarebbe 40: +1/livello NON retroattivo).
+    assert out["pf_max"] == 44 and out["pf"] == 44
+
+

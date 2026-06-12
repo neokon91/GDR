@@ -5,6 +5,21 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 
 ## [Non rilasciato]
 
+### Corretto
+- **PF retroattivi su ASI/`concede` di Costituzione** (`sali_pg.js`, `crea_pg.js`): alzare il
+  modificatore di Costituzione ora aggiunge +1 PF **per ogni livello** (RAW 5.5e), non solo sul
+  livello nuovo — prima `pf_max` era fissato col mod COS pre-ASI. Anche a creazione i PF di L1 si
+  calcolano DOPO il `concede` del privilegio di livello 1. Test di regressione aggiunto.
+- **ASI «+2 a una caratteristica» non azzera più un `concede` dello stesso livello** (`sali_pg.js`):
+  il ramo leggeva solo il frontmatter, scartando un bonus-punteggio appena concesso da un
+  privilegio-classe homebrew; ora legge il valore aggiornato (come «+1 a due caratteristiche»).
+- **`build_site.py` — `parse_note`**: divide il frontmatter solo sulle righe-delimitatore `---`
+  (non sul `---` come sottostringa) — un `---` dentro un valore non corrompe più il corpo né può
+  far sparire una nota dal sito giocatori.
+
+### Rimosso
+- Macro Jinja morta `confronto_assi()` (mai chiamata; il manuale incolla già il suo blocco `renderAxesCompare`).
+
 ### Aggiunto
 - **Generatore — nuove categorie**: `trappola/insidia` (innesco + effetto coi dadi + TS/CD +
   individuazione/disinnesco), `evento di viaggio` (overland/hexcrawl) e **`incontro casuale`** —

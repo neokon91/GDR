@@ -91,15 +91,17 @@ _NEVER_FACT = {"tags", "cssclasses", "stato", "visibilita", "pubblico", "banner"
 def parse_note(text: str) -> tuple[dict[str, Any], str]:
     """Divide una nota Markdown in (frontmatter dict, corpo). Senza frontmatter
     valido → ({}, testo intero)."""
-    if text.startswith("---"):
-        parts = text.split("---", 2)
-        if len(parts) == 3:
-            try:
-                fm = yaml.safe_load(parts[1]) or {}
-            except yaml.YAMLError:
-                fm = {}
-            if isinstance(fm, dict):
-                return fm, parts[2].lstrip("\n")
+    # Split SOLO su righe-delimitatore `---` (non sul `---` come sottostringa, che un
+    # valore del frontmatter potrebbe contenere → corromperebbe corpo/frontmatter o farebbe
+    # sparire la nota dal sito). Il corpo è tutto ciò che segue il 2º delimitatore.
+    m = re.match(r"^---\n(.*?)\n---\n?(.*)\Z", text, re.S)
+    if m:
+        try:
+            fm = yaml.safe_load(m.group(1)) or {}
+        except yaml.YAMLError:
+            fm = {}
+        if isinstance(fm, dict):
+            return fm, m.group(2).lstrip("\n")
     return {}, text
 
 

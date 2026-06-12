@@ -740,13 +740,3 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "{{ category }}", component);
 ```
 {%- endmacro %}
-
-{# Radar di CONFRONTO fra entità (JS Engine): skin riusabile, da incollare in
-   QUALSIASI nota. Sovrappone gli assi delle entità elencate nel frontmatter
-   `confronta: [[A]], [[B]]` (stessa categoria). Disegno in views.js
-   (renderAxesCompare). Vedi LEGGIMI per lo snippet copia-incolla. #}
-{% macro confronto_assi() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAxesCompare");
-```
-{%- endmacro %}

@@ -601,7 +601,6 @@ async function costruisciPG(tp, opt, nome) {
     // Incantesimi di 1º livello (solo incantatori; pool SRD + homebrew del vault).
     const magia = await scegliIncantesimi(tp, classe, classeId);
 
-    const pf = Math.max(1, (classe.dado_vita || 8) + mod(caratteristiche.costituzione));
     const talentoOrigine = background.talento_origine
         ? String(background.talento_origine).trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
         : "";
@@ -647,6 +646,10 @@ async function costruisciPG(tp, opt, nome) {
     for (const pv of (classe.privilegi_livello || {})[1] || []) applyConcede(uL1, caratteristiche, pv.concede, opt.caratteristiche || [], abMapL1);
     for (const id of opt.caratteristiche || []) if (uL1[id] != null) caratteristiche[id] = uL1[id];
     for (const id of Object.keys(abilita)) if (uL1["prof_" + id] && !competenzeAbilita.includes(id)) competenzeAbilita.push(id);
+
+    // PF al 1º livello: DOPO il `concede` del privilegio L1 (che può alzare la Costituzione),
+    // così pf resta coerente con mod_costituzione/risorse (prima usava la COS pre-concede).
+    const pf = Math.max(1, (classe.dado_vita || 8) + mod(caratteristiche.costituzione));
 
     return frontmatter({
         nome,
