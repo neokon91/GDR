@@ -48,6 +48,12 @@ SRD-completo**):
   strumenti` + `lingue` (Comune + N). **Equipaggiamento** SRD (A/B) → `inventario`.
   **Privilegi** di classe L1. **Incantatore**: `trucchetti`/`incantesimi` (preparati) dal
   pool + `slot_1`. **Talento** d'origine dal background.
+- **Risorse di classe a ricarica** (`risorse`, da `risorseAtLevel`): Ki/Furia/Incanalare divinità/
+  Ispirazione bardica/… + **Patto del Warlock** (slot separati). `views.renderRisorsePG` le disegna
+  a barre; il bottone *Usa risorsa* (`meta_actions.usa_risorsa`) spende un uso, i **riposi** azzerano.
+- **Homebrew `concede`**: un talento o un **privilegio di classe** con blocco `concede` strutturato
+  (caratteristica +N cap 20 / abilità→`prof_<id>` / armi-armature-strumenti) lo **applica** già a
+  creazione (`applyConcede`, sorgente condivisa `_homebrew_bridge.js`); i freeform restano prosa.
 - **Frontmatter** con ID stabili: `classe`/`specie`/`background` = id; caratteristiche
   *flat*; competenze come **flag 0/1** `ts_<car>`/`prof_<abilita>` (matematica Meta Bind);
   `nome` quotato. **Seed di gioco**: `dado_vita`/`dadi_vita_max: 1` (tracker Dadi Vita) e
@@ -86,14 +92,21 @@ Motore di level-up **interattivo** (`tp.user.sali_pg`, richiamato dal bottone *S
 livello* via `meta_actions`). Legge `personaggio.json` + il frontmatter del PG attivo,
 applica il livello successivo dalla `progressione` della classe:
 
-- **Deterministico**: PF += `floor(dado_vita/2)+1 + mod(COS)` (media fissa); `competenza`,
-  `slot_<n>` dalla riga di progressione; `livello`; `dadi_vita_max = livello`. Dopo un ASI
-  risincronizza `mod_<car>` nel frontmatter (i tiri Dice Roller della scheda lo usano).
+- **Deterministico**: PF += `floor(dado_vita/2)+1 + mod(COS)` (media fissa) **della classe che
+  sale**; `competenza`, `slot_<n>` dalla riga di progressione; `livello`/`dadi_vita_max` dal
+  TOTALE. Dopo un ASI risincronizza `mod_<car>`; se l'ASI o un `concede` **alza il mod di COS**, i
+  PF si ricalcolano su **tutti** i livelli (+1/livello, RAW), non solo sul nuovo.
 - **Scelte guidate**: ASI ai `livelli_asi` (`+2` / `+1+1` / talento — i talenti sono
   **filtrati per categoria 2024**: solo *Generali*, e *Doni epici* dal livello 19, via
   `sali_pg.talentoAmmesso`; *Origine* viene dal background, *Stile di combattimento* dai
   privilegi di classe), `sottoclasse` al `livello_sottoclasse` (l'SRD ne ha una per
   classe), nuovi `trucchetti`/`incantesimi` dal pool (fino al max livello castabile) quando i conteggi crescono.
+- **Multiclasse** (`__multiclasse__`): scegli una **nuova** classe → **prerequisiti RAW** bloccanti
+  (`multiclassGate`), competenze parziali, poi entra nel `breakdown` `[{id, livello, sottoclasse}]`.
+  Gli slot vengono dalla **tabella multiclasse** SRD (`leveledSlots` su `combinedCasterLevel` dei
+  soli caster); il **Patto del Warlock** resta separato (`pactSlots`).
+- **Privilegi di classe homebrew per-livello** col blocco `concede`: applicati al livello giusto
+  (`applyConcede`, gemello di `crea_pg` — parità imposta da `check()`); i freeform restano prosa.
 - Scrive via `app.fileManager.processFrontMatter`. La vista `renderProgressione` (scheda PG)
   mostra i privilegi acquisiti + l'anteprima del livello successivo.
 
@@ -110,6 +123,9 @@ applica il livello successivo dalla `progressione` della classe:
 ## Test
 
 Mock di Templater via node (eseguono i wizard reali e validano YAML + regole):
-`test_personaggio_options` (parser 12/12 classi), `test_crea_personaggio_e2e` +
-`test_crea_personaggio_caster_e2e` (creazione, anche caster), `test_preset_valori`
-(preset archetipo), `test_sali_pg_e2e` (mago L1→L2).
+`test_personaggio_options` (parser 12/12 classi); `test_crea_personaggio_e2e`/`_caster_e2e`/
+`_risorse_e2e`/`_padronanze` + `test_risorse_at_level` (creazione, anche caster/risorse/maestrie);
+`test_applyconcede_homebrew_effetti` + `test_privilegi_per_livello` (homebrew `concede`);
+`test_multiclasse_funzioni` + `test_sali_pg_multiclasse_e2e`/`_prereq_blocca` (multiclasse +
+prereq RAW); `test_sali_pg_asi_costituzione_pf_retroattivi` (PF retroattivi su ASI-COS); e i
+`test_crea_pg_annullamento*`/`_nome_*` (resilienza all'annullamento e ai nomi).

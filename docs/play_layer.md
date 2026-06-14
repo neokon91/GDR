@@ -42,15 +42,25 @@ calcolata (Calma/Tensione/Crisi). È il differenziatore: lore già pronta a esse
   l'archetipo lo rifinisce (precedenza). `validate` controlla che gli id-asse siano reali (1-5).
 
 ## Generazione nomi/spunti
-**Generatore homebrew** in corpo nota su PNG/luogo/fazione (macro `genera_nome()`,
-`generatori.yaml` → `core.json`; `genera.js`): nomi di **persona/toponimi/fazioni in italiano,
-a tema** + spunti al tavolo (PNG, taverne, bevande, ganci, dicerie, insediamenti, oggetti,
-meteo, stanze di dungeon) e **tesori legati all'SRD** (monete a fascia + un oggetto/equip reale
-per rarità, da `tesoro._srd` iniettato dai JSON SRD). Bottone *Genera (locale)*
-(`meta_actions` → `tp.user.genera`): deduce il tipo dalla categoria, risolve lo **stile**
-(`stile_nomi` di cultura/specie, anche luogo→cultura; ★ candidati in cima), genera N opzioni,
-inserisce al cursore. Logica pura testabile (`generaPersona/Toponimo/Fazione/DaForme/Tesoro`,
-`rng` iniettabile).
+**Generatore homebrew** in corpo nota (macro `genera_nome()`, `generatori.yaml` → `core.json`;
+`genera.js`): nomi di **persona/toponimi/fazioni in italiano, a tema** + spunti al tavolo (PNG,
+taverne, bevande, ganci, dicerie, insediamenti, oggetti, meteo, stanze di dungeon,
+**trappole/insidie**, **eventi di viaggio**), più due generatori legati all'**SRD**: **tesoro**
+(monete a fascia + un oggetto/equip reale per rarità, da `tesoro._srd`) e **incontro casuale**
+(pesca una **creatura REALE** dell'SRD per banda di GS da `incontro._srd`, + numero/attività/
+atteggiamento/twist — fn dedicata `generaIncontro`). I **ganci/dicerie** sono **world-aware**: i
+terminali `{fazione}`/`{luogo}`/`{nome}` pescano da fazioni/luoghi/PNG **reali del mondo attivo**
+(`worldPool`, dal `mondo` della nota), con fallback alla generazione se il mondo è vuoto. Bottone
+*Genera (locale)* (`meta_actions` → `tp.user.genera`): deduce il tipo dalla categoria, risolve lo
+**stile** (`stile_nomi` di cultura/specie, anche luogo→cultura; ★ candidati in cima), genera N
+opzioni, inserisce al cursore. Logica pura testabile (`generaPersona/Toponimo/Fazione/DaForme/
+Tesoro/Incontro`, `rng` iniettabile).
+
+**Tabelle casuali (roll nativo del Dice Roller)** — separate dal generatore: la nota-libreria
+`Tabelle casuali.md` (a livello-radice) raccoglie **lookup-table** del plugin (`dice: 1dN` + righe
+a range + block-id `^id`), tirabili inline con `` `dice: [[Tabelle casuali#^id]]` `` → numero +
+esito con UI/cronologia. Vincolo: le lookup-table vanno a **livello-radice** di una nota (un
+block-id dentro il fence ````tabs non è raggiungibile dal link).
 
 ## Difficoltà incontri (DMG 2024)
 - **Dati**: tabelle `cr_xp` (GS→PE) + `budget_2024` (Bassa/Moderata/Alta per personaggio)
@@ -115,9 +125,11 @@ nome: `(await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 una volta per sessione (dopo una rebuild basta riaprire la nota).
 
 **Radar degli assi** (`js-engine` → `boot.radar`): il radar del tab *Carattere* legge i
-valori-assi dal **frontmatter** della nota e disegna `views.radarMarkdownFromValues`. Si
-ridisegna alla **riapertura/ri-render** della nota, non live mentre muovi lo slider. *(Una
-variante `meta-bind-js-view` per la reattività live era stata tentata ma dava
-`META_BIND_ERROR` in-app su Meta Bind 1.4.x — verificato 2026-06-01 — quindi è stata
-abbandonata a favore di js-engine, che rende sempre.)* Le **etichette-valore** degli assi
-restano comunque reattive (VIEW Meta Bind), come ritratto/pressione/modificatori PG.
+valori-assi dal **frontmatter** della nota e disegna `views.radarMarkdownFromValues`. È
+**reattivo**: `engine.reactive` (ReactiveComponent) ridisegnato da un listener `metadataCache`
+'changed' registrato sul `component` del blocco (auto-deregistrato all'unload) → si aggiorna
+**live** muovendo uno slider, senza riaprire la nota (confermato in-app 2026-06-09; fallback
+statico se `engine.reactive` non c'è). *(Una variante `meta-bind-js-view` per la reattività dava
+`META_BIND_ERROR` su Meta Bind 1.4.x — verificato 2026-06-01 — quindi si usa js-engine col suo
+`reactive`.)* Le **etichette-valore** degli assi restano reattive anche via VIEW Meta Bind, come
+ritratto/pressione/modificatori PG.

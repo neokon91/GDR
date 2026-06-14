@@ -11,7 +11,7 @@ Dev/Source/                      Dev/Tools/                    dist/GDR-vault/
   JS/ (Templater+JSEngine)│      ├─ common.py   (modello+IO)     z.automazioni/ (JS + *.json)
   SRD/ (JSON IT)          │      ├─ build_srd.py                 z.classi/ (fileClass)
   statblocks/ (FS)        │      ├─ build_personaggio.py         SRD/ (sola lettura)
-  SiteJinja/ (HTML)      ─┘      ├─ render_config.py (.obsidian) Home/LEGGIMI/Indici/
+  SiteJinja/ (HTML)      ─┘      ├─ render_config/ (.obsidian)   Home/LEGGIMI/Indici/
                                  ├─ validate.py                  Mondi/ (i tuoi)
                                  └─ build_site.py ─▶ dist/GDR-site/ (sito giocatori)
 ```
@@ -81,7 +81,7 @@ tutti importano `common`).
 | `build_personaggio.py` | Converter del rules-engine PG: SRD + `pg_rules.yaml` → `personaggio.json`. |
 | `build_site.py` | Esporta il **sito dei giocatori** statico (`build_site`, CLI `--site`): dal vault → HTML spoiler-free in `dist/GDR-site/`. Markdown→HTML minimale; esclude callout `segreto`, campi del DM, blocchi dinamici/Meta Bind/`dice:` e le note `visibilita: dm`/`pubblico: false`. Template in `Dev/Source/SiteJinja/`. |
 | `validate.py` | `check()` + `validate_split`/`validate_entities`/`validate_entity_schema`/`validate_reciprocals`/`validate_aux_yaml`: confine core/system, dup-ID, snake_case, shape, schema wizard (`from` ammessi, `options`/`category`), inversi reciproci, YAML ausiliari (astrologia/pg_rules), template/Jinja, e l'uguaglianza byte delle sorgenti `_*.js`. |
-| `render_config.py` | Scrittura della config `.obsidian` (merge NON distruttivo, un writer per plugin: Templater/Meta Bind/Metadata Menu/Iconize/Callout Manager/Fantasy Statblocks/Initiative Tracker/Folder Notes/Tab Panels/Calendarium/Bookmarks/Homepage/core), i bottoni e fileClass derivati dal modello (`creation_buttons`/`action_buttons`/`fileclass_fields`/`meta_bind_config`), le viste **Bases** (`bases_doc`/`write_bases`) e la **presentazione** colore-categoria (`CATEGORY_ACCENTS` → CSS `gdr.css` + preset Canvas `canvas_colors`). |
+| `render_config/` (package: `_io`/`presentation`/`model_cfg`/`writers`) | Scrittura della config `.obsidian` (merge NON distruttivo, un writer per plugin: Templater/Meta Bind/Metadata Menu/Iconize/Callout Manager/Fantasy Statblocks/Initiative Tracker/Folder Notes/Tab Panels/Calendarium/Bookmarks/Homepage/core), i bottoni e fileClass derivati dal modello (`creation_buttons`/`action_buttons`/`fileclass_fields`/`meta_bind_config`), le viste **Bases** (`bases_doc`/`write_bases`) e la **presentazione** colore-categoria (`CATEGORY_ACCENTS` → CSS `gdr.css` + preset Canvas `canvas_colors`). |
 | `render.py` | Orchestratore (~400 righe): `build()` delega a helper nominati (`write_engine_data`/`render_notes`/`write_bases`/`write_obsidian_config`/…), `clean()`, `scaffold_folders()`, CLI. Re-esporta i nomi pubblici dei moduli per i test. |
 
 ## Pipeline di build (`render.py build()`)
@@ -91,9 +91,11 @@ monolite): carica il modello e delega.
 
 1. `load_core()` (modello fuso) + `load_templates()` (templates.yaml + entità) + `load_pages()`.
 2. `write_engine_data()` — scrive `z.automazioni/data/{core.json,personaggio.json}`
-   (dati per i JS; `core.json` include anche `astrologia`/`generatori`), copia i JS 1:1
-   (`views.js`, `boot.mjs`, `meta_actions.js`, `create_entity.js`, `sali_pg.js`, `genera.js`),
-   genera i wrapper `crea_<id>.js` mancanti. *(I JS cache-ano `core.json` per-modulo.)*
+   (dati per i JS; `core.json` include anche `astrologia`/`generatori`), copia i JS autonomi
+   (`boot.mjs`, `create_entity.js`, `crea_pg.js`, `sali_pg.js`, `genera.js`, `importa_*.js`, …) e
+   **bundla** i frammenti `JS/<stem>/*.js` → `views.js`/`meta_actions.js` (concatenazione
+   byte-esatta, ordine `00_`…`99_`), genera i wrapper `crea_<id>.js` mancanti.
+   *(I JS cache-ano `core.json` per-modulo.)*
 3. `render_notes(jinja_env(), …)` — rende ogni template Jinja → `z.modelli/`, le azioni,
    Home/LEGGIMI, le pagine-indice e le dashboard auto **Ponte Mondo↔Sistema**, **Fronti**,
    **Rete del mondo**, **Economia** e **Geografia** (`Indici/`). Ritorna `{target: testo}`.
