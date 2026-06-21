@@ -1,6 +1,6 @@
 # Reference: Homepage (`homepage`)
 
-Versione vault: **v4.4.2**. Doc: https://github.com/mirnovov/obsidian-homepage
+Versione vault: **v4.4.4**. Doc: https://github.com/mirnovov/obsidian-homepage
 
 > Usato da: `render.py → write_homepage` (`HOMEPAGE_CONFIG`). Apre la nota **Home**
 > all'avvio di Obsidian.

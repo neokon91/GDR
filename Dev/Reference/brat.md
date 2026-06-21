@@ -1,6 +1,6 @@
 # Reference: BRAT (`obsidian42-brat`)
 
-Versione vault: **v2.0.4** (TfTHacker). Repo: https://github.com/TfTHacker/obsidian42-brat
+Versione vault: **v2.0.8** (TfTHacker). Repo: https://github.com/TfTHacker/obsidian42-brat
 
 > **Stato: strumento di manutenzione, non template-facing.** Non lo usa nessun
 > template/script: serve solo a installare/aggiornare plugin **beta** da GitHub.

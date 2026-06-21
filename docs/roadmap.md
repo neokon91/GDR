@@ -5,7 +5,7 @@ Il **come** sta nei doc tecnici ([architecture](architecture.md) · [data_model]
 [rules_layer](rules_layer.md) · [play_layer](play_layer.md) · [plugin_contracts](plugin_contracts.md));
 la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e cosa manca.
 
-## Stato (2026-06-09)
+## Stato (2026-06-21)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` → vault Obsidian (+ sito giocatori
 opzionale). Build vuota; lo zip spedito ha un mondo-esempio **Astaria** seminato da
@@ -54,6 +54,21 @@ SVG/PNG. **Fix**: `sintonia` unificata (colonna Ponte non più vuota); relazioni
 le modifiche (radar-live, infobox, Esplora, mappa); i 2 minori risolti con soluzioni dai doc-plugin/web
 (`[link]` per le relazioni, `isEmpty()` per il filtro Bases). 445 test verdi.
 
+**Sessione 2026-06-21**: **pass di coerenza sul grafo di mondo** (analisi worldbuilder di tutte le
+**45 entità** → implementazione). ~95 relazioni tipizzate aggiunte e **reciproci 30→140** (×4.6, su
+283 legami): ogni legame identitario è navigabile nei due sensi. `personaggio` diventa hub vero
+(espone `governa`/`comanda`/`culti_guidati`/`possiede`/`eventi`); **religione↔popoli**
+(`cultura.culti↔culto.culture`), **hub magico** (`sistema_magico↔incantesimo/divinità/oggetti/specie`,
+`incantesimo.dominio`), **poli cosmici opposti** in self-relation (`dominio.domini_opposti`,
+`legge.legge_opposta`, `divinita.alleati`, `piano.piani_adiacenti`), `regno` con economia/milizia
+(`eserciti`/`risorse`/`religione_stato`), **`background` agganciato alla lore**, **catena di gioco**
+chiusa (`incontro↔scena`, `scena.genera_evento` → il gioco fa storia), geografia reciprocata
+(`ecosistema` non più orfano). 3 nuovi file assi (evento/risorsa/rotta) + campi
+(occupazione/effettivi/composizione). **Additivo**, principio di inclusione rispettato; 450 test verdi.
+**Rifinitura**: preset `famiglia→assi` applicati a tutte le 11 entità con assi (gli slider del
+Carattere partono pre-compilati) + spunti 💡 per 11 categorie prima scoperte
+(calamità/editto/esercito/rotta/missione/scena/background/bastione/incantesimo/indizio/insidia).
+
 **Verdetto 4-lenti** (analisi fresca 2026-06-08, tarata sui competitor — World Anvil/Kanka/
 LegendKeeper/Foundry/D&D Beyond): Architetto **8.5** · World-builder **9** · Game-designer 5.5e
 **9** · PM **6.5**. Il *wedge* difendibile — grafo-di-mondo che **compila in superficie
@@ -79,9 +94,9 @@ bundlata — ma anche questo è **secondario al primo utente reale**.
 
 ## Fatto (consolidato)
 
-- **Modello di mondo** — 36 categorie (classificazione `famiglia`+`tipo`; `istituzione` assorbita
+- **Modello di mondo** — 45 categorie (classificazione `famiglia`+`tipo`; `istituzione` assorbita
   in `fazione` col merge SYS-2 — vedi [data_model §Principio di inclusione](data_model.md)), relazioni tipizzate
-  con inversi auto-derivati, assi tematici 1-5 (radar/archetipi, **preset famiglia→assi**,
+  **densamente reciprocate** (140 inversi espliciti su 283 legami) con inversi auto-derivati, assi tematici 1-5 (radar/archetipi, **preset famiglia→assi**,
   **motore di coerenza** `renderCoerenza` che fa emergere le tensioni tematiche fra entità
   collegate — contrasti forti, rivali-specchio), **economia/risorse**,
   **geografia** (coord/confini/distanza/viaggio), **timeline causale**, **cronologia per-entità**

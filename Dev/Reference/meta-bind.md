@@ -1,6 +1,6 @@
 # Reference: Meta Bind (`obsidian-meta-bind-plugin`)
 
-Versione vault: **v1.4.12**. Doc: https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/
+Versione vault: **v1.4.15**. Doc: https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/
 Sintassi verificata dal sorgente: `packages/core/src/config/ButtonConfig.ts`, `Settings.ts`.
 
 > Usato da: macro Jinja (`_macros.j2`) e config generata (`render.py → meta_bind_config`).

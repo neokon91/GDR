@@ -21,6 +21,33 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 - Macro Jinja morta `confronto_assi()` (mai chiamata; il manuale incolla già il suo blocco `renderAxesCompare`).
 
 ### Aggiunto
+- **Tessuto connettivo del grafo di mondo — ~95 relazioni tipizzate + reciproci (copertura ×4.6)**
+  (`Dev/Source/YAML/entities/*`, `assi/*`): pass di coerenza worldbuilder su tutte le **45 entità**.
+  I `reciprocal` passano da **30 a 140** (su 283 legami): ogni relazione identitaria è ora navigabile
+  nei due sensi. Salienti: **`personaggio`** espone gli inversi che gli mancavano (`governa`→regno,
+  `comanda`→esercito, `culti_guidati`→culto, `possiede`/`opere`→oggetto, `bastioni`, `eventi`,
+  `alberi`) → da pozzo-senza-ritorno a hub; **religione↔popoli** (`cultura.culti↔culto.culture`);
+  **hub magico** (`sistema_magico.incantesimi/divinita/oggetti/specie`, `incantesimo.dominio`);
+  **poli cosmici opposti** come self-relation (`dominio.domini_opposti`, `legge.legge_opposta`,
+  `divinita.alleati`, `piano.piani_adiacenti`); **`regno`** non più cieco su economia/milizia
+  (`eserciti`/`risorse`/`religione_stato`/`lingua_ufficiale`); **`background`** non più isolato
+  (ganci `cultura`/`regno`/`fazione`/`luogo`/`lingua`); **catena di gioco** chiusa (`incontro↔scena`,
+  `incontro↔insidia`, bottino/ricompensa→`oggetto`, `scena.genera_evento` → il gioco rientra nella
+  storia); **geografia** reciprocata (`luogo↔bioma↔ecosistema↔creatura` → `ecosistema` non più
+  orfano). Nuovi campi: `personaggio.occupazione`, `fazione.effettivi`, `esercito.composizione`.
+  Nuovi file assi: **`evento`** (risonanza/controversia/reversibilità + archetipi), **`risorsa`**
+  (valore_strategico/controllabilità/deperibilità), **`rotta`** (sicurezza/traffico/legalità); più
+  `regno`+`potenza`, `piano`+`estensione`, `profezia`+archetipi. Tutto **additivo** (nessuna entità
+  nuova: principio di inclusione rispettato); `evento.epoca↔epoca.eventi` reso reciproco esplicito.
+  `check()` verde, 450 test.
+- **Preset `famiglia→assi` completati + spunti di onboarding estesi** (`entities/*`, `core.yaml`):
+  ogni `famiglia` delle 11 entità dotate di assi (luogo/lingua/specie/dominio/epoca/cultura/
+  personaggio/cosmologia/legge_fondamentale/evento/risorsa) ora **pre-compila gli slider** del
+  Carattere col campo `assi:` — il wizard non parte più da zero sugli assi esoterici (91/101 famiglie
+  coperte; le restanti stanno su entità senza assi, es. incontro/insidia). E **11 categorie prima
+  scoperte hanno gli spunti 💡** «davanti al foglio bianco» (`background`, `bastione`, `calamita`,
+  `editto`, `esercito`, `incantesimo`, `indizio`, `insidia`, `missione`, `rotta`, `scena`). Additivo;
+  `check()` verde, 450 test.
 - **Statblock «2024» (Fantasy Statblocks)** — pelle opt-in legata al layout 5.5: override delle
   variabili pubbliche di FS (maroon/pergamena/serif/filetti) applicato solo agli statblock col
   marcatore `gdr-sb-2024` (cls nel layout → `:has()`); il layout classico (`layout_5e`) resta col

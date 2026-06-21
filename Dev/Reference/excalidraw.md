@@ -1,6 +1,6 @@
 # Reference: Excalidraw (`obsidian-excalidraw-plugin`)
 
-Versione vault: **v2.23.7** (Zsolt Viczian). Doc: https://excalidraw-obsidian.online
+Versione vault: **v2.24.2** (Zsolt Viczian). Doc: https://excalidraw-obsidian.online
 Repo/wiki: https://github.com/zsviczian/obsidian-excalidraw-plugin/wiki
 
 > **Stato: installato, uso USER-DRIVEN (non cablato).** Mappe/diagrammi disegnati a mano

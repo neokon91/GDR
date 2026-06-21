@@ -1,6 +1,6 @@
 # Reference: Folder Notes (`folder-notes`)
 
-Versione vault: **v1.8.19** (Lost Paul). Doc: https://lostpaul.github.io/obsidian-folder-notes/
+Versione vault: **v1.8.26** (Lost Paul). Doc: https://lostpaul.github.io/obsidian-folder-notes/
 
 > **Stato: cablato.** Ogni cartella di categoria ha una **nota-cartella auto-indice**
 > generata dalla pipeline; cliccare la cartella apre l'indice di quella categoria.

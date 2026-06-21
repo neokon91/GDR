@@ -71,8 +71,10 @@ relazioni:                  # link tipizzati (macro relazioni())
   - { field, label, category, multi?, reciprocal? }
     # reciprocal: nome del campo INVERSO sul target, scritto da Collega E dal wizard di
     # creazione (logica condivisa _relations.js: inverseRelation). Serve quando l'auto-derivazione è ambigua:
-    # simmetrico (luogo.confina_con↔confina_con, rotta_con↔rotta_con) o
-    # direzionale (evento.causato_da↔conseguenze). Senza, l'inverso è auto-derivato
+    # simmetrico (luogo.confina_con↔confina_con, rotta_con↔rotta_con; opposti/affini same-type:
+    #   dominio.domini_opposti, legge_fondamentale.legge_opposta, divinita.alleati, piano.piani_adiacenti,
+    #   mito.varianti) o direzionale (evento.causato_da↔conseguenze, epoca.precede↔segue,
+    #   lingua.derivata_da↔lingue_figlie). Senza, l'inverso è auto-derivato
     # se la coppia è univoca, altrimenti generico (connessioni).
 creation:                   # wizard (letto da create_entity.js / generato)
   fields: [ { field, prompt, from?, category?, link?, required?, optional?, multi? } ]

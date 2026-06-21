@@ -1,6 +1,6 @@
 # Reference: TTRPG Tools - Maps (`zoom-map`)
 
-Versione vault: **v2.0.2** (Jareika). Plugin id: `zoom-map` · **nome reale nel manager: «TTRPG Tools - Maps»**.
+Versione vault: **v2.1.5** (Jareika). Plugin id: `zoom-map` · **nome reale nel manager: «TTRPG Tools - Maps»**.
 Repo/doc ufficiale: https://github.com/Jareika/zoom-map
 
 > **Stato: installato, uso USER-DRIVEN (non cablato dalla pipeline).** Mappe interattive

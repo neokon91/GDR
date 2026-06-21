@@ -26,6 +26,14 @@ calcolata (Calma/Tensione/Crisi). È il differenziatore: lore già pronta a esse
 - **Dashboard**: `Indici/Fronti.md` (auto, `fronti.md.j2`) — clock pieni / in corso /
   conseguenze-storia.
 
+## Catena di prep (missione → scena → incontro/indizio)
+Le entità *tavolo* si concatenano per relazione tipizzata **reciproca**: una `missione` raccoglie le
+sue `scene`; ogni `scena` (`conduce_a` per il flusso non-lineare) espone `incontri`, `indizi` (regola
+dei 3 indizi) e — via incontro — `insidie`. Il cerchio col mondo durevole si chiude da due lati:
+`scena.genera_evento`→`evento` trasforma l'esito di una scena-climax in storia di campagna (la timeline
+causale), e bottino/ricompense sono note vere (`incontro.bottino`/`missione.ricompensa_oggetto`→`oggetto`).
+Così la prep è navigabile dal filo-avventura al singolo statblock e ritorno.
+
 ## Archetipi & profilo (tag-da-assi)
 - **Catalogo** `archetipi` in `assi/<id>.yaml`: `{id, nome, quando:{asse: comparatore},
   tag}`. `quando` = combinazione di valori-assi; comparatori `">=N"` `"<=N"` `">N"` `"<N"`

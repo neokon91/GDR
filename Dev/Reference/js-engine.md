@@ -1,6 +1,6 @@
 # Reference: JS Engine (`js-engine`)
 
-Versione vault: **v0.3.5**. Doc: https://www.moritzjung.dev/obsidian-js-engine-plugin-docs/
+Versione vault: **v0.3.6**. Doc: https://www.moritzjung.dev/obsidian-js-engine-plugin-docs/
 
 ## Uso
 Code block ` ```js-engine `: esegue JS e **rende il valore ritornato** al posto del blocco.
