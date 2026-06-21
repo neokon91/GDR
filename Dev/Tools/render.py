@@ -347,7 +347,8 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
                              (f"{INDEX_DIR}/Geografia.md", "geografia.md.j2"),
                              (f"{INDEX_DIR}/Missioni.md", "missioni.md.j2"),
                              (f"{INDEX_DIR}/Occhi del giocatore.md", "occhi_giocatore.md.j2"),
-                             (f"{INDEX_DIR}/Guida al combattimento.md", "guida_combattimento.md.j2")):
+                             (f"{INDEX_DIR}/Guida al combattimento.md", "guida_combattimento.md.j2"),
+                             (f"{INDEX_DIR}/Oracolo.md", "oracolo.md.j2")):
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
         write_text(VAULT / name, text)
         rendered[name] = text
