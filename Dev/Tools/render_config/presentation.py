@@ -259,12 +259,59 @@ def callout_appearance_css(plugins: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+# Pelle statblock «2024» (Fantasy Statblocks) — OPT-IN, legata al layout 5.5.
+# Sovrascrive le VARIABILI pubbliche di FS (--statblock-*), non classi interne → robusta
+# agli update del plugin. Si applica SOLO agli statblock del layout «D&D 5.5», che porta il
+# blocco-marcatore `gdr-sb-2024` (cls nel layout JSON) → `:has()`. Il layout classico
+# (`layout_5e`), privo del marcatore, resta col look di DEFAULT di FST (entrambi convivono).
+# I valori (maroon MM/pergamena/font) sono un primo pass, rifinibili a schermo.
+STATBLOCK_2024_CSS = """
+/* === Statblock 2024 (Fantasy Statblocks) — pelle opt-in legata al layout 5.5 ====== */
+.statblock:has(.gdr-sb-2024) {
+  --statblock-primary-color: #58180d;               /* maroon MM 2024: barre/filetti */
+  --statblock-bar-color: #58180d;
+  --statblock-rule-color: #58180d;
+  --statblock-heading-font-color: #58180d;          /* nome della creatura */
+  --statblock-section-heading-font-color: #58180d;  /* "Azioni", "Tratti", … */
+  --statblock-section-heading-border-color: #58180d;
+  --statblock-property-name-font-color: #58180d;    /* etichette in grassetto */
+  --statblock-background-color: #fdf6ec;            /* pergamena chiara */
+  --statblock-font-color: #1d1b18;
+  --statblock-border-color: #c9b88f;
+  --statblock-heading-font: "Libre Baskerville", Georgia, serif;
+  --statblock-section-heading-font-family: "Libre Baskerville", Georgia, serif;
+  --statblock-property-name-font-family: "Libre Baskerville", Georgia, serif;
+  --statblock-content-font: "Noto Serif", Georgia, serif;
+}
+/* Tabella caratteristiche 2024 (3+3): vincolata al riquadro, non sborda.
+   Il wrapper-valore della cella è INLINE (shrink-to-fit, componente Svelte): senza forzarlo a
+   blocco, il width:100% della tabella vale la larghezza NATURALE (sborda). Quindi prima: */
+.statblock:has(.gdr-sb-2024) :has(> table) { display: block; width: 100%; }
+.statblock:has(.gdr-sb-2024) table {
+  width: 100% !important;        /* !important: FS/Obsidian impongono width:auto sulle tabelle md → la tabella sborderebbe */
+  table-layout: fixed !important;/* 8 colonne equidistribuite nel riquadro */
+  margin: 0.15em 0;
+  font-size: 0.8em;
+  border-collapse: collapse;
+}
+.statblock:has(.gdr-sb-2024) th,
+.statblock:has(.gdr-sb-2024) td {
+  padding: 1px 2px;
+  text-align: center;
+}
+/* Le due celle-caratteristica (For/Des/Cos e Int/Sag/Car) allineate a sinistra. */
+.statblock:has(.gdr-sb-2024) td:nth-child(1),
+.statblock:has(.gdr-sb-2024) td:nth-child(5) { text-align: left; }
+"""
+
+
 def write_workspace_chrome(obsidian: Path, plugins: dict[str, Any]) -> None:
     """Pulizia dell'esploratore: snippet CSS che nasconde le z.* + esclusione da
     ricerca/grafo/suggerimenti (userIgnoreFilters). Tutto non distruttivo. Il CSS è
     il base statico + accento per-categoria (B) + aspetto dei callout GDR."""
     write_text(obsidian / "snippets" / "gdr.css",
-               HIDE_FOLDERS_SNIPPET + category_accent_css() + callout_appearance_css(plugins))
+               HIDE_FOLDERS_SNIPPET + category_accent_css() + callout_appearance_css(plugins)
+               + STATBLOCK_2024_CSS)
     union_list_key(obsidian / "appearance.json", "enabledCssSnippets", ["gdr"])
     union_list_key(obsidian / "app.json", "userIgnoreFilters", [f"{d}/" for d in HIDDEN_DIRS])
 

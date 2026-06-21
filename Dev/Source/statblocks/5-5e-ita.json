@@ -3,6 +3,7 @@
     {
       "type": "inline",
       "id": "55it-header-inline",
+      "cls": "gdr-sb-2024",
       "properties": [],
       "hasRule": true,
       "nested": [
@@ -145,41 +146,13 @@
       "conditioned": true
     },
     {
-      "type": "table",
-      "id": "55it-stats-table",
+      "type": "property",
+      "id": "55it-stats-2024",
       "properties": [
         "stats"
       ],
-      "headers": [
-        "For",
-        "Des",
-        "Cos",
-        "Int",
-        "Sag",
-        "Car"
-      ],
-      "calculate": true,
-      "hasRule": true,
-      "conditioned": true
-    },
-    {
-      "type": "table",
-      "id": "55it-fage-stats-compat",
-      "properties": [
-        "fage_stats"
-      ],
-      "headers": [
-        "Accuracy",
-        "Communication",
-        "Constitution",
-        "Dexterity",
-        "Fighting",
-        "Intelligence",
-        "Perception",
-        "Strength",
-        "Willpower"
-      ],
-      "calculate": false,
+      "display": "",
+      "callback": "const Lh=[['For',0],['Des',1],['Cos',2]];const Rh=[['Int',3],['Sag',4],['Car',5]];const s=Array.isArray(monster.stats)?monster.stats:[10,10,10,10,10,10];const sv={};(monster.saves||[]).forEach(function(o){for(var k in o){sv[k]=o[k];}});function m(x){return Math.floor((Number(x)-10)/2);}function g(n){n=Number(n);return (n>=0?'+':'')+n;}function cell(p){var lab=p[0],v=Number(s[p[1]]!=null?s[p[1]]:10),mo=m(v),sa=(sv[lab]!=null?sv[lab]:mo);return '**'+lab+'** | '+v+' | '+g(mo)+' | '+g(sa);}var rows=[0,1,2].map(function(i){return '| '+cell(Lh[i])+' | '+cell(Rh[i])+' |';}).join('\\n');return '\\n|  | Punt. | Mod | TS |  | Punt. | Mod | TS |\\n|:--|:--:|:--:|:--:|:--|:--:|:--:|:--:|\\n'+rows+'\\n';",
       "hasRule": true,
       "conditioned": true
     },
@@ -199,15 +172,6 @@
         "senses"
       ],
       "nested": [
-        {
-          "type": "saves",
-          "id": "55it-saves",
-          "display": "Tiri Salvezza",
-          "properties": [
-            "saves"
-          ],
-          "conditioned": true
-        },
         {
           "type": "saves",
           "id": "55it-skills",

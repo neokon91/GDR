@@ -21,6 +21,14 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 - Macro Jinja morta `confronto_assi()` (mai chiamata; il manuale incolla già il suo blocco `renderAxesCompare`).
 
 ### Aggiunto
+- **Statblock «2024» (Fantasy Statblocks)** — pelle opt-in legata al layout 5.5: override delle
+  variabili pubbliche di FS (maroon/pergamena/serif/filetti) applicato solo agli statblock col
+  marcatore `gdr-sb-2024` (cls nel layout → `:has()`); il layout classico (`layout_5e`) resta col
+  look di default di FS. **Griglia caratteristiche 3+3 ufficiale**: For/Des/Cos · Int/Sag/Car con
+  Punteggio/Mod/TS in celle separate (TS integrati da `stats`+`saves` via callback → tabella
+  markdown), vincolata al riquadro (`width:100% !important` + `table-layout:fixed` + wrapper-valore
+  inline forzato a blocco). Rimossi dal layout 5.5 la tabella-colonne, il blocco `fage_stats`
+  (residuo Fantasy AGE) e la riga «Tiri Salvezza» (ora nella griglia).
 - **Generatore — nuove categorie**: `trappola/insidia` (innesco + effetto coi dadi + TS/CD +
   individuazione/disinnesco), `evento di viaggio` (overland/hexcrawl) e **`incontro casuale`** —
   che pesca una **creatura REALE dell'SRD** per banda di GS (`srd_creature_pool` → `incontro._srd`,
