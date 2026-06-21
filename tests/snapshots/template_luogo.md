@@ -249,6 +249,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Ecosistemi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Ecosistemi"), useLinks(partial), allowOther):ecosistemi]`
 > **Rotte che vi passano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Rotte"), useLinks(partial), allowOther):rotte]`
 > **Calamità in corso**: `INPUT[inlineListSuggester(optionQuery("Mondi/Calamita"), useLinks(partial), allowOther):calamita]`
+> **Conteso da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):conteso_da]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

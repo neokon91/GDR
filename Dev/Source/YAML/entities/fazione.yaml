@@ -63,7 +63,7 @@ fields:
   effettivi:       { label: "Effettivi / membri", widget: text }
 # `forma_governo` rimosso: ridondante col tipo (la FORMA è il sottotipo) e con l'asse
 # `struttura`; non aveva senso su una banda. `sede`/`controlla_risorse` restano relazioni.
-scheda: [portata, motto, fondazione, simbolo, effettivi]
+scheda: [portata, motto, fondazione, simbolo, effettivi, scoperta, interazione, movente]
 relazioni:
   - { field: sede,      label: Sede,          category: luogo }
   - { field: fondatori, label: Fondatori,     category: personaggio, multi: true }
@@ -84,6 +84,7 @@ relazioni:
   - { field: cultura, label: Cultura / tradizione, category: cultura, reciprocal: istituzioni }
   - { field: culto, label: Culto / fede, category: culto, reciprocal: fazione }
   - { field: background, label: Background affiliati, category: background, multi: true, reciprocal: fazione }
+  - { field: contende, label: Contende (territori), category: luogo, multi: true, reciprocal: conteso_da }
 creation:
   fields:
     - { field: tipo, prompt: "Tipo di fazione", from: subtypes, required: true }

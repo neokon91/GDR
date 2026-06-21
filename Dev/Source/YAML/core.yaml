@@ -32,6 +32,12 @@ fields:
   conseguenza_su: { label: Conseguenza su,       widget: legame }
   uso_al_tavolo:  { label: Uso al tavolo,        widget: testo_area }
   gancio:         { label: Gancio,               widget: testo_area }
+  # Giocabilità (disciplina di prep, idea phd20): i 3 test perché un'entità sia GIOCABILE
+  # e non lore morta — come si scopre, cosa ci si può fare, perché al PG importa. Queryabili
+  # (una vista «non giocabile» elenca chi ne è privo).
+  scoperta:       { label: "Come si scopre",     widget: text, placeholder: "es. un PNG o una diceria" }
+  interazione:    { label: "Cosa possono fare",  widget: text, placeholder: "la scelta o ricompensa al tavolo" }
+  movente:        { label: "Perché gli importa", widget: text, placeholder: "il gancio per i PG" }
   player_safe:    { label: Versione player-safe, widget: text, placeholder: "cosa possono sapere i giocatori" }
   # Rivelazione progressiva (sito-giocatori): QUANDO la nota entra nel portale dei
   # giocatori. Asse temporale, ortogonale a `visibilita` (che è il «mai»: dm/meta).

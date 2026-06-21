@@ -123,6 +123,28 @@ plugins:
     author: Lost Paul
     repo: LostPaul/obsidian-folder-notes
     license: AGPL-3.0
+  # Non critici — funzioni aggiuntive (fase «mappa vivente & tavolo»). Il vault gira
+  # anche senza: niente `critico`/`rompe` (la Diagnostica non li segnala come bloccanti).
+  - id: image-window
+    name: Second Window
+    author: Jeremy Valentine
+    repo: javalent/second-window
+    license: MIT
+  - id: heraldry-weaver
+    name: Heraldry Weaver
+    author: Obsidian TTRPG Community
+    repo: Obsidian-TTRPG-Community/heraldry-weaver
+    license: MIT
+  - id: made-up-words
+    name: Made Up Words
+    author: Obsidian TTRPG Community
+    repo: obsidian-ttrpg-community/Made-Up-Words
+    license: MIT
+  - id: better-export-pdf
+    name: Better Export PDF
+    author: l1xnan
+    repo: l1xnan/obsidian-better-export-pdf
+    license: MIT
 metabind_inputs:
   stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
   # Campi dei profili-sottotipo del luogo (gerarchia spaziale + edifici dell'insediamento).

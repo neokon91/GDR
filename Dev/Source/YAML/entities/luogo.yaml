@@ -82,6 +82,10 @@ famiglie:
 # alla distanza per confini (BFS su confina_con). Editabile nella tab Mappa.
 fields:
   coord: { label: Coordinate, widget: text }
+  # Confini della regione sulla mappa (path SVG / lista di punti): dato che il futuro
+  # pannello «mappa vivente» colora dal grafo (controllata_da/conteso_da + Fronti).
+  # Scritto dall'editor-mappa, non dal wizard.
+  confini: { label: "Confini (mappa)", widget: text }
   # Campi dei profili-sottotipo: renderTipoProfilo li mostra secondo il `tipo` scelto;
   # si modificano dal pannello Proprietà di Obsidian (sono chiavi di frontmatter).
   estensione:          { label: Estensione,             widget: text }
@@ -192,6 +196,14 @@ relazioni:
   category: calamita
   multi: true
   reciprocal: luoghi
+# Territorio CONTESO: chi rivendica il luogo oltre a chi lo controlla (controllata_da).
+# Backbone della «mappa vivente» politica: più rivendicanti → il motore di coerenza
+# segnala la contesa e i Fronti vi poggiano la pressione (clock di conquista).
+- field: conteso_da
+  label: Conteso da
+  category: fazione
+  multi: true
+  reciprocal: contende
 creation:
   fields:
   - field: tipo

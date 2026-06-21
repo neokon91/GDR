@@ -50,6 +50,9 @@ scheda:
 - pronomi
 - eta
 - occupazione
+- scoperta
+- interazione
+- movente
 relazioni:
 - field: fazione
   label: Affiliazione

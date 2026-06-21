@@ -19,6 +19,9 @@
 > | **Epoca di fondazione** | `INPUT[text:fondazione]` |
 > | **Simbolo** | `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]` |
 > | **Effettivi / membri** | `INPUT[text:effettivi]` |
+> | **Come si scopre** | `INPUT[text(placeholder(es. un PNG o una diceria)):scoperta]` |
+> | **Cosa possono fare** | `INPUT[text(placeholder(la scelta o ricompensa al tavolo)):interazione]` |
+> | **Perché gli importa** | `INPUT[text(placeholder(il gancio per i PG)):movente]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -235,6 +238,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Cultura / tradizione**: `INPUT[suggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):cultura]`
 > **Culto / fede**: `INPUT[suggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culto]`
 > **Background affiliati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Background"), useLinks(partial), allowOther):background]`
+> **Contende (territori)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):contende]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

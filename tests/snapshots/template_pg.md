@@ -15,6 +15,9 @@
 > | **Pronomi** | `INPUT[text(placeholder(es. lei / lui / loro)):pronomi]` |
 > | **Età** | `INPUT[text(placeholder(es. 34 o «secoli»)):eta]` |
 > | **Occupazione** | `INPUT[text:occupazione]` |
+> | **Come si scopre** | `INPUT[text(placeholder(es. un PNG o una diceria)):scoperta]` |
+> | **Cosa possono fare** | `INPUT[text(placeholder(la scelta o ricompensa al tavolo)):interazione]` |
+> | **Perché gli importa** | `INPUT[text(placeholder(il gancio per i PG)):movente]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
