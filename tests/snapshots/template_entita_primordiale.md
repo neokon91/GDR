@@ -143,6 +143,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ent
 > **Divinità discese**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
 > **Luoghi (prigioni, santuari)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
 > **Sistemi magici che vi attingono**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
+> **Stirpi generate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Specie"), useLinks(partial), allowOther):stirpi]`
+> **Ere primordiali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):epoche]`
+> **Miti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Miti"), useLinks(partial), allowOther):miti]`
+> **Piani di prigionia / dimora**: `INPUT[inlineListSuggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piani]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -25,7 +25,7 @@
 > [!info]- ℹ️ Guida — Incantesimo
 > **Cos'è** · Un incantesimo che i giocatori possono memorizzare e lanciare, reso nella scheda PG con slot e link.
 > **Campi chiave** · **Livello** (0 = trucchetto) + **Classi che lo lanciano** per renderlo selezionabile; **Tempo di lancio**/**Durata** (concentrazione) governano l'uso in combattimento.
-
+> **Spunti** · Cosa fa di memorabile che nessun'altra magia fa? Che prezzo o rischio esige da chi lo lancia? Chi lo teme, e chi ucciderebbe per averlo?
 
 ````tabs
 --- ⚙ Meccanica
@@ -49,6 +49,7 @@
 
 > [!example] Relazioni
 > **Sistema magico**: `INPUT[suggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistema_magico]`
+> **Dominio**: `INPUT[suggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):dominio]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -19,14 +19,14 @@ subtypes:
 # Classificazione a 2 livelli: la 'famiglia' (ambito di realtà governato) affianca il
 # 'tipo' (forma della sfera). Select + legenda auto-documentante.
 famiglie:
-- { nome: ordine,      descrizione: "La sfera della struttura, della legge e della stabilità." }
-- { nome: caos,        descrizione: "La sfera del mutamento, dell'imprevedibile e della distruzione." }
-- { nome: vita,        descrizione: "La sfera della crescita, della nascita e della fertilità." }
-- { nome: morte,       descrizione: "La sfera della fine, del trapasso e dell'oltretomba." }
-- { nome: natura,      descrizione: "La sfera del mondo vivente, degli elementi e dei cicli naturali." }
-- { nome: conoscenza,  descrizione: "La sfera del sapere, della mente e della verità." }
-- { nome: energia,     descrizione: "La sfera del potere grezzo, della magia e delle forze primarie." }
-- { nome: fato,        descrizione: "La sfera del destino, del tempo e degli eventi predeterminati." }
+- { nome: ordine,      descrizione: "La sfera della struttura, della legge e della stabilità.", assi: { orientamento: 1, tensione: 2 } }
+- { nome: caos,        descrizione: "La sfera del mutamento, dell'imprevedibile e della distruzione.", assi: { orientamento: 4, tensione: 4 } }
+- { nome: vita,        descrizione: "La sfera della crescita, della nascita e della fertilità.", assi: { orientamento: 1 } }
+- { nome: morte,       descrizione: "La sfera della fine, del trapasso e dell'oltretomba.", assi: { orientamento: 5, tensione: 2 } }
+- { nome: natura,      descrizione: "La sfera del mondo vivente, degli elementi e dei cicli naturali.", assi: { orientamento: 2, pervasivita: 3 } }
+- { nome: conoscenza,  descrizione: "La sfera del sapere, della mente e della verità.", assi: { orientamento: 3 } }
+- { nome: energia,     descrizione: "La sfera del potere grezzo, della magia e delle forze primarie.", assi: { attivita: 4 } }
+- { nome: fato,        descrizione: "La sfera del destino, del tempo e degli eventi predeterminati.", assi: { attivita: 5, pervasivita: 4 } }
 relazioni:
 - field: leggi
   label: Leggi fondamentali
@@ -48,6 +48,16 @@ relazioni:
   label: Divinità affini
   category: divinita
   multi: true
+- field: domini_opposti
+  label: Domini in tensione
+  category: dominio
+  multi: true
+  reciprocal: domini_opposti
+- field: incantesimi
+  label: Incantesimi del dominio
+  category: incantesimo
+  multi: true
+  reciprocal: dominio
 creation:
   fields:
   - field: tipo

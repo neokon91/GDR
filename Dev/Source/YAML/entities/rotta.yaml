@@ -24,7 +24,7 @@ fields:
   tappe_rotta: { label: Tappe / soste,     widget: text }
 scheda: [merci, pericoli]
 relazioni:
-- { field: estremi,       label: Collega (estremi), category: luogo, multi: true }
+- { field: estremi,       label: Collega (estremi), category: luogo, multi: true, reciprocal: rotte }
 - { field: tappe_luoghi,  label: Tappe intermedie,  category: luogo, multi: true }
 - { field: controllata_da, label: Controllata da,   category: fazione }
 - { field: risorse,       label: Risorse in transito, category: risorsa, multi: true, reciprocal: trasportata_su }

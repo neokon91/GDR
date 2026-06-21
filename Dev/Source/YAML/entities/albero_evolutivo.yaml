@@ -29,16 +29,20 @@ relazioni:
 - field: sistema_magico
   label: Tradizione magica
   category: sistema_magico
+  reciprocal: alberi
 - field: specie
   label: Specie
   category: specie
+  reciprocal: alberi
 - field: culto
   label: Culto / ordine
   category: culto
+  reciprocal: alberi
 - field: figure
   label: Esempi viventi
   category: personaggio
   multi: true
+  reciprocal: alberi
 creation:
   fields:
   - field: tipo

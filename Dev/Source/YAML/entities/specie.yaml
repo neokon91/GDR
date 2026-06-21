@@ -22,14 +22,14 @@ subtypes:
 # Classificazione a 2 livelli: la 'famiglia' (origine, seed FW glossario_razza)
 # affianca il 'tipo' (rarità). Select + legenda auto-documentante.
 famiglie:
-- { nome: ancestrale,   descrizione: "Antichissima, nata nei primordi del cosmo o da eventi mitici." }
-- { nome: spirituale,   descrizione: "Legata al ciclo delle anime, al karma o a piani spirituali." }
-- { nome: cosmica,      descrizione: "Opera su scala universale o planare." }
-- { nome: mortale,      descrizione: "Finita nel tempo: soggetta a nascita, crescita e morte." }
-- { nome: corrompibile, descrizione: "Nata pura o neutra, ma molto influenzabile da mutazioni, magie o traumi." }
-- { nome: onirica,      descrizione: "Nata nei sogni cosmici, nell'inconscio collettivo o nei piani onirici." }
-- { nome: elementale,   descrizione: "Composta o generata dagli elementi primari (fuoco, acqua, aria, terra, etere)." }
-- { nome: sintetica,    descrizione: "Creata artificialmente tramite magia, alchimia o tecnologia." }
+- { nome: ancestrale,   descrizione: "Antichissima, nata nei primordi del cosmo o da eventi mitici.", assi: { memoria_ancestrale: 5, longevita_percettiva: 4 } }
+- { nome: spirituale,   descrizione: "Legata al ciclo delle anime, al karma o a piani spirituali.", assi: { predisposizione_magica: 4, memoria_ancestrale: 4 } }
+- { nome: cosmica,      descrizione: "Opera su scala universale o planare.", assi: { predisposizione_magica: 5, longevita_percettiva: 5 } }
+- { nome: mortale,      descrizione: "Finita nel tempo: soggetta a nascita, crescita e morte.", assi: { predisposizione_magica: 1, longevita_percettiva: 2 } }
+- { nome: corrompibile, descrizione: "Nata pura o neutra, ma molto influenzabile da mutazioni, magie o traumi.", assi: { memoria_ancestrale: 2 } }
+- { nome: onirica,      descrizione: "Nata nei sogni cosmici, nell'inconscio collettivo o nei piani onirici.", assi: { predisposizione_magica: 4, memoria_ancestrale: 3, longevita_percettiva: 5 } }
+- { nome: elementale,   descrizione: "Composta o generata dagli elementi primari (fuoco, acqua, aria, terra, etere).", assi: { predisposizione_magica: 5 } }
+- { nome: sintetica,    descrizione: "Creata artificialmente tramite magia, alchimia o tecnologia.", assi: { memoria_ancestrale: 1 } }
 relazioni:
 - field: origine
   label: Regione d'origine
@@ -39,6 +39,30 @@ relazioni:
   label: Culture associate
   category: cultura
   multi: true
+- field: sistemi_magici
+  label: Magia innata
+  category: sistema_magico
+  multi: true
+  reciprocal: specie
+- field: lingue
+  label: Lingue parlate
+  category: lingua
+  multi: true
+- field: origine_divina
+  label: Origine divina
+  category: divinita
+  multi: true
+  reciprocal: creo_specie
+- field: origine_primordiale
+  label: Origine primordiale
+  category: entita_primordiale
+  multi: true
+  reciprocal: stirpi
+- field: alberi
+  label: Rami evolutivi
+  category: albero_evolutivo
+  multi: true
+  reciprocal: specie
 scheda:
 - taglia
 - velocita

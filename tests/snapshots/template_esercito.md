@@ -10,6 +10,7 @@
 > | **Comandante** | `VIEW[{comandante}][link]` |
 > | **Consistenza** | `INPUT[consistenza][:consistenza]` |
 > | **Morale** | `INPUT[morale][:morale]` |
+> | **Composizione** | `INPUT[text:composizione]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -22,7 +23,7 @@
 > [!info]- ℹ️ Guida — Esercito
 > **Cos'è** · Un esercito è una forza armata organizzata: il braccio bellico di un regno o di una fazione, che può marciare come Fronte verso una battaglia o una conquista.
 > **Campi chiave** · **Tipo** (forma: regolare, mercenari, flotta…) e **Comandante**; **Consistenza** e **Morale** dicono quanto è grosso e quanto regge; con un **clock** marcia verso il suo obiettivo.
-
+> **Spunti** · Cosa vuole conquistare, e cosa è disposto a bruciare? Qual è la sua debolezza, o la crepa nelle file? Quanto è leale — e cosa lo farebbe disertare?
 
 ````tabs
 --- 📖 Lore

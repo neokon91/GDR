@@ -22,7 +22,7 @@
 > [!info]- ℹ️ Guida — Background
 > **Cos'è** · Il background che, nel 2024, dà al PG le competenze d'origine e il primo talento — scegliendolo in creazione il motore lo applica.
 > **Campi chiave** · Tutti obbligatori per essere 2024-legale: **Caratteristiche** (3), **Abilità** (2), **Talento d'origine** (1) e **Strumento** (1).
-
+> **Spunti** · Chi era prima dell'avventura — e cosa l'ha strappato a quella vita? Cosa si è lasciato alle spalle, e chi non l'ha perdonato? Quale ferita o promessa porta ancora con sé?
 
 ````tabs
 --- 📋 Scheda
@@ -55,6 +55,12 @@ sort tipo asc, file.name asc
 > [!tip] Collega
 > Modo rapido e **guidato**: `BUTTON[collega-nota]` — scegli relazione e nota da una lista (scrive anche l'inverso). In alternativa compila i campi qui sotto: l'icona **☰** apre la **lista** delle note, la **✏️** è solo la modifica a mano.
 
+> [!example] Relazioni
+> **Cultura d'origine**: `INPUT[suggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):cultura]`
+> **Regno / patria**: `INPUT[suggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):regno]`
+> **Fazione / gilda**: `INPUT[suggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazione]`
+> **Luogo d'origine**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_origine]`
+> **Lingua appresa**: `INPUT[inlineListSuggester(optionQuery("Mondi/Lingue"), useLinks(partial), allowOther):lingua]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

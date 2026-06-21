@@ -26,13 +26,14 @@ fields:
   ingaggio:    { label: Ingaggio / paga,  widget: text }
   navi:        { label: Navi,             widget: text }
   morale:      { label: Morale,           widget: morale }
-scheda: [consistenza, morale]
+  composizione: { label: Composizione, widget: text }
+scheda: [consistenza, morale, composizione]
 relazioni:
-- { field: regno,        label: Stato / regno,   category: regno }
-- { field: comandante,   label: Comandante,      category: personaggio }
-- { field: fazione,      label: Fazione,         category: fazione }
+- { field: regno,        label: Stato / regno,   category: regno, reciprocal: eserciti }
+- { field: comandante,   label: Comandante,      category: personaggio, reciprocal: comanda }
+- { field: fazione,      label: Fazione,         category: fazione, reciprocal: eserciti }
 - { field: schierato_in, label: Schierato in,    category: luogo }
-- { field: nemici,       label: Nemici in campo, category: esercito, multi: true }
+- { field: nemici,       label: Nemici in campo, category: esercito, multi: true, reciprocal: nemici }
 creation:
   fields:
   - { field: tipo, prompt: Tipo di forza armata, from: subtypes, required: true }

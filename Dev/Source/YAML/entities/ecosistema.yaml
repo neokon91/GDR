@@ -26,13 +26,16 @@ relazioni:
 - field: bioma
   label: Bioma
   category: bioma
+  reciprocal: ecosistemi
 - field: specie
   label: Specie coinvolte
   category: creatura
   multi: true
+  reciprocal: ecosistemi
 - field: luogo
   label: Dove si trova
   category: luogo
+  reciprocal: ecosistemi
 creation:
   fields:
   - field: tipo

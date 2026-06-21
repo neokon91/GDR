@@ -94,6 +94,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "pia
 > **Ospitalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):ospitalita]` → `VIEW[{ospitalita} == 5 ? "5 · Accogliente" : ({ospitalita} == 4 ? "4 · Vivibile" : ({ospitalita} == 3 ? "3 · Estraneo" : ({ospitalita} == 2 ? "2 · Ostile" : ({ospitalita} == 1 ? "1 · Letale" : ("—")))))]`
 > **Risonanza** `INPUT[slider(minValue(1), maxValue(5), addLabels):risonanza]` → `VIEW[{risonanza} == 5 ? "5 · Traboccante" : ({risonanza} == 4 ? "4 · Risonante" : ({risonanza} == 3 ? "3 · Permeabile" : ({risonanza} == 2 ? "2 · Remoto" : ({risonanza} == 1 ? "1 · Sigillato" : ("—")))))]`
 > **Inclinazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):inclinazione]` → `VIEW[{inclinazione} == 5 ? "5 · Maligno" : ({inclinazione} == 4 ? "4 · Sinistro" : ({inclinazione} == 3 ? "3 · Indifferente" : ({inclinazione} == 2 ? "2 · Sereno" : ({inclinazione} == 1 ? "1 · Luminoso" : ("—")))))]`
+> **Estensione** `INPUT[slider(minValue(1), maxValue(5), addLabels):estensione]` → `VIEW[{estensione} == 5 ? "5 · Infinito" : ({estensione} == 4 ? "4 · Sconfinato" : ({estensione} == 3 ? "3 · Reame" : ({estensione} == 2 ? "2 · Regione" : ({estensione} == 1 ? "1 · Tasca" : ("—")))))]`
 
 > [!note]- Materialità — Quanto il piano è sostanza tangibile o puro spirito.
 > **1 · Immateriale** — Puro pensiero o energia, senza sostanza.
@@ -130,6 +131,13 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "pia
 > **4 · Sinistro** — Inquietante, corruttore, tendente al male.
 > **5 · Maligno** — Ostile a ogni vita; male incarnato.
 
+> [!note]- Estensione — La scala spaziale del piano, dalla sacca tascabile all'infinito.
+> **1 · Tasca** — Una sacca piccola e chiusa; un solo luogo.
+> **2 · Regione** — Vasto come una contrada; ha confini raggiungibili.
+> **3 · Reame** — Ampio come un mondo; lo si esplora per ere.
+> **4 · Sconfinato** — Nessun confine noto; chi lo misura si perde.
+> **5 · Infinito** — Senza fine per natura; la distanza non ha senso.
+
 --- 🔗 Collegamenti
 
 > [!tip] Collega
@@ -142,6 +150,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "pia
 > **Soglie / accessi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):soglie]`
 > **Divinità che vi dimorano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
 > **Sistemi magici di risonanza**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
+> **Piani adiacenti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piani_adiacenti]`
+> **Primordiali che vi giacciono**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):primordiali]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

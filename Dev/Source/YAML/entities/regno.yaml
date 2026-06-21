@@ -55,6 +55,7 @@ relazioni:
   label: Dinastia / sovrani
   category: personaggio
   multi: true
+  reciprocal: governa
 - field: fazioni
   label: Organi e fazioni di stato   # qualunque organo ufficiale (gilda, tribunale, accademia, corte…), non solo la 'corte'
   category: fazione
@@ -71,6 +72,27 @@ relazioni:
 - field: editti
   label: Editti
   category: editto
+  multi: true
+  reciprocal: regno
+- field: eserciti
+  label: Eserciti / forze armate
+  category: esercito
+  multi: true
+  reciprocal: regno
+- field: risorse
+  label: Risorse / economia
+  category: risorsa
+  multi: true
+- field: religione_stato
+  label: Religione di stato
+  category: culto
+  reciprocal: regno
+- field: lingua_ufficiale
+  label: Lingua ufficiale
+  category: lingua
+- field: background
+  label: Background d'origine
+  category: background
   multi: true
   reciprocal: regno
 creation:

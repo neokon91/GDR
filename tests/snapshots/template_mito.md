@@ -110,6 +110,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mit
 > **Divinità coinvolte**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
 > **Luogo simbolico**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 > **Culti che lo tramandano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti]`
+> **Fatto storico sottostante**: `INPUT[suggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):evento_storico]`
+> **Varianti e versioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Miti"), useLinks(partial), allowOther):varianti]`
+> **Figure del mito**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):figure]`
+> **Profezie contenute**: `INPUT[inlineListSuggester(optionQuery("Mondi/Profezie"), useLinks(partial), allowOther):profezie]`
+> **Primordiali del mito**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):primordiali]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

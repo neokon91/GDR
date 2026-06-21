@@ -29,6 +29,7 @@ relazioni:
 - { field: regno,    label: Regno / potere, category: regno }
 - { field: luoghi,   label: Dove vale,      category: luogo, multi: true }
 - { field: fazioni,  label: Fazioni toccate, category: fazione, multi: true }
+- { field: promulgato_in, label: Promulgato in, category: epoca }
 creation:
   fields:
   - { field: tipo, prompt: Tipo di norma, from: subtypes, required: true }

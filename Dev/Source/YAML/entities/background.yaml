@@ -23,6 +23,26 @@ scheda:
 - abilita_background
 - strumento
 - talento_origine
+relazioni:
+- field: cultura
+  label: Cultura d'origine
+  category: cultura
+  reciprocal: background
+- field: regno
+  label: Regno / patria
+  category: regno
+  reciprocal: background
+- field: fazione
+  label: Fazione / gilda
+  category: fazione
+  reciprocal: background
+- field: luogo_origine
+  label: Luogo d'origine
+  category: luogo
+- field: lingua
+  label: Lingua appresa
+  category: lingua
+  multi: true
 creation:
   fields:
   - field: tipo

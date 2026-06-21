@@ -48,6 +48,24 @@ relazioni:
 - field: specie
   label: Specie
   category: specie
+- field: ecosistemi
+  label: Ecosistemi
+  category: ecosistema
+  multi: true
+  reciprocal: specie
+- field: biomi
+  label: Habitat (biomi)
+  category: bioma
+  multi: true
+  reciprocal: specie
+- field: origine_primordiale
+  label: Origine divina/primordiale
+  category: entita_primordiale
+  multi: true
+- field: culture
+  label: Culture che la venerano/temono
+  category: cultura
+  multi: true
 creation:
   fields:
   - field: tipo

@@ -19,7 +19,7 @@
 > [!info]- ℹ️ Guida — Scena
 > **Cos'è** · Una scena è un beat dell'avventura: dove sei, cosa succede, dove puoi andare. Le scene collegate da «Conduce a» formano il flusso non-lineare; gli «Indizi» le legano in un mistero.
 > **Campi chiave** · **Ruolo** (apertura/snodo/climax…); **Conduce a** per il flusso; **Indizi** + gli snodi **chiave** per la regola dei 3 indizi (≥3 vie a ogni rivelazione).
-
+> **Spunti** · Qual è l'obiettivo e la posta in questo beat? Quale complicazione fa saltare il piano? Dove conduce — quale scena apre dopo?
 
 ````tabs
 --- 📖 Lore
@@ -68,6 +68,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Incontri**: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
 > **Rivelata dagli indizi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Indizi"), useLinks(partial), allowOther):indizi]`
 > **Indizi presenti qui**: `INPUT[inlineListSuggester(optionQuery("Mondi/Indizi"), useLinks(partial), allowOther):indizi_qui]`
+> **Genera l'evento**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):genera_evento]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

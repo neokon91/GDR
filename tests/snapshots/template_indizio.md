@@ -19,7 +19,7 @@
 > [!info]- ℹ️ Guida — Indizio
 > **Cos'è** · Un indizio è ciò che i PG possono trovare per arrivare a una verità. Collega «Rivela» alla scena-conclusione: la regola dei 3 indizi vuole almeno 3 vie indipendenti verso ogni rivelazione.
 > **Campi chiave** · **Rivela** (la conclusione che sostiene) e **Si trova nella scena**; il **Tipo** (fisico/testimonianza/documento/voce) dà varietà alle vie d'accesso.
-
+> **Spunti** · Cosa rivela davvero a chi sa leggerlo? Chi vorrebbe farlo sparire, e perché? Come può sviare chi lo interpreta di fretta?
 
 ````tabs
 --- 📖 Lore

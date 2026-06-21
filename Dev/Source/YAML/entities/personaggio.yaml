@@ -28,26 +28,28 @@ subtypes:
 # scheda PNG (character.md.j2), non sul PG.
 famiglia_label: Ruolo narrativo
 famiglie:
-- { nome: alleato,     descrizione: "Sta dalla parte del gruppo: aiuta, copre, combatte al loro fianco." }
-- { nome: antagonista, descrizione: "Si oppone attivamente al gruppo o ne ostacola gli obiettivi; non per forza un nemico." }
-- { nome: mentore,     descrizione: "Guida, istruisce o protegge il gruppo; offre saggezza, addestramento o risorse." }
-- { nome: patrono,     descrizione: "Commissiona, finanzia o dà missioni; ha potere e un'agenda propria." }
-- { nome: rivale,      descrizione: "Compete col gruppo (onore, risorse, gloria) senza volerne la rovina." }
-- { nome: mercante,    descrizione: "Fornisce beni, servizi o informazioni in cambio di qualcosa." }
-- { nome: contatto,    descrizione: "Nodo di informazioni o accesso: introduce, fa da ponte, apre porte." }
-- { nome: gregario,    descrizione: "Comparsa ricorrente o seguace: dà colore e continuità alla scena." }
+- { nome: alleato,     descrizione: "Sta dalla parte del gruppo: aiuta, copre, combatte al loro fianco.", assi: { moralita: 2, lealta: 2 } }
+- { nome: antagonista, descrizione: "Si oppone attivamente al gruppo o ne ostacola gli obiettivi; non per forza un nemico.", assi: { moralita: 5 } }
+- { nome: mentore,     descrizione: "Guida, istruisce o protegge il gruppo; offre saggezza, addestramento o risorse.", assi: { moralita: 2, temperamento: 2, approccio: 2 } }
+- { nome: patrono,     descrizione: "Commissiona, finanzia o dà missioni; ha potere e un'agenda propria.", assi: { moralita: 4, lealta: 1 } }
+- { nome: rivale,      descrizione: "Compete col gruppo (onore, risorse, gloria) senza volerne la rovina.", assi: { moralita: 4 } }
+- { nome: mercante,    descrizione: "Fornisce beni, servizi o informazioni in cambio di qualcosa.", assi: { moralita: 4, socievolezza: 4 } }
+- { nome: contatto,    descrizione: "Nodo di informazioni o accesso: introduce, fa da ponte, apre porte.", assi: { socievolezza: 4 } }
+- { nome: gregario,    descrizione: "Comparsa ricorrente o seguace: dà colore e continuità alla scena.", assi: { lealta: 1 } }
 # Titolo/rango del personaggio (re, arcimago, gran sacerdote...): seed FantasyWorld.
 fields:
   titolo: { label: Titolo, widget: text }
   # Rango nobiliare/sociale: vocabolario di ranghi (il `titolo` resta libero per cariche
   # e appellativi specifici — «Arcimago», «Capitano della Guardia»).
   rango:  { label: Rango,  widget: rango }
+  occupazione: { label: Occupazione, widget: text }
 scheda:
 - titolo
 - rango
 - allineamento
 - pronomi
 - eta
+- occupazione
 relazioni:
 - field: fazione
   label: Affiliazione
@@ -86,6 +88,46 @@ relazioni:
   category: missione
   multi: true
   reciprocal: png
+- field: governa
+  label: Governa
+  category: regno
+  multi: true
+  reciprocal: dinastia
+- field: comanda
+  label: Comanda
+  category: esercito
+  multi: true
+  reciprocal: comandante
+- field: culti_guidati
+  label: Guida il culto
+  category: culto
+  multi: true
+  reciprocal: capi
+- field: possiede
+  label: Possiede
+  category: oggetto
+  multi: true
+  reciprocal: proprietario
+- field: opere
+  label: Opere / manufatti
+  category: oggetto
+  multi: true
+  reciprocal: creatore
+- field: bastioni
+  label: Bastioni
+  category: bastione
+  multi: true
+  reciprocal: proprietario
+- field: eventi
+  label: Eventi
+  category: evento
+  multi: true
+  reciprocal: coinvolti
+- field: alberi
+  label: Percorsi / esempio vivente
+  category: albero_evolutivo
+  multi: true
+  reciprocal: figure
 creation:
   fields:
   - field: tipo

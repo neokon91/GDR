@@ -67,6 +67,38 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
+--- 📊 Carattere
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "risorsa", component);
+```
+
+> [!abstract] Carattere
+> **Valore Strategico** `INPUT[slider(minValue(1), maxValue(5), addLabels):valore_strategico]` → `VIEW[{valore_strategico} == 5 ? "5 · Vitale" : ({valore_strategico} == 4 ? "4 · Cruciale" : ({valore_strategico} == 3 ? "3 · Importante" : ({valore_strategico} == 2 ? "2 · Utile" : ({valore_strategico} == 1 ? "1 · Banale" : ("—")))))]`
+> **Controllabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):controllabilita]` → `VIEW[{controllabilita} == 5 ? "5 · Monopolizzabile" : ({controllabilita} == 4 ? "4 · Strozzabile" : ({controllabilita} == 3 ? "3 · Concentrata" : ({controllabilita} == 2 ? "2 · Diffusa" : ({controllabilita} == 1 ? "1 · Libera" : ("—")))))]`
+> **Deperibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):deperibilita]` → `VIEW[{deperibilita} == 5 ? "5 · Effimera" : ({deperibilita} == 4 ? "4 · Fragile" : ({deperibilita} == 3 ? "3 · Stagionale" : ({deperibilita} == 2 ? "2 · Durevole" : ({deperibilita} == 1 ? "1 · Imperitura" : ("—")))))]`
+
+> [!note]- Valore Strategico — Quanto la risorsa è decisiva per potere, guerra ed economia.
+> **1 · Banale** — Abbondante e sostituibile; nessuno ci combatte.
+> **2 · Utile** — Apprezzata, ma se ne può fare a meno.
+> **3 · Importante** — Muove mercati e accordi; la sua mancanza si sente.
+> **4 · Cruciale** — Sostiene eserciti, città o magie; vale alleanze.
+> **5 · Vitale** — Senza di essa un potere crolla; si uccide per averla.
+
+> [!note]- Controllabilità — Quanto è facile monopolizzarne fonte e filiera.
+> **1 · Libera** — Ovunque e per tutti; impossibile da controllare.
+> **2 · Diffusa** — Molte fonti; il controllo è parziale.
+> **3 · Concentrata** — Poche fonti note; chi le tiene ha un vantaggio.
+> **4 · Strozzabile** — Una filiera fragile: un nodo la blocca tutta.
+> **5 · Monopolizzabile** — Un'unica fonte: chi la possiede detta legge.
+
+> [!note]- Deperibilità — Quanto rapidamente perde valore o si consuma.
+> **1 · Imperitura** — Non si degrada: oro, gemme, pietra.
+> **2 · Durevole** — Dura anni con poca cura.
+> **3 · Stagionale** — Va usata o conservata entro un ciclo.
+> **4 · Fragile** — Si guasta in fretta; il trasporto è una corsa.
+> **5 · Effimera** — Svanisce quasi subito: serve magia o miracoli.
+
 --- 🔗 Collegamenti
 
 > [!tip] Collega

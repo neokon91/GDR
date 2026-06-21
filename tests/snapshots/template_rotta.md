@@ -20,7 +20,7 @@
 > [!info]- ℹ️ Guida — Rotta
 > **Cos'è** · Una rotta è una via di traffico fra luoghi: cosa vi passa, chi la controlla, cosa la minaccia. Tagliarla è una mossa che muove l'economia e i Fronti.
 > **Campi chiave** · **Tipo** (terrestre/marittima/…) e gli estremi che **Collega**; **Merci** e **Pericoli** la qualificano; **Controllata da** la lega alla fazione che la domina.
-
+> **Spunti** · Cosa vi scorre — merci, persone, segreti? Chi la controlla, e chi pretende il pedaggio? Cosa la minaccia, e cosa crolla se si chiude?
 
 ````tabs
 --- 📖 Lore
@@ -53,6 +53,38 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
+--- 📊 Carattere
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "rotta", component);
+```
+
+> [!abstract] Carattere
+> **Sicurezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):sicurezza]` → `VIEW[{sicurezza} == 5 ? "5 · Sicura" : ({sicurezza} == 4 ? "4 · Battuta" : ({sicurezza} == 3 ? "3 · Incerta" : ({sicurezza} == 2 ? "2 · Pericolosa" : ({sicurezza} == 1 ? "1 · Letale" : ("—")))))]`
+> **Traffico** `INPUT[slider(minValue(1), maxValue(5), addLabels):traffico]` → `VIEW[{traffico} == 5 ? "5 · Arteria" : ({traffico} == 4 ? "4 · Trafficata" : ({traffico} == 3 ? "3 · Vivace" : ({traffico} == 2 ? "2 · Rada" : ({traffico} == 1 ? "1 · Morta" : ("—")))))]`
+> **Legalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):legalita]` → `VIEW[{legalita} == 5 ? "5 · Sovrana" : ({legalita} == 4 ? "4 · Riconosciuta" : ({legalita} == 3 ? "3 · Grigia" : ({legalita} == 2 ? "2 · Tollerata" : ({legalita} == 1 ? "1 · Clandestina" : ("—")))))]`
+
+> [!note]- Sicurezza — Quanto è rischioso percorrerla.
+> **1 · Letale** — Pochi tornano; agguati, mostri, terreno crudele.
+> **2 · Pericolosa** — Serve scorta; gli incidenti sono frequenti.
+> **3 · Incerta** — Tranquilla a tratti, infida ad altri.
+> **4 · Battuta** — Pattugliata e nota; rischi rari.
+> **5 · Sicura** — Si viaggia senza timore, anche di notte.
+
+> [!note]- Traffico — Quanto è percorsa e quanto valore vi scorre.
+> **1 · Morta** — Quasi abbandonata; la natura se la riprende.
+> **2 · Rada** — Qualche viandante, poche carovane.
+> **3 · Vivace** — Mercanti e messi regolari.
+> **4 · Trafficata** — Flusso costante; locande e dazi prosperano.
+> **5 · Arteria** — Vena vitale del mondo: bloccarla è una crisi.
+
+> [!note]- Legalità — Quanto è riconosciuta dai poteri o vive nell'ombra.
+> **1 · Clandestina** — Vie del contrabbando; esistono solo per chi sa.
+> **2 · Tollerata** — Fuori dalle regole, ma nessuno la ferma.
+> **3 · Grigia** — Lecita a tratti, illecita ad altri.
+> **4 · Riconosciuta** — Ufficiale, con pedaggi e licenze.
+> **5 · Sovrana** — Protetta e regolata da un potere: via di stato.
+
 --- 🔗 Collegamenti
 
 > [!tip] Collega

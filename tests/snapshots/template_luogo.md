@@ -246,6 +246,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Miti del luogo**: `INPUT[inlineListSuggester(optionQuery("Mondi/Miti"), useLinks(partial), allowOther):miti]`
 > **Incontri qui**: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
 > **Insidie qui**: `INPUT[inlineListSuggester(optionQuery("Mondi/Insidie"), useLinks(partial), allowOther):insidie]`
+> **Ecosistemi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Ecosistemi"), useLinks(partial), allowOther):ecosistemi]`
+> **Rotte che vi passano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Rotte"), useLinks(partial), allowOther):rotte]`
+> **Calamità in corso**: `INPUT[inlineListSuggester(optionQuery("Mondi/Calamita"), useLinks(partial), allowOther):calamita]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

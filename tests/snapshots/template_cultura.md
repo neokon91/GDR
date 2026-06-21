@@ -193,6 +193,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Lingua**: `INPUT[suggester(optionQuery("Mondi/Lingue"), useLinks(partial), allowOther):lingua]`
 > **Istituzioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):istituzioni]`
 > **Specie**: `INPUT[inlineListSuggester(optionQuery("Mondi/Specie"), useLinks(partial), allowOther):specie]`
+> **Culti / fedi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti]`
+> **Divinità venerate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Background**: `INPUT[inlineListSuggester(optionQuery("Mondi/Background"), useLinks(partial), allowOther):background]`
+> **Ambiente d'origine**: `INPUT[inlineListSuggester(optionQuery("Mondi/Biomi"), useLinks(partial), allowOther):biomi]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

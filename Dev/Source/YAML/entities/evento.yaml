@@ -29,13 +29,13 @@ fields:
 # Classificazione a 2 livelli: la 'famiglia' (registro cosmico, seed FW evento_cat)
 # affianca il 'tipo'. Select + legenda auto-documentante.
 famiglie:
-- { nome: cosmico,       descrizione: "Coinvolge l'equilibrio dell'universo: nascita o morte di leggi fondamentali, piani o entità primordiali." }
-- { nome: epocale,       descrizione: "Marca un prima e un dopo nella linea storica, aprendo o chiudendo un'epoca." }
-- { nome: mitico,        descrizione: "Evento archetipico tramandato in forma simbolica o leggendaria." }
-- { nome: sacrale,       descrizione: "Implica un contatto diretto col divino o una trasformazione spirituale profonda." }
-- { nome: catastrofico,  descrizione: "Evento distruttivo su scala vasta." }
-- { nome: fondativo,     descrizione: "Genera un ordine, una civiltà, un pantheon o un piano." }
-- { nome: transizionale, descrizione: "Segna un passaggio tra stati dell'essere, condizioni metafisiche o ordini narrativi." }
+- { nome: cosmico,       descrizione: "Coinvolge l'equilibrio dell'universo: nascita o morte di leggi fondamentali, piani o entità primordiali.", assi: { risonanza: 5, reversibilita: 5 } }
+- { nome: epocale,       descrizione: "Marca un prima e un dopo nella linea storica, aprendo o chiudendo un'epoca.", assi: { risonanza: 4 } }
+- { nome: mitico,        descrizione: "Evento archetipico tramandato in forma simbolica o leggendaria.", assi: { controversia: 5 } }
+- { nome: sacrale,       descrizione: "Implica un contatto diretto col divino o una trasformazione spirituale profonda.", assi: { risonanza: 4 } }
+- { nome: catastrofico,  descrizione: "Evento distruttivo su scala vasta.", assi: { reversibilita: 5 } }
+- { nome: fondativo,     descrizione: "Genera un ordine, una civiltà, un pantheon o un piano.", assi: { risonanza: 5, reversibilita: 4 } }
+- { nome: transizionale, descrizione: "Segna un passaggio tra stati dell'essere, condizioni metafisiche o ordini narrativi.", assi: { reversibilita: 4 } }
 scheda:
 - portata
 relazioni:
@@ -56,6 +56,7 @@ relazioni:
 - field: epoca
   label: Epoca
   category: epoca
+  reciprocal: eventi
 - field: luogo
   label: Luogo
   category: luogo
@@ -63,6 +64,7 @@ relazioni:
   label: Coinvolti
   category: personaggio
   multi: true
+  reciprocal: eventi
 - field: fazioni
   label: Fazioni
   category: fazione
@@ -71,6 +73,7 @@ relazioni:
   label: Miti generati
   category: mito
   multi: true
+  reciprocal: evento_storico
 - field: divinita
   label: Divinità coinvolte
   category: divinita
@@ -85,6 +88,24 @@ relazioni:
   category: profezia
   multi: true
   reciprocal: evento
+- field: calamita_innescata
+  label: Calamità innescata
+  category: calamita
+  multi: true
+  reciprocal: causato_da
+- field: scene
+  label: Giocato nelle scene
+  category: scena
+  multi: true
+  reciprocal: genera_evento
+- field: eserciti
+  label: Eserciti in campo
+  category: esercito
+  multi: true
+- field: regni
+  label: Regni coinvolti
+  category: regno
+  multi: true
 creation:
   fields:
   - field: tipo

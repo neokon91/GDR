@@ -89,6 +89,13 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", component);
 ```
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+
 > [!abstract] Carattere
 > **Chiarezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):chiarezza]` → `VIEW[{chiarezza} == 5 ? "5 · Esplicita" : ({chiarezza} == 4 ? "4 · Chiara" : ({chiarezza} == 3 ? "3 · Allusiva" : ({chiarezza} == 2 ? "2 · Oscura" : ({chiarezza} == 1 ? "1 · Ermetica" : ("—")))))]`
 > **Avveramento** `INPUT[slider(minValue(1), maxValue(5), addLabels):avveramento]` → `VIEW[{avveramento} == 5 ? "5 · In atto" : ({avveramento} == 4 ? "4 · Imminente" : ({avveramento} == 3 ? "3 · In moto" : ({avveramento} == 2 ? "2 · Latente" : ({avveramento} == 1 ? "1 · Remota" : ("—")))))]`
@@ -132,6 +139,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "pro
 > **Chi riguarda**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):riguarda]`
 > **Evento legato**: `INPUT[suggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):evento]`
 > **Culti che la custodiscono**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti]`
+> **Calamità annunciata**: `INPUT[suggester(optionQuery("Mondi/Calamita"), useLinks(partial), allowOther):calamita]`
+> **Divinità implicata**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Epoca dell'avveramento**: `INPUT[suggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):epoca]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

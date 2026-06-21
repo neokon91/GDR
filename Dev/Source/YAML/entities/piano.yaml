@@ -64,6 +64,16 @@ relazioni:
   label: Sistemi magici di risonanza
   category: sistema_magico
   multi: true
+- field: piani_adiacenti
+  label: Piani adiacenti
+  category: piano
+  multi: true
+  reciprocal: piani_adiacenti
+- field: primordiali
+  label: Primordiali che vi giacciono
+  category: entita_primordiale
+  multi: true
+  reciprocal: piani
 creation:
   fields:
   - field: tipo

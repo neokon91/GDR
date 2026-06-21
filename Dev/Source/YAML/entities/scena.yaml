@@ -33,10 +33,11 @@ relazioni:
 - { field: conduce_a,  label: Conduce a,              category: scena,       multi: true }
 - { field: luogo,      label: Dove,                   category: luogo }
 - { field: png,        label: PNG in scena,           category: personaggio, multi: true }
-- { field: incontri,   label: Incontri,               category: incontro,    multi: true }
+- { field: incontri,   label: Incontri,               category: incontro,    multi: true, reciprocal: scena }
 # Ragnatela indizi (inversi auto-derivati dal lato `indizio` via reciprocal):
 - { field: indizi,     label: Rivelata dagli indizi,  category: indizio,     multi: true, reciprocal: rivela }
 - { field: indizi_qui, label: Indizi presenti qui,    category: indizio,     multi: true, reciprocal: scena }
+- { field: genera_evento, label: Genera l'evento,     category: evento,      multi: true, reciprocal: scene }
 creation:
   fields:
   - { field: tipo, prompt: Ruolo della scena, from: subtypes, required: true }

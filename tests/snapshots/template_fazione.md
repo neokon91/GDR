@@ -18,6 +18,7 @@
 > | **Motto** | `INPUT[text:motto]` |
 > | **Epoca di fondazione** | `INPUT[text:fondazione]` |
 > | **Simbolo** | `INPUT[text(placeholder(es. un sole infranto su campo nero)):simbolo]` |
+> | **Effettivi / membri** | `INPUT[text:effettivi]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -230,6 +231,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Regno / Stato**: `INPUT[suggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):regno]`
 > **Editti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Editti"), useLinks(partial), allowOther):editti]`
 > **Missioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial), allowOther):missioni]`
+> **Forze armate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eserciti"), useLinks(partial), allowOther):eserciti]`
+> **Cultura / tradizione**: `INPUT[suggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):cultura]`
+> **Culto / fede**: `INPUT[suggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culto]`
+> **Background affiliati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Background"), useLinks(partial), allowOther):background]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

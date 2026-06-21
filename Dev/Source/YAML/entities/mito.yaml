@@ -33,6 +33,7 @@ relazioni:
 - field: epoca_raccontata
   label: Epoca raccontata
   category: epoca
+  reciprocal: miti
 - field: divinita
   label: Divinità coinvolte
   category: divinita
@@ -44,6 +45,28 @@ relazioni:
   label: Culti che lo tramandano
   category: culto
   multi: true
+- field: evento_storico
+  label: Fatto storico sottostante
+  category: evento
+  reciprocal: miti
+- field: varianti
+  label: Varianti e versioni
+  category: mito
+  multi: true
+  reciprocal: varianti
+- field: figure
+  label: Figure del mito
+  category: personaggio
+  multi: true
+- field: profezie
+  label: Profezie contenute
+  category: profezia
+  multi: true
+- field: primordiali
+  label: Primordiali del mito
+  category: entita_primordiale
+  multi: true
+  reciprocal: miti
 creation:
   fields:
   - field: tipo

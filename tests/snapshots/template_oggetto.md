@@ -122,6 +122,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ogg
 > [!example] Relazioni
 > **Proprietario**: `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):proprietario]`
 > **Dove si trova**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):dove]`
+> **Creatore**: `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):creatore]`
+> **Materia / risorsa**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):materia]`
+> **Tradizione magica**: `INPUT[suggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistema_magico]`
+> **Divinità / patrono**: `INPUT[suggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Trovato in (incontri)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
+> **Ricompensa di (missioni)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial), allowOther):missioni]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

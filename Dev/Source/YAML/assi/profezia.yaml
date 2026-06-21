@@ -38,3 +38,7 @@ assi:
     3: { etichetta: Condizionata, descrizione: "Dipende da scelte precise; ha bivi reali." }
     4: { etichetta: Fragile,      descrizione: "Facile da deviare; basta poco a spezzarla." }
     5: { etichetta: Aperta,       descrizione: "Solo una possibilità tra tante; il futuro è libero." }
+archetipi:
+- { id: conto_alla_rovescia, nome: "Conto alla rovescia", quando: { avveramento: ">=4", malleabilita: "<=2" }, tag: [imminente, ineluttabile] }
+- { id: sussurro_oscuro,     nome: "Sussurro oscuro",     quando: { chiarezza: "<=2", malleabilita: ">=4" },   tag: [ambiguo, malleabile] }
+- { id: profezia_di_sangue,  nome: "Profezia di sangue",  quando: { esito: ">=4", malleabilita: "<=2" },       tag: [catastrofica, fissa] }

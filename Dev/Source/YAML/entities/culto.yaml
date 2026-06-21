@@ -41,9 +41,11 @@ relazioni:
   label: Figure di spicco
   category: personaggio
   multi: true
+  reciprocal: culti_guidati
 - field: fazione
   label: Braccio politico
   category: fazione
+  reciprocal: culto
 # Culti rivali (rivalità dottrinale: eresie, scismi, fedi in competizione):
 # alimenta il grafo e genera trame. È RECIPROCA: 'rivali' è l'UNICA self-relation
 # di culto → reciprocalField la auto-deriva e Collega scrive l'inverso simmetrico
@@ -65,6 +67,32 @@ relazioni:
   category: mito
   multi: true
   reciprocal: culti
+- field: culture
+  label: Popoli devoti
+  category: cultura
+  multi: true
+  reciprocal: culti
+- field: reliquie
+  label: Reliquie / paramenti
+  category: oggetto
+  multi: true
+- field: alberi
+  label: Gradi d'iniziazione
+  category: albero_evolutivo
+  multi: true
+  reciprocal: culto
+- field: entita_primordiale
+  label: Primordiale venerata
+  category: entita_primordiale
+  multi: true
+- field: editti
+  label: Leggi sacre / interdetti
+  category: editto
+  multi: true
+- field: regno
+  label: Stato che lo sancisce
+  category: regno
+  reciprocal: religione_stato
 creation:
   fields:
   - field: tipo

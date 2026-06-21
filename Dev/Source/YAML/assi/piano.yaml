@@ -47,3 +47,12 @@ assi:
     3: { etichetta: Indifferente, descrizione: "Amorale, oltre il bene e il male." }
     4: { etichetta: Sinistro,     descrizione: "Inquietante, corruttore, tendente al male." }
     5: { etichetta: Maligno,      descrizione: "Ostile a ogni vita; male incarnato." }
+- id: estensione
+  nome: Estensione
+  descrizione: La scala spaziale del piano, dalla sacca tascabile all'infinito.
+  valori:
+    1: { etichetta: Tasca,      descrizione: "Una sacca piccola e chiusa; un solo luogo." }
+    2: { etichetta: Regione,    descrizione: "Vasto come una contrada; ha confini raggiungibili." }
+    3: { etichetta: Reame,      descrizione: "Ampio come un mondo; lo si esplora per ere." }
+    4: { etichetta: Sconfinato, descrizione: "Nessun confine noto; chi lo misura si perde." }
+    5: { etichetta: Infinito,   descrizione: "Senza fine per natura; la distanza non ha senso." }

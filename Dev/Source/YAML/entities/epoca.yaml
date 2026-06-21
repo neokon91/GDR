@@ -21,13 +21,13 @@ subtypes:
 # Classificazione a 2 livelli: la 'famiglia' (funzione cosmica, seed FW epoca_cat)
 # affianca il 'tipo'. Select + legenda auto-documentante.
 famiglie:
-- { nome: fondativa,     descrizione: "Dà origine a strutture cosmiche fondamentali: leggi, piani, razze, civiltà, entità primordiali." }
-- { nome: transizionale, descrizione: "Periodo di passaggio, mutazione o riformulazione ontologica." }
-- { nome: stabilizzante, descrizione: "L'universo trova una forma durevole, ordinata o codificata." }
-- { nome: degenerativa,  descrizione: "L'equilibrio si corrompe, le leggi si incrinano, le civiltà decadono." }
-- { nome: ciclica,       descrizione: "Epoca destinata a ripetersi o riemergere." }
-- { nome: apocrifa,      descrizione: "Epoca dimenticata, rimossa o occultata." }
-- { nome: liminale,      descrizione: "Esiste tra due stati dell'essere: confini, piani e identità incerti." }
+- { nome: fondativa,     descrizione: "Dà origine a strutture cosmiche fondamentali: leggi, piani, razze, civiltà, entità primordiali.", assi: { storicita: 1, presenza_divina: 5 } }
+- { nome: transizionale, descrizione: "Periodo di passaggio, mutazione o riformulazione ontologica.", assi: { equilibrio_cosmico: 2, stabilita_geopolitica: 2 } }
+- { nome: stabilizzante, descrizione: "L'universo trova una forma durevole, ordinata o codificata.", assi: { equilibrio_cosmico: 4, stabilita_geopolitica: 4 } }
+- { nome: degenerativa,  descrizione: "L'equilibrio si corrompe, le leggi si incrinano, le civiltà decadono.", assi: { stabilita_geopolitica: 1, equilibrio_cosmico: 1, luce_cosmica: 2 } }
+- { nome: ciclica,       descrizione: "Epoca destinata a ripetersi o riemergere.", assi: { luce_cosmica: 3 } }
+- { nome: apocrifa,      descrizione: "Epoca dimenticata, rimossa o occultata.", assi: { storicita: 1, luce_cosmica: 2 } }
+- { nome: liminale,      descrizione: "Esiste tra due stati dell'essere: confini, piani e identità incerti.", assi: { equilibrio_cosmico: 3, storicita: 3 } }
 fields:
   inizio: { label: Inizio, widget: text }
   fine:   { label: Fine,   widget: text }
@@ -37,10 +37,45 @@ relazioni:
   label: Eventi principali
   category: evento
   multi: true
+  reciprocal: epoca
 - field: divinita
   label: Divinità dominanti
   category: divinita
   multi: true
+  reciprocal: epoche
+- field: precede
+  label: Precede
+  category: epoca
+  reciprocal: segue
+- field: segue
+  label: Segue
+  category: epoca
+  reciprocal: precede
+- field: evento_apertura
+  label: Evento d'apertura
+  category: evento
+- field: evento_chiusura
+  label: Evento di chiusura
+  category: evento
+- field: miti
+  label: Miti dell'era
+  category: mito
+  multi: true
+  reciprocal: epoca_raccontata
+- field: calamita
+  label: Calamità dell'era
+  category: calamita
+  multi: true
+  reciprocal: epoca
+- field: figure
+  label: Figure dell'era
+  category: personaggio
+  multi: true
+- field: primordiali
+  label: Primordiali dell'era
+  category: entita_primordiale
+  multi: true
+  reciprocal: epoche
 creation:
   fields:
   - field: tipo

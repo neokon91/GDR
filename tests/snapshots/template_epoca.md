@@ -160,6 +160,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epo
 > [!example] Relazioni
 > **Eventi principali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):eventi]`
 > **Divinità dominanti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Precede**: `INPUT[suggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):precede]`
+> **Segue**: `INPUT[suggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):segue]`
+> **Evento d'apertura**: `INPUT[suggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):evento_apertura]`
+> **Evento di chiusura**: `INPUT[suggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):evento_chiusura]`
+> **Miti dell'era**: `INPUT[inlineListSuggester(optionQuery("Mondi/Miti"), useLinks(partial), allowOther):miti]`
+> **Calamità dell'era**: `INPUT[inlineListSuggester(optionQuery("Mondi/Calamita"), useLinks(partial), allowOther):calamita]`
+> **Figure dell'era**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):figure]`
+> **Primordiali dell'era**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):primordiali]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

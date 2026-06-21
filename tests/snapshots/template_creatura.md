@@ -179,6 +179,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cre
 > [!example] Relazioni
 > **Habitat**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):habitat]`
 > **Specie**: `INPUT[suggester(optionQuery("Mondi/Specie"), useLinks(partial), allowOther):specie]`
+> **Ecosistemi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Ecosistemi"), useLinks(partial), allowOther):ecosistemi]`
+> **Habitat (biomi)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Biomi"), useLinks(partial), allowOther):biomi]`
+> **Origine divina/primordiale**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):origine_primordiale]`
+> **Culture che la venerano/temono**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

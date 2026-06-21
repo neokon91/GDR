@@ -22,7 +22,7 @@
 > [!info]- ℹ️ Guida — Missione
 > **Cos'è** · Una missione è un incarico per i PG: chi la dà, cosa chiede, cosa offre — il filo che traccia un arco di gioco oltre i task #gancio/#trama.
 > **Campi chiave** · **Tipo** (incarico, caccia, recupero…) e **Committente**; **Ricompensa** e **Stato** (proposta→in corso→completata/fallita) per seguirla; collega **Dove** e i **PNG**.
-
+> **Spunti** · Chi la affida, e cosa nasconde sul vero motivo? Qual è la posta se i PG falliscono? Dove può tradire, voltandosi contro chi l'accetta?
 
 ````tabs
 --- 📖 Lore
@@ -65,6 +65,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **PNG coinvolti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):png]`
 > **Fazione dietro**: `INPUT[suggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazione]`
 > **Scene**: `INPUT[inlineListSuggester(optionQuery("Mondi/Scene"), useLinks(partial), allowOther):scene]`
+> **Ricompensa (oggetto)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Oggetti"), useLinks(partial), allowOther):ricompensa_oggetto]`
+> **Nasce dall'evento**: `INPUT[suggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):evento_origine]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -27,10 +27,14 @@ fields:
   gravita:    { label: Gravità,          widget: gravita }
 scheda: [gravita]
 relazioni:
-- { field: luoghi,     label: Dove colpisce,  category: luogo, multi: true }
-- { field: epoca,      label: Epoca,          category: epoca }
-- { field: causato_da, label: Scatenata da,   category: evento }
+- { field: luoghi,     label: Dove colpisce,  category: luogo, multi: true, reciprocal: calamita }
+- { field: epoca,      label: Epoca,          category: epoca, reciprocal: calamita }
+- { field: causato_da, label: Scatenata da,   category: evento, reciprocal: calamita_innescata }
 - { field: fazioni,    label: Chi reagisce,   category: fazione, multi: true }
+- { field: profezia,   label: Profezia che l'annuncia, category: profezia, reciprocal: calamita }
+- { field: colpisce,   label: Chi colpisce (stirpi),   category: specie, multi: true }
+- { field: divinita,   label: Origine / mandante divino, category: divinita }
+- { field: culti,      label: Culti coinvolti, category: culto, multi: true }
 creation:
   fields:
   - { field: tipo, prompt: Tipo di calamità, from: subtypes, required: true }

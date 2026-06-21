@@ -98,6 +98,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Luogo**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 > **Creature**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):creature]`
 > **Alleati (PNG/evocazioni)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):alleati]`
+> **Scena**: `INPUT[suggester(optionQuery("Mondi/Scene"), useLinks(partial), allowOther):scena]`
+> **Insidie**: `INPUT[inlineListSuggester(optionQuery("Mondi/Insidie"), useLinks(partial), allowOther):insidie]`
+> **Bottino**: `INPUT[inlineListSuggester(optionQuery("Mondi/Oggetti"), useLinks(partial), allowOther):bottino]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

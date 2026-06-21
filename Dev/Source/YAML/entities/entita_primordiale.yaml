@@ -52,6 +52,26 @@ relazioni:
   label: Sistemi magici che vi attingono
   category: sistema_magico
   multi: true
+- field: stirpi
+  label: Stirpi generate
+  category: specie
+  multi: true
+  reciprocal: origine_primordiale
+- field: epoche
+  label: Ere primordiali
+  category: epoca
+  multi: true
+  reciprocal: primordiali
+- field: miti
+  label: Miti
+  category: mito
+  multi: true
+  reciprocal: primordiali
+- field: piani
+  label: Piani di prigionia / dimora
+  category: piano
+  multi: true
+  reciprocal: primordiali
 creation:
   fields:
   - field: tipo

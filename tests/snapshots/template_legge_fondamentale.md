@@ -145,6 +145,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "leg
 > **Incarnata da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):incarnata_da]`
 > **Piani che la riflettono**: `INPUT[inlineListSuggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piani]`
 > **Sistemi magici che vi poggiano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
+> **Legge complementare / opposta**: `INPUT[inlineListSuggester(optionQuery("Mondi/Leggi"), useLinks(partial), allowOther):legge_opposta]`
+> **Divinità che la incarnano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

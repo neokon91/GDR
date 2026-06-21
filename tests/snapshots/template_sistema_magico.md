@@ -179,6 +179,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Fonti / risonanze**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):fonti]`
 > **Piani di risonanza**: `INPUT[inlineListSuggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piani]`
 > **Luoghi-nodo**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_nodo]`
+> **Incantesimi del sistema**: `INPUT[inlineListSuggester(optionQuery("Mondi/Incantesimi"), useLinks(partial), allowOther):incantesimi]`
+> **Divinità fonte**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Oggetti magici**: `INPUT[inlineListSuggester(optionQuery("Mondi/Oggetti"), useLinks(partial), allowOther):oggetti]`
+> **Specie dotate (dono innato)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Specie"), useLinks(partial), allowOther):specie]`
+> **Alberi / tradizioni di mastery**: `INPUT[inlineListSuggester(optionQuery("Mondi/Alberi"), useLinks(partial), allowOther):alberi]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

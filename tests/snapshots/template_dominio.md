@@ -146,6 +146,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "dom
 > **Entità collegate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):entita]`
 > **Piani collegati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piani]`
 > **Divinità affini**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Domini in tensione**: `INPUT[inlineListSuggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):domini_opposti]`
+> **Incantesimi del dominio**: `INPUT[inlineListSuggester(optionQuery("Mondi/Incantesimi"), useLinks(partial), allowOther):incantesimi]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

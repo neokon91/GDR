@@ -144,6 +144,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lin
 > [!example] Relazioni
 > **Parlata in**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):parlata_in]`
 > **Culture**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`
+> **Sistema magico**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistema_magico]`
+> **Lingua di (divinità)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Piani**: `INPUT[inlineListSuggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piani]`
+> **Origine primordiale**: `INPUT[suggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):entita_primordiale]`
+> **Deriva da**: `INPUT[suggester(optionQuery("Mondi/Lingue"), useLinks(partial), allowOther):derivata_da]`
+> **Lingue derivate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Lingue"), useLinks(partial), allowOther):lingue_figlie]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

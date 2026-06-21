@@ -32,6 +32,8 @@ relazioni:
 - { field: fazione, label: Fazione dietro, category: fazione }
 # Scene dell'avventura (inverso di scena.missione): il filo dei beat che la compongono.
 - { field: scene,   label: Scene,          category: scena, multi: true, reciprocal: missione }
+- { field: ricompensa_oggetto, label: Ricompensa (oggetto), category: oggetto, multi: true, reciprocal: missioni }
+- { field: evento_origine, label: Nasce dall'evento, category: evento }
 creation:
   fields:
   - { field: tipo, prompt: Tipo di missione, from: subtypes, required: true }

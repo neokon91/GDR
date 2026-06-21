@@ -22,11 +22,11 @@ subtypes:
 # Classificazione a 2 livelli: la 'famiglia' (questione cosmica affrontata) affianca
 # il 'tipo'. Select + legenda auto-documentante.
 famiglie:
-- { nome: origine,    descrizione: "Come e da cosa nasce la realtà: principi e atti primigeni." }
-- { nome: struttura,  descrizione: "Come è ordinato il cosmo: piani, leggi, gerarchie dell'essere." }
-- { nome: forze,      descrizione: "Le energie e i poteri che muovono e reggono il mondo." }
-- { nome: destino,    descrizione: "Dove tende la realtà: cicli, fine, rinascita, scopo ultimo." }
-- { nome: mistero,    descrizione: "Ciò che resta ignoto o inconoscibile: enigmi e verità nascoste." }
+- { nome: origine,    descrizione: "Come e da cosa nasce la realtà: principi e atti primigeni.", assi: { stabilita_cosmica: 1, attivita: 1 } }
+- { nome: struttura,  descrizione: "Come è ordinato il cosmo: piani, leggi, gerarchie dell'essere.", assi: { ordine: 5, stabilita_cosmica: 1 } }
+- { nome: forze,      descrizione: "Le energie e i poteri che muovono e reggono il mondo.", assi: { attivita: 4 } }
+- { nome: destino,    descrizione: "Dove tende la realtà: cicli, fine, rinascita, scopo ultimo.", assi: { stabilita_cosmica: 3 } }
+- { nome: mistero,    descrizione: "Ciò che resta ignoto o inconoscibile: enigmi e verità nascoste.", assi: { percezione: 5 } }
 relazioni:
 - field: domini
   label: Domini

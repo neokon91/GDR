@@ -110,6 +110,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bio
 > [!example] Relazioni
 > **Luoghi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
 > **Specie tipiche**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):specie]`
+> **Ecosistemi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Ecosistemi"), useLinks(partial), allowOther):ecosistemi]`
+> **Risorse del bioma**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):risorse_naturali]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

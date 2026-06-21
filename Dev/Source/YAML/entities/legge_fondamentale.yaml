@@ -18,12 +18,12 @@ subtypes:
 # Classificazione a 2 livelli: la 'famiglia' (ambito di realtà retto dalla legge)
 # affianca il 'tipo'. Select + legenda auto-documentante.
 famiglie:
-- { nome: esistenziale, descrizione: "Regge l'essere e il non-essere: vita, morte, presenza." }
-- { nome: morale,       descrizione: "Regge bene e male, luce e ombra, colpa e redenzione." }
-- { nome: causale,      descrizione: "Regge causa ed effetto, destino e libero arbitrio, caso." }
-- { nome: formale,      descrizione: "Regge forma e dissoluzione, ordine ed entropia, identità." }
-- { nome: temporale,    descrizione: "Regge tempo, durata, eternità e ciclicità." }
-- { nome: magica,       descrizione: "Regge il flusso dell'energia, il vuoto e i limiti del potere." }
+- { nome: esistenziale, descrizione: "Regge l'essere e il non-essere: vita, morte, presenza.", assi: { portata: 5, rigidita: 1 } }
+- { nome: morale,       descrizione: "Regge bene e male, luce e ombra, colpa e redenzione.", assi: { equilibrio: 3, manifestazione: 2 } }
+- { nome: causale,      descrizione: "Regge causa ed effetto, destino e libero arbitrio, caso.", assi: { rigidita: 1, portata: 4 } }
+- { nome: formale,      descrizione: "Regge forma e dissoluzione, ordine ed entropia, identità.", assi: { portata: 4 } }
+- { nome: temporale,    descrizione: "Regge tempo, durata, eternità e ciclicità.", assi: { stabilita: 1, rigidita: 1 } }
+- { nome: magica,       descrizione: "Regge il flusso dell'energia, il vuoto e i limiti del potere.", assi: { rigidita: 4 } }
 # Campo query-abile: i due poli della legge (es. "Vita ↔ Morte").
 fields:
   poli: { label: Poli, widget: text }
@@ -45,6 +45,16 @@ relazioni:
   label: Sistemi magici che vi poggiano
   category: sistema_magico
   multi: true
+- field: legge_opposta
+  label: Legge complementare / opposta
+  category: legge_fondamentale
+  multi: true
+  reciprocal: legge_opposta
+- field: divinita
+  label: Divinità che la incarnano
+  category: divinita
+  multi: true
+  reciprocal: leggi
 creation:
   fields:
   - field: tipo

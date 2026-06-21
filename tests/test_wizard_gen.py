@@ -370,9 +370,10 @@ def test_famiglia_preset(tmp_path):
         f'const spec={json.dumps(spec, ensure_ascii=False)};'
         f'const faz={json.dumps(cats.get("fazione") or {}, ensure_ascii=False)};'
         f'const div={json.dumps(cats.get("divinita") or {}, ensure_ascii=False)};'
+        f'const insp={json.dumps(cats.get("insidia") or {}, ensure_ascii=False)};'
         'process.stdout.write(JSON.stringify({'
         'guer:crea.famigliaPreset(spec,"guerriera"),'
-        'nom:crea.famigliaPreset(spec,"nomadica"),'
+        'noass:crea.famigliaPreset(insp,"meccanica"),'
         'x:crea.famigliaPreset(spec,"inesistente"),'
         'mil:crea.famigliaPreset(faz,"militare"),'
         'prim:crea.famigliaPreset(div,"primordiale")}));',
@@ -381,7 +382,7 @@ def test_famiglia_preset(tmp_path):
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
     assert out["guer"] == {"valori_dominanti": 3, "relazione_morte": 2, "ritualizzazione_vita": 4}
-    assert out["nom"] == {}      # famiglia senza preset
+    assert out["noass"] == {}    # famiglia di entità senza assi (insidia) -> nessun preset
     assert out["x"] == {}        # famiglia inesistente
     assert out["mil"] == {"struttura": 5, "etica_conflitto": 4, "coesione": 4}   # preset fazione
     assert out["prim"] == {"presenza_cosmica": 1, "incarnazione": 1, "volonta": 1}  # preset divinità
@@ -540,7 +541,7 @@ def test_reciprocal_field(tmp_path):
     out = json.loads(res.stdout)
     assert out["cultura"] == "regioni"   # coppia univoca -> inverso tipizzato
     assert out["fazione"] is None        # ambiguo (figure+fondatori) -> generico
-    assert out["epoca"] == "eventi"      # univoca
+    assert out["epoca"] is None          # ambiguo (eventi/evento_apertura/evento_chiusura) -> inverso esplicito su evento.epoca↔epoca.eventi
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

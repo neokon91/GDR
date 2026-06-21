@@ -38,3 +38,12 @@ assi:
     3: { etichetta: Influente,    descrizione: "Pesa nella diplomazia regionale; gioca di sponda." }
     4: { etichetta: Espansionista, descrizione: "Conquista o colonizza attivamente." }
     5: { etichetta: Egemonico,    descrizione: "Mira al dominio totale; impero in marcia." }
+- id: potenza
+  nome: Potenza
+  descrizione: Il peso aggregato — militare ed economico — che il regno può proiettare.
+  valori:
+    1: { etichetta: Trascurabile, descrizione: "Sopravvive per concessione altrui; nessun peso." }
+    2: { etichetta: Modesta, descrizione: "Si difende, non attacca; conta a livello locale." }
+    3: { etichetta: Regionale, descrizione: "Una potenza fra pari; pesa nei suoi confini." }
+    4: { etichetta: Maggiore, descrizione: "Detta legge a vicini più deboli; eserciti veri." }
+    5: { etichetta: Egemone, descrizione: "Il suo solo nome muove alleanze e paure." }

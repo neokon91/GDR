@@ -24,7 +24,7 @@
 > [!info]- ℹ️ Guida — Insidia
 > **Cos'è** · Una trappola o pericolo ambientale pronto da piazzare in una scena, con prova per individuarlo e danno/effetto.
 > **Campi chiave** · **Livello di gioco** + **Prova** (CD per individuare/disinnescare) + **Danno/Effetto**; **Innesco** e **Contromisure** dicono come scatta e come scamparla.
-
+> **Spunti** · Cosa la innesca, e chi ci cade per primo? Quale segno la tradisce a chi guarda in tempo? Cosa protegge — o chi punisce?
 
 > [!note]- Cosa significa ogni famiglia
 > **meccanica** — Trappola fisica: lame, fosse, pressione, congegni.
@@ -62,6 +62,7 @@
 > [!example] Relazioni
 > **Luoghi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
 > **Creature collegate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):creature]`
+> **Incontri**: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

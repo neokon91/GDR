@@ -60,9 +60,10 @@ fields:
   disciplina:      { label: Disciplina,          widget: text }
   sovrano_servito: { label: Sovrano servito,     widget: legame }
   giurisdizione:   { label: Giurisdizione,       widget: text }
+  effettivi:       { label: "Effettivi / membri", widget: text }
 # `forma_governo` rimosso: ridondante col tipo (la FORMA è il sottotipo) e con l'asse
 # `struttura`; non aveva senso su una banda. `sede`/`controlla_risorse` restano relazioni.
-scheda: [portata, motto, fondazione, simbolo]
+scheda: [portata, motto, fondazione, simbolo, effettivi]
 relazioni:
   - { field: sede,      label: Sede,          category: luogo }
   - { field: fondatori, label: Fondatori,     category: personaggio, multi: true }
@@ -79,6 +80,10 @@ relazioni:
   - { field: editti, label: Editti, category: editto, multi: true, reciprocal: fazioni }
   # Inverso di missione.fazione: le missioni commissionate/mosse dalla fazione.
   - { field: missioni, label: Missioni, category: missione, multi: true, reciprocal: fazione }
+  - { field: eserciti, label: Forze armate, category: esercito, multi: true, reciprocal: fazione }
+  - { field: cultura, label: Cultura / tradizione, category: cultura, reciprocal: istituzioni }
+  - { field: culto, label: Culto / fede, category: culto, reciprocal: fazione }
+  - { field: background, label: Background affiliati, category: background, multi: true, reciprocal: fazione }
 creation:
   fields:
     - { field: tipo, prompt: "Tipo di fazione", from: subtypes, required: true }

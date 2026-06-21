@@ -40,6 +40,11 @@ relazioni:
   label: Creature collegate
   category: creatura
   multi: true
+- field: incontri
+  label: Incontri
+  category: incontro
+  multi: true
+  reciprocal: insidie
 creation:
   fields:
   - field: tipo

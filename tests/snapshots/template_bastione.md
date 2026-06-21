@@ -22,7 +22,7 @@
 > [!info]- ℹ️ Guida — Bastione
 > **Cos'è** · La roccaforte di un PG (regole Bastioni 2024): emette ordini ogni turno di 7 giorni e ospita strutture speciali.
 > **Campi chiave** · **Livello** (PG minimo, 5+) e **Difensori** ne governano le regole; collega il **Proprietario** (PG) e la **Posizione** (luogo).
-
+> **Spunti** · A cosa serve davvero questa roccaforte — e a chi dà fastidio? Chi la minaccia, da dentro o da fuori? Cosa la rende unica, e cosa accadrebbe se cadesse?
 
 ````tabs
 --- 📋 Scheda

@@ -1,0 +1,35 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'evento'.
+# Scorporati da entities/evento.yaml; render.py li rifonde in core.assi_tematici.
+id: evento
+assi:
+- id: risonanza
+  nome: Risonanza
+  descrizione: Quanto l'evento pesa ancora sul presente.
+  valori:
+    1: { etichetta: Dimenticato, descrizione: "Nessuno lo ricorda; non lascia traccia nel mondo di oggi." }
+    2: { etichetta: Eco locale, descrizione: "Ricordato solo dove accadde, da chi c'era." }
+    3: { etichetta: Storico, descrizione: "Sta nelle cronache; informa scelte e rivalità presenti." }
+    4: { etichetta: Spartiacque, descrizione: "Divide un prima e un dopo; ridefinì equilibri." }
+    5: { etichetta: Fondante, descrizione: "Regge ancora l'ordine del mondo; tutto vi discende." }
+- id: controversia
+  nome: Controversia
+  descrizione: Quanto la versione dei fatti è condivisa o contesa.
+  valori:
+    1: { etichetta: Cronaca certa, descrizione: "I fatti sono accertati e concordi." }
+    2: { etichetta: Lievi discordie, descrizione: "Dettagli in disputa, sostanza condivisa." }
+    3: { etichetta: Due versioni, descrizione: "Vincitori e vinti lo raccontano in modo opposto." }
+    4: { etichetta: Conteso, descrizione: "La verità è arma politica; le fonti si contraddicono." }
+    5: { etichetta: Mistero, descrizione: "Cosa accadde davvero è perduto o nascosto." }
+- id: reversibilita
+  nome: Reversibilità
+  descrizione: Quanto le sue conseguenze si possono ancora sanare.
+  valori:
+    1: { etichetta: Sanabile, descrizione: "Tutto può tornare com'era." }
+    2: { etichetta: Difficile, descrizione: "Rimediabile a caro prezzo." }
+    3: { etichetta: Cicatrice, descrizione: "Resta un segno, ma si convive." }
+    4: { etichetta: Quasi irreversibile, descrizione: "Solo un prodigio potrebbe annullarlo." }
+    5: { etichetta: Irreversibile, descrizione: "Ha cambiato il mondo per sempre." }
+archetipi:
+- { id: cesura_epocale, nome: "Cesura epocale", quando: { risonanza: ">=4", reversibilita: ">=4" }, tag: [cesura, fondante] }
+- { id: ferita_aperta,  nome: "Ferita aperta",  quando: { reversibilita: ">=4", controversia: ">=3" }, tag: [ferita, irrisolto] }
+- { id: verita_sepolta, nome: "Verità sepolta", quando: { controversia: ">=4" }, tag: [mistero, conteso] }

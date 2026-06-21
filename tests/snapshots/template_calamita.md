@@ -19,7 +19,7 @@
 > [!info]- ℹ️ Guida — Calamità
 > **Cos'è** · Una calamità è una sciagura che DURA e si diffonde (peste, carestia, cataclisma, maledizione): un Fronte il cui clock avanza finché qualcuno non la ferma.
 > **Campi chiave** · **Tipo** (pestilenza/carestia/…) e **Gravità**; imposta un **clock** = la diffusione; **Come si diffonde** e **Rimedio** dicono come accelera e come si spegne; collega **Dove colpisce**.
-
+> **Spunti** · Da dove è partita, e perché continua a diffondersi? Chi potrebbe fermarla — e cosa glielo impedisce? Cosa lascia dietro di sé là dove è passata?
 
 ````tabs
 --- 📖 Lore
@@ -133,6 +133,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Epoca**: `INPUT[suggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):epoca]`
 > **Scatenata da**: `INPUT[suggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):causato_da]`
 > **Chi reagisce**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazioni]`
+> **Profezia che l'annuncia**: `INPUT[suggester(optionQuery("Mondi/Profezie"), useLinks(partial), allowOther):profezia]`
+> **Chi colpisce (stirpi)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Specie"), useLinks(partial), allowOther):colpisce]`
+> **Origine / mandante divino**: `INPUT[suggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Culti coinvolti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

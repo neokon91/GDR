@@ -1,0 +1,31 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'risorsa'.
+# Scorporati da entities/risorsa.yaml; render.py li rifonde in core.assi_tematici.
+id: risorsa
+assi:
+- id: valore_strategico
+  nome: Valore Strategico
+  descrizione: Quanto la risorsa è decisiva per potere, guerra ed economia.
+  valori:
+    1: { etichetta: Banale, descrizione: "Abbondante e sostituibile; nessuno ci combatte." }
+    2: { etichetta: Utile, descrizione: "Apprezzata, ma se ne può fare a meno." }
+    3: { etichetta: Importante, descrizione: "Muove mercati e accordi; la sua mancanza si sente." }
+    4: { etichetta: Cruciale, descrizione: "Sostiene eserciti, città o magie; vale alleanze." }
+    5: { etichetta: Vitale, descrizione: "Senza di essa un potere crolla; si uccide per averla." }
+- id: controllabilita
+  nome: Controllabilità
+  descrizione: Quanto è facile monopolizzarne fonte e filiera.
+  valori:
+    1: { etichetta: Libera, descrizione: "Ovunque e per tutti; impossibile da controllare." }
+    2: { etichetta: Diffusa, descrizione: "Molte fonti; il controllo è parziale." }
+    3: { etichetta: Concentrata, descrizione: "Poche fonti note; chi le tiene ha un vantaggio." }
+    4: { etichetta: Strozzabile, descrizione: "Una filiera fragile: un nodo la blocca tutta." }
+    5: { etichetta: Monopolizzabile, descrizione: "Un'unica fonte: chi la possiede detta legge." }
+- id: deperibilita
+  nome: Deperibilità
+  descrizione: Quanto rapidamente perde valore o si consuma.
+  valori:
+    1: { etichetta: Imperitura, descrizione: "Non si degrada: oro, gemme, pietra." }
+    2: { etichetta: Durevole, descrizione: "Dura anni con poca cura." }
+    3: { etichetta: Stagionale, descrizione: "Va usata o conservata entro un ciclo." }
+    4: { etichetta: Fragile, descrizione: "Si guasta in fretta; il trasporto è una corsa." }
+    5: { etichetta: Effimera, descrizione: "Svanisce quasi subito: serve magia o miracoli." }

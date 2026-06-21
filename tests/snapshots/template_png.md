@@ -14,6 +14,7 @@
 > | **Allineamento** | `INPUT[allineamento][:allineamento]` |
 > | **Pronomi** | `INPUT[text(placeholder(es. lei / lui / loro)):pronomi]` |
 > | **Età** | `INPUT[text(placeholder(es. 34 o «secoli»)):eta]` |
+> | **Occupazione** | `INPUT[text:occupazione]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -204,6 +205,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):rivali]`
 > **Profezie che lo riguardano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Profezie"), useLinks(partial), allowOther):profezie]`
 > **Missioni affidate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial), allowOther):missioni_assegnate]`
+> **Governa**: `INPUT[inlineListSuggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):governa]`
+> **Comanda**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eserciti"), useLinks(partial), allowOther):comanda]`
+> **Guida il culto**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti_guidati]`
+> **Possiede**: `INPUT[inlineListSuggester(optionQuery("Mondi/Oggetti"), useLinks(partial), allowOther):possiede]`
+> **Opere / manufatti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Oggetti"), useLinks(partial), allowOther):opere]`
+> **Bastioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Bastioni"), useLinks(partial), allowOther):bastioni]`
+> **Eventi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):eventi]`
+> **Percorsi / esempio vivente**: `INPUT[inlineListSuggester(optionQuery("Mondi/Alberi"), useLinks(partial), allowOther):alberi]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

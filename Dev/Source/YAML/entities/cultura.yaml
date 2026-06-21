@@ -32,17 +32,17 @@ famiglie:
 - nome: ancestrale
   descrizione: "Radicata nelle origini mitiche, nella trasmissione orale e nei cicli naturali."
   assi: { valori_dominanti: 2, relazione_morte: 5, ritualizzazione_vita: 5 }
-- { nome: sciamanica, descrizione: "Integra visibile e invisibile: pratiche spirituali, viaggi dell'anima, dialogo con l'Altrove." }
-- { nome: iniziatica, descrizione: "Fondata sul passaggio, la prova e la trasformazione." }
+- { nome: sciamanica, descrizione: "Integra visibile e invisibile: pratiche spirituali, viaggi dell'anima, dialogo con l'Altrove.", assi: { relazione_altrove: 4 } }
+- { nome: iniziatica, descrizione: "Fondata sul passaggio, la prova e la trasformazione.", assi: { ritualizzazione_vita: 4, costruzione_identitaria: 4 } }
 - nome: dogmatica
   descrizione: "Del sacro immutabile, del rito stabilito, della gerarchia indiscutibile."
   assi: { valori_dominanti: 3, relazione_morte: 2, ritualizzazione_vita: 4 }
-- { nome: fluida,     descrizione: "In perenne mutamento; abbraccia molteplicità e trasformazione." }
-- { nome: sincretica, descrizione: "Dell'intreccio: fonde tradizioni e significati." }
+- { nome: fluida,     descrizione: "In perenne mutamento; abbraccia molteplicità e trasformazione.", assi: { costruzione_identitaria: 5 } }
+- { nome: sincretica, descrizione: "Dell'intreccio: fonde tradizioni e significati.", assi: { costruzione_identitaria: 5 } }
 - nome: guerriera
   descrizione: "Fondata sul conflitto, sulla prova e sulla conquista."
   assi: { valori_dominanti: 3, relazione_morte: 2, ritualizzazione_vita: 4 }
-- { nome: nomadica,   descrizione: "Del movimento, dell'adattamento e della non-fissazione." }
+- { nome: nomadica,   descrizione: "Del movimento, dell'adattamento e della non-fissazione.", assi: { costruzione_identitaria: 5, posizione_se_natura: 4 } }
 # Diffusione/portata + stile dei nomi (il generatore homebrew genera.js legge
 # stile_nomi per comporre nomi a tema della cultura) + simbolo (araldica/emblema
 # identitario, recupero FantasyWorld; si sposa con infobox/ritratto).
@@ -65,9 +65,28 @@ relazioni:
   # sono fazioni di subtype accademia/corte/tribunale.
   category: fazione
   multi: true
+  reciprocal: cultura
 - field: specie
   label: Specie
   category: specie
+  multi: true
+- field: culti
+  label: Culti / fedi
+  category: culto
+  multi: true
+  reciprocal: culture
+- field: divinita
+  label: Divinità venerate
+  category: divinita
+  multi: true
+- field: background
+  label: Background
+  category: background
+  multi: true
+  reciprocal: cultura
+- field: biomi
+  label: Ambiente d'origine
+  category: bioma
   multi: true
 creation:
   fields:

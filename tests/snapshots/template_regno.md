@@ -106,6 +106,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "reg
 > **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita]` → `VIEW[{stabilita} == 5 ? "5 · Granitica" : ({stabilita} == 4 ? "4 · Salda" : ({stabilita} == 3 ? "3 · Contesa" : ({stabilita} == 2 ? "2 · Fragile" : ({stabilita} == 1 ? "1 · Sull'orlo" : ("—")))))]`
 > **Apertura** `INPUT[slider(minValue(1), maxValue(5), addLabels):apertura]` → `VIEW[{apertura} == 5 ? "5 · Cosmopolita" : ({apertura} == 4 ? "4 · Aperto" : ({apertura} == 3 ? "3 · Pragmatico" : ({apertura} == 2 ? "2 · Protezionista" : ({apertura} == 1 ? "1 · Isolazionista" : ("—")))))]`
 > **Proiezione** `INPUT[slider(minValue(1), maxValue(5), addLabels):proiezione]` → `VIEW[{proiezione} == 5 ? "5 · Egemonico" : ({proiezione} == 4 ? "4 · Espansionista" : ({proiezione} == 3 ? "3 · Influente" : ({proiezione} == 2 ? "2 · Difensivo" : ({proiezione} == 1 ? "1 · Ripiegato" : ("—")))))]`
+> **Potenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):potenza]` → `VIEW[{potenza} == 5 ? "5 · Egemone" : ({potenza} == 4 ? "4 · Maggiore" : ({potenza} == 3 ? "3 · Regionale" : ({potenza} == 2 ? "2 · Modesta" : ({potenza} == 1 ? "1 · Trascurabile" : ("—")))))]`
 
 > [!note]- Coesione Politica — Quanto il potere è unificato o disperso nel regno.
 > **1 · Tribale** — Clan e famiglie autonomi; unità solo simbolica.
@@ -135,6 +136,13 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "reg
 > **4 · Espansionista** — Conquista o colonizza attivamente.
 > **5 · Egemonico** — Mira al dominio totale; impero in marcia.
 
+> [!note]- Potenza — Il peso aggregato — militare ed economico — che il regno può proiettare.
+> **1 · Trascurabile** — Sopravvive per concessione altrui; nessun peso.
+> **2 · Modesta** — Si difende, non attacca; conta a livello locale.
+> **3 · Regionale** — Una potenza fra pari; pesa nei suoi confini.
+> **4 · Maggiore** — Detta legge a vicini più deboli; eserciti veri.
+> **5 · Egemone** — Il suo solo nome muove alleanze e paure.
+
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
 ```
@@ -158,6 +166,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Regni alleati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):alleati]`
 > **Regni rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):rivali]`
 > **Editti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Editti"), useLinks(partial), allowOther):editti]`
+> **Eserciti / forze armate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eserciti"), useLinks(partial), allowOther):eserciti]`
+> **Risorse / economia**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):risorse]`
+> **Religione di stato**: `INPUT[suggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):religione_stato]`
+> **Lingua ufficiale**: `INPUT[suggester(optionQuery("Mondi/Lingue"), useLinks(partial), allowOther):lingua_ufficiale]`
+> **Background d'origine**: `INPUT[inlineListSuggester(optionQuery("Mondi/Background"), useLinks(partial), allowOther):background]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -1,0 +1,31 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'rotta'.
+# Scorporati da entities/rotta.yaml; render.py li rifonde in core.assi_tematici.
+id: rotta
+assi:
+- id: sicurezza
+  nome: Sicurezza
+  descrizione: Quanto è rischioso percorrerla.
+  valori:
+    1: { etichetta: Letale, descrizione: "Pochi tornano; agguati, mostri, terreno crudele." }
+    2: { etichetta: Pericolosa, descrizione: "Serve scorta; gli incidenti sono frequenti." }
+    3: { etichetta: Incerta, descrizione: "Tranquilla a tratti, infida ad altri." }
+    4: { etichetta: Battuta, descrizione: "Pattugliata e nota; rischi rari." }
+    5: { etichetta: Sicura, descrizione: "Si viaggia senza timore, anche di notte." }
+- id: traffico
+  nome: Traffico
+  descrizione: Quanto è percorsa e quanto valore vi scorre.
+  valori:
+    1: { etichetta: Morta, descrizione: "Quasi abbandonata; la natura se la riprende." }
+    2: { etichetta: Rada, descrizione: "Qualche viandante, poche carovane." }
+    3: { etichetta: Vivace, descrizione: "Mercanti e messi regolari." }
+    4: { etichetta: Trafficata, descrizione: "Flusso costante; locande e dazi prosperano." }
+    5: { etichetta: Arteria, descrizione: "Vena vitale del mondo: bloccarla è una crisi." }
+- id: legalita
+  nome: Legalità
+  descrizione: Quanto è riconosciuta dai poteri o vive nell'ombra.
+  valori:
+    1: { etichetta: Clandestina, descrizione: "Vie del contrabbando; esistono solo per chi sa." }
+    2: { etichetta: Tollerata, descrizione: "Fuori dalle regole, ma nessuno la ferma." }
+    3: { etichetta: Grigia, descrizione: "Lecita a tratti, illecita ad altri." }
+    4: { etichetta: Riconosciuta, descrizione: "Ufficiale, con pedaggi e licenze." }
+    5: { etichetta: Sovrana, descrizione: "Protetta e regolata da un potere: via di stato." }

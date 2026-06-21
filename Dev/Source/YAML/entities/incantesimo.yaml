@@ -25,6 +25,11 @@ relazioni:
 - field: sistema_magico
   label: Sistema magico
   category: sistema_magico
+  reciprocal: incantesimi
+- field: dominio
+  label: Dominio
+  category: dominio
+  reciprocal: incantesimi
 fields:
   rituale: { label: Rituale, widget: toggle }
 scheda:

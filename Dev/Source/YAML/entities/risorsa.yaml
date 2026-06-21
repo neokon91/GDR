@@ -24,11 +24,11 @@ subtypes:
 # Classificazione a 2 livelli: la 'famiglia' (funzione economica) affianca il
 # 'tipo' (forma). Aiuta a leggere cosa muove il mondo. Legenda auto-documentante.
 famiglie:
-  - { nome: vitale,       descrizione: "Necessaria alla sopravvivenza: cibo, acqua, sale, legname — chi la perde muore o si piega." }
-  - { nome: bellica,      descrizione: "Alimenta la guerra: metalli, cavalli, salnitro, acciaio — chi la controlla detta i conflitti." }
-  - { nome: arcana,       descrizione: "Carburante della magia: reagenti, reliquie, cristalli — rara, instabile, sempre contesa." }
-  - { nome: voluttuaria,  descrizione: "Lusso e status: spezie, gemme, sete — muove ricchezza e desiderio, non necessità." }
-  - { nome: simbolica,    descrizione: "Valore culturale/sacro oltre l'uso: ostie, insegne, materiali rituali — il prezzo è identità." }
+  - { nome: vitale,       descrizione: "Necessaria alla sopravvivenza: cibo, acqua, sale, legname — chi la perde muore o si piega.", assi: { valore_strategico: 5 } }
+  - { nome: bellica,      descrizione: "Alimenta la guerra: metalli, cavalli, salnitro, acciaio — chi la controlla detta i conflitti.", assi: { valore_strategico: 4 } }
+  - { nome: arcana,       descrizione: "Carburante della magia: reagenti, reliquie, cristalli — rara, instabile, sempre contesa.", assi: { valore_strategico: 4, controllabilita: 4 } }
+  - { nome: voluttuaria,  descrizione: "Lusso e status: spezie, gemme, sete — muove ricchezza e desiderio, non necessità.", assi: { valore_strategico: 2 } }
+  - { nome: simbolica,    descrizione: "Valore culturale/sacro oltre l'uso: ostie, insegne, materiali rituali — il prezzo è identità.", assi: { valore_strategico: 2 } }
 fields:
   fonte:    { label: Fonte,      widget: text }
   scarsita: { label: Scarsità,   widget: scarsita }

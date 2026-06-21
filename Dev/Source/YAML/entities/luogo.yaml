@@ -70,13 +70,13 @@ subtypes:
 # ortogonale alla scala-tipo. Niente più 'insediamento'/'rovina' qui (erano forme = tipo):
 # restano le nature vere (mondano vs sacro/liminale/selvaggio/onirico/planare/simbolico).
 famiglie:
-- { nome: mondano,           descrizione: "Luogo ordinario del mondo materiale: abitato, coltivato o di passaggio, senza carica metafisica particolare." }
-- { nome: santuario,         descrizione: "Spazio con forte carica spirituale, usato per riti, culti o contatto con entità superiori." }
-- { nome: confine,           descrizione: "Punto di transizione tra realtà, epoche o stati dell'essere: soglia, varco, non-luogo." }
-- { nome: selvaggio,         descrizione: "Spazio non civilizzato, primordiale, vivo: natura pura o ambiente magico incontaminato." }
-- { nome: onirico,           descrizione: "Luogo tra sogno, memoria e inconscio: sognato, astrale o condiviso psichicamente." }
-- { nome: interdimensionale, descrizione: "Nodo tra piani, crocevia metafisico o intersezione ontologica; instabile o multistrato." }
-- { nome: simbolico,         descrizione: "Non ha senso fisico: rappresenta concetti, leggi o archetipi. Esiste per significato." }
+- { nome: mondano,           descrizione: "Luogo ordinario del mondo materiale: abitato, coltivato o di passaggio, senza carica metafisica particolare.", assi: { civilizzazione: 3, presenza_magica: 1, sacralita: 2 } }
+- { nome: santuario,         descrizione: "Spazio con forte carica spirituale, usato per riti, culti o contatto con entità superiori.", assi: { sacralita: 5, presenza_magica: 3 } }
+- { nome: confine,           descrizione: "Punto di transizione tra realtà, epoche o stati dell'essere: soglia, varco, non-luogo.", assi: { stratificazione_dimensionale: 3, stabilita_spaziale: 4, coerenza_temporale: 3 } }
+- { nome: selvaggio,         descrizione: "Spazio non civilizzato, primordiale, vivo: natura pura o ambiente magico incontaminato.", assi: { civilizzazione: 1, presenza_magica: 3 } }
+- { nome: onirico,           descrizione: "Luogo tra sogno, memoria e inconscio: sognato, astrale o condiviso psichicamente.", assi: { risonanza_psichica: 4, stabilita_spaziale: 5 } }
+- { nome: interdimensionale, descrizione: "Nodo tra piani, crocevia metafisico o intersezione ontologica; instabile o multistrato.", assi: { stratificazione_dimensionale: 5, stabilita_spaziale: 4 } }
+- { nome: simbolico,         descrizione: "Non ha senso fisico: rappresenta concetti, leggi o archetipi. Esiste per significato.", assi: { stabilita_spaziale: 5, risonanza_psichica: 5, coerenza_temporale: 5 } }
 # Posizione sulla mappa: "x, y" (unità arbitrarie o pixel-mappa). Con mondo.scala_mappa
 # (km/unità) renderDintorni calcola la distanza IN LINEA D'ARIA in km, complementare
 # alla distanza per confini (BFS su confina_con). Editabile nella tab Mappa.
@@ -119,6 +119,7 @@ relazioni:
 - field: bioma
   label: Bioma
   category: bioma
+  reciprocal: luoghi
 - field: cultura
   label: Cultura dominante
   category: cultura
@@ -174,6 +175,21 @@ relazioni:
 - field: insidie
   label: Insidie qui
   category: insidia
+  multi: true
+  reciprocal: luoghi
+- field: ecosistemi
+  label: Ecosistemi
+  category: ecosistema
+  multi: true
+  reciprocal: luogo
+- field: rotte
+  label: Rotte che vi passano
+  category: rotta
+  multi: true
+  reciprocal: estremi
+- field: calamita
+  label: Calamità in corso
+  category: calamita
   multi: true
   reciprocal: luoghi
 creation:

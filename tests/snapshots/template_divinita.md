@@ -173,6 +173,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Piano di dimora**: `INPUT[suggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piano]`
 > **Divinità opposte**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):rivali]`
 > **Miti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Miti"), useLinks(partial), allowOther):miti]`
+> **Divinità alleate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):alleati]`
+> **Leggi incarnate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Leggi"), useLinks(partial), allowOther):leggi]`
+> **Sistemi magici alimentati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
+> **Specie create**: `INPUT[inlineListSuggester(optionQuery("Mondi/Specie"), useLinks(partial), allowOther):creo_specie]`
+> **Epoche di dominio**: `INPUT[inlineListSuggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):epoche]`
+> **Avatar / Prescelti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):avatar]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

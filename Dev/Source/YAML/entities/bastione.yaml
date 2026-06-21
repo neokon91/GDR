@@ -29,6 +29,7 @@ relazioni:
 - field: proprietario
   label: Proprietario
   category: personaggio
+  reciprocal: bastioni
 - field: luogo
   label: Posizione
   category: luogo

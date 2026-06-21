@@ -190,6 +190,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Culti rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):rivali]`
 > **Profezie custodite**: `INPUT[inlineListSuggester(optionQuery("Mondi/Profezie"), useLinks(partial), allowOther):profezie]`
 > **Miti tramandati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Miti"), useLinks(partial), allowOther):miti]`
+> **Popoli devoti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`
+> **Reliquie / paramenti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Oggetti"), useLinks(partial), allowOther):reliquie]`
+> **Gradi d'iniziazione**: `INPUT[inlineListSuggester(optionQuery("Mondi/Alberi"), useLinks(partial), allowOther):alberi]`
+> **Primordiale venerata**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):entita_primordiale]`
+> **Leggi sacre / interdetti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Editti"), useLinks(partial), allowOther):editti]`
+> **Stato che lo sancisce**: `INPUT[suggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):regno]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

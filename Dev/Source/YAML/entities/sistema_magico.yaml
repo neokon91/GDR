@@ -52,6 +52,31 @@ relazioni:
   label: Luoghi-nodo
   category: luogo
   multi: true
+- field: incantesimi
+  label: Incantesimi del sistema
+  category: incantesimo
+  multi: true
+  reciprocal: sistema_magico
+- field: divinita
+  label: Divinità fonte
+  category: divinita
+  multi: true
+  reciprocal: sistemi_magici
+- field: oggetti
+  label: Oggetti magici
+  category: oggetto
+  multi: true
+  reciprocal: sistema_magico
+- field: specie
+  label: Specie dotate (dono innato)
+  category: specie
+  multi: true
+  reciprocal: sistemi_magici
+- field: alberi
+  label: Alberi / tradizioni di mastery
+  category: albero_evolutivo
+  multi: true
+  reciprocal: sistema_magico
 creation:
   fields:
   - field: tipo

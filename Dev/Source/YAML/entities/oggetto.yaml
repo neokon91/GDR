@@ -42,9 +42,35 @@ relazioni:
 - field: proprietario
   label: Proprietario
   category: personaggio
+  reciprocal: possiede
 - field: dove
   label: Dove si trova
   category: luogo
+- field: creatore
+  label: Creatore
+  category: personaggio
+  reciprocal: opere
+- field: materia
+  label: Materia / risorsa
+  category: risorsa
+  multi: true
+- field: sistema_magico
+  label: Tradizione magica
+  category: sistema_magico
+  reciprocal: oggetti
+- field: divinita
+  label: Divinità / patrono
+  category: divinita
+- field: incontri
+  label: Trovato in (incontri)
+  category: incontro
+  multi: true
+  reciprocal: bottino
+- field: missioni
+  label: Ricompensa di (missioni)
+  category: missione
+  multi: true
+  reciprocal: ricompensa_oggetto
 creation:
   fields:
   - field: tipo

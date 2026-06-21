@@ -67,6 +67,35 @@ relazioni:
   category: mito
   multi: true
   reciprocal: divinita
+- field: alleati
+  label: Divinità alleate
+  category: divinita
+  multi: true
+  reciprocal: alleati
+- field: leggi
+  label: Leggi incarnate
+  category: legge_fondamentale
+  multi: true
+  reciprocal: divinita
+- field: sistemi_magici
+  label: Sistemi magici alimentati
+  category: sistema_magico
+  multi: true
+  reciprocal: divinita
+- field: creo_specie
+  label: Specie create
+  category: specie
+  multi: true
+  reciprocal: origine_divina
+- field: epoche
+  label: Epoche di dominio
+  category: epoca
+  multi: true
+  reciprocal: divinita
+- field: avatar
+  label: Avatar / Prescelti
+  category: personaggio
+  multi: true
 # NB: "di cosa è dio/dea" vive nella relazione tipizzata `domini`→dominio (link),
 # non in un campo-scheda `dominio` di testo libero che la duplicherebbe.
 scheda:

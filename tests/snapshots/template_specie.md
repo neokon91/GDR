@@ -121,6 +121,11 @@ sort tipo asc, file.name asc
 > [!example] Relazioni
 > **Regione d'origine**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):origine]`
 > **Culture associate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`
+> **Magia innata**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
+> **Lingue parlate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Lingue"), useLinks(partial), allowOther):lingue]`
+> **Origine divina**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):origine_divina]`
+> **Origine primordiale**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):origine_primordiale]`
+> **Rami evolutivi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Alberi"), useLinks(partial), allowOther):alberi]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

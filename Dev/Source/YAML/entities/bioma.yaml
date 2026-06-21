@@ -29,9 +29,20 @@ relazioni:
   label: Luoghi
   category: luogo
   multi: true
+  reciprocal: bioma
 - field: specie
   label: Specie tipiche
   category: creatura
+  multi: true
+  reciprocal: biomi
+- field: ecosistemi
+  label: Ecosistemi
+  category: ecosistema
+  multi: true
+  reciprocal: bioma
+- field: risorse_naturali
+  label: Risorse del bioma
+  category: risorsa
   multi: true
 creation:
   fields:

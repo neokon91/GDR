@@ -42,6 +42,17 @@ relazioni:
   label: Culti che la custodiscono
   category: culto
   multi: true
+- field: calamita
+  label: Calamità annunciata
+  category: calamita
+  reciprocal: profezia
+- field: divinita
+  label: Divinità implicata
+  category: divinita
+  multi: true
+- field: epoca
+  label: Epoca dell'avveramento
+  category: epoca
 creation:
   fields:
   - field: tipo

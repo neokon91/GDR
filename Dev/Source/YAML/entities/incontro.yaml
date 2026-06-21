@@ -53,6 +53,20 @@ relazioni:
   label: Alleati (PNG/evocazioni)
   category: creatura
   multi: true
+- field: scena
+  label: Scena
+  category: scena
+  reciprocal: incontri
+- field: insidie
+  label: Insidie
+  category: insidia
+  multi: true
+  reciprocal: incontri
+- field: bottino
+  label: Bottino
+  category: oggetto
+  multi: true
+  reciprocal: incontri
 creation:
   fields:
   - field: tipo
