@@ -49,7 +49,7 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
     classi = build_classes(pg_rules, stats, label_to_id, all_skill_ids)
     specie = build_species()
     background = build_backgrounds(stats, skills)
-    talenti = build_feats()
+    talenti = build_feats(pg_rules.get("talenti_incantesimi", {}) or {})
 
     return {
         "caratteristiche": car_ids,

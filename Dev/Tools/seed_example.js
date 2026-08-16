@@ -28,6 +28,11 @@ function modelBody(name) {
 // Frontmatter YAML da un oggetto (stringhe quotate, numeri/array nudi; null/"" → omessi).
 function fm(obj) {
   const q = (v) => typeof v === "number" ? String(v) : JSON.stringify(String(v));
+  // Ogni nota della demo porta il tag `gdr/esempio`: la spina di onboarding (Home) la
+  // esclude dal conteggio — così il tour «Crea il tuo mondo» resta visibile anche con
+  // Astaria presente — e l'utente può filtrarla o cancellare `Mondi/Astaria` per il foglio bianco.
+  const tags = Array.isArray(obj.tags) ? obj.tags : [];
+  if (!tags.includes("gdr/esempio")) obj = { ...obj, tags: [...tags, "gdr/esempio"] };
   const lines = ["---"];
   for (const [k, v] of Object.entries(obj)) {
     if (v === undefined || v === null) continue;

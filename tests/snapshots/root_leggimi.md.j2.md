@@ -1,10 +1,12 @@
 # 👋 Benvenuto — il tuo mondo e il tuo tavolo
 
 > [!warning] 🧪 Stai testando una **beta**
-> Grazie per provarlo! Il vault parte **vuoto**: il mondo lo costruisci tu. Ogni nota che crei
-> ha in alto un callout **ℹ️ Guida** (cos'è, come compilare i campi principali, spunti): aprilo
-> quando non sai da dove iniziare. Le dashboard di *Home* e gli *Indici* sono vuote all'avvio e si
-> popolano man mano che crei. Qualcosa è ancora **da rifinire** (es. il *Sali di livello* copre
+> Grazie per provarlo! Il vault arriva con un **mondo-esempio** (**[[Astaria]]**) da esplorare per
+> vedere com'è fatto un vault vivo; il **tuo** mondo lo costruisci tu — quando vuoi partire da zero,
+> cancella la cartella `Mondi/Astaria`. Ogni nota che crei ha in alto un callout **ℹ️ Guida**
+> (cos'è, come compilare i campi principali, spunti): aprilo quando non sai da dove iniziare. Le
+> dashboard di *Home* e gli *Indici* all'avvio mostrano la demo e seguono le tue note man mano che
+> crei. Qualcosa è ancora **da rifinire** (es. il *Sali di livello* copre
 > le scelte SRD di base). **Segnala** intoppi, cose poco chiare o impressioni a chi ti ha condiviso il vault —
 > è esattamente ciò che serve in questa fase.
 
@@ -23,8 +25,8 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
    **«Trust author and enable plugins»**. I plugin sono già inclusi nel vault — non
    devi installare niente. *(Se una scheda appare come testo grezzo, apri **[[Diagnostica]]**.)*
 2. **Apri `Home`**: è la tua plancia. Da lì crei tutto e raggiungi gli indici.
-   All'inizio le dashboard e gli indici sono **vuoti**: è normale, si riempiono man
-   mano che crei.
+   All'inizio mostrano il **mondo-esempio Astaria**: esploralo, poi cancella
+   `Mondi/Astaria` quando vuoi il tuo foglio bianco. Le dashboard seguono le tue note.
 3. **Crea il tuo primo mondo**: in Home premi **Crea → Mondo**, rispondi a poche
    domande e parti. Poi popolalo (luoghi, personaggi, fazioni…) sempre da Home: ogni
    *Crea* apre un aiutante, e ogni nota ti guida col callout **ℹ️ Guida** in cima.

@@ -12,7 +12,11 @@
     il parser MB. -#}
 {%- set inline = f.widget in ['text', 'number', 'toggle', 'date', 'datePicker', 'time'] -%}
 {%- set ph = ('(placeholder(' ~ f.get('placeholder') ~ '))') if (f.get('placeholder') and f.widget in ['text', 'number']) else '' -%}
-{%- if inline -%}`INPUT[{{ f.widget }}{{ ph }}:{{ id }}]`
+{#- testo_area con placeholder: forma INLINE Meta Bind (`INPUT[textArea(placeholder(…)):id]`)
+    invece del template `INPUT[textArea][:id]`, così un campo-prosa vuoto porta la sua guida
+    «es. …» come i campi text. Gli altri testo_area (senza placeholder) restano sul template. -#}
+{%- if f.widget == 'testo_area' and f.get('placeholder') -%}`INPUT[textArea(placeholder({{ f.placeholder }})):{{ id }}]`
+{%- elif inline -%}`INPUT[{{ f.widget }}{{ ph }}:{{ id }}]`
 {%- else -%}`INPUT[{{ f.widget }}][:{{ id }}]`{%- endif -%}
 {%- endmacro %}
 
@@ -220,7 +224,7 @@
 
 {% endif %}
 > [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): {{ field('rivelazione', label=false) }}
+> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): {{ field('rivelazione', label=false) }}
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 {%- endmacro %}

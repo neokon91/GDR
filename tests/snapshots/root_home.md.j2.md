@@ -1,13 +1,16 @@
 # 🏠 GDR — Home
 
 > [!tip] Nuovo qui? Il tuo mondo prende vita in **5 tappe**. Tour con spunti: **[[Crea il tuo mondo]]** · panoramica: **[[LEGGIMI]]**.
-> Il vault parte **vuoto**: *scrivi lore → la superficie giocabile si calcola da sé*. Ogni nota ha in cima un callout **ℹ️ Guida** (cos'è, campi chiave, spunti).
+> Trovi un **mondo-esempio** già pronto (**[[Astaria]]**): esploralo per vedere com'è fatto un vault vivo. Per partire dal **tuo**, cancella la cartella `Mondi/Astaria` — il conteggio qui sotto segue *le tue* note, non quelle della demo. Ogni nota ha in cima un callout **ℹ️ Guida** (cos'è, campi chiave, spunti).
 > Vedi del **codice** al posto di pulsanti o tabelle? Manca un plugin → **[[Diagnostica]]**.
 
 ```dataviewjs
 // Spina di onboarding: il progresso delle 5 tappe «Crea il tuo mondo» derivato dallo
 // stato REALE del vault (conta le note + cerca legami/Fronti) → si aggiorna da sé.
-const p = dv.pages().where(x => !x.file.path.startsWith("z."));  // escludi i template z.modelli/z.*
+const p = dv.pages().where(x =>
+  !x.file.path.startsWith("z.")            // escludi i template z.modelli/z.*
+  && !x.file.tags.includes("#gdr/esempio") // e il mondo-esempio (demo): il tour conta il TUO mondo
+);
 const has = v => v != null && (typeof v.length !== "number" || v.length > 0);
 const some = f => p.where(f).length > 0;
 const steps = [

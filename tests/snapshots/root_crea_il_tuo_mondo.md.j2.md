@@ -1,7 +1,8 @@
 # 🧭 Crea il tuo mondo
 
 > [!info] A cosa serve
-> Parti da un foglio bianco? **Cinque tappe** per dare vita al tuo mondo — ognuna con
+> Pronto a costruire il **tuo** mondo (dopo aver sbirciato la demo *Astaria*)? **Cinque tappe**
+> per dargli vita — ognuna con
 > qualche spunto per accendere l'idea. Non serve compilare tutto: bastano poche frasi
 > per partire, il resto cresce giocando. *(Ogni nota che crei ha in cima un callout
 > **ℹ️ Guida**: spiega cos'è e come compilarne i campi principali.)*

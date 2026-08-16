@@ -13,23 +13,16 @@ templates:
   target: z.modelli/Luogo.md
   jinja: luogo.md.j2
   primary: true
-# SOTTOTIPI con PROFILO: il 'tipo' è la SCALA/FORMA spaziale, dal continente al
-# dungeon — una GERARCHIA di contenimento (continente ⊃ regione ⊃ insediamento/sito).
-# Ogni profilo porta i SUOI campi (renderTipoProfilo li mostra in base al tipo), i suoi
-# prompt-wizard, e i flag clock (è un Fronte?) ed evoluzione (cambia tra le epoche?).
+# SOTTOTIPI con PROFILO: il 'tipo' è la SCALA/FORMA spaziale del luogo. Fra i tipi esiste
+# una GERARCHIA di contenimento (continente ⊃ regione ⊃ insediamento/sito ⊃ struttura/dungeon),
+# ma l'ORDINE qui non la segue: apre coi tipi da cui il gioco parte davvero (l'insediamento
+# dove i PG agiscono, il sito, la struttura, il dungeon) e lascia in coda le scale larghe
+# (regione, continente), scelte rare per chi crea il primo Luogo. Così il picker «Tipo di
+# luogo» del wizard mette per primo il default e ciò che l'onboarding promette («un Luogo dove
+# inizia l'azione»), non la scala geografica più astratta. Ogni profilo porta i SUOI campi
+# (renderTipoProfilo li mostra in base al tipo), i suoi prompt-wizard, e i flag clock (è un
+# Fronte?) ed evoluzione (cambia tra le epoche?). L'ordine NON tocca `default_type` (per nome).
 subtypes:
-- nome: continente
-  descrizione: "Grande massa di terra che raccoglie regioni e mari: il livello più alto della geografia."
-  campi: [estensione, terreno_dominante]
-  wizard: ["Geografia d'insieme: rilievi, mari, clima dominante", "Cosa lo distingue dagli altri continenti"]
-  clock: false
-  evoluzione: true
-- nome: regione
-  descrizione: "Area che contiene insediamenti e siti: provincia, marca, valle, arcipelago, ducato geografico."
-  campi: [capoluogo, estensione, terreno_dominante]
-  wizard: ["Confini naturali e cosa la rende un'unità", "Quali popoli e poteri la abitano"]
-  clock: false
-  evoluzione: true
 - nome: insediamento
   descrizione: "Luogo abitato, dal villaggio alla metropoli: qui i PG comprano, pregano, riposano, reclutano, indagano."
   campi: [taglia_insediamento, popolazione, governo_locale, prosperita, pericolosita, servizi, quartieri]
@@ -66,6 +59,18 @@ subtypes:
   wizard: ["Il fenomeno o pericolo naturale che lo definisce"]
   clock: false
   evoluzione: false
+- nome: regione
+  descrizione: "Area che contiene insediamenti e siti: provincia, marca, valle, arcipelago, ducato geografico."
+  campi: [capoluogo, estensione, terreno_dominante]
+  wizard: ["Confini naturali e cosa la rende un'unità", "Quali popoli e poteri la abitano"]
+  clock: false
+  evoluzione: true
+- nome: continente
+  descrizione: "Grande massa di terra che raccoglie regioni e mari: il livello più alto della geografia."
+  campi: [estensione, terreno_dominante]
+  wizard: ["Geografia d'insieme: rilievi, mari, clima dominante", "Cosa lo distingue dagli altri continenti"]
+  clock: false
+  evoluzione: true
 # Classificazione a 2 livelli: la 'famiglia' è la NATURA (mitica/ontologica) del luogo,
 # ortogonale alla scala-tipo. Niente più 'insediamento'/'rovina' qui (erano forme = tipo):
 # restano le nature vere (mondano vs sacro/liminale/selvaggio/onirico/planare/simbolico).

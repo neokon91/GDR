@@ -3,8 +3,19 @@
 // Il corpo della nota è renderizzato da Jinja (source of truth: YAML).
 
 async function loadCore() {
-  const raw = await app.vault.adapter.read("z.automazioni/data/core.json");
-  return JSON.parse(raw);
+  // Read e parse separati con messaggi azionabili: un vault fresco (build mai
+  // lanciata) o un core.json corrotto non devono dare uno stack trace grezzo.
+  let raw;
+  try {
+    raw = await app.vault.adapter.read("z.automazioni/data/core.json");
+  } catch (e) {
+    throw new Error("core.json non trovato — rilancia la build del vault (npm run build).");
+  }
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    throw new Error("core.json illeggibile (JSON non valido) — rilancia la build del vault.");
+  }
 }
 
 function slugify(value) {
@@ -96,6 +107,21 @@ async function chooseNotes(tp, question, req) {
     return picked.map((f) => `[[${f.basename}]]`);
   }
   if (!files.length) {
+    // Nessun target esistente: prompt a testo libero. Se il campo è obbligatorio, un
+    // invio vuoto NON deve passare — creerebbe una nota orfana (es. Luogo/Fazione con
+    // `mondo: ''` prima che esista un Mondo). Si ripete fino a 3 volte come per il nome
+    // in runWizard, poi si annulla il wizard (throw → "Creazione annullata.").
+    if (req) {
+      let typed = "";
+      for (let attempt = 0; attempt < 3 && !typed; attempt++) {
+        const label = attempt
+          ? `${question.prompt} (digita il nome) — obbligatorio`
+          : `${question.prompt} (digita il nome)`;
+        typed = String(await tp.system.prompt(label, "", true)).trim();
+      }
+      if (!typed) throw new Error(`Campo obbligatorio vuoto: ${question.prompt}`);
+      return `[[${typed}]]`;
+    }
     const typed = await tp.system.prompt(`${question.prompt} (digita il nome)`, "", req);
     return typed ? `[[${String(typed).trim()}]]` : "";
   }
@@ -437,9 +463,20 @@ async function runWizard(tp, template, core) {
 }
 
 async function create_entity(tp, templateId = "") {
-  const core = await loadCore();
+  let core;
+  try {
+    core = await loadCore();
+  } catch (e) {
+    // core.json mancante/corrotto: Notice comprensibile, niente crash. La nota
+    // resta una bozza valida e apribile invece di uno stack trace di Templater.
+    new Notice(e.message);
+    return frontmatter({ categoria: "nota", stato: "bozza", tags: ["gdr/bozza"] });
+  }
   const template = core.templates.find(item => item.id === templateId);
-  if (!template) throw new Error(`Template non dichiarato: ${templateId}`);
+  if (!template) {
+    new Notice(`Template non dichiarato: ${templateId} — rilancia la build del vault.`);
+    return frontmatter({ categoria: "nota", stato: "bozza", tags: ["gdr/bozza"] });
+  }
   try {
     return await runWizard(tp, template, core);
   } catch (e) {

@@ -218,7 +218,9 @@ def test_render_diagnostica(tmp_path):
     """views.renderDiagnostica: confronta i plugin ESSENZIALI (core.json:plugins) coi
     plugin ATTIVI in Obsidian. Tutti attivi -> messaggio OK; qualcuno spento -> avviso
     + tabella (nome + cosa rompe) coi SOLI mancanti. Non usa Dataview (gira anche se
-    Dataview è spento, il caso da diagnosticare). pluginAttivi normalizza Set/array."""
+    Dataview è spento, il caso da diagnosticare). pluginAttivi normalizza Set/array.
+    Fonte di verità: i plugin CARICATI (app.plugins.plugins), non enabledPlugins: un
+    plugin abilitato ma non caricabile deve risultare MANCANTE, non «attivo»."""
     harness = tmp_path / "diag.js"
     harness.write_text(
         'const fs=require("fs");'
@@ -226,13 +228,22 @@ def test_render_diagnostica(tmp_path):
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const core={plugins:[{id:"a",name:"Alpha",rompe:"Le X non si vedono."},'
         '{id:"b",name:"Beta",rompe:"Le Y non funzionano."}]};'
-        'const mk=(on)=>({vault:{adapter:{read:async()=>JSON.stringify(core)}},'
-        'plugins:{enabledPlugins:new Set(on)}});'
+        # loaded=id dei plugin REALMENTE caricati (app.plugins.plugins). enabled=quelli
+        # abilitati in community-plugins.json: può includere plugin non caricabili.
+        'const mk=(loaded,enabled)=>({vault:{adapter:{read:async()=>JSON.stringify(core)}},'
+        'plugins:{plugins:Object.fromEntries((loaded||[]).map(id=>[id,{}])),'
+        'enabledPlugins:new Set(enabled||loaded)}});'
         'Promise.all(['
-        '  m.exports.renderDiagnostica(mk(["a","b"])),'
-        '  m.exports.renderDiagnostica(mk(["a"])),'
-        ']).then(([ok,miss])=>process.stdout.write(JSON.stringify({ok,miss,'
-        'arr:[...m.exports.pluginAttivi({plugins:{enabledPlugins:["x"]}})]})));',
+        '  m.exports.renderDiagnostica(mk(["a","b"])),'                   # entrambi caricati -> OK
+        '  m.exports.renderDiagnostica(mk(["a"])),'                       # b non caricato -> manca
+        # BUG: b abilitato in community-plugins.json ma NON caricabile (non in plugins).
+        # enabledPlugins direbbe "attivo"; la fonte corretta (plugins) lo dà per mancante.
+        '  m.exports.renderDiagnostica(mk(["a"],["a","b"])),'
+        ']).then(([ok,miss,broken])=>process.stdout.write(JSON.stringify({ok,miss,broken,'
+        # ripiego legacy: se manca app.plugins.plugins, normalizza enabledPlugins
+        'arr:[...m.exports.pluginAttivi({plugins:{enabledPlugins:["x"]}})],'
+        # fonte di verità: preferisce i plugin caricati a enabledPlugins
+        'truth:[...m.exports.pluginAttivi({plugins:{plugins:{y:{}},enabledPlugins:["x","y"]}})]})));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
@@ -241,7 +252,10 @@ def test_render_diagnostica(tmp_path):
     assert "Manca 1 plugin essenziale su 2" in out["miss"]                  # singolare corretto
     assert "**Beta**" in out["miss"] and "Le Y non funzionano." in out["miss"]  # mancante + cosa rompe
     assert "Alpha" not in out["miss"]                                       # gli attivi non compaiono
-    assert out["arr"] == ["x"]                                              # pluginAttivi normalizza l'array
+    assert "Manca 1 plugin essenziale su 2" in out["broken"]                # abilitato ma non caricato -> manca
+    assert "**Beta**" in out["broken"]                                      # il falso "attivo" è smascherato
+    assert out["arr"] == ["x"]                                              # ripiego: normalizza enabledPlugins
+    assert out["truth"] == ["y"]                                            # fonte di verità: i plugin caricati
 
 
 # Mock minimale dell'elemento Obsidian (createEl) per testare il percorso di

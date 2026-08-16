@@ -20,7 +20,7 @@
 
 > [!opzioni]- ⚙️ Opzioni
 > **Stato**: `INPUT[stato][:stato]`
-> **Tipo**: `INPUT[inlineSelect(option(continente), option(regione), option(insediamento), option(sito di interesse), option(struttura), option(dungeon), option(rovina), option(landmark naturale)):tipo]`
+> **Tipo**: `INPUT[inlineSelect(option(insediamento), option(sito di interesse), option(struttura), option(dungeon), option(rovina), option(landmark naturale), option(regione), option(continente)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(mondano), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
@@ -84,10 +84,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 --- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
-> `INPUT[testo_area][:uso_al_tavolo]`
+> `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
 
 > [!gancio]- Gancio
-> `INPUT[testo_area][:gancio]`
+> `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
 
 > [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
 > Pressione: `INPUT[pressione][:pressione]`
@@ -114,7 +114,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza e chiede se il fronte è *risolto* (si chiude, archiviato) o *ricorrente* (riparte, clock azzerato).
 
 > [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
+> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere

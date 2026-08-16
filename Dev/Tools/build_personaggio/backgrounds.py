@@ -28,9 +28,21 @@ def build_backgrounds(stats: Callable[[Any], list[str]],
     return background
 
 
-def build_feats() -> dict[str, Any]:
-    """Talenti {slug: {label, categoria}} dal SRD feats. La `categoria` (Origini /
-    Generale / Stile di combattimento / Dono epico) serve al gating dei talenti a un
-    ASI (sali_pg.talentoAmmesso): solo i Generali, e i Doni epici dal 19."""
-    return {_slug(f.get("nome")): {"label": f.get("nome", ""), "categoria": f.get("categoria", "")}
-            for f in load_srd("srd_5_2_1_feats.json") if f.get("nome")}
+def build_feats(feat_spells: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Talenti {slug: {label, categoria[, incantesimi]}} dal SRD feats. La `categoria`
+    (Origini / Generale / Stile di combattimento / Dono epico) serve al gating dei talenti a
+    un ASI (sali_pg.talentoAmmesso): solo i Generali, e i Doni epici dal 19. `feat_spells`
+    (overlay pg_rules.talenti_incantesimi, chiave = slug) aggiunge `incantesimi`
+    ({trucchetti, incantesimi, liste}) ai talenti che concedono incantesimi (Iniziato alla
+    magia): crea_pg.scegliIncantesimiTalenti lo legge per guidare la scelta."""
+    feat_spells = feat_spells or {}
+    talenti: dict[str, Any] = {}
+    for f in load_srd("srd_5_2_1_feats.json"):
+        if not f.get("nome"):
+            continue
+        slug = _slug(f.get("nome"))
+        entry: dict[str, Any] = {"label": f.get("nome", ""), "categoria": f.get("categoria", "")}
+        if slug in feat_spells:
+            entry["incantesimi"] = feat_spells[slug]
+        talenti[slug] = entry
+    return talenti

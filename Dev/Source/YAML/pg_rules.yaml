@@ -53,6 +53,20 @@ risorse_classe:
 # gli slot_uso_N. Gli altri incantatori recuperano gli slot solo sul riposo lungo.
 slot_ricarica_breve_classi: [warlock]
 
+# Talenti che CONCEDONO incantesimi (Iniziato alla magia, 2024). Il SRD li descrive in
+# prosa (`beneficio`); qui li strutturo perché il wizard possa guidare la scelta. Chiave =
+# slug del talento (come build_feats._slug del nome SRD). `trucchetti`/`incantesimi` = quanti
+# se ne scelgono (liv 0 / liv 1); `liste` = liste di CLASSE da cui pescare (id classe: il pool
+# è classi[<id>].incantesimi_pool). La variante del background FISSA la lista via la parentesi
+# del talento_origine ("Iniziato alla magia (chierico)"); se il talento arriva "nudo" (talento
+# d'origine di specie) il wizard fa scegliere la lista. build_feats attacca questi dati al
+# talento; crea_pg (scegliIncantesimiTalenti) fa i prompt e li scrive in trucchetti/incantesimi.
+talenti_incantesimi:
+  iniziato_alla_magia:
+    trucchetti: 2
+    incantesimi: 1
+    liste: [chierico, druido, mago]
+
 # Risorse il cui MAX = modificatore di una CARATTERISTICA (non una colonna SRD): es.
 # l'Ispirazione bardica = mod Carisma (min 1). Chiave = id classe; crea_pg/sali_pg
 # calcolano max = mod(<caratteristica>) al punteggio corrente del PG (si aggiorna a un ASI).

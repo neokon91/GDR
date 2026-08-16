@@ -52,7 +52,20 @@
       "additionalProperties": {
         "type": "object",
         "required": ["label", "categoria"],
-        "properties": { "label": { "type": "string" }, "categoria": { "type": "string" } }
+        "properties": {
+          "label": { "type": "string" },
+          "categoria": { "type": "string" },
+          "incantesimi": {
+            "type": "object",
+            "description": "Talenti che concedono incantesimi (Iniziato alla magia): crea_pg.scegliIncantesimiTalenti guida la scelta dal pool di classe.",
+            "required": ["trucchetti", "incantesimi", "liste"],
+            "properties": {
+              "trucchetti": { "type": "integer" },
+              "incantesimi": { "type": "integer" },
+              "liste": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
       }
     },
     "slot_incantatore": { "type": "object" },

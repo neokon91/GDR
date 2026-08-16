@@ -405,16 +405,7 @@ def build() -> dict[str, str]:
     return rendered
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Genera il vault Obsidian GDR in dist/GDR-vault da sorgenti YAML/Jinja/JS.")
-    parser.add_argument("--clean", action="store_true", help="Rimuove solo gli artefatti generati (non i contenuti/plugin).")
-    parser.add_argument("--check", action="store_true", help="Valida YAML/Jinja senza scrivere output.")
-    parser.add_argument("--site", action="store_true", help="Genera il sito statico dei giocatori (spoiler-free, read-only) in dist/GDR-site dal vault.")
-    parser.add_argument("--reveal", choices=["pubblico", "incontrato", "segreto", "tutto"],
-                        default="pubblico",
-                        help="Livello di rivelazione del sito-giocatori: include le note col campo `rivelazione` fino a quel tier (default: pubblico).")
-    args = parser.parse_args()
-
+def _dispatch(args: argparse.Namespace) -> int:
     if args.clean:
         clean()
         print("Artefatti generati rimossi.")
@@ -440,6 +431,29 @@ def main() -> int:
     print(f"Build OK: {len(rendered)} note generate, {js_runtime} JS runtime.")
     print(f"Vault: {rel}/  — apri questa cartella in Obsidian.")
     return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Genera il vault Obsidian GDR in dist/GDR-vault da sorgenti YAML/Jinja/JS.")
+    parser.add_argument("--clean", action="store_true", help="Rimuove solo gli artefatti generati (non i contenuti/plugin).")
+    parser.add_argument("--check", action="store_true", help="Valida YAML/Jinja senza scrivere output.")
+    parser.add_argument("--site", action="store_true", help="Genera il sito statico dei giocatori (spoiler-free, read-only) in dist/GDR-site dal vault.")
+    parser.add_argument("--reveal", choices=["pubblico", "incontrato", "segreto", "tutto"],
+                        default="pubblico",
+                        help="Livello di rivelazione del sito-giocatori: include le note col campo `rivelazione` fino a quel tier (default: pubblico).")
+    args = parser.parse_args()
+
+    # Un refuso nelle sorgenti YAML editate dall'utente (virgola/indentazione) o un
+    # file mancante non devono dare un traceback Python: messaggio azionabile + exit 1.
+    try:
+        return _dispatch(args)
+    except yaml.YAMLError as e:
+        print("Errore di sintassi nelle sorgenti YAML — controlla indentazione e virgole nel file indicato qui sotto:")
+        print(f"  {e}")
+        return 1
+    except FileNotFoundError as e:
+        print(f"File mancante: {e.filename or e}. Verifica le sorgenti in Dev/Source/ (o rilancia dopo `npm install`/`pip install -r requirements-dev.txt`).")
+        return 1
 
 
 if __name__ == "__main__":

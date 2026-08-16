@@ -17,11 +17,13 @@ Obsidian fai **«Apri cartella come vault»** (i plugin sono inclusi). Dentro:
   (budget 2024), condizioni, dadi — **locale e gratis**, i tuoi dati restano tuoi;
 - ogni nota che crei ha in cima un callout **ℹ️ Guida** (cos'è, come compilare i campi
   principali, spunti) e i bottoni **Crea** aprono un aiutante passo-passo;
-- un **sito dei giocatori** statico e *senza spoiler* che generi tu (`npm run site`), con
+- un **sito dei giocatori** statico e *senza spoiler* che generi con un clic dal vault
+  (dashboard **👁 Occhi del giocatore → Genera sito**, niente terminale), con
   **rivelazione progressiva**: sveli il mondo man mano che la campagna procede.
 
-Il vault parte da un **foglio bianco**: un tour **«Crea il tuo mondo»** ti accompagna. La guida
-completa è nel **LEGGIMI** dentro il vault.
+Il vault arriva con un **mondo-esempio** (*Astaria*) da esplorare: quando vuoi il tuo **foglio
+bianco**, cancella la cartella `Mondi/Astaria`. Un tour **«Crea il tuo mondo»** ti accompagna, e la
+guida completa è nel **LEGGIMI** dentro il vault.
 
 ## Screenshot
 

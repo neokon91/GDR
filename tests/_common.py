@@ -32,12 +32,16 @@ _PG_HARNESS = """
 const fs = require("fs");
 const data = fs.readFileSync(process.argv[2], "utf8");
 const wantClass = process.argv[4] || null;
+const wantBg = process.argv[5] || null;
 global.app = { vault: { adapter: { read: async () => data } } };
 const tp = { system: {
     prompt: async () => "Test PG",
     suggester: async (l, v, _f, title) => {
         if (wantClass && title && String(title).startsWith("Classe")) {
             const i = v.indexOf(wantClass); return v[i >= 0 ? i : 0];
+        }
+        if (wantBg && title && String(title).startsWith("Background")) {
+            const i = v.indexOf(wantBg); return v[i >= 0 ? i : 0];
         }
         return v[0];
     } },
@@ -46,8 +50,9 @@ require(process.argv[3])(tp).then(fm => process.stdout.write(fm));
 """
 
 
-def _run_crea_pg(tmp_path, classe=None):
-    """Esegue crea_pg.js col mock Templater; ritorna (opzioni, frontmatter dict)."""
+def _run_crea_pg(tmp_path, classe=None, background=None):
+    """Esegue crea_pg.js col mock Templater; ritorna (opzioni, frontmatter dict).
+    `classe`/`background` forzano quelle scelte (per id o label); il resto = prima opzione."""
     import build_personaggio
     opt = build_personaggio.build_personaggio_options(CORE)
     pj = tmp_path / "personaggio.json"
@@ -55,8 +60,10 @@ def _run_crea_pg(tmp_path, classe=None):
     harness = tmp_path / "harness.js"
     harness.write_text(_PG_HARNESS, encoding="utf-8")
     args = ["node", str(harness), str(pj), str(render.JS_DIR / "crea_pg.js")]
-    if classe:
-        args.append(classe)
+    if classe or background:
+        args.append(classe or "")
+    if background:
+        args.append(background)
     res = subprocess.run(args, capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     return opt, yaml.safe_load(res.stdout.split("---")[1])

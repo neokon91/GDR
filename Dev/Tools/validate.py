@@ -449,7 +449,12 @@ def validate_runtime_payloads(core: dict[str, Any], templates: list[dict[str, An
     JSON Schema (schemas/): è il contratto Python→JS reso ESPLICITO. Un drift di shape
     — chiave rinominata/rimossa o tipo cambiato dal lato Python che il JS legge — si ferma
     al build invece di rompere muto in-app. Costruisce i payload IN-MEMORY (non scrive file)."""
-    import jsonschema  # dev-dep (requirements-dev.txt): serve solo a check-time, non nel vault
+    try:
+        import jsonschema  # dev-dep (requirements-dev.txt): serve solo a check-time, non nel vault
+    except ImportError:
+        # Utente che ha fatto `npm install` ma non le dev-dep Python: messaggio
+        # azionabile invece di un ModuleNotFoundError grezzo.
+        return ["jsonschema non installato — esegui `pip install -r requirements-dev.txt` per validare i payload runtime."]
     from build_personaggio import build_personaggio_options
     from render import engine_payload  # differito: render importa validate al load (no ciclo a runtime)
 
@@ -513,8 +518,10 @@ def check() -> int:
             errors.append(f"campo {field_id}: widget '{widget}' assente da metabind_inputs")
         ph = spec.get("placeholder")
         if ph is not None:
-            if widget not in ("text", "number"):
-                errors.append(f"campo {field_id}: 'placeholder' ammesso solo su widget text/number (è '{widget}')")
+            # text/number lo emettono inline; testo_area lo riceve via la forma inline
+            # `INPUT[textArea(placeholder(…)):id]` (vedi macro field()).
+            if widget not in ("text", "number", "testo_area"):
+                errors.append(f"campo {field_id}: 'placeholder' ammesso solo su widget text/number/testo_area (è '{widget}')")
             if set(str(ph)) & placeholder_vietati:
                 errors.append(f"campo {field_id}: placeholder con caratteri che rompono il parser Meta Bind — ()[]:,` o apici dritti ' \" (usa l'apostrofo tipografico ’)")
 

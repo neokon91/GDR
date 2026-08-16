@@ -319,8 +319,17 @@ async function sali_pg(tp) {
   let breakdown = (Array.isArray(fm.classi) && fm.classi.length
     ? fm.classi.map(c => ({ id: String(c.id), livello: Math.max(0, Number(c.livello) || 0), sottoclasse: c.sottoclasse || "" }))
     : [{ id: fm.classe, livello: Math.max(1, Number(fm.livello) || 1), sottoclasse: fm.sottoclasse || "" }]
-  ).filter(c => c.id && classi[c.id]);
+  ).filter(c => c.id);
   if (!breakdown.length) { new Notice(`Classe sconosciuta: ${fm.classe}`); return ""; }
+  // Una classe presente sulla scheda ma non più risolvibile nel motore (nota-classe
+  // homebrew archiviata o rinominata) NON va scartata in silenzio: droppare e poi
+  // riscrivere u.classi (riga ~502) farebbe scendere livello/competenza/PF senza
+  // avviso. Meglio fermarsi e dire quale nota manca, così il GM la ripristina.
+  const nonRisolte = breakdown.filter(c => !classi[c.id]);
+  if (nonRisolte.length) {
+    new Notice(`Classe non trovata nel motore: ${nonRisolte.map(c => c.id).join(", ")} — ripristina la nota-classe (o rilancia la build).`);
+    return "";
+  }
   const totale = breakdown.reduce((s, c) => s + c.livello, 0);
   if (totale >= 20) { new Notice("PG già al 20º livello (personaggio)."); return ""; }
 

@@ -67,10 +67,14 @@ function conPasso(tp, fase) {
     return out;
 }
 
-// suggester su una mappa { id: { label } } -> ritorna l'id scelto.
+// suggester su una mappa { id: { label } } -> ritorna l'id scelto. Le scelte qui
+// sono tutte obbligatorie (metodo/classe/specie/background): Escape → annulla il
+// wizard (sentinella CANCEL), non prosegue con id=null che creerebbe un PG rotto.
 async function scegliDaMappa(tp, titolo, mappa) {
     const ids = Object.keys(mappa || {});
-    return tp.system.suggester(ids.map(id => (mappa[id] && mappa[id].label) || id), ids, false, titolo);
+    const scelta = await tp.system.suggester(ids.map(id => (mappa[id] && mappa[id].label) || id), ids, false, titolo);
+    if (scelta == null) throw new Error(CANCEL);  // Escape → annulla, non corrompere
+    return scelta;
 }
 
 async function assegnaArray(tp, caratteristiche, valori) {
@@ -355,7 +359,7 @@ function applyConcede(u, fm, concede, carIds, abilMap) {
 async function scegliMondo(tp) {
   const mondi = noteVault("mondo").map(({ f }) => f.basename).sort();
   if (!mondi.length) return "";
-  const SALTA = "— nessuno —";
+  const SALTA = "(nessuno)";
   const scelto = await tp.system.suggester([SALTA, ...mondi], [SALTA, ...mondi], false, "Mondo di appartenenza (opzionale)");
   return scelto && scelto !== SALTA ? `[[${scelto}]]` : "";
 }
@@ -418,6 +422,48 @@ async function scegliIncantesimi(tp, classe, classeId) {
     const trucchetti = await scegliMulti(tp, "Trucchetto", pool["0"] || [], classe.trucchetti_noti || 0);
     const preparati = await scegliMulti(tp, "Incantesimo di 1º livello", pool["1"] || [], classe.incantesimi_preparati || 0);
     return { trucchetti, preparati, slot: classe.slot_l1 || {} };
+}
+
+// Slug di un talento dal suo nome (stessa regola di build_feats._slug lato Python): usato
+// sia per la voce `talenti` del frontmatter sia per il lookup dei metadati in opt.talenti.
+function slugTalento(nome) {
+    return String(nome || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+}
+
+// "Iniziato alla magia (chierico)" → { base: "iniziato_alla_magia", lista: "chierico" }. La
+// parentesi (quando c'è) FISSA la lista di classe della variante del background; senza
+// parentesi (talento "nudo") lista = "" e il wizard la farà scegliere.
+function talentoConLista(raw) {
+    const s = String(raw || "");
+    const m = s.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
+    return { base: slugTalento(m ? m[1] : s), lista: m ? slugTalento(m[2]) : "" };
+}
+
+// Incantesimi concessi dai TALENTI d'origine (Iniziato alla magia, 2024): per ogni talento
+// con metadati `incantesimi` ({trucchetti, incantesimi, liste}), sceglie N trucchetti + M
+// incantesimi di 1º livello dal pool della classe scelta (opt.classi[lista].incantesimi_pool).
+// La lista è FISSATA dalla variante del background, o è a scelta fra `liste` (talento di
+// specie). Vale anche per i NON-incantatori (Barbaro/Accolito): i talenti concedono magia a
+// prescindere dalla classe. `descrittori` = [{base, lista, label}]. Ritorna {trucchetti, incantesimi}.
+async function scegliIncantesimiTalenti(tp, descrittori, opt) {
+    const trucchetti = [], incantesimi = [];
+    for (const d of descrittori || []) {
+        const meta = ((opt.talenti || {})[d.base] || {}).incantesimi;
+        if (!meta) continue;  // talento senza magia (Allerta, Aggressore selvaggio...) → niente
+        const liste = meta.liste || [];
+        let lista = d.lista && liste.includes(d.lista) ? d.lista : "";
+        if (!lista && liste.length === 1) lista = liste[0];
+        if (!lista && liste.length > 1) {
+            lista = await tp.system.suggester(
+                liste.map(id => ((opt.classi || {})[id] || {}).label || id),
+                liste, false, `${d.label}: lista incantesimi`);
+            if (lista == null) throw new Error(CANCEL);  // Escape → annulla, non lasciare il talento a metà
+        }
+        const pool = ((opt.classi || {})[lista] || {}).incantesimi_pool || {};
+        for (const t of await scegliMulti(tp, `${d.label}: trucchetto`, pool["0"] || [], meta.trucchetti || 0)) trucchetti.push(t);
+        for (const s of await scegliMulti(tp, `${d.label}: incantesimo di 1º livello`, pool["1"] || [], meta.incantesimi || 0)) incantesimi.push(s);
+    }
+    return { trucchetti, incantesimi };
 }
 
 function listaYaml(items) {
@@ -601,22 +647,38 @@ async function costruisciPG(tp, opt, nome) {
     // Incantesimi di 1º livello (solo incantatori; pool SRD + homebrew del vault).
     const magia = await scegliIncantesimi(tp, classe, classeId);
 
-    const talentoOrigine = background.talento_origine
-        ? String(background.talento_origine).trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
-        : "";
+    // Talento d'origine del background: lo slug COMPLETO ("Iniziato alla magia (chierico)"
+    // → iniziato_alla_magia_chierico) va nel frontmatter; il `base` (senza parentesi) serve
+    // per i metadati in opt.talenti e per escludere il talento dal pool di specie.
+    const bgTal = talentoConLista(background.talento_origine);
+    const talentoOrigine = background.talento_origine ? slugTalento(background.talento_origine) : "";
     // Talento d'origine di specie (Umano «Versatile», 2024): N talenti d'ORIGINE in più,
     // diversi da quello del background. Data-driven da specie.talento_origine_extra.
     const talentiSpecie = [];
     const featExtra = Number(specie.talento_origine_extra) || 0;
     if (featExtra > 0) {
         const pool = Object.entries(opt.talenti || {})
-            .filter(([id, t]) => /origin/i.test((t && t.categoria) || "") && id !== talentoOrigine)
+            .filter(([id, t]) => /origin/i.test((t && t.categoria) || "") && id !== bgTal.base)
             .map(([id, t]) => ({ id, label: (t && t.label) || id }));
         const labelToId = Object.fromEntries(pool.map(p => [p.label, p.id]));
         for (const lbl of await scegliMulti(tp, "Talento d'origine (specie)", pool.map(p => p.label), featExtra)) {
             if (labelToId[lbl]) talentiSpecie.push(labelToId[lbl]);
         }
     }
+    // Incantesimi CONCESSI dai talenti d'origine (Iniziato alla magia): il wizard fa scegliere
+    // trucchetti/incantesimi dalla lista di classe (fissata dal background o a scelta per il
+    // talento di specie). Vale anche per i non-incantatori — prima il talento restava "inerte"
+    // (talenti: [iniziato_alla_magia_chierico] con trucchetti/incantesimi vuoti da compilare a mano).
+    const descrittoriTalenti = [];
+    if (background.talento_origine)
+        descrittoriTalenti.push({ base: bgTal.base, lista: bgTal.lista, label: ((opt.talenti || {})[bgTal.base] || {}).label || background.talento_origine });
+    for (const id of talentiSpecie)
+        descrittoriTalenti.push({ base: id, lista: "", label: ((opt.talenti || {})[id] || {}).label || id });
+    const magiaTalenti = await scegliIncantesimiTalenti(tp, descrittoriTalenti, opt);
+    // Fusione con gli incantesimi di CLASSE (senza duplicati): un incantatore col talento
+    // può ricevere lo stesso trucchetto da entrambe le fonti → una sola voce sulla scheda.
+    const trucchettiTot = Array.from(new Set([...magia.trucchetti, ...magiaTalenti.trucchetti]));
+    const incantesimiTot = Array.from(new Set([...magia.preparati, ...magiaTalenti.incantesimi]));
     // Strumenti da classe + background, deduplicati senza badare al maiuscolo
     // (es. classe "Arnesi da scasso" + Criminale "arnesi da scasso" → uno solo).
     const strumenti = (() => {
@@ -684,8 +746,8 @@ async function costruisciPG(tp, opt, nome) {
         privilegi_classe: classe.privilegi_l1 || [],
         inventario,
         incantatore: !!classe.incantatore,
-        trucchetti: magia.trucchetti,
-        incantesimi: magia.preparati,
+        trucchetti: trucchettiTot,
+        incantesimi: incantesimiTot,
         slot: magia.slot,
         talenti: [talentoOrigine, ...talentiSpecie].filter(Boolean),
         padronanze_armi,
@@ -746,3 +808,7 @@ module.exports.specieHomebrew = specieHomebrew;
 module.exports.classeHomebrew = classeHomebrew;
 module.exports.armiPadronanzaHomebrew = armiPadronanzaHomebrew;
 module.exports.risorseAtLevel = risorseAtLevel;
+// Esposti per i test dei talenti che concedono incantesimi (Iniziato alla magia).
+module.exports.slugTalento = slugTalento;
+module.exports.talentoConLista = talentoConLista;
+module.exports.scegliIncantesimiTalenti = scegliIncantesimiTalenti;

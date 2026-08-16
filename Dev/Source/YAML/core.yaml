@@ -30,8 +30,8 @@ fields:
   scadenza:       { label: "Scadenza (giri)",    widget: number }
   conseguenza:    { label: Conseguenza,          widget: testo_area }
   conseguenza_su: { label: Conseguenza su,       widget: legame }
-  uso_al_tavolo:  { label: Uso al tavolo,        widget: testo_area }
-  gancio:         { label: Gancio,               widget: testo_area }
+  uso_al_tavolo:  { label: Uso al tavolo,        widget: testo_area, placeholder: "es. i PG possono corrompere la guardia per entrare di notte" }
+  gancio:         { label: Gancio,               widget: testo_area, placeholder: "es. una taglia sul suo capo che nessuno osa riscuotere" }
   # Giocabilità (disciplina di prep, idea phd20): i 3 test perché un'entità sia GIOCABILE
   # e non lore morta — come si scopre, cosa ci si può fare, perché al PG importa. Queryabili
   # (una vista «non giocabile» elenca chi ne è privo).

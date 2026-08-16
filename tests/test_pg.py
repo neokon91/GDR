@@ -187,8 +187,9 @@ def test_crea_personaggio_e2e(tmp_path):
 
 def test_crea_personaggio_caster_e2e(tmp_path):
     """Per un incantatore (mago) il wizard applica trucchetti/incantesimi/slot di
-    1º livello dalla progressione e dai pool SRD della classe."""
-    opt, fm = _run_crea_pg(tmp_path, classe="mago")
+    1º livello dalla progressione e dai pool SRD della classe. Background Criminale
+    (talento Allerta, senza magia) per ISOLARE gli incantesimi di classe dal talento."""
+    opt, fm = _run_crea_pg(tmp_path, classe="mago", background="criminale")
     mago = opt["classi"]["mago"]
     assert fm["classe"] == "mago" and fm["incantatore"] is True
     assert len(fm["trucchetti"]) == mago["trucchetti_noti"]
@@ -196,6 +197,46 @@ def test_crea_personaggio_caster_e2e(tmp_path):
     assert fm["slot_1"] == mago["slot_l1"]["1"]
     assert set(fm["trucchetti"]).issubset(set(mago["incantesimi_pool"]["0"]))
     assert set(fm["incantesimi"]).issubset(set(mago["incantesimi_pool"]["1"]))
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_talento_con_lista(tmp_path):
+    """crea_pg.talentoConLista: separa il nome-base del talento dalla lista FISSATA fra
+    parentesi ("Iniziato alla magia (chierico)" → base + lista), gestendo il talento "nudo"
+    (senza parentesi → lista vuota) e slugificando come build_feats._slug (lato Python)."""
+    h = tmp_path / "tcl.js"
+    h.write_text(
+        f'const c = require({json.dumps(str(render.JS_DIR / "crea_pg.js"))});\n'
+        'process.stdout.write(JSON.stringify({'
+        '  bg: c.talentoConLista("Iniziato alla magia (chierico)"),'
+        '  nudo: c.talentoConLista("Iniziato alla magia"),'
+        '  vuoto: c.talentoConLista(""),'
+        '  slug: c.slugTalento("Aggressore selvaggio")}));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(h)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["bg"] == {"base": "iniziato_alla_magia", "lista": "chierico"}
+    assert out["nudo"] == {"base": "iniziato_alla_magia", "lista": ""}
+    assert out["vuoto"] == {"base": "", "lista": ""}
+    assert out["slug"] == "aggressore_selvaggio"
+
+
+@pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
+def test_crea_personaggio_talento_incantesimi(tmp_path):
+    """Un talento d'origine che CONCEDE incantesimi (Accolito → «Iniziato alla magia
+    (chierico)») fa scegliere 2 trucchetti + 1 incantesimo di 1º dalla lista fissata dal
+    background, ANCHE per un non-incantatore (Barbaro): prima il talento restava inerte."""
+    opt, fm = _run_crea_pg(tmp_path, classe="barbaro", background="accolito")
+    assert fm["classe"] == "barbaro" and fm["incantatore"] is False  # niente magia di classe
+    assert "iniziato_alla_magia_chierico" in (fm.get("talenti") or [])
+    meta = opt["talenti"]["iniziato_alla_magia"]["incantesimi"]
+    chierico = opt["classi"]["chierico"]["incantesimi_pool"]
+    # Gli incantesimi del talento vengono dalla lista FISSATA (chierico), nel numero atteso.
+    assert len(fm["trucchetti"]) == meta["trucchetti"]
+    assert len(fm["incantesimi"]) == meta["incantesimi"]
+    assert set(fm["trucchetti"]).issubset(set(chierico["0"]))
+    assert set(fm["incantesimi"]).issubset(set(chierico["1"]))
 
 
 @pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
