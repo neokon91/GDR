@@ -3,3 +3,4 @@ MarkupSafe==3.0.2
 PyYAML==6.0.2
 pytest==9.0.3
 jsonschema==4.26.0
+certifi==2025.01.31

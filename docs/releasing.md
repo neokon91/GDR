@@ -15,6 +15,14 @@ release — non si committano.
 
 Lo stato locale (workspace, cache, `.DS_Store`) è escluso, così lo zip è pulito.
 
+I **plugin sono bundlati in modo riproducibile e pinnato**: `release.py` invoca
+`Dev/Tools/fetch_plugins.py`, che scarica i plugin con `repo`+`version` in
+`plugins.yaml` dalle loro **GitHub release** (asset `main.js`/`manifest.json`/
+`styles.css`) dentro `dist/GDR-vault/.obsidian/plugins/<id>/` **prima** dello zip.
+Non dipende più dai plugin installati a mano sul PC del maintainer → lo zip esce
+uguale da un **clone pulito**. Un **gate** (`assert_critical_present`) fa **fallire**
+`npm run dist` se manca un plugin `critico`: mai uno zip turnkey rotto in silenzio.
+
 ## Passi
 
 1. **Versione**: aggiorna `version` in `package.json` (SemVer). È la single source che
@@ -53,15 +61,28 @@ Fa build+zip e poi `butler push` dei due artefatti su due canali:
 `…:vault` (il vault Obsidian pronto) e `…:site` (il sito dei giocatori), versionati con la
 `version` di package.json. itch tiene lo storico dei build per canale.
 
-> **Turnkey vs lite**: il vault include i plugin (vedi Note). Per una release pubblica
-> turnkey va bene (licenze verificate); la variante *lite* (senza `.obsidian/plugins/`) è
-> opzionale se vuoi azzerare ogni dubbio sulle licenze altrui.
+> **Turnkey vs lite**: il vault include i plugin, scaricati e **pinnati** da
+> `fetch_plugins.py` (vedi *Cosa esce* e Note). Per una release pubblica turnkey va
+> bene (licenze verificate); la variante *lite* (senza `.obsidian/plugins/`) è opzionale
+> se vuoi azzerare ogni dubbio sulle licenze altrui — togli i campi `version` da
+> `plugins.yaml` così nessun plugin viene bundlato (si installano via BRAT/community al
+> primo avvio), e documentalo nel LEGGIMI. NB: i plugin `critico` devono restare pinnati
+> (il gate lo impone), quindi la *lite* pura richiede prima di renderli non critici.
 
 ## Note
 
-- **Licenze dei plugin** (verificato 2026-06-04): tutti e 18 i plugin bundlati sono
-  **redistribuibili** — 12 MIT, 3 GPL-3.0, 3 AGPL-3.0. Inclusi **non modificati** come
-  *mera aggregazione* (non relicenzia il codice MIT del progetto). L'attribuzione è
+- **Plugin bundlati (pin)**: un plugin si bundla dichiarando in `plugins.yaml` sia
+  `repo` sia `version` (il **tag** della GitHub release, che Obsidian impone == versione
+  del manifest, **senza** prefisso `v`). `fetch_plugins.py` scarica gli asset di quella
+  release e **verifica** che il manifest scaricato dichiari `id`/`version` attesi (pin
+  integro). È **idempotente**: salta un plugin già presente alla versione pinnata. Per
+  **aggiornare** un plugin, cambia il suo `version` e rilancia `npm run dist` (o
+  `python3 Dev/Tools/fetch_plugins.py --force`). Un plugin **senza** `version` non è
+  bundlato (si installa via BRAT/community). `npm run check` fallisce se un plugin
+  `critico` non è pinnato.
+- **Licenze dei plugin** (verificato 2026-06-04): tutti i plugin bundlati sono
+  **redistribuibili** — MIT, GPL-3.0, AGPL-3.0. Inclusi **non modificati** come *mera
+  aggregazione* (non relicenzia il codice MIT del progetto). L'attribuzione è
   **auto-generata** da `plugins.yaml` (campi `author/repo/license`) nel file
   `THIRD-PARTY-LICENSES.md`, incluso nel vault → nello zip. *Mantieni i plugin non
   modificati*; se ne aggiungi uno, metti i suoi `author/repo/license` (un test lo impone).

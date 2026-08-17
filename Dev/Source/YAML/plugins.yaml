@@ -6,6 +6,13 @@ purpose: Solo plugin fondamentali usati dai template.
 # author/repo/license: attribuzione per THIRD-PARTY-LICENSES (verificato via API
 # GitHub / package.json il 2026-06-04). Inclusi NON MODIFICATI come mera aggregazione
 # (non relicenzia il codice MIT del progetto). GPL/AGPL: sorgente al repo.
+# version: PIN della release da bundlare. Un plugin con `repo` + `version` viene
+# SCARICATO da fetch_plugins.py (asset della GitHub release `<version>`: main.js/
+# manifest.json/styles.css) dentro dist/GDR-vault/.obsidian/plugins/<id>/ prima
+# dello zip → il turnkey è riproducibile e pinnato da un clone pulito. Un plugin
+# SENZA `version` non è bundlato (si installa via BRAT/community al primo avvio).
+# Ogni plugin `critico` DEVE avere `version` (fetch_plugins lo impone), così
+# `npm run dist` non produce mai in silenzio uno zip senza i plugin essenziali.
 plugins:
   # critico: il vault non funziona senza. `rompe` = cosa NON si vede (in italiano
   # semplice), mostrato dalla nota Diagnostica (views.renderDiagnostica) quando il
@@ -14,6 +21,7 @@ plugins:
     name: Templater
     author: SilentVoid
     repo: silentvoid13/Templater
+    version: 2.20.6
     license: AGPL-3.0
     critico: true
     rompe: "I pulsanti «Crea» non funzionano: non puoi creare nuove note."
@@ -21,6 +29,7 @@ plugins:
     name: Dataview
     author: Michael Brenan
     repo: blacksmithgu/obsidian-dataview
+    version: 0.5.68
     license: MIT
     critico: true
     rompe: "La Home e gli indici (Atlante, Cast, Fronti…) restano vuoti o come codice."
@@ -28,6 +37,7 @@ plugins:
     name: Meta Bind
     author: Moritz Jung
     repo: mProjectsCode/obsidian-meta-bind-plugin
+    version: 1.4.15
     license: GPL-3.0
     critico: true
     rompe: "I campi da compilare (slider, menu, testo) restano come codice grezzo."
@@ -35,6 +45,7 @@ plugins:
     name: JS Engine
     author: Moritz Jung
     repo: mProjectsCode/obsidian-js-engine-plugin
+    version: 0.3.6
     license: GPL-3.0
     critico: true
     rompe: "I pannelli dinamici (radar, Stato del Mondo, questa diagnostica) non si disegnano."
@@ -42,6 +53,7 @@ plugins:
     name: Tab Panels
     author: GnoxNahte
     repo: GnoxNahte/obsidian-tab-panels
+    version: 1.2.3
     license: MIT
     critico: true
     rompe: "Le note a schede (Lore / Al tavolo / Collegamenti) appaiono come testo grezzo."
@@ -54,6 +66,7 @@ plugins:
     name: Fantasy Statblocks
     author: Jeremy Valentine
     repo: Obsidian-TTRPG-Community/fantasy-statblocks
+    version: 4.10.3
     license: MIT
     critico: true
     rompe: "Gli statblock dei mostri e il blocco incontro non si vedono."
@@ -71,11 +84,13 @@ plugins:
     name: Calendarium
     author: Jeremy Valentine
     repo: javalent/calendarium
+    version: 2.1.0
     license: MIT
   - id: obsidian-dice-roller
     name: Dice Roller
     author: Jeremy Valentine
     repo: Obsidian-TTRPG-Community/dice-roller
+    version: 11.4.2
     license: MIT
     critico: true
     rompe: "I tiri di dado sulla scheda e negli incontri non funzionano."
@@ -93,6 +108,7 @@ plugins:
     name: "TTRPG Tools - Maps"
     author: Jareika
     repo: Jareika/zoom-map
+    version: 2.1.5
     license: MIT
   # Suite hexcrawl: griglia esagonale + wiki. write_hexmaker punta le sue cartelle
   # alle nostre entità (Luoghi/Fazioni/Missioni/Tabelle) → gli esagoni linkano il grafo.
@@ -110,11 +126,13 @@ plugins:
     name: Homepage
     author: novov
     repo: mirnovov/obsidian-homepage
+    version: 4.4.4
     license: MIT
   - id: initiative-tracker
     name: Initiative Tracker
     author: Jeremy Valentine
     repo: Obsidian-TTRPG-Community/initiative-tracker
+    version: 13.0.21
     license: GPL-3.0
     critico: true
     rompe: "Il tracciatore d'iniziativa per i combattimenti non è disponibile."

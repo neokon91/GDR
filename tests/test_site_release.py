@@ -396,6 +396,92 @@ def test_third_party_licenses_complete():
         assert lic in out, lic
 
 
+# --- Turnkey riproducibile: bundling dei plugin pinnati (fetch_plugins) ------
+def test_critical_plugins_are_pinned():
+    """Ogni plugin CRITICO ha `repo`+`version` (bundlabile in modo riproducibile):
+    senza il pin, `npm run dist` produrrebbe in silenzio uno zip senza i plugin
+    essenziali. Rispecchia il gate di validate.check() e di fetch_plugins."""
+    import fetch_plugins
+    plugins = PLUGINS["plugins"]
+    for p in fetch_plugins.critical(plugins):
+        assert p.get("repo"), f"{p['id']}: plugin critico senza 'repo'"
+        assert p.get("version"), f"{p['id']}: plugin critico senza pin 'version'"
+    # I critici sono un sottoinsieme dei bundlati (quelli con repo+version).
+    bundled_ids = {p["id"] for p in fetch_plugins.bundled(plugins)}
+    assert {p["id"] for p in fetch_plugins.critical(plugins)} <= bundled_ids
+
+
+def test_fetch_bundled_requires_repo_and_version():
+    """bundled() seleziona SOLO i plugin con repo E version; senza version un plugin
+    non è bundlato (si installa via BRAT/community al primo avvio)."""
+    import fetch_plugins
+    sample = [
+        {"id": "pinned", "repo": "a/b", "version": "1.2.3"},
+        {"id": "no-version", "repo": "a/c"},
+        {"id": "no-repo", "version": "1.0.0"},
+    ]
+    assert [p["id"] for p in fetch_plugins.bundled(sample)] == ["pinned"]
+
+
+def test_assert_critical_present_gate(tmp_path, monkeypatch):
+    """assert_critical_present(): fallisce se manca il main.js di un plugin critico
+    nel vault (gate pre-zip), passa quando tutti i critici hanno il codice. Senza rete."""
+    import fetch_plugins
+    plugins = [
+        {"id": "core-a", "repo": "a/a", "version": "1", "critico": True},
+        {"id": "core-b", "repo": "b/b", "version": "1", "critico": True},
+        {"id": "extra", "repo": "c/c", "version": "1"},
+    ]
+    monkeypatch.setattr(fetch_plugins, "all_plugins", lambda: plugins)
+    vault = tmp_path / "GDR-vault"
+    # Solo core-a presente → manca core-b: il gate deve fallire e nominarlo.
+    (vault / ".obsidian" / "plugins" / "core-a").mkdir(parents=True)
+    (vault / ".obsidian" / "plugins" / "core-a" / "main.js").write_text("x", encoding="utf-8")
+    assert fetch_plugins.missing_critical(vault) == ["core-b"]
+    with pytest.raises(fetch_plugins.FetchError, match="core-b"):
+        fetch_plugins.assert_critical_present(vault)
+    # Aggiungi core-b → il gate passa.
+    (vault / ".obsidian" / "plugins" / "core-b").mkdir(parents=True)
+    (vault / ".obsidian" / "plugins" / "core-b" / "main.js").write_text("y", encoding="utf-8")
+    assert fetch_plugins.missing_critical(vault) == []
+    fetch_plugins.assert_critical_present(vault)  # non solleva
+
+
+def test_fetch_one_idempotent_and_pin_check(tmp_path, monkeypatch):
+    """fetch_one(): salta se il manifest su disco è già alla versione pinnata
+    ("presente"); su versione diversa riscarica; se il manifest scaricato non
+    combacia col pin (id/version) fallisce invece di bundlare il file sbagliato.
+    La rete è stubata (nessun download reale)."""
+    import fetch_plugins
+    vault = tmp_path / "GDR-vault"
+    pdir = vault / ".obsidian" / "plugins" / "demo"
+    pdir.mkdir(parents=True)
+    (pdir / "manifest.json").write_text('{"id":"demo","version":"1.0.0"}', encoding="utf-8")
+    plugin = {"id": "demo", "repo": "a/demo", "version": "1.0.0"}
+    # Già alla versione pinnata → nessuna rete, "presente".
+    assert fetch_plugins.fetch_one(plugin, vault) == "presente"
+
+    # Pin bump a 2.0.0: stub della rete che restituisce un manifest COERENTE.
+    def fake_ok(url):
+        if url.endswith("manifest.json"):
+            return b'{"id":"demo","version":"2.0.0"}'
+        if url.endswith("main.js"):
+            return b"// code"
+        return None  # styles.css assente (404) → opzionale
+    monkeypatch.setattr(fetch_plugins, "_fetch", fake_ok)
+    plugin2 = {"id": "demo", "repo": "a/demo", "version": "2.0.0"}
+    assert fetch_plugins.fetch_one(plugin2, vault) == "scaricato"
+    assert json.loads((pdir / "manifest.json").read_text())["version"] == "2.0.0"
+    assert (pdir / "main.js").is_file() and not (pdir / "styles.css").is_file()
+
+    # Manifest scaricato NON combacia col pin → FetchError (tag punta altrove).
+    monkeypatch.setattr(fetch_plugins, "_fetch",
+                        lambda url: b'{"id":"demo","version":"9.9.9"}' if url.endswith("manifest.json")
+                        else b"// code")
+    with pytest.raises(fetch_plugins.FetchError, match="non combacia"):
+        fetch_plugins.fetch_one({"id": "demo", "repo": "a/demo", "version": "3.0.0"}, vault, force=True)
+
+
 # --- Onboarding tour «Crea il tuo mondo» + libreria spunti ------------------
 def test_spunti_library():
     """La libreria spunti (core.spunti) copre le categorie d'avvio, ognuna con

@@ -488,6 +488,15 @@ def check() -> int:
     fields = core.get("fields", {})
     metabind = plugins.get("metabind_inputs") or {}
 
+    # Turnkey riproducibile: ogni plugin CRITICO deve essere PINNATO (repo+version),
+    # così fetch_plugins lo bundla da un clone pulito e `npm run dist` non produce mai
+    # in silenzio uno zip senza i plugin essenziali. Anti-drift a monte del fetch (che
+    # ricontrolla in rete): qui basta la sorgente, niente download.
+    for p in (plugins.get("plugins") or []):
+        if p.get("critico") and not (p.get("repo") and p.get("version")):
+            errors.append(f"plugin critico {p.get('id')}: manca il pin 'version' (o 'repo') "
+                          f"— serve a bundlarlo nello zip turnkey (fetch_plugins)")
+
     # Le categorie dei template (templates.yaml + file-entità) devono essere
     # dichiarate e avere una cartella risolvibile (i bottoni 'Crea ...' creano la
     # nota in quella cartella).

@@ -17,6 +17,7 @@ import zipfile
 from pathlib import Path
 
 import common
+import fetch_plugins
 from build_site import SITE_OUT
 
 # Stato locale/utente da NON spedire: layout dei pannelli, cache, file di sistema.
@@ -62,7 +63,10 @@ def zip_tree(src: Path, zip_path: Path, arc_root: str) -> int:
 
 
 def build_artifacts() -> None:
-    """Build pulita del vault + sito dei giocatori (via render.py CLI)."""
+    """Build pulita del vault + sito dei giocatori (via render.py CLI). I plugin
+    pinnati sono già stati scaricati (fetch_plugins) PRIMA di qui, così la build
+    di render.py — che inietta la config .obsidian solo per i plugin già presenti
+    (merge_plugin_config) — configura anche i plugin appena bundlati."""
     render = str(common.ROOT / "Dev" / "Tools" / "render.py")
     subprocess.run([sys.executable, render], check=True)
     subprocess.run([sys.executable, render, "--site"], check=True)
@@ -70,7 +74,22 @@ def build_artifacts() -> None:
 
 def main() -> int:
     ver = version()
+    # Plugin turnkey: scarica i binari pinnati (plugins.yaml: repo+version) nel vault
+    # PRIMA della build, così è riproducibile da un clone pulito e la config .obsidian
+    # viene iniettata anche per loro. Deve venire prima di build_artifacts().
+    print("Plugin bundlati (pinnati) → dist/GDR-vault/.obsidian/plugins/:")
+    try:
+        fetch_plugins.fetch_all(common.VAULT)
+    except (fetch_plugins.FetchError, OSError) as e:
+        print(f"\n❌ Fetch dei plugin fallito: {e}", file=sys.stderr)
+        return 1
     build_artifacts()
+    # Gate: mai uno zip turnkey senza i plugin CRITICI (sarebbe rotto per l'utente).
+    try:
+        fetch_plugins.assert_critical_present(common.VAULT)
+    except fetch_plugins.FetchError as e:
+        print(f"\n❌ {e}", file=sys.stderr)
+        return 1
     # (Ri)semina il MONDO-ESEMPIO nel vault prima di confezionarlo, così lo zip spedito ne ha
     # uno giocabile e SEMPRE aggiornato. `--force` rigenera il demo da zero (Mondi/ del vault
     # buildato è tutto mondo-esempio) → le modifiche al seed raggiungono lo zip senza passi manuali.
