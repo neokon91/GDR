@@ -42,8 +42,9 @@ spedite con fiducia.
 \* basso una volta confermata in-app la sintassi della key immagine dei `cards`.
 
 ## Note
-- **Iconize è deprecato upstream**: prima di investire su icone inline/frontmatter,
-  valutare la migrazione a un successore (es. *Iconic*).
+- **Iconize → Iconic** (FATTO): Iconize deprecato (2025); sostituito da *Iconic* (mantenuto)
+  in `plugins.yaml`. La pipeline non inietta più config icone-cartella (formato Iconic non
+  documentato); le emoji per categoria restano nei titoli di folder-note/hub (`folder_icons`).
 - Tre sintassi restano **da confermare in-app** (non spedibili come syntax finché non viste
   in Obsidian): la key immagine dei `cards` di Bases, il fence per embeddare un `.base` in
   nota, il `dvQueryString` del `Lookup` di Metadata Menu.

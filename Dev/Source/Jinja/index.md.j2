@@ -35,12 +35,22 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 {% endif %}
 ## Tutte le voci
+{% if page.get('folder_note') %}
+{# Le folder-note (auto-indice per cartella) non hanno una .base propria: restano
+   sulla tabella Dataview. #}
 ```dataview
 table without id file.link as Nome{% for c in page.columns %}, {{ c.field }} as "{{ c.label }}"{% endfor +%}
 from ""
 where categoria = "{{ page.category }}" and stato != "archiviata"
 sort {{ page.get('sort', 'file.name asc') }}
 ```
+{% else %}
+{# Vista-database NATIVA (Bases): table + Galleria a card (se la pagina ha `cover`),
+   filtrabile/ordinabile/raggruppabile dall'UI senza scrivere query. Rimpiazza la
+   vecchia tabella Dataview (ritirata: Dataview è in freeze). La .base è generata da
+   render.write_bases dalla stessa single-source di pages.yaml. #}
+![[{{ page.file }}.base]]
+{% endif %}
 
 ## 🔥 Fronti caldi
 ```dataview

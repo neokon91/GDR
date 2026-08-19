@@ -50,58 +50,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 %%/prosa%%
 
---- 🎲 Al tavolo
-
-> [!tavolo] Uso al tavolo
-> `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
-
-> [!gancio]- Gancio
-> `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
-
-> [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
->
-> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
---- 📊 Carattere
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bioma", component);
-```
-
-> [!abstract] Carattere
-> **Ostilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):ostilita]` → `VIEW[{ostilita} == 5 ? "5 · Letale" : ({ostilita} == 4 ? "4 · Ostile" : ({ostilita} == 3 ? "3 · Aspro" : ({ostilita} == 2 ? "2 · Mite" : ({ostilita} == 1 ? "1 · Ospitale" : ("—")))))]`
-> **Fertilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):fertilita]` → `VIEW[{fertilita} == 5 ? "5 · Lussureggiante" : ({fertilita} == 4 ? "4 · Rigoglioso" : ({fertilita} == 3 ? "3 · Modesto" : ({fertilita} == 2 ? "2 · Magro" : ({fertilita} == 1 ? "1 · Sterile" : ("—")))))]`
-> **Magia Ambientale** `INPUT[slider(minValue(1), maxValue(5), addLabels):magia_ambientale]` → `VIEW[{magia_ambientale} == 5 ? "5 · Saturo" : ({magia_ambientale} == 4 ? "4 · Carico" : ({magia_ambientale} == 3 ? "3 · Intriso" : ({magia_ambientale} == 2 ? "2 · Toccato" : ({magia_ambientale} == 1 ? "1 · Mondano" : ("—")))))]`
-> **Accessibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):accessibilita]` → `VIEW[{accessibilita} == 5 ? "5 · Inaccessibile" : ({accessibilita} == 4 ? "4 · Remoto" : ({accessibilita} == 3 ? "3 · Impervio" : ({accessibilita} == 2 ? "2 · Praticabile" : ({accessibilita} == 1 ? "1 · Aperto" : ("—")))))]`
-
-> [!note]- Ostilità — Quanto il bioma è pericoloso per chi lo attraversa.
-> **1 · Ospitale** — Sicuro e accogliente; sopravvivere è facile.
-> **2 · Mite** — Pochi pericoli, gestibili con prudenza.
-> **3 · Aspro** — Duro; richiede preparazione e rispetto.
-> **4 · Ostile** — Insidie costanti; il bioma vuole respingerti.
-> **5 · Letale** — Mortale; sopravvivere è un'impresa rara.
-
-> [!note]- Fertilità — Quanta vita e risorse il bioma sostiene.
-> **1 · Sterile** — Quasi morto; nulla cresce, nulla resta.
-> **2 · Magro** — Vita scarsa e tenace; risorse rare.
-> **3 · Modesto** — Sostiene una vita stabile ma non abbondante.
-> **4 · Rigoglioso** — Vita ricca; risorse e specie in quantità.
-> **5 · Lussureggiante** — Esplosione di vita; sovrabbondante e vorace.
-
-> [!note]- Magia Ambientale — Quanto la magia permea il bioma.
-> **1 · Mondano** — Nessuna magia; natura ordinaria.
-> **2 · Toccato** — Tracce o residui magici occasionali.
-> **3 · Intriso** — La magia è percepibile; fenomeni regolari.
-> **4 · Carico** — La magia plasma flora, fauna e clima.
-> **5 · Saturo** — Realtà alterata; la magia detta le regole.
-
-> [!note]- Accessibilità — Quanto è facile raggiungere e percorrere il bioma.
-> **1 · Aperto** — Facile da attraversare; rotte e accessi noti.
-> **2 · Praticabile** — Percorribile con guida o sentieri.
-> **3 · Impervio** — Difficile; ostacoli naturali continui.
-> **4 · Remoto** — Isolato; pochi sanno come arrivarci.
-> **5 · Inaccessibile** — Quasi irraggiungibile; barriere estreme o magiche.
-
 --- 🔗 Collegamenti
 
 > [!tip] Collega
@@ -126,14 +74,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
 ```
---- 👁 Vista
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
-```
-
-> [!tip] Azioni
-> `BUTTON[marca-canonico]`
->
-> `BUTTON[archivia-nota]`
 ````
+
+> [!tip] ＋ Componenti
+> Aggiungi ciò che ti serve, quando ti serve — **Al tavolo**, **Clock del fronte**, **Carattere**, **Cronologia**, **Vista**…
+> `BUTTON[aggiungi-componente]`
+>
+> `BUTTON[marca-canonico]` · `BUTTON[archivia-nota]`

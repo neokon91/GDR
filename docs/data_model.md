@@ -29,7 +29,7 @@ core = apply_entities( deep_merge(core.yaml, system.yaml), entities/*.yaml )
 | `gruppi` | Lista ordinata `{id, label, icona, descrizione}` — la mappa concettuale (cornice/geografia/tempo/società/cosmo/regole/tavolo). Ogni entità dichiara il suo `gruppo`; guida Home/indici. |
 | `tavolo` | Superficie giocabile: lista `{field, callout, title, fold?}`. |
 | `states` | Stati del flusso (`bozza`/`pronto`/…) → Select `stato`. |
-| `fronte_categorie` | Categorie che possono essere un **Fronte**: solo qui `tavolo()` espone la macchina del clock (pressione/clock/conseguenza/Avanza-Scatena/pannelli). Le altre tengono Uso al tavolo/Gancio/Condivisione, senza Fronte. Deve contenere il set COSMO di `views.js`. |
+| `fronte_categorie` | Categorie che possono essere un **Fronte**: solo qui il componente **Clock** (`clock()`) è offerto (clock/conseguenza/Avanza-Scatena/pannelli) e `tavolo()` mostra la Pressione. Le altre tengono Uso al tavolo/Gancio/Condivisione, senza Fronte. Deve contenere il set COSMO di `views.js`. |
 | `tappe_categorie` · `coerenza_categorie` · `ritratto_categorie` | Allowlist di categorie che ricevono, rispettivamente, la tab Cronologia (`renderTappe`), il motore di coerenza (`renderCoerenza`) e il selettore ritratto nell'infobox. Validate impone che nominino categorie reali. |
 | `spunti` | Domande-stimolo per categoria → confluite nel callout **ℹ️ Guida** (`guida()`). |
 
@@ -76,7 +76,9 @@ relazioni:                  # link tipizzati (macro relazioni())
     #   mito.varianti) o direzionale (evento.causato_da↔conseguenze, epoca.precede↔segue,
     #   lingua.derivata_da↔lingue_figlie). Senza, l'inverso è auto-derivato
     # se la coppia è univoca, altrimenti generico (connessioni).
-creation:                   # wizard (letto da create_entity.js / generato)
+creation:                   # scaffold del CORPO nota (reso da Jinja: scheda/wizard_body).
+                            # NB: il wizard (create_entity.js) è MINIMALE — chiede solo
+                            # nome + tipo; `fields`/`body` popolano la nota, non il modale.
   fields: [ { field, prompt, from?, category?, link?, required?, optional?, multi? } ]
   body:   [ { field, prompt, heading? | callout?+title?+fold? } ]
 ```

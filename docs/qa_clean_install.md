@@ -29,8 +29,12 @@ veri. Falla **una volta, dall'alto in basso, su una copia pristina**.
 - [ ] **Home** rende le dashboard dataviewjs: «Crea il tuo mondo — n/5», Trame, Fronti caldi
 - [ ] **Inizia da qui** rende; i bottoni (`crea-luogo`, link al cruscotto Fronti) funzionano
 - [ ] Tour **Crea il tuo mondo** (5 tappe): ogni bottone *Crea* crea la nota giusta nella cartella giusta
-- [ ] Wizard end-to-end: **Mondo → Luogo → Fazione**; frontmatter compilato, **campi del sottotipo**
-      chiesti (subtype-aware), nota nella cartella corretta
+- [ ] Wizard **minimale** end-to-end: **Mondo → Luogo → Fazione**; il modale chiede **solo
+      nome (+ tipo)**, la nota nasce **snella** (identità + descrizione + Collegamenti) nella
+      cartella corretta, senza codice grezzo
+- [ ] **＋ Componenti**: sulla nota creata, il bottone **＋ Aggiungi componente** offre i componenti
+      pertinenti (Al tavolo, Clock sui fronti, Carattere con assi, Cronologia, Vista); sceglierne uno
+      **appende** il blocco (Meta Bind/JS Engine lo rendono) e **non lo ri-offre** (idempotente)
 
 ## §3 — Superfici d'integrazione (rischio #1, non testabili headless)
 - [ ] **Meta Bind**: l'infobox (VIEW) mostra **valori**, non `VIEW[...]` grezzo; gli INPUT

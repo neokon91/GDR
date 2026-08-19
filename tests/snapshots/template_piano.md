@@ -46,98 +46,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 %%/prosa%%
 
---- 🎲 Al tavolo
-
-> [!tavolo] Uso al tavolo
-> `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
-
-> [!gancio]- Gancio
-> `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
-
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> **Pressione** = quanto scotta *adesso* (temperatura) · **Clock** = il countdown alla conseguenza. Pressione e spinte dal grafo *giustificano* di avanzare il clock; l'imminenza nei cruscotti le pesa entrambe.
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza e chiede se il fronte è *risolto* (si chiude, archiviato) o *ricorrente* (riparte, clock azzerato).
-
-> [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
->
-> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
---- 📊 Carattere
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "piano", component);
-```
-
-> [!abstract] Carattere
-> **Materialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):materialita]` → `VIEW[{materialita} == 5 ? "5 · Iperreale" : ({materialita} == 4 ? "4 · Solido" : ({materialita} == 3 ? "3 · Fluido" : ({materialita} == 2 ? "2 · Eterico" : ({materialita} == 1 ? "1 · Immateriale" : ("—")))))]`
-> **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita]` → `VIEW[{stabilita} == 5 ? "5 · Immutabile" : ({stabilita} == 4 ? "4 · Stabile" : ({stabilita} == 3 ? "3 · Ciclico" : ({stabilita} == 2 ? "2 · Mutevole" : ({stabilita} == 1 ? "1 · Caotico" : ("—")))))]`
-> **Ospitalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):ospitalita]` → `VIEW[{ospitalita} == 5 ? "5 · Accogliente" : ({ospitalita} == 4 ? "4 · Vivibile" : ({ospitalita} == 3 ? "3 · Estraneo" : ({ospitalita} == 2 ? "2 · Ostile" : ({ospitalita} == 1 ? "1 · Letale" : ("—")))))]`
-> **Risonanza** `INPUT[slider(minValue(1), maxValue(5), addLabels):risonanza]` → `VIEW[{risonanza} == 5 ? "5 · Traboccante" : ({risonanza} == 4 ? "4 · Risonante" : ({risonanza} == 3 ? "3 · Permeabile" : ({risonanza} == 2 ? "2 · Remoto" : ({risonanza} == 1 ? "1 · Sigillato" : ("—")))))]`
-> **Inclinazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):inclinazione]` → `VIEW[{inclinazione} == 5 ? "5 · Maligno" : ({inclinazione} == 4 ? "4 · Sinistro" : ({inclinazione} == 3 ? "3 · Indifferente" : ({inclinazione} == 2 ? "2 · Sereno" : ({inclinazione} == 1 ? "1 · Luminoso" : ("—")))))]`
-> **Estensione** `INPUT[slider(minValue(1), maxValue(5), addLabels):estensione]` → `VIEW[{estensione} == 5 ? "5 · Infinito" : ({estensione} == 4 ? "4 · Sconfinato" : ({estensione} == 3 ? "3 · Reame" : ({estensione} == 2 ? "2 · Regione" : ({estensione} == 1 ? "1 · Tasca" : ("—")))))]`
-
-> [!note]- Materialità — Quanto il piano è sostanza tangibile o puro spirito.
-> **1 · Immateriale** — Puro pensiero o energia, senza sostanza.
-> **2 · Eterico** — Tenue, attraversabile, quasi-fisico.
-> **3 · Fluido** — Sostanza mutevole, senza forma fissa.
-> **4 · Solido** — Tangibile e percorribile come il mondo materiale.
-> **5 · Iperreale** — Più denso e «vero» del reale; schiaccia i sensi.
-
-> [!note]- Stabilità — Quanto le sue leggi sono costanti o mutevoli.
-> **1 · Caotico** — Leggi fisiche instabili, in continuo mutamento.
-> **2 · Mutevole** — Cambia con lentezza o a ondate.
-> **3 · Ciclico** — Muta secondo cicli o stagioni cosmiche.
-> **4 · Stabile** — Leggi costanti e affidabili.
-> **5 · Immutabile** — Eterno e identico a sé stesso.
-
-> [!note]- Ospitalità — Quanto un mortale può sopravvivervi.
-> **1 · Letale** — Uccide chi vi entra senza protezione.
-> **2 · Ostile** — Sopravvivibile a stento, a caro prezzo.
-> **3 · Estraneo** — Vivibile ma profondamente alieno.
-> **4 · Vivibile** — Un mortale può dimorarvi.
-> **5 · Accogliente** — Prospero, persino paradisiaco.
-
-> [!note]- Risonanza — Quanto il piano tocca e influenza il mondo materiale.
-> **1 · Sigillato** — Isolato; non tocca il mondo.
-> **2 · Remoto** — Influenza rara e debole.
-> **3 · Permeabile** — Filtra nel mondo per soglie e riti.
-> **4 · Risonante** — La sua impronta si sente nel mondo.
-> **5 · Traboccante** — Dilaga nel reale; lo plasma e lo invade.
-
-> [!note]- Inclinazione — La tinta morale del piano.
-> **1 · Luminoso** — Benevolo, redentivo, votato al bene.
-> **2 · Sereno** — Pacifico e neutro-positivo.
-> **3 · Indifferente** — Amorale, oltre il bene e il male.
-> **4 · Sinistro** — Inquietante, corruttore, tendente al male.
-> **5 · Maligno** — Ostile a ogni vita; male incarnato.
-
-> [!note]- Estensione — La scala spaziale del piano, dalla sacca tascabile all'infinito.
-> **1 · Tasca** — Una sacca piccola e chiusa; un solo luogo.
-> **2 · Regione** — Vasto come una contrada; ha confini raggiungibili.
-> **3 · Reame** — Ampio come un mondo; lo si esplora per ere.
-> **4 · Sconfinato** — Nessun confine noto; chi lo misura si perde.
-> **5 · Infinito** — Senza fine per natura; la distanza non ha senso.
-
 --- 🔗 Collegamenti
 
 > [!tip] Collega
@@ -166,14 +74,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
 ```
---- 👁 Vista
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
-```
-
-> [!tip] Azioni
-> `BUTTON[marca-canonico]`
->
-> `BUTTON[archivia-nota]`
 ````
+
+> [!tip] ＋ Componenti
+> Aggiungi ciò che ti serve, quando ti serve — **Al tavolo**, **Clock del fronte**, **Carattere**, **Cronologia**, **Vista**…
+> `BUTTON[aggiungi-componente]`
+>
+> `BUTTON[marca-canonico]` · `BUTTON[archivia-nota]`

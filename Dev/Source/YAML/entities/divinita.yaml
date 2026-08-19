@@ -13,8 +13,9 @@ templates:
   target: z.modelli/Divinita.md
   # Template di default (_entity_base): una divinità è un attore cosmico che PREME sul
   # tavolo (Fronte: clock di risveglio/desiderio — vedi grafo teologico) come le altre
-  # entità cosmiche (piano/dominio/legge_fondamentale). La lean reference.md.j2 le negava
-  # la tab «Al tavolo»; il default le dà superficie giocabile + Cronologia (tappe_categorie).
+  # entità cosmiche (piano/dominio/legge_fondamentale). La lean reference.md.j2 non le dava
+  # superficie giocabile; il default le rende disponibili i componenti Al tavolo/Clock
+  # (fronte) e Cronologia (tappe_categorie) dal bottone ＋ Componenti.
 # SOTTOTIPI con PROFILO: il RANGO della divinità (la natura sta nella famiglia + assi).
 # Tutte premono sul tavolo come Fronti (clock) ed evolvono tra le epoche. Profilo
 # leggero: la profondità cosmica è negli assi e nelle relazioni (domini/culti/piano).

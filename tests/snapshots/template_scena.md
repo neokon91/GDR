@@ -43,18 +43,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 %%/prosa%%
 
---- 🎲 Al tavolo
-
-> [!tavolo] Uso al tavolo
-> `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
-
-> [!gancio]- Gancio
-> `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
-
-> [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
->
-> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 🔗 Collegamenti
 
 > [!tip] Collega
@@ -83,14 +71,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
 ```
---- 👁 Vista
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
-```
-
-> [!tip] Azioni
-> `BUTTON[marca-canonico]`
->
-> `BUTTON[archivia-nota]`
 ````
+
+> [!tip] ＋ Componenti
+> Aggiungi ciò che ti serve, quando ti serve — **Al tavolo**, **Clock del fronte**, **Carattere**, **Cronologia**, **Vista**…
+> `BUTTON[aggiungi-componente]`
+>
+> `BUTTON[marca-canonico]` · `BUTTON[archivia-nota]`

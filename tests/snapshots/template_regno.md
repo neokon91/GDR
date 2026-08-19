@@ -59,99 +59,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 %%/prosa%%
 
---- 🎲 Al tavolo
-
-> [!tavolo] Uso al tavolo
-> `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
-
-> [!gancio]- Gancio
-> `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
-
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> **Pressione** = quanto scotta *adesso* (temperatura) · **Clock** = il countdown alla conseguenza. Pressione e spinte dal grafo *giustificano* di avanzare il clock; l'imminenza nei cruscotti le pesa entrambe.
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza e chiede se il fronte è *risolto* (si chiude, archiviato) o *ricorrente* (riparte, clock azzerato).
-
-> [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
->
-> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
---- 📊 Carattere
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "regno", component);
-```
-
-> [!abstract] Carattere
-> **Coesione Politica** `INPUT[slider(minValue(1), maxValue(5), addLabels):coesione_politica]` → `VIEW[{coesione_politica} == 5 ? "5 · Monolitica" : ({coesione_politica} == 4 ? "4 · Centralizzata" : ({coesione_politica} == 3 ? "3 · Policentrica" : ({coesione_politica} == 2 ? "2 · Confederale" : ({coesione_politica} == 1 ? "1 · Tribale" : ("—")))))]`
-> **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita]` → `VIEW[{stabilita} == 5 ? "5 · Granitica" : ({stabilita} == 4 ? "4 · Salda" : ({stabilita} == 3 ? "3 · Contesa" : ({stabilita} == 2 ? "2 · Fragile" : ({stabilita} == 1 ? "1 · Sull'orlo" : ("—")))))]`
-> **Apertura** `INPUT[slider(minValue(1), maxValue(5), addLabels):apertura]` → `VIEW[{apertura} == 5 ? "5 · Cosmopolita" : ({apertura} == 4 ? "4 · Aperto" : ({apertura} == 3 ? "3 · Pragmatico" : ({apertura} == 2 ? "2 · Protezionista" : ({apertura} == 1 ? "1 · Isolazionista" : ("—")))))]`
-> **Proiezione** `INPUT[slider(minValue(1), maxValue(5), addLabels):proiezione]` → `VIEW[{proiezione} == 5 ? "5 · Egemonico" : ({proiezione} == 4 ? "4 · Espansionista" : ({proiezione} == 3 ? "3 · Influente" : ({proiezione} == 2 ? "2 · Difensivo" : ({proiezione} == 1 ? "1 · Ripiegato" : ("—")))))]`
-> **Potenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):potenza]` → `VIEW[{potenza} == 5 ? "5 · Egemone" : ({potenza} == 4 ? "4 · Maggiore" : ({potenza} == 3 ? "3 · Regionale" : ({potenza} == 2 ? "2 · Modesta" : ({potenza} == 1 ? "1 · Trascurabile" : ("—")))))]`
-
-> [!note]- Coesione Politica — Quanto il potere è unificato o disperso nel regno.
-> **1 · Tribale** — Clan e famiglie autonomi; unità solo simbolica.
-> **2 · Confederale** — Nuclei cooperano via consigli; decisioni lente.
-> **3 · Policentrica** — Più centri di potere con autorità centrale debole.
-> **4 · Centralizzata** — Autorità unificata; periferie soggette a leggi comuni.
-> **5 · Monolitica** — Potere assoluto e indiviso; la dissidenza è tradimento.
-
-> [!note]- Stabilità — Solidità del regno nel presente.
-> **1 · Sull'orlo** — Collasso imminente; guerra civile o invasione.
-> **2 · Fragile** — Crisi aperte; il trono vacilla.
-> **3 · Contesa** — Tensioni gestite; equilibrio precario ma in piedi.
-> **4 · Salda** — Istituzioni solide; le crisi sono contenute.
-> **5 · Granitica** — Ordine duraturo; pace e continuità da generazioni.
-
-> [!note]- Apertura — Atteggiamento verso stranieri, idee e altri popoli.
-> **1 · Isolazionista** — Chiuso e diffidente; confini sigillati.
-> **2 · Protezionista** — Scambi limitati e sorvegliati.
-> **3 · Pragmatico** — Aperto per convenienza; alleanze mutevoli.
-> **4 · Aperto** — Commerci e migrazioni incoraggiati; cosmopolita.
-> **5 · Cosmopolita** — Crocevia di popoli; identità plurale e fluida.
-
-> [!note]- Proiezione — Quanto il regno cerca di espandersi o influenzare fuori dai confini.
-> **1 · Ripiegato** — Solo sopravvivenza interna; nessuna ambizione esterna.
-> **2 · Difensivo** — Tutela i confini; non cerca espansione.
-> **3 · Influente** — Pesa nella diplomazia regionale; gioca di sponda.
-> **4 · Espansionista** — Conquista o colonizza attivamente.
-> **5 · Egemonico** — Mira al dominio totale; impero in marcia.
-
-> [!note]- Potenza — Il peso aggregato — militare ed economico — che il regno può proiettare.
-> **1 · Trascurabile** — Sopravvive per concessione altrui; nessun peso.
-> **2 · Modesta** — Si difende, non attacca; conta a livello locale.
-> **3 · Regionale** — Una potenza fra pari; pesa nei suoi confini.
-> **4 · Maggiore** — Detta legge a vicini più deboli; eserciti veri.
-> **5 · Egemone** — Il suo solo nome muove alleanze e paure.
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
-```
-
---- 🕰 Cronologia
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
-```
 --- 🔗 Collegamenti
 
 > [!tip] Collega
@@ -185,14 +92,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
 ```
---- 👁 Vista
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
-```
-
-> [!tip] Azioni
-> `BUTTON[marca-canonico]`
->
-> `BUTTON[archivia-nota]`
 ````
+
+> [!tip] ＋ Componenti
+> Aggiungi ciò che ti serve, quando ti serve — **Al tavolo**, **Clock del fronte**, **Carattere**, **Cronologia**, **Vista**…
+> `BUTTON[aggiungi-componente]`
+>
+> `BUTTON[marca-canonico]` · `BUTTON[archivia-nota]`

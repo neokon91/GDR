@@ -75,10 +75,15 @@ plugins:
     author: mdelobelle
     repo: mdelobelle/metadatamenu
     license: MIT
-  - id: obsidian-icon-folder
-    name: Iconize
-    author: Florian Woelki
-    repo: FlorianWoelki/obsidian-iconize
+  # Iconic: successore MANTENUTO di Iconize (deprecato 2025-03). Icone/colori per
+  # file, cartelle, tab, bookmark — dalla UI, con regole per path. La pipeline NON
+  # inietta config (formato data.json non documentato): le emoji delle cartelle si
+  # impostano dal pannello di Iconic. Le emoji per categoria restano in `folder_icons`
+  # (usate a costo-zero nei titoli delle folder-note e degli hub).
+  - id: iconic
+    name: Iconic
+    author: gfxholo
+    repo: gfxholo/iconic
     license: MIT
   - id: calendarium
     name: Calendarium
@@ -246,8 +251,9 @@ metabind_inputs:
   # le chiavi di generatori.yaml:stili (validate lo impone, anti-drift).
   stile_nomi: INPUT[inlineSelect(option(romanzo, "Romanzo latino"), option(nordico, "Nordico"), option(silvano, "Silvano elfico"), option(montano, "Montano nanico"), option(tribale, "Tribale orchesco"), option(esotico, "Esotico arcano"))]
   testo_area: INPUT[textArea]
-# Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.
-# render.py le mappa sul percorso reale e le inietta in obsidian-icon-folder.
+# Icone cartella per categoria (emoji): chiave = chiave di core.folders. Usate a
+# costo-zero (nessun plugin) nei titoli delle folder-note (render.folder_index_pages)
+# e degli hub. Per le icone nell'ESPLORATORE file: plugin Iconic (impostate dalla sua UI).
 folder_icons:
   mondo: "🌍"
   esercito: "🪖"
@@ -313,6 +319,11 @@ callouts:
 # Obsidian (nessuna azione-nota). I bottoni "Crea <Titolo>" sono generati da
 # templates.yaml (id: crea-<id>).
 buttons:
+  # «＋ Componenti»: aggiunge alla nota un componente a richiesta (Al tavolo, Clock,
+  # Carattere, Cronologia, Vista…). Reso nella toolbar da _macros.componenti_toolbar.
+  - id: aggiungi-componente
+    label: ＋ Aggiungi componente
+    action: inserisci_componente
   - id: collega-nota
     label: Collega
     action: collega

@@ -51,7 +51,7 @@ dv.paragraph(done === 5
 
 {# Crea, organizzato per GRUPPO (core.gruppi): la cornice + i gruppi narrativi
    espansi, i tecnici (tempo/cosmo/regole) pieghevoli. Il gruppo 'tavolo' vive
-   nella tab Al tavolo. #}
+   nel componente Al tavolo (bottone ＋ Componenti sulla nota). #}
 {% for g in core.gruppi if g.id != 'tavolo' -%}
 {%- set members = [] -%}
 {%- for t in templates if t.get('area') != 'gioco' and core.categories.get(t.category, {}).get('gruppo') == g.id -%}

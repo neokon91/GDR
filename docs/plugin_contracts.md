@@ -20,7 +20,7 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
 | **Tasks** | Convenzione `#gancio`/`#trama` (fili narrativi) + `#prep` (checklist sessione). Home → *Al tavolo* ha **🧵 Fili narrativi** e **✅ Da fare**; `sessione` ha la checklist *Prep*. | `home.md.j2`, `session.md.j2` |
 | **Calendarium** | Parsing eventi (`write_calendarium`: `autoParse`/`parseDates`/`eventFrontmatter` + `inlineEventsTag: #cronologia`) **+ ponte modello→calendario**: `evento` emette `fc-date` (callout *Calendario*, macro `calendario()`); `epoca` emette `fc-date`+`fc-end` (intervallo, `calendario(range=true)`). Le chiavi `fc-*` sono whitelisted in `validate.INTEROP_FIELDS` (trattino voluto). Il **calendario** (mesi/ere) è contenuto per-mondo: creato in-app dai preset (opt-in). | `write_calendarium()`, macro `calendario()` |
 | **Folder Notes** | Una **nota-cartella** auto-indice per categoria (`Mondi/<X>/<X>.md`, resa con `index.md.j2`): cliccare la cartella apre l'indice di quella categoria. Config allineata (`insideFolder`, `{{folder_name}}`, `hideFolderNote`). | `folder_index_pages()`, `write_folder_notes()` |
-| **Iconize** | Mappa percorso-cartella → emoji nel `data.json` (emojiStyle native). | `plugins.yaml:folder_icons` |
+| **Iconic** | Successore mantenuto di Iconize (deprecato 2025). La pipeline **non** inietta config (formato non documentato): icone-cartella nell'esploratore impostate dalla UI di Iconic. Le emoji per categoria (`folder_icons`) restano usate a costo-zero nei **titoli** di folder-note e hub. | `plugins.yaml:folder_icons` (solo titoli) |
 | **Callout Manager** | Aggiunge i callout GDR custom (`tavolo`/`gancio`/`segreto`: id/color/icon) in `callouts.custom`; degradano a standard se assenti. | `plugins.yaml:callouts` |
 | **Bookmarks** (core) | Aggiunge (senza rimuovere) Home + le pagine-indice (`.md` + `.base`) + l'indice SRD. | `pages.yaml` |
 | **community-plugins.json** | Union degli id dei plugin dichiarati. | `plugins.yaml:plugins` |
@@ -46,7 +46,7 @@ scrive config — si usano a mano nelle note. Il punto d'aggancio comune è il c
   resta navigabile e cercabile.
 - `app.json:attachmentFolderPath` = **`Media/`**: cartella unica per i file utente
   (ritratti/mappe/immagini) e destinazione degli allegati trascinati. Scaffoldata
-  (`MEDIA_FOLDER`) + icona Iconize; non è una categoria.
+  (`MEDIA_FOLDER`); non è una categoria.
 
 ## Sito dei giocatori (output separato)
 

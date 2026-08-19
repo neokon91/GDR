@@ -117,6 +117,12 @@ async function meta_actions(tp, action = "") {
     new Notice("genera_sito non disponibile."); return "";
   }
 
+  if (action === "inserisci_componente") {
+    // «＋ Componenti»: appende alla nota un componente scelto (Al tavolo, Clock,
+    // Carattere…) dal catalogo z.automazioni/data/componenti.json.
+    return await inserisci_componente(tp, file);
+  }
+
   if (action === "inizia_incontro") {
     // Schiera il gruppo: auto-inietta il Party di Initiative Tracker dai PG (non serve file attivo).
     return await inizia_incontro(tp);

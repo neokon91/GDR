@@ -63,7 +63,7 @@ creation:
     optional: true
   # Solo l'ANIMA della campagna (niente equivalente fra i componenti). Geografia/popoli/
   # magia/poteri/storia NON sono prosa qui: sono Luoghi/Regni, Culture/Specie, Sistemi
-  # magici, Fazioni, Epoche — li crei nel tab Componenti.
+  # magici, Fazioni, Epoche — note a sé, che crei coi bottoni **Crea**.
   # NB: 'tono' NON è qui — è un ASSE del Carattere (slider Luminoso→Grimdark); metterlo
   # anche come campo-body creava una collisione (due input sullo stesso `tono`).
   body:

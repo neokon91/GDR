@@ -203,25 +203,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
 
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> **Pressione** = quanto scotta *adesso* (temperatura) · **Clock** = il countdown alla conseguenza. Pressione e spinte dal grafo *giustificano* di avanzare il clock; l'imminenza nei cruscotti le pesa entrambe.
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza e chiede se il fronte è *risolto* (si chiude, archiviato) o *ricorrente* (riparte, clock azzerato).
-
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
 >

@@ -81,7 +81,7 @@ tutti importano `common`).
 | `build_personaggio.py` | Converter del rules-engine PG: SRD + `pg_rules.yaml` → `personaggio.json`. |
 | `build_site.py` | Esporta il **sito dei giocatori** statico (`build_site`, CLI `--site`): dal vault → HTML spoiler-free in `dist/GDR-site/`. Markdown→HTML minimale; esclude callout `segreto`, campi del DM, blocchi dinamici/Meta Bind/`dice:` e le note `visibilita: dm`/`pubblico: false`. Template in `Dev/Source/SiteJinja/`. |
 | `validate.py` | `check()` + `validate_split`/`validate_entities`/`validate_entity_schema`/`validate_reciprocals`/`validate_aux_yaml`: confine core/system, dup-ID, snake_case, shape, schema wizard (`from` ammessi, `options`/`category`), inversi reciproci, YAML ausiliari (astrologia/pg_rules), template/Jinja, e l'uguaglianza byte delle sorgenti `_*.js`. |
-| `render_config/` (package: `_io`/`presentation`/`model_cfg`/`writers`) | Scrittura della config `.obsidian` (merge NON distruttivo, un writer per plugin: Templater/Meta Bind/Metadata Menu/Iconize/Callout Manager/Fantasy Statblocks/Initiative Tracker/Folder Notes/Tab Panels/Calendarium/Bookmarks/Homepage/core), i bottoni e fileClass derivati dal modello (`creation_buttons`/`action_buttons`/`fileclass_fields`/`meta_bind_config`), le viste **Bases** (`bases_doc`/`write_bases`) e la **presentazione** colore-categoria (`CATEGORY_ACCENTS` → CSS `gdr.css` + preset Canvas `canvas_colors`). |
+| `render_config/` (package: `_io`/`presentation`/`model_cfg`/`writers`) | Scrittura della config `.obsidian` (merge NON distruttivo, un writer per plugin: Templater/Meta Bind/Metadata Menu/Callout Manager/Fantasy Statblocks/Initiative Tracker/Folder Notes/Tab Panels/Calendarium/Bookmarks/Homepage/core), i bottoni e fileClass derivati dal modello (`creation_buttons`/`action_buttons`/`fileclass_fields`/`meta_bind_config`), le viste **Bases** (`bases_doc`/`write_bases`) e la **presentazione** colore-categoria (`CATEGORY_ACCENTS` → CSS `gdr.css` + preset Canvas `canvas_colors`). |
 | `render.py` | Orchestratore (~400 righe): `build()` delega a helper nominati (`write_engine_data`/`render_notes`/`write_bases`/`write_obsidian_config`/…), `clean()`, `scaffold_folders()`, CLI. Re-esporta i nomi pubblici dei moduli per i test. |
 
 ## Pipeline di build (`render.py build()`)
@@ -95,7 +95,9 @@ monolite): carica il modello e delega.
    (`boot.mjs`, `create_entity.js`, `crea_pg.js`, `sali_pg.js`, `genera.js`, `importa_*.js`, …) e
    **bundla** i frammenti `JS/<stem>/*.js` → `views.js`/`meta_actions.js` (concatenazione
    byte-esatta, ordine `00_`…`99_`), genera i wrapper `crea_<id>.js` mancanti.
-   *(I JS cache-ano `core.json` per-modulo.)*
+   *(I JS cache-ano `core.json` per-modulo.)* `write_componenti()` rende le macro di
+   `componenti.yaml` in `z.automazioni/data/componenti.json` (catalogo dei componenti a
+   richiesta, letto da `meta_actions.inserisci_componente` — bottone «＋ Componenti»).
 3. `render_notes(jinja_env(), …)` — rende ogni template Jinja → `z.modelli/`, le azioni,
    Home/LEGGIMI, le pagine-indice e le dashboard auto **Ponte Mondo↔Sistema**, **Fronti**,
    **Rete del mondo**, **Economia** e **Geografia** (`Indici/`). Ritorna `{target: testo}`.
@@ -103,7 +105,7 @@ monolite): carica il modello e delega.
 4. `build_srd(core)` → albero `SRD/` (prima della config: i bookmark referenziano `SRD/Indice`).
 5. `write_obsidian_config()` — config `.obsidian` **non distruttiva** (merge), un writer
    per plugin: community-plugins, Templater, Dataview, Meta Bind (input+button),
-   `write_metadata_menu` (fileClass), `write_iconize`, `write_callout_manager`,
+   `write_metadata_menu` (fileClass), `write_callout_manager`,
    `write_statblock_layouts` (layout + dice), `write_folder_notes`, `write_calendarium`
    (parsing + ponte `fc-*`), `write_bookmarks`, chrome esploratore, default core, homepage.
    Vedi [plugin_contracts.md](plugin_contracts.md).

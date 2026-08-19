@@ -441,6 +441,28 @@ def validate_aux_yaml() -> list[str]:
         if not (lingue.get("standard") and lingue.get("numero_a_scelta") is not None):
             errors.append("pg_rules: lingue senza standard/numero_a_scelta")
 
+    # componenti.yaml -> render.write_componenti (catalogo dei componenti a richiesta,
+    # bottone «＋ Componenti»). Ogni voce DEVE nominare una macro reale di _macros.j2
+    # (un refuso qui darebbe un componente vuoto/rotto in-app, in silenzio) e un
+    # `quando`/`arg` validi. `categorie` esplicito, se presente, dev'essere una lista.
+    comp_doc = load("componenti.yaml")
+    if comp_doc:
+        macros_src = (JINJA_DIR / "_macros.j2").read_text(encoding="utf-8")
+        macro_names = set(re.findall(r"\{%-?\s*macro\s+(\w+)\s*\(", macros_src))
+        for c in comp_doc.get("componenti", []) or []:
+            cid = (c or {}).get("id", "?")
+            for fld in ("id", "label", "macro", "heading"):
+                if not c.get(fld):
+                    errors.append(f"componenti: '{cid}' senza campo '{fld}'")
+            if c.get("macro") and c["macro"] not in macro_names:
+                errors.append(f"componenti: '{cid}' macro '{c['macro']}' assente da _macros.j2")
+            if c.get("arg", "none") not in ("category", "none"):
+                errors.append(f"componenti: '{cid}' arg '{c.get('arg')}' non valido (category|none)")
+            if "categorie" in c and not isinstance(c["categorie"], list):
+                errors.append(f"componenti: '{cid}' 'categorie' dev'essere una lista")
+            elif "categorie" not in c and c.get("quando", "sempre") not in ("sempre", "fronte", "tappe", "assi"):
+                errors.append(f"componenti: '{cid}' quando '{c.get('quando')}' non valido (sempre|fronte|tappe|assi)")
+
     return errors
 
 

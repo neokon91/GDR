@@ -1,5 +1,5 @@
 # Assi tematici (formato ricco 1-5) per l'entità 'legge_fondamentale' (polarità cosmica).
-# render.py li rifonde in core.assi_tematici → tab Carattere + radar.
+# render.py li rifonde in core.assi_tematici → componente Carattere + radar (bottone ＋ Componenti).
 id: legge_fondamentale
 assi:
 - id: rigidita

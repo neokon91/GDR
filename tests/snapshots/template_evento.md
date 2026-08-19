@@ -75,57 +75,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 %%/prosa%%
 
---- 🎲 Al tavolo
-
-> [!tavolo] Uso al tavolo
-> `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
-
-> [!gancio]- Gancio
-> `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
-
-> [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
->
-> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
---- 📊 Carattere
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "evento", component);
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
-
-> [!tip] Profilo
-> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
-
-> [!abstract] Carattere
-> **Risonanza** `INPUT[slider(minValue(1), maxValue(5), addLabels):risonanza]` → `VIEW[{risonanza} == 5 ? "5 · Fondante" : ({risonanza} == 4 ? "4 · Spartiacque" : ({risonanza} == 3 ? "3 · Storico" : ({risonanza} == 2 ? "2 · Eco locale" : ({risonanza} == 1 ? "1 · Dimenticato" : ("—")))))]`
-> **Controversia** `INPUT[slider(minValue(1), maxValue(5), addLabels):controversia]` → `VIEW[{controversia} == 5 ? "5 · Mistero" : ({controversia} == 4 ? "4 · Conteso" : ({controversia} == 3 ? "3 · Due versioni" : ({controversia} == 2 ? "2 · Lievi discordie" : ({controversia} == 1 ? "1 · Cronaca certa" : ("—")))))]`
-> **Reversibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):reversibilita]` → `VIEW[{reversibilita} == 5 ? "5 · Irreversibile" : ({reversibilita} == 4 ? "4 · Quasi irreversibile" : ({reversibilita} == 3 ? "3 · Cicatrice" : ({reversibilita} == 2 ? "2 · Difficile" : ({reversibilita} == 1 ? "1 · Sanabile" : ("—")))))]`
-
-> [!note]- Risonanza — Quanto l'evento pesa ancora sul presente.
-> **1 · Dimenticato** — Nessuno lo ricorda; non lascia traccia nel mondo di oggi.
-> **2 · Eco locale** — Ricordato solo dove accadde, da chi c'era.
-> **3 · Storico** — Sta nelle cronache; informa scelte e rivalità presenti.
-> **4 · Spartiacque** — Divide un prima e un dopo; ridefinì equilibri.
-> **5 · Fondante** — Regge ancora l'ordine del mondo; tutto vi discende.
-
-> [!note]- Controversia — Quanto la versione dei fatti è condivisa o contesa.
-> **1 · Cronaca certa** — I fatti sono accertati e concordi.
-> **2 · Lievi discordie** — Dettagli in disputa, sostanza condivisa.
-> **3 · Due versioni** — Vincitori e vinti lo raccontano in modo opposto.
-> **4 · Conteso** — La verità è arma politica; le fonti si contraddicono.
-> **5 · Mistero** — Cosa accadde davvero è perduto o nascosto.
-
-> [!note]- Reversibilità — Quanto le sue conseguenze si possono ancora sanare.
-> **1 · Sanabile** — Tutto può tornare com'era.
-> **2 · Difficile** — Rimediabile a caro prezzo.
-> **3 · Cicatrice** — Resta un segno, ma si convive.
-> **4 · Quasi irreversibile** — Solo un prodigio potrebbe annullarlo.
-> **5 · Irreversibile** — Ha cambiato il mondo per sempre.
-
 --- ⛓ Catena causale
 
 > [!info] Causa → conseguenza
@@ -179,14 +128,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
 ```
---- 👁 Vista
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
-```
-
-> [!tip] Azioni
-> `BUTTON[marca-canonico]`
->
-> `BUTTON[archivia-nota]`
 ````
+
+> [!tip] ＋ Componenti
+> Aggiungi ciò che ti serve, quando ti serve — **Al tavolo**, **Clock del fronte**, **Carattere**, **Cronologia**, **Vista**…
+> `BUTTON[aggiungi-componente]`
+>
+> `BUTTON[marca-canonico]` · `BUTTON[archivia-nota]`

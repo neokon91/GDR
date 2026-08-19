@@ -26,7 +26,6 @@ from .model_cfg import (
 )
 from .writers import (
     MEDIA_FOLDER,
-    MEDIA_ICON,
     APP_SETTINGS,
     CORE_PLUGINS,
     HOMEPAGE_CONFIG,
@@ -37,7 +36,6 @@ from .writers import (
     write_calendarium,
     write_hexmaker,
     write_metadata_menu,
-    write_iconize,
     write_callout_manager,
     write_statblock_layouts,
     initiative_statuses,

@@ -1,0 +1,52 @@
+id: componenti
+version: 0.1.0
+purpose: >-
+  Catalogo dei COMPONENTI inseribili a richiesta in una nota-entità (bottone
+  «＋ Componenti» → meta_actions.inserisci_componente). Ogni voce nomina una MACRO
+  di _macros.j2: render.write_componenti la rende in markdown, per categoria,
+  dentro z.automazioni/data/componenti.json. Così la nota nasce snella e i
+  componenti "da tavolo" (Al tavolo, Clock, Carattere, Cronologia, Vista…) si
+  aggiungono solo quando servono — single source restano le macro Jinja.
+# Campi:
+#   id       chiave stabile del componente
+#   label    etichetta mostrata nel suggester (con emoji)
+#   macro    nome della macro in _macros.j2 da rendere
+#   arg      come chiamarla: 'category' (passa l'id-categoria) | 'none'
+#   heading  intestazione ## che avvolge il blocco inserito = MARKER anti-duplicato
+#   quando   applicabilità, mappata su segnali di core.yaml:
+#              sempre  -> ogni categoria (uniforme di worldbuilding)
+#              fronte  -> categorie in fronte_categorie
+#              tappe   -> categorie in tappe_categorie
+#              assi    -> categorie con assi_tematici
+#            (in alternativa, `categorie: [..]` = lista esplicita di id-categoria)
+componenti:
+  - id: tavolo
+    label: "🎲 Al tavolo"
+    macro: tavolo
+    arg: category
+    heading: "## 🎲 Al tavolo"
+    quando: sempre
+  - id: clock
+    label: "⏳ Clock del fronte"
+    macro: clock
+    arg: none
+    heading: "## ⏳ Fronte & clock"
+    quando: fronte
+  - id: carattere
+    label: "📊 Carattere"
+    macro: carattere
+    arg: category
+    heading: "## 📊 Carattere"
+    quando: assi
+  - id: cronologia
+    label: "🕰 Cronologia"
+    macro: cronologia
+    arg: none
+    heading: "## 🕰 Cronologia"
+    quando: tappe
+  - id: vista
+    label: "👁 Vista"
+    macro: vista
+    arg: none
+    heading: "## 👁 Vista"
+    quando: sempre

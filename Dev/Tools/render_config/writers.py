@@ -30,9 +30,8 @@ from .presentation import write_workspace_chrome
 # si edita via Meta Bind nel corpo, le proprietà grezze sarebbero ridondanti.
 # Cartella unica per i file media dell'utente (ritratti, mappe, immagini): è anche
 # la destinazione degli allegati di Obsidian, così trascinare un'immagine la deposita
-# qui invece di sparpagliarla. Non è una categoria: scaffoldata a parte + icona.
+# qui invece di sparpagliarla. Non è una categoria: scaffoldata a parte.
 MEDIA_FOLDER = "Media"
-MEDIA_ICON = "🖼️"
 # defaultViewMode "preview": le note si aprono in Lettura, dove il contenuto
 # dinamico (tabs/Dataview/Meta Bind/dice) RENDE e gli INPUT/BUTTON sono già
 # interattivi — così la prima impressione non è un muro di ```fence grezze. Si
@@ -156,16 +155,6 @@ def write_metadata_menu(obsidian: Path, core: dict[str, Any]) -> None:
     for category in core.get("categories", {}):
         write_text(VAULT / "z.classi" / f"{category}.md", fileclass_note(core, category))
     merge_plugin_config(obsidian, "metadata-menu", {"classFilesPath": "z.classi/"})
-
-
-def write_iconize(obsidian: Path, core: dict[str, Any], plugins: dict[str, Any]) -> None:
-    """Iconize: icona (emoji) per cartella di categoria. Chiavi top-level
-    percorso->emoji nel data.json (emojiStyle native); 'settings' preservato."""
-    folders = core.get("folders", {})
-    icons = {folders[key]: emoji for key, emoji in (plugins.get("folder_icons") or {}).items() if key in folders}
-    icons[MEDIA_FOLDER] = MEDIA_ICON  # cartella media (non categoria)
-    if icons:
-        merge_plugin_config(obsidian, "obsidian-icon-folder", icons)
 
 
 def write_callout_manager(obsidian: Path, plugins: dict[str, Any]) -> None:
@@ -340,7 +329,7 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
                           templates: list[dict[str, Any]], pages: list[dict[str, Any]]) -> None:
     """Config .obsidian: merge NON distruttivo. Le impostazioni e i plugin
     installati dall'utente sono preservati; si aggiornano solo le chiavi che la
-    pipeline possiede (Templater, Dataview, Meta Bind, Metadata Menu, Iconize,
+    pipeline possiede (Templater, Dataview, Meta Bind, Metadata Menu,
     Callout Manager, Fantasy Statblocks, bookmarks, chrome esploratore, default
     core, homepage)."""
     union_list(obsidian / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
@@ -357,7 +346,6 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     merge_plugin_config(obsidian, "dataview", {"enableDataviewJs": True})
     merge_plugin_config(obsidian, "obsidian-meta-bind-plugin", meta_bind_config(plugins, core, templates))
     write_metadata_menu(obsidian, core)
-    write_iconize(obsidian, core, plugins)
     write_callout_manager(obsidian, plugins)
     write_statblock_layouts(obsidian)
     write_initiative_tracker(obsidian, core)

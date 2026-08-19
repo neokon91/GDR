@@ -48,58 +48,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 %%/prosa%%
 
---- 🎲 Al tavolo
-
-> [!tavolo] Uso al tavolo
-> `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
-
-> [!gancio]- Gancio
-> `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
-
-> [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
->
-> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
---- 📊 Carattere
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mito", component);
-```
-
-> [!abstract] Carattere
-> **Veridicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):veridicita]` → `VIEW[{veridicita} == 5 ? "5 · Rivelato" : ({veridicita} == 4 ? "4 · Fedele" : ({veridicita} == 3 ? "3 · Romanzato" : ({veridicita} == 2 ? "2 · Distorto" : ({veridicita} == 1 ? "1 · Invenzione" : ("—")))))]`
-> **Diffusione** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione]` → `VIEW[{diffusione} == 5 ? "5 · Universale" : ({diffusione} == 4 ? "4 · Diffuso" : ({diffusione} == 3 ? "3 · Regionale" : ({diffusione} == 2 ? "2 · Esoterico" : ({diffusione} == 1 ? "1 · Perduto" : ("—")))))]`
-> **Tono** `INPUT[slider(minValue(1), maxValue(5), addLabels):tono]` → `VIEW[{tono} == 5 ? "5 · Maledetto" : ({tono} == 4 ? "4 · Cupo" : ({tono} == 3 ? "3 · Ambiguo" : ({tono} == 2 ? "2 · Edificante" : ({tono} == 1 ? "1 · Luminoso" : ("—")))))]`
-> **Vitalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):vitalita]` → `VIEW[{vitalita} == 5 ? "5 · Profetico" : ({vitalita} == 4 ? "4 · Operante" : ({vitalita} == 3 ? "3 · Vivo" : ({vitalita} == 2 ? "2 · Dormiente" : ({vitalita} == 1 ? "1 · Morto" : ("—")))))]`
-
-> [!note]- Veridicità — Quanto il mito corrisponde a fatti reali del mondo.
-> **1 · Invenzione** — Pura finzione; nessun nucleo di verità.
-> **2 · Distorto** — Lontano dai fatti; un seme reale gonfiato fino all'irriconoscibile.
-> **3 · Romanzato** — Vero a metà; fatti reali avvolti di leggenda.
-> **4 · Fedele** — Aderente ai fatti, con poche aggiunte simboliche.
-> **5 · Rivelato** — Letteralmente vero; verità sacra travestita da mito.
-
-> [!note]- Diffusione — Quanto il mito è conosciuto nel mondo.
-> **1 · Perduto** — Dimenticato; lo conosce forse un solo erudite o reliquia.
-> **2 · Esoterico** — Noto solo a iniziati, culti o studiosi.
-> **3 · Regionale** — Diffuso in un popolo o regione.
-> **4 · Diffuso** — Conosciuto da molte culture, in varianti.
-> **5 · Universale** — Lo conoscono tutti; fondamento culturale condiviso.
-
-> [!note]- Tono — L'atmosfera morale del racconto.
-> **1 · Luminoso** — Eroico, consolatorio; promette salvezza.
-> **2 · Edificante** — Morale ed esemplare; insegna virtù.
-> **3 · Ambiguo** — Tragico o a doppio taglio; nessuna lezione netta.
-> **4 · Cupo** — Ammonitore; parla di colpa, caduta, perdita.
-> **5 · Maledetto** — Sinistro; raccontarlo o crederci porta sventura.
-
-> [!note]- Vitalità — Quanto il mito agisce ancora nel presente.
-> **1 · Morto** — Curiosità d'archivio; nessun effetto sul presente.
-> **2 · Dormiente** — Ricordato ma inerte; nessuno ci agisce sopra.
-> **3 · Vivo** — Ispira riti, nomi, usanze ancora praticate.
-> **4 · Operante** — Muove fazioni e culti; orienta scelte e conflitti.
-> **5 · Profetico** — Si sta avverando; il mondo si muove sul suo copione.
-
 --- 🔗 Collegamenti
 
 > [!tip] Collega
@@ -129,14 +77,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
 ```
---- 👁 Vista
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
-```
-
-> [!tip] Azioni
-> `BUTTON[marca-canonico]`
->
-> `BUTTON[archivia-nota]`
 ````
+
+> [!tip] ＋ Componenti
+> Aggiungi ciò che ti serve, quando ti serve — **Al tavolo**, **Clock del fronte**, **Carattere**, **Cronologia**, **Vista**…
+> `BUTTON[aggiungi-componente]`
+>
+> `BUTTON[marca-canonico]` · `BUTTON[archivia-nota]`

@@ -33,14 +33,16 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
    *(Vuoi una mano passo-passo? **[[Crea il tuo mondo]]** ti accompagna in 5 tappe.)*
 
 ## 🧭 Come si usa, in breve
-- **Creare**: ogni bottone **Crea** apre un *aiutante* che ti fa qualche domanda (il
-  minimo necessario); il resto lo scrivi con calma nella nota, nei campi e negli slider.
+- **Creare**: ogni bottone **Crea** apre un *aiutante* che chiede solo **nome** (e
+  **tipo**). La nota nasce snella; il resto lo aggiungi con calma nella nota — campi e
+  slider, e il bottone **＋ Componenti** per le superfici da tavolo (Al tavolo, Clock…).
 - **Collegare**: nel tab *Collegamenti* di una nota premi **Collega**, scegli il tipo
   di legame e l'altra nota: il collegamento si scrive nei due sensi, da solo.
-- **Il "carattere" delle cose** (tab *Carattere*): gli **slider** descrivono l'indole
-  (es. un culto più *dogmatico* o più *anarchico*). Sotto, il **Profilo** ti suggerisce
-  etichette coerenti (es. *Teocrazia di stato*) e il bottone **Applica profilo** le salva
-  come tag. Quando crei, puoi anche partire da un **archetipo** già pronto.
+- **Il "carattere" delle cose** (aggiungi il componente *Carattere* dal bottone
+  **＋ Componenti**): gli **slider** descrivono l'indole (es. un culto più *dogmatico*
+  o più *anarchico*). Sotto, il **Profilo** ti suggerisce etichette coerenti (es.
+  *Teocrazia di stato*) e il bottone **Applica profilo** le salva come tag — puoi
+  partire da un **archetipo** già pronto in un clic.
 - **Un personaggio giocante**: **Crea → PG**, scegli classe/specie/background e
   l'aiutante riempie la scheda (punti ferita, tiri salvezza, abilità, incantesimi).
 - **Al tavolo**: in Home c'è il riquadro *Al tavolo*; ogni incontro ha i tiri di dado

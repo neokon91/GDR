@@ -128,8 +128,8 @@ infobox_relazioni:
   missione: [luogo, fazione]
   cultura:  [lingua]
 
-# Entità "durature" che cambiano attraverso le epoche: ricevono la tab Cronologia
-# (proprietà `tappe`, righe "quando | stato" → views.renderTappe). Il mondo NON è
+# Entità "durature" che cambiano attraverso le epoche: possono aggiungere il componente
+# Cronologia (proprietà `tappe`, righe "quando | stato" → views.renderTappe). Il mondo NON è
 # statico: un luogo si fonda/fiorisce/cade, un regno sorge e crolla. Le entità
 # astratte/meccaniche/effimere (cosmologia/regole/incontri/eventi) restano fuori:
 # un evento È un punto nel tempo, non un'entità che evolve.

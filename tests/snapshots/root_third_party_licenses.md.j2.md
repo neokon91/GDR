@@ -20,7 +20,7 @@ la sorgente corrispondente, con il testo completo della licenza, è al rispettiv
 | Callout Manager | eth-p | MIT | [eth-p/obsidian-callout-manager](https://github.com/eth-p/obsidian-callout-manager) |
 | Fantasy Statblocks | Jeremy Valentine | MIT | [Obsidian-TTRPG-Community/fantasy-statblocks](https://github.com/Obsidian-TTRPG-Community/fantasy-statblocks) |
 | Metadata Menu | mdelobelle | MIT | [mdelobelle/metadatamenu](https://github.com/mdelobelle/metadatamenu) |
-| Iconize | Florian Woelki | MIT | [FlorianWoelki/obsidian-iconize](https://github.com/FlorianWoelki/obsidian-iconize) |
+| Iconic | gfxholo | MIT | [gfxholo/iconic](https://github.com/gfxholo/iconic) |
 | Calendarium | Jeremy Valentine | MIT | [javalent/calendarium](https://github.com/javalent/calendarium) |
 | Dice Roller | Jeremy Valentine | MIT | [Obsidian-TTRPG-Community/dice-roller](https://github.com/Obsidian-TTRPG-Community/dice-roller) |
 | Tasks | Obsidian Tasks contributors | MIT | [obsidian-tasks-group/obsidian-tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) |

@@ -6,12 +6,7 @@
 > `BUTTON[crea-fazione]`
 
 ## Tutte le voci
-```dataview
-table without id file.link as Nome, tipo as "Tipo", sede as "Sede", pressione as "Pressione"
-from ""
-where categoria = "fazione" and stato != "archiviata"
-sort pressione desc
-```
+![[Fazioni.base]]
 
 ## 🔥 Fronti caldi
 ```dataview

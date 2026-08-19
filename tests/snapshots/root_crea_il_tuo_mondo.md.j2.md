@@ -54,8 +54,8 @@ Un mondo è una **rete**, non un elenco: un *legame* dice come due note si tocca
 > 2. Vai nel tab **Collegamenti** e premi **`Collega`**.
 > 3. Scegli il tipo di legame (es. *Controllata da*) e la nota da agganciare (la tua **Fazione**).
 >
-> Il legame inverso si scrive **da sé** sull'altra nota. *(Se hai creato il Luogo dopo
-> la Fazione, il wizard te l'ha già chiesto — «Collegare ad altre note ora?».)*
+> Il legame inverso si scrive **da sé** sull'altra nota. *(La creazione è lampo — nome e
+> tipo; i collegamenti li fai qui, col bottone **Collega**, quando le note esistono.)*
 
 Poi apri **[[Rete del mondo]]** e guarda il grafo prendere forma.
 

@@ -710,3 +710,49 @@ def test_homebrew_bridge(tmp_path):
     assert out["sub"] == ["Setta del Nulla"]  # sottoclasse homebrew legata alla classe (sali_pg)
 
 
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_wizard_minimale_nome_e_tipo(tmp_path):
+    """Wizard MINIMALE (create_entity.runWizard): il modale chiede SOLO il nome e — se
+    la categoria ha sottotipi — il tipo. Nessun prompt per campi/relazioni/famiglia/
+    archetipo. Il frontmatter esce snello: tipo scelto, mondo vuoto, tags = solo
+    'gdr/bozza' (niente 'profilo/*' da archetipo). Per 'luogo' (ha subtypes) il conteggio
+    è: 1 prompt (nome) + 1 suggester (tipo)."""
+    core_json = tmp_path / "core.json"
+    core_json.write_text(json.dumps(render.engine_payload(CORE, TEMPLATES), ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "wiz.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        'const core=fs.readFileSync(process.argv[2],"utf8");'
+        'let prompts=0,suggests=0,suggestTitles=[];'
+        'global.Notice=function(){};'
+        'global.app={vault:{'
+        '  adapter:{read:async()=>core},'
+        '  getMarkdownFiles:()=>[],'
+        '  getAbstractFileByPath:()=>({}),'          # cartella "esiste" → niente createFolder
+        '  createFolder:async()=>{}},'
+        '  metadataCache:{getFileCache:()=>({frontmatter:{}}),getFirstLinkpathDest:()=>null},'
+        '  fileManager:{}};'
+        'const tp={system:{'
+        '  prompt:async()=>{prompts++;return "Forte Cenere";},'
+        '  suggester:async(l,v,f,title)=>{suggests++;suggestTitles.push(String(title||""));return v[0];}},'
+        '  file:{move:async()=>{}},'
+        '  date:{now:()=>"2026-01-01"}};'
+        f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
+        'crea(tp,"luogo").then(fm=>{'
+        '  process.stdout.write(JSON.stringify({fm,prompts,suggests,suggestTitles}));});',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness), str(core_json)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    fm = yaml.safe_load(out["fm"].split("---")[1])
+    assert fm["categoria"] == "luogo"
+    assert fm["nome"] == "Forte Cenere"
+    assert fm["mondo"] == "" and fm["connessioni"] == []      # niente relazioni catturate
+    assert fm["tags"] == ["gdr/bozza"]                        # nessun tag da archetipo
+    assert "famiglia" not in fm                               # niente prompt famiglia
+    assert fm["tipo"]                                         # tipo scelto (primo sottotipo)
+    # Solo nome + tipo: 1 prompt, 1 suggester (il titolo del suggester è il Tipo).
+    assert out["prompts"] == 1
+    assert out["suggests"] == 1 and out["suggestTitles"][0].startswith("Tipo di")

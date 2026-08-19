@@ -171,10 +171,28 @@ def bases_doc(page: dict[str, Any]) -> dict[str, Any]:
     if parts:
         direction = "DESC" if len(parts) > 1 and parts[1].lower() == "desc" else "ASC"
         sort = [{"property": parts[0], "direction": direction}]
+    views = [{"type": "table", "name": "Tutte le voci", "order": order, "sort": sort}]
+    # Vista GALLERIA (cards) con COPERTINA, se la pagina dichiara `cover` (ritratto|banner):
+    # una seconda vista (la table resta la PRIMA = default, quindi additiva e non-bloccante).
+    # `image` = proprietà NUDA (contesto espressione, come i filtri/sort); `imageFit: cover`
+    # riempie la card. Raggruppata per `group` (default 'tipo'): Bestiario/Atlante/Cast/Fazioni
+    # "a colpo d'occhio" per tipo. Schema cards verificato su .base reali (Obsidian 1.9.4+).
+    cover = page.get("cover")
+    if cover:
+        card_order = ["file.name"] + [col["field"] for col in columns[:2]]
+        # `sort` con oggetti FRESCHI (non condivisi con la table): evita che
+        # yaml.safe_dump emetta un'ancora/alias (&id/*id) — i .base restano anchor-free.
+        cards = {"type": "cards", "name": "Galleria", "image": cover,
+                 "imageFit": "cover", "order": card_order,
+                 "sort": [dict(s) for s in sort]}
+        group = page.get("group", "tipo")
+        if group:
+            cards["groupBy"] = group
+        views.append(cards)
     return {
         "filters": {"and": [f'categoria == "{category}"', 'stato != "archiviata"']},
         "properties": properties,
-        "views": [{"type": "table", "name": "Tutte le voci", "order": order, "sort": sort}],
+        "views": views,
     }
 
 

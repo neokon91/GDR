@@ -6,7 +6,8 @@ purpose: >
   'file' = nome file (senza .md); 'category' = categoria mostrata; 'columns' =
   colonne Dataview (field del frontmatter, anche relazioni); 'sort' = clausola
   Dataview (default "file.name asc"). I bottoni "Crea" della categoria sono
-  inclusi automaticamente.
+  inclusi automaticamente. 'cover' (opz., ritratto|banner) aggiunge alla .base una
+  vista GALLERIA a card con quella copertina, raggruppata per 'group' (default tipo).
 pages:
   - id: atlante
     file: Atlante
@@ -15,6 +16,7 @@ pages:
     intro: Tutti i luoghi del mondo, dal più caldo al più quieto.
     # Mappa-mondo navigabile (views.renderWorldMap): la zoom-map dei Mondi/cornici, in cima.
     panel: map
+    cover: banner
     sort: "pressione desc"
     columns:
       - { field: tipo,      label: Tipo }
@@ -25,6 +27,7 @@ pages:
     title: "🐾 Bestiario"
     category: creatura
     intro: Le creature del mondo. Apri una scheda per lo statblock 5e.
+    cover: ritratto
     sort: "tipo asc"
     columns:
       - { field: tipo,      label: Tipo }
@@ -35,6 +38,7 @@ pages:
     title: "⚔️ Fazioni"
     category: fazione
     intro: Chi muove i fili — sede, alleanze, pressione.
+    cover: ritratto
     sort: "pressione desc"
     columns:
       - { field: tipo,      label: Tipo }
@@ -56,6 +60,7 @@ pages:
     title: "🎭 Cast"
     category: personaggio
     intro: PG e PNG, con affiliazione e base.
+    cover: ritratto
     sort: "file.name asc"
     columns:
       - { field: tipo,      label: Ruolo }

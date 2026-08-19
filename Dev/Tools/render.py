@@ -82,7 +82,6 @@ from render_config import (  # noqa: F401 (re-export per i test/usi storici)
     HIDE_FOLDERS_SNIPPET,
     HOMEPAGE_CONFIG,
     MEDIA_FOLDER,
-    MEDIA_ICON,
     action_buttons,
     bases_doc,
     callout_appearance_css,
@@ -106,7 +105,6 @@ from render_config import (  # noqa: F401 (re-export per i test/usi storici)
     write_core_settings,
     write_folder_notes,
     write_homepage,
-    write_iconize,
     write_initiative_tracker,
     write_metadata_menu,
     write_obsidian_config,
@@ -247,6 +245,53 @@ def engine_payload(core: dict[str, Any], templates: list[dict[str, Any]]) -> dic
     }
 
 
+def _component_applies(comp: dict[str, Any], category: str, core: dict[str, Any]) -> bool:
+    """Se il componente `comp` è offerto per `category`. `categorie` esplicito ha
+    la precedenza; altrimenti `quando` mappa sui segnali di core (fronte/tappe/assi/
+    sempre)."""
+    cats = comp.get("categorie")
+    if cats:
+        return category in cats
+    quando = comp.get("quando", "sempre")
+    if quando == "sempre":
+        return True
+    if quando == "fronte":
+        return category in core.get("fronte_categorie", [])
+    if quando == "tappe":
+        return category in core.get("tappe_categorie", [])
+    if quando == "assi":
+        return bool(core.get("assi_tematici", {}).get(category))
+    return False
+
+
+def _render_component(env: Environment, comp: dict[str, Any], core: dict[str, Any],
+                      plugins: dict[str, Any], category: str) -> str:
+    """Rende la macro del componente (in _macros.j2) come frammento markdown per la
+    categoria data, con lo stesso contesto (core/plugins) dei template. `arg` decide
+    se passarle l'id-categoria o chiamarla senza argomenti."""
+    call = f"m.{comp['macro']}(category)" if comp.get("arg") == "category" else f"m.{comp['macro']}()"
+    tmpl = env.from_string("{% import '_macros.j2' as m with context %}{{ " + call + " }}")
+    return tmpl.render(core=core, plugins=plugins, category=category).strip()
+
+
+def write_componenti(env: Environment, core: dict[str, Any], plugins: dict[str, Any]) -> None:
+    """Catalogo runtime dei COMPONENTI inseribili a richiesta (componenti.yaml): per
+    ogni categoria, i componenti applicabili resi in markdown, in
+    z.automazioni/data/componenti.json. Lo legge meta_actions.inserisci_componente
+    (bottone «＋ Componenti») per offrire e inserire il blocco giusto. Single source:
+    le macro di _macros.j2 — qui solo distillate per categoria."""
+    catalog = (load_yaml("componenti.yaml").get("componenti", [])
+               if (SOURCE / "YAML" / "componenti.yaml").is_file() else [])
+    out: dict[str, list[dict[str, str]]] = {}
+    for category in core.get("categories", {}):
+        items = [{"id": comp["id"], "label": comp["label"], "heading": comp["heading"],
+                  "md": _render_component(env, comp, core, plugins, category)}
+                 for comp in catalog if _component_applies(comp, category, core)]
+        if items:
+            out[category] = items
+    write_json(VAULT / "z.automazioni" / "data" / "componenti.json", out)
+
+
 def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> None:
     """Dati e script che il JS Engine legge a runtime: il payload core.json
     (modello distillato per views.js), le opzioni del rules-engine PG, gli script
@@ -312,6 +357,9 @@ def folder_index_pages(core: dict[str, Any], plugins: dict[str, Any]) -> list[di
                 "intro": "Tutte le voci di questa categoria. Clicca la cartella per tornare qui.",
                 "sort": "file.name asc",
                 "columns": [{"field": "tipo", "label": "Tipo"}, {"field": "mondo", "label": "Mondo"}],
+                # Le folder-note NON hanno una .base dedicata (solo le pagine di pages.yaml):
+                # l'hub .md embedda la .base, la folder-note resta sulla tabella Dataview.
+                "folder_note": True,
             },
         })
     return out
@@ -388,8 +436,12 @@ def build() -> dict[str, str]:
     actions = load_yaml("templates.yaml").get("actions", [])
     pages = load_pages()
 
+    env = jinja_env()
     write_engine_data(core, templates)
-    rendered = render_notes(jinja_env(), core, plugins, templates, actions, pages)
+    # Catalogo dei componenti a richiesta (bottone «＋ Componenti»): dopo il modello,
+    # reso con lo stesso env dei template.
+    write_componenti(env, core, plugins)
+    rendered = render_notes(env, core, plugins, templates, actions, pages)
     # Bases (core): una vista DB nativa (.base) per pagina, stessa single-source
     # degli hub. Additivo: gli hub Dataview restano come fallback.
     write_bases(pages)

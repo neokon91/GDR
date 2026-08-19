@@ -198,10 +198,10 @@
 
 {# Superficie giocabile (il differenziatore). Single source: core.tavolo.
    'Uso al tavolo', 'Gancio' e 'Condivisione' sono UNIVERSALI (ogni nota lore).
-   La macchina del FRONTE — Pressione (etichetta calcolata + prossima_mossa) e il
-   clock() — compare SOLO per le categorie in core.fronte_categorie: un orologio
-   su un bioma/una lingua non ha senso. `category=none` -> mostra tutto (chiamata
-   senza contesto). #}
+   La Pressione del FRONTE (etichetta calcolata + prossima_mossa) compare SOLO per
+   le categorie in core.fronte_categorie. Il clock() è ora una macro/componente A
+   PARTE (inserito a richiesta dal bottone «＋ Componenti», solo sui fronti): qui
+   tavolo() NON lo incorpora più. `category=none` -> mostra tutto (senza contesto). #}
 {% macro tavolo(category=none) -%}
 {%- set is_fronte = (category is none) or (category in core.get('fronte_categorie', [])) -%}
 {% for t in core.tavolo %}
@@ -219,14 +219,25 @@
 
 {% endif %}
 {% endfor %}
-{% if is_fronte %}
-{{ clock() }}
-
-{% endif %}
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): {{ field('rivelazione', label=false) }}
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
+{%- endmacro %}
+
+{# Toolbar «＋ Componenti»: unico punto di scoperta per aggiungere a richiesta i
+   componenti "da tavolo" (Al tavolo, Clock, Carattere, Cronologia, Vista, mappa…)
+   senza appesantire la nota alla creazione. Il bottone lancia
+   meta_actions.inserisci_componente, che offre solo i componenti pertinenti alla
+   categoria (z.automazioni/data/componenti.json) e non ancora presenti nella nota.
+   Ospita anche le azioni-nota che prima vivevano nella tab «Vista». NON piegata:
+   il bottone deve restare visibile (scoperta > compattezza). #}
+{% macro componenti_toolbar() -%}
+> [!tip] ＋ Componenti
+> Aggiungi ciò che ti serve, quando ti serve — **Al tavolo**, **Clock del fronte**, **Carattere**, **Cronologia**, **Vista**…
+> `BUTTON[aggiungi-componente]`
+>
+> `BUTTON[marca-canonico]` · `BUTTON[archivia-nota]`
 {%- endmacro %}
 
 {# Clock & conseguenze (Fase 2): un fronte traccia un orologio a segmenti

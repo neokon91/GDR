@@ -1,5 +1,5 @@
 # Assi tematici (formato ricco 1-5) per l'entità 'entita_primordiale' (essere pre-divino).
-# render.py li rifonde in core.assi_tematici → tab Carattere + radar.
+# render.py li rifonde in core.assi_tematici → componente Carattere + radar (bottone ＋ Componenti).
 id: entita_primordiale
 assi:
 - id: coscienza

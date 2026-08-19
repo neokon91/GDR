@@ -47,89 +47,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 %%/prosa%%
 
---- 🎲 Al tavolo
-
-> [!tavolo] Uso al tavolo
-> `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
-
-> [!gancio]- Gancio
-> `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
-
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text(placeholder(es. il barone raddoppia le guardie)):prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> **Pressione** = quanto scotta *adesso* (temperatura) · **Clock** = il countdown alla conseguenza. Pressione e spinte dal grafo *giustificano* di avanzare il clock; l'imminenza nei cruscotti le pesa entrambe.
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza e chiede se il fronte è *risolto* (si chiude, archiviato) o *ricorrente* (riparte, clock azzerato).
-
-> [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
->
-> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
---- 📊 Carattere
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", component);
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
-
-> [!tip] Profilo
-> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
-
-> [!abstract] Carattere
-> **Chiarezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):chiarezza]` → `VIEW[{chiarezza} == 5 ? "5 · Esplicita" : ({chiarezza} == 4 ? "4 · Chiara" : ({chiarezza} == 3 ? "3 · Allusiva" : ({chiarezza} == 2 ? "2 · Oscura" : ({chiarezza} == 1 ? "1 · Ermetica" : ("—")))))]`
-> **Avveramento** `INPUT[slider(minValue(1), maxValue(5), addLabels):avveramento]` → `VIEW[{avveramento} == 5 ? "5 · In atto" : ({avveramento} == 4 ? "4 · Imminente" : ({avveramento} == 3 ? "3 · In moto" : ({avveramento} == 2 ? "2 · Latente" : ({avveramento} == 1 ? "1 · Remota" : ("—")))))]`
-> **Esito atteso** `INPUT[slider(minValue(1), maxValue(5), addLabels):esito]` → `VIEW[{esito} == 5 ? "5 · Catastrofe" : ({esito} == 4 ? "4 · Sventura" : ({esito} == 3 ? "3 · Svolta" : ({esito} == 2 ? "2 · Benedizione" : ({esito} == 1 ? "1 · Salvezza" : ("—")))))]`
-> **Malleabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):malleabilita]` → `VIEW[{malleabilita} == 5 ? "5 · Aperta" : ({malleabilita} == 4 ? "4 · Fragile" : ({malleabilita} == 3 ? "3 · Condizionata" : ({malleabilita} == 2 ? "2 · Rigida" : ({malleabilita} == 1 ? "1 · Ineluttabile" : ("—")))))]`
-
-> [!note]- Chiarezza — Quanto la profezia è comprensibile o criptica.
-> **1 · Ermetica** — Incomprensibile; simboli puri, nessun appiglio.
-> **2 · Oscura** — Enigmatica; richiede chiavi e interpreti.
-> **3 · Allusiva** — Immagini leggibili ma ambigue; più letture valide.
-> **4 · Chiara** — Senso evidente, con qualche dettaglio velato.
-> **5 · Esplicita** — Dice apertamente cosa, chi, quando.
-
-> [!note]- Avveramento — Quanto la profezia è vicina a compiersi.
-> **1 · Remota** — Lontanissima; nessun segno ancora.
-> **2 · Latente** — Condizioni assenti; potrebbe non avverarsi mai.
-> **3 · In moto** — I primi segni appaiono; gli ingranaggi girano.
-> **4 · Imminente** — Quasi tutte le condizioni soddisfatte; sta accadendo.
-> **5 · In atto** — Si sta compiendo ora; resta solo l'esito.
-
-> [!note]- Esito atteso — Cosa promette la profezia se si avvera.
-> **1 · Salvezza** — Liberazione, alba, rinascita per il mondo.
-> **2 · Benedizione** — Bene per alcuni; un dono o un erede atteso.
-> **3 · Svolta** — Cambio epocale ambiguo; né bene né male netti.
-> **4 · Sventura** — Caduta, lutto, fine di un ordine.
-> **5 · Catastrofe** — Rovina cosmica; fine del mondo o di un'era.
-
-> [!note]- Malleabilità — Quanto le scelte mortali possono cambiarne il corso.
-> **1 · Ineluttabile** — Si avvera comunque; ogni resistenza la realizza.
-> **2 · Rigida** — Si può ritardare, non evitare.
-> **3 · Condizionata** — Dipende da scelte precise; ha bivi reali.
-> **4 · Fragile** — Facile da deviare; basta poco a spezzarla.
-> **5 · Aperta** — Solo una possibilità tra tante; il futuro è libero.
-
 --- 🔗 Collegamenti
 
 > [!tip] Collega
@@ -156,14 +73,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
 ```
---- 👁 Vista
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
-```
-
-> [!tip] Azioni
-> `BUTTON[marca-canonico]`
->
-> `BUTTON[archivia-nota]`
 ````
+
+> [!tip] ＋ Componenti
+> Aggiungi ciò che ti serve, quando ti serve — **Al tavolo**, **Clock del fronte**, **Carattere**, **Cronologia**, **Vista**…
+> `BUTTON[aggiungi-componente]`
+>
+> `BUTTON[marca-canonico]` · `BUTTON[archivia-nota]`

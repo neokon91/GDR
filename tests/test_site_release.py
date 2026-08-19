@@ -700,3 +700,50 @@ def test_callout_appearance_css_bare_icons():
     assert "--callout-color: 201, 64, 64;" in css
     assert "--callout-icon: scroll-text;" in css         # infobox
     assert '--callout-color' not in css.split('data-callout="infobox"')[1].split('}')[0]
+
+
+# --- Note modulari: catalogo componenti a richiesta + inserimento ------------
+def test_componenti_catalog_generation():
+    """Catalogo componenti (componenti.yaml → render.write_componenti): applicabilità
+    corretta per categoria — 'tavolo'/'vista' sempre, 'clock' solo ai fronti,
+    'carattere' solo con assi, 'cronologia' solo alle tappe — e ogni blocco reso non
+    è vuoto e porta il contenuto atteso della sua macro."""
+    catalog = render.load_yaml("componenti.yaml")["componenti"]
+    by_id = {c["id"]: c for c in catalog}
+    assert {"tavolo", "clock", "carattere", "cronologia", "vista"} <= set(by_id)
+    # Applicabilità (segnali di core): fazione è fronte, bioma no; luogo è tappe.
+    assert render._component_applies(by_id["clock"], "fazione", CORE)
+    assert not render._component_applies(by_id["clock"], "bioma", CORE)
+    assert render._component_applies(by_id["cronologia"], "luogo", CORE)
+    assert not render._component_applies(by_id["cronologia"], "bioma", CORE)
+    assert render._component_applies(by_id["tavolo"], "bioma", CORE)      # sempre
+    # Rendering non vuoto + marker della macro.
+    env = render.jinja_env()
+    tav = render._render_component(env, by_id["tavolo"], CORE, PLUGINS, "fazione")
+    assert tav.strip() and "Condivisione coi giocatori" in tav
+    clk = render._render_component(env, by_id["clock"], CORE, PLUGINS, "fazione")
+    assert "renderClock" in clk
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_apply_component_idempotent(tmp_path):
+    """meta_actions.applyComponent: appende il blocco in fondo alla nota; se il marker
+    (l'heading del componente) è già presente NON duplica (idempotente)."""
+    harness = tmp_path / "comp.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(META_ACTIONS_JS)},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const A=m.exports.applyComponent;'
+        'const base="# Nota\\n\\ncorpo\\n";'
+        'const once=A(base,"## AT\\nblocco","## AT");'
+        'const twice=A(once,"## AT\\nblocco","## AT");'
+        'process.stdout.write(JSON.stringify({once,eq:once===twice,'
+        ' count:(once.match(/## AT/g)||[]).length}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "## AT" in out["once"] and "corpo" in out["once"]   # append, non sovrascrive
+    assert out["eq"] is True                                   # secondo insert = no-op
+    assert out["count"] == 1                                   # nessun doppione

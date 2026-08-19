@@ -12,12 +12,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 
 ## Tutte le voci
-```dataview
-table without id file.link as Nome, tipo as "Tipo", regione as "Regione", pressione as "Pressione"
-from ""
-where categoria = "luogo" and stato != "archiviata"
-sort pressione desc
-```
+![[Atlante.base]]
 
 ## 🔥 Fronti caldi
 ```dataview

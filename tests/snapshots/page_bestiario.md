@@ -6,12 +6,7 @@
 > `BUTTON[crea-creatura]`
 
 ## Tutte le voci
-```dataview
-table without id file.link as Nome, tipo as "Tipo", mondo as "Mondo", pressione as "Pressione"
-from ""
-where categoria = "creatura" and stato != "archiviata"
-sort tipo asc
-```
+![[Bestiario.base]]
 
 ## 🔥 Fronti caldi
 ```dataview

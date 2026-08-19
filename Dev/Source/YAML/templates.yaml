@@ -72,3 +72,8 @@ actions:
   - id: inizia_incontro
     title: Prepara il gruppo (IT)
     target: z.modelli/azioni/Prepara il gruppo (IT).md
+  # «＋ Componenti»: appende alla nota un componente a richiesta (Al tavolo, Clock,
+  # Carattere, Cronologia, Vista…) dal catalogo z.automazioni/data/componenti.json.
+  - id: inserisci_componente
+    title: Aggiungi componente
+    target: z.modelli/azioni/Aggiungi componente.md

@@ -6,12 +6,7 @@
 > `BUTTON[crea-risorsa]`
 
 ## Tutte le voci
-```dataview
-table without id file.link as Nome, tipo as "Tipo", scarsita as "Scarsità", controllata_da as "Controllata da", pressione as "Pressione"
-from ""
-where categoria = "risorsa" and stato != "archiviata"
-sort pressione desc
-```
+![[Risorse.base]]
 
 ## 🔥 Fronti caldi
 ```dataview

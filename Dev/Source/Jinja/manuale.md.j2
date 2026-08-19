@@ -16,7 +16,7 @@ assicurati che **Restricted mode** sia OFF e che questi siano **abilitati**:
 > [!warning] Senza questi plugin
 > Senza **Tab Panels** le note a schede appaiono come testo grezzo; senza
 > **Fantasy Statblocks** non vedi gli statblock né il blocco `encounter`; senza
-> **Meta Bind** i campi `INPUT`/`VIEW` (incluso il tab *Carattere*) restano testo grezzo;
+> **Meta Bind** i campi `INPUT`/`VIEW` (incluso il componente *Carattere*) restano testo grezzo;
 > senza **JS Engine** il pannello *Vista* (card "pronto al tavolo?" + "Citato da") non si rende.
 > **Controllo automatico**: apri **[[Diagnostica]]** — ti dice quali mancano e come riattivarli.
 
@@ -49,8 +49,8 @@ Se qualcosa appare come *testo grezzo*, è quasi sempre un plugin del §1 non ab
   d20 normale, con vantaggio e con svantaggio. Sulla **scheda PG**, inoltre, ogni
   caratteristica (Prova/TS), ogni abilità, l'iniziativa e il TS contro morte hanno un
   `dice:` 🎲 col **bonus già incluso** (legge i modificatori dalla scheda): clic = tiro pronto.
-- Ogni nota lore ha il tab **Al tavolo** (uso al tavolo, gancio, pressione): è la
-  superficie giocabile, il cuore del vault.
+- Ogni nota lore può aggiungere **Al tavolo** (dal bottone **＋ Componenti**: uso al
+  tavolo, gancio, pressione): è la superficie giocabile, il cuore del vault.
 - Vuoi vedere uno **statblock 5.5e** subito? Apri un mostro SRD già pronto, es.
   **SRD/Mostri/Goblin guerriero** (Iniziativa, GS con PE+CB, azioni — entra nel bestiario).
 - Per un **incontro**: *Crea → Incontro*, collega le creature (e gli eventuali **Alleati**:
@@ -65,11 +65,16 @@ Se qualcosa appare come *testo grezzo*, è quasi sempre un plugin del §1 non ab
   strumenti del DM: **non** finiscono nel sito dei giocatori.
 
 ## 4. Creare e collegare
-- **Crea** una nota dai bottoni in Home (o nell'indice di dominio): un wizard chiede
-  l'essenziale; il resto lo rifinisci nei tab con i campi `INPUT`/slider.
+- **Crea** una nota dai bottoni in Home (o nell'indice di dominio): il wizard chiede
+  solo **nome** (e **tipo**, se la categoria ne ha). La nota nasce **snella** —
+  identità, descrizione, Collegamenti — e la rifinisci con calma coi campi `INPUT`/slider.
+- **＋ Componenti** — sotto ogni nota, il bottone **＋ Aggiungi componente** aggiunge
+  *quando serve* le superfici "da tavolo": **Al tavolo** (uso al tavolo, gancio, pressione),
+  **Clock** (sui fronti), **Carattere** (radar degli assi), **Cronologia**, **Vista**.
+  Niente muro di roba alla creazione: la nota cresce a richiesta.
 - **Collega** due note quando vuoi (anche dopo): nel tab *Collegamenti* premi
   **`Collega`**, scegli il tipo di relazione e la nota — scrive il link tipizzato e
-  quello inverso. Il pannello *Vista* mostra anche **"Citato da"** (chi ti referenzia).
+  quello inverso. Il componente *Vista* mostra anche **"Citato da"** (chi ti referenzia).
 - Preferisci il pannello **Proprietà** di Obsidian? I campi sono tipizzati (Metadata
   Menu): `stato`/`tipo` sono menu a tendina, le relazioni sono link.
 
@@ -155,8 +160,8 @@ via `monster:` — non riscrivi nulla). Per cambiare lo stile di un singolo bloc
 riga `layout:`. Entrambi i layout IT sono vendorizzati e installati in Fantasy Statblocks.
 
 ## 10. Radar degli assi + confronto fra entità (JS Engine)
-Nel tab **Carattere** (entità con ≥3 assi) gli slider sono affiancati da un **radar**
-che disegna gli assi tematici della nota corrente (richiede **JS Engine**).
+Il componente **Carattere** (aggiungilo da **＋ Componenti**; entità con ≥3 assi) affianca
+agli slider un **radar** che disegna gli assi tematici della nota (richiede **JS Engine**).
 
 Per **confrontare più entità** sullo stesso radar, incolla questo blocco in una nota
 qualunque e aggiungi nel suo frontmatter `confronta: [[Entità A]], [[Entità B]]`
@@ -212,7 +217,7 @@ Il sito esce in `dist/GDR-site/` (apri `index.html` o pubblica la cartella). Res
 **sempre fuori**: le note `visibilita: dm`, gli strumenti del DM (incontri, tiri `dice:`)
 e i callout *Segreto*.
 
-**Rivelazione progressiva** — ogni nota ha, nel tab *Al tavolo*, un selettore 👁 *Condivisione*:
+**Rivelazione progressiva** — ogni nota ha, nel callout **⚙️ Opzioni**, un selettore 👁 *Rivelazione*:
 - **pubblico** — noto ai personaggi da subito (default);
 - **incontrato** — compare quando i PG lo scoprono;
 - **segreto** — un colpo di scena, da svelare al momento giusto.

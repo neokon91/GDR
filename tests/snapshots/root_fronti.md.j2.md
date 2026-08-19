@@ -3,7 +3,7 @@
 > [!info] A cosa serve
 > Tutti i fronti con un **clock** in corso: quanto sono vicini a scatenarsi e cosa
 > accadrà. Quando un clock è **pieno**, apri il fronte e premi *Scatena conseguenza*
-> (crea l'evento e azzera il clock). Imposti un clock dal tab *Al tavolo* di una nota.
+> (crea l'evento e azzera il clock). Aggiungi un **Clock** a una nota-fronte dal bottone **＋ Componenti**.
 
 > [!tip] Far girare il mondo
 > `BUTTON[avanza-mondo]` — avanza **tutti** i Fronti di un passo (in proporzione al calore: 🔴 Crisi +2, 🟠 Tensione +1, 🟢 Calma fermo), scatena i pieni (conseguenza in bozza) e ne propaga le **onde** nel grafo. Scrive una cronaca «Giro del mondo». *Premilo tra una sessione e l'altra.*

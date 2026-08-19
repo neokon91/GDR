@@ -7,12 +7,7 @@
 > `BUTTON[crea-png]`
 
 ## Tutte le voci
-```dataview
-table without id file.link as Nome, tipo as "Ruolo", fazione as "Affiliazione", luogo as "Base", pressione as "Pressione"
-from ""
-where categoria = "personaggio" and stato != "archiviata"
-sort file.name asc
-```
+![[Cast.base]]
 
 ## 🔥 Fronti caldi
 ```dataview

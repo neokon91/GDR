@@ -318,7 +318,6 @@ async function writeInverses(core, category, name, captured) {
 async function runWizard(tp, template, core) {
   const category = template.category;
   const categorySpec = core.categories[category] ?? {};
-  const wizard = (core.creation ?? {})[category] ?? {};
 
   // Il nome è sempre obbligatorio e NON vuoto: X (Escape) o invio vuoto ripetuto
   // annulla. Senza questo guard un nome vuoto creava "<cartella>/.md".
@@ -329,130 +328,38 @@ async function runWizard(tp, template, core) {
   }
   if (!name) throw new Error("Nome vuoto");
 
-  // Nel wizard si chiedono SOLO i campi strutturati (creation.fields: tipo, liste,
-  // link). La PROSA (creation.body: descrizione/tono/storia…) NON si digita nel modale:
-  // rende come callout editabili nella nota (wizard_body), dove si scrive con calma e
-  // si rilegge. Creazione veloce = scaffold + scelte; il testo lungo vive nella nota.
-  const questions = [...(wizard.fields ?? [])];
-  const captured = {};
-
-  // Campi obbligatori: X annulla l'intero wizard.
-  for (const q of questions.filter(q => q.required)) {
-    captured[q.field] = await ask(tp, q, template, core);
-  }
-
-  // Facoltativi: l'utente sceglie se compilarli ora o dopo nella nota.
-  const optional = questions.filter(q => !q.required);
-  let fillNow = false;
-  if (optional.length) {
-    fillNow = await tp.system.suggester(
-      ["Sì, compila ora", "No, li compilo dopo nella nota"],
-      [true, false], false, "Compilare i campi facoltativi ora?"
-    ) === true;
-  }
-  for (const q of optional) {
-    captured[q.field] = fillNow ? await ask(tp, q, template, core) : emptyFor(q);
-  }
-
-  // Campi del SOTTOTIPO scelto: scelto `tipo`, il wizard chiede i campi propri di quel
-  // sottotipo (subtype_profiles[tipo].campi) — un luogo «insediamento» nasce con
-  // popolazione/servizi/prosperità, un «dungeon» con livelli/occupante. Data-driven: il
-  // widget del campo decide come si chiede (subtypeFieldQuestion). Opzionale e gated come
-  // i facoltativi; i campi già chiesti come creation.fields e i `legame` si saltano qui.
-  const tipoScelto = captured.tipo ?? template.default_type;
-  const profilo = (categorySpec.subtype_profiles ?? {})[tipoScelto] ?? {};
-  const campiQs = (profilo.campi ?? [])
-    .filter((fid) => !(fid in captured))
-    .map((fid) => subtypeFieldQuestion(fid, core))
-    .filter(Boolean);
-  if (campiQs.length) {
-    const fillTipo = await tp.system.suggester(
-      ["Sì, compila ora", "No, dopo nelle Proprietà"],
-      [true, false], false, `Compilare i campi del tipo «${tipoScelto}» ora?`
-    ) === true;
-    if (fillTipo) {
-      for (const q of campiQs) {
-        const v = await ask(tp, q, template, core);
-        if (Array.isArray(v) ? v.length : v !== "") captured[q.field] = v;
-      }
-    }
-  }
-
-  // Collegamenti tipizzati (relazioni della categoria): il wizard li offre ALLA
-  // CREAZIONE, così l'entità nasce agganciata al grafo invece che isola (prima
-  // i legami erano solo un passo manuale post-creazione: macro Collegamenti /
-  // bottone Collega). Opzionali e skippabili; salta quelli già chiesti come
-  // creation.fields (es. personaggio.fazione/luogo). Scrive solo i non vuoti.
-  // Offri SOLO le relazioni con target ESISTENTI: alla PRIMA creazione (es. il mondo,
-  // creato per primo) non c'è ancora nulla da collegare → niente prompt "collega ora" a
-  // vuoto. I legami mancanti si fanno dopo col bottone Collega, quando i target esistono.
-  const relsToAsk = relationsToAsk((core.relazioni ?? {})[category], questions.map((q) => q.field))
-    .filter((r) => notesByCategory(r.category).length > 0);
-  if (relsToAsk.length) {
-    const connect = await tp.system.suggester(
-      ["Sì, collega ora", "No, collego dopo (tab Collegamenti / Collega)"],
-      [true, false], false, `Collegare ${template.title} ad altre note ora?`
-    ) === true;
-    if (connect) {
-      for (const r of relsToAsk) {
-        const val = await chooseNotes(tp, { field: r.field, prompt: r.label, category: r.category, multi: r.multi }, false);
-        if (Array.isArray(val) ? val.length : val) captured[r.field] = val;
-      }
-    }
-  }
-
-  // Famiglia (classificazione a 2 livelli, opzionale): se la categoria ha famiglie,
-  // chiedila; la famiglia scelta può pre-compilare gli assi (campo `assi`). È il
-  // livello tematico "ampio"; l'archetipo sotto la rifinisce (e ha la precedenza).
-  const famiglie = categorySpec.famiglie ?? [];
-  let famiglia = "";
-  let preFamiglia = {};
-  if (famiglie.length) {
-    const chosen = await tp.system.suggester(
-      ["(nessuna)", ...famiglie.map((f) => withDesc(f.nome, f.descrizione))],
-      [null, ...famiglie], false,
-      `${categorySpec.famiglia_label ?? "Famiglia"} di ${template.title} (opzionale)`);
-    if (chosen) { famiglia = chosen.nome; preFamiglia = famigliaPreset(categorySpec, chosen.nome); }
-  }
-
-  // Archetipo (opzionale): se la categoria ha un catalogo, pre-compila i valori
-  // degli assi tematici + i tag 'profilo/*' coerenti. "(personalizzato)" salta.
-  const archetipi = (core.archetipi ?? {})[category] ?? [];
-  let preset = {};
-  let profiloTags = [];
-  if (archetipi.length) {
-    const chosen = await tp.system.suggester(
-      ["(personalizzato)", ...archetipi.map(a => a.nome)],
-      [null, ...archetipi], false, `Archetipo di ${template.title} (opzionale)`);
-    if (chosen) {
-      preset = presetValori(chosen);
-      profiloTags = (chosen.tag ?? []).map(t => `profilo/${t}`);
-    }
+  // Wizard MINIMALE: il modale chiede SOLO il nome e — se la categoria ha
+  // sottotipi — il `tipo`. Tutto il resto (campi, campi-sottotipo, relazioni,
+  // famiglia, archetipo, prosa) si compila DOPO, con calma, dentro la nota: i
+  // widget Meta Bind (infobox/⚙️ Opzioni), i bottoni Collega/Applica profilo e la
+  // toolbar «＋ Componenti». Creazione = lampo; la nota nasce snella e cresce a richiesta.
+  const subs = categorySpec.subtypes ?? [];
+  let tipo = template.default_type;
+  if (subs.length) {
+    // Display = nome + descrizione del sottotipo (subtype_profiles); valore = nome.
+    // Opzionale (req=false): X/Escape lascia il default_type senza annullare.
+    const profili = categorySpec.subtype_profiles ?? {};
+    const labels = subs.map((s) => withDesc(s, (profili[s] ?? {}).descrizione));
+    const v = await tp.system.suggester(labels, subs, false, `Tipo di ${template.title} (opzionale)`);
+    if (v) tipo = String(v);
   }
 
   const folderKey = categorySpec.folder ?? category;
   const folder = core.folders[folderKey] ?? core.folders[category] ?? "Inbox";
   await ensureFolder(folder);
   await tp.file.move(`${folder}/${name}`);
-  // Inverso reciproco sui target (link bidirezionale alla creazione, come Collega):
-  // l'entità nasce agganciata al grafo in entrambe le direzioni.
-  await writeInverses(core, category, name, captured);
 
   const session = activeSession();
   const data = {
     id: slugify(name),
     nome: name,
     categoria: category,
-    tipo: captured.tipo ?? template.default_type,
+    tipo,
     stato: "bozza",
-    mondo: captured.mondo ?? "",
+    mondo: "",
     connessioni: [],
     sessioni: session ? [`[[${session.basename}]]`] : [],
-    tags: ["gdr/bozza", ...profiloTags],
-    ...(famiglia ? { famiglia } : {}),
-    ...preFamiglia,
-    ...preset,
-    ...captured,
+    tags: ["gdr/bozza"],
   };
   if (category === "creatura") data.statblock = "inline";
   if (category === "sessione") {

@@ -19,12 +19,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 
 ## Tutte le voci
-```dataview
-table without id file.link as Nome, quando as "Quando", mondo as "Mondo"
-from ""
-where categoria = "evento" and stato != "archiviata"
-sort quando asc
-```
+![[Cronologia.base]]
 
 ## 🔥 Fronti caldi
 ```dataview
