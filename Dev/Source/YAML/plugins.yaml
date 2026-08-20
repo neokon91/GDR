@@ -23,8 +23,8 @@ plugins:
     repo: silentvoid13/Templater
     version: 2.20.6
     license: AGPL-3.0
-    critico: true
-    rompe: "I pulsanti «Crea» non funzionano: non puoi creare nuove note."
+    critico: false
+    rompe: "Fallback: la creazione e le azioni le gestisce ora il plugin GDR. Templater serve solo se costruisci col ripiego GDR_PLUGIN_BLOCKS=0."
   - id: dataview
     name: Dataview
     author: Michael Brenan

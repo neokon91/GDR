@@ -173,7 +173,16 @@ Il **mini-motore di istanziazione template** è nel plugin e valida dal vivo:
   `command gdr:crea-*`, e i bottoni-azione gestiti → `command gdr:<azione>` (invece di
   `templaterCreateNote`/`runTemplaterFile`).
 
-**Coda rimasta su Templater** (script `tp.user` ricchi, da migrare uno a uno): `genera`,
-`world_board`, `importa_mappa`, `importa_azgaar`, `genera_sito`, `sincronizza_pin`. Finché
-questi 6 bottoni usano `runTemplaterFile`, Templater resta bundlato. Migrati quelli (col
-`tpShim` già pronto, estendendo `tp.file.*` dove serve), Templater esce dal bundle.
+**Coda migrata → Templater ritirato (2026-08-20).** Anche gli ultimi 6 script `tp.user`
+(`genera`, `world_board`, `importa_mappa`, `importa_azgaar`, `genera_sito`, `sincronizza_pin`)
+sono comandi del plugin: usano solo `tp.config` + `tp.system.suggester` (coperti dal tpShim)
+e si auto-inseriscono/scrivono via `app` (non dipendono dal ritorno Templater). `_PLUGIN_ACTIONS`
+è ora completo → **0 bottoni su `runTemplaterFile`**. `templater-obsidian` → `critico: false`
+(come js-engine: fallback per l'opt-out `GDR_PLUGIN_BLOCKS=0`, non più essenziale).
+
+**Stato finale**: il vault di default gira interamente sul plugin `gdr` per creazione,
+azioni e display; Templater e js-engine restano bundlati solo come ripiego dell'opt-out.
+Plugin critici: dataview, meta-bind, tab-panels, statblocks, dice-roller, initiative-tracker.
+Provato dal vivo: creazione («Crea Nota Rapida»), azioni (Collega, Giro del mondo, Genera un
+nome via proxy tp.user), display+radar (Korbin), cruscotto DM. 462 test verdi. Branch
+`tier-b-plugin` (5 commit), non ancora mergeato in main.

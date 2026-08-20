@@ -67,13 +67,16 @@ def creation_buttons(core: dict[str, Any], templates: list[dict[str, Any]]) -> l
 
 # Azioni del dispatcher meta_actions che il plugin `gdr` espone come comandi nativi
 # (`gdr:<azione>`): a flag ON i bottoni le lanciano via comando invece che via Templater.
-# Fuori: le azioni che delegano a script tp.user ricchi (generatore/import/sito/world board)
-# + `sincronizza_pin`, che restano su Templater finché non migrate una a una.
+# Copre TUTTE le azioni del dispatcher — comprese quelle che delegano a script tp.user
+# (genera/importa/sito/world board), risolti dal proxy `tp.user` del tpShim del plugin.
+# Con questo set completo nessun bottone usa più Templater → Templater esce dal bundle.
 _PLUGIN_ACTIONS = {
     "riposo_lungo", "riposo_breve", "sali_di_livello", "usa_risorsa", "collega",
     "applica_profilo", "marca_canonico", "archivia", "aggiorna_encounter",
     "scaffold_statblock", "inizia_incontro", "avanza_fronte", "scatena_conseguenza",
     "tira_tabella", "turno_bastione", "inserisci_componente", "giro_del_mondo",
+    "genera", "sincronizza_pin", "importa_mappa", "importa_azgaar", "world_board",
+    "genera_sito",
 }
 
 

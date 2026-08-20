@@ -202,7 +202,13 @@ export default class GdrPlugin extends Plugin {
       { id: "tira_tabella", name: "Tira sulla tabella" },
       { id: "turno_bastione", name: "Turno di bastione" },
       { id: "inserisci_componente", name: "Aggiungi componente" },
+      { id: "genera", name: "Genera un nome (nota attiva)" },
+      { id: "sincronizza_pin", name: "Sincronizza i pin dalla mappa" },
+      { id: "importa_mappa", name: "Importa mappa (Watabou)" },
+      { id: "importa_azgaar", name: "Importa mappa (Azgaar)" },
       { id: "giro_del_mondo", name: "Giro del mondo", global: true },
+      { id: "world_board", name: "Genera il World Board", global: true },
+      { id: "genera_sito", name: "Genera il sito giocatori", global: true },
     ];
     for (const a of ACTIONS) {
       this.addCommand({

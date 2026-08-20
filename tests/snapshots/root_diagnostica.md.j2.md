@@ -25,7 +25,6 @@ renderDiagnostica
 >
 > | Plugin | Cosa non si vede senza |
 > |:--|:--|
-> | **Templater** | I pulsanti «Crea» non funzionano: non puoi creare nuove note. |
 > | **Dataview** | La Home e gli indici (Atlante, Cast, Fronti…) restano vuoti o come codice. |
 > | **Meta Bind** | I campi da compilare (slider, menu, testo) restano come codice grezzo. |
 > | **Tab Panels** | Le note a schede (Lore / Al tavolo / Collegamenti) appaiono come testo grezzo. |
