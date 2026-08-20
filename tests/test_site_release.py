@@ -717,12 +717,23 @@ def test_componenti_catalog_generation():
     assert render._component_applies(by_id["cronologia"], "luogo", CORE)
     assert not render._component_applies(by_id["cronologia"], "bioma", CORE)
     assert render._component_applies(by_id["tavolo"], "bioma", CORE)      # sempre
+    # 'mappa' via `categorie` esplicite: geografiche che non la bakeano (regno/bioma sì,
+    # luogo no — la incorpora nel suo tab Spazio).
+    assert render._component_applies(by_id["mappa"], "regno", CORE)
+    assert render._component_applies(by_id["mappa"], "bioma", CORE)
+    assert not render._component_applies(by_id["mappa"], "luogo", CORE)
+    # Ogni componente ha una `desc` (mostrata nel picker "label — desc").
+    for c in catalog:
+        assert c.get("desc"), c["id"]
     # Rendering non vuoto + marker della macro.
     env = render.jinja_env()
     tav = render._render_component(env, by_id["tavolo"], CORE, PLUGINS, "fazione")
     assert tav.strip() and "Condivisione coi giocatori" in tav
     clk = render._render_component(env, by_id["clock"], CORE, PLUGINS, "fazione")
     assert "renderClock" in clk
+    # 'mappa' rende il pannello renderMap per una categoria geografica.
+    mp = render._render_component(env, by_id["mappa"], CORE, PLUGINS, "regno")
+    assert "renderMap" in mp
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

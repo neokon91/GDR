@@ -37,8 +37,11 @@ async function inserisci_componente(tp, file) {
     new Notice("Tutti i componenti sono già nella nota.");
     return "";
   }
+  // Display "label — desc" (il DM sa cosa fa prima di aggiungerlo); il VALORE resta il
+  // componente. desc assente → solo label.
   const chosen = await tp.system.suggester(
-    missing.map((c) => c.label), missing, false, "Aggiungi componente");
+    missing.map((c) => (c.desc ? `${c.label} — ${c.desc}` : c.label)),
+    missing, false, "Aggiungi componente");
   if (!chosen) return "";
   const block = `${chosen.heading}\n${chosen.md}`;
   await app.vault.modify(file, applyComponent(content, block, chosen.heading));

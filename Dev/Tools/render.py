@@ -284,7 +284,8 @@ def write_componenti(env: Environment, core: dict[str, Any], plugins: dict[str, 
                if (SOURCE / "YAML" / "componenti.yaml").is_file() else [])
     out: dict[str, list[dict[str, str]]] = {}
     for category in core.get("categories", {}):
-        items = [{"id": comp["id"], "label": comp["label"], "heading": comp["heading"],
+        items = [{"id": comp["id"], "label": comp["label"], "desc": comp.get("desc", ""),
+                  "heading": comp["heading"],
                   "md": _render_component(env, comp, core, plugins, category)}
                  for comp in catalog if _component_applies(comp, category, core)]
         if items:

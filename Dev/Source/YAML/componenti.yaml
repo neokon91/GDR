@@ -10,6 +10,8 @@ purpose: >-
 # Campi:
 #   id       chiave stabile del componente
 #   label    etichetta mostrata nel suggester (con emoji)
+#   desc     descrizione breve mostrata nel picker ("label — desc"): il DM sa
+#            cosa fa prima di aggiungerlo
 #   macro    nome della macro in _macros.j2 da rendere
 #   arg      come chiamarla: 'category' (passa l'id-categoria) | 'none'
 #   heading  intestazione ## che avvolge il blocco inserito = MARKER anti-duplicato
@@ -22,30 +24,44 @@ purpose: >-
 componenti:
   - id: tavolo
     label: "🎲 Al tavolo"
+    desc: "la superficie giocabile — uso al tavolo, gancio, pressione, condivisione"
     macro: tavolo
     arg: category
     heading: "## 🎲 Al tavolo"
     quando: sempre
   - id: clock
     label: "⏳ Clock del fronte"
+    desc: "orologio a segmenti + conseguenza quando è pieno (solo i fronti)"
     macro: clock
     arg: none
     heading: "## ⏳ Fronte & clock"
     quando: fronte
   - id: carattere
     label: "📊 Carattere"
+    desc: "gli slider degli assi tematici + radar dell'indole"
     macro: carattere
     arg: category
     heading: "## 📊 Carattere"
     quando: assi
   - id: cronologia
     label: "🕰 Cronologia"
+    desc: "le tappe dell'entità attraverso le epoche (fondazione, ascesa, caduta…)"
     macro: cronologia
     arg: none
     heading: "## 🕰 Cronologia"
     quando: tappe
+  - id: mappa
+    label: "🗺 Mappa"
+    desc: "una mappa navigabile dal campo Mappa (import Azgaar/Watabou o disegno)"
+    macro: mappa
+    arg: none
+    heading: "## 🗺 Mappa"
+    # Geografiche che NON incorporano già una mappa (luogo/mondo la bakeano nei loro
+    # template bespoke): regno/cultura/bioma/ecosistema.
+    categorie: [regno, cultura, bioma, ecosistema]
   - id: vista
     label: "👁 Vista"
+    desc: "il pannello scheda dell'entità — «pronto al tavolo?» + «citato da»"
     macro: vista
     arg: none
     heading: "## 👁 Vista"
