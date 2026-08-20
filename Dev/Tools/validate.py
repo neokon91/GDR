@@ -679,6 +679,24 @@ def check() -> int:
                 elif block != canonical_rel:
                     errors.append(f"{js_name}: inverseRelation/reciprocalField diverge da _relations.js (sorgente unica) — risincronizza")
 
+    # JS — anti-drift degli HELPER PG CONDIVISI: mod/sigla/maxAtLevel/risorseAtLevel/
+    # scegliMulti hanno UNA sorgente canonica (_pg_shared.js); crea_pg.js e sali_pg.js
+    # (autonomi, niente require) ne tengono una COPIA fra i marker >>>pg-shared/<<<pg-shared.
+    # Impongo l'uguaglianza così creazione e level-up calcolano risorse/competenze identiche
+    # (prima erano scritti in due stili → drift silenzioso se se ne toccava uno solo).
+    pg_shared_path = JS_DIR / "_pg_shared.js"
+    if pg_shared_path.is_file():
+        pg_shared = marked_block(pg_shared_path.read_text(encoding="utf-8"), "pg-shared")
+        if pg_shared is None:
+            errors.append("_pg_shared.js: blocco pg-shared fra i marker mancante")
+        else:
+            for js_name in ("crea_pg.js", "sali_pg.js"):
+                block = marked_block(js_source(js_name), "pg-shared")
+                if block is None:
+                    errors.append(f"{js_name}: blocco pg-shared fra i marker // >>>pg-shared/<<<pg-shared mancante")
+                elif block != pg_shared:
+                    errors.append(f"{js_name}: helper PG condivisi divergono da _pg_shared.js (sorgente unica) — risincronizza")
+
     # Ogni field('<id>') usato nei Jinja deve esistere nel registro core.fields.
     # I partial (_*.j2) definiscono le macro, non le usano: vanno esclusi.
     for path in sorted(JINJA_DIR.glob("*.j2")):

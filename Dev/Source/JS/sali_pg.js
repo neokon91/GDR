@@ -7,9 +7,41 @@
 async function loadOpzioni() {
   return JSON.parse(await app.vault.adapter.read("z.automazioni/data/personaggio.json"));
 }
+// >>>pg-shared
+// Helper puri CONDIVISI fra crea_pg.js e sali_pg.js (creazione ↔ level-up): così le
+// risorse/competenze calcolate coincidono. Sorgente canonica: Dev/Source/JS/_pg_shared.js
+// — le copie fra i marker devono restare byte-identiche (imposto da validate.check).
 function mod(v) { const n = Number.parseInt(v, 10); return Math.floor(((Number.isFinite(n) ? n : 10) - 10) / 2); }
-function pfPerLivello(dado) { return Math.floor((Number(dado) || 8) / 2) + 1; } // media fissa (PHB)
 function sigla(s) { return String(s).charAt(0).toUpperCase() + String(s).slice(1); }
+function maxAtLevel(valori, liv) {
+  let m = 0;
+  for (const [k, v] of Object.entries(valori || {})) if (Number(k) <= liv) m = Math.max(m, Number(v) || 0);
+  return m;
+}
+// Risorse di classe attive al livello `liv`: max da CARATTERISTICA (mod, min 1), da
+// TABELLA SRD (`valori`) o `max` fisso (homebrew); la ricarica passa a breve dalla soglia
+// `ricarica_breve_da_livello`. Esclude i max 0. → frontmatter `risorse_pg`.
+function risorseAtLevel(risorse, liv, scores) {
+  return (risorse || []).map(r => {
+    let max;
+    if (r.caratteristica) max = Math.max(1, mod((scores || {})[r.caratteristica]));
+    else if (r.valori) max = maxAtLevel(r.valori, liv);
+    else max = Number(r.max) || 0;
+    const ric = (r.ricarica_breve_da_livello && liv >= r.ricarica_breve_da_livello) ? "breve" : r.ricarica;
+    return { id: r.id, label: r.label, max, ric, icona: r.icona || "" };
+  }).filter(r => r.max > 0);
+}
+async function scegliMulti(tp, titolo, pool, n) {
+  const scelte = [], disp = [...(pool || [])];
+  for (let i = 0; i < (n || 0) && disp.length; i++) {
+    const v = await tp.system.suggester(disp, disp, false, `${titolo} (${i + 1}/${n})`);
+    if (v == null) break;
+    scelte.push(v); disp.splice(disp.indexOf(v), 1);
+  }
+  return scelte;
+}
+// <<<pg-shared
+function pfPerLivello(dado) { return Math.floor((Number(dado) || 8) / 2) + 1; } // media fissa (PHB)
 
 // --- Ponte HOMEBREW→motore (note del vault fuse nelle opzioni SRD a runtime) ---
 // Le 8 funzioni nel blocco qui sotto sono una COPIA byte-identica di
@@ -188,16 +220,6 @@ function sottoclasseHomebrew(classeId, classeLabel) {
   return out;
 }
 
-async function scegliMulti(tp, titolo, pool, n) {
-  const scelte = [], disp = [...(pool || [])];
-  for (let i = 0; i < (n || 0) && disp.length; i++) {
-    const v = await tp.system.suggester(disp, disp, false, `${titolo} (${i + 1}/${n})`);
-    if (v == null) break;
-    scelte.push(v); disp.splice(disp.indexOf(v), 1);
-  }
-  return scelte;
-}
-
 // --- Multiclasse 2024 (funzioni pure, testate isolate) ------------------------
 const CARS = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
 
@@ -269,27 +291,6 @@ function pactSlots(breakdown, classiOpt) {
   }
   if (!cls || liv <= 0) return null;
   return cls.pact[Math.min(liv, cls.pact.length) - 1] || null;
-}
-
-// Max di una risorsa a un livello (colonna SRD monotòna → max sui livelli ≤ liv).
-function maxAtLevel(valori, liv) {
-  let m = 0;
-  for (const [k, v] of Object.entries(valori || {})) if (Number(k) <= liv) m = Math.max(m, Number(v) || 0);
-  return m;
-}
-
-// Risorse di classe attive al livello `liv` (gemella di crea_pg.risorseAtLevel): max da
-// CARATTERISTICA (mod, min 1), da TABELLA SRD (`valori`) o `max` fisso (homebrew); la
-// ricarica passa a breve dalla soglia `ricarica_breve_da_livello`. Esclude i max 0.
-function risorseAtLevel(risorse, liv, scores) {
-  return (risorse || []).map(r => {
-    let max;
-    if (r.caratteristica) max = Math.max(1, mod((scores || {})[r.caratteristica]));
-    else if (r.valori) max = maxAtLevel(r.valori, liv);
-    else max = Number(r.max) || 0;
-    const ric = (r.ricarica_breve_da_livello && liv >= r.ricarica_breve_da_livello) ? "breve" : r.ricarica;
-    return { id: r.id, label: r.label, max, ric, icona: r.icona || "" };
-  }).filter(r => r.max > 0);
 }
 
 // Risorse da TUTTE le classi del breakdown ai rispettivi livelli, deduplicate per id
