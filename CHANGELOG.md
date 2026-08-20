@@ -13,14 +13,34 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 - **ASI «+2 a una caratteristica» non azzera più un `concede` dello stesso livello** (`sali_pg.js`):
   il ramo leggeva solo il frontmatter, scartando un bonus-punteggio appena concesso da un
   privilegio-classe homebrew; ora legge il valore aggiornato (come «+1 a due caratteristiche»).
-- **`build_site.py` — `parse_note`**: divide il frontmatter solo sulle righe-delimitatore `---`
-  (non sul `---` come sottostringa) — un `---` dentro un valore non corrompe più il corpo né può
-  far sparire una nota dal sito giocatori.
+- **Bug trovati dal vivo in Obsidian 1.12** (non intercettabili dai test headless): le
+  Bases cards col `groupBy` in formato-oggetto non documentato rompevano l'**intera** `.base`
+  («groupBy deve essere un object») → rimosso; mismatch label↔azione del bottone **Componenti**
+  → allineato; `tira-tabella` corretto. Aggiunti check anti-drift a copertura.
 
 ### Rimosso
+- **Via Python del sito ritirata**: `build_site.py` (~560 righe, seconda implementazione tenuta
+  in parità a mano) e `SiteJinja/{index,page}.html.j2`. Il sito dei giocatori si genera **solo
+  in-app** da `genera_sito.js` (unico esportatore); sfilati i riferimenti da `render.py` (`--site`),
+  `release.py`, `publish_itch.py` (niente più canale/zip `GDR-site`) e `package.json` (script `site`).
+  `site.css` resta (la usa `genera_sito.js`). Test riscritti a test diretti di `genera_sito.js` via node.
+- **Callout `segreto`** (pelle viola mai emessa: 0 usi): un solo trattamento visivo per «ciò che i
+  PG non sanno» — i segreti usano `[!rivela|segreto]`. Rimossi anche i controlli doppi (`Stato` solo
+  nell'infobox; `Rivelazione` editabile solo in ⚙️ Opzioni, read-only nel componente Al tavolo).
 - Macro Jinja morta `confronto_assi()` (mai chiamata; il manuale incolla già il suo blocco `renderAxesCompare`).
 
 ### Aggiunto
+- **Zip turnkey riproducibile** (`fetch_plugins.py`): lo zip di release scarica i plugin community
+  **pinnati** (versione fissa) e li impacchetta nel vault, con gate sui plugin critici → il vault
+  parte già funzionante senza installazione manuale.
+- **Note modulari + componenti a richiesta**: corpo-nota snello per default; i blocchi opzionali si
+  aggiungono col bottone **＋ Componenti** (picker con **descrizione** per componente, così il DM sa
+  cosa fa prima di aggiungerlo). Nuovo componente **🗺 Mappa** per le entità geografiche che non la
+  incorporano già (regno/cultura/bioma/ecosistema).
+- **Viste Bases cards** al posto delle tabelle Dataview negli hub (viste `.base` native, per-vista).
+- **📖 Glossario dei termini di gioco** (`Indici/Glossario`): quick-ref unico di Condizioni (15),
+  Maestrie delle armi (8) e Ordini di bastione (7), riusando le macro esistenti; linkato da
+  **[[Guida al combattimento]]** e dal Manuale.
 - **Tessuto connettivo del grafo di mondo — ~95 relazioni tipizzate + reciproci (copertura ×4.6)**
   (`Dev/Source/YAML/entities/*`, `assi/*`): pass di coerenza worldbuilder su tutte le **45 entità**.
   I `reciprocal` passano da **30 a 140** (su 283 legami): ogni relazione identitaria è ora navigabile
@@ -127,6 +147,17 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   affidabilità d'indizio, pena/ambito d'editto, dottrina d'esercito) e «rituale» un sì/no.
 
 ### Migliorato
+- **Bottoni de-gergati** (label == title == file mantenuto, con check anti-drift): «Marca Canonico»→
+  «Segna come canonico», «Aggiorna encounter»→«Aggiorna l'incontro», «Genera (locale)»→«Genera un
+  nome», «Prepara il gruppo (IT)»→«Schiera il gruppo»; menzioni in prosa allineate.
+- **`Iconize`→`Iconic`**: sostituito il plugin icone-cartella deprecato (2025) col successore
+  mantenuto (le emoji-categoria restano usate a costo-zero nei titoli).
+- **`common.ROOT_NOTES` single-source** (nome→jinja) delle note fisse generate: la usano sia
+  `render_notes` (generazione) sia `generated_note_names` (clean) → fixa un drift storico per cui
+  Diagnostica/Missioni/Guida al combattimento/Oracolo erano generate ma non ripulite da `clean()`.
+- **Accenti-categoria** dati alle 6 categorie che ne erano prive (mondo/esercito/missione/editto/
+  calamita/rotta); titolo infobox su `--text-normal` (contrasto ok anche su yellow/cyan);
+  callout `opzioni` più chiaro in dark; aggiunto il CSS mancante del clock.
 - **Generatore — liste molto più ampie**: le tabelle delle categorie-staple sono ~raddoppiate —
   **PNG** (ruolo 15→35, aspetto/tratto/manierismo/vuole/segreto), **gancio** (chi/cosa/cosa_capita/
   twist) e **diceria** (soggetto/fatto/fatto2) → molta più varietà, meno ripetizione. Stesso pattern

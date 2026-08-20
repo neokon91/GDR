@@ -64,8 +64,9 @@ veri. Falla **una volta, dall'alto in basso, su una copia pristina**.
       end-to-end → luoghi + segnaposto
 
 ## §5 — Sito giocatori (il differenziatore, player-facing)
-- [ ] `npm run site -- --reveal incontrato` → il portale si genera, **spoiler-free**: una nota `segreto`
-      **non** compare; una `visibilita: dm` **mai**
+- [ ] **[[Occhi del giocatore]] → «Genera sito»** (in-app, livello *incontrato*) → il portale si genera
+      in `Sito-giocatori/`, **spoiler-free**: una nota `rivelazione: segreto` **non** compare; una
+      `visibilita: dm` **mai**
 
 ## §6 — Esito
 - [ ] **Zero codice-grezzo** lungo tutto il percorso (il segnale n.1 di integrazione rotta)

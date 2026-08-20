@@ -9,7 +9,7 @@ salvando un frontmatter strutturato con **ID stabili** (non label).
 ```
 SRD JSON (Dev/Source/SRD/srd_5_2_1_{classes,species,backgrounds,feats}.json)
   +  pg_rules.yaml  +  system.yaml (caratteristiche, abilita)
-        │  build_personaggio.py (converter)
+        │  build_personaggio (converter)
         ▼
   z.automazioni/data/personaggio.json   (opzioni del rules-engine)
         │  crea_pg.js (wizard Templater, a runtime)
@@ -17,7 +17,7 @@ SRD JSON (Dev/Source/SRD/srd_5_2_1_{classes,species,backgrounds,feats}.json)
   frontmatter della nota PG  ──▶  pg.md.j2 / macro scheda_pg_rules()  (presentazione)
 ```
 
-## 1. Converter (`build_personaggio.py`)
+## 1. Converter (`build_personaggio`)
 
 Fonde lo **strutturato** dell'SRD con l'**overlay curato** e *parsa la prosa*
 dove serve. Output `personaggio.json`:
