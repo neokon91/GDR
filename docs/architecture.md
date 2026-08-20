@@ -99,9 +99,12 @@ monolite): carica il modello e delega.
    `componenti.yaml` in `z.automazioni/data/componenti.json` (catalogo dei componenti a
    richiesta, letto da `meta_actions.inserisci_componente` — bottone «＋ Componenti»).
 3. `render_notes(jinja_env(), …)` — rende ogni template Jinja → `z.modelli/`, le azioni,
-   Home/LEGGIMI, le pagine-indice e le dashboard auto **Ponte Mondo↔Sistema**, **Fronti**,
-   **Rete del mondo**, **Economia** e **Geografia** (`Indici/`). Ritorna `{target: testo}`.
-   Poi `write_bases()` (viste `.base`).
+   e le **note fisse** (`common.ROOT_NOTES`, single-source nome→jinja): Home/LEGGIMI/
+   Manuale/Diagnostica + gli hub in `Indici/` (**Ponte Mondo↔Sistema**, **Fronti**, **Rete
+   del mondo**, **Economia**, **Geografia**, **Missioni**, **Guida al combattimento**,
+   **Oracolo**, **Glossario** dei termini di gioco…). `generated_note_names()` deriva da
+   `ROOT_NOTES` → `clean()` rimuove ESATTAMENTE ciò che si genera (niente più drift).
+   Ritorna `{target: testo}`. Poi `write_bases()` (viste `.base`).
 4. `build_srd(core)` → albero `SRD/` (prima della config: i bookmark referenziano `SRD/Indice`).
 5. `write_obsidian_config()` — config `.obsidian` **non distruttiva** (merge), un writer
    per plugin: community-plugins, Templater, Dataview, Meta Bind (input+button),

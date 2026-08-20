@@ -54,8 +54,30 @@ GENERATED_DIRS = (*HIDDEN_DIRS, "SRD")
 # Cartella delle pagine-indice (hub): tiene la radice pulita.
 INDEX_DIR = "Indici"
 
-# Note generate alla radice del vault (non contenuti utente).
-GENERATED_NOTES = ("Home.md", "LEGGIMI.md", "Manuale.md", "THIRD-PARTY-LICENSES.md", "Crea il tuo mondo.md")
+# SINGLE-SOURCE delle note FISSE generate (nome → template Jinja): le note di radice
+# e gli hub-per-dominio in INDEX_DIR (NON le pagine di pages.yaml, rese a parte). La
+# usano SIA render_notes (per generarle) SIA generated_note_names (perché clean() le
+# rimuova tutte): un'unica lista evita il drift storico (note generate ma mai ripulite).
+ROOT_NOTES = (
+    ("Home.md", "home.md.j2"),
+    ("LEGGIMI.md", "leggimi.md.j2"),
+    ("Manuale.md", "manuale.md.j2"),
+    ("THIRD-PARTY-LICENSES.md", "third_party_licenses.md.j2"),
+    ("Crea il tuo mondo.md", "crea_il_tuo_mondo.md.j2"),
+    ("Diagnostica.md", "diagnostica.md.j2"),
+    (f"{INDEX_DIR}/Ponte Mondo-Sistema.md", "ponte.md.j2"),
+    (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2"),
+    (f"{INDEX_DIR}/Rete del mondo.md", "rete.md.j2"),
+    (f"{INDEX_DIR}/Economia.md", "economia.md.j2"),
+    (f"{INDEX_DIR}/Geografia.md", "geografia.md.j2"),
+    (f"{INDEX_DIR}/Missioni.md", "missioni.md.j2"),
+    (f"{INDEX_DIR}/Occhi del giocatore.md", "occhi_giocatore.md.j2"),
+    (f"{INDEX_DIR}/Guida al combattimento.md", "guida_combattimento.md.j2"),
+    (f"{INDEX_DIR}/Oracolo.md", "oracolo.md.j2"),
+    (f"{INDEX_DIR}/Glossario.md", "glossario.md.j2"),
+)
+# Compat storica (re-export/test): i soli nomi delle note generate.
+GENERATED_NOTES = tuple(name for name, _ in ROOT_NOTES)
 
 # Lo schema 5.5e vive in system.yaml, separato dall'ontologia di core.yaml; lo
 # schema per-entità in entities/*.yaml. Tutto si fonde in un unico 'core'.
@@ -232,12 +254,10 @@ def load_pages() -> list[dict[str, Any]]:
 
 
 def generated_note_names() -> list[str]:
-    """Note generate: Home/LEGGIMI alla radice + una pagina-indice per voce di
-    pages.yaml (in INDEX_DIR/). Cosi' clean() le rimuove senza nomi hard-coded."""
-    return [*GENERATED_NOTES, f"{INDEX_DIR}/Ponte Mondo-Sistema.md", f"{INDEX_DIR}/Fronti.md",
-            f"{INDEX_DIR}/Rete del mondo.md", f"{INDEX_DIR}/Economia.md", f"{INDEX_DIR}/Geografia.md",
-            f"{INDEX_DIR}/Occhi del giocatore.md",
-            *(f"{INDEX_DIR}/{p['file']}.md" for p in load_pages())]
+    """Tutte le note generate FISSE (ROOT_NOTES: radice + hub in INDEX_DIR) + una
+    pagina-indice per voce di pages.yaml. clean() le rimuove tutte: derivare da
+    ROOT_NOTES garantisce che ogni nota resa da render_notes sia anche ripulita."""
+    return [name for name, _ in ROOT_NOTES] + [f"{INDEX_DIR}/{p['file']}.md" for p in load_pages()]
 
 
 def template_folder(core: dict[str, Any], category: str) -> str:

@@ -156,6 +156,10 @@ Nel template **Creatura** trovi **due tab**: *Statblock 5.5e* (dove inserisci i 
 via `monster:` — non riscrivi nulla). Per cambiare lo stile di un singolo blocco, modifica la
 riga `layout:`. Entrambi i layout IT sono vendorizzati e installati in Fantasy Statblocks.
 
+Per il **richiamo rapido** di condizioni, maestrie delle armi e ordini di bastione (in un
+posto solo): **[[Glossario|📖 Glossario dei termini di gioco]]**; per il flusso di uno scontro
+vedi **[[Guida al combattimento]]**.
+
 ## 10. Radar degli assi + confronto fra entità (JS Engine)
 Il componente **Carattere** (aggiungilo da **＋ Componenti**; entità con ≥3 assi) affianca
 agli slider un **radar** che disegna gli assi tematici della nota (richiede **JS Engine**).

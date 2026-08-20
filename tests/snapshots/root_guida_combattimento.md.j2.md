@@ -45,3 +45,7 @@ Una creatura con solo il **Grado di sfida (GS)**: nel tab *Statblock 5.5e* premi
 dal GS** → riempie AC/PF/iniziativa + **multiattacco** e un attacco col bonus/danno tipici
 della sua fascia. Il pannello **📐 Coerenza GS** segnala se i numeri (rifiniti a mano)
 restano dentro il GS dichiarato. Poi aggiungi la creatura al tracker come le altre.
+
+## 5. Richiamo rapido dei termini
+Condizioni, maestrie delle armi e ordini di bastione — tutti in un posto solo:
+**[[Glossario|📖 Glossario dei termini di gioco]]**.

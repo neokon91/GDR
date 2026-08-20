@@ -23,6 +23,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from common import (  # noqa: F401 (re-export per i test/usi storici)
     GENERATED_DIRS,
     GENERATED_NOTES,
+    ROOT_NOTES,
     HIDDEN_DIRS,
     INDEX_DIR,
     JINJA_DIR,
@@ -384,20 +385,9 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
         write_text(VAULT / action["target"], text)
         rendered[action["target"]] = text
 
-    for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2"),
-                             ("Manuale.md", "manuale.md.j2"),
-                             ("THIRD-PARTY-LICENSES.md", "third_party_licenses.md.j2"),
-                             ("Crea il tuo mondo.md", "crea_il_tuo_mondo.md.j2"),
-                             ("Diagnostica.md", "diagnostica.md.j2"),
-                             (f"{INDEX_DIR}/Ponte Mondo-Sistema.md", "ponte.md.j2"),
-                             (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2"),
-                             (f"{INDEX_DIR}/Rete del mondo.md", "rete.md.j2"),
-                             (f"{INDEX_DIR}/Economia.md", "economia.md.j2"),
-                             (f"{INDEX_DIR}/Geografia.md", "geografia.md.j2"),
-                             (f"{INDEX_DIR}/Missioni.md", "missioni.md.j2"),
-                             (f"{INDEX_DIR}/Occhi del giocatore.md", "occhi_giocatore.md.j2"),
-                             (f"{INDEX_DIR}/Guida al combattimento.md", "guida_combattimento.md.j2"),
-                             (f"{INDEX_DIR}/Oracolo.md", "oracolo.md.j2")):
+    # Note fisse (radice + hub INDEX_DIR): single-source ROOT_NOTES, così ciò che si
+    # genera qui è ESATTAMENTE ciò che clean() rimuove (generated_note_names deriva da ROOT_NOTES).
+    for name, jinja_name in ROOT_NOTES:
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
         write_text(VAULT / name, text)
         rendered[name] = text
