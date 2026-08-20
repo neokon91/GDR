@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 from pathlib import Path
@@ -151,7 +152,7 @@ def crea_wrapper_js(template: dict[str, Any]) -> str:
 def jinja_env() -> Environment:
     """Ambiente Jinja della pipeline. StrictUndefined: un campo mancante è un
     errore (non una stringa vuota); trim/lstrip_blocks tengono pulito l'output."""
-    return Environment(
+    env = Environment(
         loader=FileSystemLoader(str(JINJA_DIR)),
         undefined=StrictUndefined,
         autoescape=False,
@@ -159,6 +160,13 @@ def jinja_env() -> Environment:
         trim_blocks=True,
         lstrip_blocks=True,
     )
+    # Flag Tier B: se attivo, i pannelli-vista/radar emettono un blocco ```gdr (reso dal
+    # plugin `gdr`) invece del blocco js-engine che delega a boot.mjs. **Default ON**: il
+    # plugin è la via principale del display; js-engine resta un'opzione di ripiego.
+    # Disattiva con GDR_PLUGIN_BLOCKS=0 (torna a js-engine). NB: i wizard Templater
+    # (`<% tp.user.crea_X %>`) NON dipendono da questo flag.
+    env.globals["GDR_PLUGIN_BLOCKS"] = os.environ.get("GDR_PLUGIN_BLOCKS", "1") != "0"
+    return env
 
 
 def widget_options() -> dict[str, dict[str, Any]]:
@@ -416,6 +424,30 @@ def scaffold_folders(core: dict[str, Any]) -> None:
     (VAULT / MEDIA_FOLDER).mkdir(parents=True, exist_ok=True)
 
 
+def install_authored_plugins() -> None:
+    """Copia i plugin AUTORIALI (non fetchati da GitHub) nel vault e li abilita. Oggi: il
+    plugin `gdr` (motore viste/azioni, Tier B) da `plugin/`. Idempotente e non-distruttivo.
+    Se il plugin non è ancora buildato (`plugin/main.js` assente), avvisa e salta — così una
+    build senza toolchain JS resta valida (coesistenza col percorso js-engine)."""
+    src = ROOT / "plugin"
+    if not (src / "main.js").is_file():
+        print("Plugin gdr non buildato (plugin/main.js assente): salto. "
+              "`npm run build:plugin` per includerlo nel vault.")
+        return
+    dest = VAULT / ".obsidian" / "plugins" / "gdr"
+    dest.mkdir(parents=True, exist_ok=True)
+    for name in ("main.js", "manifest.json", "styles.css"):
+        f = src / name
+        if f.is_file():
+            shutil.copy2(f, dest / name)
+    cp = VAULT / ".obsidian" / "community-plugins.json"
+    enabled = json.loads(cp.read_text(encoding="utf-8")) if cp.is_file() else []
+    if "gdr" not in enabled:
+        enabled.append("gdr")
+        cp.write_text(json.dumps(enabled, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print("Plugin gdr installato in .obsidian/plugins/gdr/ e abilitato.")
+
+
 def build() -> dict[str, str]:
     """Orchestratore della build: carica il modello, scrive dati+script del JS
     Engine, rende tutte le note, genera Bases e SRD, scrive la config .obsidian
@@ -443,6 +475,7 @@ def build() -> dict[str, str]:
         print(f"SRD: {srd_count} voci generate in SRD/.")
 
     write_obsidian_config(VAULT / ".obsidian", core, plugins, templates, pages)
+    install_authored_plugins()
     scaffold_folders(core)
     return rendered
 

@@ -249,13 +249,9 @@
    clock_dim mostra solo un suggerimento. #}
 {% macro clock() -%}
 **⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti · scadenza (opz.) `INPUT[number:scadenza]` giri
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
+{{ vista("renderClock") }}
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
+{{ vista("renderPressioni") }}
 
 > [!warning]- Conseguenza (quando il clock è pieno)
 > {{ field('conseguenza', label=false) }}
@@ -320,9 +316,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    della nota e mostra gli archetipi che combaciano; il bottone 'Applica profilo'
    scrive i tag 'profilo/*' in frontmatter senza residui (meta_actions). #}
 {% macro profilo() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProfilo");
-```
+{{ vista("renderProfilo") }}
 
 > [!tip] Profilo
 > Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
@@ -332,9 +326,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    entità collegate (assi con lo stesso id) e fa emergere le tensioni notevoli —
    contrasti forti, rivali dal profilo identico. Spunti narrativi. renderCoerenza. #}
 {% macro coerenza() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
-```
+{{ vista("renderCoerenza") }}
 {%- endmacro %}
 
 {# Scheda di sistema: campi STRUTTURATI per categoria (core.scheda) come callout
@@ -387,18 +379,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 {# Memoria (il mondo ricorda): gli eventi (specie le conseguenze) che hanno toccato questa
    nota, in ordine cronologico. Read-only; vuoto se non c'è storia. views.renderMemoria. #}
 {% macro memoria() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
-```
+{{ vista("renderMemoria") }}
 {%- endmacro %}
 
 {# Rete di collegamenti (JS Engine): le relazioni tipizzate forward della nota
    risolte in TABELLA (Relazione/Nota/Tipo/Pressione). Vuoto se la nota non ha
    ancora collegamenti tipizzati. Logica in views.renderConnessioni. #}
 {% macro rete() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
-```
+{{ vista("renderConnessioni") }}
 {%- endmacro %}
 
 {# Ponte Calendarium ('tempo del mondo'): campi fc-* editabili che il plugin
@@ -478,9 +466,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > Risorse di classe (Ki/Ira/Incanalare/…): `BUTTON[usa-risorsa]` (spendi 1 uso) — le barre 🩸 sopra mostrano i rimasti; 🌙 si ricaricano al riposo breve, ☀ solo al lungo.
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderRisorsePG");
-```
+{{ vista("renderRisorsePG") }}
 
 > [!note]- Slot incantesimo (caster) — slot a livello + Patto del Warlock
 > | Liv | Max | Spesi | Rimasti |
@@ -517,9 +503,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    e non vedrebbe module.exports), risolve dv/page e fa engine.markdown.create.
    page=null (Dataview assente o nessuna nota attiva) -> messaggio di fallback. #}
 {% macro vista(fn='renderEntityPanel') -%}
+{%- if GDR_PLUGIN_BLOCKS is defined and GDR_PLUGIN_BLOCKS -%}
+```gdr
+{{ fn }}
+```
+{%- else -%}
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "{{ fn }}");
 ```
+{%- endif -%}
 {%- endmacro %}
 
 {# Incantesimi del PG (JS Engine): trucchetti + incantesimi noti/preparati
@@ -527,9 +519,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    residui per livello. Scala 1-20 (sostituisce il callout fisso al 1º livello).
    Vuoto per i non incantatori. Logica in views.renderIncantesimi. #}
 {% macro incantesimi() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderIncantesimi");
-```
+{{ vista("renderIncantesimi") }}
 {%- endmacro %}
 
 {# Tratti di specie del PG (JS Engine): le sezioni SRD strutturate della specie
@@ -537,27 +527,21 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    così la scheda mostra i dettagli giocabili senza saltare alla nota SRD. Da
    personaggio.json (build_personaggio porta le `sezioni`). views.renderSpecieTratti. #}
 {% macro tratti_specie_panel() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderSpecieTratti");
-```
+{{ vista("renderSpecieTratti") }}
 {%- endmacro %}
 
 {# Difficoltà incontro (JS Engine): budget XP 2024 del gruppo (pg_livello × pg_numero)
    vs XP totale delle creature collegate (gs/pe) -> etichetta difficoltà + la lista
    pronta per il blocco `encounter`. Logica in views.renderEncounter. #}
 {% macro difficolta() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEncounter");
-```
+{{ vista("renderEncounter") }}
 {%- endmacro %}
 
 {# Quick-ref condizioni 5.5e (JS Engine): callout pieghevole con le 15 condizioni
    (nome + effetti compatti) per il richiamo rapido al tavolo. Da core.condizioni
    (note SRD), logica in views.renderCondizioni. #}
 {% macro condizioni() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCondizioni");
-```
+{{ vista("renderCondizioni") }}
 {%- endmacro %}
 
 {# Quick-ref ordini di bastione 2024 (statico): i 7 ordini che una struttura
@@ -587,71 +571,55 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    proprietà (nome + effetto), per il richiamo rapido al tavolo. Da core.maestrie
    (system.yaml). Logica in views.renderMaestrie. #}
 {% macro maestrie() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMaestrie");
-```
+{{ vista("renderMaestrie") }}
 {%- endmacro %}
 
 {# Attacchi con maestria (scheda PG): per ogni arma di cui il PG ha padronanza,
    tiro per colpire (mod arma + competenza) + danni + effetto della maestria. Le
    armi vengono dal catalogo di personaggio.json. Logica in views.renderAttacchi. #}
 {% macro attacchi() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAttacchi");
-```
+{{ vista("renderAttacchi") }}
 {%- endmacro %}
 
 {# Albero evolutivo: i nodi della progressione (proprietà `nodi`, righe
    "grado | nome | prerequisito | effetto") resi a gradi. Logica in renderAlbero. #}
 {% macro albero() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAlbero");
-```
+{{ vista("renderAlbero") }}
 {%- endmacro %}
 
 {# Profilo del sottotipo (JS Engine): i campi/clock/evoluzione DEDICATI al `tipo`
    scelto (core.categories[cat].subtype_profiles), reattivi al tipo. Logica in
    views.renderTipoProfilo. Vuoto se il sottotipo non ha profilo. #}
 {% macro tipo_profilo() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
-```
+{{ vista("renderTipoProfilo") }}
 {%- endmacro %}
 
 {# Cronologia (JS Engine): le tappe dell'entità attraverso le epoche (proprietà
    `tappe`, righe "quando | stato") rese come linea di vita. Logica in renderTappe.
    Solo per le entità durature (core.tappe_categorie). #}
 {% macro cronologia() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
-```
+{{ vista("renderTappe") }}
 {%- endmacro %}
 
 {# Stato del Mondo (JS Engine, dashboard Fronti): tutti i Fronti (clock_dim)
    ordinati per imminenza = clock + spinte dal grafo. Espone la pressione del grafo
    a colpo d'occhio per la prep di sessione. Logica in views.renderStatoMondo. #}
 {% macro stato_mondo() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderStatoMondo");
-```
+{{ vista("renderStatoMondo") }}
 {%- endmacro %}
 
 {# Proiezione (motore J, dashboard Fronti): dove va il mondo al ritmo attuale, PRIMA di
    premere «Avanza il mondo». Dry-run read-only del tick (ETA per Fronte + onda anticipata).
    Logica in views.renderProiezione. #}
 {% macro proiezione() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProiezione");
-```
+{{ vista("renderProiezione") }}
 {%- endmacro %}
 
 {# Tensioni latenti (motore G, dashboard Fronti): il grafo propone i propri Fronti —
    rivalità inerti, risorse contese, profezie dormienti, confini caldi. Read-only.
    Logica in views.renderTensioni. #}
 {% macro tensioni() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTensioni");
-```
+{{ vista("renderTensioni") }}
 {%- endmacro %}
 
 {# Tema natale (personalità psico-astrale, #9): scelto un segno si deriva
@@ -660,9 +628,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 {% macro tema_natale() -%}
 > [!abstract] Tema natale
 > Segno: {{ field('segno', label=false) }} · Arcano: {{ field('arcano', label=false) }}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTemaNatale");
-```
+{{ vista("renderTemaNatale") }}
 {%- endmacro %}
 
 {# Chi usa al tavolo un'entità-regola del vault (classe/specie/background): i PG/PNG il
@@ -700,9 +666,7 @@ sort tipo asc, file.name asc
 > - **Immagine caricata da te:** piazza i pin (*Shift+clic*), linkali ai `[[Luoghi]]`, poi `BUTTON[sincronizza-pin]` riscrive le **coordinate** delle note dai pin → distanze in linea d'aria e *Dintorni* si calcolano da sé.
 > - **Disegna tu:** `BUTTON[disegna-mappa]` (Excalidraw → `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con livelli/overlay).
 > - **Hexcrawl giocabile:** apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, tiri incontri). Le cartelle sono già puntate alle tue note (Towns/Dungeons→`Mondi/Luoghi`, Factions→`Mondi/Fazioni`, Quests→`Mondi/Missioni`, Regions→`Mondi/Regni`). *Al 1° avvio del suo wizard scegli «Don't show again».*
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
-```
+{{ vista("renderMap") }}
 {%- endmacro %}
 
 {# Dintorni (geografia spaziale, luogo): regione contenitore, luoghi contenuti,
@@ -710,27 +674,21 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    viaggio. La vista "dove sono / come ci si muove" senza una mappa disegnata.
    Logica in views.renderDintorni. #}
 {% macro dintorni() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderDintorni");
-```
+{{ vista("renderDintorni") }}
 {%- endmacro %}
 
 {# Viaggio (luogo): destinazioni dirette (rotte+confini) con tempo (distanza ÷ passo
    del mondo) e rischio (pressione), più incontri/insidie del luogo. Sistema di
    viaggio rotte×tempo×pericolo. Logica in views.renderViaggio. #}
 {% macro viaggio() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderViaggio");
-```
+{{ vista("renderViaggio") }}
 {%- endmacro %}
 
 {# Catena causale (timeline causale, evento): perché è successo (cause a monte,
    causato_da) e cosa ne è derivato (conseguenze a valle), ricostruite
    ricorsivamente nelle due direzioni. Logica in views.renderCausalita. #}
 {% macro causalita() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCausalita");
-```
+{{ vista("renderCausalita") }}
 {%- endmacro %}
 
 {# Progressione PG (JS Engine): privilegi acquisiti al livello + anteprima del
@@ -738,9 +696,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    livello' (statico, processato da Meta Bind) applica PF/competenza/slot e guida
    le scelte (ASI/talento/sottoclasse/incantesimi) via meta_actions -> sali_pg. #}
 {% macro progressione() -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProgressione");
-```
+{{ vista("renderProgressione") }}
 
 > [!tip] Avanza di livello
 > Applica PF/competenza/slot e guida le scelte (ASI/talento/sottoclasse/incantesimi): `BUTTON[sali-di-livello]`
@@ -753,7 +709,13 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    rende sempre. Si ridisegna alla riapertura/ri-render della nota, non live mentre
    muovi lo slider (le etichette-valore degli assi restano comunque reattive via VIEW). #}
 {% macro grafico_assi(category) -%}
+{%- if GDR_PLUGIN_BLOCKS is defined and GDR_PLUGIN_BLOCKS -%}
+```gdr
+radar {{ category }}
+```
+{%- else -%}
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "{{ category }}", component);
 ```
+{%- endif -%}
 {%- endmacro %}

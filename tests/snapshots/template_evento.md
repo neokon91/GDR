@@ -36,8 +36,8 @@
 ````tabs
 --- 📖 Lore
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```gdr
+renderTipoProfilo
 ```
 > [!abstract] Cronologia
 > Quando: `INPUT[text(placeholder(es. anno 312 o un’epoca del mondo)):quando]`
@@ -81,8 +81,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Causato da** / **Conseguenze** (tab *Collegamenti*): la catena si ricostruisce
 > nelle due direzioni.
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCausalita");
+```gdr
+renderCausalita
 ```
 --- 🕰 Cronologia mondo
 
@@ -121,11 +121,11 @@ sort quando asc
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
+```gdr
+renderConnessioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```gdr
+renderMemoria
 ```
 ````
 

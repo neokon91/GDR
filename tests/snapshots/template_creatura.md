@@ -64,8 +64,8 @@ legendary_actions: []
 > Imposta il **GS** (tab *Lore*) e premi: lo statblock qui sopra si riempie coi valori base dei mostri SRD di pari GS (AC/PF/iniziativa + multiattacco e un attacco col bonus e il danno tipici). Poi rifinisci a mano (tratti, resistenze, leggendarie).
 > `BUTTON[genera-statblock]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderVerificaGS");
+```gdr
+renderVerificaGS
 ```
 
 --- 🐉 Statblock 5e
@@ -91,8 +91,8 @@ monster: <% tp.config.target_file.basename %>
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📖 Lore
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```gdr
+renderTipoProfilo
 ```
 
 > [!note]- Aspetto e indole
@@ -125,8 +125,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 --- 📊 Carattere
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "creatura", component);
+```gdr
+radar creatura
 ```
 
 > [!abstract] Carattere
@@ -191,15 +191,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cre
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
+```gdr
+renderConnessioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```gdr
+renderMemoria
 ```
 --- 👁 Vista
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
+```gdr
+renderEntityPanel
 ```
 ````

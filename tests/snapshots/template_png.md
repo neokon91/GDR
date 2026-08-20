@@ -103,8 +103,8 @@
 
 > [!abstract] Tema natale
 > Segno: `INPUT[segno][:segno]` · Arcano: `INPUT[arcano][:arcano]`
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTemaNatale");
+```gdr
+renderTemaNatale
 ```
 --- 🎲 Al tavolo
 
@@ -126,8 +126,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "personaggio", component);
+```gdr
+radar personaggio
 ```
 
 > [!abstract] Carattere
@@ -172,8 +172,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "per
 > **4 · Pratico** — Impara facendo; preferisce l'azione all'analisi.
 > **5 · Istintivo** — Si fida del proprio fiuto; decide nell'istante.
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
+```gdr
+renderCoerenza
 ```
 
 --- 🔗 Collegamenti
@@ -205,15 +205,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
+```gdr
+renderConnessioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```gdr
+renderMemoria
 ```
 --- 👁 Vista
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
+```gdr
+renderEntityPanel
 ```
 ````

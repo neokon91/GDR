@@ -33,8 +33,8 @@
 ````tabs
 --- 🎬 Scena
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```gdr
+renderTipoProfilo
 ```
 > [!tavolo] Uso al tavolo
 > `INPUT[textArea(placeholder(es. i PG possono corrompere la guardia per entrare di notte)):uso_al_tavolo]`
@@ -54,8 +54,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 --- ⚔ Combattimento
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEncounter");
+```gdr
+renderEncounter
 ```
 
 Avvia il combattimento dal blocco (Initiative Tracker). Aggiungi le creature per
@@ -83,11 +83,11 @@ creatures:
   - 1: Nome Creatura
 ```
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCondizioni");
+```gdr
+renderCondizioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMaestrie");
+```gdr
+renderMaestrie
 ```
 --- 🔗 Collegamenti
 
@@ -109,15 +109,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
+```gdr
+renderConnessioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```gdr
+renderMemoria
 ```
 --- 👁 Vista
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
+```gdr
+renderEntityPanel
 ```
 ````

@@ -44,8 +44,8 @@
 
 --- 📖 Lore
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```gdr
+renderTipoProfilo
 ```
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -58,8 +58,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 --- 📊 Carattere
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "specie", component);
+```gdr
+radar specie
 ```
 
 > [!abstract] Carattere
@@ -131,15 +131,15 @@ sort tipo asc, file.name asc
 >
 > Connessioni: `INPUT[connessioni][:connessioni]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
+```gdr
+renderConnessioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```gdr
+renderMemoria
 ```
 --- 👁 Vista
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
+```gdr
+renderEntityPanel
 ```
 ````

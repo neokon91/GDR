@@ -44,9 +44,7 @@ legendary_actions: []
 > Imposta il **GS** (tab *Lore*) e premi: lo statblock qui sopra si riempie coi valori base dei mostri SRD di pari GS (AC/PF/iniziativa + multiattacco e un attacco col bonus e il danno tipici). Poi rifinisci a mano (tratti, resistenze, leggendarie).
 > `BUTTON[genera-statblock]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderVerificaGS");
-```
+{{ m.vista("renderVerificaGS") }}
 
 --- 🐉 Statblock 5e
 

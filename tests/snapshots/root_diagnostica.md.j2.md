@@ -11,8 +11,8 @@
 > → Plugin della community*, assicurati che il *Restricted mode* sia **off** e attiva
 > **JS Engine**; poi riapri questa nota. L'elenco completo è comunque più in basso.
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderDiagnostica");
+```gdr
+renderDiagnostica
 ```
 
 > [!tip] Come si attiva un plugin
@@ -28,7 +28,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > | **Templater** | I pulsanti «Crea» non funzionano: non puoi creare nuove note. |
 > | **Dataview** | La Home e gli indici (Atlante, Cast, Fronti…) restano vuoti o come codice. |
 > | **Meta Bind** | I campi da compilare (slider, menu, testo) restano come codice grezzo. |
-> | **JS Engine** | I pannelli dinamici (radar, Stato del Mondo, questa diagnostica) non si disegnano. |
 > | **Tab Panels** | Le note a schede (Lore / Al tavolo / Collegamenti) appaiono come testo grezzo. |
 > | **Fantasy Statblocks** | Gli statblock dei mostri e il blocco incontro non si vedono. |
 > | **Dice Roller** | I tiri di dado sulla scheda e negli incontri non funzionano. |

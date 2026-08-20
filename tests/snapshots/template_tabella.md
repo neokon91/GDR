@@ -23,8 +23,8 @@
 ````tabs
 --- 📖 Lore
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```gdr
+renderTipoProfilo
 ```
 
 > [!note] Voci della tabella — una per riga (peso opzionale: `3× testo`)
@@ -32,8 +32,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 > [!tip] Tira col bottone (rispetta i pesi e inserisce l'esito al cursore): `BUTTON[tira-tabella]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTabella");
+```gdr
+renderTabella
 ```
 
 > [!tip]- 🎲 Vuoi il roll NATIVO del Dice Roller (animazione + cronologia)?
@@ -61,11 +61,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
+```gdr
+renderConnessioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```gdr
+renderMemoria
 ```
 ````
 

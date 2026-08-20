@@ -47,8 +47,8 @@ plugins:
     repo: mProjectsCode/obsidian-js-engine-plugin
     version: 0.3.6
     license: GPL-3.0
-    critico: true
-    rompe: "I pannelli dinamici (radar, Stato del Mondo, questa diagnostica) non si disegnano."
+    critico: false
+    rompe: "Fallback: i pannelli dinamici li rende ora il plugin GDR (blocchi ```gdr). JS Engine serve solo se costruisci col ripiego GDR_PLUGIN_BLOCKS=0."
   - id: tab-panels
     name: Tab Panels
     author: GnoxNahte

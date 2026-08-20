@@ -54,8 +54,8 @@
 >
 > Risorse di classe (Ki/Ira/Incanalare/…): `BUTTON[usa-risorsa]` (spendi 1 uso) — le barre 🩸 sopra mostrano i rimasti; 🌙 si ricaricano al riposo breve, ☀ solo al lungo.
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderRisorsePG");
+```gdr
+renderRisorsePG
 ```
 
 > [!note]- Slot incantesimo (caster) — slot a livello + Patto del Warlock
@@ -128,18 +128,18 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > **Tratti di specie**: `= default(this.tratti_specie, "—")`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderSpecieTratti");
+```gdr
+renderSpecieTratti
 ```
 > [!note]- Inventario
 > `= default(this.inventario, "—")`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderIncantesimi");
+```gdr
+renderIncantesimi
 ```
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProgressione");
+```gdr
+renderProgressione
 ```
 
 > [!tip] Avanza di livello
@@ -186,8 +186,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 > [!abstract] Tema natale
 > Segno: `INPUT[segno][:segno]` · Arcano: `INPUT[arcano][:arcano]`
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTemaNatale");
+```gdr
+renderTemaNatale
 ```
 --- 🎲 Al tavolo
 
@@ -208,20 +208,20 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAttacchi");
+```gdr
+renderAttacchi
 ```
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCondizioni");
+```gdr
+renderCondizioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMaestrie");
+```gdr
+renderMaestrie
 ```
 --- 📊 Carattere
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "personaggio", component);
+```gdr
+radar personaggio
 ```
 
 > [!abstract] Carattere
@@ -266,8 +266,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "per
 > **4 · Pratico** — Impara facendo; preferisce l'azione all'analisi.
 > **5 · Istintivo** — Si fida del proprio fiuto; decide nell'istante.
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
+```gdr
+renderCoerenza
 ```
 
 --- 🔗 Collegamenti
@@ -299,15 +299,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 >
 > Sessioni: `INPUT[sessioni][:sessioni]`
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
+```gdr
+renderConnessioni
 ```
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMemoria");
+```gdr
+renderMemoria
 ```
 --- 👁 Vista
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
+```gdr
+renderEntityPanel
 ```
 ````
