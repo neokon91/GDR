@@ -519,6 +519,16 @@ def check() -> int:
             errors.append(f"plugin critico {p.get('id')}: manca il pin 'version' (o 'repo') "
                           f"— serve a bundlarlo nello zip turnkey (fetch_plugins)")
 
+    # Bottoni-azione: un button con `action` è reso come Meta Bind runTemplaterFile su
+    # `z.modelli/azioni/<label>.md` (model_cfg.action_buttons). Quindi il `label` DEVE
+    # combaciare col `title` di un'azione in templates.yaml (che genera quel file); un
+    # mismatch dà "Error while running button action" IN-APP (non a build-time). Anti-drift.
+    action_titles = {a.get("title") for a in load_yaml("templates.yaml").get("actions", []) or []}
+    for b in (plugins.get("buttons") or []):
+        if b.get("action") and b.get("label") not in action_titles:
+            errors.append(f"button {b.get('id')}: label '{b.get('label')}' non combacia con nessun "
+                          f"title di templates.yaml:actions → il file Templater non si risolve")
+
     # Le categorie dei template (templates.yaml + file-entità) devono essere
     # dichiarate e avere una cartella risolvibile (i bottoni 'Crea ...' creano la
     # nota in quella cartella).

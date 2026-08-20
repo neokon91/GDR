@@ -7,7 +7,7 @@ purpose: >
   colonne Dataview (field del frontmatter, anche relazioni); 'sort' = clausola
   Dataview (default "file.name asc"). I bottoni "Crea" della categoria sono
   inclusi automaticamente. 'cover' (opz., ritratto|banner) aggiunge alla .base una
-  vista GALLERIA a card con quella copertina, raggruppata per 'group' (default tipo).
+  vista GALLERIA a card con quella copertina.
 pages:
   - id: atlante
     file: Atlante

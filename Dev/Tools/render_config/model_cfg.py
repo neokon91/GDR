@@ -174,21 +174,36 @@ def bases_doc(page: dict[str, Any]) -> dict[str, Any]:
     views = [{"type": "table", "name": "Tutte le voci", "order": order, "sort": sort}]
     # Vista GALLERIA (cards) con COPERTINA, se la pagina dichiara `cover` (ritratto|banner):
     # una seconda vista (la table resta la PRIMA = default, quindi additiva e non-bloccante).
-    # `image` = proprietà NUDA (contesto espressione, come i filtri/sort); `imageFit: cover`
-    # riempie la card. Raggruppata per `group` (default 'tipo'): Bestiario/Atlante/Cast/Fazioni
-    # "a colpo d'occhio" per tipo. Schema cards verificato su .base reali (Obsidian 1.9.4+).
+    # `image` = proprietà NUDA (mappa su "Proprietà immagine" nella UI Bases); `imageFit:
+    # cover` riempie la card. Schema verificato DAL VIVO in Obsidian 1.12 (image/imageFit/
+    # imageAspectRatio). NB: niente `groupBy` — in 1.12 vuole un formato-oggetto non
+    # documentato e rompe l'intera .base ("groupBy deve essere un object"); la galleria
+    # non raggruppata è già l'obiettivo (copertine a colpo d'occhio).
     cover = page.get("cover")
     if cover:
         card_order = ["file.name"] + [col["field"] for col in columns[:2]]
         # `sort` con oggetti FRESCHI (non condivisi con la table): evita che
         # yaml.safe_dump emetta un'ancora/alias (&id/*id) — i .base restano anchor-free.
-        cards = {"type": "cards", "name": "Galleria", "image": cover,
-                 "imageFit": "cover", "order": card_order,
-                 "sort": [dict(s) for s in sort]}
-        group = page.get("group", "tipo")
-        if group:
-            cards["groupBy"] = group
-        views.append(cards)
+        views.append({"type": "cards", "name": "Galleria", "image": cover,
+                      "imageFit": "cover", "order": card_order,
+                      "sort": [dict(s) for s in sort]})
+    # Viste con FILTRO PER-VISTA (combinato in AND col filtro base): rimpiazzano gli
+    # ultimi due blocchi Dataview dell'hub. «Fronti caldi» solo se la categoria ha
+    # `pressione` (fra le colonne). «Bozze» ovunque. Espressioni con proprietà NUDE.
+    col_fields = [col["field"] for col in columns]
+    if "pressione" in col_fields:
+        views.append({
+            "type": "table", "name": "🔥 Fronti caldi",
+            "filters": {"and": ["pressione >= 5"]},
+            "order": ["file.name", "pressione", "prossima_mossa"],
+            "sort": [{"property": "pressione", "direction": "DESC"}],
+        })
+    views.append({
+        "type": "table", "name": "Bozze da rifinire",
+        "filters": {"and": ['stato == "bozza"']},
+        "order": ["file.name"] + col_fields[:2],
+        "sort": [{"property": "file.mtime", "direction": "DESC"}],
+    })
     return {
         "filters": {"and": [f'categoria == "{category}"', 'stato != "archiviata"']},
         "properties": properties,

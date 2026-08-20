@@ -39,9 +39,9 @@ def test_bases_doc_sort_direction():
 
 def test_bases_cards_view_when_cover():
     """Pagina con `cover` (ritratto|banner) → oltre alla table, una vista GALLERIA
-    (cards) con `image` = proprietà nuda, imageFit cover, groupBy = group (default
-    tipo). La table resta la PRIMA vista (default). Le pagine senza cover restano
-    solo-table."""
+    (cards) con `image` = proprietà nuda, imageFit cover. La table resta la PRIMA
+    vista (default). Le pagine senza cover restano solo-table. (Niente groupBy: in
+    Obsidian 1.12 romperebbe la .base — verificato dal vivo.)"""
     pages = {p["id"]: p for p in render.load_pages()}
     # Bestiario ha cover: ritratto.
     views = render.bases_doc(pages["bestiario"])["views"]
@@ -51,7 +51,7 @@ def test_bases_cards_view_when_cover():
     c = cards[0]
     assert c["image"] == "ritratto"                          # proprietà nuda (non note.ritratto)
     assert c["imageFit"] == "cover"
-    assert c["groupBy"] == "tipo"                             # default group
+    assert "groupBy" not in c                                # niente groupBy (rompe 1.12)
     assert c["order"][0] == "file.name"
     # Atlante usa il banner come copertina.
     atl_cards = [v for v in render.bases_doc(pages["atlante"])["views"] if v["type"] == "cards"]
@@ -59,3 +59,22 @@ def test_bases_cards_view_when_cover():
     # Pagine senza cover (es. risorse, cronologia): nessuna vista cards.
     for pid in ("risorse", "cronologia"):
         assert all(v["type"] != "cards" for v in render.bases_doc(pages[pid])["views"]), pid
+
+
+def test_bases_per_view_filters():
+    """Le liste secondarie dell'hub sono ora viste .base con FILTRO PER-VISTA (ritiro
+    Dataview): «🔥 Fronti caldi» (pressione >= 5) solo dove la categoria ha `pressione`
+    fra le colonne; «Bozze da rifinire» (stato == bozza) ovunque."""
+    pages = {p["id"]: p for p in render.load_pages()}
+    def named(pid, name):
+        return next((v for v in render.bases_doc(pages[pid])["views"] if v["name"] == name), None)
+    # Fazioni ha pressione → ha «Fronti caldi» col filtro di vista.
+    fc = named("fazioni", "🔥 Fronti caldi")
+    assert fc and fc["filters"]["and"] == ["pressione >= 5"]
+    assert fc["sort"][0] == {"property": "pressione", "direction": "DESC"}
+    # Cronologia (evento) NON ha pressione fra le colonne → niente «Fronti caldi».
+    assert named("cronologia", "🔥 Fronti caldi") is None
+    # «Bozze» presente ovunque, filtrata su stato == bozza.
+    for pid in ("fazioni", "cronologia", "risorse"):
+        bz = named(pid, "Bozze da rifinire")
+        assert bz and bz["filters"]["and"] == ['stato == "bozza"'], pid

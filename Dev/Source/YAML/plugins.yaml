@@ -321,8 +321,11 @@ callouts:
 buttons:
   # «＋ Componenti»: aggiunge alla nota un componente a richiesta (Al tavolo, Clock,
   # Carattere, Cronologia, Vista…). Reso nella toolbar da _macros.componenti_toolbar.
+  # NB: il `label` DEVE combaciare col `title` dell'azione in templates.yaml — il path
+  # Templater è z.modelli/azioni/<label>.md (model_cfg.action_buttons). L'affordance «＋»
+  # vive nell'intestazione della toolbar (componenti_toolbar), non nel label del bottone.
   - id: aggiungi-componente
-    label: ＋ Aggiungi componente
+    label: Aggiungi componente
     action: inserisci_componente
   - id: collega-nota
     label: Collega
