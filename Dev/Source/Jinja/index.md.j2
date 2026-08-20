@@ -1,3 +1,4 @@
+{% import '_macros.j2' as m with context -%}
 # {{ page.title }}
 
 {% if page.intro %}
@@ -15,23 +16,17 @@
 {% if page.get('panel') == 'timeline' %}
 ## 🕰 Linea del tempo
 > [!tip] La nostra timeline (nastro qui sotto) si popola sola dagli eventi e dalle tappe. Per il **calendario navigabile** (mesi/ere, agenda dei datati): `BUTTON[apri-calendario]`
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTimeline");
-```
+{{ m.vista("renderTimeline") }}
 
 ### 🎭 Fili paralleli
 > [!tip] Le **corsie** qui sotto mostrano la stessa cronologia per ATTORE — un filo per Fazione/PNG (dai campi *Fazioni*/*Coinvolti* degli eventi) e per le entità con *tappe*: «cosa fa ciascuno nel tempo».
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTimelineCorsie");
-```
+{{ m.vista("renderTimelineCorsie") }}
 
 {% endif %}
 {% if page.get('panel') == 'map' %}
 ## 🗺 Mappa del mondo
 > [!tip] La mappa qui sotto è **navigabile** (zoom/pan, righello distanze→tempi). Piazza i segnaposto a mano e linkali alle note. La mappa si imposta dal campo **Mappa** di un **Mondo** (o continente/regione) — importala da **Azgaar/Watabou**.
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderWorldMap");
-```
+{{ m.vista("renderWorldMap") }}
 
 {% endif %}
 ## Tutte le voci

@@ -93,13 +93,9 @@ META_ACTIONS_SRC, META_ACTIONS_JS = _bundle_to_tmp("meta_actions")
 
 
 def _env() -> Environment:
-    return Environment(
-        loader=FileSystemLoader(str(render.JINJA_DIR)),
-        undefined=StrictUndefined,
-        autoescape=False,
-        keep_trailing_newline=True,
-        trim_blocks=True,
-        lstrip_blocks=True,
-    )
+    # Delega a render.jinja_env() così i test usano ESATTAMENTE l'ambiente della build,
+    # incluso il flag GDR_PLUGIN_BLOCKS (default ON) → gli snapshot riflettono i blocchi
+    # ```gdr realmente prodotti. Per testare il ramo js-engine: GDR_PLUGIN_BLOCKS=0 pytest.
+    return render.jinja_env()
 
 

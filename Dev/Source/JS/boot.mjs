@@ -48,7 +48,9 @@ function dvPage(app) {
 //   mode "md"  -> ritorna markdown, reso con engine.markdown.create
 //   mode "dom" -> disegna direttamente nel container (nessun valore di ritorno)
 // args(app, {dv, page}, container) -> array di argomenti per la funzione.
-const PANELS = {
+// Esportato: il plugin `gdr` (Tier B) lo importa come SORGENTE UNICA della mappa pannelli,
+// così non esiste una seconda copia da tenere allineata a mano.
+export const PANELS = {
   renderDiagnostica: { mode: "md", args: (a) => [a] },
   renderEntityPanel: { mode: "md", args: (a, d) => [d.dv, d.page] },
   renderSessionPanel: { mode: "md", args: (a, d) => [d.dv, d.page] },

@@ -1,0 +1,11 @@
+/* Cruscotto DM (ItemView) — look "da app", tutto su variabili del tema. */
+.gdr-cruscotto { padding: 4px 10px 16px; }
+.gdr-crusc-head { position: sticky; top: 0; background: var(--background-primary);
+  padding-top: 6px; z-index: 1; border-bottom: 1px solid var(--background-modifier-border); }
+.gdr-crusc-head h3 { margin: 0 0 6px; }
+.gdr-crusc-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.gdr-crusc-actions button { cursor: pointer; }
+.gdr-crusc-sec { margin-top: 12px; padding: 8px 10px; border-radius: 8px;
+  background: var(--background-secondary); border: 1px solid var(--background-modifier-border); }
+.gdr-crusc-sec h4 { margin: 0 0 6px; font-size: var(--font-ui-medium); }
+.gdr-crusc-empty { color: var(--text-muted); margin: 0; }

@@ -1,0 +1,16 @@
+{
+  "name": "gdr-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Spike Tier B — plugin Obsidian che ospita le viste/azioni GDR.",
+  "scripts": {
+    "build": "node esbuild.config.mjs --prod",
+    "dev": "node esbuild.config.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "esbuild": "^0.23.0",
+    "obsidian": "^1.5.0",
+    "typescript": "^5.4.0"
+  }
+}

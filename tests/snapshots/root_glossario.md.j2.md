@@ -12,16 +12,16 @@ armi, ordini di bastione. I callout sono **pieghevoli**: aprili al bisogno.*
 Le **15 condizioni** 5.5e (nome + effetti compatti). Al tavolo si applicano/rimuovono
 anche come **status** in Initiative Tracker (vedi [[Guida al combattimento]]).
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCondizioni");
+```gdr
+renderCondizioni
 ```
 
 ## ⚔️ Maestrie delle armi
 Le **8 proprietà di maestria** delle armi 2024 (nome + effetto). Sulla scheda PG i tuoi
 attacchi con maestria sono già elencati con la mossa relativa.
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMaestrie");
+```gdr
+renderMaestrie
 ```
 
 ## 🏰 Ordini di bastione

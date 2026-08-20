@@ -169,8 +169,8 @@ qualunque e aggiungi nel suo frontmatter `confronta: [[Entità A]], [[Entità B]
 (stessa categoria — gli assi devono combaciare):
 
 ````
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAxesCompare");
+```gdr
+renderAxesCompare
 ```
 ````
 

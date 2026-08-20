@@ -6,10 +6,11 @@
   "description": "Sorgenti minimi YAML/Jinja/JS per vault Obsidian GDR.",
   "scripts": {
     "build": "python3 Dev/Tools/render.py",
+    "build:plugin": "cd plugin && npm install --no-audit --no-fund && npm run build",
     "check": "python3 Dev/Tools/render.py --check && find Dev/Source/JS \\( -name '*.js' -o -name '*.mjs' \\) -print0 | xargs -0 -n1 node --check",
     "test": "python3 -m pytest -q",
     "seed-example": "node Dev/Tools/seed_example.js",
-    "dist": "python3 Dev/Tools/release.py",
+    "dist": "npm run build:plugin && python3 Dev/Tools/release.py",
     "publish:itch": "python3 Dev/Tools/release.py && python3 Dev/Tools/publish_itch.py",
     "clean": "python3 Dev/Tools/render.py --clean"
   },

@@ -1,3 +1,4 @@
+{% import '_macros.j2' as m with context -%}
 # 📖 Manuale — riferimento completo
 
 > [!info] A cosa serve
@@ -172,9 +173,7 @@ qualunque e aggiungi nel suo frontmatter `confronta: [[Entità A]], [[Entità B]
 (stessa categoria — gli assi devono combaciare):
 
 ````
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAxesCompare");
-```
+{{ m.vista("renderAxesCompare") }}
 ````
 
 La logica vive in `z.automazioni/views.js` (radar SVG, niente plugin grafici), caricata

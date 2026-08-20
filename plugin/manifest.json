@@ -1,0 +1,9 @@
+{
+  "id": "gdr",
+  "name": "GDR — motore viste & azioni (spike)",
+  "version": "0.0.1",
+  "minAppVersion": "1.4.0",
+  "description": "Spike Tier B: ospita le viste GDR nel blocco ```gdr e le azioni come comandi nativi (hotkey), con re-render reattivo sui cambi di frontmatter. Riusa views.js / meta_actions.js del vault SENZA modificarli.",
+  "author": "GDR",
+  "isDesktopOnly": false
+}

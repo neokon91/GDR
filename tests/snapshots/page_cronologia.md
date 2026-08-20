@@ -8,14 +8,14 @@
 
 ## 🕰 Linea del tempo
 > [!tip] La nostra timeline (nastro qui sotto) si popola sola dagli eventi e dalle tappe. Per il **calendario navigabile** (mesi/ere, agenda dei datati): `BUTTON[apri-calendario]`
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTimeline");
+```gdr
+renderTimeline
 ```
 
 ### 🎭 Fili paralleli
 > [!tip] Le **corsie** qui sotto mostrano la stessa cronologia per ATTORE — un filo per Fazione/PNG (dai campi *Fazioni*/*Coinvolti* degli eventi) e per le entità con *tappe*: «cosa fa ciascuno nel tempo».
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTimelineCorsie");
+```gdr
+renderTimelineCorsie
 ```
 
 ## Tutte le voci

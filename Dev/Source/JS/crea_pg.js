@@ -31,10 +31,40 @@ function frontmatterBozza(nome) {
     return `---\nnome: ${JSON.stringify(String(nome ?? ""))}\ncategoria: personaggio\ntipo: pg\nstato: bozza\n---\n`;
 }
 
-function mod(valore) {
-    const n = Number.parseInt(valore, 10);
-    return Math.floor(((Number.isFinite(n) ? n : 10) - 10) / 2);
+// >>>pg-shared
+// Helper puri CONDIVISI fra crea_pg.js e sali_pg.js (creazione ↔ level-up): così le
+// risorse/competenze calcolate coincidono. Sorgente canonica: Dev/Source/JS/_pg_shared.js
+// — le copie fra i marker devono restare byte-identiche (imposto da validate.check).
+function mod(v) { const n = Number.parseInt(v, 10); return Math.floor(((Number.isFinite(n) ? n : 10) - 10) / 2); }
+function sigla(s) { return String(s).charAt(0).toUpperCase() + String(s).slice(1); }
+function maxAtLevel(valori, liv) {
+  let m = 0;
+  for (const [k, v] of Object.entries(valori || {})) if (Number(k) <= liv) m = Math.max(m, Number(v) || 0);
+  return m;
 }
+// Risorse di classe attive al livello `liv`: max da CARATTERISTICA (mod, min 1), da
+// TABELLA SRD (`valori`) o `max` fisso (homebrew); la ricarica passa a breve dalla soglia
+// `ricarica_breve_da_livello`. Esclude i max 0. → frontmatter `risorse_pg`.
+function risorseAtLevel(risorse, liv, scores) {
+  return (risorse || []).map(r => {
+    let max;
+    if (r.caratteristica) max = Math.max(1, mod((scores || {})[r.caratteristica]));
+    else if (r.valori) max = maxAtLevel(r.valori, liv);
+    else max = Number(r.max) || 0;
+    const ric = (r.ricarica_breve_da_livello && liv >= r.ricarica_breve_da_livello) ? "breve" : r.ricarica;
+    return { id: r.id, label: r.label, max, ric, icona: r.icona || "" };
+  }).filter(r => r.max > 0);
+}
+async function scegliMulti(tp, titolo, pool, n) {
+  const scelte = [], disp = [...(pool || [])];
+  for (let i = 0; i < (n || 0) && disp.length; i++) {
+    const v = await tp.system.suggester(disp, disp, false, `${titolo} (${i + 1}/${n})`);
+    if (v == null) break;
+    scelte.push(v); disp.splice(disp.indexOf(v), 1);
+  }
+  return scelte;
+}
+// <<<pg-shared
 
 function normNum(valore, fallback = 10) {
     const n = Number.parseInt(valore, 10);
@@ -45,10 +75,6 @@ function nomeFile(nome) {
     // Default se il nome è vuoto o resta vuoto dopo la pulizia (solo spazi o soli
     // caratteri proibiti): altrimenti tp.file.move produrrebbe una nota orfana ".md".
     return String(nome ?? "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, " ") || "Nuovo PG";
-}
-
-function sigla(stat) {
-    return stat.charAt(0).toUpperCase() + stat.slice(1);
 }
 
 // Avanzamento del wizard: decora i titoli dei modali con "· passo N/5". Il PG si
@@ -176,18 +202,6 @@ async function scegliAbilitaClasse(tp, classe, giaCompetenti, abilita) {
 
 // Scelta multipla da un pool di stringhe (trucchetti, lingue...): n scelte
 // distinte. Il mock di test seleziona sempre la prima disponibile.
-async function scegliMulti(tp, titolo, pool, n) {
-    const scelte = [];
-    const disponibili = [...(pool || [])];
-    for (let i = 0; i < (n || 0) && disponibili.length > 0; i += 1) {
-        const v = await tp.system.suggester(disponibili, disponibili, false, `${titolo} (${i + 1}/${n})`);
-        if (v == null) break;
-        scelte.push(v);
-        disponibili.splice(disponibili.indexOf(v), 1);
-    }
-    return scelte;
-}
-
 // Armatura indossata: filtra per le categorie consentite dalla classe (sempre
 // 'nessuna' disponibile). Ritorna {id, ca_base, dex_max, categoria}.
 async function scegliArmatura(tp, classe, opt) {
@@ -475,34 +489,6 @@ function listaYaml(items) {
 function listaYamlQ(items) {
     if (!items || items.length === 0) return " []";
     return `\n${items.map(x => `  - ${JSON.stringify(String(x))}`).join("\n")}`;
-}
-
-// Max di una risorsa di classe al livello `liv`: il valore della colonna SRD al livello
-// del PG (valori per livello da personaggio.json; monotòno → max sui livelli ≤ liv).
-function maxAtLevel(valori, liv) {
-    let m = 0;
-    for (const [k, v] of Object.entries(valori || {})) {
-        if (Number(k) <= liv) m = Math.max(m, Number(v) || 0);
-    }
-    return m;
-}
-
-// Risorse di classe (Ki/Ira/Incanalare/...) ATTIVE al livello `liv`: {id, label, max,
-// ric, icona}, escluse quelle non ancora ottenute (max 0). → frontmatter `risorse_pg`.
-// Il max viene da: una CARATTERISTICA (Ispirazione = mod CAR, min 1) · una tabella SRD
-// per livello (`valori`) · o un `max` fisso (classe homebrew). La ricarica passa a breve
-// dal livello `ricarica_breve_da_livello` (Bardo: «Fonte di ispirazione» al 5º).
-function risorseAtLevel(risorse, liv, caratteristiche) {
-    return (risorse || [])
-        .map(r => {
-            let max;
-            if (r.caratteristica) max = Math.max(1, mod((caratteristiche || {})[r.caratteristica]));
-            else if (r.valori) max = maxAtLevel(r.valori, liv);
-            else max = Number(r.max) || 0;
-            const ric = (r.ricarica_breve_da_livello && liv >= r.ricarica_breve_da_livello) ? "breve" : r.ricarica;
-            return { id: r.id, label: r.label, max, ric, icona: r.icona || "" };
-        })
-        .filter(r => r.max > 0);
 }
 
 // risorse_pg (lista di oggetti) + i contatori usi_<id> azzerati (= 0 spesi). Vuoto per le

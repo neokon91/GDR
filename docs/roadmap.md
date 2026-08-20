@@ -117,7 +117,7 @@ bundlata — ma anche questo è **secondario al primo utente reale**.
   `crea-luogo` e il link al cruscotto Fronti; read-only, `visibilita: dm`, vive/muore con
   l'esempio); **on-ramp Home** (6 tipi primari, metafisica opt-in; il tip apre «Inizia da qui»);
   LEGGIMI di distribuzione; **sito dei giocatori** statico spoiler-free
-  (`npm run site`, `visibilita: dm`) con **rivelazione progressiva** (`rivelazione`
+  (bottone in-app «Genera sito», `visibilita: dm`) con **rivelazione progressiva** (`rivelazione`
   pubblico/incontrato/segreto + `--reveal`): il portale svela per gradi.
 - **Solidità** — 265 test (snapshot + e2e/headless JS + rules-engine), validazione del contratto
   YAML↔wizard, anti-drift byte-equal (`_comparators.js`/`_homebrew_bridge.js`), merge config
@@ -138,8 +138,8 @@ bundlata — ma anche questo è **secondario al primo utente reale**.
   utente su quando aprire; posizionamento/pricing da definire allora. Verificare le licenze
   dei plugin bundlati prima del pubblico (o release `--no-plugins` + BRAT, da valutare).
 - ✅ **Condivisione ai giocatori — rivelazione progressiva** — campo `rivelazione`
-  (pubblico<incontrato<segreto), ortogonale a `visibilita` (il «mai»); il build del sito
-  sceglie il livello (`npm run site -- --reveal <tier>`) e include una nota se il suo tier
+  (pubblico<incontrato<segreto), ortogonale a `visibilita` (il «mai»); l'esportatore in-app
+  sceglie il livello (bottone «Genera sito» → selettore rivelazione) e include una nota se il suo tier
   ≤ livello → il portale «svela per gradi» man mano che la campagna procede (modello Kanka).
   Selettore 👁 *Condivisione* nel tab *Al tavolo*; l'indice mostra il livello e quante voci
   restano. Demo: Astaria (la *verità nascosta* sulla Veglia dei Sepolti = `segreto`). (FATTO)

@@ -46,7 +46,7 @@ Dev/Source/{YAML,Jinja,JS}  ──►  Dev/Tools/render.py  ──►  dist/GDR-
 ```
 
 - `render.py` è un **orchestratore sottile** (modello+IO in `common.py`, SRD in
-  `build_srd.py`, rules-engine PG in `build_personaggio.py`, validazione in
+  `build_srd.py`, rules-engine PG in `build_personaggio/`, validazione in
   `validate.py`). Fonde `core.yaml` + `system.yaml` + `entities/*.yaml` in un unico
   modello, rende i template **Jinja → Markdown**, copia i **JS** runtime e fa un
   **merge non distruttivo** della config `.obsidian` (non tocca `Mondi/` né i plugin).
@@ -100,7 +100,7 @@ Dev/Source/SiteJinja/ page.html.j2 · index.html.j2 · site.css (sito dei giocat
 Dev/Source/JS/        create_entity.js · crea_pg.js/sali_pg.js · meta_actions.js · views.js
                       genera.js · boot.mjs (ESM) · _comparators.js/_homebrew_bridge.js (sorgenti canoniche)
 Dev/Source/SRD/       JSON SRD 5.2.1 IT · statblocks/ layout Fantasy Statblocks
-Dev/Tools/            common.py · build_srd.py · build_personaggio.py · build_site.py · validate.py · render.py
+Dev/Tools/            common.py · render.py · build_srd.py · build_personaggio/ · fetch_plugins.py · validate.py
 Dev/Reference/        cheat-sheet sintassi dei plugin installati
 docs/                 architecture · data_model · rules_layer · play_layer · plugin_contracts · roadmap
 ```

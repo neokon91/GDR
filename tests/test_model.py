@@ -220,8 +220,13 @@ def test_panels_registered():
     exported = set(re.findall(r"\b(render\w+)\b", views.split("module.exports", 1)[1]))
     referenced = set()
     for j in render.JINJA_DIR.glob("*.j2"):
-        referenced |= set(re.findall(r'panel\([^)]*"(render\w+)"', j.read_text(encoding="utf-8")))
-    assert referenced, "nessun panel(...) trovato nelle macro (regex rotta?)"
+        text = j.read_text(encoding="utf-8")
+        # Forma diretta `panel(...,"renderX")` (definizione della macro vista) E forma
+        # instradata `vista("renderX")` / `m.vista("renderX")` (tutti gli altri call site,
+        # Tier B: unica emissione dietro flag ```gdr / js-engine).
+        referenced |= set(re.findall(r'panel\([^)]*"(render\w+)"', text))
+        referenced |= set(re.findall(r'\bvista\("(render\w+)"\)', text))
+    assert referenced, "nessun panel(...)/vista(...) trovato nelle macro (regex rotta?)"
     assert not (referenced - panels), f"pannelli usati nelle macro ma non in boot.mjs PANELS: {sorted(referenced - panels)}"
     assert not (panels - exported), f"PANELS senza export corrispondente in views.js: {sorted(panels - exported)}"
 
