@@ -11,7 +11,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(lingua), option(dialetto), option(codice o gergo)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(primordiale), option(divina), option(planare), option(elementale), option(ancestrale), option(rituale), option(arcana), option(segreta)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

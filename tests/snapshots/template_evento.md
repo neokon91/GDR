@@ -13,7 +13,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(evento storico), option(evento di campagna), option(conflitto), option(conseguenza)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(cosmico), option(epocale), option(mitico), option(sacrale), option(catastrofico), option(fondativo), option(transizionale)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

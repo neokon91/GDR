@@ -54,6 +54,11 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 .gdr-radar { display: flex; justify-content: center; margin: 4px 0 14px; }
 .gdr-radar-svg { width: 100%; max-width: 400px; height: auto; }  /* in vetrina in cima alla tab Carattere */
 .gdr-radar-empty { color: var(--text-muted); font-size: var(--font-ui-small); }
+/* Clock del fronte (views.renderClock): stesso trattamento del radar — SVG centrato,
+   etichetta muted/centrata — così l'orologio non resta allineato a sinistra e spaiato. */
+.gdr-clock { display: flex; flex-direction: column; align-items: center; margin: 4px 0; }
+.gdr-clock-label { text-align: center; color: var(--text-muted); font-size: var(--font-ui-small); }
+.gdr-clock-svg { height: auto; }
 
 /* Barre risorse PG (views.js: renderRisorsePG). Max variabile calcolato a runtime
    nel JS Engine: il progressBar Meta Bind accetta solo max letterali. */
@@ -149,7 +154,13 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
   --gdr-accent: var(--background-modifier-border);
   border-top: 3px solid var(--gdr-accent);
 }
-.callout[data-callout="infobox"] > .callout-title { color: var(--gdr-accent); }
+/* Titolo su testo NORMALE (non sull'accento): il nome della nota resta leggibile
+   anche con accenti chiari (yellow/cyan). L'identità cromatica sta nel bordo-top +
+   un filetto sotto il titolo, non nel colore del testo. */
+.callout[data-callout="infobox"] > .callout-title {
+  color: var(--text-normal);
+  border-bottom: 2px solid var(--gdr-accent);
+}
 
 /* A — NB: la sidebar flottante con testo che avvolge NON è affidabile in Obsidian:
    in lettura il renderer virtualizza i blocchi (ognuno è una `.markdown-preview-section`
@@ -188,13 +199,9 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
   border-radius: 6px;
 }
 
-/* Segreti (lettura DM): bordo tratteggiato = "non spoilerare". */
-.callout[data-callout="segreto"] {
-  border-left: 4px dashed var(--callout-color, var(--color-purple));
-  background: var(--background-secondary);
-}
-
-/* Rivelazioni progressive (verità che emergono): bordo-sinistro accentato. */
+/* Rivelazioni progressive (verità che emergono): bordo-sinistro accentato.
+   Copre anche i segreti-DM: la prosa segreta usa `[!rivela|segreto]` (un solo
+   trattamento visivo per "ciò che i giocatori non sanno ancora"). */
 .callout[data-callout="rivela"] {
   border-left: 4px solid var(--callout-color, var(--color-cyan));
 }
@@ -220,16 +227,16 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 # (theme-safe, chiaro/scuro). L'infobox di [!infobox|<categoria>] eredita --gdr-accent.
 # Presentazione, non dato: vive qui, non in YAML. Categoria non mappata → bordo neutro.
 CATEGORY_ACCENTS = {
-    "green":  ["luogo", "regno", "bioma", "ecosistema", "risorsa"],          # mondo fisico / natura / economia
-    "red":    ["fazione", "culto"],                                          # potere / fede organizzata
+    "green":  ["mondo", "luogo", "regno", "bioma", "ecosistema", "risorsa", "rotta"],  # mondo fisico / natura / economia / rotte
+    "red":    ["fazione", "culto", "esercito", "calamita"],                  # potere / fede / forze militari / disastri
     "pink":   ["cultura", "lingua"],                                         # società / popoli
     "orange": ["personaggio", "creatura"],                                   # persone & creature
     "purple": ["cosmologia", "dominio", "legge_fondamentale",                # metafisica & magia
                "entita_primordiale", "piano", "divinita", "sistema_magico"],
     "cyan":   ["epoca", "evento", "mito", "profezia"],                       # tempo / storia / mito
-    "blue":   ["classe", "sottoclasse", "specie", "background", "talento",   # regole & scheda 5e
-               "incantesimo", "regola", "oggetto", "bastione"],
-    "yellow": ["incontro", "insidia", "sessione", "scena", "indizio", "tabella"],  # al tavolo / gioco
+    "blue":   ["classe", "sottoclasse", "specie", "background", "talento",   # regole & scheda 5e / leggi
+               "incantesimo", "regola", "oggetto", "bastione", "editto"],
+    "yellow": ["incontro", "insidia", "sessione", "scena", "indizio", "tabella", "missione"],  # al tavolo / gioco
 }
 
 

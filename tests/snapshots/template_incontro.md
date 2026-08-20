@@ -12,7 +12,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(incontro), option(agguato), option(inseguimento)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(combattimento), option(sociale), option(esplorazione), option(enigma), option(ambientale)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`
@@ -44,7 +43,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
 
 > [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
+> Rivelazione attuale: `VIEW[{rivelazione} ?? "—"]` — *si imposta in **⚙️ Opzioni*** (per non avere due controlli sullo stesso campo).
+> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]]**), decide cosa i PG vedono.
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 

@@ -8,8 +8,8 @@ purpose: >-
 templates: []
 actions:
   - id: marca_canonico
-    title: Marca Canonico
-    target: z.modelli/azioni/Marca Canonico.md
+    title: Segna come canonico
+    target: z.modelli/azioni/Segna come canonico.md
   - id: archivia
     title: Archivia
     target: z.modelli/azioni/Archivia.md
@@ -41,8 +41,8 @@ actions:
     title: Usa risorsa
     target: z.modelli/azioni/Usa risorsa.md
   - id: aggiorna_encounter
-    title: Aggiorna encounter
-    target: z.modelli/azioni/Aggiorna encounter.md
+    title: Aggiorna l'incontro
+    target: z.modelli/azioni/Aggiorna l'incontro.md
   - id: scaffold_statblock
     title: Genera statblock dal GS
     target: z.modelli/azioni/Genera statblock dal GS.md
@@ -58,8 +58,8 @@ actions:
     title: Sincronizza pin dalla mappa
     target: z.modelli/azioni/Sincronizza pin dalla mappa.md
   - id: genera
-    title: Genera (locale)
-    target: z.modelli/azioni/Genera (locale).md
+    title: Genera un nome
+    target: z.modelli/azioni/Genera un nome.md
   - id: turno_bastione
     title: Turno di bastione
     target: z.modelli/azioni/Turno di bastione.md
@@ -70,8 +70,8 @@ actions:
     title: Genera sito giocatori
     target: z.modelli/azioni/Genera sito giocatori.md
   - id: inizia_incontro
-    title: Prepara il gruppo (IT)
-    target: z.modelli/azioni/Prepara il gruppo (IT).md
+    title: Schiera il gruppo
+    target: z.modelli/azioni/Schiera il gruppo.md
   # Tira sulla tabella attiva (pesi rispettati, esito al cursore): meta_actions.tira_tabella.
   # Serve l'azione-nota perché BUTTON[tira-tabella] (tabella.md.j2) risolva il file Templater.
   - id: tira_tabella

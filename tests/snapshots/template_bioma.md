@@ -13,7 +13,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(foresta), option(deserto), option(tundra), option(oceano), option(montagna), option(pianura), option(palude), option(sotterraneo), option(planare)):tipo]`
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`

@@ -25,7 +25,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(gilda), option(ordine), option(casata), option(fazione politica), option(banda), option(accademia), option(corte), option(tribunale)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(militare), option(religiosa), option(arcana), option(rivoluzionaria), option(egemonica), option(mercantile), option(profetica)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

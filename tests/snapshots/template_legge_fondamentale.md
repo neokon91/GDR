@@ -11,7 +11,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(polarità), option(principio assoluto), option(vincolo cosmico)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(esistenziale), option(morale), option(causale), option(formale), option(temporale), option(magica)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

@@ -10,7 +10,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(tabella), option(incontri), option(tesoro), option(png), option(colpo_scena), option(ambiente)):tipo]`
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`

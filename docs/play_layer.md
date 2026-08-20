@@ -59,7 +59,7 @@ taverne, bevande, ganci, dicerie, insediamenti, oggetti, meteo, stanze di dungeo
 atteggiamento/twist — fn dedicata `generaIncontro`). I **ganci/dicerie** sono **world-aware**: i
 terminali `{fazione}`/`{luogo}`/`{nome}` pescano da fazioni/luoghi/PNG **reali del mondo attivo**
 (`worldPool`, dal `mondo` della nota), con fallback alla generazione se il mondo è vuoto. Bottone
-*Genera (locale)* (`meta_actions` → `tp.user.genera`): deduce il tipo dalla categoria, risolve lo
+*Genera un nome* (`meta_actions` → `tp.user.genera`): deduce il tipo dalla categoria, risolve lo
 **stile** (`stile_nomi` di cultura/specie, anche luogo→cultura; ★ candidati in cima), genera N
 opzioni, inserisce al cursore. Logica pura testabile (`generaPersona/Toponimo/Fazione/DaForme/
 Tesoro/Incontro`, `rng` iniettabile).

@@ -17,7 +17,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(comune), option(esotica), option(mostruosa)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(ancestrale), option(spirituale), option(cosmica), option(mortale), option(corrompibile), option(onirica), option(elementale), option(sintetica)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

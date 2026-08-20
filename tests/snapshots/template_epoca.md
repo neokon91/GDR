@@ -12,7 +12,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(era cosmica), option(era storica), option(era mitica), option(età), option(eone)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(fondativa), option(transizionale), option(stabilizzante), option(degenerativa), option(ciclica), option(apocrifa), option(liminale)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

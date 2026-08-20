@@ -260,7 +260,7 @@ non testabile headless → ogni QA in-app ha storicamente trovato bug reali.
   (doc/demo corretti; il single-pick richiede il formato tabella DR — da approfondire).
 - **Da spuntare**: nulla di critico nel blocco recente (tutto verificato). Aperto solo il
   *single-pick* tabella DR. ✅ **Party PG nel tracker** — risolto: `inizia_incontro` (bottone
-  *Prepara il gruppo (IT)* nel tab Combattimento) auto-popola il Party di Initiative Tracker
+  *Schiera il gruppo* nel tab Combattimento) auto-popola il Party di Initiative Tracker
   dai PG del vault (personaggio · tipo pg) via `savePlayer`/`saveSettings`, non-distruttivo →
   `players: true` risolve senza config manuale. Ponte a IT, nessuna duplicazione (IT resta il
   motore del combattimento; i mostri li risolve già il blocco encounter).

@@ -14,7 +14,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(trappola), option(pericolo naturale), option(effetto ambientale)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(meccanica), option(magica), option(naturale), option(biologica), option(ambientale)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

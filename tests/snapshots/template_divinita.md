@@ -15,7 +15,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(divinità maggiore), option(divinità minore), option(semidio), option(pantheon)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(primordiale), option(archetipica), option(elementale), option(culturale), option(mitica), option(spirituale), option(onirica)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

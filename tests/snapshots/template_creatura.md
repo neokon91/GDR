@@ -15,7 +15,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(aberrazione), option(bestia), option(celestiale), option(costrutto), option(drago), option(elementale), option(fata), option(gigante), option(immondo), option(melma), option(mostruosita), option(non-morto), option(umanoide), option(vegetale)):tipo]`
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
@@ -86,7 +85,8 @@ monster: <% tp.config.target_file.basename %>
 > `INPUT[textArea(placeholder(es. una taglia sul suo capo che nessuno osa riscuotere)):gancio]`
 
 > [!info]- 👁 Condivisione coi giocatori
-> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]] → Genera sito**, niente terminale): `INPUT[rivelazione][:rivelazione]`
+> Rivelazione attuale: `VIEW[{rivelazione} ?? "—"]` — *si imposta in **⚙️ Opzioni*** (per non avere due controlli sullo stesso campo).
+> Quando questa nota entra nel **sito dei giocatori** (lo generi con un clic da **[[Occhi del giocatore]]**), decide cosa i PG vedono.
 >
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📖 Lore

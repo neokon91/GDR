@@ -15,7 +15,7 @@ posizionamento si usa il *theatre-of-the-mind* o una mappa di scena (tab *Mappa*
 
 ## 1. Avviare l'incontro
 - Da una nota **Incontro** (tab *Combattimento*): il blocco ` ```encounter ` è già
-  pronto. Il bottone **Aggiorna encounter** lo riscrive dalle *Creature* e dagli
+  pronto. Il bottone **Aggiorna l'incontro** lo riscrive dalle *Creature* e dagli
   *Alleati* collegati (gli alleati col flag `ally`); il campo `varianti` applica gli
   override PF/CA/iniziativa (boss potenziato, gregario indebolito).
 - Oppure da uno **statblock**: i bottoni **«Avvia incontro»** / **«Aggiungi al tracker»**

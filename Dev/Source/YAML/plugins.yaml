@@ -306,8 +306,8 @@ callouts:
   - { id: tavolo,  color: "201, 64, 64",   icon: swords }
   - { id: gancio,  color: "191, 130, 42",  icon: anchor }
   # Impostazioni della nota (Meta Bind): stato/tipo/famiglia/canonico/visibilità/rivelazione.
-  - { id: opzioni, color: "120, 120, 130", icon: sliders-horizontal }
-  - { id: segreto, color: "138, 74, 173",  icon: eye-off }
+  # Grigio leggermente più chiaro del neutro puro: leggibile anche in dark (AnuPpuccin).
+  - { id: opzioni, color: "150, 150, 162", icon: sliders-horizontal }
   # Rivelazione per-sezione (player-facing, gated dal sito): una verità che si
   # svela col procedere della campagna. `[!rivela|<tier>]` (vedi build_site).
   - { id: rivela,  color: "56, 142, 142",  icon: eye }
@@ -331,7 +331,7 @@ buttons:
     label: Collega
     action: collega
   - id: marca-canonico
-    label: Marca Canonico
+    label: Segna come canonico
     action: marca_canonico
   - id: archivia-nota
     label: Archivia
@@ -363,14 +363,14 @@ buttons:
     label: Usa risorsa
     action: usa_risorsa
   - id: aggiorna-encounter
-    label: Aggiorna encounter
+    label: Aggiorna l'incontro
     action: aggiorna_encounter
   - id: genera-statblock
     label: Genera statblock dal GS
     action: scaffold_statblock
   # Generatore homebrew (italiano, a tema): bottone Templater -> tp.user.genera.
   - id: genera-locale
-    label: Genera (locale)
+    label: Genera un nome
     action: genera
   # Tira sulla tabella casuale attiva (pesi rispettati): meta_actions.tira_tabella.
   - id: tira-tabella
@@ -405,7 +405,7 @@ buttons:
     action: genera_sito
   # Ponte Initiative Tracker: auto-popola il Party dai PG (così players: true risolve).
   - id: prepara-gruppo
-    label: Prepara il gruppo (IT)
+    label: Schiera il gruppo
     action: inizia_incontro
   # --- Comandi-strumento (button con 'command'): aprono DIRETTAMENTE lo strumento
   # del plugin senza cercarlo nella tavolozza comandi né nelle impostazioni → tolgono

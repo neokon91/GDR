@@ -13,7 +13,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(materia prima), option(bene lavorato), option(bene di lusso), option(risorsa magica), option(risorsa strategica)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(vitale), option(bellica), option(arcana), option(voluttuaria), option(simbolica)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

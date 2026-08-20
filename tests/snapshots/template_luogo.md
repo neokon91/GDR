@@ -19,7 +19,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(insediamento), option(sito di interesse), option(struttura), option(dungeon), option(rovina), option(landmark naturale), option(regione), option(continente)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(mondano), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`

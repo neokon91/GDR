@@ -10,7 +10,6 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
-> **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(quadro cosmico), option(concetto cosmico), option(mistero cosmico)):tipo]`
 > **Famiglia**: `INPUT[inlineSelect(option(origine), option(struttura), option(forze), option(destino), option(mistero)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`
