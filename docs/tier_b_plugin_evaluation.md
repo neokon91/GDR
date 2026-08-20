@@ -157,10 +157,23 @@ Il flag `GDR_PLUGIN_BLOCKS` è ora **ON di default** (`render.py`; disattiva con
 - **Validato dal vivo**: aperto **Korbin** (PG seed) nel vault di default → infobox, tab,
   pannelli risorse, radar, Dice Roller rendono tutti via plugin, senza js-engine.
 
-### Cosa resta per ritirare *anche* Templater (progetto a sé)
-Il flag NON tocca i **wizard** (`create_entity`/`crea_pg`/`sali_pg`): sono script
-`tp.user.*` lanciati da `<% %>` Templater. Migrarli richiede un **mini-motore di
-istanziazione template** nel plugin (crea nota dal template `z.modelli/`, esegue il wizard
-col `tpShim` esteso a `tp.file.move/exists` + `tp.config`, splice del ritorno nel `<% %>`,
-crea+sposta). Solo dopo Templater esce dal bundle. Finché non è fatto, il vault usa **gdr
-per il display + Templater per la creazione** (entrambi attivi).
+### Migrazione wizard + azioni (fatta, 2026-08-20)
+
+Il **mini-motore di istanziazione template** è nel plugin e valida dal vivo:
+- **Creazione** senza Templater: `createFromTemplate(id)` legge il template `z.modelli/`,
+  esegue il wizard (`crea_pg` bespoke o `create_entity`) col `tpShim` esteso — `tp.file.move`
+  **registra** la destinazione (niente nota provvisoria), la nota si crea alla fine componendo
+  `frontmatter (ritorno) + corpo del template` (rimpiazza la riga `<% await tp.user.crea_X %>`
+  e `<% tp.config.target_file.basename %>`). Provato: «Crea Nota Rapida» → prompt+suggester
+  nativi → nota creata in `Inbox/`.
+- **`tpShim` esteso**: `system.suggester/prompt` (SuggestModal/Modal), `date.now`,
+  `file.move/exists`, e un proxy `tp.user.<name>` che carica lazy gli script da z.automazioni.
+- **Comandi** `gdr:crea-<id>` per ogni template + `gdr:<azione>` per 17 azioni del dispatcher.
+  `render_config/model_cfg.py` (dietro flag) instrada i **bottoni** Meta Bind: `crea-*` →
+  `command gdr:crea-*`, e i bottoni-azione gestiti → `command gdr:<azione>` (invece di
+  `templaterCreateNote`/`runTemplaterFile`).
+
+**Coda rimasta su Templater** (script `tp.user` ricchi, da migrare uno a uno): `genera`,
+`world_board`, `importa_mappa`, `importa_azgaar`, `genera_sito`, `sincronizza_pin`. Finché
+questi 6 bottoni usano `runTemplaterFile`, Templater resta bundlato. Migrati quelli (col
+`tpShim` già pronto, estendendo `tp.file.*` dove serve), Templater esce dal bundle.

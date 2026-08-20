@@ -100,11 +100,14 @@ function promptModal(app: App, message: string, def = "", throwOnCancel = false)
   });
 }
 
-// tp compatibile per il dispatcher: `date.now` + le modali native (suggester/prompt). NIENTE
-// multi_suggester: il runtime lo tratta come opzionale e degrada a suggester singoli.
+// tp compatibile per il dispatcher: `date.now`, le modali native (suggester/prompt) e un
+// proxy `user` che carica lazy gli script `tp.user.<name>` da z.automazioni (usati da alcune
+// azioni: sali_pg, genera, importa_*, genera_sito, world_board). NIENTE multi_suggester: il
+// runtime lo tratta come opzionale e degrada a suggester singoli.
 function tpShim(app: App): any {
   const m = (window as any).moment;
-  return {
+  const userCache: Record<string, any> = {};
+  const tp: any = {
     config: {},
     date: { now: (fmt: string) => (m ? m().format(fmt) : new Date().toISOString().slice(0, 10)) },
     system: {
@@ -112,6 +115,13 @@ function tpShim(app: App): any {
       prompt: (msg: string, def = "", thr = false) => promptModal(app, msg, def, thr),
     },
   };
+  tp.user = new Proxy({}, {
+    get: (_t, name: string) => async (...args: any[]) => {
+      if (!userCache[name]) userCache[name] = evalCjs(await app.vault.adapter.read(`z.automazioni/${name}.js`), app);
+      return userCache[name](...args);
+    },
+  });
+  return tp;
 }
 
 export default class GdrPlugin extends Plugin {
@@ -178,9 +188,20 @@ export default class GdrPlugin extends Plugin {
     const ACTIONS: { id: string; name: string; global?: boolean }[] = [
       { id: "riposo_lungo", name: "Riposo lungo (PG attivo)" },
       { id: "riposo_breve", name: "Riposo breve (PG attivo)" },
+      { id: "sali_di_livello", name: "Sali di livello (PG attivo)" },
+      { id: "usa_risorsa", name: "Usa risorsa (PG attivo)" },
       { id: "collega", name: "Collega (nota attiva)" },
-      { id: "aggiorna_encounter", name: "Aggiorna l'incontro" },
+      { id: "applica_profilo", name: "Applica profilo (nota attiva)" },
       { id: "marca_canonico", name: "Segna come canonico" },
+      { id: "archivia", name: "Archivia la nota" },
+      { id: "aggiorna_encounter", name: "Aggiorna l'incontro" },
+      { id: "scaffold_statblock", name: "Genera statblock dal GS" },
+      { id: "inizia_incontro", name: "Avvia l'incontro" },
+      { id: "avanza_fronte", name: "Avanza il fronte" },
+      { id: "scatena_conseguenza", name: "Scatena la conseguenza" },
+      { id: "tira_tabella", name: "Tira sulla tabella" },
+      { id: "turno_bastione", name: "Turno di bastione" },
+      { id: "inserisci_componente", name: "Aggiungi componente" },
       { id: "giro_del_mondo", name: "Giro del mondo", global: true },
     ];
     for (const a of ACTIONS) {
@@ -208,7 +229,12 @@ export default class GdrPlugin extends Plugin {
       if (file) this.riposoLungo(file); else new Notice("Nessuna nota attiva.");
     });
 
-    console.log("GDR spike plugin caricato.");
+    // 4. WIZARD DI CREAZIONE come comandi nativi: un mini-motore di istanziazione template
+    //    esegue crea_pg/create_entity col tpShim esteso → niente Templater per creare.
+    //    Un comando `gdr:crea-<id>` per template (i bottoni Meta Bind li chiamano) + un picker.
+    await this.registerCreationCommands();
+
+    console.log("GDR plugin caricato.");
   }
 
   onunload() {
@@ -274,6 +300,90 @@ export default class GdrPlugin extends Plugin {
     const fm = file ? (this.app.metadataCache.getFileCache(file as any)?.frontmatter ?? {}) : {};
     const dvPage = dv ? dv.page(path) : null;
     return { dv, page: Object.assign({}, dvPage || {}, fm) };
+  }
+
+  // --- WIZARD DI CREAZIONE (mini-motore di istanziazione template) ---------------------
+
+  // Registra un comando `gdr:crea-<id>` per ogni template di core.json (i bottoni Meta Bind
+  // `command`→`gdr:crea-<id>` li chiamano) + un picker generico «GDR: Crea…».
+  async registerCreationCommands() {
+    let core: any;
+    try { core = await this.loadCore(); } catch { return; }
+    const templates: any[] = core.templates || [];
+    for (const t of templates) {
+      this.addCommand({
+        id: `crea-${t.id}`,
+        name: `Crea ${t.title}`,
+        callback: () => this.createFromTemplate(t.id),
+      });
+    }
+    this.addCommand({
+      id: "crea",
+      name: "Crea… (scegli il tipo)",
+      callback: async () => {
+        const chosen = await suggester(
+          this.app, templates.map((t) => t.title), templates, false, "Cosa vuoi creare?");
+        if (chosen) this.createFromTemplate((chosen as any).id);
+      },
+    });
+  }
+
+  // Istanzia un template SENZA Templater: esegue il wizard (crea_pg o create_entity) col
+  // tpShim esteso (tp.file.move REGISTRA la destinazione, la nota si crea alla fine), poi
+  // compone `frontmatter (ritorno del wizard) + corpo del template` e apre la nota.
+  async createFromTemplate(templateId: string) {
+    const app = this.app;
+    let core: any;
+    try { core = await this.loadCore(); } catch { new Notice("core.json non leggibile."); return; }
+    const tpl = (core.templates || []).find((t: any) => t.id === templateId);
+    if (!tpl) { new Notice(`Template sconosciuto: ${templateId}`); return; }
+    let templateContent: string;
+    try { templateContent = await app.vault.adapter.read(tpl.target); }
+    catch { new Notice(`Template mancante: ${tpl.target}`); return; }
+
+    // tpShim esteso: file.move registra la destinazione (niente nota provvisoria).
+    let movedTo: string | null = null;
+    const tp: any = tpShim(app);
+    tp.file = {
+      move: async (p: string) => { movedTo = p; },
+      exists: async (p: string) => !!app.vault.getAbstractFileByPath(p),
+    };
+    tp.config = { target_file: { get basename() { return movedTo ? movedTo.split("/").pop() : "Senza nome"; } } };
+
+    // Esegui il wizard → stringa frontmatter (o bozza se annullato).
+    let fm: string;
+    try {
+      if (templateId === "pg") {
+        const crea = evalCjs(await app.vault.adapter.read("z.automazioni/crea_pg.js"), app);
+        fm = await crea(tp);
+      } else {
+        const ce = evalCjs(await app.vault.adapter.read("z.automazioni/create_entity.js"), app);
+        fm = await ce(tp, templateId);
+      }
+    } catch (e: any) { new Notice(`Creazione interrotta: ${e?.message ?? e}`); return; }
+
+    // Destinazione: quella scelta dal wizard (tp.file.move) o un ripiego in cartella.
+    const folder = core.folders?.[tpl.category] ?? "Inbox";
+    let dest = (movedTo ? movedTo : `${folder}/Senza nome`) + ".md";
+    for (let n = 2; app.vault.getAbstractFileByPath(dest); n++) dest = dest.replace(/( \d+)?\.md$/, ` ${n}.md`);
+    const base = dest.replace(/\.md$/, "").split("/").pop() as string;
+
+    // Corpo: rimpiazza la riga `<% await tp.user.crea_X(tp) %>` col frontmatter, e
+    // `<% tp.config.target_file.basename %>` col basename finale.
+    let content = templateContent.replace(/^<%\s*await\s+tp\.user\.[^%]*%>\s*\n?/m, fm);
+    content = content.split("<% tp.config.target_file.basename %>").join(base);
+
+    await this.ensureParent(dest);
+    const created = await app.vault.create(dest, content);
+    app.workspace.getLeaf(false).openFile(created as any);
+  }
+
+  // Crea le cartelle-genitore di un path (idempotente).
+  private async ensureParent(path: string) {
+    const dir = path.split("/").slice(0, -1).join("/");
+    if (dir && !this.app.vault.getAbstractFileByPath(dir)) {
+      try { await this.app.vault.createFolder(dir); } catch { /* già esistente */ }
+    }
   }
 }
 
