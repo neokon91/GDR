@@ -11,7 +11,6 @@ import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
-import build_site
 import publish_itch
 import release
 from _common import (
@@ -19,13 +18,29 @@ from _common import (
     _snapshot, _env, _PG_HARNESS, _run_crea_pg,
 )
 
+# Sito dei giocatori: l'UNICO esportatore è genera_sito.js (bottone in-app; la via
+# Python build_site.py è stata RITIRATA). I test guidano le sue funzioni PURE via node
+# — niente filesystem: anti-spoiler e gating di rivelazione sono tutti a livello di funzione.
+_GS = str(render.JS_DIR / "genera_sito.js")
 
+
+def _gs(js_body):
+    """Esegue `js_body` contro genera_sito.js (richiesto come `g`); ritorna il JSON su stdout."""
+    src = f"const g=require({json.dumps(_GS)});\n{js_body}"
+    res = subprocess.run(["node", "-e", src], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    return json.loads(res.stdout)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_site_markdown_to_html():
-    """Il convertitore Markdown→HTML copre il sottoinsieme delle note lore."""
+    """mdToHtml copre il sottoinsieme markdown delle note lore (link interni/esterni)."""
     md = ("## Titolo\n\nProsa con **grassetto**, *corsivo* e `codice`.\n\n"
           "- uno\n- due\n\nVai a [[Forte Cenere|forte]] o [esterno](https://x.io).")
-    links = {"forte cenere": "forte-cenere.html"}
-    html = build_site.markdown_to_html(md, lambda n: links.get(n.lower()))
+    html = _gs(
+        f"const md={json.dumps(md)};"
+        'const link=n=>({"forte cenere":"forte-cenere.html"})[String(n).toLowerCase()]||null;'
+        "process.stdout.write(JSON.stringify(g.mdToHtml(md, link, ()=>null)));")
     assert "<h2>Titolo</h2>" in html
     assert "<strong>grassetto</strong>" in html and "<em>corsivo</em>" in html
     assert "<code>codice</code>" in html
@@ -34,29 +49,30 @@ def test_site_markdown_to_html():
     assert '<a href="https://x.io" rel="noopener">esterno</a>' in html
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_site_strip_body_removes_dynamic_and_callouts():
-    """strip_body toglie blocchi recintati, Templater, Meta Bind, callout (incl.
-    GM) e l'H1, lasciando la sola prosa player-safe."""
+    """stripBody toglie blocchi recintati, Templater, Meta Bind, callout (incl. GM) e
+    l'H1, lasciando la sola prosa player-safe."""
     body = ("# Titolo\n\nProsa visibile.\n\n"
             "> [!segreto]- Segreto\n> contenuto top secret\n\n"
             "> [!tavolo] Uso al tavolo\n> mossa del DM\n\n"
             "```dataview\nlist\n```\n\n"
             "````tabs\n--- T\n```js-engine\nreturn x\n```\n````\n\n"
             "`INPUT[text:foo]` `VIEW[{bar}]`\n")
-    out = build_site.strip_body(body)
+    out = _gs(f"process.stdout.write(JSON.stringify(g.stripBody({json.dumps(body)})));")
     assert "Prosa visibile." in out
     for leak in ["top secret", "mossa del DM", "dataview", "js-engine", "INPUT[", "VIEW[", "Titolo"]:
         assert leak not in out, leak
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_strip_body_extracts_prosa_region():
-    """La prosa-giocatore vive in QUALSIASI tab del layout (Lore, ma anche Scheda/Statblock
-    per il PG): wizard_body la marca con %%prosa%%…%%/prosa%% e strip_body estrae SOLO quella.
-    Così la prosa raggiunge il sito ovunque sia, e tutto il resto fuori dai marcatori
-    (statblock, tabelle, righe-etichetta, pannelli) NON trapela — anche se viene PRIMA."""
+    """La prosa-giocatore vive in QUALSIASI tab (Lore, ma anche Scheda/Statblock per il
+    PG): wizard_body la marca con %%prosa%%…%%/prosa%% e stripBody estrae SOLO quella.
+    Tutto il resto fuori dai marcatori (statblock, tabelle, pannelli) NON trapela."""
     body = ("# `=this.nome`\n\n"
             "````tabs\n"
-            "--- 📋 Scheda\n\n"                                # tab PRIMA della prosa (come il PG)
+            "--- 📋 Scheda\n\n"
             "**Caratteristiche**\n\n| Car | Val |\n|:--|:-:|\n| FOR | 8 |\n\n```js-engine\nx\n```\n\n"
             "--- 📖 Lore\n\n"
             "%%prosa%%\n"
@@ -67,143 +83,95 @@ def test_strip_body_extracts_prosa_region():
             "--- 🎲 Al tavolo\n\n"
             "**⏳ Fronte** — clock `INPUT[number:clock]`\n"
             "````\n")
-    out = build_site.strip_body(body)
-    assert "## Conflitto centrale" in out                      # heading della prosa marcata
-    assert "La marea nera sale sotto i moli di Aster." in out  # prosa → sito
-    assert "## Vuota" not in out                               # sezione vuota → droppata
-    for leak in ["Caratteristiche", "| Car", "| FOR", "js-engine",   # tab Scheda (fuori marcatori)
-                 "⏳ Fronte", "clock", "INPUT[", "spunto del DM", "%%"]:  # chrome / marcatori
+    out = _gs(f"process.stdout.write(JSON.stringify(g.stripBody({json.dumps(body)})));")
+    assert "## Conflitto centrale" in out
+    assert "La marea nera sale sotto i moli di Aster." in out
+    assert "## Vuota" not in out
+    for leak in ["Caratteristiche", "| Car", "| FOR", "js-engine",
+                 "⏳ Fronte", "clock", "INPUT[", "spunto del DM", "%%"]:
         assert leak not in out, leak
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_strip_body_drops_empty_headings():
-    """Una sezione del wizard lasciata in bianco (heading + solo spunto-callout, poi
-    strippato) non deve restare come titolo nudo sul sito. Un heading con prosa resta;
-    uno con soli sotto-heading vuoti cade; se un discendente ha prosa, l'antenato resta."""
+    """Una sezione del wizard lasciata in bianco non deve restare come titolo nudo sul
+    sito. Un heading con prosa resta; uno con soli sotto-heading vuoti cade; se un
+    discendente ha prosa, l'antenato resta."""
     body = ("## Piena\nHa del contenuto.\n\n"
             "## Vuota\n> [!question]- 💡 mai compilata\n\n"
             "## Genitore\n### Figlia piena\nProsa della figlia.\n\n"
             "## Genitore vuoto\n### Figlia vuota\n\n## Coda vuota\n")
-    out = build_site.strip_body(body)
+    out = _gs(f"process.stdout.write(JSON.stringify(g.stripBody({json.dumps(body)})));")
     assert "## Piena" in out and "Ha del contenuto." in out
-    assert "## Genitore" in out and "### Figlia piena" in out  # antenato di prosa → resta
+    assert "## Genitore" in out and "### Figlia piena" in out
     for gone in ["## Vuota", "## Genitore vuoto", "### Figlia vuota", "## Coda vuota"]:
         assert gone not in out, gone
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_site_is_public():
-    assert build_site.is_public({"categoria": "luogo"})
-    assert not build_site.is_public({"categoria": "luogo", "visibilita": "dm"})
-    assert not build_site.is_public({"categoria": "luogo", "pubblico": False})
-    assert not build_site.is_public({"categoria": "sessione"})  # log/strumento DM
-    assert not build_site.is_public({})  # senza categoria
+    """isPublic: le note lore sono pubbliche; `visibilita: dm`, `pubblico: false`, le
+    categorie-strumento (sessione) e le note senza categoria NON escono sul sito."""
+    r = _gs(
+        'const c=x=>g.isPublic(x);'
+        'process.stdout.write(JSON.stringify([c({categoria:"luogo"}),'
+        ' c({categoria:"luogo",visibilita:"dm"}), c({categoria:"luogo",pubblico:false}),'
+        ' c({categoria:"sessione"}), c({})]));')
+    assert r == [True, False, False, False, False]
 
 
-def test_build_site_no_spoiler_leak(tmp_path):
-    """Integrazione: il sito generato NON contiene mai campi GM (uso_al_tavolo/
-    gancio/prossima_mossa/pressione/segreto), esclude le note `visibilita: dm`, e
-    scrive index.html + site.css."""
-    nd = tmp_path / "vault" / "Mondi" / "Mondo X"
-    nd.mkdir(parents=True)
-    (nd / "Cripta.md").write_text(
-        "---\nnome: Cripta\ncategoria: luogo\ntipo: rovina\nmondo: '[[Mondo X]]'\n"
-        "uso_al_tavolo: TRAPPOLA_DM\ngancio: AGGANCIO_DM\nprossima_mossa: MOSSA_DM\n"
-        "pressione: 8\nsegreto: VERITA_NASCOSTA\nclima: gelido\n---\n\n"
-        "# Cripta\n\nUna cripta antica. Tira `dice: [[Tabella DM]]` ROLL_DM qui.\n\n"
-        "> [!segreto]- Segreto\n> ALTRO_SEGRETO\n",
-        encoding="utf-8")
-    (nd / "Privata.md").write_text(
-        "---\nnome: Privata\ncategoria: luogo\nvisibilita: dm\nmondo: '[[Mondo X]]'\n---\n\nNON_DEVE_USCIRE\n",
-        encoding="utf-8")
-    out = tmp_path / "site"
-    n = build_site.build_site(CORE, tmp_path / "vault", out)
-    assert n == 1  # Privata (visibilita: dm) esclusa
-    blob = "\n".join(p.read_text(encoding="utf-8") for p in out.glob("*.html"))
-    assert "Una cripta antica." in blob and "gelido" in blob
-    for spoiler in ["TRAPPOLA_DM", "AGGANCIO_DM", "MOSSA_DM", "VERITA_NASCOSTA", "ALTRO_SEGRETO", "NON_DEVE_USCIRE"]:
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_page_model_no_spoiler_leak():
+    """Il MODELLO di pagina (pageModel) non contiene mai i campi GM (uso_al_tavolo/
+    gancio/prossima_mossa/segreto) né i tiri Dice Roller: l'anti-spoiler è a livello di
+    funzione, prima ancora del rendering HTML."""
+    fm = {"nome": "Cripta", "categoria": "luogo", "tipo": "rovina", "mondo": "[[Mondo X]]",
+          "uso_al_tavolo": "TRAPPOLA_DM", "gancio": "AGGANCIO_DM", "prossima_mossa": "MOSSA_DM",
+          "pressione": 8, "segreto": "VERITA_NASCOSTA", "clima": "gelido"}
+    body = ("# Cripta\n\nUna cripta antica. Tira `dice: [[Tabella DM]]` ROLL_DM qui.\n\n"
+            "> [!segreto]- Segreto\n> ALTRO_SEGRETO\n")
+    model = _gs(
+        f"const CORE={json.dumps(CORE)};const fm={json.dumps(fm)};const body={json.dumps(body)};"
+        'process.stdout.write(JSON.stringify(g.pageModel(CORE, fm, body, "Cripta", ()=>null, ()=>null, 0)));')
+    blob = json.dumps(model, ensure_ascii=False)
+    assert "Una cripta antica." in blob and "gelido" in blob     # prosa e fatti player-safe presenti
+    for spoiler in ["TRAPPOLA_DM", "AGGANCIO_DM", "MOSSA_DM", "VERITA_NASCOSTA", "ALTRO_SEGRETO"]:
         assert spoiler not in blob, spoiler
-    assert "dice:" not in blob and "Tabella DM" not in blob  # i tiri Dice Roller (DM) non trapelano (P3)
-    assert (out / "index.html").is_file() and (out / "site.css").is_file()
+    assert "dice:" not in blob and "Tabella DM" not in blob
 
 
-# --- Mappa mondo-esempio + asset sito ---------------------------------------
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_site_image_embed_preserves_underscores():
-    """L'embed-immagine diventa `<img>` con la src INTATTA (regressione: il filtro
-    corsivo mangiava gli `_` dentro src/alt). Gli embed di NOTE restano inerti."""
-    resolved = {}
-
-    def image(name):
-        if Path(name).suffix.lower() in build_site._IMG_EXT:
-            resolved[name] = f"media/{Path(name).name}"
-            return resolved[name]
-        return None
-
+    """L'embed-immagine diventa `<img>` con la src INTATTA (regressione: il corsivo
+    mangiava gli `_`). Gli embed di NOTE restano inerti."""
     md = "Vedi ![[mappa_del_sale.svg|Mappa]] e ![[Una Nota]] qui."
-    html = build_site.markdown_to_html(md, lambda n: None, image)
+    html = _gs(
+        f"const md={json.dumps(md)};"
+        "const IMG=['.png','.svg','.jpg','.jpeg','.webp','.gif','.avif'];"
+        "const image=n=>IMG.some(e=>String(n).toLowerCase().endsWith(e))?('media/'+String(n).split('/').pop()):null;"
+        "process.stdout.write(JSON.stringify(g.mdToHtml(md, ()=>null, image)));")
     assert '<img src="media/mappa_del_sale.svg" alt="Mappa" loading="lazy">' in html
-    assert "<em>" not in html and "media/mappa<em>" not in html  # underscore intatti
-    assert "Una Nota" not in html  # embed di nota: inerte, sparisce
-    assert resolved == {"mappa_del_sale.svg": "media/mappa_del_sale.svg"}
+    assert "<em>" not in html                                    # underscore intatti (niente corsivo)
+    assert "Una Nota" not in html                                # embed di nota: inerte, sparisce
 
 
-def test_build_site_copies_referenced_assets(tmp_path):
-    """Integrazione: mappa embeddata nel corpo e ritratto in frontmatter →
-    <img src="media/..."> nelle pagine e i file copiati in <out>/media/."""
-    vault = tmp_path / "vault"
-    media = vault / "Media"
-    media.mkdir(parents=True)
-    (media / "mappa_del_borgo.png").write_bytes(b"\x89PNG\r\n\x1a\n" + b"0" * 16)
-    (media / "sigillo.png").write_bytes(b"\x89PNG\r\n\x1a\n" + b"0" * 16)
-    nd = vault / "Mondi" / "Mondo Y"
-    nd.mkdir(parents=True)
-    (nd / "Borgo.md").write_text(
-        "---\nnome: Borgo\ncategoria: luogo\ntipo: insediamento\nmondo: '[[Mondo Y]]'\n"
-        "ritratto: '[[sigillo.png]]'\n---\n\n# Borgo\n\nUn borgo fluviale.\n\n"
-        "## Mappa\n\n![[mappa_del_borgo.png]]\n", encoding="utf-8")
-    out = tmp_path / "site"
-    n = build_site.build_site(CORE, vault, out)
-    assert n == 1
-    html = (out / "borgo.html").read_text(encoding="utf-8")
-    assert '<img src="media/mappa_del_borgo.png"' in html      # mappa dal corpo
-    assert 'class="portrait" src="media/sigillo.png"' in html  # ritratto da frontmatter
-    assert (out / "media" / "mappa_del_borgo.png").is_file()
-    assert (out / "media" / "sigillo.png").is_file()
-
-
-# --- Rivelazione progressiva (sito-giocatori v2) ----------------------------
-def test_reveal_rank_helpers():
-    """Tier ordinati: nota senza/ignoto → pubblico(0); build `tutto` → max."""
-    assert build_site.note_reveal_rank({}) == 0
-    assert build_site.note_reveal_rank({"rivelazione": "segreto"}) == 2
-    assert build_site.note_reveal_rank({"rivelazione": "boh"}) == 0   # ignoto → pubblico
-    assert build_site.build_reveal_rank("pubblico") == 0
-    assert build_site.build_reveal_rank("incontrato") == 1
-    assert build_site.build_reveal_rank("tutto") == 2
-    assert build_site.build_reveal_rank(None) == 0
-
-
-def test_site_reveal_gating(tmp_path):
-    """Il gate progressivo include una nota se il suo tier <= livello del build;
-    le note non taggate (pubblico) escono sempre (retro-compatibile)."""
-    nd = tmp_path / "vault" / "Mondi" / "Mondo Z"
-    nd.mkdir(parents=True)
-    notes = {"Piazza": "", "Cripta": "incontrato", "Verita": "segreto"}
-    for nome, tier in notes.items():
-        riv = f"rivelazione: {tier}\n" if tier else ""
-        (nd / f"{nome}.md").write_text(
-            f"---\nnome: {nome}\ncategoria: luogo\nmondo: '[[Mondo Z]]'\n{riv}---\n\nProsa di {nome}.\n",
-            encoding="utf-8")
-    out = tmp_path / "site"
-    # pubblico (default): solo Piazza; 2 da rivelare.
-    assert build_site.build_site(CORE, tmp_path / "vault", out, reveal="pubblico") == 1
-    assert "2 voci ancora da rivelare" in (out / "index.html").read_text(encoding="utf-8")
-    assert (out / "piazza.html").is_file() and not (out / "cripta.html").is_file()
-    # incontrato: Piazza + Cripta; Verita ancora no.
-    assert build_site.build_site(CORE, tmp_path / "vault", out, reveal="incontrato") == 2
-    assert (out / "cripta.html").is_file() and not (out / "verita.html").is_file()
-    # tutto: tutte e tre.
-    assert build_site.build_site(CORE, tmp_path / "vault", out, reveal="tutto") == 3
-    assert (out / "verita.html").is_file()
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_reveal_rank_and_gating():
+    """Tier di rivelazione ordinati (noteRevealRank/buildRevealRank): nota senza/ignoto
+    → pubblico(0); build `tutto` → max. Il gate include una nota se isPublic e il suo
+    tier <= livello del build (equivalente al vecchio conteggio, senza filesystem)."""
+    r = _gs(
+        'process.stdout.write(JSON.stringify({'
+        ' n0:g.noteRevealRank({}), nS:g.noteRevealRank({rivelazione:"segreto"}),'
+        ' nB:g.noteRevealRank({rivelazione:"boh"}), nI:g.noteRevealRank({rivelazione:"incontrato"}),'
+        ' b0:g.buildRevealRank("pubblico"), b1:g.buildRevealRank("incontrato"),'
+        ' b2:g.buildRevealRank("tutto"), bN:g.buildRevealRank(null)}));')
+    assert r["n0"] == 0 and r["nS"] == 2 and r["nB"] == 0 and r["nI"] == 1
+    assert r["b0"] == 0 and r["b1"] == 1 and r["b2"] == 2 and r["bN"] == 0
+    # Gate progressivo: una nota di tier T esce se T <= tier del build.
+    assert r["n0"] <= r["b0"] and not (r["nI"] <= r["b0"])        # pubblico: solo tier 0
+    assert r["nI"] <= r["b1"] and not (r["nS"] <= r["b1"])        # incontrato: 0-1
+    assert r["nS"] <= r["b2"]                                     # tutto: tutti
 
 
 def test_occhi_giocatore_dashboard():
@@ -224,44 +192,39 @@ def test_occhi_giocatore_dashboard():
 
 
 # --- Rivelazione PER-SEZIONE (callout [!rivela|tier]) ------------------------
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_strip_body_reveal_callout():
     """Un callout `[!rivela|tier]` è svelato (contenuto → prosa) se il suo tier <=
-    reveal_level; sotto resta celato. Gli altri callout sono sempre rimossi."""
+    revealLevel; sotto resta celato. Gli altri callout sono sempre rimossi."""
     body = ("Prosa pubblica.\n\n"
             "> [!rivela|segreto]- Verità\n> IL SEGRETO.\n\n"
             "> [!rivela|incontrato] Scoperta\n> COSA SI SCOPRE.\n\n"
             "> [!nota] Normale\n> callout qualsiasi (sempre fuori).\n")
-    # livello pubblico (0): nessun rivela svelato.
-    s0 = build_site.strip_body(body, 0)
-    assert "Prosa pubblica." in s0
-    assert "IL SEGRETO." not in s0 and "COSA SI SCOPRE." not in s0
-    # livello incontrato (1): solo l'incontrato.
-    s1 = build_site.strip_body(body, 1)
-    assert "COSA SI SCOPRE." in s1 and "IL SEGRETO." not in s1
-    assert "### Scoperta" in s1                       # il titolo del callout → heading
-    # livello segreto (2): entrambi.
-    s2 = build_site.strip_body(body, 2)
-    assert "IL SEGRETO." in s2 and "COSA SI SCOPRE." in s2
-    # i callout non-rivela non trapelano mai.
-    for s in (s0, s1, s2):
-        assert "callout qualsiasi" not in s
+    r = _gs(
+        f"const body={json.dumps(body)};"
+        "process.stdout.write(JSON.stringify({s0:g.stripBody(body,0), s1:g.stripBody(body,1), s2:g.stripBody(body,2)}));")
+    assert "Prosa pubblica." in r["s0"]
+    assert "IL SEGRETO." not in r["s0"] and "COSA SI SCOPRE." not in r["s0"]   # livello 0: niente
+    assert "COSA SI SCOPRE." in r["s1"] and "IL SEGRETO." not in r["s1"]        # livello 1: solo incontrato
+    assert "### Scoperta" in r["s1"]                                            # titolo callout → heading
+    assert "IL SEGRETO." in r["s2"] and "COSA SI SCOPRE." in r["s2"]            # livello 2: entrambi
+    for s in (r["s0"], r["s1"], r["s2"]):
+        assert "callout qualsiasi" not in s                                    # non-rivela: mai
 
 
-def test_site_section_reveal_integration(tmp_path):
-    """Una nota PUBBLICA con un callout `[!rivela|segreto]`: la pagina esce sempre,
-    ma il segreto compare solo a --reveal segreto."""
-    nd = tmp_path / "vault" / "Mondi" / "Mondo S"
-    nd.mkdir(parents=True)
-    (nd / "Rocca.md").write_text(
-        "---\nnome: Rocca\ncategoria: luogo\nmondo: '[[Mondo S]]'\n---\n\n"
-        "# Rocca\n\nUna rocca sul fiume.\n\n> [!rivela|segreto]- Sotto\n> CRIPTA_NASCOSTA.\n",
-        encoding="utf-8")
-    out = tmp_path / "site"
-    build_site.build_site(CORE, tmp_path / "vault", out, reveal="pubblico")
-    assert (out / "rocca.html").is_file()
-    assert "CRIPTA_NASCOSTA" not in (out / "rocca.html").read_text(encoding="utf-8")
-    build_site.build_site(CORE, tmp_path / "vault", out, reveal="segreto")
-    assert "CRIPTA_NASCOSTA" in (out / "rocca.html").read_text(encoding="utf-8")
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_page_model_section_reveal():
+    """Una nota PUBBLICA con `[!rivela|segreto]`: nel modello di pagina il segreto compare
+    solo a revealLevel >= 2 (la pagina esce comunque)."""
+    fm = {"nome": "Rocca", "categoria": "luogo", "mondo": "[[Mondo S]]"}
+    body = "# Rocca\n\nUna rocca sul fiume.\n\n> [!rivela|segreto]- Sotto\n> CRIPTA_NASCOSTA.\n"
+    r = _gs(
+        f"const CORE={json.dumps(CORE)};const fm={json.dumps(fm)};const body={json.dumps(body)};"
+        'const at=lv=>JSON.stringify(g.pageModel(CORE, fm, body, "Rocca", ()=>null, ()=>null, lv));'
+        'process.stdout.write(JSON.stringify({pub:at(0), seg:at(2)}));')
+    assert "Una rocca sul fiume." in r["pub"]                 # la pagina esce sempre
+    assert "CRIPTA_NASCOSTA" not in r["pub"]                  # segreto celato a livello pubblico
+    assert "CRIPTA_NASCOSTA" in r["seg"]                      # svelato a livello segreto
 
 
 # --- Release / distribuzione (release.py) ------------------------------------
@@ -318,64 +281,6 @@ def test_release_excludes_qa_artifacts(tmp_path):
     names = zipfile.ZipFile(zpath).namelist()
     assert not any("QA_Barbaro" in name for name in names), names
     assert "GDR-vault/Mondi/Personaggi/Eroe.md" in names, names
-
-
-@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_genera_sito_parity(tmp_path):
-    """Parità Python↔JS dell'esportatore «sito dei giocatori» (build_site.py ↔
-    genera_sito.js, il bottone in-Obsidian): sugli STESSI dati, markdown_to_html e
-    page_model danno lo STESSO risultato → le due implementazioni non divergono (come
-    il test di parità del World Board). Fixture: player_safe + regione di prosa marcata
-    %%prosa%%…%%/prosa%% dentro ````tabs (estratta ovunque viva), sezione vuota (heading
-    droppato), callout segreto (escluso) e [!rivela] (svelato), chrome fuori-marcatori
-    scartato, relazioni, ritratto, markdown inline."""
-    import build_site as bs
-    notes = [
-        {"name": "Casa Rossa", "fm": {"categoria": "fazione", "tipo": "gilda", "nome": "Casa Rossa",
-            "mondo": "[[Astaria]]", "portata": "regionale", "motto": "Niente per niente",
-            "ritratto": "rosso.png", "player_safe": "La gilda che tiene i **moli**.",
-            "alleati": ["[[Gilda del Sale]]"], "rivali": ["[[Casa Nera]]"]},
-         "body": "# Casa Rossa\n\n````tabs\n--- 📖 Lore\n\n%%prosa%%\n"
-                 "Una gilda con [[Astaria|sede]] e ![[rosso.png]].\n\n"
-                 "## Obiettivo\n> [!question]- 💡 cosa vuole?\n\nControllare i **moli** con *coltelli*.\n\n"
-                 "> [!segreto] DM\n> trama riservata\n\n> [!rivela|incontrato] Verità\n> emersa col tempo\n\n"
-                 "## Metodo\n> [!question]- 💡 mai compilata\n\n%%/prosa%%\n"
-                 "--- 🎲 Al tavolo\n\n**⏳ Fronte** — clock `INPUT[number:clock]`\n\n"
-                 "```dataview\nlist\n```\n````"},
-        {"name": "Pontebello", "fm": {"categoria": "luogo", "tipo": "insediamento",
-            "nome": "Pontebello", "mondo": "[[Astaria]]", "clima": "temperato", "popolazione": "5.000"},
-         "body": "Prosa **semplice** di un luogo.\n\n```dataview\nx\n```\n\nRiga finale con [esterno](https://z.io)."},
-    ]
-    md = ["## Titolo\n\n**b** *i* `c` con [[X|alias]] e link", "- uno\n- due\n\n1. a\n2. b"]
-    known = {"astaria", "gilda del sale", "casa nera", "pontebello", "x"}
-    IMG = (".png", ".svg", ".jpg", ".jpeg", ".webp", ".gif", ".avif")
-    link = lambda n: bs.slugify(n) + ".html" if str(n).lower() in known else None
-    image = lambda n: "media/" + str(n).split("/")[-1] if str(n).endswith(IMG) else None
-    py = {
-        "models": [bs.page_model(CORE, n["fm"], n["body"], n["name"], link, image, 1) for n in notes],
-        "md": [bs.markdown_to_html(x, link, image) for x in md],
-    }
-    harness = tmp_path / "parity.js"
-    harness.write_text(
-        f'const g=require({json.dumps(str(render.JS_DIR / "genera_sito.js"))});'
-        f'const CORE={json.dumps(CORE, ensure_ascii=False)};'
-        f'const notes={json.dumps(notes, ensure_ascii=False)};'
-        f'const md={json.dumps(md, ensure_ascii=False)};'
-        f'const known=new Set({json.dumps(sorted(known))});'
-        'const IMG=[".png",".svg",".jpg",".jpeg",".webp",".gif",".avif"];'
-        'const link=n=>known.has(String(n).toLowerCase())?g.slugify(n)+".html":null;'
-        'const image=n=>IMG.some(e=>String(n).endsWith(e))?"media/"+String(n).split("/").pop():null;'
-        'process.stdout.write(JSON.stringify({'
-        'models:notes.map(n=>g.pageModel(CORE,n.fm,n.body,n.name,link,image,1)),'
-        'md:md.map(x=>g.mdToHtml(x,link,image))}));',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    js = json.loads(res.stdout)
-    norm = lambda o: json.dumps(o, ensure_ascii=False, sort_keys=True)
-    assert norm(js["md"]) == norm(py["md"]), "markdown_to_html diverge JS↔Python"
-    for i, (pm, jm) in enumerate(zip(py["models"], js["models"])):
-        assert norm(jm) == norm(pm), f"page_model diverge su «{notes[i]['name']}»\nPY {norm(pm)}\nJS {norm(jm)}"
 
 
 def test_third_party_licenses_complete():
@@ -685,8 +590,8 @@ def test_publish_itch_helpers(monkeypatch):
     import json as _json
     pkg = _json.loads((render.ROOT / "package.json").read_text(encoding="utf-8"))
     assert publish_itch.version() == pkg["version"]
-    # canali attesi (vault + sito)
-    assert {c for c, _ in publish_itch.CHANNELS} == {"vault", "site"}
+    # Solo il canale vault: il sito non è più un artefatto di release (in-app via genera_sito.js).
+    assert {c for c, _ in publish_itch.CHANNELS} == {"vault"}
 
 
 def test_callout_appearance_css_bare_icons():

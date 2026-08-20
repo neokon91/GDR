@@ -62,7 +62,6 @@ from build_srd import (  # noqa: F401 (re-export per i test)
     srd_statblock_yaml,
 )
 from build_personaggio import build_personaggio_options  # noqa: F401 (re-export)
-from build_site import SITE_OUT, build_site  # noqa: F401 (re-export per i test)
 from validate import (  # noqa: F401 (re-export per i test)
     CORE_ONLY_SECTIONS,
     PARTITIONED_SECTIONS,
@@ -320,9 +319,9 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
     for template in templates:
         if not (JS_DIR / f"crea_{template['id']}.js").is_file():
             write_text(VAULT / "z.automazioni" / f"crea_{template['id']}.js", crea_wrapper_js(template))
-    # site.css per l'esportatore JS del sito-giocatori (genera_sito.js): sorgente
-    # unica SiteJinja/site.css (la stessa di build_site.py), spedita nel vault così
-    # il bottone «Genera sito giocatori» la emette accanto alle pagine HTML.
+    # site.css per l'esportatore JS del sito-giocatori (genera_sito.js, l'UNICO
+    # esportatore: la via Python è stata ritirata). Sorgente SiteJinja/site.css,
+    # spedita nel vault così il bottone «Genera sito giocatori» la emette accanto alle pagine HTML.
     site_css = SOURCE / "SiteJinja" / "site.css"
     if site_css.is_file():
         write_text(VAULT / "z.automazioni" / "site.css", site_css.read_text(encoding="utf-8"))
@@ -455,14 +454,6 @@ def _dispatch(args: argparse.Namespace) -> int:
         return 0
     if args.check:
         return check()
-    if args.site:
-        if not (VAULT / "Mondi").is_dir():
-            print("Nessun contenuto in Mondi/: esegui prima `npm run build`.")
-            return 1
-        pages = build_site(load_core(), VAULT, SITE_OUT, reveal=args.reveal)
-        print(f"Sito giocatori: {pages} pagine in {SITE_OUT.relative_to(ROOT)}/ "
-              f"(rivelazione: {args.reveal}) — apri index.html o pubblica la cartella.")
-        return 0
 
     clean()
     rendered = build()
@@ -480,10 +471,6 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Genera il vault Obsidian GDR in dist/GDR-vault da sorgenti YAML/Jinja/JS.")
     parser.add_argument("--clean", action="store_true", help="Rimuove solo gli artefatti generati (non i contenuti/plugin).")
     parser.add_argument("--check", action="store_true", help="Valida YAML/Jinja senza scrivere output.")
-    parser.add_argument("--site", action="store_true", help="Genera il sito statico dei giocatori (spoiler-free, read-only) in dist/GDR-site dal vault.")
-    parser.add_argument("--reveal", choices=["pubblico", "incontrato", "segreto", "tutto"],
-                        default="pubblico",
-                        help="Livello di rivelazione del sito-giocatori: include le note col campo `rivelazione` fino a quel tier (default: pubblico).")
     args = parser.parse_args()
 
     # Un refuso nelle sorgenti YAML editate dall'utente (virgola/indentazione) o un

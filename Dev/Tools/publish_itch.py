@@ -23,7 +23,10 @@ from pathlib import Path
 import common
 
 # Canali itch → artefatto: il canale è l'etichetta della "release line" su itch.
-CHANNELS = (("vault", "GDR-vault-v{ver}.zip"), ("site", "GDR-site-v{ver}.zip"))
+# Solo il vault: il sito dei giocatori non è più un artefatto di release (lo genera
+# il DM in-app dal bottone «Genera sito»). Il canale itch «site» resta storicizzato ma non
+# più aggiornato da qui.
+CHANNELS = (("vault", "GDR-vault-v{ver}.zip"),)
 
 
 def version() -> str:

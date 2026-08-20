@@ -11,9 +11,10 @@ release — non si committano.
 | Artefatto | Cos'è |
 |---|---|
 | `GDR-vault-v<ver>.zip` | Il **vault Obsidian pronto** (plugin inclusi). Si scompatta in una cartella `GDR-vault/` → «Apri cartella come vault». |
-| `GDR-site-v<ver>.zip` | Il **sito dei giocatori** statico (spoiler-free). Demo del differenziatore; pubblicabile su Pages/Netlify. |
 
-Lo stato locale (workspace, cache, `.DS_Store`) è escluso, così lo zip è pulito.
+Lo stato locale (workspace, cache, `.DS_Store`) è escluso, così lo zip è pulito. *(Il **sito
+dei giocatori** non è più un artefatto di release: lo genera il DM in-app dal bottone «Genera
+sito» — [[Occhi del giocatore]] — sul suo mondo; vedi README.)*
 
 I **plugin sono bundlati in modo riproducibile e pinnato**: `release.py` invoca
 `Dev/Tools/fetch_plugins.py`, che scarica i plugin con `repo`+`version` in
@@ -33,7 +34,7 @@ uguale da un **clone pulito**. Un **gate** (`assert_critical_present`) fa **fall
 4. **Pacchetto**: `npm run dist`. Stampa anche il comando `gh` pronto.
 5. **Pubblica** (GitHub):
    ```
-   gh release create v<ver> dist/GDR-vault-v<ver>.zip dist/GDR-site-v<ver>.zip \
+   gh release create v<ver> dist/GDR-vault-v<ver>.zip \
      --title "GDR v<ver>" --notes-file CHANGELOG.md
    ```
    In alternativa, o in parallelo, **itch.io** (vetrina + *name-your-price*) — sotto.
@@ -57,8 +58,7 @@ Il caricamento è automatizzato con **butler**, la CLI ufficiale di itch.
 ```
 npm run publish:itch
 ```
-Fa build+zip e poi `butler push` dei due artefatti su due canali:
-`…:vault` (il vault Obsidian pronto) e `…:site` (il sito dei giocatori), versionati con la
+Fa build+zip e poi `butler push` del vault sul canale `…:vault` (il vault Obsidian pronto), versionato con la
 `version` di package.json. itch tiene lo storico dei build per canale.
 
 > **Turnkey vs lite**: il vault include i plugin, scaricati e **pinnati** da

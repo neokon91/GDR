@@ -194,4 +194,4 @@ ciò che non li supera, non ciò che il mondo richiede davvero.
 
 > **Campi-frontmatter fuori dal modello**: alcune chiavi che l'utente scrive nelle note non
 > entrano in `core` ma sono lette da altri strati — es. `visibilita: dm` / `pubblico: false`
-> escludono la nota dal **sito dei giocatori** (`build_site.is_public`).
+> escludono la nota dal **sito dei giocatori** (`genera_sito.isPublic`).

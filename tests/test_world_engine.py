@@ -715,7 +715,3 @@ def test_append_turno_log(tmp_path):
     assert out.index("2026-06-08") < out.index("2026-06-01")  # più recente in cima
 
 
-# --- Sito dei giocatori (build_site) ----------------------------------------
-import build_site  # noqa: E402
-
-

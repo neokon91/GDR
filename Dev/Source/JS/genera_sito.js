@@ -510,4 +510,6 @@ genera_sito.stripBody = stripBody;
 genera_sito.mdToHtml = mdToHtml;
 genera_sito.isPublic = isPublic;
 genera_sito.slugify = slugify;
+genera_sito.noteRevealRank = noteRevealRank;
+genera_sito.buildRevealRank = buildRevealRank;
 module.exports = genera_sito;

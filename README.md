@@ -63,25 +63,25 @@ Dev/Source/{YAML,Jinja,JS}  ──►  Dev/Tools/render.py  ──►  dist/GDR-
 |---|---|
 | `npm run check` | Valida YAML/Jinja e `node --check` sui JS. **Non scrive.** |
 | `npm run build` | Genera il vault in `dist/GDR-vault/` (non distruttivo). |
-| `npm run site` | Genera il **sito dei giocatori** (statico, spoiler-free) in `dist/GDR-site/`. |
-| `npm run dist` | Confeziona gli **zip di release** (vault turnkey + sito) in `dist/`. Vedi [releasing](docs/releasing.md). |
+| `npm run dist` | Confeziona lo **zip di release** (vault turnkey) in `dist/`. Vedi [releasing](docs/releasing.md). |
 | `npm run clean` | Rimuove solo gli artefatti generati (mai `.obsidian`/contenuti). |
 
 Verifica sempre con `npm run check` o un render standalone a stdout; il `build`
 scrive sul vault Obsidian reale.
 
-### Sito dei giocatori (`npm run site`)
+### Sito dei giocatori (in-app, un clic)
 
-Esporta da `dist/GDR-vault/Mondi/` un **sito statico HTML** navigabile, pensato per i
-**giocatori**: una voce per nota di worldbuilding (fatti, prosa, relazioni linkate),
-**senza spoiler** e **read-only**. Aggira il limite di Obsidian Publish (che non rende
-i plugin dinamici Dataview/Meta Bind/JS Engine): qui Dataview/Meta Bind/Templater/
-js-engine, i callout `segreto` e i campi del DM (`uso_al_tavolo`/`gancio`/`pressione`/
-`prossima_mossa`/`conseguenza`) sono **rimossi a monte**. Output in `dist/GDR-site/`
-(`index.html` + una pagina per nota + `site.css`): aprilo in locale o pubblica la
-cartella su GitHub Pages/Netlify. Per **nascondere** una nota intera ai giocatori:
-`visibilita: dm` (o `pubblico: false`) nel frontmatter. Implementazione in
-[`Dev/Tools/build_site.py`](Dev/Tools/build_site.py), template in `Dev/Source/SiteJinja/`.
+Un **sito statico HTML** navigabile, pensato per i **giocatori**: una voce per nota di
+worldbuilding (fatti, prosa, relazioni linkate), **senza spoiler** e **read-only**. Si
+genera **dentro Obsidian** (niente terminale): apri **Occhi del giocatore** e premi
+**Genera sito** (scegli il livello di rivelazione). Aggira il limite di Obsidian Publish
+(che non rende i plugin dinamici Dataview/Meta Bind/JS Engine): Dataview/Meta Bind/
+Templater/js-engine, i segreti e i campi del DM (`uso_al_tavolo`/`gancio`/`pressione`/
+`prossima_mossa`/`conseguenza`) sono **rimossi a monte**. Output nella cartella
+`Sito-giocatori/` del vault (`index.html` + una pagina per nota + `site.css`): aprilo in
+locale o pubblica la cartella su GitHub Pages/Netlify. Per **nascondere** una nota intera
+ai giocatori: `visibilita: dm` (o `pubblico: false`) nel frontmatter. Implementazione in
+[`Dev/Source/JS/genera_sito.js`](Dev/Source/JS/genera_sito.js) (l'unico esportatore).
 
 ## Documentazione
 

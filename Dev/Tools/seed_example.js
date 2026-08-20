@@ -51,7 +51,7 @@ const write = (rel, text) => {
 
 // Riempie le SEZIONI ## del corpo-modello con la prosa della demo (l'area-scrittura
 // sotto lo spunto), così le note-esempio mostrano prosa vera sul sito-giocatori, che
-// ora la legge dal corpo (build_site.strip_body). `fills` = { "Titolo sezione": "prosa" }.
+// ora la legge dal corpo (genera_sito.stripBody). `fills` = { "Titolo sezione": "prosa" }.
 // Le sezioni assenti restano vuote (lo strip le toglie dal sito). Un titolo che combacia
 // con un callout segreto ([!rivela|segreto]) riceve la prosa DENTRO il callout (gated per tier).
 function fillBody(body, fills) {

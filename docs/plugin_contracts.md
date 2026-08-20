@@ -21,7 +21,7 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
 | **Calendarium** | Parsing eventi (`write_calendarium`: `autoParse`/`parseDates`/`eventFrontmatter` + `inlineEventsTag: #cronologia`) **+ ponte modello→calendario**: `evento` emette `fc-date` (callout *Calendario*, macro `calendario()`); `epoca` emette `fc-date`+`fc-end` (intervallo, `calendario(range=true)`). Le chiavi `fc-*` sono whitelisted in `validate.INTEROP_FIELDS` (trattino voluto). Il **calendario** (mesi/ere) è contenuto per-mondo: creato in-app dai preset (opt-in). | `write_calendarium()`, macro `calendario()` |
 | **Folder Notes** | Una **nota-cartella** auto-indice per categoria (`Mondi/<X>/<X>.md`, resa con `index.md.j2`): cliccare la cartella apre l'indice di quella categoria. Config allineata (`insideFolder`, `{{folder_name}}`, `hideFolderNote`). | `folder_index_pages()`, `write_folder_notes()` |
 | **Iconic** | Successore mantenuto di Iconize (deprecato 2025). La pipeline **non** inietta config (formato non documentato): icone-cartella nell'esploratore impostate dalla UI di Iconic. Le emoji per categoria (`folder_icons`) restano usate a costo-zero nei **titoli** di folder-note e hub. | `plugins.yaml:folder_icons` (solo titoli) |
-| **Callout Manager** | Aggiunge i callout GDR custom (`tavolo`/`gancio`/`segreto`: id/color/icon) in `callouts.custom`; degradano a standard se assenti. | `plugins.yaml:callouts` |
+| **Callout Manager** | Aggiunge i callout GDR custom (`tavolo`/`gancio`/`rivela`/`infobox`…: id/color/icon) in `callouts.custom`; degradano a standard se assenti. | `plugins.yaml:callouts` |
 | **Bookmarks** (core) | Aggiunge (senza rimuovere) Home + le pagine-indice (`.md` + `.base`) + l'indice SRD. | `pages.yaml` |
 | **community-plugins.json** | Union degli id dei plugin dichiarati. | `plugins.yaml:plugins` |
 
@@ -50,8 +50,8 @@ scrive config — si usano a mano nelle note. Il punto d'aggancio comune è il c
 
 ## Sito dei giocatori (output separato)
 
-`render.py --site` (`npm run site`) genera un **sito statico HTML spoiler-free** in
-`dist/GDR-site/` dalle note di `Mondi/` (`build_site.py`). Non è un plugin: è un secondo
+Il bottone in-app **«Genera sito»** (`genera_sito.js`, l'unico esportatore) genera un **sito
+statico HTML spoiler-free** in `Sito-giocatori/` dalle note di `Mondi/`. Non è un plugin: è un secondo
 output della pipeline, pubblicabile (GitHub Pages) o apribile in locale. Esclude per
 costruzione i callout `segreto`, i campi del DM (`uso_al_tavolo`/`gancio`/`pressione`/
 `conseguenza`), i blocchi dinamici (Meta Bind/Dataview/JS Engine) e i tiri `dice:`, più le

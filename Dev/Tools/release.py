@@ -18,7 +18,6 @@ from pathlib import Path
 
 import common
 import fetch_plugins
-from build_site import SITE_OUT
 
 # Stato locale/utente da NON spedire: layout dei pannelli, cache, file di sistema.
 _EXCLUDE_NAMES = {".DS_Store", "workspace.json", "workspace-mobile.json",
@@ -63,13 +62,13 @@ def zip_tree(src: Path, zip_path: Path, arc_root: str) -> int:
 
 
 def build_artifacts() -> None:
-    """Build pulita del vault + sito dei giocatori (via render.py CLI). I plugin
-    pinnati sono già stati scaricati (fetch_plugins) PRIMA di qui, così la build
-    di render.py — che inietta la config .obsidian solo per i plugin già presenti
-    (merge_plugin_config) — configura anche i plugin appena bundlati."""
+    """Build pulita del vault (via render.py CLI). I plugin pinnati sono già stati
+    scaricati (fetch_plugins) PRIMA di qui, così la build di render.py — che inietta
+    la config .obsidian solo per i plugin già presenti (merge_plugin_config) —
+    configura anche i plugin appena bundlati. NB: il sito dei giocatori NON è più un
+    artefatto di release: lo genera il DM in-app dal bottone «Genera sito» (genera_sito.js)."""
     render = str(common.ROOT / "Dev" / "Tools" / "render.py")
     subprocess.run([sys.executable, render], check=True)
-    subprocess.run([sys.executable, render, "--site"], check=True)
 
 
 def main() -> int:
@@ -98,8 +97,6 @@ def main() -> int:
     targets = [
         (common.VAULT, dist / f"GDR-vault-v{ver}.zip", "GDR-vault",
          "vault pronto: scompatta e «Apri cartella come vault» in Obsidian"),
-        (SITE_OUT, dist / f"GDR-site-v{ver}.zip", "GDR-site",
-         "sito dei giocatori statico: apri index.html o pubblicalo"),
     ]
     made: list[Path] = []
     print(f"Release v{ver}:")

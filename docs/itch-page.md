@@ -45,7 +45,7 @@ Non «organizza la campagna»: **giocala**.
   con le caselle già collegate ai tuoi Luoghi/Fazioni/Missioni.
 
 ### 👥 Condividi col gruppo, senza spoiler
-- genera un **sito statico per i giocatori** (`npm run site`): sola lettura, niente strumenti del DM,
+- genera un **sito statico per i giocatori** (un clic in-app, «Genera sito»): sola lettura, niente strumenti del DM,
   con la **prosa vera** delle tue note;
 - **rivelazione progressiva**: sveli il mondo *per gradi* man mano che la campagna procede — anche
   **singole sezioni** di una nota restano nascoste finché non è il momento.
