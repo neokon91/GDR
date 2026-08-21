@@ -1,5 +1,11 @@
 /* Cruscotto DM (ItemView) — look "da app", tutto su variabili del tema. */
-.gdr-cruscotto { padding: 4px 10px 16px; }
+.gdr-cruscotto { padding: 4px 14px 20px; max-width: 1200px; margin: 0 auto; }
+
+/* Griglia responsive: multi-colonna a piena pagina (dashboard), impilata se stretta
+   (pannello laterale) — auto-fit su una larghezza minima per colonna. */
+.gdr-crusc-grid { display: grid; gap: 12px; align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.gdr-crusc-grid > .gdr-crusc-sec { margin-top: 0; }
 .gdr-crusc-head { position: sticky; top: 0; background: var(--background-primary);
   padding-top: 6px; z-index: 1; border-bottom: 1px solid var(--background-modifier-border); }
 .gdr-crusc-head h3 { margin: 0 0 6px; }

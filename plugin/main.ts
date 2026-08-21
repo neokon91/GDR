@@ -14,8 +14,27 @@
  * dimostrativo) e render.py emette ```gdr invece di js-engine.
  */
 import {
-  App, ItemView, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, SuggestModal, WorkspaceLeaf,
+  App, ItemView, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, PluginSettingTab,
+  Setting, SuggestModal, WorkspaceLeaf,
 } from "obsidian";
+
+// --- Impostazioni del plugin (persistite via loadData/saveData) ---------------------------
+interface GdrSettings {
+  sezioni: { party: boolean; combattimento: boolean; dadi: boolean; data: boolean; mondo: boolean };
+  dadi: string; // "etichetta:espressione" separati da virgola
+}
+const DEFAULT_SETTINGS: GdrSettings = {
+  sezioni: { party: true, combattimento: true, dadi: true, data: true, mondo: true },
+  dadi: "d20:1d20, Vantaggio:2d20kh1, Svantaggio:2d20kl1, d100:1d100, 2d6:2d6, 1d8:1d8",
+};
+
+// Parsa la stringa dadi impostata in coppie [etichetta, espressione].
+function parseDadi(s: string): [string, string][] {
+  return String(s || "").split(",").map((p) => p.trim()).filter(Boolean).map((p) => {
+    const i = p.indexOf(":");
+    return (i < 0 ? [p, p] : [p.slice(0, i).trim(), p.slice(i + 1).trim()]) as [string, string];
+  });
+}
 // SORGENTE UNICA della mappa pannelli: importata da boot.mjs (bundlata da esbuild), così il
 // plugin SUSSUME boot.mjs invece di duplicarne il registro (niente drift).
 // @ts-ignore — .mjs JS del vault, senza tipi; esbuild lo risolve e tree-shaka al solo PANELS.
@@ -128,8 +147,12 @@ export default class GdrPlugin extends Plugin {
   private views: any = null;
   private meta: any = null;
   private core: any = null;
+  settings: GdrSettings = DEFAULT_SETTINGS;
+  private statusBar: HTMLElement | null = null;
 
   async onload() {
+    await this.loadSettings();
+
     // 1. Blocco ```gdr <renderX> (o `radar <category>`) → monta la vista, con re-render
     //    reattivo sui cambi di frontmatter della nota-sorgente.
     this.registerMarkdownCodeBlockProcessor("gdr", async (source, el, ctx) => {
@@ -240,6 +263,15 @@ export default class GdrPlugin extends Plugin {
     //    Un comando `gdr:crea-<id>` per template (i bottoni Meta Bind li chiamano) + un picker.
     await this.registerCreationCommands();
 
+    // 5. Impostazioni native + status bar (data del mondo · n° PG), cliccabile → dashboard.
+    this.addSettingTab(new GdrSettingTab(this.app, this));
+    this.statusBar = this.addStatusBarItem();
+    this.statusBar.addClass("gdr-status");
+    this.statusBar.onClickEvent(() => this.activateCruscotto());
+    this.updateStatusBar();
+    this.registerEvent(this.app.metadataCache.on("changed", () => this.updateStatusBar()));
+    this.registerEvent((this.app.metadataCache as any).on("dataview:index-ready", () => this.updateStatusBar()));
+
     console.log("GDR plugin caricato.");
   }
 
@@ -247,14 +279,67 @@ export default class GdrPlugin extends Plugin {
     this.app.workspace.detachLeavesOfType(VIEW_TYPE_CRUSCOTTO);
   }
 
+  // Apre il Cruscotto come DASHBOARD a piena pagina (area principale), non nel laterale
+  // stretto: la control-room ha spazio per il layout multi-colonna. Riusa la vista se già aperta.
   async activateCruscotto() {
     const { workspace } = this.app;
-    let leaf = workspace.getLeavesOfType(VIEW_TYPE_CRUSCOTTO)[0];
-    if (!leaf) {
-      leaf = workspace.getRightLeaf(false)!;
-      await leaf.setViewState({ type: VIEW_TYPE_CRUSCOTTO, active: true });
-    }
+    const existing = workspace.getLeavesOfType(VIEW_TYPE_CRUSCOTTO);
+    // Se è già aperto in un tab dell'AREA PRINCIPALE, rivelalo lì.
+    const inMain = existing.find((l) => (l as any).getRoot?.() === (workspace as any).rootSplit);
+    if (inMain) { workspace.revealLeaf(inMain); return; }
+    // Altrimenti apri il dashboard a piena pagina, staccando eventuali istanze nel laterale.
+    existing.forEach((l) => l.detach());
+    const leaf = workspace.getLeaf("tab");
+    await leaf.setViewState({ type: VIEW_TYPE_CRUSCOTTO, active: true });
     workspace.revealLeaf(leaf);
+  }
+
+  async loadSettings() {
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, (await this.loadData()) || {});
+    this.settings.sezioni = Object.assign({}, DEFAULT_SETTINGS.sezioni, this.settings.sezioni);
+  }
+  async saveSettings() { await this.saveData(this.settings); this.refreshCruscotti(); this.updateStatusBar(); }
+
+  // Ridisegna eventuali dashboard aperte (dopo un cambio impostazioni).
+  refreshCruscotti() {
+    for (const leaf of this.app.workspace.getLeavesOfType(VIEW_TYPE_CRUSCOTTO)) {
+      const v: any = leaf.view;
+      if (v && typeof v.render === "function") v.render();
+    }
+  }
+
+  // Data del mondo da Calendarium (best-effort, forme API variabili). "" se non disponibile.
+  worldDate(): string {
+    const cal = (this.app as any).plugins?.plugins?.["calendarium"];
+    if (!cal) return "";
+    try {
+      if (typeof cal.api?.getCurrentDate === "function") return String(cal.api.getCurrentDate());
+      if (typeof cal.getCurrentDate === "function") return String(cal.getCurrentDate());
+      const c = cal.data?.calendars?.[0], cur = c?.current;
+      if (cur) {
+        const month = c?.static?.months?.[(cur.month ?? 1) - 1]?.name ?? cur.month;
+        return [cur.day, month, cur.year].filter((x: any) => x != null).join(" ");
+      }
+    } catch { /* forma API cambiata */ }
+    return "";
+  }
+
+  private countPgs(): number {
+    return this.app.vault.getMarkdownFiles().filter((f) => {
+      const fm = this.app.metadataCache.getFileCache(f)?.frontmatter || {};
+      return fm.categoria === "personaggio" && String((fm as any).tipo).toLowerCase() === "pg";
+    }).length;
+  }
+
+  updateStatusBar() {
+    if (!this.statusBar) return;
+    const parts = ["🎲 GDR"];
+    const date = this.worldDate();
+    if (date) parts.push(`🕰 ${date}`);
+    const pgs = this.countPgs();
+    if (pgs) parts.push(`🎭 ${pgs}`);
+    this.statusBar.setText(parts.join("  ·  "));
+    this.statusBar.setAttribute("aria-label", "Apri il Cruscotto DM");
   }
 
   async riposoLungo(file: any) {
@@ -400,12 +485,6 @@ const CRUSCOTTO_SECTIONS = [
   { icon: "🔮", title: "Proiezione", view: "renderProiezione" },
 ];
 
-// Tiri rapidi: etichetta → espressione dado.
-const QUICK_DICE: [string, string][] = [
-  ["d20", "1d20"], ["Vantaggio", "2d20kh1"], ["Svantaggio", "2d20kl1"],
-  ["d100", "1d100"], ["2d6", "2d6"], ["1d8", "1d8"],
-];
-
 // Roller locale (affidabile in ItemView): NdM con +/-K e kh1/kl1 (vantaggio/svantaggio).
 function rollFormula(expr: string): { total: number; detail: string } {
   const m = expr.match(/^(\d+)d(\d+)(kh1|kl1)?([+-]\d+)?$/i);
@@ -445,12 +524,13 @@ class CruscottoView extends ItemView {
     this.redrawTimer = window.setTimeout(() => this.render(), 400);
   }
 
-  private async render() {
+  async render() {
     const root = this.containerEl.children[1] as HTMLElement;
     root.empty();
     root.addClass("gdr-cruscotto");
+    const s = this.plugin.settings.sezioni;
 
-    // Intestazione + azioni rapide (le più usate al tavolo).
+    // Intestazione + azioni rapide (piena larghezza).
     const head = root.createDiv({ cls: "gdr-crusc-head" });
     head.createEl("h3", { text: "🎲 Cruscotto DM" });
     const bar = head.createDiv({ cls: "gdr-crusc-actions" });
@@ -464,37 +544,34 @@ class CruscottoView extends ItemView {
     btnRefresh.setAttribute("aria-label", "Aggiorna");
     btnRefresh.onclick = () => this.render();
 
-    // Sezione PARTY: i PG del vault con barra PF + CA, cliccabili.
-    this.renderParty(root);
+    // Griglia RESPONSIVE: multi-colonna a piena pagina, impilata se stretta (auto-fit).
+    const grid = root.createDiv({ cls: "gdr-crusc-grid" });
 
-    // Sezione COMBATTIMENTO: stato live di Initiative Tracker (o roster del gruppo).
-    this.renderCombat(root);
+    if (s.party) this.renderParty(grid);
+    if (s.combattimento) this.renderCombat(grid);
+    if (s.dadi) this.renderDice(grid);
+    if (s.data) this.renderWorldDate(grid);
 
-    // Sezione TIRI RAPIDI (Dice Roller): pulsanti-dado inline.
-    await this.renderDice(root);
-
-    // Data del mondo (Calendarium), se disponibile.
-    this.renderWorldDate(root);
-
-    // Sezioni MONDO (viste riusate, rese come markdown).
-    let views: any, dv: any;
-    try {
-      views = await this.plugin.loadViews();
-      dv = (this.app as any).plugins?.plugins?.dataview?.api ?? null;
-    } catch (e: any) {
-      root.createEl("pre", { text: `Cruscotto: impossibile caricare le viste (${e?.message ?? e}).` });
-      return;
-    }
-    for (const sec of CRUSCOTTO_SECTIONS) {
-      const box = root.createDiv({ cls: "gdr-crusc-sec" });
-      box.createEl("h4", { text: `${sec.icon} ${sec.title}` });
-      const body = box.createDiv();
+    if (s.mondo) {
+      let views: any, dv: any;
       try {
-        const out = await views[sec.view](this.app, dv);
-        if (typeof out === "string" && out.trim()) await MarkdownRenderer.render(this.app, out, body, "", this);
-        else body.createEl("p", { text: "—", cls: "gdr-crusc-empty" });
+        views = await this.plugin.loadViews();
+        dv = (this.app as any).plugins?.plugins?.dataview?.api ?? null;
       } catch (e: any) {
-        body.createEl("pre", { text: `Errore ${sec.view}: ${e?.message ?? e}` });
+        grid.createEl("pre", { text: `Cruscotto: impossibile caricare le viste (${e?.message ?? e}).` });
+        return;
+      }
+      for (const sec of CRUSCOTTO_SECTIONS) {
+        const box = grid.createDiv({ cls: "gdr-crusc-sec" });
+        box.createEl("h4", { text: `${sec.icon} ${sec.title}` });
+        const body = box.createDiv();
+        try {
+          const out = await views[sec.view](this.app, dv);
+          if (typeof out === "string" && out.trim()) await MarkdownRenderer.render(this.app, out, body, "", this);
+          else body.createEl("p", { text: "—", cls: "gdr-crusc-empty" });
+        } catch (e: any) {
+          body.createEl("pre", { text: `Errore ${sec.view}: ${e?.message ?? e}` });
+        }
       }
     }
   }
@@ -535,7 +612,7 @@ class CruscottoView extends ItemView {
     const box = root.createDiv({ cls: "gdr-crusc-sec" });
     box.createEl("h4", { text: "🎲 Tiri rapidi" });
     const body = box.createDiv({ cls: "gdr-crusc-dice" });
-    for (const [label, expr] of QUICK_DICE) {
+    for (const [label, expr] of parseDadi(this.plugin.settings.dadi)) {
       const b = body.createEl("button", { cls: "gdr-crusc-die", text: label });
       b.onclick = () => {
         const { total, detail } = rollFormula(expr);
@@ -597,21 +674,7 @@ class CruscottoView extends ItemView {
   // Data del mondo (Calendarium), best-effort: nessuna sezione se il plugin è assente o
   // se non si riesce a leggere la data corrente (API interna variabile fra versioni).
   private renderWorldDate(root: HTMLElement) {
-    const cal = (this.app as any).plugins?.plugins?.["calendarium"];
-    if (!cal) return;
-    let date = "";
-    try {
-      if (typeof cal.api?.getCurrentDate === "function") date = String(cal.api.getCurrentDate());
-      else if (typeof cal.getCurrentDate === "function") date = String(cal.getCurrentDate());
-      else {
-        const c = cal.data?.calendars?.[0];
-        const cur = c?.current;
-        if (cur) {
-          const month = c?.static?.months?.[(cur.month ?? 1) - 1]?.name ?? cur.month;
-          date = [cur.day, month, cur.year].filter((x: any) => x != null).join(" ");
-        }
-      }
-    } catch { /* forma API cambiata */ }
+    const date = this.plugin.worldDate();
     if (!date) return;
     const box = root.createDiv({ cls: "gdr-crusc-sec gdr-crusc-date" });
     box.createEl("h4", { text: "🕰 Data del mondo" });
@@ -620,5 +683,38 @@ class CruscottoView extends ItemView {
 
   async onClose() {
     if (this.redrawTimer) window.clearTimeout(this.redrawTimer);
+  }
+}
+
+// --- Tab Impostazioni native --------------------------------------------------------------
+class GdrSettingTab extends PluginSettingTab {
+  constructor(app: App, private plugin: GdrPlugin) { super(app, plugin); }
+
+  display() {
+    const { containerEl } = this;
+    containerEl.empty();
+    containerEl.createEl("h3", { text: "Cruscotto DM — sezioni" });
+
+    const toggle = (key: keyof GdrSettings["sezioni"], name: string, desc: string) =>
+      new Setting(containerEl).setName(name).setDesc(desc).addToggle((t) =>
+        t.setValue(this.plugin.settings.sezioni[key]).onChange(async (v) => {
+          this.plugin.settings.sezioni[key] = v; await this.plugin.saveSettings();
+        }));
+
+    toggle("party", "Party", "I PG del vault con barra PF e CA.");
+    toggle("combattimento", "Combattimento", "Roster / stato live di Initiative Tracker.");
+    toggle("dadi", "Tiri rapidi", "Pulsanti-dado.");
+    toggle("data", "Data del mondo", "Data corrente da Calendarium.");
+    toggle("mondo", "Mondo", "Stato del mondo, tensioni, proiezione.");
+
+    new Setting(containerEl)
+      .setName("Tiri rapidi")
+      .setDesc("Coppie «etichetta:espressione» separate da virgola (es. d20:1d20, Vantaggio:2d20kh1).")
+      .addTextArea((t) => {
+        t.setValue(this.plugin.settings.dadi).onChange(async (v) => {
+          this.plugin.settings.dadi = v; await this.plugin.saveSettings();
+        });
+        t.inputEl.rows = 3; t.inputEl.style.width = "100%";
+      });
   }
 }
