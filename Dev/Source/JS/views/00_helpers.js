@@ -117,9 +117,15 @@ function renderSessionPanel(dv, page) {
 // categoria, abilitando il confronto fra entità. axisMax resta parametrico per
 // non incrostare la scala nel disegno.
 
+// Palette delle serie radar. Via le variabili di progetto --gdr-c-* (definite in
+// gdr.css, con fallback al colore del tema): in tema chiaro le tinte deboli sono già
+// scurite → swatch e poligono restano distinguibili. La PRIMA serie era --text-accent
+// (viola del tema Default), troppo vicina a --color-purple con ≥4 serie: sostituita con
+// pink, percettivamente lontana da tutte le altre.
 const RADAR_PALETTE = [
-  "var(--text-accent)", "var(--color-red)", "var(--color-green)",
-  "var(--color-orange)", "var(--color-purple)", "var(--color-cyan)",
+  "var(--gdr-c-pink, var(--color-pink))", "var(--gdr-c-red, var(--color-red))",
+  "var(--gdr-c-green, var(--color-green))", "var(--gdr-c-orange, var(--color-orange))",
+  "var(--gdr-c-purple, var(--color-purple))", "var(--gdr-c-cyan, var(--color-cyan))",
 ];
 
 // Scala massima di un asse (valori 1-5 -> 5). Parametrico via il numero di valori.
@@ -176,7 +182,12 @@ function radarSvg(axes, series) {
     g += `<polygon points="${poly}" fill="${s.color}" fill-opacity="0.18" stroke="${s.color}" stroke-width="1.5"/>`;
   });
   series.forEach((s, i) => {
-    g += `<text x="6" y="${12 + i * 12}" font-size="8" fill="${s.color}">■ ${svgEscape(s.name)}</text>`;
+    // Swatch ■ colorato (codifica-colore) + NOME in --text-normal: a font-size 8 il testo
+    // colorato (specie le tinte chiare) scendeva sotto AA in tema chiaro; così il nome è
+    // sempre leggibile e l'identità della serie resta nello swatch.
+    g += `<text x="6" y="${12 + i * 12}" font-size="8">`
+      + `<tspan fill="${s.color}">■</tspan>`
+      + `<tspan fill="var(--text-normal)"> ${svgEscape(s.name)}</tspan></text>`;
   });
   return `<svg viewBox="0 0 ${W} ${H}" class="gdr-radar-svg" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
 }

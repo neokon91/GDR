@@ -166,7 +166,11 @@ async function renderTimeline(app, dv, page) {
     const info = eraInfo[name] || {};
     const span = [text(info.inizio), text(info.fine)].filter(Boolean).join("–");
     const isS = name === SENZA;
-    const color = isS ? "var(--text-faint)" : `var(--color-${palette[ci++ % palette.length]})`;
+    // Bordo-epoca via --gdr-c-* (theme-aware, fallback al colore del tema): come bordo
+    // 3px è un oggetto UI (soglia 3:1) e in tema chiaro green/cyan/orange/yellow cadevano
+    // sotto soglia; le varianti scurite dello snippet li riportano ≥3.8.
+    const c = palette[ci++ % palette.length];
+    const color = isS ? "var(--text-muted)" : `var(--gdr-c-${c}, var(--color-${c}))`;
     return `<div class="gdr-tl-era" style="flex:${Math.max(1, its.length)};border-bottom-color:${color}">`
       + `<span class="gdr-tl-name">${isS ? "🌫" : "🏛"} ${esc(isS ? SENZA : name)}</span>`
       + (span ? `<span class="gdr-tl-span">${esc(span)}</span>` : "")

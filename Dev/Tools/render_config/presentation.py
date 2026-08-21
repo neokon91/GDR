@@ -32,6 +32,30 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
   display: none;
 }
 
+/* === Accenti GDR theme-aware (--gdr-c-*) ==================================== */
+/* Palette-accento di progetto: in DARK = il colore del tema (già ≥3:1 come bordo);
+   in LIGHT le quattro tinte chiare (yellow/cyan/green/orange) del tema Default cadono
+   sotto 3:1 come bordo/oggetto UI → qui vengono scurite. Definite come variabili di
+   progetto (NON si overridano i --color-* globali del tema): le usano l'accento di
+   categoria dell'infobox, i bordi-epoca della timeline e la legenda del radar, così
+   un solo punto governa il contrasto nei due temi. */
+:root {
+  --gdr-c-green:  var(--color-green);
+  --gdr-c-red:    var(--color-red);
+  --gdr-c-pink:   var(--color-pink);
+  --gdr-c-orange: var(--color-orange);
+  --gdr-c-purple: var(--color-purple);
+  --gdr-c-cyan:   var(--color-cyan);
+  --gdr-c-blue:   var(--color-blue);
+  --gdr-c-yellow: var(--color-yellow);
+}
+.theme-light {
+  --gdr-c-yellow: #8a6a00;   /* era #e0ac00 (1.9 su secondary chiaro) → 4.9 */
+  --gdr-c-cyan:   #067a78;   /* era #00bfbc (2.1) → 5.0 */
+  --gdr-c-orange: #b35800;   /* era #ec7500 (2.7) → 4.6 */
+  --gdr-c-green:  #0a7a34;   /* era #08b94e (2.4) → 5.2 */
+}
+
 /* Card del pannello Vista (views.js: renderEntityPanel). Variabili del tema. */
 .gdr-grid {
   display: grid;
@@ -81,12 +105,12 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 }
 .gdr-tl-name { font-weight: 600; font-size: var(--font-ui-small); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gdr-tl-span { font-size: var(--font-ui-smaller); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.gdr-tl-count { font-size: var(--font-ui-smaller); color: var(--text-faint); }
+.gdr-tl-count { font-size: var(--font-ui-smaller); color: var(--text-muted); }  /* era --text-faint (2.9:1, sotto AA): è un conteggio informativo, non decoro */
 
 /* Swimlane (renderTimelineCorsie): un filo per attore, i punti posizionati sul tempo
    (left ∝ al «quando» numerico) su un asse condiviso. Sopra il dettaglio pieghevole. */
 .gdr-swimlane { display: grid; gap: 5px; margin: 0.4em 0 0.8em; }
-.gdr-sl-axis { display: flex; justify-content: space-between; font-size: var(--font-ui-smaller); color: var(--text-faint); padding-left: 7.5em; }
+.gdr-sl-axis { display: flex; justify-content: space-between; font-size: var(--font-ui-smaller); color: var(--text-muted); padding-left: 7.5em; }  /* era --text-faint: tacche d'asse leggibili in entrambi i temi */
 .gdr-sl-lane { display: grid; grid-template-columns: 7.5em 1fr; align-items: center; gap: 8px; }
 .gdr-sl-name { font-size: var(--font-ui-small); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gdr-sl-track { position: relative; height: 14px; background: var(--background-secondary); border-radius: 7px; }
@@ -101,9 +125,12 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
    distinto + ritratto incorniciato + tabella-fatti compatta (chiave in muted). */
 .callout[data-callout="infobox"] {
   border: 1px solid var(--background-modifier-border);
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--background-secondary);
   padding: 0.5em 0.9em 0.7em;
+  /* Lieve elevazione "da app" (coerente col Cruscotto del plugin): stacca la scheda
+     dalla pagina senza pesare in lettura. Ombre in rgba → discrete in dark, morbide in light. */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 16px rgba(0, 0, 0, 0.05);
 }
 .callout[data-callout="infobox"] > .callout-title {
   font-size: var(--font-ui-medium);
@@ -178,7 +205,7 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 .callout[data-callout="banner"] > .callout-title { display: none; }
 .callout[data-callout="banner"] img {
   width: 100%; height: 200px; object-fit: cover;
-  border-radius: 10px; display: block; margin: 0;
+  border-radius: 12px; display: block; margin: 0;
   border: 1px solid var(--background-modifier-border);
 }
 
@@ -248,7 +275,7 @@ def category_accent_css() -> str:
         for cat in cats:
             lines.append(
                 f'.callout[data-callout="infobox"][data-callout-metadata="{cat}"]'
-                f' {{ --gdr-accent: var(--color-{color}); }}')
+                f' {{ --gdr-accent: var(--gdr-c-{color}); }}')
     return "\n".join(lines) + "\n"
 
 
@@ -290,6 +317,21 @@ STATBLOCK_2024_CSS = """
   --statblock-property-name-font-family: "Libre Baskerville", Georgia, serif;
   --statblock-content-font: "Noto Serif", Georgia, serif;
 }
+/* Skin DARK: la pergamena chiara qui sopra, in tema scuro, è un'isola abbagliante
+   (luminanza ~15× la pagina). In dark si passa a una "pergamena scura" a pari
+   contrasto interno (testo 12.8, nome/heading 6.4, filetti 4.4) e senza glare. */
+.theme-dark .statblock:has(.gdr-sb-2024) {
+  --statblock-primary-color: #c76a4d;               /* barre/filetti */
+  --statblock-bar-color: #c76a4d;
+  --statblock-rule-color: #c76a4d;
+  --statblock-heading-font-color: #e08b6d;          /* nome della creatura */
+  --statblock-section-heading-font-color: #e08b6d;  /* "Azioni", "Tratti", … */
+  --statblock-section-heading-border-color: #c76a4d;
+  --statblock-property-name-font-color: #e08b6d;    /* etichette in grassetto */
+  --statblock-background-color: #241d15;            /* pergamena scura */
+  --statblock-font-color: #ece0cf;
+  --statblock-border-color: #5a4a33;
+}
 /* Tabella caratteristiche 2024 (3+3): vincolata al riquadro, non sborda.
    Il wrapper-valore della cella è INLINE (shrink-to-fit, componente Svelte): senza forzarlo a
    blocco, il width:100% della tabella vale la larghezza NATURALE (sborda). Quindi prima: */
@@ -323,11 +365,15 @@ def write_workspace_chrome(obsidian: Path, plugins: dict[str, Any]) -> None:
     union_list_key(obsidian / "app.json", "userIgnoreFilters", [f"{d}/" for d in HIDDEN_DIRS])
 
 
-# --- Accento-colore per categoria → preset JSON Canvas ----------------------
-# Colore-categoria → preset JSON Canvas (1 rosso, 2 arancio, 3 giallo, 4 verde,
-# 5 ciano, 6 viola). Riusa i gruppi tematici di CATEGORY_ACCENTS (presentazione).
-_CANVAS_PRESET = {"green": "4", "red": "1", "pink": "6", "orange": "2",
-                  "purple": "6", "cyan": "5", "blue": "5", "yellow": "3"}
+# --- Accento-colore per categoria → colore nodo Canvas ----------------------
+# Colore-categoria → colore del nodo Obsidian Canvas. I 6 preset numerici (1..6) non
+# bastano per gli 8 gruppi: due coppie collidevano ESATTAMENTE (pink≡purple sul preset
+# "6", blue≡cyan sul "5"), rendendo indistinguibili 4 categorie sul World Board. Il
+# Canvas accetta anche colori HEX liberi → mappiamo ogni gruppo al suo accento reale
+# (gli stessi --color-* dell'infobox): 8 categorie, 8 colori distinti, zero collisioni.
+_CANVAS_PRESET = {"green": "#08b94e", "red": "#e93147", "pink": "#d53984",
+                  "orange": "#ec7500", "purple": "#7852ee", "cyan": "#00bfbc",
+                  "blue": "#086ddd", "yellow": "#e0ac00"}
 
 
 def _canvas_color(category: str) -> str:
