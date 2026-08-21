@@ -11,3 +11,4 @@ __pycache__/
 # Il vault Obsidian generato vive interamente in dist/ (output, non sorgente).
 dist/
 Dev/Build/
+archivio
