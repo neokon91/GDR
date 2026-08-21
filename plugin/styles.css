@@ -9,3 +9,27 @@
   background: var(--background-secondary); border: 1px solid var(--background-modifier-border); }
 .gdr-crusc-sec h4 { margin: 0 0 6px; font-size: var(--font-ui-medium); }
 .gdr-crusc-empty { color: var(--text-muted); margin: 0; }
+
+/* Party: riga PG con nome cliccabile, barra PF e CA. */
+.gdr-crusc-pgrow { display: grid; grid-template-columns: minmax(6.5em, 1.3fr) 1.5fr auto auto;
+  align-items: center; gap: 8px; padding: 2px 0; font-size: var(--font-ui-small); }
+.gdr-crusc-pgname { cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gdr-crusc-pftrack { height: 9px; border-radius: 5px; background: var(--background-modifier-border); overflow: hidden; }
+.gdr-crusc-pffill { display: block; height: 100%; border-radius: 5px; }
+.gdr-crusc-pfval { font-variant-numeric: tabular-nums; color: var(--text-muted); white-space: nowrap; }
+.gdr-crusc-ac { color: var(--text-muted); white-space: nowrap; }
+
+/* Tiri rapidi: pulsanti-dado. */
+.gdr-crusc-dice { display: flex; flex-wrap: wrap; gap: 6px; }
+.gdr-crusc-die { cursor: pointer; font-size: var(--font-ui-small); padding: 3px 10px; }
+
+/* Combattimento: round + righe iniziativa (attivo evidenziato). */
+.gdr-crusc-round { font-weight: 600; color: var(--text-accent); margin-bottom: 4px; }
+.gdr-crusc-combat { display: grid; gap: 2px; }
+.gdr-crusc-cbrow { display: grid; grid-template-columns: 2.2em 1fr auto; align-items: center;
+  gap: 8px; padding: 2px 6px; border-radius: 5px; font-size: var(--font-ui-small); }
+.gdr-crusc-cbrow.is-active { background: var(--background-modifier-hover); font-weight: 600; }
+.gdr-crusc-cbinit { font-variant-numeric: tabular-nums; color: var(--text-muted); text-align: right; }
+.gdr-crusc-cbname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gdr-crusc-cbhp { font-variant-numeric: tabular-nums; color: var(--text-muted); white-space: nowrap; }
+.gdr-crusc-date p { margin: 0; font-variant-numeric: tabular-nums; }
