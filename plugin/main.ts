@@ -665,7 +665,15 @@ class CruscottoView extends ItemView {
       });
     }
     const b = box.createEl("button", { text: "Apri il tracker" });
-    b.onclick = () => { try { (this.app as any).commands.executeCommandById("initiative-tracker:open-tracker"); } catch { /* comando assente */ } };
+    b.onclick = async () => {
+      const w = this.app.workspace;
+      let leaf = w.getLeavesOfType("initiative-tracker-view")[0];
+      if (!leaf) {
+        leaf = w.getRightLeaf(false)!;
+        try { await leaf.setViewState({ type: "initiative-tracker-view", active: true }); } catch { /* vista non registrata */ }
+      }
+      if (leaf) w.revealLeaf(leaf);
+    };
   }
 
   // Data del mondo (Calendarium), best-effort: nessuna sezione se il plugin è assente o
