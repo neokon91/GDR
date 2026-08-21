@@ -32,8 +32,16 @@ node esbuild.config.mjs --prod   # → main.js (CJS, `obsidian` esterno)  [oppur
 esente dal pin `repo`+`version` del turnkey (non si fetcha), ma il gate `fetch_plugins --check`
 esige che sia **presente** nel vault prima dello zip.
 
+## Tipi generati
+`core.d.ts` è **generato** dal modello (`npm run gen:types` → `Dev/Tools/gen_plugin_types.py`):
+vocabolari chiusi (`Categoria`/`Stato`/`PanelName`/`TemplateId`/`AzioneId`) + la shape di
+`core.json` (`CoreData`). `main.ts` li importa (solo `import type`, esbuild li strippa). NON
+si tipizzano le entità di dominio (creatura/oggetto…): quello è dato YAML, validato a runtime
+— un'interfaccia a mano deriverebbe (come dimostra la deriva fra vocabolari scritti a mano e
+lo YAML). `npm run build` fa `gen:types → typecheck (tsc --noEmit) → esbuild`.
+
 ## Anti-drift
-`_panels.mjs` è la sorgente UNICA della mappa pannelli (niente copie). La parità
-`_PLUGIN_ACTIONS` (model_cfg) ↔ lista `ACTIONS` di `main.ts`, e il fatto che ogni pannello
-usato nelle macro sia registrato, sono verificati dai test Python
-(`test_panels_registered`, `test_buttons_map_to_plugin_commands`).
+`_panels.mjs` è la sorgente UNICA della mappa pannelli (niente copie). Verificati dai test
+Python: la parità `_PLUGIN_ACTIONS` (model_cfg) ↔ lista `ACTIONS` di `main.ts` e ogni
+pannello-macro registrato (`test_panels_registered`, `test_buttons_map_to_plugin_commands`);
+e `core.d.ts` allineato al modello (`test_plugin_types`).

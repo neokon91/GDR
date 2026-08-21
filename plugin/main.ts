@@ -37,6 +37,9 @@ function parseDadi(s: string): [string, string][] {
 // la tiene fuori dal vault: è consumata solo a build-time (esbuild) e dal test di drift.
 // @ts-ignore — .mjs JS del vault, senza tipi; esbuild lo risolve e tree-shaka al solo PANELS.
 import { PANELS } from "../Dev/Source/JS/_panels.mjs";
+// Tipi GENERATI dal modello (Dev/Tools/gen_plugin_types.py): la shape di core.json e i
+// vocabolari chiusi. Solo type-import → esbuild lo strippa (nessun impatto a runtime).
+import type { CoreData } from "./core";
 
 const VIEWS_PATH = "z.automazioni/views.js";
 const META_PATH = "z.automazioni/meta_actions.js";
@@ -144,7 +147,7 @@ function tpShim(app: App): any {
 export default class GdrPlugin extends Plugin {
   private views: any = null;
   private meta: any = null;
-  private core: any = null;
+  private core: CoreData | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
 
@@ -370,8 +373,8 @@ export default class GdrPlugin extends Plugin {
 
   // Catalogo core.json (assi per categoria, ecc.): immutabile a runtime (lo riscrive solo
   // render.py al build) → letto una volta e cacheato.
-  async loadCore() {
-    if (!this.core) this.core = JSON.parse(await this.app.vault.adapter.read("z.automazioni/data/core.json"));
+  async loadCore(): Promise<CoreData> {
+    if (!this.core) this.core = JSON.parse(await this.app.vault.adapter.read("z.automazioni/data/core.json")) as CoreData;
     return this.core;
   }
 

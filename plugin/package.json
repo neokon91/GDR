@@ -2,10 +2,12 @@
   "name": "gdr-plugin",
   "version": "0.0.1",
   "private": true,
-  "description": "Spike Tier B — plugin Obsidian che ospita le viste/azioni GDR.",
+  "description": "Plugin Obsidian: runtime del vault GDR (viste ```gdr, azioni, creazione, Cruscotto DM).",
   "scripts": {
-    "build": "node esbuild.config.mjs --prod",
-    "dev": "node esbuild.config.mjs"
+    "gen:types": "python3 ../Dev/Tools/gen_plugin_types.py",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run gen:types && npm run typecheck && node esbuild.config.mjs --prod",
+    "dev": "npm run gen:types && node esbuild.config.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
