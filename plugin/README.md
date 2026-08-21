@@ -2,8 +2,7 @@
 
 Il **runtime del vault** GDR (plugin Obsidian nativo, TS + esbuild). Riusa
 `z.automazioni/views.js` e `meta_actions.js` **senza modificarli** (li carica come
-CommonJS) e importa la mappa pannelli da `../Dev/Source/JS/_panels.mjs`. Storia e
-motivazioni del salto in [../docs/tier_b_plugin_evaluation.md](../docs/tier_b_plugin_evaluation.md).
+CommonJS) e importa la mappa pannelli da `../Dev/Source/JS/_panels.mjs`.
 
 È l'**unica** via: js-engine e Templater sono stati ritirati.
 

@@ -131,7 +131,7 @@ Dataview). Aggiornare `views.js` (la logica) si propaga a tutte le note senza ri
 `core.json` è **cache-ato** (`views.loadCoreData` / `plugin.loadCore`): immutabile a runtime,
 letto una volta per sessione (dopo una rebuild basta riaprire la nota). *(Prima del plugin i
 pannelli erano blocchi `js-engine` di una riga che delegavano al guscio `boot.mjs`; js-engine
-e quel guscio sono stati ritirati — vedi [tier_b_plugin_evaluation](tier_b_plugin_evaluation.md).)*
+e quel guscio sono stati ritirati.)*
 
 **Radar degli assi** (blocco ` ```gdr ` → `radar <cat>`): il radar del tab *Carattere* legge i
 valori-assi dal **frontmatter** della nota e disegna `views.radarMarkdownFromValues`. È
