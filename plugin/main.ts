@@ -1,17 +1,14 @@
 /*
- * GDR — spike Tier B (plugin Obsidian).
+ * GDR — Console DM & Motore (plugin Obsidian).
  *
- * Prova che il salto a plugin NON è un rewrite: riusa `z.automazioni/views.js` e
- * `z.automazioni/meta_actions.js` del vault SENZA modificarli (li carica come CommonJS,
- * esattamente come fa `boot.mjs`), e li espone come:
- *   1. blocco ```gdr <renderX>   — al posto del blocco js-engine (32 nel vault),
- *   2. comando nativo + hotkey    — «GDR: Riposo lungo (PG attivo)» → meta_actions,
- *   3. re-render REATTIVO          — ogni blocco si ridisegna sui cambi di frontmatter,
- *   4. CRUSCOTTO DM (ItemView)     — pannello laterale persistente «da app» (stato mondo,
- *      tensioni, proiezione) con azioni rapide, anch'esso reattivo.
- *
- * In un B2 completo il plugin SUSSUME boot.mjs (qui la mappa PANELS è duplicata a scopo
- * dimostrativo) e render.py emette ```gdr invece di js-engine.
+ * Runtime del vault GDR: riusa `z.automazioni/views.js` e `z.automazioni/meta_actions.js`
+ * SENZA modificarli (li carica come CommonJS, come boot.mjs, di cui importa la mappa PANELS)
+ * ed espone:
+ *   1. blocco ```gdr <renderX> / `radar <cat>` — al posto di js-engine, re-render reattivo;
+ *   2. le AZIONI del dispatcher come comandi nativi + hotkey + ribbon (modali native al posto
+ *      di tp.system.suggester/prompt); la CREAZIONE via mini-motore di istanziazione template;
+ *   3. CRUSCOTTO DM — dashboard a piena pagina che integra PG, Initiative Tracker, dadi,
+ *      Calendarium e lo stato del mondo, con tab Impostazioni e status bar.
  */
 import {
   App, ItemView, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, PluginSettingTab,

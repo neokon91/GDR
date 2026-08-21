@@ -1,41 +1,156 @@
-/* Cruscotto DM (ItemView) — look "da app", tutto su variabili del tema. */
-.gdr-cruscotto { padding: 4px 14px 20px; max-width: 1200px; margin: 0 auto; }
+/* ============================================================================
+   GDR — Cruscotto DM & superfici del plugin.
+   Look "da app" moderno, interamente theme-aware (light/dark via variabili
+   Obsidian). Nessun colore hardcoded per testo/sfondi; solo ombre in rgba.
+   ============================================================================ */
 
-/* Griglia responsive: multi-colonna a piena pagina (dashboard), impilata se stretta
-   (pannello laterale) — auto-fit su una larghezza minima per colonna. */
-.gdr-crusc-grid { display: grid; gap: 12px; align-items: start;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.gdr-crusc-grid > .gdr-crusc-sec { margin-top: 0; }
-.gdr-crusc-head { position: sticky; top: 0; background: var(--background-primary);
-  padding-top: 6px; z-index: 1; border-bottom: 1px solid var(--background-modifier-border); }
-.gdr-crusc-head h3 { margin: 0 0 6px; }
-.gdr-crusc-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
-.gdr-crusc-actions button { cursor: pointer; }
-.gdr-crusc-sec { margin-top: 12px; padding: 8px 10px; border-radius: 8px;
-  background: var(--background-secondary); border: 1px solid var(--background-modifier-border); }
-.gdr-crusc-sec h4 { margin: 0 0 6px; font-size: var(--font-ui-medium); }
-.gdr-crusc-empty { color: var(--text-muted); margin: 0; }
+.gdr-cruscotto {
+  --gdr-radius: 14px;
+  --gdr-gap: 16px;
+  --gdr-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.06);
+  --gdr-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.07), 0 12px 28px rgba(0, 0, 0, 0.10);
+  padding: 22px 24px 32px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
 
-/* Party: riga PG con nome cliccabile, barra PF e CA. */
-.gdr-crusc-pgrow { display: grid; grid-template-columns: minmax(6.5em, 1.3fr) 1.5fr auto auto;
-  align-items: center; gap: 8px; padding: 2px 0; font-size: var(--font-ui-small); }
-.gdr-crusc-pgname { cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.gdr-crusc-pftrack { height: 9px; border-radius: 5px; background: var(--background-modifier-border); overflow: hidden; }
-.gdr-crusc-pffill { display: block; height: 100%; border-radius: 5px; }
+/* --- Intestazione: titolo grande + toolbar azioni, appiccicata in alto ------ */
+.gdr-crusc-head {
+  position: sticky; top: 0; z-index: 2;
+  margin: -22px -24px 18px;
+  padding: 18px 24px 14px;
+  background: linear-gradient(var(--background-primary) 78%, transparent);
+  backdrop-filter: saturate(1.1);
+}
+.gdr-crusc-head h3 {
+  margin: 0 0 12px;
+  font-size: 1.55em; font-weight: 750; letter-spacing: -0.015em;
+}
+.gdr-crusc-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.gdr-crusc-actions button {
+  cursor: pointer;
+  border-radius: 9px;
+  padding: 7px 15px;
+  font-size: var(--font-ui-small); font-weight: 550;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
+  transition: background .13s ease, border-color .13s ease, transform .06s ease, box-shadow .13s ease;
+}
+.gdr-crusc-actions button:hover {
+  background: var(--background-modifier-hover);
+  border-color: var(--interactive-accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.gdr-crusc-actions button:active { transform: translateY(1px); }
+
+/* --- Griglia responsive: multi-colonna a piena pagina, impilata se stretta -- */
+.gdr-crusc-grid {
+  display: grid; gap: var(--gdr-gap); align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* --- Card di sezione -------------------------------------------------------- */
+.gdr-crusc-sec {
+  padding: 15px 17px 16px;
+  border-radius: var(--gdr-radius);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  box-shadow: var(--gdr-shadow);
+  transition: box-shadow .16s ease, border-color .16s ease, transform .16s ease;
+}
+.gdr-crusc-sec:hover { box-shadow: var(--gdr-shadow-hover); }
+.gdr-crusc-sec h4 {
+  margin: 0 0 11px;
+  font-size: 0.82em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex; align-items: center; gap: 7px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.gdr-crusc-empty { color: var(--text-muted); margin: 2px 0 0; font-size: var(--font-ui-small); }
+
+/* --- Party: riga PG con nome, barra PF (gradiente) e CA --------------------- */
+.gdr-crusc-pgrow {
+  display: grid; grid-template-columns: minmax(6.5em, 1.3fr) 1.5fr auto auto;
+  align-items: center; gap: 10px;
+  padding: 5px 0; font-size: var(--font-ui-small);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.gdr-crusc-pgrow:last-child { border-bottom: none; }
+.gdr-crusc-pgname {
+  cursor: pointer; font-weight: 550; color: var(--text-normal);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: color .1s ease;
+}
+.gdr-crusc-pgname:hover { color: var(--text-accent); }
+.gdr-crusc-pftrack {
+  height: 8px; border-radius: 999px;
+  background: var(--background-modifier-border); overflow: hidden;
+}
+.gdr-crusc-pffill {
+  display: block; height: 100%; border-radius: 999px;
+  filter: saturate(1.05); transition: width .3s ease;
+}
 .gdr-crusc-pfval { font-variant-numeric: tabular-nums; color: var(--text-muted); white-space: nowrap; }
-.gdr-crusc-ac { color: var(--text-muted); white-space: nowrap; }
+.gdr-crusc-ac {
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+  color: var(--text-muted); font-size: 0.92em;
+  padding: 1px 7px; border-radius: 999px; background: var(--background-modifier-border);
+}
 
-/* Tiri rapidi: pulsanti-dado. */
-.gdr-crusc-dice { display: flex; flex-wrap: wrap; gap: 6px; }
-.gdr-crusc-die { cursor: pointer; font-size: var(--font-ui-small); padding: 3px 10px; }
+/* --- Tiri rapidi: pulsanti-dado a pillola ---------------------------------- */
+.gdr-crusc-dice { display: flex; flex-wrap: wrap; gap: 7px; }
+.gdr-crusc-die {
+  cursor: pointer; font-size: var(--font-ui-small); font-weight: 550;
+  padding: 5px 13px; border-radius: 999px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  transition: background .12s ease, border-color .12s ease, color .12s ease, transform .06s ease;
+}
+.gdr-crusc-die:hover {
+  background: var(--interactive-accent); color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+}
+.gdr-crusc-die:active { transform: translateY(1px); }
 
-/* Combattimento: round + righe iniziativa (attivo evidenziato). */
-.gdr-crusc-round { font-weight: 600; color: var(--text-accent); margin-bottom: 4px; }
-.gdr-crusc-combat { display: grid; gap: 2px; }
-.gdr-crusc-cbrow { display: grid; grid-template-columns: 2.2em 1fr auto; align-items: center;
-  gap: 8px; padding: 2px 6px; border-radius: 5px; font-size: var(--font-ui-small); }
-.gdr-crusc-cbrow.is-active { background: var(--background-modifier-hover); font-weight: 600; }
+/* --- Combattimento: round + righe iniziativa (attivo evidenziato) ----------- */
+.gdr-crusc-round {
+  font-weight: 700; color: var(--text-accent); margin-bottom: 6px;
+  font-variant: small-caps; letter-spacing: 0.03em;
+}
+.gdr-crusc-combat { display: grid; gap: 3px; }
+.gdr-crusc-cbrow {
+  display: grid; grid-template-columns: 2.4em 1fr auto; align-items: center; gap: 9px;
+  padding: 3px 8px; border-radius: 7px; font-size: var(--font-ui-small);
+  border-left: 2px solid transparent;
+}
+.gdr-crusc-cbrow.is-active {
+  background: var(--background-modifier-hover);
+  border-left-color: var(--interactive-accent); font-weight: 650;
+}
 .gdr-crusc-cbinit { font-variant-numeric: tabular-nums; color: var(--text-muted); text-align: right; }
 .gdr-crusc-cbname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gdr-crusc-cbhp { font-variant-numeric: tabular-nums; color: var(--text-muted); white-space: nowrap; }
-.gdr-crusc-date p { margin: 0; font-variant-numeric: tabular-nums; }
+
+/* Bottone "Apri il tracker" dentro le card */
+.gdr-crusc-sec > button {
+  margin-top: 10px; cursor: pointer; font-size: var(--font-ui-smaller);
+  padding: 4px 11px; border-radius: 8px;
+  border: 1px solid var(--background-modifier-border); background: var(--background-primary);
+  transition: background .12s ease, border-color .12s ease;
+}
+.gdr-crusc-sec > button:hover { background: var(--background-modifier-hover); border-color: var(--interactive-accent); }
+
+/* --- Data del mondo: numero grande e leggibile ------------------------------ */
+.gdr-crusc-date p {
+  margin: 0; font-size: 1.15em; font-weight: 600;
+  font-variant-numeric: tabular-nums; letter-spacing: 0.01em;
+}
+
+/* --- Prosa delle viste-mondo rese come markdown ----------------------------- */
+.gdr-crusc-sec .callout { margin: 4px 0; }
+
+/* --- Status bar ------------------------------------------------------------- */
+.gdr-status { cursor: pointer; }
+.gdr-status:hover { color: var(--text-normal); }

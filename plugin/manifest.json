@@ -1,9 +1,9 @@
 {
   "id": "gdr",
-  "name": "GDR — motore viste & azioni (spike)",
-  "version": "0.0.1",
+  "name": "GDR — Console DM & Motore",
+  "version": "0.1.0",
   "minAppVersion": "1.4.0",
-  "description": "Spike Tier B: ospita le viste GDR nel blocco ```gdr e le azioni come comandi nativi (hotkey), con re-render reattivo sui cambi di frontmatter. Riusa views.js / meta_actions.js del vault SENZA modificarli.",
+  "description": "Runtime del vault GDR: rende i pannelli/radar (blocco ```gdr), le azioni e la creazione come comandi nativi, e un Cruscotto DM (dashboard) che integra PG, Initiative Tracker, dadi e Calendarium. Riusa views.js/meta_actions.js del vault.",
   "author": "GDR",
   "isDesktopOnly": false
 }
