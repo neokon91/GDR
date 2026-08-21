@@ -5,9 +5,10 @@
   "description": "Plugin Obsidian: runtime del vault GDR (viste ```gdr, azioni, creazione, Cruscotto DM).",
   "scripts": {
     "gen:types": "python3 ../Dev/Tools/gen_plugin_types.py",
+    "gen:bestiario": "python3 ../Dev/Tools/gen_bestiario.py",
     "typecheck": "tsc --noEmit",
-    "build": "npm run gen:types && npm run typecheck && node esbuild.config.mjs --prod",
-    "dev": "npm run gen:types && node esbuild.config.mjs"
+    "build": "npm run gen:types && npm run gen:bestiario && npm run typecheck && node esbuild.config.mjs --prod",
+    "dev": "npm run gen:types && npm run gen:bestiario && node esbuild.config.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

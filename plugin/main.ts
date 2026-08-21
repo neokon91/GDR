@@ -40,10 +40,19 @@ import { PANELS } from "../Dev/Source/JS/_panels.mjs";
 // Tipi GENERATI dal modello (Dev/Tools/gen_plugin_types.py): la shape di core.json e i
 // vocabolari chiusi. Solo type-import → esbuild lo strippa (nessun impatto a runtime).
 import type { CoreData } from "./core";
+// MOTORE di combattimento dal repo condiviso `regole` (symlink `../regole`, gitignorato;
+// esbuild ne segue il link e bundla la catena TS pura). Spike A: prova che gira in-app.
+import {
+  ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
+  comandoIniziativa, comandoAttacco, comandoSalvezza, comandoMultiattacco, comandoCura,
+  type Evento, type Dado, type InPlancia, type Stato,
+} from "../regole/src/motore/motore";
+import { daMostro, type Combattente, type Azione } from "../regole/src/motore/combattente";
 
 const VIEWS_PATH = "z.automazioni/views.js";
 const META_PATH = "z.automazioni/meta_actions.js";
 const VIEW_TYPE_CRUSCOTTO = "gdr-cruscotto";
+const VIEW_TYPE_BOARD = "gdr-board";
 
 // Carica uno script CommonJS del vault iniettando i SOLI globali che il runtime usa
 // (app, Notice — verificato: nessun altro simbolo Obsidian libero in views/meta_actions).
@@ -148,6 +157,7 @@ export default class GdrPlugin extends Plugin {
   private views: any = null;
   private meta: any = null;
   private core: CoreData | null = null;
+  private bestiario: any[] | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
 
@@ -253,6 +263,23 @@ export default class GdrPlugin extends Plugin {
       name: "Apri il Cruscotto DM",
       callback: () => this.activateCruscotto(),
     });
+    // SPIKE A — smoke del motore: gioca una micro-battaglia deterministica (Eroina vs
+    // due Goblin) coi comandi reali di `regole` e stampa il registro. Prova che il
+    // motore event-sourced bundlato gira dentro Obsidian. Comando dev, senza dati vault.
+    this.addCommand({
+      id: "motore-smoke",
+      name: "DEV: Smoke del motore di combattimento",
+      callback: () => this.motoreSmoke(),
+    });
+    // Board di combattimento (Spike C, read-only): ItemView che rende una battaglia dal
+    // motore di `regole`. Sostituirà Initiative Tracker + il rendering di Fantasy Statblocks.
+    this.registerView(VIEW_TYPE_BOARD, (leaf) => new BoardView(leaf, this));
+    this.addCommand({
+      id: "apri-board",
+      name: "Apri la Board di combattimento",
+      callback: () => this.activateBoard(),
+    });
+    this.addRibbonIcon("swords", "GDR: Board di combattimento", () => this.activateBoard());
     this.addRibbonIcon("layout-dashboard", "GDR: Cruscotto DM", () => this.activateCruscotto());
     this.addRibbonIcon("moon", "GDR: Riposo lungo (PG attivo)", () => {
       const file = this.app.workspace.getActiveFile();
@@ -293,6 +320,57 @@ export default class GdrPlugin extends Plugin {
     const leaf = workspace.getLeaf("tab");
     await leaf.setViewState({ type: VIEW_TYPE_CRUSCOTTO, active: true });
     workspace.revealLeaf(leaf);
+  }
+
+  async activateBoard() {
+    const { workspace } = this.app;
+    const existing = workspace.getLeavesOfType(VIEW_TYPE_BOARD);
+    const inMain = existing.find((l) => (l as any).getRoot?.() === (workspace as any).rootSplit);
+    if (inMain) { workspace.revealLeaf(inMain); return; }
+    existing.forEach((l) => l.detach());
+    const leaf = workspace.getLeaf("tab");
+    await leaf.setViewState({ type: VIEW_TYPE_BOARD, active: true });
+    workspace.revealLeaf(leaf);
+  }
+
+  // SPIKE A — smoke del motore. Costruisce combattenti "magri" a mano (nessun adapter
+  // ancora: quello è lo Spike B), gioca due round coi comandi reali e mostra il
+  // `registro` narrato + lo stato finale in PF. Dado deterministico (LCG) → esito ripetibile.
+  motoreSmoke() {
+    let seme = 7 >>> 0;
+    const dado: Dado = (facce) => { seme = (seme * 1664525 + 1013904223) >>> 0; return (seme % facce) + 1; };
+    const eroe: InPlancia = {
+      key: "eroe", id: "eroe", nome: "Eroina", ca: 18, pf_max: 34, pf_attuali: 34,
+      iniziativa: null, iniziativa_bonus: 2, schieramento: "alleato",
+      attacco: { nome: "Colpo di spada", colpire: 6, danno: { numero: 1, facce: 8, bonus: 4 } },
+    };
+    const goblin = (key: string, nome: string): InPlancia => ({
+      key, id: "goblin", nome, ca: 13, pf_max: 12, pf_attuali: 12,
+      iniziativa: null, iniziativa_bonus: 2, schieramento: "nemico",
+      attacco: { nome: "Scimitarra", colpire: 4, danno: { numero: 1, facce: 6, bonus: 2 } },
+    });
+    const eventi: Evento[] = [
+      { tipo: "aggiunto", combattente: eroe },
+      { tipo: "aggiunto", combattente: goblin("gob1", "Goblin A") },
+      { tipo: "aggiunto", combattente: goblin("gob2", "Goblin B") },
+    ];
+    const s = () => ricostruisci(eventi);
+    const gioca = (...nuovi: Evento[]) => { eventi.push(...nuovi); };
+    // Round 1: iniziativa, si comincia, l'eroina colpisce Goblin A.
+    gioca(...comandoIniziativa(s(), dado), { tipo: "cominciato" });
+    gioca(...comandoAttacco(s(), "eroe", "gob1", dado));
+    gioca({ tipo: "turno-passato" });
+    // Round 2: Goblin B risponde all'eroina, poi l'eroina rifinisce Goblin A.
+    gioca(...comandoAttacco(s(), "gob2", "eroe", dado));
+    gioca(...comandoAttacco(s(), "eroe", "gob1", dado));
+    const finale = s();
+    const log = [
+      ...registro(eventi),
+      "— Stato finale —",
+      ...finale.combattenti.map((c) => `${c.nome}: ${c.pf_attuali}/${c.pf_max} PF`),
+    ].join("\n");
+    console.log("[GDR motore-smoke]\n" + log);
+    new Notice("Motore OK — registro in console:\n\n" + log, 12000);
   }
 
   async loadSettings() {
@@ -376,6 +454,17 @@ export default class GdrPlugin extends Plugin {
   async loadCore(): Promise<CoreData> {
     if (!this.core) this.core = JSON.parse(await this.app.vault.adapter.read("z.automazioni/data/core.json")) as CoreData;
     return this.core;
+  }
+
+  // Bestiario SRD (sidecar generato da gen_bestiario.py, copiato accanto a main.js): i mostri
+  // GREZZI che `daMostro` converte in Combattente. Letto una volta, on-demand (all'apertura
+  // della Board), così main.js resta magro. `manifest.dir` = cartella del plugin nel vault.
+  async loadBestiario(): Promise<any[]> {
+    if (!this.bestiario) {
+      const path = `${this.manifest.dir}/data/srd_bestiario.json`;
+      this.bestiario = JSON.parse(await this.app.vault.adapter.read(path)) as any[];
+    }
+    return this.bestiario;
   }
 
   // Frontmatter FRESCO di una nota (da metadataCache, già aggiornato al 'changed').
@@ -693,6 +782,203 @@ class CruscottoView extends ItemView {
   async onClose() {
     if (this.redrawTimer) window.clearTimeout(this.redrawTimer);
   }
+}
+
+// Etichetta breve per un bottone-azione, per tipo (attacco/salvezza/multiattacco/cura).
+function etichettaAzione(az: Azione): string {
+  if (az.tipo === "attacco") return `⚔️ ${az.nome} (+${az.colpire})`;
+  if (az.tipo === "salvezza") return `✨ ${az.nome} (CD ${az.cd})`;
+  if (az.tipo === "multiattacco") return `⚔️⚔️ ${az.nome}`;
+  if (az.tipo === "cura") return `➕ ${az.nome}`;
+  return `• ${az.nome}`;
+}
+
+// --- Board di combattimento (Spike C+D) ---------------------------------------------------
+// Tracker di combattimento pilotato dal motore event-sourced di `regole`: tiene `eventi:
+// Evento[]`, ogni comando li accoda e la board ridisegna `ricostruisci(eventi)`. Costruisci
+// l'incontro pescando dal bestiario SRD bundlato (opzione 1), tira l'iniziativa, poi
+// l'attivo agisce (attacco/TS/multiattacco/cura) scegliendo il bersaglio; passa-turno e
+// annulla. Sostituirà Initiative Tracker + il rendering di Fantasy Statblocks. Lo stato è in
+// memoria (per-vista); persistere gli eventi su nota è un passo successivo. I PG (via
+// daAttore) sono lo Spike E.
+class BoardView extends ItemView {
+  private eventi: Evento[] = [];
+  private bestiario: any[] = [];
+  private errore: string | null = null;
+
+  constructor(leaf: WorkspaceLeaf, private plugin: GdrPlugin) { super(leaf); }
+
+  getViewType() { return VIEW_TYPE_BOARD; }
+  getDisplayText() { return "Board di combattimento"; }
+  getIcon() { return "swords"; }
+
+  async onOpen() {
+    try { this.bestiario = await this.plugin.loadBestiario(); }
+    catch (e: any) { this.errore = e?.message ?? String(e); }
+    this.render();
+  }
+
+  private stato(): Stato { return ricostruisci(this.eventi); }
+  // Ogni mutazione passa da qui: accoda eventi e ridisegna. Unico punto di verità.
+  private push(...ev: Evento[]) { this.eventi.push(...ev); this.render(); }
+
+  // Schiera un mostro grezzo (daMostro → Combattente, avvolto in InPlancia). key unica per
+  // copia (`id#n`); nome disambiguato «(2)», «(3)» dal secondo doppione in poi.
+  private schiera(raw: any, lato: "alleato" | "nemico"): InPlancia {
+    const base: Combattente = daMostro(raw);
+    const simili = this.stato().combattenti.filter((c) => c.id === base.id).length;
+    const nome = simili > 0 ? `${base.nome} (${simili + 1})` : base.nome;
+    return { ...base, key: `${base.id}#${simili + 1}`, nome, pf_attuali: base.pf_max, iniziativa: null, schieramento: lato };
+  }
+
+  // Picker sul bestiario (334 mostri) → aggiunge un combattente del lato scelto.
+  private async aggiungi(lato: "alleato" | "nemico") {
+    if (!this.bestiario.length) { new Notice("Bestiario non caricato."); return; }
+    const raw = await suggester(this.app, (m: any) => m.nome, this.bestiario, false, `Aggiungi ${lato === "nemico" ? "un nemico" : "un alleato"}`);
+    if (raw) this.push({ tipo: "aggiunto", combattente: this.schiera(raw, lato) });
+  }
+
+  // Sceglie un bersaglio fra i candidati (auto se uno solo).
+  private pickBersaglio(cands: InPlancia[], titolo: string): Promise<InPlancia | null> {
+    if (cands.length === 0) { new Notice("Nessun bersaglio valido."); return Promise.resolve(null); }
+    if (cands.length === 1) return Promise.resolve(cands[0]);
+    return suggester(this.app, (c: InPlancia) => `${c.nome} — ${c.pf_attuali}/${c.pf_max} PF`, cands, false, titolo);
+  }
+
+  // Esegue l'azione dell'attivo instradandola al comando giusto (col bersaglio scelto).
+  private async agisci(attore: InPlancia, az: Azione) {
+    const s = this.stato();
+    const nemici = ordine(s).filter((c) => c.schieramento !== attore.schieramento && inPiedi(c));
+    const alleati = ordine(s).filter((c) => c.schieramento === attore.schieramento && inPiedi(c));
+    if (az.tipo === "attacco") {
+      const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
+      if (t) this.push(...comandoAttacco(s, attore.key, t.key, dadoVero, az));
+    } else if (az.tipo === "salvezza") {
+      const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
+      if (t) this.push(...comandoSalvezza(s, attore.key, t.key, az, dadoVero));
+    } else if (az.tipo === "multiattacco") {
+      const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
+      if (t) this.push(...comandoMultiattacco(s, attore.key, t.key, az, dadoVero));
+    } else if (az.tipo === "cura") {
+      const t = await this.pickBersaglio(alleati, `${az.nome} → chi curare`);
+      if (t) this.push(...comandoCura(s, t.key, az, dadoVero));
+    } else {
+      new Notice(`Azione «${az.nome}» (${az.tipo}) non ancora gestita dalla board.`);
+    }
+  }
+
+  // Costruisce l'incontro-demo e ne AUTO-GIOCA il copione (dado seminato) — resta come
+  // scorciatoia dimostrativa accanto al gioco a mano.
+  private seedDemo(seme = (Date.now() & 0xffff)) {
+    const byId = new Map(this.bestiario.map((m) => [m.id, m]));
+    const vuoi = ["lupo-feroce", "orso-bruno", "goblin-guerriero", "goblin-guerriero"];
+    const lati: ("alleato" | "nemico")[] = ["alleato", "alleato", "nemico", "nemico"];
+    this.eventi = [];
+    vuoi.forEach((id, i) => { const raw = byId.get(id); if (raw) this.eventi.push({ tipo: "aggiunto", combattente: this.schiera(raw, lati[i]) }); });
+    let s = (seme >>> 0); const dado: Dado = (f) => { s = (s * 1664525 + 1013904223) >>> 0; return (s % f) + 1; };
+    this.eventi.push(...comandoIniziativa(this.stato(), dado), { tipo: "cominciato" });
+    for (let step = 0; step < 60 && !esitoScontro(this.stato()); step++) {
+      const st = this.stato(); const a = attivo(st); if (!a) break;
+      if (inPiedi(a) && a.attacco) {
+        const n = ordine(st).find((c) => c.schieramento !== a.schieramento && inPiedi(c));
+        if (n) this.eventi.push(...comandoAttacco(st, a.key, n.key, dado));
+      }
+      this.eventi.push({ tipo: "turno-passato" });
+    }
+    this.render();
+  }
+
+  private render() {
+    const root = this.containerEl.children[1] as HTMLElement;
+    root.empty();
+    root.addClass("gdr-board");
+
+    const head = root.createDiv({ cls: "gdr-board-head" });
+    head.createEl("h3", { text: "⚔️ Board di combattimento" });
+
+    if (this.errore) {
+      root.createEl("pre", { text: `Bestiario non caricato: ${this.errore}\n(fatto 'npm run build:plugin' + render.py, così data/srd_bestiario.json è nel plugin?)` });
+      return;
+    }
+
+    const s = this.stato();
+    const esito = esitoScontro(s);
+    const iniziato = s.round > 0;
+    const attivoOra = attivo(s);
+
+    // Barra comandi.
+    const bar = root.createDiv({ cls: "gdr-board-controls" });
+    const btn = (label: string, fn: () => void, cls = "") => {
+      const b = bar.createEl("button", { text: label });
+      if (cls) b.addClass(cls);
+      b.onclick = fn;
+      return b;
+    };
+    btn("➕ Nemico", () => void this.aggiungi("nemico"));
+    btn("➕ Alleato", () => void this.aggiungi("alleato"));
+    if (!iniziato) btn("🎲 Iniziativa", () => this.push(...comandoIniziativa(this.stato()), { tipo: "cominciato" }), "primario");
+    else if (!esito) btn("⏭️ Passa turno", () => this.push({ tipo: "turno-passato" }), "primario");
+    btn("↩️ Annulla", () => { this.eventi = annullaUltimo(this.eventi); this.render(); });
+    btn("🗑️ Reset", () => { this.eventi = []; this.render(); });
+    btn("🎬 Demo", () => this.seedDemo());
+
+    const sub = root.createDiv({ cls: "gdr-board-sub" });
+    sub.setText(!iniziato ? `${s.combattenti.length} combattenti — pre-battaglia` : esito ? `Round ${s.round} — ${esito}` : `Round ${s.round} — in corso`);
+
+    if (!s.combattenti.length) {
+      root.createDiv({ cls: "gdr-board-vuoto", text: "Aggiungi creature col bestiario (➕ Nemico / ➕ Alleato) oppure carica la 🎬 Demo." });
+      return;
+    }
+
+    // Roster in ordine d'iniziativa.
+    const lista = root.createDiv({ cls: "gdr-board-roster" });
+    for (const c of ordine(s)) {
+      const riga = lista.createDiv({ cls: "gdr-board-riga" });
+      if (attivoOra && c.key === attivoOra.key) riga.addClass("is-attivo");
+      if (!inPiedi(c)) riga.addClass("is-ko");
+      riga.createSpan({ cls: "gdr-board-ini", text: c.iniziativa != null ? String(c.iniziativa) : "—" });
+      riga.createSpan({ cls: "gdr-board-lato", text: c.schieramento === "alleato" ? "🛡️" : "☠️" });
+      riga.createSpan({ cls: "gdr-board-nome", text: c.nome });
+      riga.createSpan({ cls: "gdr-board-ca", text: `CA ${c.ca}` });
+      const pf = riga.createDiv({ cls: "gdr-board-pf" });
+      const barra = pf.createDiv({ cls: "gdr-board-pf-fill" });
+      const frazione = Math.max(0, Math.min(1, c.pf_attuali / c.pf_max));
+      barra.style.width = `${Math.round(frazione * 100)}%`;
+      if (frazione <= 0.33) barra.addClass("bassa"); else if (frazione <= 0.66) barra.addClass("media");
+      pf.createSpan({ cls: "gdr-board-pf-txt", text: `${c.pf_attuali}/${c.pf_max}` });
+      const cond = s.condizioni[c.key] ?? [];
+      if (cond.length) {
+        const box = riga.createDiv({ cls: "gdr-board-cond" });
+        for (const id of cond) box.createSpan({ cls: "gdr-board-cond-chip", text: id });
+      }
+    }
+
+    // Azioni dell'attivo (a battaglia iniziata, se in piedi e non c'è ancora un esito).
+    if (iniziato && !esito && attivoOra && inPiedi(attivoOra)) {
+      const disponibili: Azione[] = (attivoOra.azioni && attivoOra.azioni.length)
+        ? attivoOra.azioni
+        : (attivoOra.attacco ? [{ nome: attivoOra.attacco.nome, tipo: "attacco", colpire: attivoOra.attacco.colpire, danno: attivoOra.attacco.danno } as Azione] : []);
+      const pan = root.createDiv({ cls: "gdr-board-azioni" });
+      pan.createEl("h4", { text: `Azioni di turno — ${attivoOra.nome}` });
+      const box = pan.createDiv({ cls: "gdr-board-azioni-box" });
+      if (disponibili.length) {
+        for (const az of disponibili) {
+          const b = box.createEl("button", { text: etichettaAzione(az) });
+          b.onclick = () => void this.agisci(attivoOra, az);
+        }
+      } else {
+        box.createSpan({ cls: "gdr-board-vuoto", text: "(nessuna azione eseguibile — passa il turno)" });
+      }
+    }
+
+    // Registro.
+    const log = root.createDiv({ cls: "gdr-board-log" });
+    log.createEl("h4", { text: "Registro" });
+    const righe = log.createEl("div", { cls: "gdr-board-log-righe" });
+    for (const riga of registro(this.eventi)) righe.createDiv({ cls: "gdr-board-log-riga", text: riga });
+  }
+
+  async onClose() {}
 }
 
 // --- Tab Impostazioni native --------------------------------------------------------------

@@ -13,3 +13,6 @@ dist/
 Dev/Build/
 archivio
 regole
+# Bestiario del motore: artefatto GENERATO da archivio (Dev/Tools/gen_bestiario.py,
+# rigenerato dalla build del plugin). Sorgente = archivio + generatore, non questo file.
+plugin/data/

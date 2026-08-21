@@ -416,6 +416,11 @@ def install_authored_plugins() -> None:
         f = src / name
         if f.is_file():
             shutil.copy2(f, dest / name)
+    # Sidecar dati che il plugin legge a runtime (il bestiario SRD della Board di
+    # combattimento, gen_bestiario.py). Cartella intera, così i futuri dataset seguono.
+    data_src = src / "data"
+    if data_src.is_dir():
+        shutil.copytree(data_src, dest / "data", dirs_exist_ok=True)
     cp = VAULT / ".obsidian" / "community-plugins.json"
     enabled = json.loads(cp.read_text(encoding="utf-8")) if cp.is_file() else []
     if "gdr" not in enabled:
