@@ -8,7 +8,7 @@ veri. Falla **una volta, dall'alto in basso, su una copia pristina**.
 
 > Per ogni **FAIL** annota: *nota · cosa attendevi · cosa hai visto · quale superficie/plugin* →
 > apri una issue col template **🎲 Feedback beta**. Il sintomo n.1 di rottura è **codice grezzo**
-> (`INPUT[...]`, ` ```dataview `, ` ```js-engine `) al posto di pulsanti/schede/tabelle.
+> (`INPUT[...]`, ` ```dataview `, ` ```gdr `) al posto di pulsanti/schede/tabelle.
 
 ## §0 — Setup: simula il DM esterno
 - [ ] `npm run check && npm test` verdi (gate pre-pacchetto)

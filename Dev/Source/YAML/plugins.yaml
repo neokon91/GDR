@@ -17,14 +17,17 @@ plugins:
   # critico: il vault non funziona senza. `rompe` = cosa NON si vede (in italiano
   # semplice), mostrato dalla nota Diagnostica (views.renderDiagnostica) quando il
   # plugin è spento → l'utente non-tecnico sa quale riattivare invece di vedere codice.
-  - id: templater-obsidian
-    name: Templater
-    author: SilentVoid
-    repo: silentvoid13/Templater
-    version: 2.20.6
-    license: AGPL-3.0
-    critico: false
-    rompe: "Fallback: la creazione e le azioni le gestisce ora il plugin GDR. Templater serve solo se costruisci col ripiego GDR_PLUGIN_BLOCKS=0."
+  # gdr: plugin AUTORIALE (buildato in plugin/, installato da render.install_authored_plugins,
+  # NON fetchato) → `autoriale: true` lo esenta dal pin repo+version pur restando critico.
+  # È IL runtime del vault (blocchi ```gdr, azioni, creazione, Cruscotto): se è spento non
+  # si rende né si crea nulla. js-engine e Templater sono stati RITIRATI (il plugin li sussume).
+  - id: gdr
+    name: GDR — Console DM & Motore
+    author: neokon91
+    license: MIT
+    autoriale: true
+    critico: true
+    rompe: "Il motore del vault: pannelli, pulsanti-azione, creazione note e Cruscotto DM non funzionano (le note appaiono come codice ```gdr)."
   - id: dataview
     name: Dataview
     author: Michael Brenan
@@ -41,14 +44,6 @@ plugins:
     license: GPL-3.0
     critico: true
     rompe: "I campi da compilare (slider, menu, testo) restano come codice grezzo."
-  - id: js-engine
-    name: JS Engine
-    author: Moritz Jung
-    repo: mProjectsCode/obsidian-js-engine-plugin
-    version: 0.3.6
-    license: GPL-3.0
-    critico: false
-    rompe: "Fallback: i pannelli dinamici li rende ora il plugin GDR (blocchi ```gdr). JS Engine serve solo se costruisci col ripiego GDR_PLUGIN_BLOCKS=0."
   - id: tab-panels
     name: Tab Panels
     author: GnoxNahte

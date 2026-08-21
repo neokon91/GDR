@@ -122,22 +122,20 @@ a **concentrazione**), `renderMaestrie` (maestrie armi 2024), `renderSpecieTratt
 SRD della specie), `renderDintorni`/`renderViaggio`/`renderPressioni` (geografia: confini e
 distanza, rotte×tempo×pericolo, spinte del grafo econ/geo sui Fronti).
 
-Il corpo nota di ogni pannello è **una riga** che importa il guscio unico
-`z.automazioni/boot.mjs` (modulo ESM via `engine.importJs`) e gli delega il pannello per
-nome: `(await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderX")`.
-`boot.mjs` concentra in un solo posto ciò che prima era ripetuto in ogni blocco — carica
-`views.js` come CommonJS (`new Function`, perché `importJs` usa `import()` ESM e non vedrebbe
-`module.exports`), risolve `dv`/`page` e fa `engine.markdown.create`. Aggiornare `views.js`
-(la logica) o `boot.mjs` (il guscio) si propaga a tutte le note senza ricrearle. `core.json` è
-**cache-ato** per-modulo (`views.loadCoreData`/`boot.loadCore`): immutabile a runtime, lo si legge
-una volta per sessione (dopo una rebuild basta riaprire la nota).
+Il corpo nota di ogni pannello è **una riga**: un blocco ` ```gdr ` col solo nome del
+pannello (`renderX`). Lo rende il **plugin GDR**, che carica `views.js` come CommonJS
+(`evalCjs` → `new Function`), risolve `dv`/`page` tramite la mappa `_panels.mjs:PANELS`
+(dice come passare gli argomenti e se l'output è markdown o disegnato nel container) e rende
+con `MarkdownRenderer`, ri-renderizzando in modo **reattivo** (listener `metadataCache` +
+Dataview). Aggiornare `views.js` (la logica) si propaga a tutte le note senza ricrearle.
+`core.json` è **cache-ato** (`views.loadCoreData` / `plugin.loadCore`): immutabile a runtime,
+letto una volta per sessione (dopo una rebuild basta riaprire la nota). *(Prima del plugin i
+pannelli erano blocchi `js-engine` di una riga che delegavano al guscio `boot.mjs`; js-engine
+e quel guscio sono stati ritirati — vedi [tier_b_plugin_evaluation](tier_b_plugin_evaluation.md).)*
 
-**Radar degli assi** (`js-engine` → `boot.radar`): il radar del tab *Carattere* legge i
+**Radar degli assi** (blocco ` ```gdr ` → `radar <cat>`): il radar del tab *Carattere* legge i
 valori-assi dal **frontmatter** della nota e disegna `views.radarMarkdownFromValues`. È
-**reattivo**: `engine.reactive` (ReactiveComponent) ridisegnato da un listener `metadataCache`
-'changed' registrato sul `component` del blocco (auto-deregistrato all'unload) → si aggiorna
-**live** muovendo uno slider, senza riaprire la nota (confermato in-app 2026-06-09; fallback
-statico se `engine.reactive` non c'è). *(Una variante `meta-bind-js-view` per la reattività dava
-`META_BIND_ERROR` su Meta Bind 1.4.x — verificato 2026-06-01 — quindi si usa js-engine col suo
-`reactive`.)* Le **etichette-valore** degli assi restano reattive anche via VIEW Meta Bind, come
-ritratto/pressione/modificatori PG.
+**reattivo**: il plugin lo ridisegna da un listener `metadataCache` 'changed' registrato sul
+componente del blocco (auto-deregistrato all'unload) → si aggiorna **live** muovendo uno slider,
+senza riaprire la nota. Le **etichette-valore** degli assi restano reattive anche via VIEW Meta
+Bind, come ritratto/pressione/modificatori PG.

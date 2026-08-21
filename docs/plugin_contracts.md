@@ -7,12 +7,11 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
 
 | Plugin | Cosa scrive la pipeline | Sorgente |
 |---|---|---|
-| **Templater** | `templates_folder: z.modelli`, `user_scripts_folder: z.automazioni`. Gli script JS sono copiati 1:1 in `z.automazioni/` e richiamati come `tp.user.<nome>`. | `Dev/Source/JS/` |
+| **GDR** (plugin autoriale) | **Il runtime del vault** (`plugin/`, buildato e installato da `install_authored_plugins`; critico, esente dal pin `autoriale`). Rende i blocchi ` ```gdr ` (pannelli-vista da `views.js` via la mappa `_panels.mjs:PANELS`, + `radar <cat>`), espone le AZIONI del dispatcher `meta_actions.js` come **comandi nativi** `gdr:<azione>` (hotkey/ribbon, modali native), istanzia i template col mini-motore (`create_entity.js`, `crea_pg.js` per il PG — niente Templater), e fornisce il **Cruscotto DM** (dashboard). Gli script JS restano copiati 1:1 in `z.automazioni/` (il plugin li carica con `evalCjs`). js-engine e Templater sono stati **ritirati**. | `plugin/`, `_panels.mjs`, `views.js`, `meta_actions.js` |
 | **Dataview** | `enableDataviewJs: true`. Le pagine-indice (`index.md.j2`) usano blocchi ` ```dataview `; il pannello *Vista* interroga la Dataview API (backlink/fronti). | `index.md.j2`, `views.js` |
-| **JS Engine** | Standard per i pannelli dinamici. Macro che emettono ` ```js-engine ` di **una riga**: importano il guscio unico `boot.mjs` (`engine.importJs`) che carica `views.js` come CommonJS e disegna. Pannelli: `vista` (pronto al tavolo + Citato da), `grafico_assi` (radar), `profilo` (tag-da-assi), `clock` (orologio fronte), `difficolta` (incontri), `progressione` (PG). `views.js` è logica condivisa, `boot.mjs` il guscio: aggiornarli si propaga alle note. Vedi [play_layer](play_layer.md). | macro in `_macros.j2`, `boot.mjs`, `views.js` |
 | **Tab Panels** | `enableCaching: false` (`write_tab_panels`): cache **disattivata** — incompatibile con Meta Bind. Il caching IndexedDB scatena `metadataCache.changed` con cache `undefined` → `onCacheChanged` di Meta Bind/core crasha su `.frontmatter` (e ogni nota-entità ha Meta Bind *dentro* le tab). Costo: i `[[wikilink]]` scritti a mano nel corpo di una tab non vanno in backlink/Outline (ma le relazioni tipizzate sono nel frontmatter, indicizzate). | `merge_plugin_config` |
 | **Bases** (core) | Una vista-DB nativa (`.base`) per dominio in `Indici/`, dalla stessa single-source di `pages.yaml` (filtro categoria, colonne, sort). Gli hub usano queste viste Bases; i blocchi Dataview sopravvivono **solo** nelle folder-note per-categoria (auto-indice, senza `.base` propria). `bases` abilitato in `core-plugins.json`. | `bases_doc()` da `pages.yaml` |
-| **Meta Bind** | `enableJs`, `inputFieldTemplates` (da `metabind_inputs`), `buttonTemplates` (un "Crea <X>" per template + le azioni). Le azioni-bottone sono `runTemplaterFile` (richiedono l'azione-nota in `templates.yaml:actions`) **oppure** `command` (lanciano un comando di Obsidian, niente azione-nota: campo `command` su un button in `plugins.yaml`). Le note usano `INPUT[...]`/`VIEW[...]`/`BUTTON[...]`. | `plugins.yaml`, template-entità |
+| **Meta Bind** | `enableJs`, `inputFieldTemplates` (da `metabind_inputs`), `buttonTemplates` (un "Crea <X>" per template + le azioni). Le azioni-bottone lanciano **sempre un comando di Obsidian** (`type: command`): il `command` esplicito del button, oppure `gdr:<azione>` esposto dal plugin (`_PLUGIN_ACTIONS`) — niente più `runTemplaterFile`/azioni-nota. Le note usano `INPUT[...]`/`VIEW[...]`/`BUTTON[...]`. | `plugins.yaml`, template-entità |
 | **Metadata Menu** | Un **fileClass** per categoria in `z.classi/` (campi tipizzati: Select per stato/tipo, File/MultiFile per i link, Number/Input per il resto) + `classFilesPath`. | `fileclass_fields()` dal modello |
 | **Fantasy Statblocks** | Union per id dei layout in `obsidian-5e-statblocks/data.json` (NON cambia il default) + `diceRolling: true`. Due layout IT: `statblock.layout` (5.5e fedele, default) e `statblock.layout_5e` (5e classico). `srd_statblock_yaml` mappa i mostri SRD su TUTTI i campi 2024 (initiative/saves/skillsaves/resist./immunità/gear/bonus_actions/reactions/leggendarie+desc/pb). Template creatura: 2 tab (5.5e inline + 5e via `monster:`, dati condivisi); le note creatura hanno `statblock: inline`. | `Dev/Source/statblocks/*.json`, `srd_statblock_yaml`, `creature.md.j2` |
 | **Initiative Tracker** | Blocco ` ```encounter ` (combattimento + iniziativa, legge il bestiario FS); `aggiorna_encounter` riscrive creature **+ alleati** (flag `ally`) dalle relazioni e applica gli **override HP/CA/init** dal campo `varianti` (boss/gregari, incontri ripetibili); il pannello *difficoltà* (`renderEncounter`) stima il budget XP 2024. I PG entrano via *Party* nelle impostazioni del plugin. | `encounter.md.j2`, `meta_actions.js`, `views.js` |
@@ -63,13 +62,13 @@ note con `visibilita: dm` / `pubblico: false`.
   (sola lettura / calcolato-e-salvato), `BUTTON[id]`.
 - Tab Panels: blocco ` ````tabs ` con separatori `--- <Titolo>`.
 - Statblock: blocco ` ```statblock ` con `layout:` dal modello.
-- JS Engine: blocco ` ```js-engine ` (pannello *Vista*); Dice Roller: ` `dice: 1d20` ` inline.
+- GDR: blocco ` ```gdr ` (pannello *Vista*, `radar <cat>`), reso dal plugin; Dice Roller: ` `dice: 1d20` ` inline.
 - Bases: file `.base` (YAML) accanto agli hub `.md` in `Indici/`.
 
 ## Verifica in-app necessaria
 
 La generazione è validata da `npm test`/`check`, ma il **rendering reale dei
-plugin** (Meta Bind, tabelle, statblock, wizard Templater) va confermato aprendo
+plugin** (Meta Bind, tabelle, statblock, pannelli/azioni del plugin GDR) va confermato aprendo
 `dist/GDR-vault` in Obsidian dopo un build: l'agente non pilota Obsidian desktop.
 Verificato in-app (2026-06-02): ✅ i **tiri Dice Roller** della scheda PG leggono i campi dal
 **frontmatter YAML** (tooltip «1d20 + mod_forza [15] + 3»); ✅ rendering note + pannelli +

@@ -57,11 +57,15 @@ def test_site_strip_body_removes_dynamic_and_callouts():
             "> [!segreto]- Segreto\n> contenuto top secret\n\n"
             "> [!tavolo] Uso al tavolo\n> mossa del DM\n\n"
             "```dataview\nlist\n```\n\n"
+            "```gdr\nrenderEncounter\n```\n\n"
             "````tabs\n--- T\n```js-engine\nreturn x\n```\n````\n\n"
             "`INPUT[text:foo]` `VIEW[{bar}]`\n")
     out = _gs(f"process.stdout.write(JSON.stringify(g.stripBody({json.dumps(body)})));")
     assert "Prosa visibile." in out
-    for leak in ["top secret", "mossa del DM", "dataview", "js-engine", "INPUT[", "VIEW[", "Titolo"]:
+    # `gdr` è ora IL linguaggio dei pannelli DM (blocchi ```gdr): il sito-giocatori
+    # NON deve emetterne il codice grezzo (RE_FENCE spoglia ogni blocco recintato).
+    for leak in ["top secret", "mossa del DM", "dataview", "js-engine", "renderEncounter",
+                 "INPUT[", "VIEW[", "Titolo"]:
         assert leak not in out, leak
 
 
@@ -284,18 +288,23 @@ def test_release_excludes_qa_artifacts(tmp_path):
 
 
 def test_third_party_licenses_complete():
-    """Attribuzione plugin: ogni plugin bundlato (plugins.yaml) ha author/repo/
-    license e compare in THIRD-PARTY-LICENSES con licenza e link al repo. Se aggiungi
-    un plugin senza questi campi, il test fallisce → ti forza a verificarne la licenza."""
+    """Attribuzione plugin: ogni plugin TERZO (plugins.yaml, non autoriale) ha
+    author/repo/license e compare in THIRD-PARTY-LICENSES con licenza e link al repo. Se
+    aggiungi un plugin senza questi campi, il test fallisce → ti forza a verificarne la
+    licenza. I plugin AUTORIALI (autoriale:true, es. `gdr`) sono nostri → esclusi dall'elenco."""
     out = _env().get_template("third_party_licenses.md.j2").render(
         core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
-    plugins = PLUGINS["plugins"]
-    assert len(plugins) >= 18
-    for p in plugins:
+    third_party = [p for p in PLUGINS["plugins"] if not p.get("autoriale")]
+    assert len(third_party) >= 18
+    for p in third_party:
         for field in ("author", "repo", "license"):
             assert p.get(field), f"{p['id']}: manca '{field}' (attribuzione)"
         assert p["name"] in out and p["license"] in out
         assert f"https://github.com/{p['repo']}" in out
+    # I plugin autoriali NON devono comparire in THIRD-PARTY (non sono di terzi).
+    for p in PLUGINS["plugins"]:
+        if p.get("autoriale"):
+            assert p["name"] not in out, f"{p['id']} autoriale non deve stare in THIRD-PARTY-LICENSES"
     assert "mera aggregazione" in out                         # base legale dichiarata
     for lic in ("MIT", "GPL-3.0", "AGPL-3.0"):
         assert lic in out, lic
@@ -303,17 +312,20 @@ def test_third_party_licenses_complete():
 
 # --- Turnkey riproducibile: bundling dei plugin pinnati (fetch_plugins) ------
 def test_critical_plugins_are_pinned():
-    """Ogni plugin CRITICO ha `repo`+`version` (bundlabile in modo riproducibile):
-    senza il pin, `npm run dist` produrrebbe in silenzio uno zip senza i plugin
-    essenziali. Rispecchia il gate di validate.check() e di fetch_plugins."""
+    """Ogni plugin CRITICO da fetchare ha `repo`+`version` (bundlabile in modo
+    riproducibile): senza il pin, `npm run dist` produrrebbe in silenzio uno zip senza i
+    plugin essenziali. Rispecchia il gate di validate.check() e di fetch_plugins. I plugin
+    AUTORIALI (autoriale:true, es. `gdr`) sono esenti: li build+installa la pipeline, non si
+    fetchano."""
     import fetch_plugins
     plugins = PLUGINS["plugins"]
-    for p in fetch_plugins.critical(plugins):
+    fetchable_critical = [p for p in fetch_plugins.critical(plugins) if not p.get("autoriale")]
+    for p in fetchable_critical:
         assert p.get("repo"), f"{p['id']}: plugin critico senza 'repo'"
         assert p.get("version"), f"{p['id']}: plugin critico senza pin 'version'"
-    # I critici sono un sottoinsieme dei bundlati (quelli con repo+version).
+    # I critici NON autoriali sono un sottoinsieme dei bundlati (quelli con repo+version).
     bundled_ids = {p["id"] for p in fetch_plugins.bundled(plugins)}
-    assert {p["id"] for p in fetch_plugins.critical(plugins)} <= bundled_ids
+    assert {p["id"] for p in fetchable_critical} <= bundled_ids
 
 
 def test_fetch_bundled_requires_repo_and_version():

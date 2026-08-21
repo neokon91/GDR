@@ -75,9 +75,9 @@ Un **sito statico HTML** navigabile, pensato per i **giocatori**: una voce per n
 worldbuilding (fatti, prosa, relazioni linkate), **senza spoiler** e **read-only**. Si
 genera **dentro Obsidian** (niente terminale): apri **Occhi del giocatore** e premi
 **Genera sito** (scegli il livello di rivelazione). Aggira il limite di Obsidian Publish
-(che non rende i plugin dinamici Dataview/Meta Bind/JS Engine): Dataview/Meta Bind/
-Templater/js-engine, i segreti e i campi del DM (`uso_al_tavolo`/`gancio`/`pressione`/
-`prossima_mossa`/`conseguenza`) sono **rimossi a monte**. Output nella cartella
+(che non rende i plugin dinamici Dataview/Meta Bind né i pannelli del plugin GDR): i blocchi
+dinamici (Dataview/Meta Bind, i pannelli ` ```gdr `), i segreti e i campi del DM
+(`uso_al_tavolo`/`gancio`/`pressione`/`prossima_mossa`/`conseguenza`) sono **rimossi a monte**. Output nella cartella
 `Sito-giocatori/` del vault (`index.html` + una pagina per nota + `site.css`): aprilo in
 locale o pubblica la cartella su GitHub Pages/Netlify. Per **nascondere** una nota intera
 ai giocatori: `visibilita: dm` (o `pubblico: false`) nel frontmatter. Implementazione in
@@ -98,7 +98,7 @@ Dev/Source/YAML/      core.yaml · system.yaml · entities/*.yaml · pg_rules.ya
 Dev/Source/Jinja/     _macros.j2 · _entity_base.j2 + un template per entità
 Dev/Source/SiteJinja/ page.html.j2 · index.html.j2 · site.css (sito dei giocatori)
 Dev/Source/JS/        create_entity.js · crea_pg.js/sali_pg.js · meta_actions.js · views.js
-                      genera.js · boot.mjs (ESM) · _comparators.js/_homebrew_bridge.js (sorgenti canoniche)
+                      genera.js · _panels.mjs (mappa pannelli → plugin) · _comparators.js/_homebrew_bridge.js (sorgenti canoniche)
 Dev/Source/SRD/       JSON SRD 5.2.1 IT · statblocks/ layout Fantasy Statblocks
 Dev/Tools/            common.py · render.py · build_srd.py · build_personaggio/ · fetch_plugins.py · validate.py
 Dev/Reference/        cheat-sheet sintassi dei plugin installati

@@ -495,23 +495,14 @@
 {{ tiri() }}
 {%- endmacro %}
 
-{# Pannello vista (JS Engine). fn = funzione esposta da z.automazioni/views.js,
-   caricata a runtime: aggiornare views.js si propaga alle note senza ricrearle.
-   Il corpo nota è UNA riga: importa il guscio unico boot.mjs (ESM) e gli delega
-   il pannello per nome. boot.mjs concentra ciò che prima era ripetuto in ogni
-   blocco — carica views.js (CommonJS via new Function: importJs usa import() ESM
-   e non vedrebbe module.exports), risolve dv/page e fa engine.markdown.create.
-   page=null (Dataview assente o nessuna nota attiva) -> messaggio di fallback. #}
+{# Pannello vista. fn = funzione esposta da z.automazioni/views.js, caricata a runtime
+   dal plugin `gdr`: aggiornare views.js si propaga alle note senza ricrearle. Il corpo
+   nota è un blocco ```gdr col solo nome del pannello; il plugin risolve dv/page (via
+   _panels.mjs:PANELS) e rende con MarkdownRenderer, ri-renderizzando reattivo. #}
 {% macro vista(fn='renderEntityPanel') -%}
-{%- if GDR_PLUGIN_BLOCKS is defined and GDR_PLUGIN_BLOCKS -%}
 ```gdr
 {{ fn }}
 ```
-{%- else -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "{{ fn }}");
-```
-{%- endif -%}
 {%- endmacro %}
 
 {# Incantesimi del PG (JS Engine): trucchetti + incantesimi noti/preparati
@@ -702,20 +693,11 @@ sort tipo asc, file.name asc
 > Applica PF/competenza/slot e guida le scelte (ASI/talento/sottoclasse/incantesimi): `BUTTON[sali-di-livello]`
 {%- endmacro %}
 
-{# Radar degli assi tematici (JS Engine): boot.radar legge i valori-assi dal
-   frontmatter della nota attiva e disegna il radar (views.radarMarkdownFromValues).
-   NB: era un meta-bind-js-view per la reattività live, ma quella variante dava
-   MB_PARSING/META_BIND_ERROR in-app (Meta Bind 1.4.x) → tornato a js-engine, che
-   rende sempre. Si ridisegna alla riapertura/ri-render della nota, non live mentre
-   muovi lo slider (le etichette-valore degli assi restano comunque reattive via VIEW). #}
+{# Radar degli assi tematici: il plugin `gdr` legge i valori-assi dal frontmatter della
+   nota attiva e disegna il radar (views.radarMarkdownFromValues), ridisegnandolo
+   reattivo quando uno slider Meta Bind cambia il frontmatter (listener metadataCache). #}
 {% macro grafico_assi(category) -%}
-{%- if GDR_PLUGIN_BLOCKS is defined and GDR_PLUGIN_BLOCKS -%}
 ```gdr
 radar {{ category }}
 ```
-{%- else -%}
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "{{ category }}", component);
-```
-{%- endif -%}
 {%- endmacro %}

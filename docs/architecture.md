@@ -8,7 +8,7 @@ Obsidian). Il repo di sviluppo resta pulito; il vault è ricostruibile.
 Dev/Source/                      Dev/Tools/                    dist/GDR-vault/
   YAML/ (modello)        ─┐
   Jinja/ (template)       ├─▶  render.py (orchestratore)  ─▶   z.modelli/ (template)
-  JS/ (Templater+JSEngine)│      ├─ common.py   (modello+IO)     z.automazioni/ (JS + *.json)
+  JS/ (runtime plugin GDR) │      ├─ common.py   (modello+IO)     z.automazioni/ (JS + *.json)
   SRD/ (JSON IT)          │      ├─ build_srd.py                 z.classi/ (fileClass)
   statblocks/ (FS)        │      ├─ build_personaggio/           SRD/ (sola lettura)
   SiteJinja/ (HTML)      ─┘      ├─ render_config/ (.obsidian)   Home/LEGGIMI/Indici/
@@ -44,14 +44,16 @@ Ogni entità tende a essere descritta da tre file:
 1. **YAML** (`entities/<id>.yaml`) — lo *schema* (campi, scheda, relazioni, wizard).
 2. **Jinja** (`Jinja/<id>.md.j2`) — il *corpo* della nota, costruito con le macro
    condivise (`_macros.j2`) estendendo lo scheletro `_entity_base.j2`.
-3. **JS** (`JS/crea_<id>.js`) — il *wizard* di creazione (Templater): prompt/
-   suggester, applica le regole e stampa il frontmatter. Il template Jinja in
-   alto chiama solo `tp.user.crea_<id>(tp)`.
+3. **JS di creazione** — il *wizard*: prompt/suggester, applica le regole e produce
+   il frontmatter. Il **plugin GDR** lo esegue col suo mini-motore (`createFromTemplate`):
+   il template Jinja in alto porta una riga-marcatore `<% await tp.user.crea_<id>(tp) %>`
+   che il plugin **sostituisce** col frontmatter del wizard prima di scrivere la nota.
 
-Il wizard delle entità "uniformi" è **generato**: `render.py` produce un
-`crea_<id>.js` minimale che delega al motore condiviso `create_entity.js` (legge
-lo schema da `core.json`). Le entità bespoke hanno invece un `crea_<id>.js`
-**hand-authored** in `Dev/Source/JS/` che fa da override.
+Le entità "uniformi" NON hanno un file di creazione dedicato: il plugin invoca il motore
+condiviso `create_entity.js` (legge lo schema da `core.json`) passando l'id del template.
+L'unico wizard **hand-authored** è `crea_pg.js` (il PG, con le sue regole 5.5e). *(Prima del
+plugin ogni template aveva un `crea_<id>.js` — generato o override — eseguito da Templater;
+i wrapper generati e Templater sono stati ritirati.)*
 
 I file `_*.js` (`_comparators.js`, `_homebrew_bridge.js`, `_relations.js`) sono **sorgenti
 canoniche condivise**: NON copiate nel vault, ma gli script autonomi (niente require a runtime)
@@ -80,7 +82,7 @@ tutti importano `common`).
 | `build_personaggio/` | Converter del rules-engine PG (package): SRD + `pg_rules.yaml` → `personaggio.json`. |
 | `genera_sito.js` | **Unico** esportatore del **sito dei giocatori** statico (bottone in-app «Genera sito»): dalle note di `Mondi/` → HTML spoiler-free in `Sito-giocatori/`. Markdown→HTML minimale; esclude segreti, campi del DM, blocchi dinamici/Meta Bind/`dice:` e le note `visibilita: dm`/`pubblico: false`. CSS in `Dev/Source/SiteJinja/site.css`. |
 | `validate.py` | `check()` + `validate_split`/`validate_entities`/`validate_entity_schema`/`validate_reciprocals`/`validate_aux_yaml`: confine core/system, dup-ID, snake_case, shape, schema wizard (`from` ammessi, `options`/`category`), inversi reciproci, YAML ausiliari (astrologia/pg_rules), template/Jinja, e l'uguaglianza byte delle sorgenti `_*.js`. |
-| `render_config/` (package: `_io`/`presentation`/`model_cfg`/`writers`) | Scrittura della config `.obsidian` (merge NON distruttivo, un writer per plugin: Templater/Meta Bind/Metadata Menu/Callout Manager/Fantasy Statblocks/Initiative Tracker/Folder Notes/Tab Panels/Calendarium/Bookmarks/Homepage/core), i bottoni e fileClass derivati dal modello (`creation_buttons`/`action_buttons`/`fileclass_fields`/`meta_bind_config`), le viste **Bases** (`bases_doc`/`write_bases`) e la **presentazione** colore-categoria (`CATEGORY_ACCENTS` → CSS `gdr.css` + preset Canvas `canvas_colors`). |
+| `render_config/` (package: `_io`/`presentation`/`model_cfg`/`writers`) | Scrittura della config `.obsidian` (merge NON distruttivo, un writer per plugin: Meta Bind/Metadata Menu/Callout Manager/Fantasy Statblocks/Initiative Tracker/Folder Notes/Tab Panels/Calendarium/Bookmarks/Homepage/core), i bottoni e fileClass derivati dal modello (`creation_buttons`/`action_buttons` → comandi nativi `gdr:…`, `fileclass_fields`/`meta_bind_config`), le viste **Bases** (`bases_doc`/`write_bases`) e la **presentazione** colore-categoria (`CATEGORY_ACCENTS` → CSS `gdr.css` + colori Canvas `canvas_colors`). |
 | `render.py` | Orchestratore (~400 righe): `build()` delega a helper nominati (`write_engine_data`/`render_notes`/`write_bases`/`write_obsidian_config`/…), `clean()`, `scaffold_folders()`, CLI. Re-esporta i nomi pubblici dei moduli per i test. |
 
 ## Pipeline di build (`render.py build()`)
@@ -90,14 +92,15 @@ monolite): carica il modello e delega.
 
 1. `load_core()` (modello fuso) + `load_templates()` (templates.yaml + entità) + `load_pages()`.
 2. `write_engine_data()` — scrive `z.automazioni/data/{core.json,personaggio.json}`
-   (dati per i JS; `core.json` include anche `astrologia`/`generatori`), copia i JS autonomi
-   (`boot.mjs`, `create_entity.js`, `crea_pg.js`, `sali_pg.js`, `genera.js`, `importa_*.js`, …) e
-   **bundla** i frammenti `JS/<stem>/*.js` → `views.js`/`meta_actions.js` (concatenazione
-   byte-esatta, ordine `00_`…`99_`), genera i wrapper `crea_<id>.js` mancanti.
-   *(I JS cache-ano `core.json` per-modulo.)* `write_componenti()` rende le macro di
+   (dati per i JS; `core.json` include anche `astrologia`/`generatori`), copia i JS runtime
+   (`create_entity.js`, `crea_pg.js`, `sali_pg.js`, `genera.js`, `importa_*.js`, … — li carica
+   il plugin GDR) e **bundla** i frammenti `JS/<stem>/*.js` → `views.js`/`meta_actions.js`
+   (concatenazione byte-esatta, ordine `00_`…`99_`). *(I JS cache-ano `core.json` per-modulo;
+   la mappa pannelli `_panels.mjs` NON si copia — la bundla esbuild dentro il plugin.)*
+   `write_componenti()` rende le macro di
    `componenti.yaml` in `z.automazioni/data/componenti.json` (catalogo dei componenti a
    richiesta, letto da `meta_actions.inserisci_componente` — bottone «＋ Componenti»).
-3. `render_notes(jinja_env(), …)` — rende ogni template Jinja → `z.modelli/`, le azioni,
+3. `render_notes(jinja_env(), …)` — rende ogni template Jinja → `z.modelli/`
    e le **note fisse** (`common.ROOT_NOTES`, single-source nome→jinja): Home/LEGGIMI/
    Manuale/Diagnostica + gli hub in `Indici/` (**Ponte Mondo↔Sistema**, **Fronti**, **Rete
    del mondo**, **Economia**, **Geografia**, **Missioni**, **Guida al combattimento**,
@@ -106,7 +109,7 @@ monolite): carica il modello e delega.
    Ritorna `{target: testo}`. Poi `write_bases()` (viste `.base`).
 4. `build_srd(core)` → albero `SRD/` (prima della config: i bookmark referenziano `SRD/Indice`).
 5. `write_obsidian_config()` — config `.obsidian` **non distruttiva** (merge), un writer
-   per plugin: community-plugins, Templater, Dataview, Meta Bind (input+button),
+   per plugin: community-plugins, Dataview, Meta Bind (input+button),
    `write_metadata_menu` (fileClass), `write_callout_manager`,
    `write_statblock_layouts` (layout + dice), `write_folder_notes`, `write_calendarium`
    (parsing + ponte `fc-*`), `write_bookmarks`, chrome esploratore, default core, homepage.

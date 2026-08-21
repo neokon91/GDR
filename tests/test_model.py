@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -77,21 +78,15 @@ def test_background_2024_legale():
 
 
 @pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
-def test_crea_js_present(tpl):
-    """Ogni template ha un crea_<id>.js: hand-authored in JS/ o generato (wrapper)."""
-    if (render.JS_DIR / f"crea_{tpl['id']}.js").is_file():
-        return  # override hand-authored
-    js = render.crea_wrapper_js(tpl)
-    assert f'create_entity(tp, "{tpl["id"]}")' in js
-
-
-@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_crea_wrapper_valid(tmp_path):
-    """Il wrapper generato è JS sintatticamente valido."""
-    js = render.crea_wrapper_js({"id": "luogo", "category": "luogo"})
-    f = tmp_path / "crea_luogo.js"
-    f.write_text(js, encoding="utf-8")
-    assert subprocess.run(["node", "--check", str(f)], capture_output=True).returncode == 0
+def test_creation_marker_present(tpl):
+    """Contratto di creazione del plugin: ogni template renderizzato contiene UNA riga
+    `<% await tp.user.<x>(tp) %>` che il mini-motore createFromTemplate rimpiazza col
+    frontmatter del wizard (regex in plugin/main.ts). Senza quel marcatore, «Crea …»
+    creerebbe la nota senza frontmatter. (Non ci sono più wrapper crea_<id>.js: la
+    creazione la fa create_entity.js — crea_pg.js per il PG — direttamente dal plugin.)"""
+    out = _env().get_template(tpl["jinja"]).render(core=CORE, plugins=PLUGINS, template=tpl)
+    markers = re.findall(r"^<%\s*await\s+tp\.user\.[^%]*%>\s*$", out, re.M)
+    assert len(markers) == 1, f"template {tpl['id']}: attesa 1 riga-marcatore di creazione, trovate {len(markers)}"
 
 
 @pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
@@ -201,34 +196,54 @@ def test_js_syntax(js):
 )
 def test_js_bundle_syntax(pkg, tmp_path):
     """Il BUNDLE (concatenazione di JS_DIR/<pkg>/*.js) è l'artefatto runtime reale —
-    ciò che boot.mjs valuta: dev'essere JS valido, non solo i singoli frammenti."""
+    ciò che il plugin `gdr` valuta: dev'essere JS valido, non solo i singoli frammenti."""
     f = tmp_path / f"{pkg}.js"
     f.write_text(render.bundle_js(pkg), encoding="utf-8")
     assert subprocess.run(["node", "--check", str(f)], capture_output=True).returncode == 0
 
 
 def test_panels_registered():
-    """Guard di drift JS Engine: ogni pannello referenziato in una macro Jinja
-    (`panel(...,"renderX")`) DEVE essere nel registro boot.mjs PANELS, e ogni PANELS
-    deve puntare a una funzione esportata da views.js. Senza questo, una macro che
-    nomina un pannello non registrato passa check/snapshot ma lancia 'Pannello JS
-    Engine sconosciuto' SOLO in-app (i test chiamano le view dirette, bypassando boot)."""
+    """Guard di drift pannelli: ogni pannello referenziato in una macro Jinja
+    (`panel(...,"renderX")`) DEVE essere nel registro `_panels.mjs` PANELS (sorgente
+    unica importata dal plugin), e ogni PANELS deve puntare a una funzione esportata da
+    views.js. Senza questo, una macro che nomina un pannello non registrato passa
+    check/snapshot ma lancia 'Pannello sconosciuto' SOLO in-app (i test chiamano le view
+    dirette, bypassando il plugin)."""
     import re
-    boot = (render.JS_DIR / "boot.mjs").read_text(encoding="utf-8")
+    boot = (render.JS_DIR / "_panels.mjs").read_text(encoding="utf-8")
     panels = set(re.findall(r"(\w+):\s*\{\s*mode:", boot))
     views = VIEWS_SRC
     exported = set(re.findall(r"\b(render\w+)\b", views.split("module.exports", 1)[1]))
     referenced = set()
     for j in render.JINJA_DIR.glob("*.j2"):
         text = j.read_text(encoding="utf-8")
-        # Forma diretta `panel(...,"renderX")` (definizione della macro vista) E forma
-        # instradata `vista("renderX")` / `m.vista("renderX")` (tutti gli altri call site,
-        # Tier B: unica emissione dietro flag ```gdr / js-engine).
-        referenced |= set(re.findall(r'panel\([^)]*"(render\w+)"', text))
+        # Ogni call site `vista("renderX")` / `m.vista("renderX")` (unica via: il plugin
+        # emette il blocco ```gdr col nome pannello).
         referenced |= set(re.findall(r'\bvista\("(render\w+)"\)', text))
-    assert referenced, "nessun panel(...)/vista(...) trovato nelle macro (regex rotta?)"
-    assert not (referenced - panels), f"pannelli usati nelle macro ma non in boot.mjs PANELS: {sorted(referenced - panels)}"
+    assert referenced, "nessun vista(...) trovato nelle macro (regex rotta?)"
+    assert not (referenced - panels), f"pannelli usati nelle macro ma non in _panels.mjs PANELS: {sorted(referenced - panels)}"
     assert not (panels - exported), f"PANELS senza export corrispondente in views.js: {sorted(panels - exported)}"
+
+
+def test_buttons_map_to_plugin_commands():
+    """Anti-drift bottoni↔plugin (sostituisce il vecchio guard label↔azioni-Templater):
+    dopo il ritiro di js-engine/Templater ogni bottone-azione lancia un comando nativo
+    `gdr:<azione>`. Verifica che (1) il set di azioni che model_cfg instrada ai comandi
+    (_PLUGIN_ACTIONS) coincida ESATTAMENTE con la lista ACTIONS che il plugin registra in
+    plugin/main.ts, e (2) ogni bottone di plugins.yaml con `action` (senza `command`
+    esplicito) sia coperto. Un mismatch = bottone che lancia un comando inesistente in-app."""
+    from render_config.model_cfg import _PLUGIN_ACTIONS
+    main_ts = (render.ROOT / "plugin" / "main.ts").read_text(encoding="utf-8")
+    block = re.search(r"const ACTIONS[^\[]*\[(.*?)\];", main_ts, re.S)
+    assert block, "blocco const ACTIONS non trovato in plugin/main.ts (regex da aggiornare?)"
+    plugin_actions = set(re.findall(r'id:\s*"([a-z_]+)"', block.group(1)))
+    assert plugin_actions == _PLUGIN_ACTIONS, (
+        f"drift azioni plugin↔model_cfg: solo nel plugin {sorted(plugin_actions - _PLUGIN_ACTIONS)}, "
+        f"solo in _PLUGIN_ACTIONS {sorted(_PLUGIN_ACTIONS - plugin_actions)}")
+    for b in (PLUGINS.get("buttons") or []):
+        act = b.get("action")
+        if act and not b.get("command"):
+            assert act in plugin_actions, f"bottone {b.get('id')}: azione '{act}' non registrata dal plugin"
 
 
 @pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])

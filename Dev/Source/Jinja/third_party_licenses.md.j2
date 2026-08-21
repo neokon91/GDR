@@ -17,8 +17,8 @@ la sorgente corrispondente, con il testo completo della licenza, è al rispettiv
 
 | Plugin | Autore | Licenza | Sorgente |
 |---|---|:--:|---|
-{% for p in plugins.plugins -%}
-| {{ p.name }} | {{ p.author | default("—", true) }} | {{ p.license | default("?", true) }} | {% if p.repo %}[{{ p.repo }}](https://github.com/{{ p.repo }}){% else %}—{% endif %} |
+{% for p in plugins.plugins if not p.get('autoriale') -%}
+| {{ p.name }} | {{ p.author | default("—", true) }} | {{ p.license | default("?", true) }} | {% if p.get('repo') %}[{{ p.repo }}](https://github.com/{{ p.repo }}){% else %}—{% endif %} |
 {% endfor %}
 
 > **Per chi ridistribuisce questo vault**: mantieni i plugin non modificati e conserva

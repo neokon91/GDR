@@ -1,41 +1,39 @@
-# Plugin GDR — spike Tier B
+# Plugin GDR — Console DM & Motore
 
-Dimostratore del salto a **plugin Obsidian nativo** (vedi
-[../docs/tier_b_plugin_evaluation.md](../docs/tier_b_plugin_evaluation.md)). Prova che
-il porting **non è un rewrite**: riusa `z.automazioni/views.js` e `meta_actions.js` del
-vault **senza modificarli**.
+Il **runtime del vault** GDR (plugin Obsidian nativo, TS + esbuild). Riusa
+`z.automazioni/views.js` e `meta_actions.js` **senza modificarli** (li carica come
+CommonJS) e importa la mappa pannelli da `../Dev/Source/JS/_panels.mjs`. Storia e
+motivazioni del salto in [../docs/tier_b_plugin_evaluation.md](../docs/tier_b_plugin_evaluation.md).
 
-## Cosa dimostra
-1. **Blocco ` ```gdr <renderX> `** al posto del blocco `js-engine` (32 nel vault) —
-   `registerMarkdownCodeBlockProcessor`.
-2. **Comando nativo + hotkey + icona ribbon** «GDR: Riposo lungo (PG attivo)» → dispatcher
-   `meta_actions(tp, "riposo_lungo")`.
-3. **Re-render reattivo**: ogni blocco si ridisegna sui cambi di frontmatter
-   (`metadataCache 'changed'`), non solo il radar come oggi.
-4. **Cruscotto DM (`ItemView`)**: pannello laterale persistente «da app» con sezioni riusate
-   (`renderStatoMondo`/`renderTensioni`/`renderProiezione`) + azioni rapide («Giro del mondo»,
-   «Aggiorna»), reattivo su `metadataCache` e robusto al cold-start di Dataview
-   (`dataview:index-ready`). Apri con il comando «Apri il Cruscotto DM» o l'icona ribbon.
+È l'**unica** via: js-engine e Templater sono stati ritirati.
 
-Tutti e 4 i punti **validati dal vivo** in Obsidian su `dist/GDR-vault` (vedi
-[../docs/tier_b_plugin_evaluation.md](../docs/tier_b_plugin_evaluation.md)).
+## Cosa fa
+1. **Blocco ` ```gdr <renderX> `** (+ ` radar <cat> `) — al posto del vecchio `js-engine`:
+   `registerMarkdownCodeBlockProcessor`, re-render **reattivo** sui cambi di frontmatter
+   (`metadataCache 'changed'`) e sull'index-ready di Dataview.
+2. **Azioni del dispatcher come comandi nativi** `gdr:<azione>` (hotkey + ribbon), con
+   modali native (`SuggestModal`/`Modal`) al posto di `tp.system.suggester`/`prompt`.
+3. **Creazione senza Templater**: il mini-motore `createFromTemplate` esegue `crea_pg.js`
+   (PG) o `create_entity.js` (entità) col `tpShim`, poi compone frontmatter + corpo del
+   template. Un comando `gdr:crea-<id>` per template + un picker generico.
+4. **Cruscotto DM (`ItemView`)**: dashboard a piena pagina (Party, Combattimento via
+   Initiative Tracker, Tiri rapidi, Data del mondo via Calendarium, Stato del mondo) +
+   tab Impostazioni + status bar. Apri col comando «Apri il Cruscotto DM» o l'icona ribbon.
 
-## Build
+## Build e installazione
 ```bash
 cd plugin
 npm install
-npm run build      # → main.js (esbuild, CJS, obsidian esterno)
+node esbuild.config.mjs --prod   # → main.js (CJS, `obsidian` esterno)  [oppure: npm run build:plugin dalla root]
 ```
+`render.py` (build del vault) chiama `install_authored_plugins`, che copia
+`main.js`/`manifest.json`/`styles.css` in `dist/GDR-vault/.obsidian/plugins/gdr/` e abilita
+**gdr**. In `plugins.yaml` il plugin è dichiarato **critico autoriale** (`autoriale: true`):
+esente dal pin `repo`+`version` del turnkey (non si fetcha), ma il gate `fetch_plugins --check`
+esige che sia **presente** nel vault prima dello zip.
 
-## Installazione nel vault di sviluppo
-Copia `manifest.json` + `main.js` in
-`dist/GDR-vault/.obsidian/plugins/gdr/` e abilita **gdr** in
-*Impostazioni → Plugin della community* (o già presente in `community-plugins.json`).
-Apri **`GDR — Demo plugin.md`** e prova il blocco + il comando.
-
-## In un B2 completo (non fatto qui)
-- Il plugin **sussume `boot.mjs`** (qui la mappa `PANELS` è duplicata a scopo demo).
-- `render.py` bundla il plugin nel vault ed emette ` ```gdr ` invece di `js-engine`;
-  `fetch_plugins.py`/turnkey lo trattano come gli altri plugin `.obsidian/plugins/<id>/`.
-- `tp.system.suggester`/`prompt` → `SuggestModal`/`Modal`; `tp.user.*` → chiamate dirette.
-- La logica resta JS/TS puro → i test node headless e l'anti-drift continuano a valere.
+## Anti-drift
+`_panels.mjs` è la sorgente UNICA della mappa pannelli (niente copie). La parità
+`_PLUGIN_ACTIONS` (model_cfg) ↔ lista `ACTIONS` di `main.ts`, e il fatto che ogni pannello
+usato nelle macro sia registrato, sono verificati dai test Python
+(`test_panels_registered`, `test_buttons_map_to_plugin_commands`).

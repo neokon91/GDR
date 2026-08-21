@@ -7,12 +7,15 @@ interventi **possibili** — materiale utile non ancora sfruttato — con valore
 da cui scegliere. **Non è codice.**
 
 ## Stato della QA in-app
-Diversi candidati cambiano comportamento **runtime** (Meta Bind / JS Engine / Bases): la
+Diversi candidati cambiano comportamento **runtime** (Meta Bind / plugin GDR / Bases): la
 generazione è deterministica e testata, ma il **rendering reale dei plugin** va verificato
 aprendo Obsidian. Le voci marcate 🔬 dipendono da quella verifica prima di poter essere
 spedite con fiducia.
 
 ## Già fatto (questo ciclo)
+- **Reattività live radar/infobox** (ex candidato #1): risolta dal **plugin GDR** — i blocchi
+  ```gdr si ridisegnano su `metadataCache 'changed'` (niente più bisogno di un ponte Meta
+  Bind↔JS Engine; js-engine ritirato).
 - **FIX**: zoom-map sintassi `image:` + nome plugin reale; Iconize deprecazione + gotcha
   falso corretto; callout `infobox` in tabella; repo IT → `javalent`; `tp.file.title` →
   `tp.config.target_file.basename`; Metadata Menu "proposta" → "implementata"; comando BRAT;
@@ -26,9 +29,8 @@ spedite con fiducia.
 
 | # | Candidato | Plugin | Valore | Effort | Blocco | Reference |
 |---|---|---|:-:|:-:|---|---|
-| 1 | Reattività live radar/infobox via `engine.reactive` | JS Engine | Alto | Medio-alto | 🔬 serve un ponte evento Meta Bind↔JS Engine | [js-engine](../Dev/Reference/js-engine.md) |
 | 2 | Galleria `cards` con copertina (Bestiario/Cast/Atlante) | Bases | Alto | Basso\* | 🔬 key immagine da confermare + servono ritratti in `Media/` | [bases](../Dev/Reference/bases.md) |
-| 3 | `multi_suggester` per "collega più note" nei wizard | Templater | Medio | Basso-medio | 🔬 UX in-app | [templater](../Dev/Reference/templater.md) |
+| 3 | Modale **multi-select** nativa per "collega più note" nei wizard | plugin GDR | Medio | Basso-medio | 🔬 UX in-app (SuggestModal multi) | — |
 | 4 | `fc-img`/`fc-category` nel wizard evento (colore+immagine in agenda) | Calendarium | Medio | Basso | 🔬 resa agenda | [calendarium](../Dev/Reference/calendarium.md) |
 | 5 | `extends` fileClass-base condiviso (meno duplicazione in `z.classi/`) | Metadata Menu | Medio | Medio | — | [metadata-menu](../Dev/Reference/metadata-menu.md) |
 | 6 | Indici Bases più ricchi: `groupBy`/`summaries`/`formulas`/filtri `or-not` | Bases | Medio | Basso-medio | 🔬 | [bases](../Dev/Reference/bases.md) |

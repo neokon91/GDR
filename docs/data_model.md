@@ -114,8 +114,8 @@ La tassonomia ha tre strati, dal più largo al più stretto:
 3. **famiglia** (`famiglie`) — dimensione tematica ortogonale (natura/indole), col preset-assi.
 
 Il pannello vive nel tab Lore (gated: `{% if categories[cat].subtype_profiles %}`), reso
-dalla macro `tipo_profilo()` → `boot.mjs:PANELS.renderTipoProfilo` (guardato da
-`test_panels_registered`).
+dalla macro `tipo_profilo()` → `_panels.mjs:PANELS.renderTipoProfilo` (reso dal plugin GDR,
+guardato da `test_panels_registered`).
 
 ## Principio di inclusione — cosa diventa un'entità
 

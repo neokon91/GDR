@@ -2,9 +2,9 @@
  * GDR — Console DM & Motore (plugin Obsidian).
  *
  * Runtime del vault GDR: riusa `z.automazioni/views.js` e `z.automazioni/meta_actions.js`
- * SENZA modificarli (li carica come CommonJS, come boot.mjs, di cui importa la mappa PANELS)
- * ed espone:
- *   1. blocco ```gdr <renderX> / `radar <cat>` — al posto di js-engine, re-render reattivo;
+ * SENZA modificarli (li carica come CommonJS) e importa la mappa PANELS da `_panels.mjs`.
+ * È l'UNICO runtime dei blocchi/azioni (js-engine e Templater sono stati ritirati). Espone:
+ *   1. blocco ```gdr <renderX> / `radar <cat>` — re-render reattivo (metadataCache+dataview);
  *   2. le AZIONI del dispatcher come comandi nativi + hotkey + ribbon (modali native al posto
  *      di tp.system.suggester/prompt); la CREAZIONE via mini-motore di istanziazione template;
  *   3. CRUSCOTTO DM — dashboard a piena pagina che integra PG, Initiative Tracker, dadi,
@@ -32,10 +32,11 @@ function parseDadi(s: string): [string, string][] {
     return (i < 0 ? [p, p] : [p.slice(0, i).trim(), p.slice(i + 1).trim()]) as [string, string];
   });
 }
-// SORGENTE UNICA della mappa pannelli: importata da boot.mjs (bundlata da esbuild), così il
-// plugin SUSSUME boot.mjs invece di duplicarne il registro (niente drift).
+// SORGENTE UNICA della mappa pannelli: importata da _panels.mjs (bundlata da esbuild), così il
+// plugin e i test la condividono senza duplicarne il registro (niente drift). Il prefisso `_`
+// la tiene fuori dal vault: è consumata solo a build-time (esbuild) e dal test di drift.
 // @ts-ignore — .mjs JS del vault, senza tipi; esbuild lo risolve e tree-shaka al solo PANELS.
-import { PANELS } from "../Dev/Source/JS/boot.mjs";
+import { PANELS } from "../Dev/Source/JS/_panels.mjs";
 
 const VIEWS_PATH = "z.automazioni/views.js";
 const META_PATH = "z.automazioni/meta_actions.js";
@@ -169,7 +170,7 @@ export default class GdrPlugin extends Plugin {
       };
 
       // Caso speciale: il RADAR non è in PANELS (firma diversa — legge gli assi dal
-      // frontmatter e disegna l'SVG). `radar <category>`; era `boot.radar` via js-engine.
+      // frontmatter e disegna l'SVG). Sintassi: `radar <category>`.
       if (name === "radar") {
         const category = tokens[1] || "";
         reactive(async () => {
@@ -368,7 +369,7 @@ export default class GdrPlugin extends Plugin {
   }
 
   // Catalogo core.json (assi per categoria, ecc.): immutabile a runtime (lo riscrive solo
-  // render.py al build) → letto una volta e cacheato, come fa boot.mjs.
+  // render.py al build) → letto una volta e cacheato.
   async loadCore() {
     if (!this.core) this.core = JSON.parse(await this.app.vault.adapter.read("z.automazioni/data/core.json"));
     return this.core;

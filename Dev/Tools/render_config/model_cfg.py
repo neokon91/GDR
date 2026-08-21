@@ -1,15 +1,8 @@
 """Config derivata dal MODELLO: bottoni di creazione, fileClass (Metadata Menu), Meta Bind, viste Bases, layout statblock."""
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from typing import Any
-
-
-def _gdr_plugin_blocks() -> bool:
-    """Flag Tier B (stessa semantica di render.jinja_env): a ON i bottoni di creazione
-    lanciano il comando nativo del plugin `gdr` invece di `templaterCreateNote`."""
-    return os.environ.get("GDR_PLUGIN_BLOCKS", "1") != "0"
 
 import yaml
 
@@ -42,27 +35,14 @@ def load_statblock_layouts() -> list[dict[str, Any]]:
 
 # --- Bottoni e fileClass (derivati dal modello) -----------------------------
 def creation_buttons(core: dict[str, Any], templates: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Un bottone 'Crea <Titolo>' per ogni template, derivato dai file-entità."""
-    use_plugin = _gdr_plugin_blocks()
-    buttons = []
-    for template in templates:
-        if use_plugin:
-            # Tier B: il plugin `gdr` istanzia il template (mini-motore) col wizard nativo.
-            action: dict[str, Any] = {"type": "command", "command": f"gdr:crea-{template['id']}"}
-        else:
-            action = {
-                "type": "templaterCreateNote",
-                "templateFile": template["target"],
-                "folderPath": template_folder(core, template["category"]),
-                "openNote": True,
-            }
-        buttons.append({
-            "id": f"crea-{template['id']}",
-            "label": f"Crea {template['title']}",
-            "style": "primary",
-            "actions": [action],
-        })
-    return buttons
+    """Un bottone 'Crea <Titolo>' per ogni template, derivato dai file-entità. Il plugin
+    `gdr` istanzia il template col suo mini-motore (comando nativo `gdr:crea-<id>`)."""
+    return [{
+        "id": f"crea-{template['id']}",
+        "label": f"Crea {template['title']}",
+        "style": "primary",
+        "actions": [{"type": "command", "command": f"gdr:crea-{template['id']}"}],
+    } for template in templates]
 
 
 # Azioni del dispatcher meta_actions che il plugin `gdr` espone come comandi nativi
@@ -81,20 +61,20 @@ _PLUGIN_ACTIONS = {
 
 
 def action_buttons(plugins: dict[str, Any]) -> list[dict[str, Any]]:
-    """Bottoni-azione: lanciano un comando di Obsidian (button con 'command' esplicito, o
-    — a flag Tier B ON — l'azione del dispatcher gestita dal plugin `gdr`) oppure eseguono
-    un file Templater (fallback, e per le azioni non ancora migrate)."""
-    use_plugin = _gdr_plugin_blocks()
+    """Bottoni-azione: lanciano un comando di Obsidian — quello esplicito (`command`) o
+    l'azione del dispatcher esposta come comando nativo dal plugin `gdr` (`gdr:<azione>`).
+    Ogni bottone DEVE essere coperto da una delle due vie (niente più fallback Templater)."""
     buttons = []
     for button in plugins.get("buttons", []):
         act = button.get("action")
         if button.get("command"):
             action = {"type": "command", "command": button["command"]}
-        elif use_plugin and act in _PLUGIN_ACTIONS:
+        elif act in _PLUGIN_ACTIONS:
             action = {"type": "command", "command": f"gdr:{act.replace('_', '-')}"}
         else:
-            target = f"z.modelli/azioni/{button['label']}.md"
-            action = {"type": "runTemplaterFile", "templateFile": target}
+            raise ValueError(
+                f"Bottone '{button.get('id')}' senza comando: manca 'command' e "
+                f"l'azione '{act}' non è in _PLUGIN_ACTIONS (il plugin non la espone).")
         buttons.append({
             "id": button["id"],
             "label": button["label"],

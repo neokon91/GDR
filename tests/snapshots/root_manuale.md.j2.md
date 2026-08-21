@@ -9,12 +9,15 @@
 Sono **già nel vault**: di norma basta accettare il *trust prompt* all'apertura (vedi i 3
 passi del [[LEGGIMI]]). Se qualcosa non si rende, apri *Impostazioni → Plugin della comunità*,
 assicurati che **Restricted mode** sia OFF e che questi siano **abilitati**:
-- **Templater** (`templater-obsidian`)- **Dataview** (`dataview`)- **Meta Bind** (`obsidian-meta-bind-plugin`)- **JS Engine** (`js-engine`)- **Tab Panels** (`tab-panels`)- **Callout Manager** (`callout-manager`)- **Fantasy Statblocks** (`obsidian-5e-statblocks`)- **Metadata Menu** (`metadata-menu`)- **Iconic** (`iconic`)- **Calendarium** (`calendarium`)- **Dice Roller** (`obsidian-dice-roller`)- **Tasks** (`obsidian-tasks-plugin`)- **Excalidraw** (`obsidian-excalidraw-plugin`)- **TTRPG Tools - Maps** (`zoom-map`)- **Hexmap World Creator** (`hexmaker`)- **BRAT** (`obsidian42-brat`)- **Homepage** (`homepage`)- **Initiative Tracker** (`initiative-tracker`)- **Folder Notes** (`folder-notes`)- **Second Window** (`image-window`)- **Heraldry Weaver** (`heraldry-weaver`)- **Made Up Words** (`made-up-words`)- **Better Export PDF** (`better-export-pdf`)
+- **Dataview** (`dataview`)- **Meta Bind** (`obsidian-meta-bind-plugin`)- **Tab Panels** (`tab-panels`)- **Callout Manager** (`callout-manager`)- **Fantasy Statblocks** (`obsidian-5e-statblocks`)- **Metadata Menu** (`metadata-menu`)- **Iconic** (`iconic`)- **Calendarium** (`calendarium`)- **Dice Roller** (`obsidian-dice-roller`)- **Tasks** (`obsidian-tasks-plugin`)- **Excalidraw** (`obsidian-excalidraw-plugin`)- **TTRPG Tools - Maps** (`zoom-map`)- **Hexmap World Creator** (`hexmaker`)- **BRAT** (`obsidian42-brat`)- **Homepage** (`homepage`)- **Initiative Tracker** (`initiative-tracker`)- **Folder Notes** (`folder-notes`)- **Second Window** (`image-window`)- **Heraldry Weaver** (`heraldry-weaver`)- **Made Up Words** (`made-up-words`)- **Better Export PDF** (`better-export-pdf`)
+Più il **plugin GDR** (`gdr`, già incluso e abilitato): è il motore del vault — rende i
+pannelli ```gdr, i pulsanti-azione, la creazione delle note e il Cruscotto DM.
+
 > [!warning] Senza questi plugin
-> Senza **Tab Panels** le note a schede appaiono come testo grezzo; senza
-> **Fantasy Statblocks** non vedi gli statblock né il blocco `encounter`; senza
-> **Meta Bind** i campi `INPUT`/`VIEW` (incluso il componente *Carattere*) restano testo grezzo;
-> senza **JS Engine** il pannello *Vista* (card "pronto al tavolo?" + "Citato da") non si rende.
+> Senza il **plugin GDR** i pannelli *Vista*/radar restano come codice ```gdr, i pulsanti
+> non fanno nulla e non si creano note; senza **Tab Panels** le note a schede appaiono come
+> testo grezzo; senza **Fantasy Statblocks** non vedi gli statblock né il blocco `encounter`;
+> senza **Meta Bind** i campi `INPUT`/`VIEW` (incluso il componente *Carattere*) restano testo grezzo.
 > **Controllo automatico**: apri **[[Diagnostica]]** — ti dice quali mancano e come riattivarli.
 
 ## 2. Impostazioni (già pronte)
@@ -175,8 +178,8 @@ renderAxesCompare
 ````
 
 La logica vive in `z.automazioni/views.js` (radar SVG, niente plugin grafici), caricata
-dal guscio unico `z.automazioni/boot.mjs`: se le aggiorni, tutti i blocchi si aggiornano
-senza ricreare le note.
+dal **plugin GDR** che rende i blocchi ```gdr: se aggiorni views.js, tutti i blocchi si
+aggiornano senza ricreare le note.
 
 ## 11. Tassonomia: quale categoria quando
 Le categorie sono stratificate dal metafisico al tavolo. Quando non sei sicuro su quale

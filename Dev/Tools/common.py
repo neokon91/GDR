@@ -22,7 +22,7 @@ SRD_DIR = SOURCE / "SRD"  # SRD 5.2.1 vendorizzata (JSON IT, CC-BY-4.0)
 def bundle_js(stem: str) -> str:
     """Concatena i frammenti `JS_DIR/<stem>/*.js` (ordinati per nome) nel singolo
     sorgente runtime. Gli script grandi (es. views) sono EDITATI a frammenti ma
-    CARICATI come un file solo: boot.mjs li valuta con `new Function` (niente
+    CARICATI come un file solo: il plugin `gdr` li valuta con `new Function` (niente
     require/bundling a runtime). Join byte-esatto → l'ordine `00_`,`10_`,… conta;
     `99_exports.js` (module.exports) va per ultimo."""
     return "".join(p.read_text(encoding="utf-8")

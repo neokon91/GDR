@@ -333,16 +333,8 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     Callout Manager, Fantasy Statblocks, bookmarks, chrome esploratore, default
     core, homepage)."""
     union_list(obsidian / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
-    # Azioni-import come COMANDI palette (oltre al bottone nel tab Mappa): l'utente le lancia
-    # da Cmd+P anche su note vecchie o quando il tab Mappa è nell'overflow → "Templater: …
-    # Importa mappa…". Data-driven: ogni button la cui azione inizia con "importa".
-    import_hotkeys = [f"z.modelli/azioni/{b['label']}.md" for b in plugins.get("buttons", [])
-                      if str(b.get("action", "")).startswith("importa")]
-    merge_plugin_config(obsidian, "templater-obsidian", {
-        "templates_folder": "z.modelli",
-        "user_scripts_folder": "z.automazioni",
-        "enabled_templates_hotkeys": import_hotkeys,
-    })
+    # NB: niente config Templater (plugin ritirato): le azioni-import sono comandi nativi
+    # del plugin `gdr` (gdr:importa-mappa / gdr:importa-azgaar), già in palette e hotkey-abili.
     merge_plugin_config(obsidian, "dataview", {"enableDataviewJs": True})
     merge_plugin_config(obsidian, "obsidian-meta-bind-plugin", meta_bind_config(plugins, core, templates))
     write_metadata_menu(obsidian, core)

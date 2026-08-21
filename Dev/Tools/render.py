@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import shutil
 from pathlib import Path
@@ -137,18 +136,6 @@ def clean() -> None:
         shutil.rmtree(legacy_build)
 
 
-def crea_wrapper_js(template: dict[str, Any]) -> str:
-    """Wizard di creazione per-template generato: `tp.user.crea_<id>` delega al
-    motore condiviso create_entity.js. Le entità bespoke hanno un crea_<id>.js
-    hand-authored in JS/ (override) e non passano di qui."""
-    tid = template["id"]
-    return (
-        f'// GENERATO da render.py — wizard del template "{tid}" (categoria {template["category"]}).\n'
-        f'// Delega al motore create_entity.js; lo schema è in entities/{template["category"]}.yaml.\n'
-        f'module.exports = async (tp) => tp.user.create_entity(tp, "{tid}");\n'
-    )
-
-
 def jinja_env() -> Environment:
     """Ambiente Jinja della pipeline. StrictUndefined: un campo mancante è un
     errore (non una stringa vuota); trim/lstrip_blocks tengono pulito l'output."""
@@ -160,12 +147,6 @@ def jinja_env() -> Environment:
         trim_blocks=True,
         lstrip_blocks=True,
     )
-    # Flag Tier B: se attivo, i pannelli-vista/radar emettono un blocco ```gdr (reso dal
-    # plugin `gdr`) invece del blocco js-engine che delega a boot.mjs. **Default ON**: il
-    # plugin è la via principale del display; js-engine resta un'opzione di ripiego.
-    # Disattiva con GDR_PLUGIN_BLOCKS=0 (torna a js-engine). NB: i wizard Templater
-    # (`<% tp.user.crea_X %>`) NON dipendono da questo flag.
-    env.globals["GDR_PLUGIN_BLOCKS"] = os.environ.get("GDR_PLUGIN_BLOCKS", "1") != "0"
     return env
 
 
@@ -302,31 +283,30 @@ def write_componenti(env: Environment, core: dict[str, Any], plugins: dict[str, 
 
 
 def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> None:
-    """Dati e script che il JS Engine legge a runtime: il payload core.json
-    (modello distillato per views.js), le opzioni del rules-engine PG, gli script
-    Templater (copia 1:1) e un wizard di creazione per-template (wrapper sul
-    motore create_entity.js, salvo override hand-authored crea_<id>.js in JS/)."""
+    """Dati e script che il plugin `gdr` legge a runtime: il payload core.json
+    (modello distillato per views.js), le opzioni del rules-engine PG e gli script
+    runtime (copia 1:1: views/meta_actions bundle, create_entity.js, crea_pg.js,
+    genera.js, importa_*, …). La creazione la istanzia il mini-motore del plugin
+    (create_entity.js per le entità, crea_pg.js per il PG); niente wrapper per-template."""
     # YAML -> JSON che gli script JS leggono a runtime via app.vault.adapter.read.
     write_json(VAULT / "z.automazioni" / "data" / "core.json", engine_payload(core, templates))
     # Opzioni del rules-engine PG (SRD + pg_rules.yaml) per crea_personaggio.js.
     write_json(VAULT / "z.automazioni" / "data" / "personaggio.json", build_personaggio_options(core))
-    # Gli script Templater (.js CommonJS) e il guscio JS Engine (.mjs ESM) sono
-    # autonomi (niente require/bundling): copia 1:1. I `_*.js` sono sorgenti di
-    # riferimento condivise (es. _comparators.js, sincronizzato via check) — non
-    # runtime: non si copiano nel vault, come i partial Jinja `_*.j2`.
-    for source in sorted(JS_DIR.glob("*.js")) + sorted(JS_DIR.glob("*.mjs")):
+    # Gli script runtime (.js CommonJS) sono autonomi (niente require/bundling): copia
+    # 1:1. Li carica il plugin `gdr` con `new Function`/evalCjs (views.js, meta_actions.js,
+    # create_entity.js, crea_pg.js, genera.js, importa_*, …). I `_*.js` sono sorgenti di
+    # riferimento condivise (es. _comparators.js, sincronizzato via check) — non runtime:
+    # non si copiano nel vault, come i partial Jinja `_*.j2`.
+    for source in sorted(JS_DIR.glob("*.js")):
         if source.name.startswith("_"):
             continue
         shutil.copy2(source, VAULT / "z.automazioni" / source.name)
     # Script grandi frammentati (es. views/): editati a frammenti in JS_DIR/<stem>/,
-    # qui CONCATENATI nel singolo file runtime z.automazioni/<stem>.js (boot.mjs li
+    # qui CONCATENATI nel singolo file runtime z.automazioni/<stem>.js (il plugin lo
     # valuta con new Function: un file solo, niente require). Vedi bundle_js().
     for pkg in sorted(JS_DIR.iterdir()):
         if pkg.is_dir() and any(pkg.glob("*.js")):
             write_text(VAULT / "z.automazioni" / f"{pkg.name}.js", bundle_js(pkg.name))
-    for template in templates:
-        if not (JS_DIR / f"crea_{template['id']}.js").is_file():
-            write_text(VAULT / "z.automazioni" / f"crea_{template['id']}.js", crea_wrapper_js(template))
     # site.css per l'esportatore JS del sito-giocatori (genera_sito.js, l'UNICO
     # esportatore: la via Python è stata ritirata). Sorgente SiteJinja/site.css,
     # spedita nel vault così il bottone «Genera sito giocatori» la emette accanto alle pagine HTML.
@@ -375,22 +355,16 @@ def folder_index_pages(core: dict[str, Any], plugins: dict[str, Any]) -> list[di
 
 
 def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any],
-                 templates: list[dict[str, Any]], actions: list[dict[str, Any]],
+                 templates: list[dict[str, Any]],
                  pages: list[dict[str, Any]]) -> dict[str, str]:
     """Rende tutti i Jinja sul vault e ritorna {target: testo}: le note-modello
-    (z.modelli/), le azioni Templater, le note di radice (Home/LEGGIMI/Ponte/
-    Fronti) e le pagine-indice per dominio (Indici/, per tenere pulita la radice)."""
+    (z.modelli/), le note di radice (Home/LEGGIMI/Ponte/Fronti) e le pagine-indice
+    per dominio (Indici/, per tenere pulita la radice)."""
     rendered: dict[str, str] = {}
     for template in templates:
         text = env.get_template(template["jinja"]).render(core=core, plugins=plugins, template=template)
         write_text(VAULT / template["target"], text)
         rendered[template["target"]] = text
-
-    action_template = env.get_template("action.md.j2")
-    for action in actions:
-        text = action_template.render(action=action)
-        write_text(VAULT / action["target"], text)
-        rendered[action["target"]] = text
 
     # Note fisse (radice + hub INDEX_DIR): single-source ROOT_NOTES, così ciò che si
     # genera qui è ESATTAMENTE ciò che clean() rimuove (generated_note_names deriva da ROOT_NOTES).
@@ -426,9 +400,11 @@ def scaffold_folders(core: dict[str, Any]) -> None:
 
 def install_authored_plugins() -> None:
     """Copia i plugin AUTORIALI (non fetchati da GitHub) nel vault e li abilita. Oggi: il
-    plugin `gdr` (motore viste/azioni, Tier B) da `plugin/`. Idempotente e non-distruttivo.
-    Se il plugin non è ancora buildato (`plugin/main.js` assente), avvisa e salta — così una
-    build senza toolchain JS resta valida (coesistenza col percorso js-engine)."""
+    plugin `gdr` da `plugin/`, che è l'UNICO runtime del vault (pannelli ```gdr, azioni,
+    creazione, Cruscotto — niente più js-engine/Templater). Idempotente e non-distruttivo.
+    Se il plugin non è ancora buildato (`plugin/main.js` assente), avvisa e salta: la build
+    delle note resta valida ma il vault NON si rende finché non fai `npm run build:plugin`
+    (il gate turnkey fetch_plugins --check, con `gdr` critico, lo intercetta prima dello zip)."""
     src = ROOT / "plugin"
     if not (src / "main.js").is_file():
         print("Plugin gdr non buildato (plugin/main.js assente): salto. "
@@ -455,7 +431,6 @@ def build() -> dict[str, str]:
     core = load_core()
     plugins = load_yaml("plugins.yaml")
     templates = load_templates()
-    actions = load_yaml("templates.yaml").get("actions", [])
     pages = load_pages()
 
     env = jinja_env()
@@ -463,7 +438,7 @@ def build() -> dict[str, str]:
     # Catalogo dei componenti a richiesta (bottone «＋ Componenti»): dopo il modello,
     # reso con lo stesso env dei template.
     write_componenti(env, core, plugins)
-    rendered = render_notes(env, core, plugins, templates, actions, pages)
+    rendered = render_notes(env, core, plugins, templates, pages)
     # Bases (core): una vista DB nativa (.base) per pagina, stessa single-source
     # degli hub. Additivo: gli hub Dataview restano come fallback.
     write_bases(pages)

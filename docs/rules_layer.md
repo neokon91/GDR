@@ -12,7 +12,7 @@ SRD JSON (Dev/Source/SRD/srd_5_2_1_{classes,species,backgrounds,feats}.json)
         │  build_personaggio (converter)
         ▼
   z.automazioni/data/personaggio.json   (opzioni del rules-engine)
-        │  crea_pg.js (wizard Templater, a runtime)
+        │  crea_pg.js (wizard eseguito dal plugin GDR, a runtime)
         ▼
   frontmatter della nota PG  ──▶  pg.md.j2 / macro scheda_pg_rules()  (presentazione)
 ```
@@ -36,7 +36,8 @@ dove serve. Output `personaggio.json`:
 
 ## 2. Wizard (`crea_pg.js`)
 
-Script Templater **autonomo**, separato da `create_entity.js`. Legge
+Script CommonJS **autonomo**, separato da `create_entity.js`, eseguito dal mini-motore del
+plugin GDR (`createFromTemplate`, col `tpShim`; è l'unico wizard hand-authored). Legge
 `personaggio.json`. Passi: nome → classe → specie → background → caratteristiche
 (array/point-buy/manuale) → ASI background → scelte-abilità di classe → equipaggiamento
 A/B → armatura+scudo → lingue → incantesimi (caster). Applica (PG **di 1º livello
@@ -122,7 +123,7 @@ applica il livello successivo dalla `progressione` della classe:
 
 ## Test
 
-Mock di Templater via node (eseguono i wizard reali e validano YAML + regole):
+Mock del `tp` (l'API-shim, come il plugin a runtime) via node — eseguono i wizard reali e validano YAML + regole:
 `test_personaggio_options` (parser 12/12 classi); `test_crea_personaggio_e2e`/`_caster_e2e`/
 `_risorse_e2e`/`_padronanze` + `test_risorse_at_level` (creazione, anche caster/risorse/maestrie);
 `test_applyconcede_homebrew_effetti` + `test_privilegi_per_livello` (homebrew `concede`);

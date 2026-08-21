@@ -12,10 +12,8 @@ la sorgente corrispondente, con il testo completo della licenza, è al rispettiv
 
 | Plugin | Autore | Licenza | Sorgente |
 |---|---|:--:|---|
-| Templater | SilentVoid | AGPL-3.0 | [silentvoid13/Templater](https://github.com/silentvoid13/Templater) |
 | Dataview | Michael Brenan | MIT | [blacksmithgu/obsidian-dataview](https://github.com/blacksmithgu/obsidian-dataview) |
 | Meta Bind | Moritz Jung | GPL-3.0 | [mProjectsCode/obsidian-meta-bind-plugin](https://github.com/mProjectsCode/obsidian-meta-bind-plugin) |
-| JS Engine | Moritz Jung | GPL-3.0 | [mProjectsCode/obsidian-js-engine-plugin](https://github.com/mProjectsCode/obsidian-js-engine-plugin) |
 | Tab Panels | GnoxNahte | MIT | [GnoxNahte/obsidian-tab-panels](https://github.com/GnoxNahte/obsidian-tab-panels) |
 | Callout Manager | eth-p | MIT | [eth-p/obsidian-callout-manager](https://github.com/eth-p/obsidian-callout-manager) |
 | Fantasy Statblocks | Jeremy Valentine | MIT | [Obsidian-TTRPG-Community/fantasy-statblocks](https://github.com/Obsidian-TTRPG-Community/fantasy-statblocks) |

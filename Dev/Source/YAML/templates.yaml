@@ -1,84 +1,8 @@
 id: templates
 version: 0.1.0
 purpose: >-
-  Azioni Templater globali (bottoni che operano su una nota esistente). I
-  template di CREAZIONE delle entità sono ora dichiarati per-entità in
-  entities/*.yaml (chiave 'templates'); render.load_templates() li raccoglie.
-# Nessun template di creazione qui: vivono nei file-entità (entities/*.yaml).
+  Elenco base dei template di creazione. Oggi vuoto: i template delle entità sono
+  dichiarati per-entità in entities/*.yaml (chiave 'templates') e raccolti da
+  render.load_templates(); le AZIONI sul-nota sono comandi nativi del plugin `gdr`
+  (non più file Templater), quindi qui non c'è più una lista 'actions'.
 templates: []
-actions:
-  - id: marca_canonico
-    title: Segna come canonico
-    target: z.modelli/azioni/Segna come canonico.md
-  - id: archivia
-    title: Archivia
-    target: z.modelli/azioni/Archivia.md
-  - id: collega
-    title: Collega
-    target: z.modelli/azioni/Collega.md
-  - id: applica_profilo
-    title: Applica profilo
-    target: z.modelli/azioni/Applica profilo.md
-  - id: scatena_conseguenza
-    title: Scatena conseguenza
-    target: z.modelli/azioni/Scatena conseguenza.md
-  - id: avanza_fronte
-    title: Avanza fronte
-    target: z.modelli/azioni/Avanza fronte.md
-  - id: giro_del_mondo
-    title: Avanza il mondo
-    target: z.modelli/azioni/Avanza il mondo.md
-  - id: sali_di_livello
-    title: Sali di livello
-    target: z.modelli/azioni/Sali di livello.md
-  - id: riposo_lungo
-    title: Riposo lungo
-    target: z.modelli/azioni/Riposo lungo.md
-  - id: riposo_breve
-    title: Riposo breve
-    target: z.modelli/azioni/Riposo breve.md
-  - id: usa_risorsa
-    title: Usa risorsa
-    target: z.modelli/azioni/Usa risorsa.md
-  - id: aggiorna_encounter
-    title: Aggiorna l'incontro
-    target: z.modelli/azioni/Aggiorna l'incontro.md
-  - id: scaffold_statblock
-    title: Genera statblock dal GS
-    target: z.modelli/azioni/Genera statblock dal GS.md
-  # Import mappe: senza queste entry il BUTTON[importa-mappa]/[importa-azgaar] punta a un
-  # file-azione INESISTENTE (clic = errore). target = z.modelli/azioni/<label del button>.md.
-  - id: importa_mappa
-    title: Importa mappa Watabou
-    target: z.modelli/azioni/Importa mappa Watabou.md
-  - id: importa_azgaar
-    title: Importa mappa Azgaar (Full JSON)
-    target: z.modelli/azioni/Importa mappa Azgaar (Full JSON).md
-  - id: sincronizza_pin
-    title: Sincronizza pin dalla mappa
-    target: z.modelli/azioni/Sincronizza pin dalla mappa.md
-  - id: genera
-    title: Genera un nome
-    target: z.modelli/azioni/Genera un nome.md
-  - id: turno_bastione
-    title: Turno di bastione
-    target: z.modelli/azioni/Turno di bastione.md
-  - id: world_board
-    title: Genera World Board
-    target: z.modelli/azioni/Genera World Board.md
-  - id: genera_sito
-    title: Genera sito giocatori
-    target: z.modelli/azioni/Genera sito giocatori.md
-  - id: inizia_incontro
-    title: Schiera il gruppo
-    target: z.modelli/azioni/Schiera il gruppo.md
-  # Tira sulla tabella attiva (pesi rispettati, esito al cursore): meta_actions.tira_tabella.
-  # Serve l'azione-nota perché BUTTON[tira-tabella] (tabella.md.j2) risolva il file Templater.
-  - id: tira_tabella
-    title: Tira sulla tabella
-    target: z.modelli/azioni/Tira sulla tabella.md
-  # «＋ Componenti»: appende alla nota un componente a richiesta (Al tavolo, Clock,
-  # Carattere, Cronologia, Vista…) dal catalogo z.automazioni/data/componenti.json.
-  - id: inserisci_componente
-    title: Aggiungi componente
-    target: z.modelli/azioni/Aggiungi componente.md

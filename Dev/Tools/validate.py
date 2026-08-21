@@ -515,19 +515,23 @@ def check() -> int:
     # in silenzio uno zip senza i plugin essenziali. Anti-drift a monte del fetch (che
     # ricontrolla in rete): qui basta la sorgente, niente download.
     for p in (plugins.get("plugins") or []):
-        if p.get("critico") and not (p.get("repo") and p.get("version")):
+        # I plugin AUTORIALI (autoriale:true, es. `gdr`) sono buildati e installati da
+        # render.install_authored_plugins, non fetchati da GitHub → esenti dal pin.
+        if p.get("critico") and not p.get("autoriale") and not (p.get("repo") and p.get("version")):
             errors.append(f"plugin critico {p.get('id')}: manca il pin 'version' (o 'repo') "
                           f"— serve a bundlarlo nello zip turnkey (fetch_plugins)")
 
-    # Bottoni-azione: un button con `action` è reso come Meta Bind runTemplaterFile su
-    # `z.modelli/azioni/<label>.md` (model_cfg.action_buttons). Quindi il `label` DEVE
-    # combaciare col `title` di un'azione in templates.yaml (che genera quel file); un
-    # mismatch dà "Error while running button action" IN-APP (non a build-time). Anti-drift.
-    action_titles = {a.get("title") for a in load_yaml("templates.yaml").get("actions", []) or []}
+    # Bottoni-azione: un button con `action` è reso come comando nativo del plugin `gdr`
+    # (`gdr:<azione>`, model_cfg.action_buttons). Quindi l'`action` DEVE essere fra quelle
+    # che il plugin espone (model_cfg._PLUGIN_ACTIONS); altrimenti il bottone lancia un
+    # comando inesistente IN-APP. La parità _PLUGIN_ACTIONS↔lista del plugin è testata in
+    # test_model.py (che può leggere plugin/main.ts). Qui basta la sorgente Python.
+    from render_config.model_cfg import _PLUGIN_ACTIONS
     for b in (plugins.get("buttons") or []):
-        if b.get("action") and b.get("label") not in action_titles:
-            errors.append(f"button {b.get('id')}: label '{b.get('label')}' non combacia con nessun "
-                          f"title di templates.yaml:actions → il file Templater non si risolve")
+        act = b.get("action")
+        if act and not b.get("command") and act not in _PLUGIN_ACTIONS:
+            errors.append(f"button {b.get('id')}: azione '{act}' non è esposta dal plugin "
+                          f"(_PLUGIN_ACTIONS) né ha un 'command' esplicito → comando inesistente in-app")
 
     # Le categorie dei template (templates.yaml + file-entità) devono essere
     # dichiarate e avere una cartella risolvibile (i bottoni 'Crea ...' creano la
