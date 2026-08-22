@@ -22,10 +22,15 @@
 
 {{ m.difficolta() }}
 
-Avvia il combattimento dal blocco (Initiative Tracker). Aggiungi le creature per
-nome dal bestiario (SRD / Fantasy Statblocks) con `- <numero>: <Nome>`; un alleato
-(PNG/evocazione) si schiera col gruppo con `- <Nome>, ally`. `players: true` include
-il **gruppo**.
+> [!tip] ⚔️ Gioca nella Board (consigliato)
+> Dal comando **«GDR: Schiera l'incontro nella Board»** (con questa nota aperta) la Board di
+> combattimento si apre **pre-popolata**: le *Creature* collegate diventano nemici, gli
+> *Alleati* e i tuoi **PG** entrano dalla tua parte, gli override `varianti` (hp/ca) si
+> applicano. Poi tiri l'iniziativa e giochi lì (motore nativo: PF, condizioni, statblock).
+
+Il blocco qui sotto è il flusso **legacy** (Initiative Tracker + Fantasy Statblocks): aggiungi
+le creature per nome con `- <numero>: <Nome>`; un alleato con `- <Nome>, ally`; `players: true`
+include il gruppo.
 
 > [!tip] Schiera il gruppo (una volta sola)
 > Niente config manuale del Party: `BUTTON[prepara-gruppo]` auto-popola il **Party di

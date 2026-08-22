@@ -52,7 +52,10 @@ export class CruscottoView extends ItemView {
       const b = bar.createEl("button", { text: label });
       b.onclick = async () => { await this.plugin.dispatch(action); };
     };
-    act("⚔️ Schiera il gruppo", "inizia_incontro");
+    // Superficie di combattimento primaria = la Board GDR (audit F3): la CTA apre la Board,
+    // non prepara più Initiative Tracker (che resta come legacy nella sezione Combattimento).
+    const bBoard = bar.createEl("button", { text: "⚔️ Board di combattimento" });
+    bBoard.onclick = () => this.plugin.activateBoard();
     act("🌍 Giro del mondo", "giro_del_mondo");
     const btnRefresh = bar.createEl("button", { text: "🔄" });
     btnRefresh.setAttribute("aria-label", "Aggiorna");
