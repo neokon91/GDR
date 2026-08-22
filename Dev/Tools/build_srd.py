@@ -56,7 +56,8 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_magic_items.json": "magic_items",
     "srd_5_2_1_languages.json": "lingue",
     "srd_5_2_1_species.json": "specie",
-    # NB NON qui (ancora): classi/background/talenti/equipaggiamento/regole → li consuma anche
+    "srd_5_2_1_backgrounds.json": "background",
+    # NB NON qui (ancora): classi/talenti/equipaggiamento/regole → li consuma anche
     # build_personaggio (creazione PG) nella forma JSON; l'adapter deve riprodurre quella forma
     # perché downstream resti invariato. Migrazione per-categoria.
 }
@@ -129,14 +130,30 @@ def _id_nudo(idv: Any) -> str:
 
 
 def _adatta_background(d: dict[str, Any]) -> None:
-    comp = d.get("competenze") or {}
+    # De-sluga i campi che build_backgrounds mappa via stats()/skills() (case-insensitive ma
+    # NON convertono i trattini): punteggi + abilità → nomi-prosa; strumenti lista → stringa.
+    d["id"] = _id_nudo(d.get("id"))
+    if isinstance(d.get("punteggi_caratteristica"), list):
+        d["punteggi_caratteristica"] = [_pulisci(x).capitalize() for x in d["punteggi_caratteristica"]]
+    to = _pulisci(d.get("talento_origine"))
+    # «Iniziato alla magia» concede la lista incantesimi di una CLASSE: l'archivio non porta
+    # il qualificatore, che è il default SRD 2024 del background (Accolito→chierico,
+    # Sapiente→mago). Lo si reintegra qui perché il motore PG scelga la lista giusta.
+    cls = {"accolito": "chierico", "sapiente": "mago"}.get(d["id"])
+    if cls and to.startswith("iniziato alla magia") and "(" not in to:
+        to = f"{to} ({cls})"
+    d["talento_origine"] = to
+    comp = dict(d.get("competenze") or {})
+    if isinstance(comp.get("abilita"), list):
+        comp["abilita"] = [_pulisci(x).capitalize() for x in comp["abilita"]]
+    if isinstance(comp.get("strumenti"), list):
+        comp["strumenti"] = ", ".join(_pulisci(x) for x in comp["strumenti"])
+    d["competenze"] = comp
     righe = []
     if d.get("punteggi_caratteristica"): righe.append(_kv("Caratteristiche", d["punteggi_caratteristica"]))
-    if d.get("talento_origine"): righe.append(_kv("Talento d'origine", _pulisci(d["talento_origine"])))
+    if d.get("talento_origine"): righe.append(_kv("Talento d'origine", d["talento_origine"]))
     if comp.get("abilita"): righe.append(_kv("Abilità", comp["abilita"]))
-    if comp.get("strumenti"):
-        s = comp["strumenti"]
-        righe.append(_kv("Strumenti", [_pulisci(x) for x in s] if isinstance(s, list) else _pulisci(s)))
+    if comp.get("strumenti"): righe.append(_kv("Strumenti", comp["strumenti"]))
     if d.get("equipaggiamento_alternativo"): righe.append(_kv("Equipaggiamento", d["equipaggiamento_alternativo"]))
     if righe: d.setdefault("sezioni", []).insert(0, {"titolo": "Dettagli", "righe": righe})
 
