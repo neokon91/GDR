@@ -27,11 +27,19 @@ OUT = ROOT / "plugin" / "data" / "srd_condizioni.json"
 def main() -> None:
     if not SRD.is_dir():
         raise SystemExit(f"archivio/srd non trovato ({SRD}). Manca il symlink/submodule 'archivio'?")
-    files = sorted(SRD.rglob("*.condition.yaml"))
-    condizioni = [yaml.safe_load(f.read_text(encoding="utf-8")) for f in files]
+    # Transizione: le condizioni passano dal file unico `*.condition.yaml` al DOPPIO FILE
+    # `srd/glossario/condizioni/*.yaml` (dati) + `*.md` (prosa). Si leggono ENTRAMBE le
+    # forme e si deduplica per `id` (l'ultima vince), così regge il dato in migrazione.
+    files = sorted(SRD.rglob("*.condition.yaml")) + sorted((SRD / "glossario" / "condizioni").glob("*.yaml"))
+    per_id: dict[str, dict] = {}
+    for f in files:
+        c = yaml.safe_load(f.read_text(encoding="utf-8"))
+        if isinstance(c, dict) and c.get("id"):
+            per_id[c["id"]] = c
+    condizioni = list(per_id.values())
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(condizioni, ensure_ascii=False), encoding="utf-8")
-    print(f"[ok] {len(condizioni)} condizioni SRD → {OUT.relative_to(ROOT)}")
+    print(f"[ok] {len(condizioni)} condizioni SRD → {OUT.relative_to(ROOT)} (da {len(files)} file)")
 
 
 if __name__ == "__main__":
