@@ -55,9 +55,10 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_spells.json": "spells",
     "srd_5_2_1_magic_items.json": "magic_items",
     "srd_5_2_1_languages.json": "lingue",
-    # NB NON qui: classi/background/specie/talenti/equipaggiamento/regole → li consuma anche il
-    # motore di creazione PG (build_personaggio) nella forma JSON; migrarli richiede prima di
-    # adattare build_personaggio all'archivio (grosso, legato al «motore PG unico» — vedi handoff).
+    "srd_5_2_1_species.json": "specie",
+    # NB NON qui (ancora): classi/background/talenti/equipaggiamento/regole → li consuma anche
+    # build_personaggio (creazione PG) nella forma JSON; l'adapter deve riprodurre quella forma
+    # perché downstream resti invariato. Migrazione per-categoria.
 }
 
 
@@ -120,6 +121,13 @@ def _pulisci(s: Any) -> str:
     return str(s or "").replace("-", " ").strip()
 
 
+def _id_nudo(idv: Any) -> str:
+    """Id nudo (ultimo segmento) da un id qualificato archivio `dnd.<tipo>.<slug>`:
+    downstream (build_personaggio, viste, frontmatter PG) chiavizza per slug, non per id
+    qualificato. La forma qualificata resta la sorgente; qui la si proietta per compat."""
+    return str(idv or "").split(".")[-1]
+
+
 def _adatta_background(d: dict[str, Any]) -> None:
     comp = d.get("competenze") or {}
     righe = []
@@ -134,15 +142,28 @@ def _adatta_background(d: dict[str, Any]) -> None:
 
 
 def _adatta_specie(d: dict[str, Any]) -> None:
+    # Riproduce la forma JSON delle specie (velocita stringa, tratti de-slugati, sezioni
+    # Tratti+Antenati) → build_species e renderSpecieTratti restano invariati.
+    d["id"] = _id_nudo(d.get("id"))
+    if isinstance(d.get("taglia"), list):  # specie bi-taglia (umano/tiefling) → stringa
+        d["taglia"] = " o ".join(str(x).capitalize() for x in d["taglia"])
     if isinstance(d.get("velocita"), dict):
         d["velocita"] = ", ".join(f"{v} m" if k == "camminata" else f"{k} {v} m" for k, v in d["velocita"].items())
     d.setdefault("tipo_creatura", d.get("tipo", ""))
-    if d.get("tratti_sintesi") and not d.get("descrizione"):
-        d["descrizione"] = "**Tratti**: " + _pulisci(d["tratti_sintesi"]) + "."
+    tratti = _pulisci(d.get("tratti_sintesi"))
+    d["tratti_sintesi"] = tratti
+    if not d.get("descrizione"):
+        d["descrizione"] = tratti
+    sez: list[dict[str, Any]] = []
+    if tratti:
+        sez.append({"titolo": "Tratti", "descrizione": tratti + "."})
     ant = d.get("antenati_draconici")
     if isinstance(ant, list) and ant:
-        righe = [{"Antenato": a.get("nome", ""), "Danno": _pulisci(a.get("tipo_danno"))} for a in ant if isinstance(a, dict)]
-        d.setdefault("sezioni", []).append({"titolo": "Antenati draconici", "righe": righe})
+        sez.append({"titolo": "Antenati draconici",
+                    "righe": [{"Antenato": a.get("nome", ""), "Danno": _pulisci(a.get("tipo_danno")).capitalize()}
+                              for a in ant if isinstance(a, dict)]})
+    if sez:
+        d["sezioni"] = sez
 
 
 def _adatta_classe(d: dict[str, Any]) -> None:
