@@ -72,7 +72,7 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
         "multiclasse": pg_rules.get("multiclasse", {}) or {},
         # Tabella SRD «Incantatore multiclasse» (slot 1-9 per livello-da-incantatore
         # COMBINATO): sali_pg la usa coi PG che hanno 2+ classi incantatrici.
-        "slot_multiclasse": _multiclass_slot_table(),
+        "slot_multiclasse": _multiclass_slot_table(classi),
         # Mappa nome-arma -> padronanza (Weapon Mastery 2024): crea_pg la usa per
         # offrire le armi alla scelta delle padronanze e per mostrarne l'effetto.
         "armi_padronanza": _weapon_mastery_map(),
