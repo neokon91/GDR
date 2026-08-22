@@ -11,6 +11,7 @@ from typing import Any
 import yaml
 
 from common import SRD_DIR, VAULT, frontmatter_block, write_text
+import gen_bestiario
 
 # --- SRD 5.2.1 (CC-BY-4.0), traduzione italiana ----------------------------
 # I JSON tipizzati vendorizzati in Dev/Source/SRD/ (da github massimobarbieri/
@@ -702,26 +703,30 @@ def build_srd(core: dict[str, Any]) -> int:
         write_text(VAULT / "SRD" / dest / f"{srd_slug(entry.get('nome'))}.md",
                    srd_note(entry, cat, ["descrittore"], links, al_re, al_idx))
         written += 1
-    # Mostri -> statblock (statblock: inline => entra nel bestiario di Fantasy Statblocks).
-    layout = (core.get("statblock", {}) or {}).get("layout", "Basic 5e Layout")
-    for monster in load_srd("srd_5_2_1_monsters.json"):
-        fm = {"nome": monster.get("nome", ""), "categoria": "srd-mostro", "srd": True,
-              "fonte": "SRD 5.2.1", "statblock": "inline"}
-        # gs/pe nel frontmatter (interrogabili): servono al calcolo difficoltà incontri.
-        gs = monster.get("grado_sfida") or {}
-        if isinstance(gs, dict):
-            if gs.get("valore") is not None:
-                fm["gs"] = str(gs["valore"])
-            if gs.get("punti_esperienza") is not None:
-                fm["pe"] = gs["punti_esperienza"]
-        content = frontmatter_block(fm) + f"# {monster.get('nome', '')}\n\n```statblock\n{srd_statblock_yaml(monster, layout, core, al_re, al_idx)}```\n"
-        write_text(VAULT / "SRD" / "Mostri" / f"{srd_slug(monster.get('nome'))}.md", content)
+    # Mostri: pagina con lo STATBLOCK NATIVO del plugin (```gdr statblock <slug>), che legge
+    # il BESTIARIO generato da archivio (gen_bestiario). Non più Fantasy Statblocks: niente
+    # `statblock: inline` né proiezione FS (srd_statblock_yaml). SORGENTE = archivio (audit
+    # A1.1): i dati core coincidono col JSON (tests/test_srd_parity.py). Lo slug del blocco è
+    # l'ultimo segmento dell'id — `trovaMostro` lo risolve sul bestiario (qualificato o meno).
+    for monster in gen_bestiario.carica_mostri(gen_bestiario.SRD_MONSTERS):
+        nome = monster.get("nome", "")
+        fm = {"nome": nome, "categoria": "srd-mostro", "srd": True, "fonte": "SRD 5.2.1"}
+        # gs/pe nel frontmatter (interrogabili): il GS resta in formato archivio (frazione
+        # `1/2`), le stesse chiavi di `core.xp.cr_xp` → il fallback XP da GS funziona per i
+        # mostri senza `pe` esplicito.
+        if monster.get("gs") is not None:
+            fm["gs"] = str(monster["gs"])
+        if monster.get("punti_esperienza") is not None:
+            fm["pe"] = monster["punti_esperienza"]
+        slug = str(monster.get("id", "")).split(".")[-1] or srd_slug(nome)
+        content = frontmatter_block(fm) + f"# {nome}\n\n```gdr statblock {slug}\n```\n"
+        write_text(VAULT / "SRD" / "Mostri" / f"{srd_slug(nome)}.md", content)
         written += 1
     index = (
         "# 📚 SRD 5.2.1 (italiano)\n\n"
         "Riferimento ufficiale 5.5e in italiano, **sola lettura**: si rigenera a ogni build, "
-        "non modificarlo (il tuo homebrew va in `Mondi/`). I mostri sono statblock e popolano "
-        "il bestiario di Fantasy Statblocks (richiamabili con `monster: Nome`).\n\n"
+        "non modificarlo (il tuo homebrew va in `Mondi/`). I mostri mostrano lo statblock "
+        "nativo del plugin (```gdr statblock`), dal bestiario generato dall'archivio.\n\n"
         f"> [!quote]- Licenza\n> {SRD_ATTRIBUTION}\n\n"
         "## Contenuto\n"
         '```dataview\ntable without id length(rows) as Voci\nfrom "SRD"\n'
