@@ -59,6 +59,7 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_backgrounds.json": "background",
     "srd_5_2_1_feats.json": "talenti",
     "srd_5_2_1_equipment.json": "equipaggiamento",
+    "srd_5_2_1_classes.json": "classi",
     # NB NON qui (ancora): classi/talenti/equipaggiamento/regole → li consuma anche
     # build_personaggio (creazione PG) nella forma JSON; l'adapter deve riprodurre quella forma
     # perché downstream resti invariato. Migrazione per-categoria.
@@ -186,6 +187,7 @@ def _adatta_specie(d: dict[str, Any]) -> None:
 
 
 def _adatta_classe(d: dict[str, Any]) -> None:
+    d["id"] = _id_nudo(d.get("id"))
     righe = []
     if d.get("dado_vita"): righe.append(_kv("Dado Vita", f"d{d['dado_vita']}"))
     if d.get("caratteristica_primaria"): righe.append(_kv("Caratteristica primaria", d["caratteristica_primaria"]))

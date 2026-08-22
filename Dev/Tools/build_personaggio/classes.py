@@ -1,6 +1,7 @@
-"""Classi del rules-engine PG: parsing della progressione SRD (slot/competenza/
-privilegi), scelte-abilità in prosa, equipaggiamento/armature, padronanza d'armi e
-risorse di classe a ricarica → opzioni-classe del personaggio (build_classes)."""
+"""Classi del rules-engine PG, dall'ARCHIVIO (forma strutturata: `tabella_progressione.
+benefici` = righe per livello con privilegi-slug, slot_incantesimo, colonne-risorsa e
+padronanza_armi; `competenze_abilita` = {quantita, scelte}; `privilegi` = prosa). Il pool
+incantesimi si DERIVA dagli spell (`spell.classi`), non da una lista nella classe."""
 
 from __future__ import annotations
 
@@ -9,19 +10,57 @@ from typing import Any, Callable
 
 from build_srd import load_srd
 
-from ._helpers import _COUNT_WORDS, _hit_die, _int_or_none, _norm
-from .spells import _pact_table, _spell_pool
+from ._helpers import _hit_die, _norm
+
+# Slug-privilegio che valgono uno slot ASI (Aumento dei punteggi 4/8/12/16 + Dono epico 19).
+_ASI_SLUGS = ("aumento-punteggi", "dono-epico")
+# Colonna-risorsa archivio → chiave in pg_rules.risorse_classe (label/ricarica/icona).
+_RISORSA_COL = {
+    "numero_ira": "Ire", "punti_stregoneria": "Punti stregoneria", "concentrazione": "Concentrazione",
+    "incanalare_divinita": "Incanalare divinità", "forma_selvatica": "Forma selvatica",
+    "recuperare_energie": "Recuperare energie", "nemico_prescelto": "Nemico prescelto",
+}
+
+
+def _is_asi(privilegi: list[str]) -> bool:
+    return any(any(a in str(p) for a in _ASI_SLUGS) for p in privilegi)
+
+
+def _is_sub(privilegi: list[str]) -> bool:
+    return any("sottoclasse" in str(p) for p in privilegi)
+
+
+def _prog_row(row: dict[str, Any]) -> dict[str, Any]:
+    """Riga di progressione archivio → {livello, competenza, privilegi(slug), trucchetti,
+    preparati, slot, _raw}. La competenza segue la formula standard (non è in archivio)."""
+    liv = row.get("livello")
+    slot: dict[str, int] = {}
+    for k, v in (row.get("slot_incantesimo") or {}).items():
+        m = re.match(r"livello(\d+)", str(k))
+        if m and v:
+            slot[m.group(1)] = int(v)
+    return {
+        "livello": liv,
+        "competenza": 2 + (int(liv) - 1) // 4 if liv else None,
+        "privilegi": list(row.get("privilegi") or []),
+        "trucchetti": row.get("trucchetti_conosciuti"),
+        "preparati": row.get("incantesimi_preparati"),
+        "slot": slot,
+        "_raw": row,
+    }
+
+
+def _progressione(cls: dict[str, Any]) -> list[dict[str, Any]]:
+    benefici = ((cls.get("tabella_progressione") or {}).get("benefici")) or []
+    return [_prog_row(r) for r in benefici if isinstance(r, dict)]
 
 
 def _caster_kind(cls: dict[str, Any], prog: list[dict[str, Any]]) -> str:
-    """Tipo di incantatore per la multiclasse: 'patto' (Warlock, colonne SRD dedicate),
-    'pieno' (slot fino al 9º), 'mezzo' (fino al 5º: Paladino/Ranger), 'nessuno'. Deriva
-    dalla riga di L20 della progressione (niente hard-code)."""
-    raw = cls.get("progressione") or []
-    if any(isinstance(r, dict) and ("Slot incantesimo" in r or "Livello slot" in r) for r in raw):
+    """pieno/mezzo/patto/nessuno per la multiclasse. Il Warlock è 'patto' (slot a livello
+    unico, ricarica breve): lo si riconosce per id."""
+    if _id_nudo(cls) == "warlock":
         return "patto"
-    last = prog[-1] if prog else {}
-    top = max((int(k) for k in (last.get("slot") or {})), default=0)
+    top = max((int(k) for r in prog for k in (r.get("slot") or {})), default=0)
     if top >= 9:
         return "pieno"
     if 1 <= top <= 5:
@@ -29,185 +68,146 @@ def _caster_kind(cls: dict[str, Any], prog: list[dict[str, Any]]) -> str:
     return "nessuno"
 
 
-def _armor_categories(prose: str) -> list[str]:
-    """Da 'Armature leggere, medie e pesanti; scudi.' -> categorie indossabili."""
-    norm = _norm(prose)
-    cats = [c for c, key in (("leggera", "legger"), ("media", "medi"),
-                             ("pesante", "pesant"), ("scudo", "scud")) if key in norm]
-    return cats
+def _id_nudo(cls: dict[str, Any]) -> str:
+    return str(cls.get("id") or "").split(".")[-1]
 
 
-def _equipment_options(prose: str) -> dict[str, str]:
-    """'A: ...; oppure B: ...' -> {'A': '...', 'B': '...'} (B opzionale)."""
-    text = re.sub(r"\s+", " ", str(prose or "")).strip()
-    if not text:
-        return {}
-    match = re.match(r"\s*A\s*:\s*(.*?)\s*(?:;?\s*oppure\s*|;\s*)B\s*:\s*(.*)", text, re.IGNORECASE)
-    if match:
-        return {"A": match.group(1).strip(" .;"), "B": match.group(2).strip(" .;")}
-    return {"A": text.strip(" .;")}
+def _armor_categories(armature: Any) -> list[str]:
+    """Categorie di armatura indossabili dalle competenze_armature archivio (lista di slug/
+    dict). Riconosce leggera/media/pesante/scudo."""
+    testo = _norm(" ".join(str(x) for x in armature) if isinstance(armature, list) else str(armature))
+    return [c for c, key in (("leggera", "legger"), ("media", "medi"),
+                             ("pesante", "pesant"), ("scudo", "scud")) if key in testo]
 
 
-# Livelli ASI: "Aumento dei punteggi" (4/8/12/16 + extra di classe) E il "Dono epico"
-# del 19° (2024) — anch'esso uno slot ASI/talento, altrimenti ogni classe perdeva il 19°.
-_ASI_RE = re.compile(r"aumento dei punteggi|dono epico", re.I)
-_SUB_RE = re.compile(r"sottoclasse", re.I)
+def _competenze_str(v: Any) -> str:
+    """competenze_armi/armature/strumenti dell'archivio (lista di slug e/o dict
+    {categoria, proprieta}) → stringa leggibile (il frontmatter PG le vuole stringa)."""
+    if isinstance(v, list):
+        parts = [str(x.get("categoria", "")) if isinstance(x, dict) else str(x) for x in v]
+        return ", ".join(_norm_dash(p) for p in parts if p)
+    return _norm_dash(str(v or ""))
 
 
-def _prog_row(row: dict[str, Any]) -> dict[str, Any]:
-    """Una riga di progressione SRD -> {livello, competenza, privilegi, trucchetti,
-    preparati, slot}."""
-    row = row or {}
-    privilegi = [p.strip() for p in re.split(r",|;", str(row.get("Privilegi di classe", ""))) if p.strip()]
-    slot = {str(n): _int_or_none(row.get(f"Slot {n}")) for n in range(1, 10)}
-    comp = re.sub(r"\D", "", str(row.get("Bonus di competenza", "")))
-    return {
-        "livello": _int_or_none(row.get("Livello")),
-        "competenza": int(comp) if comp else None,
-        "privilegi": privilegi,
-        "trucchetti": _int_or_none(row.get("Trucchetti")),
-        "preparati": _int_or_none(row.get("Incantesimi preparati")),
-        "slot": {n: v for n, v in slot.items() if v},
-    }
+def _norm_dash(s: str) -> str:
+    return s.replace("-", " ")
 
 
-def _progressione(prog: list[Any]) -> list[dict[str, Any]]:
-    """Tabella di progressione 1-20 normalizzata (lista di _prog_row)."""
-    return [_prog_row(r) for r in (prog or []) if isinstance(r, dict)]
+def _class_skills(comp_abilita: Any, all_skill_ids: list[str]) -> dict[str, Any]:
+    """competenze_abilita {quantita, scelte:[slug]} → {scelte:N, opzioni:[id]} (slug→id per
+    trattino→underscore). Senza elenco: tutte le abilità."""
+    if isinstance(comp_abilita, dict) and comp_abilita.get("scelte"):
+        opz = []
+        for s in comp_abilita["scelte"]:
+            sid = str(s).replace("-", "_")
+            if sid in all_skill_ids and sid not in opz:
+                opz.append(sid)
+        return {"scelte": comp_abilita.get("quantita", 2), "opzioni": opz or list(all_skill_ids)}
+    return {"scelte": 2, "opzioni": list(all_skill_ids)}
 
 
-def _class_resources(raw_prog: list[Any], risorse_map: dict[str, Any]) -> list[dict[str, Any]]:
-    """Risorse di classe a ricarica (Ki/Ira/Incanalare divinità/...) dalle COLONNE-risorsa
-    della progressione SRD, mappate in pg_rules.risorse_classe (chiave = nome colonna). Per
-    ogni colonna presente: {id, label, ricarica, icona, valori:{livello:n}} — i livelli col
-    valore '-' (la classe non l'ha ancora) sono saltati. crea_pg/sali_pg ne derivano il max
-    al livello del PG; renderRisorsePG le disegna; i riposi le azzerano."""
-    rows = [r for r in (raw_prog or []) if isinstance(r, dict)]
+def _weapon_mastery_count(prog1: dict[str, Any]) -> int:
+    """Padronanze d'armi al L1: dalla colonna `padronanza_armi` della riga L1 (Barbaro 2,
+    Guerriero 3) o 2 se un privilegio L1 la concede (Ladro/Paladino/Ranger)."""
+    col = (prog1.get("_raw") or {}).get("padronanza_armi")
+    if col is not None:
+        try:
+            return int(col)
+        except (TypeError, ValueError):
+            pass
+    if any("maestria-nelle-armi" in str(p) or "padronanza-armi" in str(p) for p in prog1.get("privilegi", [])):
+        return 2
+    return 0
+
+
+def _class_resources(prog: list[dict[str, Any]], risorse_map: dict[str, Any]) -> list[dict[str, Any]]:
+    """Risorse a ricarica dalle COLONNE-risorsa archivio (numero_ira, recuperare_energie…),
+    mappate su pg_rules.risorse_classe → {id,label,ricarica,icona,valori:{livello:n}}."""
     out: list[dict[str, Any]] = []
-    for col, spec in (risorse_map or {}).items():
+    for col, pg_key in _RISORSA_COL.items():
+        spec = risorse_map.get(pg_key)
+        if not spec:
+            continue
         valori = {}
-        for r in rows:
-            liv = _int_or_none(r.get("Livello"))
-            n = _int_or_none(r.get(col))
-            if liv and n is not None:
-                valori[liv] = n
+        for r in prog:
+            v = (r.get("_raw") or {}).get(col)
+            if r.get("livello") and isinstance(v, (int, float)) and v:
+                valori[r["livello"]] = int(v)
         if valori:
-            out.append({
-                "id": spec["id"],
-                "label": spec.get("label", col),
-                "ricarica": spec.get("ricarica", "lungo"),
-                "icona": spec.get("icona", ""),
-                "valori": valori,
-            })
+            out.append({"id": spec["id"], "label": spec.get("label", col),
+                        "ricarica": spec.get("ricarica", "lungo"), "icona": spec.get("icona", ""),
+                        "valori": valori})
     return out
 
 
-def parse_class_skills(prose: str, all_skill_ids: list[str], label_to_id: dict[str, str]) -> dict[str, Any]:
-    """Da una frase SRD ('Due a scelta tra Atletica, Intimidire o ...') ricava
-    {scelte: N, opzioni: [id...]}. Senza elenco esplicito -> tutte le 18 abilità."""
-    norm = _norm(prose)
-    tokens = norm.split()
-    scelte = _COUNT_WORDS.get(tokens[0], 2) if tokens else 2
-
-    opzioni: list[str] = []
-    match = re.search(r"\b(?:tra|fra)\b(.*)", norm)
-    if match:
-        for piece in re.split(r",| o | e | oppure ", match.group(1)):
-            sid = label_to_id.get(piece.strip(" .;:"))
-            if sid and sid not in opzioni:
-                opzioni.append(sid)
-    if not opzioni:
-        opzioni = list(all_skill_ids)
-    return {"scelte": scelte, "opzioni": opzioni}
+def _spell_pool(class_id: str) -> dict[str, list[str]]:
+    """Pool incantesimi della classe: derivato dagli spell (`spell.classi` contiene la
+    classe) → {livello: [nomi]}. È la lista da cui il PG sceglie."""
+    pool: dict[str, list[str]] = {}
+    for sp in load_srd("srd_5_2_1_spells.json"):
+        classi = [str(c).lower() for c in (sp.get("classi") or [])]
+        if class_id in classi and sp.get("nome"):
+            pool.setdefault(str(sp.get("livello", 0)), []).append(sp["nome"])
+    for lvl in pool:
+        pool[lvl].sort()
+    return pool
 
 
-# --- Padronanza delle armi (Weapon Mastery 2024) ---------------------------
-_MASTERY_RE = re.compile(r"adronanza d['’]armi", re.I)
-
-
-def _weapon_mastery_count(cls: dict[str, Any], privilegi_l1: list[str], fallback: int) -> int:
-    """Padronanze d'armi note al L1: dalla colonna di progressione se presente
-    (Barbaro 2, Guerriero 3); altrimenti il fallback 2024 se la classe ha il
-    privilegio L1 'Padronanza d'armi' (Ladro/Paladino/Ranger); altrimenti 0."""
-    def walk(o: Any):
-        if isinstance(o, dict):
-            if str(o.get("Livello")) == "1":
-                for k, v in o.items():
-                    if _MASTERY_RE.search(k):
-                        digits = re.sub(r"\D", "", str(v))
-                        if digits:
-                            return int(digits)
-            for v in o.values():
-                r = walk(v)
-                if r is not None:
-                    return r
-        elif isinstance(o, list):
-            for v in o:
-                r = walk(v)
-                if r is not None:
-                    return r
-        return None
-    n = walk(cls)
-    if n is not None:
-        return n
-    return fallback if any(_MASTERY_RE.search(p) for p in privilegi_l1) else 0
+def _pact_table(prog: list[dict[str, Any]]) -> list[dict[str, int]]:
+    """Patto del Warlock: da ogni riga, {slot: numero slot, liv: livello degli slot} — gli
+    slot del patto sono tutti dello stesso livello (il più alto disponibile)."""
+    out = []
+    for r in prog:
+        slot = r.get("slot") or {}
+        if slot:
+            liv = max(int(k) for k in slot)
+            out.append({"slot": int(slot[str(liv)]), "liv": liv})
+        else:
+            out.append({"slot": 0, "liv": 0})
+    return out
 
 
 def build_classes(pg_rules: dict[str, Any], stats: Callable[[Any], list[str]],
                   label_to_id: dict[str, str], all_skill_ids: list[str]) -> dict[str, Any]:
-    """Opzioni-classe dal SRD classes + overlay pg_rules. `stats` mappa i nomi-in-prosa
-    sugli id di caratteristica (chiusura dall'orchestratore). Include le risorse a
-    ricarica (dalle colonne SRD) e quelle il cui max = mod. di una caratteristica."""
-    mastery_fallback = int(pg_rules.get("padronanza_armi_fallback", 2))
+    """Opzioni-classe dall'archivio + overlay pg_rules (ricariche risorse)."""
     risorse_map = pg_rules.get("risorse_classe", {}) or {}
     classi: dict[str, Any] = {}
     for cls in load_srd("srd_5_2_1_classes.json"):
-        comp = cls.get("competenze", {}) or {}
-        prog = _progressione(cls.get("progressione"))
-        prog1 = prog[0] if prog else _prog_row({})
-        incantatore = bool(prog1["slot"] or prog1["trucchetti"])
-        sottoclasse_srd = cls.get("sottoclasse_srd")
-        livelli_asi = [r["livello"] for r in prog if any(_ASI_RE.search(p) for p in r["privilegi"])]
-        sub_levels = [r["livello"] for r in prog if any(_SUB_RE.search(p) for p in r["privilegi"])]
-        classi[cls["id"]] = {
-            "label": cls.get("nome", cls["id"]),
+        cid = _id_nudo(cls)
+        prog = _progressione(cls)
+        prog1 = prog[0] if prog else {"privilegi": [], "slot": {}, "trucchetti": None, "preparati": None, "_raw": {}}
+        incantatore = bool(prog1.get("slot") or prog1.get("trucchetti"))
+        livelli_asi = [r["livello"] for r in prog if _is_asi(r["privilegi"])]
+        sub_levels = [r["livello"] for r in prog if _is_sub(r["privilegi"])]
+        tipo_inc = _caster_kind(cls, prog)
+        classi[cid] = {
+            "label": cls.get("nome", cid),
             "dado_vita": _hit_die(cls.get("dado_vita")),
             "tiri_salvezza": stats(cls.get("tiri_salvezza")),
             "caratteristica_primaria": stats(cls.get("caratteristica_primaria")),
-            "abilita": parse_class_skills(comp.get("abilita", ""), all_skill_ids, label_to_id),
-            "competenze_armi": comp.get("armi", ""),
-            "competenze_armature": comp.get("armature", ""),
-            "competenze_armature_cat": _armor_categories(comp.get("armature", "")),
-            "competenze_strumenti": comp.get("strumenti", ""),
-            "equipaggiamento": _equipment_options(cls.get("equipaggiamento_iniziale", "")),
+            "abilita": _class_skills(cls.get("competenze_abilita"), all_skill_ids),
+            "competenze_armi": _competenze_str(cls.get("competenze_armi")),
+            "competenze_armature": _competenze_str(cls.get("competenze_armature")),
+            "competenze_armature_cat": _armor_categories(cls.get("competenze_armature", "")),
+            "competenze_strumenti": _competenze_str(cls.get("competenze_strumenti")),
+            "equipaggiamento": {},
             "privilegi_l1": prog1["privilegi"],
             "incantatore": incantatore,
-            # Tipo di incantatore per la multiclasse (pieno/mezzo/patto/nessuno):
-            # sali_pg lo usa per il livello-da-incantatore combinato e per il Patto.
-            "tipo_incantatore": _caster_kind(cls, prog),
-            "trucchetti_noti": prog1["trucchetti"],
-            "incantesimi_preparati": prog1["preparati"],
-            "slot_l1": prog1["slot"],
-            "incantesimi_pool": _spell_pool(cls.get("liste_incantesimi")) if incantatore else {},
-            # Progressione 2-20 (sali di livello interattivo):
+            "tipo_incantatore": tipo_inc,
+            "trucchetti_noti": prog1.get("trucchetti"),
+            "incantesimi_preparati": prog1.get("preparati"),
+            "slot_l1": prog1.get("slot", {}),
+            "incantesimi_pool": _spell_pool(cid) if incantatore else {},
             "progressione": prog,
-            "sottoclasse": sottoclasse_srd.get("nome") if isinstance(sottoclasse_srd, dict) else None,
+            "sottoclasse": None,
             "livello_sottoclasse": sub_levels[0] if sub_levels else None,
             "livelli_asi": livelli_asi,
-            # Padronanze d'armi note al L1 (Weapon Mastery 2024): quante l'utente
-            # ne sceglie in creazione (0 per le classi che non la ottengono).
-            "padronanza_armi": _weapon_mastery_count(cls, prog1["privilegi"], mastery_fallback),
-            # Risorse di classe a ricarica (Ki/Ira/Incanalare/...): valori per livello
-            # dalle colonne SRD + ricarica curata (pg_rules). crea_pg/sali_pg → risorse_pg.
-            "risorse": _class_resources(cls.get("progressione"), risorse_map),
+            "padronanza_armi": _weapon_mastery_count(prog1),
+            "risorse": _class_resources(prog, risorse_map),
         }
-        # Patto del Warlock (slot SEPARATI dagli slot a livello, ricarica a riposo
-        # breve): tabella 1-20 dalle colonne SRD dedicate. Solo per le classi-patto.
-        if classi[cls["id"]]["tipo_incantatore"] == "patto":
-            classi[cls["id"]]["pact"] = _pact_table(cls)
+        if tipo_inc == "patto":
+            classi[cid]["pact"] = _pact_table(prog)
 
-    # Risorse il cui max = mod. di una caratteristica (Ispirazione bardica = mod CAR):
-    # non in tabella SRD → appese qui alla classe; crea_pg/sali_pg ne calcolano il max.
     for cid, spec in (pg_rules.get("risorse_caratteristica", {}) or {}).items():
         if cid in classi:
             classi[cid].setdefault("risorse", []).append({
