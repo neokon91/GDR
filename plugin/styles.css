@@ -243,3 +243,22 @@
 .gdr-board-dmg:hover { border-color: #c0392b; color: #c0392b; }
 .gdr-board-heal:hover { border-color: #3fa34d; color: #3fa34d; }
 .gdr-board-del:hover { border-color: var(--background-modifier-error); color: var(--background-modifier-error); }
+
+/* --- Board: nome cliccabile (apre statblock/nota) --------------------------- */
+.gdr-board-nome.is-click { cursor: pointer; }
+.gdr-board-nome.is-click:hover { color: var(--text-accent); text-decoration: underline; }
+
+/* --- Statblock nativo (Modal, sostituisce Fantasy Statblocks, Strada 1) ----- */
+.gdr-sb { max-height: 75vh; overflow-y: auto; }
+.gdr-sb-nome { margin: 0 0 2px; color: var(--text-accent); }
+.gdr-sb-sotto { font-style: italic; color: var(--text-muted); margin-bottom: 10px; }
+.gdr-sb-blocco { border-top: 2px solid var(--interactive-accent); border-bottom: 2px solid var(--interactive-accent); padding: 8px 0; margin: 8px 0; display: flex; flex-direction: column; gap: 3px; }
+.gdr-sb-blocco strong { color: var(--text-accent); }
+.gdr-sb-car { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin: 10px 0; text-align: center; }
+.gdr-sb-carcell { padding: 6px 2px; border-radius: 8px; background: var(--background-secondary); }
+.gdr-sb-carnome { font-size: var(--font-ui-smaller); color: var(--text-muted); font-weight: 700; letter-spacing: .04em; }
+.gdr-sb-carval { font-variant-numeric: tabular-nums; }
+.gdr-sb-carts { font-size: var(--font-ui-smaller); color: var(--text-accent); font-variant-numeric: tabular-nums; }
+.gdr-sb-sez { margin: 14px 0 4px; padding-bottom: 2px; border-bottom: 1px solid var(--interactive-accent); color: var(--text-accent); font-size: 1.05em; }
+.gdr-sb-voce { margin: 5px 0; line-height: 1.45; }
+.gdr-sb-voce strong { color: var(--text-normal); font-style: italic; }

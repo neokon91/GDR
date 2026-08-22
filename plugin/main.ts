@@ -822,6 +822,81 @@ function daPgGdr(fm: any): Combattente {
   };
 }
 
+// Modificatore di caratteristica, formattato col segno (+3, -1, +0).
+function modCar(valore: number): string {
+  const m = Math.floor((valore - 10) / 2);
+  return m >= 0 ? `+${m}` : String(m);
+}
+
+// Statblock NATIVO di un mostro (sostituisce Fantasy Statblocks): reso in un Modal da
+// `raw` (il .monster.yaml completo del bestiario). PF/condizioni correnti dal combattente
+// in plancia, se presente; i tiri salvezza dai numeri già risolti da `daMostro`.
+class StatblockModal extends Modal {
+  constructor(app: App, private raw: any, private comb?: InPlancia) { super(app); }
+
+  onOpen() {
+    const c = this.contentEl;
+    c.empty();
+    c.addClass("gdr-sb");
+    const m = this.raw;
+    const n = (v: any) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+
+    c.createEl("h2", { cls: "gdr-sb-nome", text: String(m.nome ?? "?") });
+    const sotto = [m.taglia, m.tipo, m.allineamento].filter(Boolean).join(", ");
+    if (sotto) c.createEl("div", { cls: "gdr-sb-sotto", text: sotto });
+
+    // Testata difensiva: CA · PF · Velocità.
+    const testa = c.createDiv({ cls: "gdr-sb-blocco" });
+    const pf = this.comb ? `${this.comb.pf_attuali}/${this.comb.pf_max}` : (this.comb?.pf_max ?? "?");
+    const riga = (etich: string, val: string) => { const p = testa.createEl("div"); p.createEl("strong", { text: `${etich} ` }); p.appendText(val); };
+    riga("CA", String(n((m.ca ?? {}).valore)));
+    riga("PF", String(pf));
+    const vel = m.velocita ? Object.entries(m.velocita).map(([k, v]) => (k === "camminata" ? `${v} m` : `${k} ${v} m`)).join(", ") : "";
+    if (vel) riga("Velocità", vel);
+
+    // Caratteristiche: valore (mod) + eventuale TS.
+    const abil = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
+    const grid = c.createDiv({ cls: "gdr-sb-car" });
+    for (const a of abil) {
+      const v = n((m.caratteristiche ?? {})[a]?.valore ?? 10);
+      const ts = this.comb?.tiri_salvezza?.[a];
+      const cell = grid.createDiv({ cls: "gdr-sb-carcell" });
+      cell.createDiv({ cls: "gdr-sb-carnome", text: a.slice(0, 3).toUpperCase() });
+      cell.createDiv({ cls: "gdr-sb-carval", text: `${v} (${modCar(v)})` });
+      if (ts != null) cell.createDiv({ cls: "gdr-sb-carts", text: `TS ${ts >= 0 ? "+" : ""}${ts}` });
+    }
+
+    // Abilità · Sensi · Lingue · GS (difensivo sulle forme dei dati).
+    const meta = c.createDiv({ cls: "gdr-sb-blocco" });
+    const ab = m.abilita;
+    if (ab && (Array.isArray(ab) ? ab.length : Object.keys(ab).length)) {
+      const txt = Array.isArray(ab) ? ab.map((x: any) => (typeof x === "string" ? x : `${x.nome ?? x.abilita} ${x.valore ?? x.bonus ?? ""}`.trim())).join(", ")
+        : Object.entries(ab).map(([k, v]) => `${k} ${v}`).join(", ");
+      const p = meta.createEl("div"); p.createEl("strong", { text: "Abilità " }); p.appendText(txt);
+    }
+    if (m.sensi) { const p = meta.createEl("div"); p.createEl("strong", { text: "Sensi " }); p.appendText(Object.entries(m.sensi).map(([k, v]) => `${k.replace(/_/g, " ")} ${v} m`).join(", ")); }
+    if (m.lingue) { const p = meta.createEl("div"); p.createEl("strong", { text: "Lingue " }); p.appendText(Array.isArray(m.lingue) ? m.lingue.join(", ") : String(m.lingue)); }
+    if (m.gs != null) { const p = meta.createEl("div"); p.createEl("strong", { text: "GS " }); p.appendText(String(m.gs)); }
+
+    // Sezioni a voci: tratti, azioni, reazioni, leggendarie (nome in grassetto + prosa).
+    const sezione = (titolo: string, voci: any[]) => {
+      if (!Array.isArray(voci) || !voci.length) return;
+      c.createEl("h3", { cls: "gdr-sb-sez", text: titolo });
+      for (const v of voci) {
+        const p = c.createEl("div", { cls: "gdr-sb-voce" });
+        if (v?.nome) p.createEl("strong", { text: `${v.nome}. ` });
+        if (v?.testo) p.appendText(String(v.testo).trim());
+      }
+    };
+    sezione("Tratti", m.tratti);
+    sezione("Azioni", m.azioni);
+    sezione("Reazioni", m.reazioni);
+    sezione("Azioni leggendarie", m.azioni_leggendarie);
+  }
+
+  onClose() { this.contentEl.empty(); }
+}
+
 // Etichetta breve per un bottone-azione, per tipo (attacco/salvezza/multiattacco/cura).
 function etichettaAzione(az: Azione): string {
   if (az.tipo === "attacco") return `⚔️ ${az.nome} (+${az.colpire})`;
@@ -884,6 +959,20 @@ class BoardView extends ItemView {
     if (!pgs.length) { new Notice("Nessun PG nel vault (categoria=personaggio, tipo=pg)."); return; }
     const scelto = await suggester(this.app, (e: any) => String(e.fm.nome || e.f.basename), pgs, false, "Aggiungi un PG");
     if (scelto) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daPgGdr(scelto.fm), "alleato") });
+  }
+
+  // Statblock del combattente: mostro → StatblockModal nativa (dal bestiario grezzo);
+  // PG → apre la sua nota (che ha già la scheda completa nel vault).
+  private apriStatblock(c: InPlancia) {
+    if (c.id.startsWith("pg:")) {
+      const pg = this.plugin.partyPgs().find((e) => `pg:${String(e.fm.nome ?? "").toLowerCase().replace(/\s+/g, "-")}` === c.id);
+      if (pg) void this.app.workspace.getLeaf(false).openFile(pg.f);
+      else new Notice("Nota del PG non trovata.");
+      return;
+    }
+    const raw = this.bestiario.find((m) => m.id === c.id);
+    if (raw) new StatblockModal(this.app, raw, c).open();
+    else new Notice("Statblock non disponibile per questo combattente.");
   }
 
   // Sceglie un bersaglio fra i candidati (auto se uno solo).
@@ -988,7 +1077,9 @@ class BoardView extends ItemView {
       if (!inPiedi(c)) riga.addClass("is-ko");
       riga.createSpan({ cls: "gdr-board-ini", text: c.iniziativa != null ? String(c.iniziativa) : "—" });
       riga.createSpan({ cls: "gdr-board-lato", text: c.schieramento === "alleato" ? "🛡️" : "☠️" });
-      riga.createSpan({ cls: "gdr-board-nome", text: c.nome });
+      const nome = riga.createSpan({ cls: "gdr-board-nome is-click", text: c.nome });
+      nome.setAttribute("aria-label", "Apri statblock");
+      nome.onclick = () => this.apriStatblock(c);
       riga.createSpan({ cls: "gdr-board-ca", text: `CA ${c.ca}` });
       const pf = riga.createDiv({ cls: "gdr-board-pf" });
       const barra = pf.createDiv({ cls: "gdr-board-pf-fill" });
