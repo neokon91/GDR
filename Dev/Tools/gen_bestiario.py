@@ -4,7 +4,7 @@ Legge i mostri SRD dell'archivio condiviso (`archivio/srd/monsters/*.monster.yam
 sottoinsieme CC-BY) e ne scrive un unico JSON in `plugin/data/srd_bestiario.json`. Ogni
 mostro resta nella sua forma GREZZA (`RawMostro`): è esattamente ciò che `regole`
 `daMostro()` digerisce in un `Combattente` — il .monster.yaml NON va appiattito (a
-differenza di `srd_adapter.py`, che proietta uno statblock Fantasy Statblocks lossy).
+differenza di uno statblock Fantasy Statblocks, che è una proiezione lossy).
 
 Dato COMPLETO (non trimmato): oltre a ciò che serve al motore, la board mostra anche uno
 STATBLOCK nativo (che sostituisce Fantasy Statblocks) → servono i campi di presentazione
