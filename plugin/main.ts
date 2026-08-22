@@ -859,7 +859,10 @@ function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia) {
 
     // Testata difensiva: CA · PF · Velocità.
     const testa = c.createDiv({ cls: "gdr-sb-blocco" });
-    const pf = comb ? `${comb.pf_attuali}/${comb.pf_max}` : "?";
+    // Con un combattente in plancia: PF correnti/max. Senza (blocco in nota): i PF
+    // massimi calcolati dal motore (daMostro), come nello statblock a riposo.
+    let pf = "?";
+    try { pf = comb ? `${comb.pf_attuali}/${comb.pf_max}` : String(daMostro(m).pf_max ?? "?"); } catch { /* dati incompleti */ }
     const riga = (etich: string, val: string) => { const p = testa.createEl("div"); p.createEl("strong", { text: `${etich} ` }); p.appendText(val); };
     riga("CA", String(n((m.ca ?? {}).valore)));
     riga("PF", String(pf));
@@ -887,7 +890,9 @@ function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia) {
       const p = meta.createEl("div"); p.createEl("strong", { text: "Abilità " }); p.appendText(txt);
     }
     if (m.sensi) { const p = meta.createEl("div"); p.createEl("strong", { text: "Sensi " }); p.appendText(Object.entries(m.sensi).map(([k, v]) => `${k.replace(/_/g, " ")} ${v} m`).join(", ")); }
-    if (m.lingue) { const p = meta.createEl("div"); p.createEl("strong", { text: "Lingue " }); p.appendText(Array.isArray(m.lingue) ? m.lingue.join(", ") : String(m.lingue)); }
+    const perLingua = (l: any) => (typeof l === "string" ? l : String(l?.nome ?? l?.id ?? "")).trim();
+    const lingue = (Array.isArray(m.lingue) ? m.lingue : m.lingue ? [m.lingue] : []).map(perLingua).filter(Boolean);
+    if (lingue.length) { const p = meta.createEl("div"); p.createEl("strong", { text: "Lingue " }); p.appendText(lingue.join(", ")); }
     if (m.gs != null) { const p = meta.createEl("div"); p.createEl("strong", { text: "GS " }); p.appendText(String(m.gs)); }
 
     // Sezioni a voci: tratti, azioni, reazioni, leggendarie (nome in grassetto + prosa).
