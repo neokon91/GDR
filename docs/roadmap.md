@@ -5,6 +5,30 @@ Il **come** sta nei doc tecnici ([architecture](architecture.md) · [data_model]
 [rules_layer](rules_layer.md) · [play_layer](play_layer.md) · [plugin_contracts](plugin_contracts.md));
 la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e cosa manca.
 
+## Stato (2026-08) — motore di combattimento, Board, ecosistema a 4 repo
+
+Svolta grande: il vault è ora al centro di un **ecosistema a 4 repo** (dati `archivio` ·
+motore `regole` · `GDR` · `Compendio`) e il plugin ha un **runtime di combattimento nativo**.
+Dettagli in [combat_engine.md](combat_engine.md).
+
+- **Motore event-sourced** (`regole`, TS, ~228 test) bundlato nel plugin via symlink.
+- **Board di combattimento** (`BoardView`): incontro dal bestiario + PG, iniziativa, azioni
+  di turno (attacco/TS/multiattacco), controlli GM (HP/condizioni), **persistenza** tra reload.
+- **Statblock nativo** (`renderStatblock` + ```gdr statblock`) — sostituto di Fantasy Statblocks
+  per la consultazione. **Condizioni "vere"**: gli effetti modificano i tiri (`risolviCondizioni`).
+- **Adapter** `daMostro` (mostro archivio→Combattente) e `daPgGdr` (PG→Combattente); **sidecar**
+  `plugin/data/` generati da archivio (`gen_bestiario.py`/`gen_condizioni.py`).
+- **Migrazione archivio** in corso: doppio-file (dati `.yaml` + prosa `.md`), id qualificati
+  `dnd.<tipo>.<slug>`.
+
+**Debito noto / prossime priorità** (dagli audit 2026-08):
+1. **Ricucire la Board al flusso**: "apri l'Incontro nella Board" (oggi la Board ignora le
+   note-Incontro); Cruscotto → Board (non Initiative Tracker); pannello Conseguenze a fine scontro.
+2. **Unificare le fonti dati SRD**: oggi doppie (`Dev/Source/SRD/*.json` per le pagine vault
+   vs `archivio/*.yaml` per il motore) → archivio unica fonte.
+3. **Unificare la logica regole PG**: `crea_pg.js`/`sali_pg.js` (JS) vs `regole/creatore` (TS).
+4. **Ritiro** di Initiative Tracker + Fantasy Statblocks (pianificato, non fatto).
+
 ## Stato (2026-06-21)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` → vault Obsidian (+ sito giocatori

@@ -164,6 +164,17 @@ ciò che non li supera, non ciò che il mondo richiede davvero.
 | `astrologia.yaml` | Catalogo tema natale (segni/arcani/elementi) → `core.json` (`views.renderTemaNatale`). |
 | `generatori.yaml` | Generatore homebrew di nomi/spunti (stili/affissi/forme + tesoro SRD) → `core.json` (`genera.js`). |
 
+## Dati SRD condivisi (`archivio`) e sidecar del motore
+
+Oltre al modello del vault sopra, il **runtime di combattimento** consuma i **dati SRD del
+repo `archivio`** (symlink), separati da `Dev/Source/SRD/*.json` (che alimenta le pagine
+vault). `archivio` sta migrando al **doppio-file**: `<slug>.yaml` (dati puri) + `<slug>.md`
+(prosa, frontmatter `id`), legati per **id qualificato** `dnd.<tipo>.<slug>` (es.
+`dnd.condizione.accecato`). I generatori `gen_bestiario.py`/`gen_condizioni.py` ne producono i
+**sidecar** `plugin/data/*.json`, letti dal plugin a runtime. Dettagli e stato della
+transizione: **[combat_engine.md](combat_engine.md)**. *(Debito noto: i mostri SRD esistono
+in due fonti — questo `archivio` YAML e `Dev/Source/SRD/*.json` — da unificare.)*
+
 ## Confine validato (`validate.py`)
 
 - **core-only**: `tavolo`, `assi_tematici`, `states` (mai in system.yaml).

@@ -85,7 +85,16 @@ block-id dentro il fence ````tabs non è raggiungibile dal link).
   copia-incolla. I **PG** entrano nel tracker via `players: true` configurando il **Party**
   nelle impostazioni di Initiative Tracker (note in `Mondi/Personaggi`).
 
-## Combattimento al tavolo (VTT-lite, plugin Javalent)
+## Combattimento al tavolo
+
+> **Due sistemi in transizione.** Il nuovo è la **Board nativa GDR** sul motore event-sourced
+> di `regole` (tracker + statblock nativo + **condizioni "vere"** che *applicano* gli effetti
+> ai tiri, non solo li mostrano) → **[combat_engine.md](combat_engine.md)**. Il legacy è la
+> triade Javalent qui sotto (ancora installata, ritiro pianificato). Differenza chiave sulle
+> condizioni: FS/IT le mostrano come *status/quick-ref*; il motore le **risolve** (`risolviCondizioni`
+> → prono/avvelenato→svantaggio, ecc.).
+
+### Legacy (VTT-lite, plugin Javalent)
 La triade **Initiative Tracker + Fantasy Statblocks + Dice Roller** dà l'automazione di
 combattimento *testuale* (iniziativa, PF, condizioni, dadi cliccabili — **non** una mappa
 con token: IT ha rimosso l'integrazione mappa in v12). La pipeline la sfrutta a fondo:

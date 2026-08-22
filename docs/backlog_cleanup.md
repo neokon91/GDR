@@ -1,5 +1,9 @@
 # Backlog fase pulizia/refactor
 
+> ⏳ **STORICO (2026-08-20)** — snapshot della fase pulizia/refactor, **precede** la fase
+> motore/Board/archivio (2026-08). Accurato come storia; per lo stato attuale vedi
+> [roadmap.md](roadmap.md) e [combat_engine.md](combat_engine.md).
+
 > Estratto durevole dall'handoff del 2026-08-20 (fase pulizia/refactor/estetica).
 > Interprete test: `/usr/local/bin/python3.11` (ha jinja2/pytest; il `python3` di default = brew 3.14 senza jinja2).
 > Comandi: `npm run check`, `npm test` (= `python3 -m pytest -q`), `npm run build`. Baseline: 461 test verdi.

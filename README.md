@@ -83,9 +83,20 @@ locale o pubblica la cartella su GitHub Pages/Netlify. Per **nascondere** una no
 ai giocatori: `visibilita: dm` (o `pubblico: false`) nel frontmatter. Implementazione in
 [`Dev/Source/JS/genera_sito.js`](Dev/Source/JS/genera_sito.js) (l'unico esportatore).
 
+## Ecosistema (4 repo)
+
+GDR non è più isolato: è parte di un ecosistema a 4 repo condivisi (sotto
+`~/Documents/Sviluppo/projects/`) — **archivio** (dati SRD condivisi, YAML), **regole**
+(motore D&D 5.5e in TS: primitive + combattimento event-sourced), **GDR** (questo: vault +
+plugin), **Compendio** (app Astro). In sviluppo `archivio` e `regole` sono **symlink
+gitignorati** dentro `GDR/`; esbuild bundla il motore `regole` nel plugin e i generatori
+leggono `archivio`. Il plugin ha un **runtime di combattimento nativo** (Board + motore +
+statblock + condizioni "vere"). → [docs/combat_engine.md](docs/combat_engine.md).
+
 ## Documentazione
 
 Approfondimenti in [`docs/`](docs/): [architecture](docs/architecture.md) ·
+[combat_engine (motore + Board + ecosistema)](docs/combat_engine.md) ·
 [data_model](docs/data_model.md) · [plugin_contracts](docs/plugin_contracts.md) ·
 [rules_layer](docs/rules_layer.md) · [play_layer](docs/play_layer.md) ·
 [releasing](docs/releasing.md) · **[roadmap & analisi](docs/roadmap.md)**.

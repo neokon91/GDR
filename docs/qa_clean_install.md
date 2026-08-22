@@ -2,8 +2,8 @@
 
 Checklist per il **path turnkey da zip pulito** — l'esperienza del **DM esterno**, non la tua
 dev-copy. La suite automatica copre la *generazione* e la *logica di rendering*; **qui** si copre
-l'**integrazione plugin** (Meta Bind che binda, Dataview che indicizza, JS Engine che disegna,
-reattività live) — non testabile headless, ed è dove *ogni* QA in-app ha storicamente trovato bug
+l'**integrazione plugin** (Meta Bind che binda, Dataview che indicizza, il **plugin gdr** che
+disegna i blocchi ```gdr, reattività live) — non testabile headless, ed è dove *ogni* QA in-app ha storicamente trovato bug
 veri. Falla **una volta, dall'alto in basso, su una copia pristina**.
 
 > Per ogni **FAIL** annota: *nota · cosa attendevi · cosa hai visto · quale superficie/plugin* →
@@ -22,7 +22,7 @@ veri. Falla **una volta, dall'alto in basso, su una copia pristina**.
 ## §1 — Attivazione plugin (il make-or-break)
 - [ ] *Trust author* / Restricted mode **off**; i plugin si attivano (BRAT/community)
 - [ ] Apri **Diagnostica** → tutti i plugin **essenziali** risultano **attivi**, nessuno mancante
-- [ ] La checklist di Diagnostica si **disegna** (se vedi codice lì, manca **JS Engine** — caso limite da verificare)
+- [ ] La checklist di Diagnostica si **disegna** (se vedi codice grezzo lì, il **plugin gdr** non è attivo — caso limite da verificare)
 - [ ] Su **Home** nessun codice grezzo al posto di dashboard/pulsanti
 
 ## §2 — Onboarding (il percorso del nuovo DM)
@@ -34,14 +34,17 @@ veri. Falla **una volta, dall'alto in basso, su una copia pristina**.
       cartella corretta, senza codice grezzo
 - [ ] **＋ Componenti**: sulla nota creata, il bottone **＋ Aggiungi componente** offre i componenti
       pertinenti (Al tavolo, Clock sui fronti, Carattere con assi, Cronologia, Vista); sceglierne uno
-      **appende** il blocco (Meta Bind/JS Engine lo rendono) e **non lo ri-offre** (idempotente)
+      **appende** il blocco (Meta Bind/plugin gdr lo rendono) e **non lo ri-offre** (idempotente)
 
 ## §3 — Superfici d'integrazione (rischio #1, non testabili headless)
 - [ ] **Meta Bind**: l'infobox (VIEW) mostra **valori**, non `VIEW[...]` grezzo; gli INPUT
       (toggle/inlineSelect/suggester) sono editabili e **persistono** nel frontmatter
 - [ ] **Dataview**: dashboard e folder-table si **popolano**; le tabelle-relazioni risolvono i `[[link]]`
-- [ ] **JS Engine panel**: *Rete di collegamenti* (tabella con `[[ ]]`), radar **Carattere** (SVG),
+- [ ] **Pannelli ```gdr (plugin gdr)**: *Rete di collegamenti* (tabella con `[[ ]]`), radar **Carattere** (SVG),
       *Stato del Mondo*/Fronti, *Scheda*
+- [ ] **Board di combattimento (GDR nativa)**: comando «Apri la Board di combattimento» → aggiungi un mostro
+      (➕Nemico) e un PG (🎭PG), tira iniziativa, un attacco applica danno; click sul nome → **statblock nativo**;
+      ricarica l'app → lo stato **persiste**
 - [ ] **Reattività**: muovi uno **slider asse** → il radar si **ridisegna live** (senza riaprire la nota);
       avanza un Fronte → il **clock** aggiorna
 - [ ] **Auto-link SRD**: in una scheda i nomi (condizioni/incantesimi/mostri) sono `[[link]]` navigabili

@@ -4,6 +4,11 @@ GDR è un **vault Obsidian generato**: le sorgenti in `Dev/Source/` sono l'unica
 verità e vengono compilate in `dist/GDR-vault/` (il vault vivo che apri in
 Obsidian). Il repo di sviluppo resta pulito; il vault è ricostruibile.
 
+> Questo doc copre la **pipeline di generazione** del vault. Il **runtime di combattimento**
+> (motore `regole` event-sourced, Board nativa, statblock, condizioni "vere") e le
+> **dipendenze esterne** (`archivio` dati + `regole` motore, via symlink gitignorati bundlati
+> da esbuild) sono un ecosistema a sé: vedi **[combat_engine.md](combat_engine.md)**.
+
 ```
 Dev/Source/                      Dev/Tools/                    dist/GDR-vault/
   YAML/ (modello)        ─┐

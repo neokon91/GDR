@@ -1,5 +1,9 @@
 # Audit SRD IT — completezza e correttezza del contenuto generato
 
+> ⏳ **STORICO (2026-08-20)** — audit di `build_srd.py` (pagine vault da `Dev/Source/SRD/*.json`).
+> Valido per quel generatore, ma **non** copre il percorso `archivio/srd → plugin/data`
+> (bestiario del motore/Board): sono due fonti dati SRD distinte — vedi [combat_engine.md](combat_engine.md).
+
 **Data:** 2026-08-20 · **Tipo:** solo-report (nessun file del repo modificato)
 **Ambito:** generatore `Dev/Tools/build_srd.py`, sorgenti `Dev/Source/SRD/*.json`, output generato in `dist/GDR-vault/SRD/`.
 
