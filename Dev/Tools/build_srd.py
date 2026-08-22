@@ -20,7 +20,7 @@ import gen_bestiario
 # Config: { json, dest (sottocartella), cat (categoria), fm (campi -> frontmatter) }.
 SRD_GEN = [
     {"json": "srd_5_2_1_spells.json",      "dest": "Incantesimi",     "cat": "srd-incantesimo", "fm": ["livello", "scuola", "classi", "tempo_lancio", "gittata", "componenti", "durata"]},
-    {"json": "srd_5_2_1_magic_items.json", "dest": "Oggetti",         "cat": "srd-oggetto",     "fm": ["tipo_base", "rarita"]},  # `sintonia` (campo del modello) derivato da richiede_sintonia, sotto
+    {"json": "srd_5_2_1_magic_items.json", "dest": "Oggetti",         "cat": "srd-oggetto",     "fm": ["tipo", "rarita"]},  # archivio: `tipo` (era `tipo_base` nel JSON, senza consumatori). `sintonia` da richiede_sintonia, sotto
     {"json": "srd_5_2_1_feats.json",       "dest": "Talenti",         "cat": "srd-talento",     "fm": ["categoria", "prerequisito", "ripetibile"]},
     {"json": "srd_5_2_1_species.json",     "dest": "Specie",          "cat": "srd-specie",      "fm": ["tipo_creatura", "taglia", "velocita"]},
     {"json": "srd_5_2_1_backgrounds.json", "dest": "Background",      "cat": "srd-background",  "fm": ["talento_origine"]},
@@ -53,6 +53,7 @@ def srd_slug(name: str) -> str:
 ARCHIVIO_SRD = gen_bestiario.SRD_MONSTERS.parent  # ROOT/archivio/srd
 _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_spells.json": "spells",
+    "srd_5_2_1_magic_items.json": "magic_items",
 }
 
 

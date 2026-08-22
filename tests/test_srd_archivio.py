@@ -40,3 +40,16 @@ def test_spells_arrivano_dallarchivio():
     nomi = {str(s.get("nome")) for s in spells}
     assert "Tocco Vampirico" in nomi          # nome classico dell'archivio
     assert "Tocco del vampiro" not in nomi     # generico del JSON, ritirato
+
+
+def test_magic_items_da_archivio_con_sintonia():
+    """La categoria oggetti magici è mappata su archivio: >200 voci, con prosa e la
+    sintonia derivata da `richiede_sintonia`."""
+    items = bs.load_srd("srd_5_2_1_magic_items.json")
+    if not items:
+        import pytest
+        pytest.skip("archivio/JSON magic_items assenti")
+    assert len(items) > 200
+    baston = next((x for x in items if str(x.get("nome")).lower() == "bastone del fuoco"), None)
+    assert baston and baston.get("richiede_sintonia") is True
+    assert isinstance(baston.get("descrizione"), str) and baston["descrizione"].strip()
