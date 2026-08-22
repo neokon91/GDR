@@ -19,6 +19,7 @@ import {
 interface GdrSettings {
   sezioni: { party: boolean; combattimento: boolean; dadi: boolean; data: boolean; mondo: boolean };
   dadi: string; // "etichetta:espressione" separati da virgola
+  board?: Evento[]; // stato della Board di combattimento, persistito così sopravvive al reload
 }
 const DEFAULT_SETTINGS: GdrSettings = {
   sezioni: { party: true, combattimento: true, dadi: true, data: true, mondo: true },
@@ -467,6 +468,21 @@ export default class GdrPlugin extends Plugin {
     return this.bestiario;
   }
 
+  // I PG del vault (categoria=personaggio, tipo=pg), con il loro frontmatter. Sorgente
+  // condivisa fra Cruscotto (Party) e Board (schierare i PG). Ordinati per nome.
+  partyPgs(): { f: any; fm: any }[] {
+    return this.app.vault.getMarkdownFiles()
+      .map((f) => ({ f, fm: (this.app.metadataCache.getFileCache(f)?.frontmatter || {}) as any }))
+      .filter((e) => e.fm.categoria === "personaggio" && String(e.fm.tipo).toLowerCase() === "pg")
+      .sort((a, b) => String(a.fm.nome || a.f.basename).localeCompare(String(b.fm.nome || b.f.basename)));
+  }
+
+  // Persistenza della Board: gli eventi vivono nel data.json del plugin (accanto alle
+  // impostazioni) così il combattimento sopravvive a un reload. Salvataggio "nudo" (niente
+  // refreshCruscotti/statusBar di saveSettings): lo si chiama a ogni comando della board.
+  async saveBoard(eventi: Evento[]) { this.settings.board = eventi; await this.saveData(this.settings); }
+  loadBoard(): Evento[] { return Array.isArray(this.settings.board) ? this.settings.board : []; }
+
   // Frontmatter FRESCO di una nota (da metadataCache, già aggiornato al 'changed').
   frontmatterOf(path: string): any {
     const file = this.app.vault.getAbstractFileByPath(path);
@@ -667,12 +683,7 @@ class CruscottoView extends ItemView {
   }
 
   // I PG del vault (nota personaggio · tipo pg), ordinati per nome.
-  private partyPgs() {
-    return this.app.vault.getMarkdownFiles()
-      .map((f) => ({ f, fm: (this.app.metadataCache.getFileCache(f)?.frontmatter || {}) as any }))
-      .filter((e) => e.fm.categoria === "personaggio" && String(e.fm.tipo).toLowerCase() === "pg")
-      .sort((a, b) => String(a.fm.nome || a.f.basename).localeCompare(String(b.fm.nome || b.f.basename)));
-  }
+  private partyPgs() { return this.plugin.partyPgs(); }
 
   private renderParty(root: HTMLElement) {
     const box = root.createDiv({ cls: "gdr-crusc-sec" });
@@ -722,8 +733,12 @@ class CruscottoView extends ItemView {
     const it = (this.app as any).plugins?.plugins?.["initiative-tracker"];
     const box = root.createDiv({ cls: "gdr-crusc-sec" });
     box.createEl("h4", { text: "⚔️ Combattimento" });
+    // Superficie primaria: la Board nativa GDR (motore di `regole`). Initiative Tracker
+    // resta sotto come legacy finché la Board non lo sostituisce del tutto.
+    const bBoard = box.createEl("button", { text: "⚔️ Board di combattimento (GDR)" });
+    bBoard.onclick = () => this.plugin.activateBoard();
     if (!it || !it.data) {
-      box.createEl("p", { text: "Initiative Tracker non attivo.", cls: "gdr-crusc-empty" });
+      box.createEl("p", { text: "Initiative Tracker (legacy) non attivo.", cls: "gdr-crusc-empty" });
       return;
     }
     let live: any = null;
@@ -784,6 +799,29 @@ class CruscottoView extends ItemView {
   }
 }
 
+// Adapter PG GDR → Combattente. Il frontmatter del PG è ricco e piatto: mod_* già
+// calcolati, ts_* = FLAG di competenza (0/1), competenza = bonus competenza. Ne ricava CA,
+// PF, bonus iniziativa (mod destrezza) e i tiri salvezza (mod + PB·flag). NON gli attacchi:
+// dipendono dall'arma che il giocatore sceglie → gestiti a mano (barra PF/danni), non
+// auto-eseguiti. Così il PG entra in plancia targetabile, subisce danni e TIRA salvezza
+// (i mostri lo attaccano dal motore); la sua offensiva resta al giocatore.
+function daPgGdr(fm: any): Combattente {
+  const n = (v: any) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+  const pb = n(fm.competenza);
+  const ABIL = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
+  const tiri_salvezza: Record<string, number> = {};
+  for (const a of ABIL) tiri_salvezza[a] = n(fm[`mod_${a}`]) + pb * (n(fm[`ts_${a}`]) ? 1 : 0);
+  const slug = String(fm.nome ?? "pg").toLowerCase().replace(/\s+/g, "-");
+  return {
+    id: `pg:${slug}`,
+    nome: String(fm.nome ?? "PG"),
+    ca: n(fm.ca),
+    pf_max: n(fm.pf_max) || n(fm.pf),
+    iniziativa_bonus: n(fm.mod_destrezza),
+    tiri_salvezza,
+  };
+}
+
 // Etichetta breve per un bottone-azione, per tipo (attacco/salvezza/multiattacco/cura).
 function etichettaAzione(az: Azione): string {
   if (az.tipo === "attacco") return `⚔️ ${az.nome} (+${az.colpire})`;
@@ -815,27 +853,37 @@ class BoardView extends ItemView {
   async onOpen() {
     try { this.bestiario = await this.plugin.loadBestiario(); }
     catch (e: any) { this.errore = e?.message ?? String(e); }
+    this.eventi = this.plugin.loadBoard(); // ripristina il combattimento in corso
     this.render();
   }
 
   private stato(): Stato { return ricostruisci(this.eventi); }
-  // Ogni mutazione passa da qui: accoda eventi e ridisegna. Unico punto di verità.
-  private push(...ev: Evento[]) { this.eventi.push(...ev); this.render(); }
+  // Ridisegna E persiste: unico punto d'uscita dopo ogni mutazione degli eventi.
+  private commit() { this.render(); void this.plugin.saveBoard(this.eventi); }
+  // Accoda eventi e committa. Unico punto per i comandi del motore.
+  private push(...ev: Evento[]) { this.eventi.push(...ev); this.commit(); }
 
-  // Schiera un mostro grezzo (daMostro → Combattente, avvolto in InPlancia). key unica per
-  // copia (`id#n`); nome disambiguato «(2)», «(3)» dal secondo doppione in poi.
-  private schiera(raw: any, lato: "alleato" | "nemico"): InPlancia {
-    const base: Combattente = daMostro(raw);
+  // Avvolge un Combattente (da mostro o PG) in un InPlancia schierato: key unica per copia
+  // (`id#n`), nome disambiguato «(2)», «(3)» dal secondo doppione in poi, PF pieni.
+  private schieraDaBase(base: Combattente, lato: "alleato" | "nemico"): InPlancia {
     const simili = this.stato().combattenti.filter((c) => c.id === base.id).length;
     const nome = simili > 0 ? `${base.nome} (${simili + 1})` : base.nome;
     return { ...base, key: `${base.id}#${simili + 1}`, nome, pf_attuali: base.pf_max, iniziativa: null, schieramento: lato };
   }
 
-  // Picker sul bestiario (334 mostri) → aggiunge un combattente del lato scelto.
+  // Picker sul bestiario (334 mostri) → aggiunge un mostro del lato scelto.
   private async aggiungi(lato: "alleato" | "nemico") {
     if (!this.bestiario.length) { new Notice("Bestiario non caricato."); return; }
     const raw = await suggester(this.app, (m: any) => m.nome, this.bestiario, false, `Aggiungi ${lato === "nemico" ? "un nemico" : "un alleato"}`);
-    if (raw) this.push({ tipo: "aggiunto", combattente: this.schiera(raw, lato) });
+    if (raw) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(raw), lato) });
+  }
+
+  // Picker sui PG del vault → aggiunge un personaggio come alleato (via daPgGdr).
+  private async aggiungiPg() {
+    const pgs = this.plugin.partyPgs();
+    if (!pgs.length) { new Notice("Nessun PG nel vault (categoria=personaggio, tipo=pg)."); return; }
+    const scelto = await suggester(this.app, (e: any) => String(e.fm.nome || e.f.basename), pgs, false, "Aggiungi un PG");
+    if (scelto) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daPgGdr(scelto.fm), "alleato") });
   }
 
   // Sceglie un bersaglio fra i candidati (auto se uno solo).
@@ -874,7 +922,7 @@ class BoardView extends ItemView {
     const vuoi = ["lupo-feroce", "orso-bruno", "goblin-guerriero", "goblin-guerriero"];
     const lati: ("alleato" | "nemico")[] = ["alleato", "alleato", "nemico", "nemico"];
     this.eventi = [];
-    vuoi.forEach((id, i) => { const raw = byId.get(id); if (raw) this.eventi.push({ tipo: "aggiunto", combattente: this.schiera(raw, lati[i]) }); });
+    vuoi.forEach((id, i) => { const raw = byId.get(id); if (raw) this.eventi.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(raw), lati[i]) }); });
     let s = (seme >>> 0); const dado: Dado = (f) => { s = (s * 1664525 + 1013904223) >>> 0; return (s % f) + 1; };
     this.eventi.push(...comandoIniziativa(this.stato(), dado), { tipo: "cominciato" });
     for (let step = 0; step < 60 && !esitoScontro(this.stato()); step++) {
@@ -885,7 +933,7 @@ class BoardView extends ItemView {
       }
       this.eventi.push({ tipo: "turno-passato" });
     }
-    this.render();
+    this.commit();
   }
 
   private render() {
@@ -916,10 +964,11 @@ class BoardView extends ItemView {
     };
     btn("➕ Nemico", () => void this.aggiungi("nemico"));
     btn("➕ Alleato", () => void this.aggiungi("alleato"));
+    btn("🎭 PG", () => void this.aggiungiPg());
     if (!iniziato) btn("🎲 Iniziativa", () => this.push(...comandoIniziativa(this.stato()), { tipo: "cominciato" }), "primario");
     else if (!esito) btn("⏭️ Passa turno", () => this.push({ tipo: "turno-passato" }), "primario");
-    btn("↩️ Annulla", () => { this.eventi = annullaUltimo(this.eventi); this.render(); });
-    btn("🗑️ Reset", () => { this.eventi = []; this.render(); });
+    btn("↩️ Annulla", () => { this.eventi = annullaUltimo(this.eventi); this.commit(); });
+    btn("🗑️ Reset", () => { this.eventi = []; this.commit(); });
     btn("🎬 Demo", () => this.seedDemo());
 
     const sub = root.createDiv({ cls: "gdr-board-sub" });
@@ -930,9 +979,10 @@ class BoardView extends ItemView {
       return;
     }
 
-    // Roster in ordine d'iniziativa.
+    // Roster: in ordine d'iniziativa a battaglia iniziata, altrimenti in ordine di
+    // schieramento (così i combattenti si vedono già in pre-battaglia).
     const lista = root.createDiv({ cls: "gdr-board-roster" });
-    for (const c of ordine(s)) {
+    for (const c of (iniziato ? ordine(s) : s.combattenti)) {
       const riga = lista.createDiv({ cls: "gdr-board-riga" });
       if (attivoOra && c.key === attivoOra.key) riga.addClass("is-attivo");
       if (!inPiedi(c)) riga.addClass("is-ko");
@@ -945,12 +995,24 @@ class BoardView extends ItemView {
       const frazione = Math.max(0, Math.min(1, c.pf_attuali / c.pf_max));
       barra.style.width = `${Math.round(frazione * 100)}%`;
       if (frazione <= 0.33) barra.addClass("bassa"); else if (frazione <= 0.66) barra.addClass("media");
-      pf.createSpan({ cls: "gdr-board-pf-txt", text: `${c.pf_attuali}/${c.pf_max}` });
-      const cond = s.condizioni[c.key] ?? [];
-      if (cond.length) {
-        const box = riga.createDiv({ cls: "gdr-board-cond" });
-        for (const id of cond) box.createSpan({ cls: "gdr-board-cond-chip", text: id });
+      const pfTemp = c.pf_temporanei ? ` (+${c.pf_temporanei})` : "";
+      pf.createSpan({ cls: "gdr-board-pf-txt", text: `${c.pf_attuali}/${c.pf_max}${pfTemp}` });
+      // Coda: condizioni (chip cliccabili per toglierle) + controlli manuali del GM.
+      const coda = riga.createDiv({ cls: "gdr-board-tail" });
+      for (const id of s.condizioni[c.key] ?? []) {
+        const chip = coda.createSpan({ cls: "gdr-board-cond-chip is-click", text: id });
+        chip.setAttribute("aria-label", `Togli «${id}»`);
+        chip.onclick = () => this.push({ tipo: "condizione-finita", key: c.key, condizione: id });
       }
+      const ctrl = coda.createDiv({ cls: "gdr-board-ctrl" });
+      const amt = ctrl.createEl("input", { cls: "gdr-board-amt", attr: { type: "number", min: "1", value: "5", inputmode: "numeric" } });
+      const quanti = () => Math.max(1, Math.round(Number(amt.value) || 0));
+      const bDmg = ctrl.createEl("button", { text: "−", cls: "gdr-board-dmg" }); bDmg.setAttribute("aria-label", "Infliggi danno");
+      bDmg.onclick = () => this.push({ tipo: "danno", key: c.key, quanti: quanti() });
+      const bHeal = ctrl.createEl("button", { text: "+", cls: "gdr-board-heal" }); bHeal.setAttribute("aria-label", "Cura");
+      bHeal.onclick = () => this.push({ tipo: "cura", key: c.key, quanti: quanti() });
+      const bDel = ctrl.createEl("button", { text: "✕", cls: "gdr-board-del" }); bDel.setAttribute("aria-label", "Rimuovi dalla plancia");
+      bDel.onclick = () => this.push({ tipo: "rimosso", key: c.key });
     }
 
     // Azioni dell'attivo (a battaglia iniziata, se in piedi e non c'è ancora un esito).

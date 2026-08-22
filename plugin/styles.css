@@ -224,3 +224,22 @@
   transition: background .12s ease, border-color .12s ease;
 }
 .gdr-board-azioni-box button:hover { background: var(--background-modifier-hover); border-color: var(--interactive-accent); }
+
+/* --- Board: coda riga (condizioni + controlli manuali GM, Spike B) ---------- */
+.gdr-board-tail { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.gdr-board-cond-chip.is-click { cursor: pointer; }
+.gdr-board-cond-chip.is-click:hover { background: var(--background-modifier-error); color: var(--text-on-accent); text-decoration: line-through; }
+.gdr-board-ctrl { display: inline-flex; align-items: center; gap: 3px; }
+.gdr-board-amt {
+  width: 3.2em; text-align: center; font-size: var(--font-ui-smaller);
+  padding: 1px 4px; border-radius: 6px;
+  border: 1px solid var(--background-modifier-border); background: var(--background-primary); color: var(--text-normal);
+}
+.gdr-board-ctrl button {
+  cursor: pointer; width: 1.9em; height: 1.9em; padding: 0; border-radius: 6px; font-weight: 700; line-height: 1;
+  border: 1px solid var(--background-modifier-border); background: var(--background-primary); color: var(--text-normal);
+}
+.gdr-board-ctrl button:hover { background: var(--background-modifier-hover); }
+.gdr-board-dmg:hover { border-color: #c0392b; color: #c0392b; }
+.gdr-board-heal:hover { border-color: #3fa34d; color: #3fa34d; }
+.gdr-board-del:hover { border-color: var(--background-modifier-error); color: var(--background-modifier-error); }
