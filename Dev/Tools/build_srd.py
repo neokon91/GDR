@@ -304,20 +304,42 @@ def srd_loot_pool() -> dict[str, list[str]]:
     return {k: sorted(set(v)) for k, v in pool.items() if v}
 
 
+def _gs_num(gs: Any) -> float | None:
+    """Valore numerico da un GS: frazione archivio `1/2`→0.5, intero, o dict {valore}."""
+    if isinstance(gs, dict):
+        gs = gs.get("valore")
+    s = str(gs)
+    if "/" in s:
+        n, d = s.split("/", 1)
+        try:
+            return float(n) / float(d)
+        except (ValueError, ZeroDivisionError):
+            return None
+    try:
+        return float(s)
+    except (TypeError, ValueError):
+        return None
+
+
+def _mostri_archivio() -> list[dict[str, Any]]:
+    """Bestiario dell'archivio (memoizzato): la stessa sorgente delle pagine mostro."""
+    global _MOSTRI_CACHE
+    if _MOSTRI_CACHE is None:
+        _MOSTRI_CACHE = gen_bestiario.carica_mostri(gen_bestiario.SRD_MONSTERS)
+    return _MOSTRI_CACHE
+
+
+_MOSTRI_CACHE: list[dict[str, Any]] | None = None
+
+
 def srd_creature_pool() -> dict[str, list[str]]:
     """Nomi di creature REALI dell'SRD raggruppate per BANDA di grado-sfida, per il
     generatore `incontro` (genera.js: generaIncontro). Bande: debole (GS≤1), medio (≤5),
-    tosto (≤10), letale (>10). Iniettato in core.json sotto generatori.incontro._srd così
-    l'incontro casuale cita mostri veri e CC-BY (mai inventati)."""
+    tosto (≤10), letale (>10). Sorgente = bestiario archivio."""
     bande: dict[str, list[str]] = {"debole": [], "medio": [], "tosto": [], "letale": []}
-    for x in load_srd("srd_5_2_1_monsters.json"):
-        if not (isinstance(x, dict) and x.get("nome")):
-            continue
-        gs = x.get("grado_sfida")
-        cr = gs.get("valore") if isinstance(gs, dict) else gs
-        try:
-            cr = float(cr)
-        except (TypeError, ValueError):
+    for x in _mostri_archivio():
+        cr = _gs_num(x.get("gs"))
+        if not x.get("nome") or cr is None:
             continue
         banda = "debole" if cr <= 1 else "medio" if cr <= 5 else "tosto" if cr <= 10 else "letale"
         bande[banda].append(x["nome"])
@@ -772,43 +794,54 @@ def gs_baselines() -> dict[str, dict[str, Any]]:
     rappresentativa, CD salvezza. **Sorgente SRD** (non la tabella DMG) -> nessun
     vincolo di licenza. Alimenta lo scaffolder di statblock per le creature homebrew
     (meta_actions.scaffold_statblock): un boss con solo `gs` diventa subito giocabile."""
+    import math
+    _FACCE = {"minuscola": 4, "piccola": 6, "media": 8, "grande": 10, "enorme": 12, "mastodontica": 20}
+
+    def _taglia1(a: dict[str, Any]) -> str:
+        t = a.get("taglia")
+        return str((t[0] if isinstance(t, list) and t else t) or "").lower()
+
+    def _car(a: dict[str, Any], nome: str) -> int:
+        v = ((a.get("caratteristiche") or {}).get(nome) or {}).get("valore")
+        return (int(v) - 10) // 2 if v is not None else 0
+
+    def _pf(a: dict[str, Any]) -> float | None:
+        dv = a.get("dadi_vita")
+        if dv is None:
+            return a.get("pf") or a.get("pf_max")
+        f = _FACCE.get(_taglia1(a))
+        return math.floor(dv * (f / 2 + 0.5)) + dv * _car(a, "costituzione") if f else None
+
+    def _pb(cr: float) -> int:  # tabella DMG (PB per GS): 2 fino a GS4, poi +1 ogni 4
+        return 2 + max(0, (math.ceil(cr) - 1) // 4) if cr >= 1 else 2
+
     groups: dict[str, dict[str, list[float]]] = {}
     formulas: dict[str, list[tuple[float, str, str]]] = {}
-    for mon in load_srd("srd_5_2_1_monsters.json"):
-        if not isinstance(mon, dict):
-            continue
-        cr = mon.get("grado_sfida") or {}
-        key = _gs_key(cr.get("valore") if isinstance(cr, dict) else cr)
-        if key is None:
+    for mon in _mostri_archivio():
+        cr = _gs_num(mon.get("gs"))
+        key = _gs_key(mon.get("gs"))
+        if key is None or cr is None:
             continue
         g = groups.setdefault(key, {"ac": [], "hp": [], "pb": [], "init": [], "atk": [], "dmg": [], "cd": []})
-        ac = mon.get("classe_armatura")
+        ca = mon.get("ca")
+        ac = ca.get("valore") if isinstance(ca, dict) else ca
         if isinstance(ac, (int, float)):
             g["ac"].append(ac)
-        hp = mon.get("punti_ferita") or {}
-        if isinstance(hp, dict) and isinstance(hp.get("media"), (int, float)):
-            g["hp"].append(hp["media"])
-        if isinstance(mon.get("bonus_competenza"), (int, float)):
-            g["pb"].append(mon["bonus_competenza"])
-        ini = mon.get("iniziativa") or {}
-        if isinstance(ini, dict) and isinstance(ini.get("bonus"), (int, float)):
-            g["init"].append(ini["bonus"])
-        for az in mon.get("azioni") or []:
-            for tiro in (az.get("tiri") or []) if isinstance(az, dict) else []:
-                if not isinstance(tiro, dict):
-                    continue
-                if tiro.get("tipo") == "attacco":
-                    if isinstance(tiro.get("bonus"), (int, float)):
-                        g["atk"].append(tiro["bonus"])
-                    danni = tiro.get("danni") or []
-                    tot = sum(d.get("media", 0) for d in danni if isinstance(d, dict) and isinstance(d.get("media"), (int, float)))
-                    if tot:
-                        g["dmg"].append(tot)
-                        d0 = next((d for d in danni if isinstance(d, dict) and d.get("formula")), None)
-                        if d0:
-                            formulas.setdefault(key, []).append((tot, str(d0["formula"]), str(d0.get("tipo", ""))))
-                elif tiro.get("tipo") == "salvezza" and isinstance(tiro.get("cd"), (int, float)):
-                    g["cd"].append(tiro["cd"])
+        hp = _pf(mon)
+        if isinstance(hp, (int, float)):
+            g["hp"].append(hp)
+        pb = _pb(cr)
+        g["pb"].append(pb)
+        g["init"].append(_car(mon, "destrezza") + (pb if str(mon.get("iniziativa")) == "maestria" else 0))
+        # Attacco/danno/CD dalla PROSA delle azioni (l'archivio le tiene come `testo`).
+        testo = " ".join(str(a.get("testo", "")) for a in (mon.get("azioni") or []) if isinstance(a, dict))
+        for m in re.finditer(r"per colpire[^+\-\d]*([+-]?\d+)", testo, re.I):
+            g["atk"].append(int(m.group(1)))
+        for m in re.finditer(r"olpito:\**\s*(\d+)\s*\(([^)]*\d+d\d+[^)]*)\)\s*danni\s*([a-zà-ú]+)", testo):
+            g["dmg"].append(int(m.group(1)))
+            formulas.setdefault(key, []).append((int(m.group(1)), m.group(2).strip(), m.group(3).strip()))
+        for m in re.finditer(r"\bCD\s*(\d+)", testo):
+            g["cd"].append(int(m.group(1)))
     out: dict[str, dict[str, Any]] = {}
     for key, g in groups.items():
         rec: dict[str, Any] = {}
