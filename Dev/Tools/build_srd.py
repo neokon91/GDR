@@ -57,6 +57,7 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_languages.json": "lingue",
     "srd_5_2_1_species.json": "specie",
     "srd_5_2_1_backgrounds.json": "background",
+    "srd_5_2_1_feats.json": "talenti",
     # NB NON qui (ancora): classi/talenti/equipaggiamento/regole → li consuma anche
     # build_personaggio (creazione PG) nella forma JSON; l'adapter deve riprodurre quella forma
     # perché downstream resti invariato. Migrazione per-categoria.
@@ -226,12 +227,23 @@ def _adatta_lingue(d: dict[str, Any]) -> None:
     if sez: d.setdefault("sezioni", []).extend(sez)
 
 
+def _adatta_talento(d: dict[str, Any]) -> None:
+    d["id"] = _id_nudo(d.get("id"))
+    # categoria: archivio mescola slug (`talento-origine`/`talento-generale`) e prosa →
+    # normalizza alla prosa JSON (il gating `talentoAmmesso` tollera entrambe, ma le pagine
+    # e i consumatori restano coerenti).
+    cat = {"talento-origine": "Origini", "talento-generale": "Generale"}.get(
+        str(d.get("categoria") or ""), d.get("categoria"))
+    d["categoria"] = cat
+
+
 _ADATTA = {
     "srd_5_2_1_backgrounds.json": _adatta_background,
     "srd_5_2_1_species.json": _adatta_specie,
     "srd_5_2_1_classes.json": _adatta_classe,
     "srd_5_2_1_equipment.json": _adatta_equip,
     "srd_5_2_1_languages.json": _adatta_lingue,
+    "srd_5_2_1_feats.json": _adatta_talento,
 }
 
 
