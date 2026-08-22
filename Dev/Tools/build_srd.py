@@ -58,6 +58,7 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_species.json": "specie",
     "srd_5_2_1_backgrounds.json": "background",
     "srd_5_2_1_feats.json": "talenti",
+    "srd_5_2_1_equipment.json": "equipaggiamento",
     # NB NON qui (ancora): classi/talenti/equipaggiamento/regole → li consuma anche
     # build_personaggio (creazione PG) nella forma JSON; l'adapter deve riprodurre quella forma
     # perché downstream resti invariato. Migrazione per-categoria.
@@ -203,6 +204,7 @@ def _adatta_classe(d: dict[str, Any]) -> None:
 
 
 def _adatta_equip(d: dict[str, Any]) -> None:
+    d["id"] = _id_nudo(d.get("id"))
     righe = []
     if d.get("tipo"): righe.append(_kv("Tipo", _pulisci(d["tipo"])))
     costo = d.get("costo")
@@ -276,7 +278,9 @@ _LOOT_RARITY = {
 }
 # Tipi di equipaggiamento che hanno senso come bottino non magico (gli altri —
 # vitto/alloggio, servizi, cavalcature, veicoli, monete — non sono "tesoro").
-_LOOT_MUNDANE_TIPI = {"equipaggiamento_avventura", "arma", "armatura", "scudo", "strumento"}
+# Prefissi-tipo del bottino NON magico (archivio: `tipo` compatto tipo `arma-mischia-semplice`,
+# `armatura-media`, `scudo`, `strumento`, `equipaggiamento-avventura`) → match per prefisso.
+_LOOT_MUNDANE_PREFIXES = ("arma", "armatura", "scudo", "strumento", "equipaggiamento")
 
 
 def srd_loot_pool() -> dict[str, list[str]]:
@@ -286,7 +290,7 @@ def srd_loot_pool() -> dict[str, list[str]]:
     sotto generatori.tesoro._srd così il bottino cita item veri e CC-BY (mai DMG)."""
     pool: dict[str, list[str]] = {"mondano": [], "non comune": [], "rara": [], "molto rara": [], "leggendaria": []}
     for x in load_srd("srd_5_2_1_equipment.json"):
-        if isinstance(x, dict) and x.get("nome") and str(x.get("tipo")) in _LOOT_MUNDANE_TIPI:
+        if isinstance(x, dict) and x.get("nome") and str(x.get("tipo") or "").startswith(_LOOT_MUNDANE_PREFIXES):
             pool["mondano"].append(x["nome"])
     for x in load_srd("srd_5_2_1_magic_items.json"):
         if not (isinstance(x, dict) and x.get("nome")):
