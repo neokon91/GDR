@@ -45,7 +45,40 @@ def srd_slug(name: str) -> str:
     return cleaned or "voce"
 
 
+# Fonte unica = archivio (audit A1): le categorie qui mappate (json → sottocartella di
+# `archivio/srd/`) NON leggono più il JSON vendorizzato ma gli YAML dell'archivio. La
+# redirezione è a livello di `load_srd`, così PAGINE e strutture DERIVATE (id-index,
+# autolink, pool bottino) passano ad archivio insieme, per categoria. Le categorie non
+# ancora mappate restano sul JSON finché non migrano.
+ARCHIVIO_SRD = gen_bestiario.SRD_MONSTERS.parent  # ROOT/archivio/srd
+_ARCHIVIO_SUBDIR: dict[str, str] = {
+    "srd_5_2_1_spells.json": "spells",
+}
+
+
+def _load_archivio(subdir: str) -> list[dict[str, Any]]:
+    """Carica una categoria SRD dagli YAML dell'archivio (ricorsivo). Dedup per nome;
+    id dal frontmatter o dallo slug del file. Forma-dato specifica dell'archivio: i
+    consumatori (srd_note/id-index/autolink) leggono gli stessi nomi-campo del JSON."""
+    d = ARCHIVIO_SRD / subdir
+    if not d.is_dir():
+        return []
+    per_nome: dict[str, dict[str, Any]] = {}
+    for f in sorted(d.rglob("*.yaml")):
+        m = yaml.safe_load(f.read_text(encoding="utf-8"))
+        if not isinstance(m, dict) or not m.get("nome"):
+            continue
+        m.setdefault("id", f.name.split(".")[0])
+        per_nome.setdefault(str(m["nome"]).strip().lower(), m)
+    return list(per_nome.values())
+
+
 def load_srd(name: str) -> list[dict[str, Any]]:
+    subdir = _ARCHIVIO_SUBDIR.get(name)
+    if subdir:
+        data = _load_archivio(subdir)
+        if data:  # archivio assente/vuoto → ripiego sul JSON (build robusta)
+            return data
     path = SRD_DIR / name
     if not path.is_file():
         return []
@@ -409,7 +442,17 @@ def autolink(text: str, regex, idx: dict[str, str], self_nome: str, seen: set[st
         seen.add(canon)
         return f"[[{canon}]]" if trovato == canon else f"[[{canon}|{trovato}]]"
 
-    return regex.sub(repl, text)
+    # La prosa dell'archivio porta già i propri collegamenti fra parentesi quadre
+    # (`[[invisibile]]`, `[cubo]`): NON ri-linkare al loro interno, o si annidano
+    # (`[[[[…]]]]`). Applica l'auto-link SOLO ai segmenti fuori dalle parentesi quadre.
+    out: list[str] = []
+    last = 0
+    for span in re.finditer(r"\[\[?[^\[\]]*\]\]?", text):
+        out.append(regex.sub(repl, text[last:span.start()]))
+        out.append(span.group(0))  # collegamento già presente: intatto
+        last = span.end()
+    out.append(regex.sub(repl, text[last:]))
+    return "".join(out)
 
 
 # Dadi tirabili in-vault: avvolge le espressioni-dado della prosa (3d8, 2d6 + 5, 1d8…)
@@ -481,10 +524,17 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
         # Salta le sezioni col solo titolo (niente heading vuoti).
         if contenuto and not (len(contenuto) == 1 and sez.get("titolo")):
             parts.append("\n\n".join(contenuto))
-    scaling = [s for s in (entry.get("scaling") or []) if isinstance(s, dict)]
-    if scaling:
-        body = "\n>\n".join(f"> **{s.get('nome', '')}** — {_wrap_dice(str(s.get('descrizione', '')))}" for s in scaling)
-        parts.append(f"> [!tip]- Potenziamento\n{body}")
+    scaling_raw = entry.get("scaling")
+    if isinstance(scaling_raw, str) and scaling_raw.strip():
+        # Archivio: scaling come prosa unica (già col proprio grassetto). Callout unico,
+        # dadi resi cliccabili.
+        corpo = _wrap_dice(scaling_raw.strip()).replace("\n", "\n> ")
+        parts.append(f"> [!tip]- Potenziamento\n> {corpo}")
+    else:
+        scaling = [s for s in (scaling_raw or []) if isinstance(s, dict)]
+        if scaling:
+            body = "\n>\n".join(f"> **{s.get('nome', '')}** — {_wrap_dice(str(s.get('descrizione', '')))}" for s in scaling)
+            parts.append(f"> [!tip]- Potenziamento\n{body}")
     # Creature evocate inline (incantesimi): statblock di gioco completo.
     evocate = _creatura_evocata(entry.get("creature_evocate_inline") or [])
     if evocate:
