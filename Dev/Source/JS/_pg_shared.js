@@ -5,6 +5,13 @@
 // validate.check() impone l'uguaglianza: modificarne una sola copia è un errore di
 // build, non un drift latente (creazione e level-up calcolerebbero risorse diverse).
 // Per aggiornare un helper: cambia il blocco QUI e ricopialo identico nelle due copie.
+//
+// SPEC delle REGOLE: `mod`/`maxAtLevel`/`risorseAtLevel` sono la copia JS della spec
+// TESTATA in `regole/creatore/risorse.ts` (`modPunteggio`/`maxAlLivello`/`risorseAlLivello`).
+// `tests/test_pg_shared_parity.py` lega questa copia a quella spec su una batteria di
+// input: se una delle due deriva, il test diventa rosso. La verità della regola è in
+// regole; qui c'è la copia perché i wizard restano autonomi. `sigla`/`scegliMulti`
+// (formato/UI, non regole) restano solo JS.
 
 // >>>pg-shared
 // Helper puri CONDIVISI fra crea_pg.js e sali_pg.js (creazione ↔ level-up): così le
