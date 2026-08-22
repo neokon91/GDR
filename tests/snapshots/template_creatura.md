@@ -26,54 +26,36 @@
 > **Spunti** · Cosa la rende pericolosa al di là dei numeri? Come caccia o si difende? Che leggenda raccontano di lei i popoli vicini?
 
 ````tabs
---- 🐉 Statblock 5.5e
+--- 🐉 Statblock
 
-```statblock
-layout: D&D 5.5 Layout ITA - Compatibile 5e
-name: <% tp.config.target_file.basename %>
-size: Medio
-type: umanoide
-subtype: ""
-alignment: neutrale
-ac: 10
-hp: 10
-hit_dice: 2d8
-speed: 9 m
-initiative: "+0"
-stats: [10, 10, 10, 10, 10, 10]
-saves: []
-skillsaves: []
-damage_vulnerabilities: ""
-damage_resistances: ""
-damage_immunities: ""
-condition_immunities: ""
-gear: ""
-senses: Percezione passiva 10
-languages: Comune
-cr: "1"
-pb: "+2"
-traits: []
-actions: []
-bonus_actions: []
-reactions: []
-legendary_description: ""
-legendary_actions: []
+```gdr statblock
+nome: <% tp.config.target_file.basename %>
+taglia: media
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 10}
+  destrezza: {valore: 10}
+  costituzione: {valore: 10}
+  intelligenza: {valore: 10}
+  saggezza: {valore: 10}
+  carisma: {valore: 10}
+dadi_vita: 2
+velocita: {camminata: 9}
+gs: "1"
+percezione_passiva: 10
+lingue: [Comune]
+tratti: []
+azioni: []
 ```
 
 > [!tip]- 🎲 Genera dal Grado di sfida
-> Imposta il **GS** (tab *Lore*) e premi: lo statblock qui sopra si riempie coi valori base dei mostri SRD di pari GS (AC/PF/iniziativa + multiattacco e un attacco col bonus e il danno tipici). Poi rifinisci a mano (tratti, resistenze, leggendarie).
+> Imposta il **GS** (tab *Lore*) e premi: lo statblock qui sopra si riempie coi valori base dei mostri SRD di pari GS (CA/PF + multiattacco e un attacco col bonus e il danno tipici). Poi rifinisci a mano (tratti, resistenze, leggendarie).
 > `BUTTON[genera-statblock]`
 
 ```gdr
 renderVerificaGS
-```
-
---- 🐉 Statblock 5e
-
-> Stessa creatura, resa **classica 5e** (cambia solo il layout). I numeri si modificano nel tab *Statblock 5.5e*: questa scheda li rispecchia (richiede `statblock: inline`, già impostato dal wizard).
-```statblock
-layout: Basic 5e Layout ITA
-monster: <% tp.config.target_file.basename %>
 ```
 
 --- 🎲 Al tavolo
@@ -96,7 +78,7 @@ renderTipoProfilo
 ```
 
 > [!note]- Aspetto e indole
-> Com'è fatta, come si muove, che impressione dà. I numeri 5e sono nel tab Statblock.
+> Com'è fatta, come si muove, che impressione dà. I numeri sono nel tab Statblock.
 
 > [!quote]- Versione player-safe
 > `INPUT[text(placeholder(cosa possono sapere i giocatori)):player_safe]`

@@ -115,17 +115,17 @@ def test_gs_baselines():
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_scaffold_statblock_e2e(tmp_path):
-    """meta_actions.scaffold_statblock: riempie il blocco ```statblock``` di una creatura
-    dai valori-base del suo GS (core.json gs_baseline) — un boss con solo `gs` diventa
-    giocabile (AC/PF + azione d'attacco col bonus/danno + azione-salvezza). Preserva il
-    layout, rimpiazza il placeholder, lascia intatto il resto del corpo."""
+    """meta_actions.scaffold_statblock: riempie il blocco ```gdr statblock``` NATIVO
+    (forma RawMostro) di una creatura dai valori-base del suo GS (core.json gs_baseline)
+    — un boss con solo `gs` diventa giocabile (CA/PF + azione d'attacco col bonus/danno +
+    azione-salvezza). Rimpiazza il placeholder, lascia intatto il resto del corpo."""
     base = {"ac": 15, "hp": 104, "pb": 3, "init": 2, "attacco": 7,
             "danno": 14, "danno_formula": "2d10 + 3", "danno_tipo": "taglienti", "cd": 14}
     core = {"gs_baseline": {"5": base}}
     harness = tmp_path / "scaffold.js"
     harness.write_text(
-        'const body = "# Orrore\\n\\n```statblock\\nlayout: 5-5e-ita\\nname: x\\n'
-        'ac: 10\\nhp: 10\\nstats: [10, 10, 10, 10, 10, 10]\\ncr: 1\\nactions: []\\n```\\n\\nfine";\n'
+        'const body = "# Orrore\\n\\n```gdr statblock\\nnome: x\\nca: {valore: 10}\\n'
+        'caratteristiche:\\n  forza: {valore: 10}\\ngs: \\"1\\"\\nazioni: []\\n```\\n\\nfine";\n'
         'let saved = null;\n'
         'const file = { basename: "Orrore della Voragine", path: "Mondi/Creature/Orrore.md" };\n'
         'global.Notice = class { constructor(m){} };\n'
@@ -145,17 +145,17 @@ def test_scaffold_statblock_e2e(tmp_path):
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = res.stdout
-    assert "ac: 15" in out and "hp: 104" in out                    # valori-base dal GS
-    assert "name: Orrore della Voragine" in out                    # name = basename
-    assert "size: Grande" in out and "type: aberrazione" in out    # da frontmatter
-    assert 'cr: "5"' in out and 'pb: "+3"' in out
+    assert "ca: {valore: 15}" in out                               # CA-base dal GS
+    assert "dadi_vita:" in out                                     # PF derivati da HD (≈ hp base)
+    assert "nome: Orrore della Voragine" in out                    # nome = basename
+    assert "taglia: grande" in out and "tipo: aberrazione" in out  # da frontmatter
+    assert 'gs: "5"' in out
     assert "*Tiro per colpire:* +7" in out and "2d10 + 3" in out   # azione d'attacco reale
     assert "Multiattacco" in out and "effettua 2 attacchi" in out  # GS 5 -> multiattacco x2
-    assert "saves:" in out and "FOR:" in out                       # TS competenti rollabili
+    assert "competenza: true" in out                              # TS competenti (FOR/COS)
     assert "CD 14" in out                                          # azione-salvezza dal GS
-    assert "actions: []" not in out                                # placeholder sostituito
-    assert "layout: 5-5e-ita" in out                               # layout preservato
-    assert out.count("```statblock") == 1                          # un solo blocco
+    assert "azioni: []" not in out                                 # placeholder sostituito
+    assert out.count("```gdr statblock") == 1                      # un solo blocco
     assert out.startswith("# Orrore") and out.rstrip().endswith("fine")  # corpo preservato
 
 

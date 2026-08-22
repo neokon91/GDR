@@ -14,7 +14,7 @@
  * ../docs/combat_engine.md.
  */
 import {
-  App, MarkdownRenderer, MarkdownRenderChild, Notice, Plugin, PluginSettingTab, Setting,
+  App, MarkdownRenderer, MarkdownRenderChild, Notice, Plugin, PluginSettingTab, Setting, parseYaml,
 } from "obsidian";
 // @ts-ignore — .mjs JS del vault, senza tipi; esbuild lo risolve e tree-shaka al solo PANELS.
 import { PANELS } from "../Dev/Source/JS/_panels.mjs";
@@ -96,17 +96,28 @@ export default class GdrPlugin extends Plugin {
         return;
       }
 
-      // Statblock nativo (sostituisce Fantasy Statblocks nelle pagine SRD). Sintassi:
-      // `statblock <id-mostro>` — rende dal bestiario bundlato. Non reattivo (dato immutabile).
+      // Statblock nativo (sostituisce Fantasy Statblocks). Due sintassi, stesso renderer:
+      //  · `statblock <id-mostro>` (prima riga, niente corpo) → dato dal bestiario bundlato (SRD);
+      //  · `statblock` + CORPO YAML nella forma RawMostro → statblock INLINE homebrew (creature
+      //    del vault), senza dipendere da un id del bestiario. Non reattivo (dato immutabile).
       if (name === "statblock") {
-        const id = tokens.slice(1).join(" ").trim();
+        const nl = source.indexOf("\n");
+        const corpo = nl < 0 ? "" : source.slice(nl + 1).trim();
+        const id = (nl < 0 ? source : source.slice(0, nl)).replace(/^\s*statblock\s*/, "").trim();
         el.empty();
         try {
-          const raw = trovaMostro(await this.loadBestiario(), id);
-          if (raw) renderStatblock(el.createDiv(), raw, undefined, { app: this.app, component: child, sourcePath: ctx.sourcePath });
-          else el.createEl("pre", { text: `Statblock GDR: mostro «${id}» non nel bestiario.` });
+          let raw: any;
+          if (corpo) raw = parseYaml(corpo);                                  // inline homebrew (RawMostro)
+          else raw = trovaMostro(await this.loadBestiario(), id);            // lookup SRD per id
+          if (raw && typeof raw === "object") {
+            renderStatblock(el.createDiv(), raw, undefined, { app: this.app, component: child, sourcePath: ctx.sourcePath });
+          } else if (corpo) {
+            el.createEl("pre", { text: "Statblock GDR: corpo YAML inline non valido." });
+          } else {
+            el.createEl("pre", { text: `Statblock GDR: mostro «${id}» non nel bestiario.` });
+          }
         } catch (e: any) {
-          el.createEl("pre", { text: `Errore statblock ${id}: ${e?.message ?? e}` });
+          el.createEl("pre", { text: `Errore statblock: ${e?.message ?? e}` });
         }
         return;
       }
