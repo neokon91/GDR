@@ -27,7 +27,6 @@ la sorgente corrispondente, con il testo completo della licenza, è al rispettiv
 | Hexmap World Creator | morkdev | MIT | [sbuffkin/hexmaker](https://github.com/sbuffkin/hexmaker) |
 | BRAT | TfTHacker | MIT | [TfTHacker/obsidian42-brat](https://github.com/TfTHacker/obsidian42-brat) |
 | Homepage | novov | MIT | [mirnovov/obsidian-homepage](https://github.com/mirnovov/obsidian-homepage) |
-| Initiative Tracker | Jeremy Valentine | GPL-3.0 | [Obsidian-TTRPG-Community/initiative-tracker](https://github.com/Obsidian-TTRPG-Community/initiative-tracker) |
 | Folder Notes | Lost Paul | AGPL-3.0 | [LostPaul/obsidian-folder-notes](https://github.com/LostPaul/obsidian-folder-notes) |
 | Second Window | Jeremy Valentine | MIT | [javalent/second-window](https://github.com/javalent/second-window) |
 | Heraldry Weaver | Obsidian TTRPG Community | MIT | [Obsidian-TTRPG-Community/heraldry-weaver](https://github.com/Obsidian-TTRPG-Community/heraldry-weaver) |

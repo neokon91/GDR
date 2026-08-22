@@ -128,14 +128,6 @@ plugins:
     repo: mirnovov/obsidian-homepage
     version: 4.4.4
     license: MIT
-  - id: initiative-tracker
-    name: Initiative Tracker
-    author: Jeremy Valentine
-    repo: Obsidian-TTRPG-Community/initiative-tracker
-    version: 13.0.21
-    license: GPL-3.0
-    critico: true
-    rompe: "Il tracciatore d'iniziativa per i combattimenti non è disponibile."
   - id: folder-notes
     name: Folder Notes
     author: Lost Paul

@@ -519,7 +519,7 @@ class GdrSettingTab extends PluginSettingTab {
         }));
 
     toggle("party", "Party", "I PG del vault con barra PF e CA.");
-    toggle("combattimento", "Combattimento", "Board di combattimento (GDR) + stato legacy di Initiative Tracker.");
+    toggle("combattimento", "Combattimento", "Board di combattimento (GDR).");
     toggle("dadi", "Tiri rapidi", "Pulsanti-dado.");
     toggle("data", "Data del mondo", "Data corrente da Calendarium.");
     toggle("mondo", "Mondo", "Stato del mondo, tensioni, proiezione.");

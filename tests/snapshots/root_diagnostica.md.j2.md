@@ -31,4 +31,3 @@ renderDiagnostica
 > | **Tab Panels** | Le note a schede (Lore / Al tavolo / Collegamenti) appaiono come testo grezzo. |
 > | **Fantasy Statblocks** | Gli statblock dei mostri e il blocco incontro non si vedono. |
 > | **Dice Roller** | I tiri di dado sulla scheda e negli incontri non funzionano. |
-> | **Initiative Tracker** | Il tracciatore d'iniziativa per i combattimenti non è disponibile. |

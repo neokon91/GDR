@@ -243,53 +243,6 @@ def write_statblock_layouts(obsidian: Path) -> None:
                 write_json(fs_dir / "data.json", fs_data)
 
 
-def initiative_statuses(core: dict[str, Any]) -> list[dict[str, Any]]:
-    """Le 15 condizioni 5.5e (core.condizioni) nel formato status di Initiative
-    Tracker: {name, id, description}. Così sono APPLICABILI in combattimento dal
-    tracker (non solo quick-ref). id = nome (convenzione di IT)."""
-    out: list[dict[str, Any]] = []
-    for c in core.get("condizioni", []) or []:
-        nome = str(c.get("nome", "")).strip()
-        if not nome:
-            continue
-        eff = "; ".join(
-            str(e.get("descrizione", "")).strip()
-            for e in (c.get("effetti") or []) if isinstance(e, dict) and e.get("descrizione"))
-        desc = str(c.get("descrizione", "")).strip()
-        full = (desc + (" — " + eff if eff else "")).strip() or nome
-        out.append({"name": nome, "id": nome, "description": full})
-    return out
-
-
-def write_initiative_tracker(obsidian: Path, core: dict[str, Any]) -> None:
-    """Initiative Tracker: inietta le condizioni 5.5e come STATUS (applicabili in
-    combattimento) e un PARTY di default 'Gruppo' (vuoto: aggiungi i tuoi PG una
-    volta) così `players: true`/party risolve. Non distruttivo: riempie solo le
-    chiavi assenti, preservando statuses/party personalizzati dall'utente."""
-    it_dir = obsidian / "plugins" / "initiative-tracker"
-    if not it_dir.is_dir():
-        return
-    cur = read_json(it_dir / "data.json")
-    cur = cur if isinstance(cur, dict) else {}
-    updates: dict[str, Any] = {}
-    if not cur.get("statuses"):
-        statuses = initiative_statuses(core)
-        if statuses:
-            # + i due status specifici del tracker (non sono condizioni SRD): la
-            # concentrazione e la reazione-usata (azzerata a ogni round).
-            updates["statuses"] = statuses + [
-                {"name": "Concentrazione", "id": "Concentrazione",
-                 "description": "Mantiene un incantesimo a concentrazione: TS Costituzione (CD 10 o metà danni) quando subisce danni, o lo perde."},
-                {"name": "Reazione usata", "id": "Reazione usata", "resetOnRound": True,
-                 "description": "Ha già usato la reazione in questo round."},
-            ]
-    if not cur.get("parties"):
-        updates["parties"] = [{"name": "Gruppo", "players": []}]
-        updates["defaultParty"] = "Gruppo"
-    if updates:
-        merge_plugin_config(obsidian, "initiative-tracker", updates)
-
-
 def write_bookmarks(obsidian: Path, pages: list[dict[str, Any]]) -> None:
     """Bookmarks (core): le poche pagine di riferimento a un clic (Home, hub, SRD
     se generata, Base per pagina). Non distruttivo: aggiunge solo le voci mancanti,
@@ -340,7 +293,6 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_metadata_menu(obsidian, core)
     write_callout_manager(obsidian, plugins)
     write_statblock_layouts(obsidian)
-    write_initiative_tracker(obsidian, core)
     write_folder_notes(obsidian)
     write_tab_panels(obsidian)
     write_calendarium(obsidian)

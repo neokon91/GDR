@@ -50,22 +50,6 @@ def test_entity_schema():
     assert render.validate_entity_schema(render.load_entities()) == []
 
 
-def test_initiative_statuses():
-    """render.initiative_statuses: le condizioni 5.5e (core.condizioni) diventano status
-    di Initiative Tracker {name, id, description}, con gli effetti uniti nella descrizione;
-    id = nome (convenzione IT); le voci senza nome sono scartate; descrizione mai vuota."""
-    core = {"condizioni": [
-        {"nome": "Accecato", "descrizione": "Non vede.", "effetti": [{"descrizione": "Fallisce le prove a vista."}]},
-        {"nome": "Avvelenato", "descrizione": "", "effetti": []},
-        {"nome": "", "descrizione": "x"},
-    ]}
-    st = render.initiative_statuses(core)
-    assert len(st) == 2                                     # la voce senza nome è scartata
-    a = next(s for s in st if s["name"] == "Accecato")
-    assert a["id"] == "Accecato" and "Fallisce le prove a vista" in a["description"]
-    assert all(s["description"] for s in st)               # mai vuota (fallback al nome)
-
-
 def test_background_2024_legale():
     """Un background homebrew 2024-legale DEVE concedere ASI (3 caratteristiche), 2
     abilità, 1 strumento e un Talento d'Origine: il wizard rende OBBLIGATORI questi

@@ -52,8 +52,8 @@ export class CruscottoView extends ItemView {
       const b = bar.createEl("button", { text: label });
       b.onclick = async () => { await this.plugin.dispatch(action); };
     };
-    // Superficie di combattimento primaria = la Board GDR (audit F3): la CTA apre la Board,
-    // non prepara più Initiative Tracker (che resta come legacy nella sezione Combattimento).
+    // Superficie di combattimento = la Board GDR (audit F3): la CTA apre la Board
+    // (Initiative Tracker ritirato).
     const bBoard = bar.createEl("button", { text: "⚔️ Board di combattimento" });
     bBoard.onclick = () => this.plugin.activateBoard();
     act("🌍 Giro del mondo", "giro_del_mondo");
@@ -138,59 +138,13 @@ export class CruscottoView extends ItemView {
     }
   }
 
-  // Combattimento: la Board nativa GDR è la superficie primaria; Initiative Tracker resta
-  // sotto come legacy (stato live best-effort) finché la Board non lo sostituisce del tutto.
+  // Combattimento: la Board nativa GDR è LA superficie di combattimento. Initiative Tracker
+  // è ritirato (il vecchio flusso ```encounter/IT non esiste più): dal Cruscotto si apre la Board.
   private renderCombat(root: HTMLElement) {
-    const it = (this.app as any).plugins?.plugins?.["initiative-tracker"];
     const box = root.createDiv({ cls: "gdr-crusc-sec" });
     box.createEl("h4", { text: "⚔️ Combattimento" });
     const bBoard = box.createEl("button", { text: "⚔️ Board di combattimento (GDR)" });
     bBoard.onclick = () => this.plugin.activateBoard();
-    if (!it || !it.data) {
-      box.createEl("p", { text: "Initiative Tracker (legacy) non attivo.", cls: "gdr-crusc-empty" });
-      return;
-    }
-    let live: any = null;
-    try {
-      if (it.tracker && typeof it.tracker.subscribe === "function") {
-        const unsub = it.tracker.subscribe((v: any) => { live = v; }); unsub();  // valore corrente dello store
-      } else if (it.view?.ordered || it.combatants) {
-        live = { creatures: it.view?.ordered || it.combatants, round: it.view?.round, state: true };
-      }
-    } catch { /* forma API cambiata → roster */ }
-
-    const creatures = live && Array.isArray(live.creatures) ? live.creatures : null;
-    if (creatures && creatures.length && (live.state || live.round != null)) {
-      if (live.round != null) box.createEl("div", { cls: "gdr-crusc-round", text: `Round ${live.round}` });
-      const list = box.createDiv({ cls: "gdr-crusc-combat" });
-      for (const c of creatures) {
-        const row = list.createDiv({ cls: "gdr-crusc-cbrow" + (c.active ? " is-active" : "") });
-        row.createSpan({ cls: "gdr-crusc-cbinit", text: String(c.initiative ?? c.roll ?? "—") });
-        row.createSpan({ cls: "gdr-crusc-cbname", text: String(c.name || "?") });
-        const hp = c.current_hp ?? c.hp;
-        if (hp != null) row.createSpan({ cls: "gdr-crusc-cbhp", text: `${hp}${c.max_hp ? "/" + c.max_hp : ""}` });
-      }
-    } else {
-      const pname = it.data.defaultParty || it.data.parties?.[0]?.name;
-      const party = (it.data.parties || []).find((p: any) => p?.name === pname) || it.data.parties?.[0];
-      const players = party?.players || (it.data.players || []).map((p: any) => p?.name).filter(Boolean);
-      box.createEl("p", {
-        cls: "gdr-crusc-empty",
-        text: players && players.length
-          ? `Gruppo «${pname || "—"}»: ${players.join(", ")}. Nessun combattimento in corso.`
-          : "Nessun gruppo. Usa «⚔️ Schiera il gruppo».",
-      });
-    }
-    const b = box.createEl("button", { text: "Apri il tracker" });
-    b.onclick = async () => {
-      const w = this.app.workspace;
-      let leaf = w.getLeavesOfType("initiative-tracker-view")[0];
-      if (!leaf) {
-        leaf = w.getRightLeaf(false)!;
-        try { await leaf.setViewState({ type: "initiative-tracker-view", active: true }); } catch { /* vista non registrata */ }
-      }
-      if (leaf) w.revealLeaf(leaf);
-    };
   }
 
   // Data del mondo (Calendarium), best-effort: nessuna sezione se il plugin è assente o
