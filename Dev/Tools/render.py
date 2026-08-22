@@ -59,7 +59,6 @@ from build_srd import (  # noqa: F401 (re-export per i test)
     srd_creature_pool,
     srd_loot_pool,
     srd_note,
-    srd_statblock_yaml,
 )
 from build_personaggio import build_personaggio_options  # noqa: F401 (re-export)
 from validate import (  # noqa: F401 (re-export per i test)
