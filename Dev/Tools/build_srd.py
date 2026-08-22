@@ -61,9 +61,8 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_equipment.json": "equipaggiamento",
     "srd_5_2_1_classes.json": "classi",
     "srd_5_2_1_rules.json": "regole",
-    # NB NON qui (ancora): classi/talenti/equipaggiamento/regole → li consuma anche
-    # build_personaggio (creazione PG) nella forma JSON; l'adapter deve riprodurre quella forma
-    # perché downstream resti invariato. Migrazione per-categoria.
+    "srd_5_2_1_monsters.json": "mostro",
+    # Manca solo rules_glossary (condizioni/glossario): loop dedicato in build_srd().
 }
 
 
