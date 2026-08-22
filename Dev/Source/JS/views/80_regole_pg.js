@@ -168,18 +168,31 @@ function verificaGS(table, stats, dichiarato) {
   return { difensivo, offensivo, atteso, dichiarato: dichiarato == null ? null : String(dichiarato) };
 }
 
-// Estrae dal corpo nota i numeri del primo blocco ```statblock: AC, PF e (best-effort
-// dal formato delle azioni) il miglior bonus d'attacco e il danno per colpo.
+// Estrae dal corpo nota i numeri del primo blocco ```gdr statblock (forma RawMostro):
+// AC da `ca: {valore}`, PF CALCOLATI da dadi_vita+taglia+Cos (come il motore), e
+// (best-effort dal formato delle azioni) il miglior bonus d'attacco e il danno per colpo.
 function parseStatblockStats(testo) {
-  const block = (String(testo || "").match(/```statblock[\s\S]*?```/) || [])[0] || "";
+  const block = (String(testo || "").match(/```gdr statblock[\s\S]*?```/) || [])[0] || "";
   if (!block) return null;
-  const one = (re) => { const m = block.match(re); return m ? Number(m[1]) : null; };
+  const num = (re) => { const m = block.match(re); return m ? Number(m[1]) : null; };
+  const ac = num(/\bca:\s*\{?\s*valore:\s*(\d+)/);
+  // PF medi: dadi_vita × media-del-dado(taglia) + dadi_vita × mod-Cos.
+  const dadi = num(/\bdadi_vita:\s*(\d+)/);
+  const cos = num(/costituzione:\s*\{?\s*valore:\s*(\d+)/);
+  const tagliaM = block.match(/\btaglia:\s*([a-zà-ú]+)/i);
+  const facce = { minuscola: 4, piccola: 6, media: 8, grande: 10, enorme: 12, mastodontica: 20 };
+  let hp = null;
+  if (dadi != null) {
+    const avg = (facce[(tagliaM ? tagliaM[1] : "media").toLowerCase()] || 8) / 2 + 0.5;
+    const cosMod = cos != null ? Math.floor((cos - 10) / 2) : 0;
+    hp = Math.floor(dadi * avg) + dadi * cosMod;
+  }
   let atk = null, danno = null, m;
   const atkRe = /per colpire:\*?\s*([+-]?\d+)/g;
   while ((m = atkRe.exec(block))) { const v = Number(m[1]); if (atk == null || v > atk) atk = v; }
   const dmgRe = /Colpito:\*?\s*(\d+)/g;
   while ((m = dmgRe.exec(block))) { const v = Number(m[1]); if (danno == null || v > danno) danno = v; }
-  return { ac: one(/^\s*ac:\s*"?(\d+)/m), hp: one(/^\s*hp:\s*"?(\d+)/m), atk, danno };
+  return { ac, hp, atk, danno };
 }
 
 async function renderVerificaGS(app, page) {

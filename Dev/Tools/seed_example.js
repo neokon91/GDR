@@ -259,10 +259,9 @@ function main() {
 
   // 6) Un INCONTRO al tavolo agganciato al mondo: «Guardiani della Terza Porta» alla
   //    Ziggurat — la Veglia che difende il rito. Chiude il loop worldbuilding →
-  //    combattimento: luogo + creature SRD (risolte dal bestiario Fantasy Statblocks) +
-  //    budget 2024 (pg_livello/pg_numero → difficoltà). Blocco encounter PRE-GENERATO (il
-  //    seed non gira Templater, che lascerebbe il tag <% %> grezzo nel name:).
-  const encBlock = "```encounter\nname: Guardiani della Terza Porta\nplayers: 4\ncreatures:\n  - 4: Cultista\n  - 1: Ombra\n```";
+  //    combattimento: luogo + creature SRD collegate (schierabili nella Board) + budget 2024
+  //    (pg_livello/pg_numero → difficoltà). Le creature stanno nel frontmatter `creature`:
+  //    «Schiera l'incontro nella Board» le risolve dal bestiario.
   write("Mondi/Incontri/Guardiani della Terza Porta.md", fm({
     id: "guardiani-terza-porta", nome: "Guardiani della Terza Porta", categoria: "incontro",
     stato: "bozza", mondo: "[[Astaria]]", luogo: "[[Ziggurat Oscura]]",
@@ -271,7 +270,7 @@ function main() {
     gancio: "Oltre la soglia, gli incappucciati della Veglia salmodiano attorno a una porta che non dovrebbe esistere — e qualcosa, dietro, risponde ai loro versi.",
     uso_al_tavolo: "Lo scontro che chiude il primo atto. I Guardiani difendono la Terza Porta, ma accolgono «chi l'Ombra ha scelto»: con la parola (o la faccia) giusta si passa senza sangue. Altrimenti, i cultisti e un'Ombra che cola dalle fessure.",
     connessioni: [], sessioni: [], tags: ["gdr/bozza"],
-  }) + fillBody(modelBody("Incontro.md").replace(/```encounter[\s\S]*?```/, encBlock), {
+  }) + fillBody(modelBody("Incontro.md"), {
     Obiettivo: "Oltrepassare la soglia che la Veglia difende — con la parola giusta, o con le lame.",
     Complicazione: "I Guardiani accolgono «chi l'Ombra ha scelto»: la faccia o la frase giusta apre la porta senza sangue. Ma un'Ombra cola già dalle fessure, e non distingue gli amici dai nemici.",
     "Posta in gioco": "Dietro la porta c'è il rito della Terza Porta. Se i PG arrivano troppo tardi, il clock del Risveglio avanza — e la nebbia entra a Chiarombra.",

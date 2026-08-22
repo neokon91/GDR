@@ -1,7 +1,7 @@
 # Schema per-entità: creatura (lore + statblock 5.5e). Single source di tassonomia,
 # campi, scheda, assi, relazioni, wizard e wiring template. render.py lo distribuisce
 # nel modello globale 'core' (apply_entities) e raccoglie i template.
-# I numeri 5e vivono nel blocco ```statblock``` (creature.md.j2); QUI il lore =
+# I numeri 5e vivono nel blocco ```gdr statblock``` (creature.md.j2); QUI il lore =
 # ecologia, comportamento, mito. Arricchito da FantasyWorld t.bestiario.yaml +
 # assi_tematici_specie.yaml con criterio "mix curato" (fm interrogabile + prosa).
 id: creatura
@@ -15,7 +15,7 @@ templates:
   target: z.modelli/Creatura.md
   jinja: creature.md.j2
 # SOTTOTIPI: i 13 TIPI di creatura 5.5e (orientamento + ganci di gioco). I dati di
-# combattimento vivono nel blocco ```statblock``` e in `gs`/`taglia`: il profilo qui è
+# combattimento vivono nel blocco ```gdr statblock``` e in `gs`/`taglia`: il profilo qui è
 # descrittivo, non li tocca.
 subtypes:
 - { nome: aberrazione, descrizione: "Orrore alieno e innaturale: menti contorte, anatomie impossibili, spesso dal profondo o da altri piani." }

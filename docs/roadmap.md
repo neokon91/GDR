@@ -27,7 +27,9 @@ Dettagli in [combat_engine.md](combat_engine.md).
 2. **Unificare le fonti dati SRD**: oggi doppie (`Dev/Source/SRD/*.json` per le pagine vault
    vs `archivio/*.yaml` per il motore) → archivio unica fonte.
 3. **Unificare la logica regole PG**: `crea_pg.js`/`sali_pg.js` (JS) vs `regole/creatore` (TS).
-4. **Ritiro** di Initiative Tracker + Fantasy Statblocks (pianificato, non fatto).
+4. **Ritiro** di Initiative Tracker + Fantasy Statblocks. ✅ **FATTO**: mostri/homebrew/
+   evocazioni su statblock nativo, flusso ```encounter → Board, entrambi i plugin rimossi
+   da `plugins.yaml`.
 
 ## Stato (2026-06-21)
 

@@ -16,7 +16,7 @@ import gen_bestiario
 # --- SRD 5.2.1 (CC-BY-4.0), traduzione italiana ----------------------------
 # I JSON tipizzati vendorizzati in Dev/Source/SRD/ (da github massimobarbieri/
 # DND-SRD-IT) sono generati in note per-voce in un albero di SOLA LETTURA SRD/,
-# separato dall'homebrew. I mostri diventano statblock Fantasy Statblocks.
+# separato dall'homebrew. Le pagine mostro emettono lo statblock nativo (```gdr statblock).
 # Config: { json, dest (sottocartella), cat (categoria), fm (campi -> frontmatter) }.
 SRD_GEN = [
     {"json": "srd_5_2_1_spells.json",      "dest": "Incantesimi",     "cat": "srd-incantesimo", "fm": ["livello", "scuola", "classi", "tempo_lancio", "gittata", "componenti", "durata"]},
@@ -458,8 +458,8 @@ def autolink(text: str, regex, idx: dict[str, str], self_nome: str, seen: set[st
 
 # Dadi tirabili in-vault: avvolge le espressioni-dado della prosa (3d8, 2d6 + 5, 1d8…)
 # nella sintassi inline di Dice Roller `dice: …` → cliccabili come in un VTT (danno, cura,
-# scaling di incantesimi/oggetti/talenti). NON si applica agli statblock dei mostri: lì i
-# dadi li rende Fantasy Statblocks (diceParsing), e un `dice:` dentro il blocco li romperebbe.
+# scaling di incantesimi/oggetti/talenti). La guardia `[` evita di toccare i dadi già
+# dentro un collegamento tra parentesi quadre.
 _DICE_RE = re.compile(r"(?<![\w`\[])(\d*d\d+(?:\s*[+-]\s*\d+)?)(?![\w])", re.IGNORECASE)
 
 

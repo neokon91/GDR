@@ -52,5 +52,5 @@ Page preview, Daily notes, Templates (core, distinto da Templater).
 
 ## Code block speciali (resi da plugin)
 ` ```dataview ` / ` ```dataviewjs ` (Dataview), ` ```js-engine ` (JS Engine),
-` ```statblock ` (Fantasy Statblocks), ` ```tasks ` (Tasks), ` ````tabs ` (Tab Panels),
+` ```gdr statblock ` (plugin GDR nativo), ` ```tasks ` (Tasks), ` ````tabs ` (Tab Panels),
 ` ```meta-bind-button ` (Meta Bind), `` `dice: ...` `` (Dice Roller).

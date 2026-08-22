@@ -5,8 +5,8 @@ multi-repo** su cui poggia — la parte NON generata dalla pipeline `render.py` 
 vedi [architecture.md](architecture.md)). È il quadro d'insieme di plugin ↔ motore ↔ dati.
 
 > Stato (2026-08): il motore + la Board + lo statblock nativo + le condizioni "vere" sono
-> **in produzione** nel plugin. Il **ritiro** di Initiative Tracker + Fantasy Statblocks è
-> **pianificato ma NON fatto**: i due sistemi coesistono (vedi § Transizione).
+> **in produzione** nel plugin, e sono l'UNICA superficie di combattimento. Initiative
+> Tracker e Fantasy Statblocks sono stati **ritirati** (vedi § Ritiro, completato).
 
 ## L'ecosistema a 4 repo
 Sotto `~/Documents/Sviluppo/projects/`:
@@ -80,13 +80,13 @@ mostri a seguire). Il plugin è reso **tollerante alla transizione**: i ref rest
 per id qualificato sia per slug nudo (`risolviCondizioni`/`risolviAzione` in `regole`
 indicizzano per entrambi), e i generatori leggono vecchio+nuovo formato.
 
-## Transizione: coesistenza con Initiative Tracker + Fantasy Statblocks
-Oggi convivono **due** sistemi (debito noto, da chiudere):
-- **Nuovo**: Board + statblock nativo + condizioni del motore.
-- **Legacy**: pagine SRD con ```statblock (Fantasy Statblocks), note-Incontro con ```encounter
-  → Initiative Tracker; `plugins.yaml` li tiene ancora `critico: true`.
-
-Il **ritiro** richiede: pagine SRD → ```gdr statblock; statblock inline delle evocazioni →
-render nativo; flusso ```encounter → Board (ponte "apri l'Incontro nella Board"); poi via i
-due plugin da `plugins.yaml`. È bloccato dalla migrazione archivio (fonte SRD da unificare) e
-dalla ricucitura del flusso incontro. Vedi le raccomandazioni degli audit.
+## Ritiro di Initiative Tracker + Fantasy Statblocks (completato)
+Il combattimento non dipende più da plugin di terze parti. Fatto:
+- **Pagine SRD** (334 mostri) → ` ```gdr statblock <id> ` (dal bestiario generato da archivio).
+- **Statblock inline delle evocazioni** (incantesimi) → callout Markdown nativo (`_creatura_evocata`).
+- **Creature homebrew** → ` ```gdr statblock ` con dati YAML inline (`renderStatblock` parsa
+  il corpo); `scaffold_statblock` genera la base dal GS in forma nativa.
+- **Flusso ```encounter → Board**: «Schiera l'incontro nella Board» costruisce lo schieramento
+  dalla nota-Incontro; il vecchio blocco ```encounter e i bottoni IT sono rimossi.
+- **plugins.yaml**: `obsidian-5e-statblocks` e `initiative-tracker` rimossi (con i loro writer
+  di config). `srd_statblock_yaml`/`Dev/Source/statblocks/*.json` eliminati.

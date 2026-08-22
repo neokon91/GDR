@@ -38,7 +38,6 @@ core = apply_entities( deep_merge(core.yaml, system.yaml), entities/*.yaml )
 | Sezione | Contenuto |
 |---|---|
 | `fields` | Campi 5.5e (rarità, livello, dado_vita, …). |
-| `statblock` | `{layout}` per il blocco ` ```statblock ` (Fantasy Statblocks). |
 | `caratteristiche` | Le 6 abilità di base `{id, sigla}`. |
 | `abilita` | Le 18 abilità 5e `{id: {label, caratteristica}}` (scheda PG + converter). |
 | `xp` | Difficoltà incontri: `cr_xp` (GS→PE) + `budget_2024` (Bassa/Moderata/Alta per personaggio). Usato da `views.renderEncounter`. |

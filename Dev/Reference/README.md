@@ -16,13 +16,11 @@ Ogni file cita la doc ufficiale; le parti critiche sono verificate dal sorgente.
 | [tab-panels](tab-panels.md) | Tab Panels | schede note (` ```tabs / --- `) |
 | [meta-bind](meta-bind.md) | Meta Bind | INPUT/VIEW/BUTTON |
 | [metadata-menu](metadata-menu.md) | Metadata Menu | fileClass = schemi campi entità |
-| [fantasy-statblocks](fantasy-statblocks.md) | Fantasy Statblocks | statblock creature |
 | [callout-manager](callout-manager.md) | Callout Manager | callout GDR custom (tavolo/gancio/segreto) |
 | [iconize](iconize.md) | Iconize | icone-emoji cartelle di categoria |
 | [homepage](homepage.md) | Homepage | apre Home all'avvio |
 | [tasks](tasks.md) | Tasks | task sessioni |
 | [dice-roller](dice-roller.md) | Dice Roller | tiri al tavolo |
-| [initiative-tracker](initiative-tracker.md) | Initiative Tracker | blocco `encounter` (base; manca XP/auto-popola) |
 
 ### Installati, non ancora cablati (aggancio previsto)
 | File | Plugin | Aggancio previsto |

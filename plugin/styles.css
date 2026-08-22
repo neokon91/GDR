@@ -114,26 +114,7 @@
 }
 .gdr-crusc-die:active { transform: translateY(1px); }
 
-/* --- Combattimento: round + righe iniziativa (attivo evidenziato) ----------- */
-.gdr-crusc-round {
-  font-weight: 700; color: var(--text-accent); margin-bottom: 6px;
-  font-variant: small-caps; letter-spacing: 0.03em;
-}
-.gdr-crusc-combat { display: grid; gap: 3px; }
-.gdr-crusc-cbrow {
-  display: grid; grid-template-columns: 2.4em 1fr auto; align-items: center; gap: 9px;
-  padding: 3px 8px; border-radius: 7px; font-size: var(--font-ui-small);
-  border-left: 2px solid transparent;
-}
-.gdr-crusc-cbrow.is-active {
-  background: var(--background-modifier-hover);
-  border-left-color: var(--interactive-accent); font-weight: 650;
-}
-.gdr-crusc-cbinit { font-variant-numeric: tabular-nums; color: var(--text-muted); text-align: right; }
-.gdr-crusc-cbname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.gdr-crusc-cbhp { font-variant-numeric: tabular-nums; color: var(--text-muted); white-space: nowrap; }
-
-/* Bottone "Apri il tracker" dentro le card */
+/* Bottone "Board di combattimento" dentro le card del Cruscotto */
 .gdr-crusc-sec > button {
   margin-top: 10px; cursor: pointer; font-size: var(--font-ui-smaller);
   padding: 4px 11px; border-radius: 8px;

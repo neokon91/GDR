@@ -76,41 +76,34 @@ block-id dentro il fence ````tabs non è raggiungibile dal link).
   da `grado_sfida`) + campo `gs` su `creatura` homebrew.
 - **Calcolo** (`views.renderEncounter`, tab *Combattimento*): budget del gruppo
   (`pg_livello`×`pg_numero`) vs XP totale delle creature collegate (`pe` diretto o `cr_xp[gs]`)
-  → etichetta difficoltà (Banale/Bassa/Moderata/Alta/Mortale).
-- **Auto-riscrittura del blocco** (`meta_actions.aggiorna_encounter`, bottone *Aggiorna
-  encounter*): riscrive il fence ```` ```encounter ```` dalle creature in *Collegamenti*
-  (conta per nome — occorrenze ripetute = quantità — risolve i link al basename, allinea
-  `name:` al titolo, preserva `players:`) ed emette gli **alleati** collegati (campo
-  `alleati`) col flag `, ally` (Initiative Tracker li separa dai nemici). Niente più
-  copia-incolla. I **PG** entrano nel tracker via `players: true` configurando il **Party**
-  nelle impostazioni di Initiative Tracker (note in `Mondi/Personaggi`).
+  → etichetta difficoltà 2024 (Banale/Bassa/Moderata/Alta).
+- **Schierare nella Board** (comando «GDR: Schiera l'incontro nella Board»,
+  `plugin/incontro.ts:eventiDaIncontro`): dalla nota-Incontro costruisce lo schieramento — le
+  *Creature* collegate diventano nemici, gli *Alleati* e i **PG** del vault entrano dalla parte
+  del gruppo, gli override `varianti` (HP/CA) si applicano — e apre la Board pronta per
+  l'iniziativa. Niente blocco da riscrivere a mano.
 
 ## Combattimento al tavolo
 
-> **Due sistemi in transizione.** Il nuovo è la **Board nativa GDR** sul motore event-sourced
-> di `regole` (tracker + statblock nativo + **condizioni "vere"** che *applicano* gli effetti
-> ai tiri, non solo li mostrano) → **[combat_engine.md](combat_engine.md)**. Il legacy è la
-> triade Javalent qui sotto (ancora installata, ritiro pianificato). Differenza chiave sulle
-> condizioni: FS/IT le mostrano come *status/quick-ref*; il motore le **risolve** (`risolviCondizioni`
-> → prono/avvelenato→svantaggio, ecc.).
+La superficie di combattimento è la **Board nativa GDR** sul motore event-sourced di `regole`
+(tracker + statblock nativo + **condizioni "vere"** che *applicano* gli effetti ai tiri, non
+solo li mostrano) → **[combat_engine.md](combat_engine.md)**. Initiative Tracker e Fantasy
+Statblocks sono stati **ritirati**: nessun plugin di terze parti per il combattimento.
 
-### Legacy (VTT-lite, plugin Javalent)
-La triade **Initiative Tracker + Fantasy Statblocks + Dice Roller** dà l'automazione di
-combattimento *testuale* (iniziativa, PF, condizioni, dadi cliccabili — **non** una mappa
-con token: IT ha rimosso l'integrazione mappa in v12). La pipeline la sfrutta a fondo:
-- **Statblock giocabile dal GS** (`meta_actions.scaffold_statblock`): riempie il blocco dai
-  valori-base del GS (mediane SRD) con **multiattacco** (2 da GS 2, 3 da GS 11) e TS
-  competenti; `views.renderVerificaGS` stima il GS difensivo/offensivo e avvisa se i numeri
-  (rifiniti a mano) escono dal GS dichiarato.
-- **Condizioni → status di Initiative Tracker** (15 condizioni 5.5e + Concentrazione/Reazione)
-  e **party «Gruppo»** di default, iniettati in `data.json` (`render.write_initiative_tracker`,
-  non distruttivo: solo chiavi assenti). Dadi cliccabili negli statblock via `useDice` (FS).
+- **Iniziativa/turni/azioni**: 🎲 Iniziativa tira e ordina, ⏭️ Passa turno avanza; per il
+  combattente attivo le azioni eseguibili risolvono colpire-contro-CA, danno e tiri salvezza
+  (i PG li tirano da soli). PF coi pulsanti −/+; ＋stato applica una condizione **coi suoi
+  effetti veri** (`risolviCondizioni` → prono/avvelenato→svantaggio, ecc.).
+- **Statblock giocabile dal GS** (`meta_actions.scaffold_statblock`): riempie il blocco
+  ` ```gdr statblock ` (nativo, forma RawMostro) dai valori-base del GS (mediane SRD) con
+  **multiattacco** (2 da GS 2, 3 da GS 11) e TS competenti; `views.renderVerificaGS` stima il
+  GS difensivo/offensivo e avvisa se i numeri (rifiniti a mano) escono dal GS dichiarato.
 - Guida operativa passo-passo: **[[Guida al combattimento]]** (`Indici/`).
 
 ## Azioni (`meta_actions.js` + bottoni)
 `collega` (link reciproco), `marca_canonico`, `archivia`, `applica_profilo`,
 `scatena_conseguenza`, `avanza_fronte` (clock +1), `sali_di_livello` (delega a `tp.user.sali_pg`),
-`aggiorna_encounter` (creature + alleati collegati), `riposo_breve`/`riposo_lungo` (loop di
+`riposo_breve`/`riposo_lungo` (loop di
 sessione 2024: Dadi Vita, slot, TS-morte, concentrazione, Esaurimento), `turno_bastione`,
 `genera` (delega a `tp.user.genera`, generatore nomi). Esposte come bottoni Meta Bind: `plugins.yaml:buttons` → `templates.yaml:actions`
 → `action.md.j2` genera il file azione che chiama `tp.user.meta_actions(tp, "<id>")`. *(I bottoni

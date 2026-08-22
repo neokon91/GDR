@@ -1,50 +1,46 @@
 # ⚔️ Guida al combattimento
 
-Come si gioca uno scontro con i plugin **Initiative Tracker + Fantasy Statblocks +
-Dice Roller**. Insieme danno l'**automazione di combattimento da tavolo** (iniziativa,
-PF, condizioni, dadi cliccabili). *Non* una mappa tattica con token: per il
-posizionamento si usa il *theatre-of-the-mind* o una mappa di scena (tab *Mappa*).
+Come si gioca uno scontro con la **Board di combattimento** nativa del plugin GDR: il motore
+event-sourced di *regole* fa iniziativa, turni, PF, tiri (colpire / salvezza / danno) e le
+**condizioni con i loro effetti**. Nessun plugin di terze parti. *Non* è una mappa tattica con
+token: per il posizionamento si usa il *theatre-of-the-mind* o una mappa di scena (tab *Mappa*).
 
 ## 0. Preparazione (una volta sola)
-1. Apri le impostazioni di **Initiative Tracker** → sezione **Parties/Players**.
-2. C'è già un party **«Gruppo»** (vuoto): aggiungi i tuoi PG puntandoli alle note in
-   `Mondi/Personaggi` (nome, PF, CA, livello). Da qui in poi `players: true` nei blocchi
-   incontro includerà automaticamente il gruppo.
-3. Le **15 condizioni 5.5e** sono già caricate come **status** del tracker (in italiano):
-   applicabili/rimovibili sui combattenti, non solo consultabili.
+Crea i tuoi **PG** (comando **«GDR: Crea PG»**). La Board li riconosce come il tuo
+schieramento: entrano dalla tua parte con CA, PF, bonus d'iniziativa e tiri salvezza già
+calcolati dalla scheda.
 
-## 1. Avviare l'incontro
-- Da una nota **Incontro** (tab *Combattimento*): il blocco ` ```encounter ` è già
-  pronto. Il bottone **Aggiorna l'incontro** lo riscrive dalle *Creature* e dagli
-  *Alleati* collegati (gli alleati col flag `ally`); il campo `varianti` applica gli
-  override PF/CA/iniziativa (boss potenziato, gregario indebolito).
-- Oppure da uno **statblock**: i bottoni **«Avvia incontro»** / **«Aggiungi al tracker»**
-  popolano il tracker dalla scheda creatura in un clic.
+## 1. Schierare l'incontro
+- Da una nota **Incontro** (tab *Combattimento*), con la nota aperta lancia
+  **«GDR: Schiera l'incontro nella Board»**: le *Creature* collegate diventano nemici, gli
+  *Alleati* e i tuoi **PG** entrano dalla tua parte, e gli override `varianti` (PF/CA) si
+  applicano. La Board si apre **pre-popolata**, pronta per l'iniziativa.
+- Oppure apri la Board dal **Cruscotto DM** (bottone **«⚔️ Board di combattimento»**) e
+  aggiungi i combattenti a mano: **➕ Nemico** / **➕ Alleato** li pescano dal bestiario SRD.
 
-## 2. Il giro di combattimento (cosa è automatico)
-1. **Iniziativa** — il tracker la **tira da solo** per i mostri e ordina i turni (i PG
-   secondo l'impostazione che scegli). I PF iniziali si tirano dai Dadi Vita se attivo.
-2. **Turni/round** — avanzi col pulsante; il contatore dei round sale da sé.
-3. **Tirare un attacco** — nello statblock della creatura, **clicca il dado** del tiro
-   per colpire e del danno (Dice Roller). *Decidi tu* se colpisce contro la CA del bersaglio.
-4. **Applicare il danno** — clicca i **PF** del bersaglio nel tracker e inserisci il numero.
-   Toggle **salvato/resistenza** = ×0,5. A **0 PF** la creatura diventa *Privo di sensi*
-   in automatico.
-5. **Condizioni** — applica/rimuovi gli status (le 15 condizioni) sui combattenti.
+## 2. Il giro di combattimento (cosa fa il motore)
+1. **🎲 Iniziativa** — un clic tira l'iniziativa di tutti e ordina i turni; la battaglia parte.
+2. **⏭️ Passa turno** — avanza al prossimo; il contatore dei round sale da sé.
+3. **Azioni di turno** — per il combattente attivo compaiono le sue azioni eseguibili
+   (attacchi, incantesimi, multiattacco): scegli il **bersaglio** e il motore **risolve il tiro
+   per colpire contro la CA**, il **danno** e gli eventuali **tiri salvezza** (i PG li tirano da
+   soli). Niente da calcolare a mano.
+4. **PF** — i pulsanti **−** / **+** sul combattente infliggono danno o curano; a **0 PF**
+   scatta *Privo di sensi* in automatico.
+5. **Condizioni vere** — **＋stato** applica una condizione: i suoi effetti (vantaggio/
+   svantaggio ai tiri, salvezza automaticamente fallita…) entrano **da soli** nei tiri
+   successivi — non sono solo etichette.
 
-## 3. Cosa resta al DM (limiti dei plugin)
-- Decidere **colpito vs CA** e l'esito dei **tiri salvezza** (i toggle dimezzano solo il
-  numero che digiti — non c'è un tiro-salvezza di gruppo automatico).
-- **Durate** delle condizioni e check di **concentrazione** (la condizione *Concentrazione*
-  è un'etichetta, non scade da sola).
-- **Posizione e mappa tattica**: non c'è griglia/token. Usa una mappa di scena come sfondo
-  e gestisci le distanze a voce.
+## 3. Cosa resta al DM
+- **Posizione e distanze**: non c'è griglia né token — *theatre-of-the-mind* o una mappa di
+  scena come sfondo, distanze a voce.
+- **Durate narrative** e le scelte di trama (quando finisce un effetto «a scelta del GM»).
 
 ## 4. Creature homebrew giocabili
-Una creatura con solo il **Grado di sfida (GS)**: nel tab *Statblock 5.5e* premi **Genera
-dal GS** → riempie AC/PF/iniziativa + **multiattacco** e un attacco col bonus/danno tipici
-della sua fascia. Il pannello **📐 Coerenza GS** segnala se i numeri (rifiniti a mano)
-restano dentro il GS dichiarato. Poi aggiungi la creatura al tracker come le altre.
+Una creatura con solo il **Grado di sfida (GS)**: nel tab *Statblock* premi **Genera dal GS**
+→ riempie CA/PF + **multiattacco** e un attacco col bonus/danno tipici della sua fascia, già
+nella forma nativa. Il pannello **📐 Coerenza GS** segnala se i numeri (rifiniti a mano)
+restano dentro il GS dichiarato. Lo statblock nativo è subito schierabile nella Board.
 
 ## 5. Richiamo rapido dei termini
 Condizioni, maestrie delle armi e ordini di bastione — tutti in un posto solo:

@@ -125,7 +125,7 @@ if (!shown) dv.paragraph("*📊 I cruscotti del mondo (trame, cronologia, bozze)
 ```
 
 --- 🎲 Al tavolo
-> [!tip] Come si gioca uno scontro? **[[Guida al combattimento]]** — iniziativa, PF, condizioni e dadi coi plugin (Initiative Tracker + Statblocks + Dice Roller).
+> [!tip] Come si gioca uno scontro? **[[Guida al combattimento]]** — iniziativa, PF, condizioni e tiri nella **Board di combattimento** nativa (motore GDR).
 > [!tip] Devi improvvisare? **[[Oracolo]]** — Sì/No, tabelle di significato e reazioni dei PNG da tirare al volo (+ il backlog di prep dai link in sospeso).
 
 > [!example] Crea

@@ -46,9 +46,8 @@ relazioni:
   label: Creature
   category: creatura
   multi: true
-# Combattenti dalla parte del gruppo (PNG alleati, evocazioni): aggiorna_encounter
-# li emette con il flag `, ally` nel blocco encounter (Initiative Tracker li separa
-# dai nemici nel conteggio difficoltà).
+# Combattenti dalla parte del gruppo (PNG alleati, evocazioni): «Schiera l'incontro nella
+# Board» li fa entrare dalla parte del gruppo (accanto ai PG), distinti dai nemici.
 - field: alleati
   label: Alleati (PNG/evocazioni)
   category: creatura

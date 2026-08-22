@@ -215,9 +215,3 @@ async function avanza_fronte(file) {
   new Notice(nuovo >= dim ? `Clock pieno (${nuovo}/${dim})! Scatena la conseguenza.` : `Fronte avanzato: ${nuovo}/${dim}.`);
   return "";
 }
-
-// Override HP/CA/iniziativa per-creatura: frontmatter `varianti`, una stringa per
-// creatura nella forma "[[Nome]]: hp 60, ca 12, init 20" (alias IT: pf→hp, iniz→init).
-// Mappa nome→{hp,ca,init}. Serve a potenziare un boss o indebolire un gregario senza
-// creare una nota apposta. hp è l'ancora: Initiative Tracker è POSIZIONALE
-// (count: name, hp, ca, init), quindi ca/init valgono solo se preceduti da hp.

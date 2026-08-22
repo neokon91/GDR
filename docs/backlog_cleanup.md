@@ -33,18 +33,18 @@
 
 ## Piano test IN-APP da "tester" (creazione encounter end-to-end)
 
-Obiettivo: comportarsi da DM esterno e far **funzionare un incontro** dall'inizio alla fine in Obsidian, verificando le superfici che i test headless non coprono (Meta Bind, Initiative Tracker, Fantasy Statblocks, Dice Roller). Vault: `dist/GDR-vault` (fai prima `npm run build` con python3.11 se serve rigenerare; il seed «Astaria» ha già un incontro «Guardiani della Terza Porta»).
+Obiettivo: comportarsi da DM esterno e far **funzionare un incontro** dall'inizio alla fine in Obsidian, verificando le superfici che i test headless non coprono (Meta Bind, Board di combattimento, statblock nativo, Dice Roller). Vault: `dist/GDR-vault` (fai prima `npm run build` con python3.11 se serve rigenerare; il seed «Astaria» ha già un incontro «Guardiani della Terza Porta»).
 
 Setup computer-use: `request_access(["Obsidian"])`, apri il vault (`open -a Obsidian ".../dist/GDR-vault"`), poi pilota con `computer_batch` (screenshot per verificare). Cmd+O = quick switcher. Console: Cmd+Alt+I.
 
 Flusso da provare (segna FAIL con nota/atteso/visto/superficie):
-1. **Party**: Impostazioni → Initiative Tracker → Parties → «Gruppo»: aggiungi i PG puntandoli a `Mondi/Personaggi` (c'è **Korbin Salmastro**). Verifica che `players: true` poi li includa.
+1. **PG pronti**: verifica che ci sia almeno un PG in `Mondi/Personaggi` (**Korbin Salmastro**); la Board li riconosce come schieramento del gruppo (nessuna config Party manuale).
 2. **Crea un Incontro nuovo**: da Home/Bestiario bottone *Crea → Incontro* → il wizard chiede solo nome (+tipo). La nota nasce snella.
-3. **Collega le creature**: tab Collegamenti → *Collega* → aggiungi 1-2 creature (crea una **Creatura** homebrew col solo **GS** se non ce ne sono, poi *Genera statblock dal GS*). Eventuali **Alleati**.
-4. **Aggiorna l'incontro**: nel tab Combattimento premi **Aggiorna l'incontro** → il blocco ```encounter``` si riscrive dalle creature collegate (alleati col flag `ally`); verifica budget XP nel pannello difficoltà.
-5. **Schiera il gruppo**: bottone **Schiera il gruppo** → popola il Party di Initiative Tracker dai PG. Verifica che i PG compaiano nel tracker.
-6. **Avvia l'incontro**: dal blocco encounter/statblock → *Avvia incontro*/*Aggiungi al tracker*. Avanza i turni; il round-counter sale.
-7. **Statblock giocabili**: apri lo statblock di una creatura → i **dadi** (+N a colpire, danno 2d6+X) sono **cliccabili** (Dice Roller). Applica **condizioni** (status del tracker). Verifica i link `[[Afferrato]]` ecc. nelle azioni.
+3. **Collega le creature**: tab Collegamenti → *Collega* → aggiungi 1-2 creature (crea una **Creatura** homebrew col solo **GS** se non ce ne sono, poi *Genera statblock dal GS* → statblock nativo). Eventuali **Alleati**.
+4. **Difficoltà**: nel tab Combattimento il pannello difficoltà stima il budget XP dalle creature collegate.
+5. **Schiera nella Board**: con la nota-Incontro aperta, comando **«GDR: Schiera l'incontro nella Board»** → la Board si apre pre-popolata (nemici + PG + alleati; override `varianti` applicati).
+6. **Gioca il giro**: **🎲 Iniziativa** ordina i turni; **⏭️ Passa turno** avanza (round-counter sale); per il combattente attivo le **azioni** risolvono colpire-contro-CA/danno/salvezza; **−/+** sui PF.
+7. **Statblock + condizioni**: click sul nome di un combattente apre lo statblock nativo (dadi `dice:` cliccabili, link `[[Afferrato]]` nelle azioni); **＋stato** applica una condizione **coi suoi effetti veri** sui tiri successivi.
 8. **Scheda PG (Korbin)**: i tiri caratteristica/TS/abilità/iniziativa/TS-morte hanno il bonus reale e sono cliccabili; *Sali di livello* e *Riposo* funzionano.
 9. **Glossario**: apri **[[Glossario]]** → condizioni/maestrie/ordini rendono; **[[Guida al combattimento]]** linka.
 10. **Sito**: **[[Occhi del giocatore]]** → **Genera sito** → verifica che esca in `Sito-giocatori/` senza spoiler (niente uso_al_tavolo/segreti; incontri/PG-DM fuori).

@@ -20,14 +20,12 @@ pannelli ```gdr, i pulsanti-azione, la creazione delle note e il Cruscotto DM.
 > [!warning] Senza questi plugin
 > Senza il **plugin GDR** i pannelli *Vista*/radar restano come codice ```gdr, i pulsanti
 > non fanno nulla e non si creano note; senza **Tab Panels** le note a schede appaiono come
-> testo grezzo; senza **Fantasy Statblocks** non vedi gli statblock né il blocco `encounter`;
-> senza **Meta Bind** i campi `INPUT`/`VIEW` (incluso il componente *Carattere*) restano testo grezzo.
+> testo grezzo; senza **Meta Bind** i campi `INPUT`/`VIEW` (incluso il componente *Carattere*)
+> restano testo grezzo.
 > **Controllo automatico**: apri **[[Diagnostica]]** — ti dice quali mancano e come riattivarli.
 
 ## 2. Impostazioni (già pronte)
 La build imposta da sé le opzioni che servono — di norma **non devi toccare nulla**:
-- **Fantasy Statblocks → "Parse Frontmatter in Notes"**: già ON (le note creatura e i
-  mostri SRD entrano nel bestiario e sono richiamabili per nome con `monster:`/`encounter`).
 - **Meta Bind → "Enable JS"**: già ON (pulsanti e viste calcolate `VIEW[...]`).
 - **Templater → "Trigger Templater on new file creation"**: non serve; i bottoni `Crea`
   applicano già il template alla creazione.
@@ -58,10 +56,9 @@ Se qualcosa appare come *testo grezzo*, è quasi sempre un plugin del §1 non ab
 - Vuoi vedere uno **statblock 5.5e** subito? Apri un mostro SRD già pronto, es.
   **SRD/Mostri/Goblin guerriero** (Iniziativa, GS con PE+CB, azioni — entra nel bestiario).
 - Per un **incontro**: *Crea → Incontro*, collega le creature (e gli eventuali **Alleati**:
-  PNG/evocazioni) nel tab *Collegamenti* e premi **Aggiorna l'incontro** nel tab
-  *Combattimento*: il blocco `encounter` si riscrive da solo (gli alleati col flag `ally`).
-  Per far comparire i **PG** nel tracker, configurali una volta come **Party** nelle
-  impostazioni di *Initiative Tracker* (puntandoli a `Mondi/Personaggi`).
+  PNG/evocazioni) nel tab *Collegamenti*, poi — con la nota aperta — lancia il comando
+  **«GDR: Schiera l'incontro nella Board»**: la Board si apre pre-popolata (nemici + i tuoi
+  **PG** + alleati). Da lì tiri l'iniziativa e giochi (motore nativo: PF, condizioni, tiri).
 - **Liste di consultazione** (Dice Roller): crea una nota con un **elenco** (incontri, bottino,
   meteo, voci) e richiamala dove ti serve con `dice: [[Nome della nota]]` — la mostra inline.
   Esempio già pronto (solo DM): *Incontri delle Marche*. *(Per il tiro casuale di una singola

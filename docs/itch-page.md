@@ -59,7 +59,7 @@ Non «organizza la campagna»: **giocala**.
 - …una **wiki di worldbuilding**? Quella *descrive* il mondo. Qui il mondo **si calcola**: Fronti,
   pressioni, prossima mossa.
 - …un **VTT**? Quello ti dà il tavolo ma non il mondo. Qui **il tavolo nasce dal mondo** (l'incontro
-  dalle creature del vault, lo statblock dal GS, il gruppo già pronto nell'Initiative Tracker).
+  dalle creature del vault, lo statblock dal GS, il gruppo già pronto nella Board di combattimento).
 - …un **servizio cloud**? Qui è **Markdown, locale, tuo** — niente abbonamento, niente lock-in.
 
 ### Come si parte (2 minuti)

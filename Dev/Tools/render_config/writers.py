@@ -220,8 +220,7 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     """Config .obsidian: merge NON distruttivo. Le impostazioni e i plugin
     installati dall'utente sono preservati; si aggiornano solo le chiavi che la
     pipeline possiede (Templater, Dataview, Meta Bind, Metadata Menu,
-    Callout Manager, Fantasy Statblocks, bookmarks, chrome esploratore, default
-    core, homepage)."""
+    Callout Manager, bookmarks, chrome esploratore, default core, homepage)."""
     union_list(obsidian / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
     # NB: niente config Templater (plugin ritirato): le azioni-import sono comandi nativi
     # del plugin `gdr` (gdr:importa-mappa / gdr:importa-azgaar), già in palette e hotkey-abili.

@@ -195,8 +195,10 @@ def test_verifica_gs(tmp_path):
     table = {"1": {"ac": 13, "hp": 20, "attacco": 4, "danno": 6},
              "5": {"ac": 15, "hp": 90, "attacco": 6, "danno": 14},
              "10": {"ac": 17, "hp": 180, "attacco": 8, "danno": 28}}
-    body = ('# Boss\n\n```statblock\nlayout: 5-5e-ita\nname: Boss\nac: 15\nhp: 90\n'
-            'cr: "5"\nactions:\n  - name: Attacco\n    desc: "*Tiro per colpire:* +6, '
+    # Blocco NATIVO (RawMostro): PF 90 da dadi_vita 20 × media(d8=4.5) + Cos mod 0.
+    body = ('# Boss\n\n```gdr statblock\nnome: Boss\ntaglia: media\nca: {valore: 15}\n'
+            'caratteristiche:\n  costituzione: {valore: 10}\ndadi_vita: 20\ngs: "5"\n'
+            'azioni:\n  - nome: Attacco\n    testo: "*Tiro per colpire:* +6, '
             'portata 1,5 m. *Colpito:* 14 (2d10 + 3) danni."\n```\n')
     harness = tmp_path / "vgs.js"
     harness.write_text(

@@ -9,8 +9,8 @@ armi, ordini di bastione. I callout sono **pieghevoli**: aprili al bisogno.*
 > per una consultazione veloce senza aprire una scheda.
 
 ## 🩹 Condizioni
-Le **15 condizioni** 5.5e (nome + effetti compatti). Al tavolo si applicano/rimuovono
-anche come **status** in Initiative Tracker (vedi [[Guida al combattimento]]).
+Le **15 condizioni** 5.5e (nome + effetti compatti). Nella **Board di combattimento** si
+applicano/rimuovono coi loro effetti veri sui tiri (vedi [[Guida al combattimento]]).
 
 ```gdr
 renderCondizioni

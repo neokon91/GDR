@@ -35,7 +35,6 @@ spedite con fiducia.
 | 5 | `extends` fileClass-base condiviso (meno duplicazione in `z.classi/`) | Metadata Menu | Medio | Medio | — | [metadata-menu](../Dev/Reference/metadata-menu.md) |
 | 6 | Indici Bases più ricchi: `groupBy`/`summaries`/`formulas`/filtri `or-not` | Bases | Medio | Basso-medio | 🔬 | [bases](../Dev/Reference/bases.md) |
 | 7 | Tasks `filter by function`/`happens` (prep legata all'ontologia) | Tasks | Medio | Basso | 🔬 | [tasks](../Dev/Reference/tasks.md) |
-| 8 | Campi statblock extra (spells/lair/regional/mythic) + bottoni IT nel layout | Fantasy Statblocks | Medio | Medio | 🔬 | [fantasy-statblocks](../Dev/Reference/fantasy-statblocks.md) |
 | 9 | `updateMetadata` per i bottoni di solo-reset | Meta Bind | Basso | Basso | i flussi JS funzionano e sono testati (ROI basso) | [meta-bind](../Dev/Reference/meta-bind.md) |
 | 10 | `excludeFolders` (no folder-note fantasma su `z.*`/`Media`/`SRD`) | Folder Notes | Basso | Medio (oggetti con UUID, fragili) | — | [folder-notes](../Dev/Reference/folder-notes.md) |
 | 11 | `kind: Base` / `separateMobile` (landing su `.base` / home mobile) | Homepage | Basso | Basso | — | [homepage](../Dev/Reference/homepage.md) |

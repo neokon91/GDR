@@ -61,8 +61,8 @@ veri. Falla **una volta, dall'alto in basso, su una copia pristina**.
       emergono; *Versione player-safe* presente
 - [ ] **5.5e**: **Korbin Salmastro** (PG) → scheda, **tiri col bonus reale** (Dice Roller), risorse/riposi;
       *Sali di livello* funziona
-- [ ] **Tavolo**: l'incontro **«Guardiani della Terza Porta»** → budget XP, statblock, *Schiera il gruppo*
-      popola Initiative Tracker dai PG
+- [ ] **Tavolo**: l'incontro **«Guardiani della Terza Porta»** → budget XP, e *«Schiera l'incontro
+      nella Board»* apre la Board pre-popolata (nemici + PG); iniziativa/turni/condizioni funzionano
 - [ ] **Mappe**: zoom-map pan/zoom, i **pin linkano** le note; (se puoi) un import **Watabou/Azgaar**
       end-to-end → luoghi + segnaposto
 

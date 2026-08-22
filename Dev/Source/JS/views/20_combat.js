@@ -38,8 +38,7 @@ function xpForCreature(p, core) {
   return Number(cr[gs] || 0);
 }
 
-// Pannello difficoltà (markdown): budget del gruppo vs XP totale delle creature
-// collegate + la lista pronta per il blocco `encounter` (Initiative Tracker).
+// Pannello difficoltà (markdown): budget del gruppo vs XP totale delle creature collegate.
 async function renderEncounter(app, dv, page) {
   if (!page || !dv) return "*Dataview non attivo o nessuna nota.*";
   const core = await loadCoreData(app);
