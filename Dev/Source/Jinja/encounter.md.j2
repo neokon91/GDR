@@ -27,30 +27,10 @@
 > combattimento si apre **pre-popolata**: le *Creature* collegate diventano nemici, gli
 > *Alleati* e i tuoi **PG** entrano dalla tua parte, gli override `varianti` (hp/ca) si
 > applicano. Poi tiri l'iniziativa e giochi lì (motore nativo: PF, condizioni, statblock).
-
-Il blocco qui sotto è il flusso **legacy** (Initiative Tracker + Fantasy Statblocks): aggiungi
-le creature per nome con `- <numero>: <Nome>`; un alleato con `- <Nome>, ally`; `players: true`
-include il gruppo.
-
-> [!tip] Schiera il gruppo (una volta sola)
-> Niente config manuale del Party: `BUTTON[prepara-gruppo]` auto-popola il **Party di
-> Initiative Tracker** dai tuoi **PG** del vault (note *personaggio · pg*: nome, PF, CA,
-> iniziativa). Dopo, `players: true` qui sotto risolve e **Avvia incontro** include il
-> gruppo. Ripremi quando aggiungi un PG o sali di livello.
-
-> [!tip] Sincronizza da creature e alleati collegati
-> Riscrive il blocco qui sotto dalle *Creature* e dagli *Alleati* in *Collegamenti*
-> (gli alleati col flag `ally`; niente copia-incolla): `BUTTON[aggiorna-encounter]`
-> **Boss/gregari**: aggiungi una proprietà `varianti` al frontmatter, una riga per
-> creatura — es. `[[Salamandra]]: hp 60, ca 12, init 20` (alias `pf`→hp). *Aggiorna*
-> applica gli override; indicare l'HP rende l'incontro **ripetibile** (niente tiro PF).
-
-```encounter
-name: <% tp.config.target_file.basename %>
-players: true
-creatures:
-  - 1: Nome Creatura
-```
+>
+> **Boss/gregari**: una proprietà `varianti` nel frontmatter, una riga per creatura — es.
+> `[[Salamandra]]: hp 60, ca 12, init 20` (alias `pf`→hp) — applica gli override quando
+> schieri; indicare l'HP rende l'incontro **ripetibile** (niente tiro casuale dei PF).
 
 {{ m.condizioni() }}
 {{ m.maestrie() }}

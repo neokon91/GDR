@@ -545,56 +545,6 @@ def test_bastione_turno_e2e(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_inizia_incontro_e2e(tmp_path):
-    """meta_actions.inizia_incontro (ponte Initiative Tracker, mock plugin): auto-popola
-    il Party IT dai PG (personaggio · tipo pg) — `playerFromPg` mappa nome/PF/CA/init-mod;
-    aggiunge solo i PG MANCANTI al roster (`savePlayer`), unisce i nomi al party di
-    default e persiste (`saveSettings`); i non-PG e i PG già presenti sono esclusi."""
-    harness = tmp_path / "it.js"
-    harness.write_text(
-        'const saved=[];\n'
-        'const it={data:{players:[{name:"Esistente"}], parties:[{name:"Gruppo",players:["Esistente"]}], defaultParty:"Gruppo"},\n'
-        '  savePlayer:async function(p){this.data.players.push(p); saved.push(p.name);},\n'
-        '  saveSettings:async function(){this.data._saved=(this.data._saved||0)+1;}};\n'
-        'const files=[\n'
-        '  {basename:"Vera", path:"Mondi/Personaggi/Vera.md"},\n'
-        '  {basename:"Renzo", path:"Mondi/Personaggi/Renzo.md"},\n'
-        '  {basename:"Goblin", path:"x/Goblin.md"},\n'
-        '  {basename:"Esistente", path:"Mondi/Personaggi/Esistente.md"},\n'
-        '];\n'
-        'const fmByPath={\n'
-        '  "Mondi/Personaggi/Vera.md":{categoria:"personaggio", tipo:"pg", nome:"Vera Sabbialesta", pf_max:25, ca:16, destrezza:14, livello:3},\n'
-        '  "Mondi/Personaggi/Renzo.md":{categoria:"personaggio", tipo:"pg", nome:"Renzo", pf_max:18, ca:14, destrezza:16, livello:2},\n'
-        '  "x/Goblin.md":{categoria:"creatura", tipo:"mostro"},\n'
-        '  "Mondi/Personaggi/Esistente.md":{categoria:"personaggio", tipo:"pg", nome:"Esistente", pf_max:10, ca:12},\n'
-        '};\n'
-        'global.Notice=class{constructor(m){}};\n'
-        'global.app={\n'
-        '  vault:{getMarkdownFiles:()=>files},\n'
-        '  metadataCache:{getFileCache:(f)=>({frontmatter:fmByPath[f.path]||{}})},\n'
-        '  plugins:{plugins:{"initiative-tracker":it}},\n'
-        '  commands:{executeCommandById:()=>{}},\n'
-        '};\n'
-        f'const meta=require({json.dumps(META_ACTIONS_JS)});\n'
-        'const pf=meta.playerFromPg({basename:"Vera"},fmByPath["Mondi/Personaggi/Vera.md"]);\n'
-        'meta.inizia_incontro({}).then(()=>process.stdout.write(JSON.stringify({\n'
-        '  pf, saved, party: it.data.parties.find(p=>p.name==="Gruppo").players,\n'
-        '  roster: it.data.players.map(p=>p.name), savedCount: it.data._saved})));\n',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    out = json.loads(res.stdout)
-    assert out["pf"] == {"name": "Vera Sabbialesta", "player": True, "hp": 25, "ac": 16, "modifier": 2, "level": 3}
-    assert out["saved"] == ["Renzo", "Vera Sabbialesta"]        # solo i PG MANCANTI (Esistente già nel roster)
-    assert set(out["party"]) == {"Esistente", "Renzo", "Vera Sabbialesta"}  # union col party esistente
-    assert "Goblin" not in out["party"]                          # i non-PG esclusi
-    assert out["savedCount"] >= 1                                # persistito (saveSettings)
-
-
-# --- Pubblicazione itch (publish_itch.py) -----------------------------------
-import publish_itch  # noqa: E402
-
-
 def test_publish_itch_helpers(monkeypatch):
     """resolve_target(): env ITCH_TARGET ha precedenza; version() da package.json."""
     monkeypatch.setenv("ITCH_TARGET", "tizio/gdr")

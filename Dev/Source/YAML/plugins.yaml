@@ -357,9 +357,6 @@ buttons:
   - id: usa-risorsa
     label: Usa risorsa
     action: usa_risorsa
-  - id: aggiorna-encounter
-    label: Aggiorna l'incontro
-    action: aggiorna_encounter
   - id: genera-statblock
     label: Genera statblock dal GS
     action: scaffold_statblock
@@ -398,10 +395,6 @@ buttons:
   - id: genera-sito
     label: Genera sito giocatori
     action: genera_sito
-  # Ponte Initiative Tracker: auto-popola il Party dai PG (così players: true risolve).
-  - id: prepara-gruppo
-    label: Schiera il gruppo
-    action: inizia_incontro
   # --- Comandi-strumento (button con 'command'): aprono DIRETTAMENTE lo strumento
   # del plugin senza cercarlo nella tavolozza comandi né nelle impostazioni → tolgono
   # l'attrito di "dov'è la mappa / il calendario". NON richiedono un'azione-nota

@@ -52,8 +52,8 @@ def creation_buttons(core: dict[str, Any], templates: list[dict[str, Any]]) -> l
 # Con questo set completo nessun bottone usa più Templater → Templater esce dal bundle.
 _PLUGIN_ACTIONS = {
     "riposo_lungo", "riposo_breve", "sali_di_livello", "usa_risorsa", "collega",
-    "applica_profilo", "marca_canonico", "archivia", "aggiorna_encounter",
-    "scaffold_statblock", "inizia_incontro", "avanza_fronte", "scatena_conseguenza",
+    "applica_profilo", "marca_canonico", "archivia",
+    "scaffold_statblock", "avanza_fronte", "scatena_conseguenza",
     "tira_tabella", "turno_bastione", "inserisci_componente", "giro_del_mondo",
     "genera", "sincronizza_pin", "importa_mappa", "importa_azgaar", "world_board",
     "genera_sito",

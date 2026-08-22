@@ -44,10 +44,6 @@ async function meta_actions(tp, action = "") {
     return await giro_del_mondo(tp);
   }
 
-  if (action === "aggiorna_encounter") {
-    return await aggiorna_encounter(tp, file);
-  }
-
   if (action === "scaffold_statblock") {
     return await scaffold_statblock(file);
   }
@@ -123,11 +119,6 @@ async function meta_actions(tp, action = "") {
     return await inserisci_componente(tp, file);
   }
 
-  if (action === "inizia_incontro") {
-    // Schiera il gruppo: auto-inietta il Party di Initiative Tracker dai PG (non serve file attivo).
-    return await inizia_incontro(tp);
-  }
-
   new Notice(`Azione non gestita: ${action}`);
   return "";
 }
@@ -140,8 +131,6 @@ meta_actions.inverseRelation = inverseRelation;  // esposto per i test
 meta_actions.appendTurnoLog = appendTurnoLog;    // esposto per i test
 meta_actions.rollInline = rollInline;            // esposto per i test
 meta_actions.resolveTurno = resolveTurno;        // esposto per i test
-meta_actions.playerFromPg = playerFromPg;        // esposto per i test
-meta_actions.inizia_incontro = inizia_incontro;  // esposto per i test
 meta_actions.avanza_fronte = avanza_fronte;      // esposto per i test
 meta_actions.scaffold_statblock = scaffold_statblock;  // esposto per i test
 meta_actions.propagaShock = propagaShock;        // esposto per i test (cascata, nucleo puro)

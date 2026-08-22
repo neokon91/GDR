@@ -149,7 +149,6 @@ export type TemplateId =
 
 /** Le azioni del dispatcher esposte come comandi gdr:<azione> (model_cfg._PLUGIN_ACTIONS). */
 export type AzioneId =
-  | 'aggiorna_encounter'
   | 'applica_profilo'
   | 'archivia'
   | 'avanza_fronte'
@@ -159,7 +158,6 @@ export type AzioneId =
   | 'giro_del_mondo'
   | 'importa_azgaar'
   | 'importa_mappa'
-  | 'inizia_incontro'
   | 'inserisci_componente'
   | 'marca_canonico'
   | 'riposo_breve'

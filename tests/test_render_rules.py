@@ -101,43 +101,6 @@ def test_encounter_xp(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_aggiorna_encounter_e2e(tmp_path):
-    """meta_actions.aggiorna_encounter riscrive il blocco ```encounter``` dalle
-    creature collegate (mock Obsidian): conta per nome (occorrenze ripetute =
-    quantità), risolve i link al basename e allinea name al titolo, preservando
-    players. Toglie il copia-incolla del residuo Fase 2."""
-    harness = tmp_path / "enc_rewrite.js"
-    harness.write_text(
-        'const body = "# Incontro\\n\\n```encounter\\nname: Vecchio\\n'
-        'players: false\\ncreatures:\\n  - 1: Nome Creatura\\n```\\n\\nfine";\n'
-        'let saved = null;\n'
-        'const file = { basename: "Imboscata", path: "Incontri/Imboscata.md" };\n'
-        'global.Notice = class { constructor(m){} };\n'
-        'global.app = {\n'
-        '  workspace: { getActiveFile: () => file },\n'
-        '  metadataCache: {\n'
-        '    getFileCache: () => ({ frontmatter: { creature: ["[[Goblin]]","[[Goblin]]","[[Orco|Bruto]]"], alleati: ["[[Lupo Addestrato]]"] } }),\n'
-        '    getFirstLinkpathDest: (t) => ({ basename: t }),\n'
-        '  },\n'
-        '  vault: { read: async () => body, modify: async (f, d) => { saved = d; } },\n'
-        '};\n'
-        f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
-        'meta({}, "aggiorna_encounter").then(() => process.stdout.write(saved));\n',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    out = res.stdout
-    assert "name: Imboscata" in out          # name allineato al titolo della nota
-    assert "players: false" in out           # players preservato
-    assert "  - 2: Goblin" in out            # occorrenze ripetute -> quantità
-    assert "  - 1: Orco" in out              # link risolto al basename del target
-    assert "  - Lupo Addestrato, ally" in out  # alleato emesso col flag ally (P2)
-    assert "Nome Creatura" not in out        # placeholder sostituito
-    assert out.count("```encounter") == 1    # un solo blocco, ben formato
-    assert out.startswith("# Incontro") and out.rstrip().endswith("fine")  # corpo preservato
-
-
-@pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD assente")
 def test_gs_baselines():
     """gs_baselines: tabella GS→statistiche base dai mostri SRD (mediane). Copre i GS
     chiave con AC/PF/attacco; i PF crescono col GS; mappa anche i GS frazionari."""
@@ -258,40 +221,6 @@ def test_verifica_gs(tmp_path):
     assert out["mis"]["difensivo"] == "1"          # PF 20 = GS 1, fuori dal GS 5 dichiarato
     assert out["parsed"] == {"ac": 15, "hp": 90, "atk": 6, "danno": 14}
     assert "Coerenza GS" in out["r"] and "GS 5" in out["r"]
-
-
-@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_aggiorna_encounter_varianti(tmp_path):
-    """meta_actions.aggiorna_encounter: il campo `varianti` applica gli override
-    HP/CA/iniziativa con la sintassi POSIZIONALE di Initiative Tracker (boss
-    potenziato / gregario indebolito / incontro ripetibile). hp è l'ancora: una
-    variante con solo ca non emette override (non esprimibile senza hp)."""
-    harness = tmp_path / "enc_var.js"
-    harness.write_text(
-        'const body = "# Incontro\\n\\n```encounter\\nname: X\\n'
-        'players: true\\ncreatures:\\n  - 1: Vecchio\\n```\\n";\n'
-        'let saved = null;\n'
-        'const file = { basename: "Agguato", path: "Incontri/Agguato.md" };\n'
-        'global.Notice = class { constructor(m){} };\n'
-        'global.app = {\n'
-        '  workspace: { getActiveFile: () => file },\n'
-        '  metadataCache: {\n'
-        '    getFileCache: () => ({ frontmatter: {\n'
-        '      creature: ["[[Salamandra]]","[[Salamandra]]","[[Goblin]]","[[Orco]]"],\n'
-        '      varianti: ["[[Salamandra]]: hp 60, ca 12, init 20", "Goblin: pf 5", "[[Orco]]: ca 18"] } }),\n'
-        '    getFirstLinkpathDest: (t) => ({ basename: t }),\n'
-        '  },\n'
-        '  vault: { read: async () => body, modify: async (f, d) => { saved = d; } },\n'
-        '};\n'
-        f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
-        'meta({}, "aggiorna_encounter").then(() => process.stdout.write(saved));\n',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    out = res.stdout
-    assert "  - 2: Salamandra, 60, 12, 20" in out  # hp+ca+init posizionali (boss)
-    assert "  - 1: Goblin, 5" in out               # alias pf→hp, solo hp (gregario)
-    assert "  - 1: Orco" in out and "Orco," not in out  # ca senza hp → nessun override
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

@@ -48,13 +48,11 @@ async function renderEncounter(app, dv, page) {
   const num = Math.max(0, Math.floor(Number(page.pg_numero) || 0));
   const creature = asArray(page.creature).map((l) => resolve(dv, l)).filter(Boolean);
   let totale = 0;
-  const counts = {};
   const righe = [];
   for (const c of creature) {
     const x = xpForCreature(c, core);
     totale += x;
     const nome = c.file ? c.file.name : (c.nome || "—");
-    counts[nome] = (counts[nome] || 0) + 1;
     righe.push(`- ${nome}: GS ${c.gs != null ? c.gs : "?"} · ${x} PE`);
   }
   let out = "> [!abstract] Difficoltà incontro\n";
@@ -75,10 +73,6 @@ async function renderEncounter(app, dv, page) {
   }
   const dettaglio = righe.length ? "\n\n" + righe.join("\n")
     : "\n\n*Collega le creature (tab Collegamenti) per la stima.*";
-  const blocco = Object.keys(counts).length
-    ? "\n\n**Per il blocco `encounter`** (copia sotto `creatures:`):\n```\n"
-      + Object.entries(counts).map(([n, q]) => `  - ${q}: ${n}`).join("\n") + "\n```"
-    : "";
-  return out + dettaglio + blocco;
+  return out + dettaglio;
 }
 
