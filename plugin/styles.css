@@ -266,3 +266,7 @@
 /* Bottone "applica condizione" (più largo dei ±, ha testo) */
 .gdr-board-cond-add { width: auto !important; padding: 0 7px !important; font-size: var(--font-ui-smaller); }
 .gdr-board-cond-add:hover { border-color: var(--interactive-accent); color: var(--text-accent); }
+
+/* Statblock: prosa resa come markdown (paragrafi senza margini extra) */
+.gdr-sb-voce p { margin: 0; }
+.gdr-sb-voce p + p { margin-top: 4px; }

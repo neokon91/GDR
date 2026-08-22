@@ -211,7 +211,7 @@ export default class GdrPlugin extends Plugin {
         try {
           const best = await this.loadBestiario();
           const raw = best.find((mm) => mm.id === id) ?? best.find((mm) => String(mm.nome).toLowerCase() === id.toLowerCase());
-          if (raw) renderStatblock(el.createDiv(), raw);
+          if (raw) renderStatblock(el.createDiv(), raw, undefined, { app: this.app, component: child, sourcePath: ctx.sourcePath });
           else el.createEl("pre", { text: `Statblock GDR: mostro «${id}» non nel bestiario.` });
         } catch (e: any) {
           el.createEl("pre", { text: `Errore statblock ${id}: ${e?.message ?? e}` });
@@ -866,7 +866,7 @@ function modCar(valore: number): string {
 // (Modal o blocco ```gdr statblock) da `raw` (il .monster.yaml completo del bestiario).
 // PF/condizioni correnti dal combattente in plancia se presente; i tiri salvezza dai
 // numeri già risolti da `daMostro`.
-function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia) {
+function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia, md?: { app: App; component: any; sourcePath?: string }) {
     const c = host;
     c.addClass("gdr-sb");
     const n = (v: any) => (Number.isFinite(Number(v)) ? Number(v) : 0);
@@ -919,8 +919,17 @@ function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia) {
       c.createEl("h3", { cls: "gdr-sb-sez", text: titolo });
       for (const v of voci) {
         const p = c.createEl("div", { cls: "gdr-sb-voce" });
-        if (v?.nome) p.createEl("strong", { text: `${v.nome}. ` });
-        if (v?.testo) p.appendText(String(v.testo).trim());
+        const testo = v?.testo ? String(v.testo).trim() : "";
+        // Con contesto markdown (app+component): la prosa è resa come Markdown (corsivi,
+        // grassetti, [[wikilink]]) — parità con Fantasy Statblocks e pronta per il .md del
+        // doppio-file. Senza contesto: testo semplice (fallback innocuo).
+        if (md) {
+          const sorgente = (v?.nome ? `***${v.nome}.*** ` : "") + testo;
+          void MarkdownRenderer.render(md.app, sorgente, p, md.sourcePath ?? "", md.component);
+        } else {
+          if (v?.nome) p.createEl("strong", { text: `${v.nome}. ` });
+          if (testo) p.appendText(testo);
+        }
       }
     };
     sezione("Tratti", m.tratti);
@@ -931,7 +940,11 @@ function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia) {
 
 class StatblockModal extends Modal {
   constructor(app: App, private raw: any, private comb?: InPlancia) { super(app); }
-  onOpen() { this.contentEl.empty(); renderStatblock(this.contentEl, this.raw, this.comb); }
+  onOpen() {
+    this.contentEl.empty();
+    const child = new MarkdownRenderChild(this.contentEl);
+    renderStatblock(this.contentEl, this.raw, this.comb, { app: this.app, component: child });
+  }
   onClose() { this.contentEl.empty(); }
 }
 
