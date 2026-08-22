@@ -46,9 +46,9 @@ import type { CoreData } from "./core";
 import {
   ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
   comandoIniziativa, comandoAttacco, comandoSalvezza, comandoMultiattacco, comandoCura,
-  type Evento, type Dado, type InPlancia, type Stato,
+  type Evento, type Dado, type InPlancia, type Stato, type DefinizioniCondizioni,
 } from "../regole/src/motore/motore";
-import { daMostro, type Combattente, type Azione } from "../regole/src/motore/combattente";
+import { daMostro, risolviCondizioni, type Combattente, type Azione } from "../regole/src/motore/combattente";
 
 const VIEWS_PATH = "z.automazioni/views.js";
 const META_PATH = "z.automazioni/meta_actions.js";
@@ -159,6 +159,8 @@ export default class GdrPlugin extends Plugin {
   private meta: any = null;
   private core: CoreData | null = null;
   private bestiario: any[] | null = null;
+  private condizioni: any[] | null = null;
+  private condDefs: DefinizioniCondizioni | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
 
@@ -482,6 +484,22 @@ export default class GdrPlugin extends Plugin {
       this.bestiario = JSON.parse(await this.app.vault.adapter.read(path)) as any[];
     }
     return this.bestiario;
+  }
+
+  // Le condizioni GREZZE dal sidecar (gen_condizioni.py): per il picker manuale.
+  async loadCondizioni(): Promise<any[]> {
+    if (!this.condizioni) {
+      try { this.condizioni = JSON.parse(await this.app.vault.adapter.read(`${this.manifest.dir}/data/srd_condizioni.json`)) as any[]; }
+      catch { this.condizioni = []; }
+    }
+    return this.condizioni;
+  }
+
+  // Le DEFINIZIONI delle condizioni risolte (prono→svantaggio, afferrato→velocità 0…):
+  // il motore le applica ai tiri quando gliele si passa come `defs`. Risolte una volta.
+  async loadDefsCondizioni(): Promise<DefinizioniCondizioni> {
+    if (!this.condDefs) this.condDefs = risolviCondizioni(await this.loadCondizioni());
+    return this.condDefs;
   }
 
   // I PG del vault (categoria=personaggio, tipo=pg), con il loro frontmatter. Sorgente
@@ -937,6 +955,8 @@ function etichettaAzione(az: Azione): string {
 class BoardView extends ItemView {
   private eventi: Evento[] = [];
   private bestiario: any[] = [];
+  private condLista: any[] = [];
+  private defs: DefinizioniCondizioni = {};
   private errore: string | null = null;
 
   constructor(leaf: WorkspaceLeaf, private plugin: GdrPlugin) { super(leaf); }
@@ -948,6 +968,8 @@ class BoardView extends ItemView {
   async onOpen() {
     try { this.bestiario = await this.plugin.loadBestiario(); }
     catch (e: any) { this.errore = e?.message ?? String(e); }
+    this.condLista = await this.plugin.loadCondizioni(); // per il picker manuale
+    this.defs = await this.plugin.loadDefsCondizioni(); // effetti-condizione automatici sui tiri
     this.eventi = this.plugin.loadBoard(); // ripristina il combattimento in corso
     this.render();
   }
@@ -981,6 +1003,15 @@ class BoardView extends ItemView {
     if (scelto) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daPgGdr(scelto.fm), "alleato") });
   }
 
+  // Applica una condizione a mano (il GM la impone spesso da effetti non meccanizzati).
+  // Picker sui nomi delle condizioni SRD → evento condizione-inflitta (il motore ne
+  // applica gli effetti ai tiri via `defs`).
+  private async applicaCondizione(c: InPlancia) {
+    if (!this.condLista.length) { new Notice("Nessuna condizione caricata."); return; }
+    const scelta = await suggester(this.app, (x: any) => String(x.nome ?? x.id), this.condLista, false, `Condizione su ${c.nome}`);
+    if (scelta?.id) this.push({ tipo: "condizione-inflitta", key: c.key, condizione: scelta.id });
+  }
+
   // Statblock del combattente: mostro → StatblockModal nativa (dal bestiario grezzo);
   // PG → apre la sua nota (che ha già la scheda completa nel vault).
   private apriStatblock(c: InPlancia) {
@@ -1009,13 +1040,13 @@ class BoardView extends ItemView {
     const alleati = ordine(s).filter((c) => c.schieramento === attore.schieramento && inPiedi(c));
     if (az.tipo === "attacco") {
       const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
-      if (t) this.push(...comandoAttacco(s, attore.key, t.key, dadoVero, az));
+      if (t) this.push(...comandoAttacco(s, attore.key, t.key, dadoVero, az, this.defs));
     } else if (az.tipo === "salvezza") {
       const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
-      if (t) this.push(...comandoSalvezza(s, attore.key, t.key, az, dadoVero));
+      if (t) this.push(...comandoSalvezza(s, attore.key, t.key, az, dadoVero, this.defs));
     } else if (az.tipo === "multiattacco") {
       const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
-      if (t) this.push(...comandoMultiattacco(s, attore.key, t.key, az, dadoVero));
+      if (t) this.push(...comandoMultiattacco(s, attore.key, t.key, az, dadoVero, this.defs));
     } else if (az.tipo === "cura") {
       const t = await this.pickBersaglio(alleati, `${az.nome} → chi curare`);
       if (t) this.push(...comandoCura(s, t.key, az, dadoVero));
@@ -1122,6 +1153,8 @@ class BoardView extends ItemView {
       bDmg.onclick = () => this.push({ tipo: "danno", key: c.key, quanti: quanti() });
       const bHeal = ctrl.createEl("button", { text: "+", cls: "gdr-board-heal" }); bHeal.setAttribute("aria-label", "Cura");
       bHeal.onclick = () => this.push({ tipo: "cura", key: c.key, quanti: quanti() });
+      const bCond = ctrl.createEl("button", { text: "＋stato", cls: "gdr-board-cond-add" }); bCond.setAttribute("aria-label", "Applica una condizione");
+      bCond.onclick = () => void this.applicaCondizione(c);
       const bDel = ctrl.createEl("button", { text: "✕", cls: "gdr-board-del" }); bDel.setAttribute("aria-label", "Rimuovi dalla plancia");
       bDel.onclick = () => this.push({ tipo: "rimosso", key: c.key });
     }
