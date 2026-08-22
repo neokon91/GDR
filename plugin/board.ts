@@ -47,6 +47,10 @@ export class BoardView extends ItemView {
     this.render();
   }
 
+  // Ricarica gli eventi persistiti e ridisegna (dopo che il plugin ha caricato un Incontro
+  // nella Board mentre questa era già aperta).
+  ricarica() { this.eventi = this.plugin.loadBoard(); this.render(); }
+
   private stato(): Stato { return ricostruisci(this.eventi); }
   // Ridisegna E persiste: unico punto d'uscita dopo ogni mutazione degli eventi.
   private commit() { this.render(); void this.plugin.saveBoard(this.eventi); }

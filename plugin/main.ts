@@ -32,6 +32,7 @@ import { suggester, tpShim } from "./modali";
 import { renderStatblock, trovaMostro } from "./statblock";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
 import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
+import { eventiDaIncontro } from "./incontro";
 
 // --- Impostazioni del plugin (persistite via loadData/saveData) ---------------------------
 interface GdrSettings {
@@ -171,6 +172,18 @@ export default class GdrPlugin extends Plugin {
     this.addCommand({ id: "apri-cruscotto", name: "Apri il Cruscotto DM", callback: () => this.activateCruscotto() });
     this.registerView(VIEW_TYPE_BOARD, (leaf) => new BoardView(leaf, this));
     this.addCommand({ id: "apri-board", name: "Apri la Board di combattimento", callback: () => this.activateBoard() });
+    // Ricucitura prepara→gioca (F2): dalla nota-Incontro attiva schiera nella Board.
+    this.addCommand({
+      id: "apri-incontro-in-board",
+      name: "Schiera l'incontro nella Board",
+      checkCallback: (checking) => {
+        const file = this.app.workspace.getActiveFile();
+        const fm = file ? this.frontmatterOf(file.path) : null;
+        if (!fm || String(fm.categoria).toLowerCase() !== "incontro") return false;
+        if (!checking) void this.apriIncontroInBoard(file!);
+        return true;
+      },
+    });
     this.addCommand({ id: "motore-smoke", name: "DEV: Smoke del motore di combattimento", callback: () => this.motoreSmoke() });
     this.addRibbonIcon("swords", "GDR: Board di combattimento", () => this.activateBoard());
     this.addRibbonIcon("layout-dashboard", "GDR: Cruscotto DM", () => this.activateCruscotto());
@@ -212,6 +225,35 @@ export default class GdrPlugin extends Plugin {
   }
   activateCruscotto() { return this.activateView(VIEW_TYPE_CRUSCOTTO); }
   activateBoard() { return this.activateView(VIEW_TYPE_BOARD); }
+
+  // Ricarica le Board già aperte dagli eventi persistiti (dopo aver caricato un Incontro).
+  refreshBoard() {
+    for (const leaf of this.app.workspace.getLeavesOfType(VIEW_TYPE_BOARD)) {
+      const v: any = leaf.view;
+      if (v && typeof v.ricarica === "function") v.ricarica();
+    }
+  }
+
+  // Ricucitura prepara→gioca (F2): dalla nota-Incontro costruisce lo schieramento (creature
+  // collegate = nemici, alleati collegati + PG del party = alleati, override `varianti`),
+  // lo PERSISTE come stato-board e apre/ricarica la Board pronta per l'iniziativa. Sostituisce
+  // il vecchio flusso ```encounter + Initiative Tracker.
+  async apriIncontroInBoard(file: any) {
+    let bestiario: any[];
+    try { bestiario = await this.loadBestiario(); }
+    catch (e: any) { new Notice(`Bestiario non caricato: ${e?.message ?? e}`); return; }
+    const fm = this.frontmatterOf(file.path);
+    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs());
+    if (!eventi.length) { new Notice("Incontro vuoto: nessuna creatura/PG risolti."); return; }
+    await this.saveBoard(eventi);
+    await this.activateBoard();
+    this.refreshBoard();
+    const nNem = eventi.filter((e) => e.tipo === "aggiunto" && (e as any).combattente.schieramento === "nemico").length;
+    const nAll = eventi.length - nNem;
+    let msg = `Schierato «${fm.nome ?? file.basename}»: ${nNem} nemici, ${nAll} alleati. Tira l'iniziativa.`;
+    if (saltati.length) msg += `\n⚠️ Non nel bestiario (saltati): ${saltati.join(", ")}.`;
+    new Notice(msg, 9000);
+  }
 
   // DEV — smoke del motore: micro-battaglia deterministica (Eroina vs due Goblin) coi comandi
   // reali di `regole`; stampa il registro. Prova che il motore bundlato gira in-app.
