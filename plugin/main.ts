@@ -201,6 +201,22 @@ export default class GdrPlugin extends Plugin {
         return;
       }
 
+      // Statblock nativo (sostituisce Fantasy Statblocks nelle pagine SRD). Sintassi:
+      // `statblock <id-mostro>` — rende dal bestiario bundlato. Non reattivo (dato immutabile).
+      if (name === "statblock") {
+        const id = tokens.slice(1).join(" ").trim();
+        el.empty();
+        try {
+          const best = await this.loadBestiario();
+          const raw = best.find((mm) => mm.id === id) ?? best.find((mm) => String(mm.nome).toLowerCase() === id.toLowerCase());
+          if (raw) renderStatblock(el.createDiv(), raw);
+          else el.createEl("pre", { text: `Statblock GDR: mostro «${id}» non nel bestiario.` });
+        } catch (e: any) {
+          el.createEl("pre", { text: `Errore statblock ${id}: ${e?.message ?? e}` });
+        }
+        return;
+      }
+
       const spec = PANELS[name];
       if (!spec) { el.createEl("pre", { text: `Vista GDR sconosciuta: "${name}"` }); return; }
       reactive(async () => {
@@ -828,17 +844,13 @@ function modCar(valore: number): string {
   return m >= 0 ? `+${m}` : String(m);
 }
 
-// Statblock NATIVO di un mostro (sostituisce Fantasy Statblocks): reso in un Modal da
-// `raw` (il .monster.yaml completo del bestiario). PF/condizioni correnti dal combattente
-// in plancia, se presente; i tiri salvezza dai numeri già risolti da `daMostro`.
-class StatblockModal extends Modal {
-  constructor(app: App, private raw: any, private comb?: InPlancia) { super(app); }
-
-  onOpen() {
-    const c = this.contentEl;
-    c.empty();
+// Statblock NATIVO di un mostro (sostituisce Fantasy Statblocks): reso dentro un host
+// (Modal o blocco ```gdr statblock) da `raw` (il .monster.yaml completo del bestiario).
+// PF/condizioni correnti dal combattente in plancia se presente; i tiri salvezza dai
+// numeri già risolti da `daMostro`.
+function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia) {
+    const c = host;
     c.addClass("gdr-sb");
-    const m = this.raw;
     const n = (v: any) => (Number.isFinite(Number(v)) ? Number(v) : 0);
 
     c.createEl("h2", { cls: "gdr-sb-nome", text: String(m.nome ?? "?") });
@@ -847,7 +859,7 @@ class StatblockModal extends Modal {
 
     // Testata difensiva: CA · PF · Velocità.
     const testa = c.createDiv({ cls: "gdr-sb-blocco" });
-    const pf = this.comb ? `${this.comb.pf_attuali}/${this.comb.pf_max}` : (this.comb?.pf_max ?? "?");
+    const pf = comb ? `${comb.pf_attuali}/${comb.pf_max}` : "?";
     const riga = (etich: string, val: string) => { const p = testa.createEl("div"); p.createEl("strong", { text: `${etich} ` }); p.appendText(val); };
     riga("CA", String(n((m.ca ?? {}).valore)));
     riga("PF", String(pf));
@@ -859,7 +871,7 @@ class StatblockModal extends Modal {
     const grid = c.createDiv({ cls: "gdr-sb-car" });
     for (const a of abil) {
       const v = n((m.caratteristiche ?? {})[a]?.valore ?? 10);
-      const ts = this.comb?.tiri_salvezza?.[a];
+      const ts = comb?.tiri_salvezza?.[a];
       const cell = grid.createDiv({ cls: "gdr-sb-carcell" });
       cell.createDiv({ cls: "gdr-sb-carnome", text: a.slice(0, 3).toUpperCase() });
       cell.createDiv({ cls: "gdr-sb-carval", text: `${v} (${modCar(v)})` });
@@ -892,8 +904,11 @@ class StatblockModal extends Modal {
     sezione("Azioni", m.azioni);
     sezione("Reazioni", m.reazioni);
     sezione("Azioni leggendarie", m.azioni_leggendarie);
-  }
+}
 
+class StatblockModal extends Modal {
+  constructor(app: App, private raw: any, private comb?: InPlancia) { super(app); }
+  onOpen() { this.contentEl.empty(); renderStatblock(this.contentEl, this.raw, this.comb); }
   onClose() { this.contentEl.empty(); }
 }
 
