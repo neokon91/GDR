@@ -9,7 +9,7 @@
 Sono **già nel vault**: di norma basta accettare il *trust prompt* all'apertura (vedi i 3
 passi del [[LEGGIMI]]). Se qualcosa non si rende, apri *Impostazioni → Plugin della comunità*,
 assicurati che **Restricted mode** sia OFF e che questi siano **abilitati**:
-- **Dataview** (`dataview`)- **Meta Bind** (`obsidian-meta-bind-plugin`)- **Tab Panels** (`tab-panels`)- **Callout Manager** (`callout-manager`)- **Fantasy Statblocks** (`obsidian-5e-statblocks`)- **Metadata Menu** (`metadata-menu`)- **Iconic** (`iconic`)- **Calendarium** (`calendarium`)- **Dice Roller** (`obsidian-dice-roller`)- **Tasks** (`obsidian-tasks-plugin`)- **Excalidraw** (`obsidian-excalidraw-plugin`)- **TTRPG Tools - Maps** (`zoom-map`)- **Hexmap World Creator** (`hexmaker`)- **BRAT** (`obsidian42-brat`)- **Homepage** (`homepage`)- **Folder Notes** (`folder-notes`)- **Second Window** (`image-window`)- **Heraldry Weaver** (`heraldry-weaver`)- **Made Up Words** (`made-up-words`)- **Better Export PDF** (`better-export-pdf`)
+- **Dataview** (`dataview`)- **Meta Bind** (`obsidian-meta-bind-plugin`)- **Tab Panels** (`tab-panels`)- **Callout Manager** (`callout-manager`)- **Metadata Menu** (`metadata-menu`)- **Iconic** (`iconic`)- **Calendarium** (`calendarium`)- **Dice Roller** (`obsidian-dice-roller`)- **Tasks** (`obsidian-tasks-plugin`)- **Excalidraw** (`obsidian-excalidraw-plugin`)- **TTRPG Tools - Maps** (`zoom-map`)- **Hexmap World Creator** (`hexmaker`)- **BRAT** (`obsidian42-brat`)- **Homepage** (`homepage`)- **Folder Notes** (`folder-notes`)- **Second Window** (`image-window`)- **Heraldry Weaver** (`heraldry-weaver`)- **Made Up Words** (`made-up-words`)- **Better Export PDF** (`better-export-pdf`)
 Più il **plugin GDR** (`gdr`, già incluso e abilitato): è il motore del vault — rende i
 pannelli ```gdr, i pulsanti-azione, la creazione delle note e il Cruscotto DM.
 
@@ -144,20 +144,20 @@ La cartella **`SRD/`** contiene il riferimento ufficiale 5.5e **in italiano** (i
 oggetti magici, talenti, specie, background, condizioni, glossario, regole, classi, **mostri**),
 sotto licenza CC-BY-4.0 (vedi `SRD/LICENZA.md`, traduzione *massimobarbieri/DND-SRD-IT*).
 **Sola lettura**: si rigenera a ogni build, non modificarla — il tuo homebrew va in `Mondi/`.
-Parti da **`SRD/Indice.md`** (anche nei segnalibri). I **mostri** sono statblock già pronti:
-con "Parse Frontmatter in Notes" ON entrano nel bestiario di **Fantasy Statblocks** e li
-richiami con `monster: Nome` in qualunque incontro.
+Parti da **`SRD/Indice.md`** (anche nei segnalibri). I **mostri** sono statblock già pronti,
+resi dallo statblock **nativo** del plugin.
 
-## 9. Statblock: 5.5e (2024) e 5e
-Gli statblock usano di default `D&D 5.5 Layout ITA - Compatibile 5e`, una resa **fedele al 2024**:
-mostra Iniziativa, la griglia caratteristiche, GS con **PE e bonus di competenza**, tiri
-salvezza/abilità, equipaggiamento, azioni bonus/reazioni/leggendarie. I mostri SRD sono già
-mappati su tutti questi campi.
+## 9. Statblock (nativo, 2024)
+Gli statblock li rende il plugin GDR col blocco **` ```gdr statblock `** — nessun plugin di
+terze parti. Mostra taglia/tipo/allineamento, CA · Iniziativa · PF · Velocità, la griglia
+delle sei caratteristiche coi tiri salvezza, abilità/sensi/lingue, resistenze e immunità,
+equipaggiamento, GS, e le sezioni Tratti/Azioni/Azioni bonus/Reazioni/Azioni leggendarie.
 
-Nel template **Creatura** trovi **due tab**: *Statblock 5.5e* (dove inserisci i numeri) e
-*Statblock 5e* (la **stessa** creatura resa in stile classico `Basic 5e Layout ITA`,
-via `monster:` — non riscrivi nulla). Per cambiare lo stile di un singolo blocco, modifica la
-riga `layout:`. Entrambi i layout IT sono vendorizzati e installati in Fantasy Statblocks.
+- **Mostri SRD**: le pagine `SRD/Mostri/` usano ` ```gdr statblock <id> ` e leggono i dati dal
+  bestiario generato dall'archivio (dado dei danni cliccabile, prosa navigabile).
+- **Creature homebrew**: il template **Creatura** ha un tab *Statblock* col blocco
+  ` ```gdr statblock ` e i dati **inline** (YAML). Scrivi i numeri lì; il pulsante *Genera dal
+  Grado di sfida* riempie una base coerente col GS, che poi rifinisci a mano.
 
 Per il **richiamo rapido** di condizioni, maestrie delle armi e ordini di bastione (in un
 posto solo): **[[Glossario|📖 Glossario dei termini di gioco]]**; per il flusso di uno scontro

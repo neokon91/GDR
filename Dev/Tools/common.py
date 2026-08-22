@@ -37,7 +37,6 @@ def js_source(filename: str) -> str:
     if (JS_DIR / stem).is_dir():
         return bundle_js(stem)
     return (JS_DIR / filename).read_text(encoding="utf-8")
-STATBLOCKS_DIR = SOURCE / "statblocks"  # layout Fantasy Statblocks (uno per file)
 
 # Unico target di output: il vault Obsidian vivo. Si apre questa cartella in
 # Obsidian e si rilancia `build` per vedere i cambiamenti dal vivo. Il repo di

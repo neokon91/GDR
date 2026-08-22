@@ -9,7 +9,6 @@ import yaml
 from common import (
     HIDDEN_DIRS,
     INDEX_DIR,
-    STATBLOCKS_DIR,
     VAULT,
     read_json,
     template_folder,

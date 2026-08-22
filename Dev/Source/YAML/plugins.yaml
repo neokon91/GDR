@@ -57,14 +57,6 @@ plugins:
     author: eth-p
     repo: eth-p/obsidian-callout-manager
     license: MIT
-  - id: obsidian-5e-statblocks
-    name: Fantasy Statblocks
-    author: Jeremy Valentine
-    repo: Obsidian-TTRPG-Community/fantasy-statblocks
-    version: 4.10.3
-    license: MIT
-    critico: true
-    rompe: "Gli statblock dei mostri e il blocco incontro non si vedono."
   - id: metadata-menu
     name: Metadata Menu
     author: mdelobelle

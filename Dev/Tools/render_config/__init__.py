@@ -14,7 +14,6 @@ from .presentation import (
     canvas_colors,
 )
 from .model_cfg import (
-    load_statblock_layouts,
     creation_buttons,
     action_buttons,
     values_list,
@@ -37,7 +36,6 @@ from .writers import (
     write_hexmaker,
     write_metadata_menu,
     write_callout_manager,
-    write_statblock_layouts,
     write_bookmarks,
     write_obsidian_config,
 )

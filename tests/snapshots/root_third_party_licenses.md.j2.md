@@ -16,7 +16,6 @@ la sorgente corrispondente, con il testo completo della licenza, è al rispettiv
 | Meta Bind | Moritz Jung | GPL-3.0 | [mProjectsCode/obsidian-meta-bind-plugin](https://github.com/mProjectsCode/obsidian-meta-bind-plugin) |
 | Tab Panels | GnoxNahte | MIT | [GnoxNahte/obsidian-tab-panels](https://github.com/GnoxNahte/obsidian-tab-panels) |
 | Callout Manager | eth-p | MIT | [eth-p/obsidian-callout-manager](https://github.com/eth-p/obsidian-callout-manager) |
-| Fantasy Statblocks | Jeremy Valentine | MIT | [Obsidian-TTRPG-Community/fantasy-statblocks](https://github.com/Obsidian-TTRPG-Community/fantasy-statblocks) |
 | Metadata Menu | mdelobelle | MIT | [mdelobelle/metadatamenu](https://github.com/mdelobelle/metadatamenu) |
 | Iconic | gfxholo | MIT | [gfxholo/iconic](https://github.com/gfxholo/iconic) |
 | Calendarium | Jeremy Valentine | MIT | [javalent/calendarium](https://github.com/javalent/calendarium) |

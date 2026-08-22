@@ -29,5 +29,4 @@ renderDiagnostica
 > | **Dataview** | La Home e gli indici (Atlante, Cast, Fronti…) restano vuoti o come codice. |
 > | **Meta Bind** | I campi da compilare (slider, menu, testo) restano come codice grezzo. |
 > | **Tab Panels** | Le note a schede (Lore / Al tavolo / Collegamenti) appaiono come testo grezzo. |
-> | **Fantasy Statblocks** | Gli statblock dei mostri e il blocco incontro non si vedono. |
 > | **Dice Roller** | I tiri di dado sulla scheda e negli incontri non funzionano. |

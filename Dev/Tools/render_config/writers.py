@@ -9,7 +9,6 @@ import yaml
 from common import (
     HIDDEN_DIRS,
     INDEX_DIR,
-    STATBLOCKS_DIR,
     VAULT,
     read_json,
     template_folder,
@@ -18,7 +17,7 @@ from common import (
 )
 
 from ._io import merge_json, merge_plugin_config, union_list
-from .model_cfg import fileclass_note, load_statblock_layouts, meta_bind_config
+from .model_cfg import fileclass_note, meta_bind_config
 from .presentation import write_workspace_chrome
 
 
@@ -181,68 +180,6 @@ def write_callout_manager(obsidian: Path, plugins: dict[str, Any]) -> None:
             write_json(cm_dir / "data.json", cm)
 
 
-def write_statblock_layouts(obsidian: Path) -> None:
-    """Fantasy Statblocks: rende disponibili i layout italiani 5e/5.5e (uno per
-    file in Dev/Source/statblocks/), abilita il Dice Roller negli statblock e
-    autoParse (registra le creature nel bestiario → `monster:` risolve). NON
-    cambia il layout di default (lo scegli tu in FS). I NOSTRI layout vendorizzati
-    sono aggiornati per id (così le correzioni — es. nuove regole diceParsing —
-    raggiungono i vault già esistenti); gli ALTRI layout dell'utente e la scelta
-    del default restano intatti."""
-    fs_dir = obsidian / "plugins" / "obsidian-5e-statblocks"
-    if fs_dir.is_dir():
-        fs_data = read_json(fs_dir / "data.json")
-        if isinstance(fs_data, dict):
-            layouts = fs_data.get("layouts") if isinstance(fs_data.get("layouts"), list) else []
-            by_id = {l.get("id"): i for i, l in enumerate(layouts) if isinstance(l, dict)}
-            changed = False
-            # Dice Roller: rende cliccabili attacchi/danni negli statblock (mostri
-            # SRD + creature). La chiave reale di Fantasy Statblocks è `useDice`
-            # (default true); `diceRolling` è legacy/no-op ma la teniamo per sicurezza.
-            for key in ("useDice", "diceRolling"):
-                if fs_data.get(key) is not True:
-                    fs_data[key] = True
-                    changed = True
-            # autoParse ("Parse Frontmatter in Notes"): registra nel bestiario le
-            # note con `statblock: inline` (mostri SRD + creature) → i riferimenti
-            # `monster:` risolvono (tab 5e del template creatura, blocchi encounter).
-            if fs_data.get("autoParse") is not True:
-                fs_data["autoParse"] = True
-                changed = True
-            # I NOSTRI layout vendorizzati sono AUTORITATIVI: se ne esiste già uno con
-            # lo stesso id (build precedente), lo AGGIORNIAMO in posto — così le nuove
-            # regole diceParsing raggiungono i vault esistenti; se è nuovo lo aggiungiamo.
-            # La posizione nell'array e fs_data["default"] non cambiano (default intatto).
-            src_layouts = load_statblock_layouts()
-            for fs_layout in src_layouts:
-                lid = fs_layout.get("id")
-                if lid in by_id:
-                    if layouts[by_id[lid]] != fs_layout:
-                        layouts[by_id[lid]] = fs_layout
-                        changed = True
-                else:
-                    by_id[lid] = len(layouts)
-                    layouts.append(fs_layout)
-                    changed = True
-            # Backfill diceParsing sui layout SENZA quella chiave (es. un layout
-            # 2024 legacy/dell'utente come "GDR — 5.5e (2024)"). FS rende i dadi con
-            # `layout.diceParsing ?? regole_default`: un layout privo di diceParsing
-            # ricade sulle regole DEFAULT, che sono in INGLESE («+N to hit») → in
-            # italiano («+N, portata») il tiro PER COLPIRE non diventa cliccabile
-            # (il danno «N (XdY)» sì, perché la regola di default lo riconosce).
-            # Diamo a ogni layout privo di regole le NOSTRE (danno + tiro per colpire
-            # italiani). Un diceParsing esplicitamente vuoto [] è rispettato.
-            dice_rules = next((l.get("diceParsing") for l in src_layouts if l.get("diceParsing")), None)
-            if dice_rules:
-                for l in layouts:
-                    if isinstance(l, dict) and "diceParsing" not in l:
-                        l["diceParsing"] = [dict(r) for r in dice_rules]
-                        changed = True
-            if changed:
-                fs_data["layouts"] = layouts
-                write_json(fs_dir / "data.json", fs_data)
-
-
 def write_bookmarks(obsidian: Path, pages: list[dict[str, Any]]) -> None:
     """Bookmarks (core): le poche pagine di riferimento a un clic (Home, hub, SRD
     se generata, Base per pagina). Non distruttivo: aggiunge solo le voci mancanti,
@@ -292,7 +229,6 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     merge_plugin_config(obsidian, "obsidian-meta-bind-plugin", meta_bind_config(plugins, core, templates))
     write_metadata_menu(obsidian, core)
     write_callout_manager(obsidian, plugins)
-    write_statblock_layouts(obsidian)
     write_folder_notes(obsidian)
     write_tab_panels(obsidian)
     write_calendarium(obsidian)

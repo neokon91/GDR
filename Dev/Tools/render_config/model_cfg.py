@@ -9,7 +9,6 @@ import yaml
 from common import (
     HIDDEN_DIRS,
     INDEX_DIR,
-    STATBLOCKS_DIR,
     VAULT,
     read_json,
     template_folder,
@@ -18,19 +17,6 @@ from common import (
 )
 
 
-
-
-def load_statblock_layouts() -> list[dict[str, Any]]:
-    """Layout Fantasy Statblocks vendorizzati (Dev/Source/statblocks/*.json), uno
-    per file. Ognuno deve essere un oggetto con id+name; gli altri sono ignorati."""
-    if not STATBLOCKS_DIR.is_dir():
-        return []
-    layouts = []
-    for path in sorted(STATBLOCKS_DIR.glob("*.json")):
-        data = read_json(path)
-        if isinstance(data, dict) and data.get("id") and data.get("name"):
-            layouts.append(data)
-    return layouts
 
 
 # --- Bottoni e fileClass (derivati dal modello) -----------------------------

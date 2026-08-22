@@ -361,7 +361,6 @@ async function runWizard(tp, template, core) {
     sessioni: session ? [`[[${session.basename}]]`] : [],
     tags: ["gdr/bozza"],
   };
-  if (category === "creatura") data.statblock = "inline";
   if (category === "sessione") {
     data.attiva = false;
     data.data = tp.date.now("YYYY-MM-DD");

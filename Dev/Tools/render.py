@@ -31,7 +31,6 @@ from common import (  # noqa: F401 (re-export per i test/usi storici)
     ROOT,
     SOURCE,
     SRD_DIR,
-    STATBLOCKS_DIR,
     VAULT,
     apply_entities,
     bundle_js,
@@ -89,7 +88,6 @@ from render_config import (  # noqa: F401 (re-export per i test/usi storici)
     creation_buttons,
     fileclass_fields,
     fileclass_note,
-    load_statblock_layouts,
     merge_json,
     merge_plugin_config,
     meta_bind_config,
@@ -105,7 +103,6 @@ from render_config import (  # noqa: F401 (re-export per i test/usi storici)
     write_homepage,
     write_metadata_menu,
     write_obsidian_config,
-    write_statblock_layouts,
     write_tab_panels,
     write_workspace_chrome,
 )
