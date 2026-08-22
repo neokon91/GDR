@@ -54,6 +54,10 @@ ARCHIVIO_SRD = gen_bestiario.SRD_MONSTERS.parent  # ROOT/archivio/srd
 _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_spells.json": "spells",
     "srd_5_2_1_magic_items.json": "magic_items",
+    "srd_5_2_1_languages.json": "lingue",
+    # NB NON qui: classi/background/specie/talenti/equipaggiamento/regole → li consuma anche il
+    # motore di creazione PG (build_personaggio) nella forma JSON; migrarli richiede prima di
+    # adattare build_personaggio all'archivio (grosso, legato al «motore PG unico» — vedi handoff).
 }
 
 
@@ -64,14 +68,133 @@ def _load_archivio(subdir: str) -> list[dict[str, Any]]:
     d = ARCHIVIO_SRD / subdir
     if not d.is_dir():
         return []
-    per_nome: dict[str, dict[str, Any]] = {}
+    per_slug: dict[str, dict[str, Any]] = {}
+    # 1) YAML strutturati. Robusto a un file transitoriamente malformato (archivio è un
+    # repo in editing): lo salta con un avviso invece di abortire tutta la build.
     for f in sorted(d.rglob("*.yaml")):
-        m = yaml.safe_load(f.read_text(encoding="utf-8"))
+        try:
+            m = yaml.safe_load(f.read_text(encoding="utf-8"))
+        except yaml.YAMLError as e:
+            print(f"[avviso] archivio: YAML malformato, saltato: {f.name} ({str(e).splitlines()[0]})")
+            continue
         if not isinstance(m, dict) or not m.get("nome"):
             continue
-        m.setdefault("id", f.name.split(".")[0])
-        per_nome.setdefault(str(m["nome"]).strip().lower(), m)
-    return list(per_nome.values())
+        slug = f.name.split(".")[0]
+        m.setdefault("id", slug)
+        per_slug[slug] = m
+    # 2) MD prosa (frontmatter + corpo markdown): il CORPO diventa `descrizione`. Si fonde
+    # sul .yaml gemello (doppio-file, es. condizioni) o crea una voce prosa-sola (es. regole).
+    for f in sorted(d.rglob("*.md")):
+        if f.name.lower() == "readme.md":  # documentazione di cartella, non una voce
+            continue
+        txt = f.read_text(encoding="utf-8")
+        mm = re.match(r"^---\n(.*?)\n---\n?(.*)$", txt, re.S)
+        try:
+            fm = yaml.safe_load(mm.group(1)) if mm else {}
+        except yaml.YAMLError as e:
+            print(f"[avviso] archivio: frontmatter .md malformato, ignorato: {f.name} ({str(e).splitlines()[0]})")
+            fm = {}
+        if not isinstance(fm, dict):
+            fm = {}
+        corpo = (mm.group(2) if mm else txt).strip()
+        slug = f.name[:-3].split(".")[0]
+        entry = per_slug.get(slug)
+        if entry is None:
+            nome = fm.get("nome") or slug.replace("-", " ").capitalize()
+            entry = {**fm, "nome": nome, "id": fm.get("id", slug)}
+            per_slug[slug] = entry
+        if corpo and not entry.get("descrizione"):
+            entry["descrizione"] = corpo
+    return [per_slug[k] for k in sorted(per_slug)]
+
+
+# --- Adapter per-categoria: la forma-dato dell'archivio è STRUTTURATA (privilegi,
+# competenze, danno/costo/peso, tratti…) e srd_note non conosce quei campi → una pagina
+# migrata da archivio sarebbe solo frontmatter. Ogni adapter SINTETIZZA `descrizione`/
+# `sezioni` renderizzabili da srd_note, così la pagina è ricca senza copiare prosa dai JSON.
+def _kv(voce: str, valore: Any) -> dict[str, Any]:
+    return {"Voce": voce, "Valore": _join(valore) if isinstance(valore, list) else str(valore)}
+
+
+def _pulisci(s: Any) -> str:
+    return str(s or "").replace("-", " ").strip()
+
+
+def _adatta_background(d: dict[str, Any]) -> None:
+    comp = d.get("competenze") or {}
+    righe = []
+    if d.get("punteggi_caratteristica"): righe.append(_kv("Caratteristiche", d["punteggi_caratteristica"]))
+    if d.get("talento_origine"): righe.append(_kv("Talento d'origine", _pulisci(d["talento_origine"])))
+    if comp.get("abilita"): righe.append(_kv("Abilità", comp["abilita"]))
+    if comp.get("strumenti"):
+        s = comp["strumenti"]
+        righe.append(_kv("Strumenti", [_pulisci(x) for x in s] if isinstance(s, list) else _pulisci(s)))
+    if d.get("equipaggiamento_alternativo"): righe.append(_kv("Equipaggiamento", d["equipaggiamento_alternativo"]))
+    if righe: d.setdefault("sezioni", []).insert(0, {"titolo": "Dettagli", "righe": righe})
+
+
+def _adatta_specie(d: dict[str, Any]) -> None:
+    if isinstance(d.get("velocita"), dict):
+        d["velocita"] = ", ".join(f"{v} m" if k == "camminata" else f"{k} {v} m" for k, v in d["velocita"].items())
+    d.setdefault("tipo_creatura", d.get("tipo", ""))
+    if d.get("tratti_sintesi") and not d.get("descrizione"):
+        d["descrizione"] = "**Tratti**: " + _pulisci(d["tratti_sintesi"]) + "."
+    ant = d.get("antenati_draconici")
+    if isinstance(ant, list) and ant:
+        righe = [{"Antenato": a.get("nome", ""), "Danno": _pulisci(a.get("tipo_danno"))} for a in ant if isinstance(a, dict)]
+        d.setdefault("sezioni", []).append({"titolo": "Antenati draconici", "righe": righe})
+
+
+def _adatta_classe(d: dict[str, Any]) -> None:
+    righe = []
+    if d.get("dado_vita"): righe.append(_kv("Dado Vita", f"d{d['dado_vita']}"))
+    if d.get("caratteristica_primaria"): righe.append(_kv("Caratteristica primaria", d["caratteristica_primaria"]))
+    if d.get("tiri_salvezza"):
+        ts = d["tiri_salvezza"]
+        righe.append(_kv("Tiri Salvezza", [_pulisci(x) for x in ts] if isinstance(ts, list) else _pulisci(ts)))
+    ca = d.get("competenze_abilita")
+    if isinstance(ca, dict) and ca.get("scelte"):
+        righe.append(_kv(f"Abilità ({ca.get('quantita', '')} a scelta)", [_pulisci(x) for x in ca["scelte"]]))
+    sez = []
+    if righe: sez.append({"titolo": "Dati di classe", "righe": righe})
+    for p in d.get("privilegi") or []:
+        if isinstance(p, dict) and p.get("nome"):
+            sez.append({"titolo": p["nome"], "descrizione": str(p.get("descrizione") or "").strip()})
+    if sez: d.setdefault("sezioni", []).extend(sez)
+
+
+def _adatta_equip(d: dict[str, Any]) -> None:
+    righe = []
+    if d.get("tipo"): righe.append(_kv("Tipo", _pulisci(d["tipo"])))
+    costo = d.get("costo")
+    if isinstance(costo, dict): righe.append(_kv("Costo", f"{costo.get('valore', '')} {_pulisci(costo.get('valuta'))}"))
+    peso = d.get("peso")
+    if isinstance(peso, dict): righe.append(_kv("Peso", f"{peso.get('valore', '')} {peso.get('unita', '')}"))
+    danno = d.get("danno")
+    if isinstance(danno, dict): righe.append(_kv("Danno", f"{danno.get('dado', '')} {_pulisci(danno.get('tipo_danno'))}"))
+    if d.get("proprieta"):
+        p = d["proprieta"]
+        righe.append(_kv("Proprietà", [_pulisci(x) for x in p] if isinstance(p, list) else _pulisci(p)))
+    if d.get("padronanza"): righe.append(_kv("Padronanza", _pulisci(d["padronanza"])))
+    if righe: d.setdefault("sezioni", []).insert(0, {"titolo": "Dettagli", "righe": righe})
+
+
+def _adatta_lingue(d: dict[str, Any]) -> None:
+    def tabella(lista):
+        return [{"Lingua": x.get("nome", "")} for x in (lista or []) if isinstance(x, dict)]
+    sez = []
+    if d.get("lingue_standard"): sez.append({"titolo": "Lingue standard", "righe": tabella(d["lingue_standard"])})
+    if d.get("lingue_rare"): sez.append({"titolo": "Lingue rare", "righe": tabella(d["lingue_rare"])})
+    if sez: d.setdefault("sezioni", []).extend(sez)
+
+
+_ADATTA = {
+    "srd_5_2_1_backgrounds.json": _adatta_background,
+    "srd_5_2_1_species.json": _adatta_specie,
+    "srd_5_2_1_classes.json": _adatta_classe,
+    "srd_5_2_1_equipment.json": _adatta_equip,
+    "srd_5_2_1_languages.json": _adatta_lingue,
+}
 
 
 def load_srd(name: str) -> list[dict[str, Any]]:
@@ -79,6 +202,10 @@ def load_srd(name: str) -> list[dict[str, Any]]:
     if subdir:
         data = _load_archivio(subdir)
         if data:  # archivio assente/vuoto → ripiego sul JSON (build robusta)
+            adatta = _ADATTA.get(name)
+            if adatta:
+                for e in data:
+                    adatta(e)
             return data
     path = SRD_DIR / name
     if not path.is_file():
