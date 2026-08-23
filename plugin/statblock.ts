@@ -10,6 +10,18 @@ export function modCar(valore: number): string {
   return m >= 0 ? `+${m}` : String(m);
 }
 
+// Etichetta leggibile da un valore che può essere un id QUALIFICATO dell'archivio
+// (`dnd.<tipo>.<slug>`, in migrazione): ne ricava lo slug (ultimo segmento, trattini→spazi,
+// iniziale maiuscola). I valori già in prosa ("Bestia", "Comune…") restano invariati.
+// NB: lo slug perde accenti/maiuscole interne dell'originale ("profondita" non "profondità");
+// la resa perfetta richiederebbe un indice id→nome bundlato (possibile evoluzione).
+export function etichetta(v: any): string {
+  const s = String(v ?? "").trim();
+  if (!/^dnd\.[a-z0-9-]+\.[a-z0-9-]+$/.test(s)) return s;
+  const slug = s.split(".").pop()!.replace(/-/g, " ");
+  return slug.charAt(0).toUpperCase() + slug.slice(1);
+}
+
 // Trova un mostro nel bestiario tollerando lo stato della migrazione archivio: per id
 // esatto, poi per SLUG (ultimo segmento dopo il `.`, così `aboleth` trova `dnd.monster.aboleth`
 // e viceversa), infine per nome (case-insensitive).
@@ -31,7 +43,7 @@ export function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia, md?
   const n = (v: any) => (Number.isFinite(Number(v)) ? Number(v) : 0);
 
   c.createEl("h2", { cls: "gdr-sb-nome", text: String(m.nome ?? "?") });
-  const sotto = [m.taglia, m.tipo, m.allineamento].filter(Boolean).join(", ");
+  const sotto = [m.taglia, etichetta(m.tipo), m.allineamento].filter(Boolean).join(", ");
   if (sotto) c.createEl("div", { cls: "gdr-sb-sotto", text: sotto });
 
   // Testata difensiva: CA · PF · Velocità.
@@ -89,7 +101,17 @@ export function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia, md?
     ? Object.entries(m.sensi).map(([k, v]) => `${k.replace(/_/g, " ")} ${v} m`) : [];
   if (m.percezione_passiva != null) sensiVoci.push(`percezione passiva ${m.percezione_passiva}`);
   if (sensiVoci.length) { const p = meta.createEl("div"); p.createEl("strong", { text: "Sensi " }); p.appendText(sensiVoci.join(", ")); }
-  const perLingua = (l: any) => (typeof l === "string" ? l : String(l?.nome ?? l?.id ?? "")).trim();
+  const perLingua = (l: any): string => {
+    if (typeof l === "string") return etichetta(l);
+    if (l && typeof l === "object") {
+      if (l.nome) return String(l.nome).trim();
+      if (l.id) return etichetta(String(l.id));
+      // forma {senso: portata} — es. {telepatia: 36} → "telepatia 36 m"
+      const [k, v] = Object.entries(l)[0] ?? [];
+      return k ? `${k} ${v} m` : "";
+    }
+    return "";
+  };
   const lingue = (Array.isArray(m.lingue) ? m.lingue : m.lingue ? [m.lingue] : []).map(perLingua).filter(Boolean);
   if (lingue.length) { const p = meta.createEl("div"); p.createEl("strong", { text: "Lingue " }); p.appendText(lingue.join(", ")); }
   // Difese/dotazione per TIPO (liste di stringhe): resistenze, immunità (danni e
