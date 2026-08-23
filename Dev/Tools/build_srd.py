@@ -27,6 +27,7 @@ SRD_GEN = [
     {"json": "srd_5_2_1_equipment.json",   "dest": "Equipaggiamento", "cat": "srd-equipaggiamento", "fm": []},
     {"json": "srd_5_2_1_rules.json",       "dest": "Regole",          "cat": "srd-regola",      "fm": []},
     {"json": "srd_5_2_1_classes.json",     "dest": "Classi",          "cat": "srd-classe",      "fm": []},
+    {"json": "srd_5_2_1_subclasses.json",  "dest": "Sottoclassi",     "cat": "srd-sottoclasse", "fm": ["classe"]},
 ]
 
 SRD_ATTRIBUTION = (
@@ -57,6 +58,7 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_feats.json": "talenti",
     "srd_5_2_1_equipment.json": "equipaggiamento",
     "srd_5_2_1_classes.json": "classi",
+    "srd_5_2_1_subclasses.json": "subclasses",
     "srd_5_2_1_rules.json": "regole",
     "srd_5_2_1_monsters.json": "mostro",
     "srd_5_2_1_rules_glossary.json": "glossario",
@@ -243,6 +245,28 @@ def _adatta_classe(d: dict[str, Any]) -> None:
     if sez: d.setdefault("sezioni", []).extend(sez)
 
 
+def _adatta_subclass(d: dict[str, Any]) -> None:
+    # I `benefici` (livello + privilegio + descrizione) diventano sezioni renderizzabili,
+    # una per privilegio, ordinate come nell'archivio. `classe` resta nel frontmatter (query/
+    # relazioni); la citazione va nell'header (srd_header). id nudo per le chiavi downstream.
+    d["id"] = _id_nudo(d.get("id"))
+    sez = []
+    for b in d.get("benefici") or []:
+        if not isinstance(b, dict):
+            continue
+        priv = str(b.get("privilegio") or "").strip()
+        liv = b.get("livello")
+        if priv and liv is not None:
+            titolo = f"Livello {liv} · {priv}"
+        else:
+            titolo = priv or (f"Livello {liv}" if liv is not None else "")
+        desc = str(b.get("descrizione") or "").strip()
+        if titolo or desc:
+            sez.append({"titolo": titolo, "descrizione": desc})
+    if sez:
+        d.setdefault("sezioni", []).extend(sez)
+
+
 def _adatta_equip(d: dict[str, Any]) -> None:
     d["id"] = _id_nudo(d.get("id"))
     righe = []
@@ -311,6 +335,7 @@ _ADATTA = {
     "srd_5_2_1_backgrounds.json": _adatta_background,
     "srd_5_2_1_species.json": _adatta_specie,
     "srd_5_2_1_classes.json": _adatta_classe,
+    "srd_5_2_1_subclasses.json": _adatta_subclass,
     "srd_5_2_1_equipment.json": _adatta_equip,
     "srd_5_2_1_languages.json": _adatta_lingue,
     "srd_5_2_1_feats.json": _adatta_talento,
@@ -583,6 +608,13 @@ def srd_header(entry: dict[str, Any], cat: str) -> str:
         return line
     if cat == "srd-specie":
         return f"> [!abstract] {entry.get('tipo_creatura', '')} · Taglia {entry.get('taglia', '')} · Velocità {entry.get('velocita', '')}"
+    if cat == "srd-sottoclasse":
+        cls = _pulisci(entry.get("classe")).capitalize()
+        righe = [f"> [!abstract] Sottoclasse{(' di ' + cls) if cls else ''}"]
+        if entry.get("citazione"):
+            cit = str(entry["citazione"]).strip('«»." ')
+            righe.append(f"> *«{cit}»*")
+        return "\n".join(righe)
     if cat == "srd-background" and entry.get("talento_origine"):
         return f"> [!abstract] Background · Talento d'origine: {entry['talento_origine']}"
     if cat == "srd-condizione":
@@ -668,6 +700,7 @@ def autolink_index() -> dict[str, str]:
 
     for jf in ("srd_5_2_1_species.json", "srd_5_2_1_backgrounds.json",
                "srd_5_2_1_feats.json", "srd_5_2_1_classes.json",
+               "srd_5_2_1_subclasses.json",
                "srd_5_2_1_spells.json", "srd_5_2_1_monsters.json"):
         for e in load_srd(jf):
             if isinstance(e, dict) and e.get("nome"):

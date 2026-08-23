@@ -113,6 +113,25 @@ def test_srd_note_converte_wikilink_qualificati_della_prosa():
     assert "[[[[" not in out  # nessun annidamento con l'autolink
 
 
+def test_subclasses_da_archivio():
+    """Le sottoclassi (12) si generano da archivio: `benefici` → sezioni renderizzabili,
+    `classe` nel frontmatter, citazione nell'header."""
+    subs = bs.load_srd("srd_5_2_1_subclasses.json")
+    if not subs:
+        import pytest
+        pytest.skip("archivio subclasses assenti")
+    assert len(subs) >= 12
+    cacc = next((s for s in subs if str(s.get("nome")) == "Cacciatore"), None)
+    assert cacc and cacc.get("classe") == "ranger"
+    # l'adapter ha sintetizzato le sezioni dai benefici (livello · privilegio)
+    titoli = [str(sez.get("titolo", "")) for sez in (cacc.get("sezioni") or [])]
+    assert any("Sapienza del Cacciatore" in t for t in titoli)
+    assert any(t.startswith("Livello 3") for t in titoli)
+    out = bs.srd_note(cacc, "srd-sottoclasse", ["classe"])
+    assert "Sottoclasse di Ranger" in out
+    assert "### Livello 3 · Sapienza del Cacciatore" in out
+
+
 def test_magic_items_da_archivio_con_sintonia():
     """La categoria oggetti magici è mappata su archivio: >200 voci, con prosa e la
     sintonia derivata da `richiede_sintonia`."""
