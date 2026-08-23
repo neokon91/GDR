@@ -176,6 +176,14 @@
   font-size: var(--font-ui-smaller); padding: 1px 7px; border-radius: 999px;
   background: var(--background-modifier-hover); color: var(--text-muted);
 }
+.gdr-board-conseguenze {
+  margin-top: 16px; padding: 12px 14px; border-radius: 12px;
+  border: 1px solid var(--interactive-accent); background: var(--background-secondary);
+}
+.gdr-board-conseguenze h4 { margin: 0 0 8px; font-size: var(--font-ui-small); }
+.gdr-board-cons-pg { margin: 0 0 10px; padding-left: 1.2em; }
+.gdr-board-cons-pg li { font-size: var(--font-ui-smaller); color: var(--text-muted); }
+
 .gdr-board-log { margin-top: 16px; }
 .gdr-board-log h4 { margin: 0 0 6px; color: var(--text-muted); font-size: var(--font-ui-small); }
 .gdr-board-log-righe { display: flex; flex-direction: column; gap: 2px; }

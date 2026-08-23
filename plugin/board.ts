@@ -150,6 +150,81 @@ export class BoardView extends ItemView {
     this.commit();
   }
 
+  // --- F5 Conseguenze: a fine scontro, cuce la Board al mondo ------------------
+  // Riporta i PF finali dei PG sulle loro note (campo `pf`, quello che la scheda mostra).
+  private async riportaPfAiPg(s: Stato) {
+    const pgs = this.plugin.partyPgs();
+    const pgInPlancia = s.combattenti.filter((c) => c.id.startsWith("pg:"));
+    let scritti = 0;
+    for (const c of pgInPlancia) {
+      const pg = pgs.find((e) => `pg:${String(e.fm.nome ?? "").toLowerCase().replace(/\s+/g, "-")}` === c.id);
+      if (!pg) continue;
+      await this.app.fileManager.processFrontMatter(pg.f, (fm: any) => {
+        fm.pf = c.pf_attuali;
+        if (c.pf_temporanei) fm.pf_temp = c.pf_temporanei; else delete fm.pf_temp;
+      });
+      scritti++;
+    }
+    new Notice(scritti ? `PF riportati su ${scritti} PG.` : "Nessuna nota PG trovata da aggiornare.");
+  }
+
+  // Avanza il clock di un fronte (una nota con `clock_dim`: la macchina-clock è armata).
+  private async avanzaFronte() {
+    const fronti = this.app.vault.getMarkdownFiles()
+      .map((f) => ({ f, fm: (this.app.metadataCache.getFileCache(f)?.frontmatter ?? {}) as any }))
+      .filter((e) => e.fm.clock_dim != null)
+      .sort((a, b) => String(a.fm.nome || a.f.basename).localeCompare(String(b.fm.nome || b.f.basename)));
+    if (!fronti.length) { new Notice("Nessun fronte con clock nel vault."); return; }
+    const scelto = await suggester(
+      this.app,
+      (e: any) => `${e.fm.nome ?? e.f.basename} — clock ${Number(e.fm.clock) || 0}/${e.fm.clock_dim}`,
+      fronti, false, "Avanza quale fronte?");
+    if (!scelto) return;
+    let nuovo = 0, dim = 0;
+    await this.app.fileManager.processFrontMatter(scelto.f, (fm: any) => {
+      dim = Number(fm.clock_dim) || 0;
+      nuovo = Math.min(dim, (Number(fm.clock) || 0) + 1);
+      fm.clock = nuovo;
+    });
+    const nome = scelto.fm.nome ?? scelto.f.basename;
+    new Notice(nuovo >= dim && dim > 0
+      ? `«${nome}»: clock PIENO (${nuovo}/${dim}) — risolvi la conseguenza (Giro del mondo).`
+      : `«${nome}»: clock ${nuovo}/${dim}.`);
+  }
+
+  // Marca una nota Incontro come risolta (campo `stato`). La Board non traccia l'origine →
+  // scelta a mano fra le note Incontro (funziona sempre, anche a Board aperta a sé).
+  private async marcaIncontroRisolto() {
+    const incontri = this.app.vault.getMarkdownFiles()
+      .map((f) => ({ f, fm: (this.app.metadataCache.getFileCache(f)?.frontmatter ?? {}) as any }))
+      .filter((e) => String(e.fm.categoria).toLowerCase() === "incontro")
+      .sort((a, b) => String(a.fm.nome || a.f.basename).localeCompare(String(b.fm.nome || b.f.basename)));
+    if (!incontri.length) { new Notice("Nessuna nota Incontro nel vault."); return; }
+    const scelto = await suggester(this.app, (e: any) => String(e.fm.nome ?? e.f.basename), incontri, false, "Quale Incontro è risolto?");
+    if (!scelto) return;
+    await this.app.fileManager.processFrontMatter(scelto.f, (fm: any) => { fm.stato = "risolto"; });
+    new Notice(`Incontro «${scelto.fm.nome ?? scelto.f.basename}» segnato risolto.`);
+  }
+
+  // Pannello Conseguenze: riepilogo dei PG con PF finali + azioni-ponte (opzionali, il GM
+  // clicca ciò che serve). Mostrato solo a scontro deciso.
+  private renderConseguenze(root: HTMLElement, s: Stato, esito: string) {
+    const pan = root.createDiv({ cls: "gdr-board-conseguenze" });
+    pan.createEl("h4", { text: `🏁 Conseguenze — ${esito}` });
+    const pgFinali = s.combattenti.filter((c) => c.id.startsWith("pg:"));
+    if (pgFinali.length) {
+      const ul = pan.createEl("ul", { cls: "gdr-board-cons-pg" });
+      for (const c of pgFinali) {
+        ul.createEl("li", { text: `${c.nome}: ${c.pf_attuali}/${c.pf_max} PF${inPiedi(c) ? "" : " — KO"}` });
+      }
+    }
+    const bar = pan.createDiv({ cls: "gdr-board-controls" });
+    const b = (label: string, fn: () => void) => { bar.createEl("button", { text: label }).onclick = fn; };
+    if (pgFinali.length) b("🩹 Riporta PF ai PG", () => void this.riportaPfAiPg(s));
+    b("📈 Avanza un fronte", () => void this.avanzaFronte());
+    b("✅ Marca Incontro risolto", () => void this.marcaIncontroRisolto());
+  }
+
   private render() {
     const root = this.containerEl.children[1] as HTMLElement;
     root.empty();
@@ -232,6 +307,9 @@ export class BoardView extends ItemView {
       const bDel = ctrl.createEl("button", { text: "✕", cls: "gdr-board-del" }); bDel.setAttribute("aria-label", "Rimuovi dalla plancia");
       bDel.onclick = () => this.push({ tipo: "rimosso", key: c.key });
     }
+
+    // Conseguenze: a scontro deciso, il pannello-ponte verso il mondo (PF ai PG, fronti, risolto).
+    if (esito) this.renderConseguenze(root, s, esito);
 
     // Azioni dell'attivo (a battaglia iniziata, se in piedi e non c'è ancora un esito).
     if (iniziato && !esito && attivoOra && inPiedi(attivoOra)) {
