@@ -131,10 +131,11 @@ def _id_nudo(idv: Any) -> str:
 
 def _norm_ref(idv: Any) -> str:
     """Chiave di confronto TOLLERANTE per i riferimenti id: ultimo segmento di un id
-    qualificato `dnd.<tipo>.<slug>`, underscore→trattino, minuscolo. Rende equivalenti le
-    convenzioni con cui una voce può essere citata — qualificato (`dnd.mostro.insetto-gigante`),
-    nudo (`insetto-gigante`) o con underscore (`insetto_gigante`)."""
-    return str(idv or "").split(".")[-1].replace("_", "-").strip().lower()
+    qualificato `dnd.<tipo>.<slug>` (o di un path `incantesimi/costrizione`), underscore→
+    trattino, minuscolo. Rende equivalenti le convenzioni con cui una voce può essere citata —
+    qualificato (`dnd.mostro.insetto-gigante`), nudo (`insetto-gigante`), con underscore
+    (`insetto_gigante`) o con path (`mostro/insetto-gigante`)."""
+    return re.split(r"[./]", str(idv or ""))[-1].replace("_", "-").strip().lower()
 
 
 def _risolvi_id(links: dict[str, str] | None, rid: Any) -> str | None:
@@ -144,6 +145,29 @@ def _risolvi_id(links: dict[str, str] | None, rid: Any) -> str | None:
     if not links or rid in (None, ""):
         return None
     return links.get(str(rid)) or links.get(_norm_ref(rid))
+
+
+# Wikilink `[[target]]` / `[[target|alias]]` — il target è catturato fino a `|` o `]]`.
+_WIKILINK_RE = re.compile(r"\[\[([^\[\]|]+?)(?:\|([^\[\]]+?))?\]\]")
+
+
+def _risolvi_wikilink(text: str, links: dict[str, str] | None) -> str:
+    """Riscrive i wikilink della PROSA che puntano per ID/slug al Nome canonico della scheda,
+    così Obsidian li risolve (le pagine SRD sono nominate per Nome, non per slug). Copre le
+    forme dell'archivio: qualificato `[[dnd.condizione.prono]]`, nudo `[[luce-intensa]]`,
+    con path `[[incantesimi/costrizione]]`, con underscore. Preserva un alias esplicito; NON
+    tocca ciò che non risolve (può essere prosa fra parentesi o un link già per Nome)."""
+    if not links or not text or "[[" not in text:
+        return text
+
+    def repl(m: "re.Match[str]") -> str:
+        target, alias = m.group(1).strip(), (m.group(2) or "").strip()
+        nome = _risolvi_id(links, target)
+        if not nome:
+            return m.group(0)                        # non risolve: intatto (può essere prosa)
+        return f"[[{nome}|{alias}]]" if alias and alias != nome else f"[[{nome}]]"
+
+    return _WIKILINK_RE.sub(repl, text)
 
 
 def _adatta_background(d: dict[str, Any]) -> None:
@@ -730,7 +754,10 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
     seen_links: set[str] = set()
 
     def link(text: str) -> str:
-        return _wrap_dice(autolink(text, al_re, al_idx or {}, self_nome, seen_links))
+        # 1) i wikilink per id/slug della sorgente → Nome (Obsidian risolve per Nome);
+        # 2) autolink per Nome sul resto (che rispetta i [[ ]] già presenti al passo 1);
+        # 3) dadi cliccabili.
+        return _wrap_dice(autolink(_risolvi_wikilink(text, links), al_re, al_idx or {}, self_nome, seen_links))
 
     fm: dict[str, Any] = {"nome": entry.get("nome", ""), "categoria": cat, "srd": True, "fonte": "SRD 5.2.1"}
     for key in fm_fields:

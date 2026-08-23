@@ -88,6 +88,31 @@ def test_vedi_anche_risolve_forme_miste():
     assert "[[" not in out2 and "termine ignoto" in out2
 
 
+def test_risolvi_wikilink_id_slug_in_prosa():
+    """I wikilink della prosa che puntano per ID/slug/path diventano `[[Nome]]` canonico
+    (le pagine sono nominate per Nome). Forme dell'archivio: qualificato, nudo, con path,
+    con underscore. Alias esplicito preservato; non-risolvibili e parentesi singole intatti."""
+    links = {"dnd.condizione.prono": "Prono", "prono": "Prono",
+             "luce-intensa": "Luce intensa", "costrizione": "Costrizione"}
+    r = lambda t: bs._risolvi_wikilink(t, links)
+    assert r("è [[dnd.condizione.prono]] a terra") == "è [[Prono]] a terra"
+    assert r("proietta [[luce-intensa]]") == "proietta [[Luce intensa]]"
+    assert r("[[incantesimi/costrizione]]") == "[[Costrizione]]"           # forma path
+    assert r("[[dnd.condizione.prono|proni]]") == "[[Prono|proni]]"        # alias preservato
+    assert r("[[dnd.condizione.prono|Prono]]") == "[[Prono]]"              # alias==Nome → collassa
+    assert r("[[Ignoto]] e [singola]") == "[[Ignoto]] e [singola]"         # irrisolvibile + bracket singolo
+
+
+def test_srd_note_converte_wikilink_qualificati_della_prosa():
+    """`srd_note` rende i `[[dnd.tipo.slug]]` della prosa come link per Nome, usando l'indice id."""
+    links = {"dnd.condizione.accecato": "Accecato", "accecato": "Accecato"}
+    entry = {"nome": "Condizione", "descrizione": "Vedi [[dnd.condizione.accecato]]."}
+    out = bs.srd_note(entry, "srd-glossario", [], links)
+    assert "[[Accecato]]" in out
+    assert "[[dnd.condizione.accecato]]" not in out
+    assert "[[[[" not in out  # nessun annidamento con l'autolink
+
+
 def test_magic_items_da_archivio_con_sintonia():
     """La categoria oggetti magici è mappata su archivio: >200 voci, con prosa e la
     sintonia derivata da `richiede_sintonia`."""
