@@ -27,10 +27,13 @@ Uso: /usr/local/bin/python3.11 Dev/Tools/gen_bestiario.py
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
 import yaml
+
+from srd_links import norm_ref, risolvi_wikilink
 
 ROOT = Path(__file__).resolve().parents[2]
 SRD_MONSTERS = ROOT / "archivio" / "srd" / "mostro"
@@ -62,12 +65,63 @@ def carica_mostri(src: Path) -> list[dict[str, Any]]:
     return [per_slug[k] for k in sorted(per_slug)]
 
 
+def indice_nomi(srd_root: Path) -> dict[str, str]:
+    """Mappa `norm_ref(slug/id) -> Nome` su TUTTE le voci SRD dell'archivio (yaml + prosa .md),
+    per risolvere i wikilink della prosa dei mostri (`[[incantesimi/costrizione]]` → `[[Costrizione]]`).
+    Le pagine SRD del vault sono nominate per Nome; senza questo la prosa mostro avrebbe link rotti."""
+    idx: dict[str, str] = {}
+
+    def _reg(slug_file: str, m: dict[str, Any]) -> None:
+        nome = m.get("nome")
+        if not nome:
+            return
+        idx.setdefault(norm_ref(m.get("id") or slug_file), str(nome))
+        idx.setdefault(norm_ref(slug_file), str(nome))
+
+    for f in srd_root.rglob("*.yaml"):
+        try:
+            m = yaml.safe_load(f.read_text(encoding="utf-8"))
+        except yaml.YAMLError:
+            continue
+        if isinstance(m, dict):
+            _reg(f.name.split(".")[0], m)
+    for f in srd_root.rglob("*.md"):
+        if f.name.lower() == "readme.md":
+            continue
+        mm = re.match(r"^---\n(.*?)\n---", f.read_text(encoding="utf-8"), re.S)
+        if not mm:
+            continue
+        try:
+            fm = yaml.safe_load(mm.group(1))
+        except yaml.YAMLError:
+            continue
+        if isinstance(fm, dict):
+            _reg(f.name[:-3].split(".")[0], fm)
+    return idx
+
+
+def _risolvi_prosa(obj: Any, idx: dict[str, str]) -> Any:
+    """Applica la risoluzione dei wikilink a OGNI stringa (ricorsiva su liste/dict): coglie la
+    prosa di tratti/azioni/reazioni/leggendarie ovunque sia, senza dipendere dai nomi-campo."""
+    if isinstance(obj, str):
+        return risolvi_wikilink(obj, lambda t: idx.get(norm_ref(t)))
+    if isinstance(obj, list):
+        return [_risolvi_prosa(x, idx) for x in obj]
+    if isinstance(obj, dict):
+        return {k: _risolvi_prosa(v, idx) for k, v in obj.items()}
+    return obj
+
+
 def main() -> None:
     if not SRD_MONSTERS.is_dir():
         raise SystemExit(
             f"archivio/srd/mostro non trovato ({SRD_MONSTERS}). Manca il symlink/submodule 'archivio'?"
         )
     mostri = carica_mostri(SRD_MONSTERS)
+    # Risolvi i wikilink della prosa (id/slug/path → Nome) contro l'indice dell'archivio SRD,
+    # così lo statblock nativo li rende come link validi in Obsidian.
+    idx = indice_nomi(SRD_MONSTERS.parent)
+    mostri = [_risolvi_prosa(m, idx) for m in mostri]
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(mostri, ensure_ascii=False), encoding="utf-8")
     kb = OUT.stat().st_size / 1024

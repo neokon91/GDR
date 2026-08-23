@@ -45,3 +45,33 @@ def test_id_dallo_slug_quando_manca_nel_frontmatter(tmp_path: Path):
     )
     mostri = gen_bestiario.carica_mostri(tmp_path)
     assert mostri[0]["id"] == "arpia"
+
+
+def test_indice_nomi_e_risoluzione_wikilink(tmp_path: Path):
+    """indice_nomi + _risolvi_prosa: i wikilink id/slug/path della prosa mostro diventano
+    `[[Nome]]` (le pagine SRD sono per Nome). Accento preservato (dal `nome` dell'archivio)."""
+    srd = tmp_path / "srd"
+    (srd / "spells").mkdir(parents=True)
+    (srd / "spells" / "invisibilita.spell.yaml").write_text(
+        "id: dnd.incantesimo.invisibilita\nnome: Invisibilità\n", encoding="utf-8")
+    idx = gen_bestiario.indice_nomi(srd)
+    m = {"nome": "Rakshasa", "azioni": [{"nome": "X", "testo": "Lancia [[incantesimi/invisibilita]]."}]}
+    out = gen_bestiario._risolvi_prosa(m, idx)
+    assert out["azioni"][0]["testo"] == "Lancia [[Invisibilità]]."
+    # id qualificato e forma nuda risolvono uguale; ciò che non c'è resta intatto.
+    assert gen_bestiario._risolvi_prosa("[[dnd.incantesimo.invisibilita]]", idx) == "[[Invisibilità]]"
+    assert gen_bestiario._risolvi_prosa("[[ignoto]]", idx) == "[[ignoto]]"
+
+
+def test_bestiario_reale_senza_wikilink_legacy():
+    """Sui dati reali: dopo la risoluzione, nessun wikilink legacy `[[incantesimi/…]]`/`[[dnd.…]]`
+    nella prosa (tutti risolti a Nome)."""
+    src = gen_bestiario.SRD_MONSTERS
+    if not src.is_dir():
+        pytest.skip("archivio non presente")
+    import json, re
+    idx = gen_bestiario.indice_nomi(src.parent)
+    mostri = [gen_bestiario._risolvi_prosa(m, idx) for m in gen_bestiario.carica_mostri(src)]
+    blob = json.dumps(mostri, ensure_ascii=False)
+    assert not re.search(r"\[\[incantesimi/", blob)
+    assert not re.search(r"\[\[dnd\.", blob)

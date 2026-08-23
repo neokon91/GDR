@@ -10,6 +10,7 @@ from typing import Any
 import yaml
 
 from common import VAULT, frontmatter_block, write_text
+from srd_links import norm_ref as _norm_ref, risolvi_wikilink as _risolvi_wikilink_fn
 import gen_bestiario
 
 # --- SRD 5.2.1 (CC-BY-4.0), traduzione italiana ----------------------------
@@ -131,15 +132,6 @@ def _id_nudo(idv: Any) -> str:
     return str(idv or "").split(".")[-1]
 
 
-def _norm_ref(idv: Any) -> str:
-    """Chiave di confronto TOLLERANTE per i riferimenti id: ultimo segmento di un id
-    qualificato `dnd.<tipo>.<slug>` (o di un path `incantesimi/costrizione`), underscore→
-    trattino, minuscolo. Rende equivalenti le convenzioni con cui una voce può essere citata —
-    qualificato (`dnd.mostro.insetto-gigante`), nudo (`insetto-gigante`), con underscore
-    (`insetto_gigante`) o con path (`mostro/insetto-gigante`)."""
-    return re.split(r"[./]", str(idv or ""))[-1].replace("_", "-").strip().lower()
-
-
 def _risolvi_id(links: dict[str, str] | None, rid: Any) -> str | None:
     """Risolve un riferimento id al Nome della scheda, tollerante alla convenzione: prova
     l'id COSÌ COM'È (match esatto → disambigua i qualificati) e poi la forma NORMALIZZATA
@@ -149,27 +141,14 @@ def _risolvi_id(links: dict[str, str] | None, rid: Any) -> str | None:
     return links.get(str(rid)) or links.get(_norm_ref(rid))
 
 
-# Wikilink `[[target]]` / `[[target|alias]]` — il target è catturato fino a `|` o `]]`.
-_WIKILINK_RE = re.compile(r"\[\[([^\[\]|]+?)(?:\|([^\[\]]+?))?\]\]")
-
-
 def _risolvi_wikilink(text: str, links: dict[str, str] | None) -> str:
-    """Riscrive i wikilink della PROSA che puntano per ID/slug al Nome canonico della scheda,
-    così Obsidian li risolve (le pagine SRD sono nominate per Nome, non per slug). Copre le
-    forme dell'archivio: qualificato `[[dnd.condizione.prono]]`, nudo `[[luce-intensa]]`,
-    con path `[[incantesimi/costrizione]]`, con underscore. Preserva un alias esplicito; NON
-    tocca ciò che non risolve (può essere prosa fra parentesi o un link già per Nome)."""
-    if not links or not text or "[[" not in text:
+    """Riscrive i wikilink della PROSA (id/slug/path/underscore) al Nome canonico della scheda,
+    usando l'id-index SRD (`links`). Le pagine SRD sono nominate per Nome, non per slug; senza
+    questo un `[[dnd.condizione.prono]]`/`[[luce-intensa]]`/`[[incantesimi/costrizione]]` resta
+    un link rotto. Nucleo condiviso in srd_links (usato anche da gen_bestiario)."""
+    if not links:
         return text
-
-    def repl(m: "re.Match[str]") -> str:
-        target, alias = m.group(1).strip(), (m.group(2) or "").strip()
-        nome = _risolvi_id(links, target)
-        if not nome:
-            return m.group(0)                        # non risolve: intatto (può essere prosa)
-        return f"[[{nome}|{alias}]]" if alias and alias != nome else f"[[{nome}]]"
-
-    return _WIKILINK_RE.sub(repl, text)
+    return _risolvi_wikilink_fn(text, lambda t: _risolvi_id(links, t))
 
 
 def _adatta_background(d: dict[str, Any]) -> None:
