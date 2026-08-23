@@ -39,6 +39,7 @@ interface GdrSettings {
   sezioni: { party: boolean; combattimento: boolean; dadi: boolean; data: boolean; mondo: boolean };
   dadi: string; // "etichetta:espressione" separati da virgola
   board?: Evento[]; // stato della Board di combattimento, persistito così sopravvive al reload
+  boardOrigine?: string; // path della nota-Incontro che ha schierato la Board (F2), per «marca risolto»
 }
 const DEFAULT_SETTINGS: GdrSettings = {
   sezioni: { party: true, combattimento: true, dadi: true, data: true, mondo: true },
@@ -265,6 +266,8 @@ export default class GdrPlugin extends Plugin {
     const fm = this.frontmatterOf(file.path);
     const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs());
     if (!eventi.length) { new Notice("Incontro vuoto: nessuna creatura/PG risolti."); return; }
+    // Traccia la nota d'origine: il pannello Conseguenze potrà marcarla «risolto» senza chiedere.
+    this.settings.boardOrigine = file.path;
     await this.saveBoard(eventi);
     await this.activateBoard();
     this.refreshBoard();
@@ -428,8 +431,13 @@ export default class GdrPlugin extends Plugin {
 
   // Persistenza della Board: gli eventi vivono nel data.json del plugin, così il combattimento
   // sopravvive a un reload. Salvataggio "nudo" (niente refreshCruscotti/statusBar).
-  async saveBoard(eventi: Evento[]) { this.settings.board = eventi; await this.saveData(this.settings); }
+  async saveBoard(eventi: Evento[]) {
+    this.settings.board = eventi;
+    if (!eventi.length) this.settings.boardOrigine = undefined; // board svuotata (Reset) → dimentica l'origine
+    await this.saveData(this.settings);
+  }
   loadBoard(): Evento[] { return Array.isArray(this.settings.board) ? this.settings.board : []; }
+  loadBoardOrigine(): string | null { return this.settings.boardOrigine ?? null; }
 
   // Frontmatter FRESCO di una nota (da metadataCache, già aggiornato al 'changed').
   frontmatterOf(path: string): any {

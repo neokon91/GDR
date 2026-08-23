@@ -2,7 +2,7 @@
 // `eventi: Evento[]`, ogni comando li accoda e la board ridisegna `ricostruisci(eventi)`.
 // Incontro dal bestiario SRD bundlato + PG del vault; azioni di turno con scelta bersaglio;
 // controlli GM (danno/cura/condizioni); statblock nativo; persistenza tra reload.
-import { ItemView, Notice, WorkspaceLeaf } from "obsidian";
+import { ItemView, Notice, TFile, WorkspaceLeaf } from "obsidian";
 import {
   ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
   comandoIniziativa, comandoAttacco, comandoSalvezza, comandoMultiattacco, comandoCura,
@@ -192,18 +192,33 @@ export class BoardView extends ItemView {
       : `«${nome}»: clock ${nuovo}/${dim}.`);
   }
 
-  // Marca una nota Incontro come risolta (campo `stato`). La Board non traccia l'origine →
-  // scelta a mano fra le note Incontro (funziona sempre, anche a Board aperta a sé).
+  // Nome (o basename) della nota-Incontro d'origine, se la Board è stata schierata da una (F2).
+  private incontroOrigine(): TFile | null {
+    const path = this.plugin.loadBoardOrigine();
+    if (!path) return null;
+    const f = this.app.vault.getAbstractFileByPath(path);
+    return f instanceof TFile ? f : null;
+  }
+  private nomeNota(f: TFile): string {
+    return String(this.app.metadataCache.getFileCache(f)?.frontmatter?.nome ?? f.basename);
+  }
+
+  // Marca una nota Incontro come risolta (campo `stato`). Se la Board è stata aperta da una
+  // nota-Incontro (F2, tracciata in boardOrigine) usa QUELLA; altrimenti scelta a mano.
   private async marcaIncontroRisolto() {
-    const incontri = this.app.vault.getMarkdownFiles()
-      .map((f) => ({ f, fm: (this.app.metadataCache.getFileCache(f)?.frontmatter ?? {}) as any }))
-      .filter((e) => String(e.fm.categoria).toLowerCase() === "incontro")
-      .sort((a, b) => String(a.fm.nome || a.f.basename).localeCompare(String(b.fm.nome || b.f.basename)));
-    if (!incontri.length) { new Notice("Nessuna nota Incontro nel vault."); return; }
-    const scelto = await suggester(this.app, (e: any) => String(e.fm.nome ?? e.f.basename), incontri, false, "Quale Incontro è risolto?");
-    if (!scelto) return;
-    await this.app.fileManager.processFrontMatter(scelto.f, (fm: any) => { fm.stato = "risolto"; });
-    new Notice(`Incontro «${scelto.fm.nome ?? scelto.f.basename}» segnato risolto.`);
+    let file = this.incontroOrigine();
+    if (!file) {
+      const incontri = this.app.vault.getMarkdownFiles()
+        .map((f) => ({ f, fm: (this.app.metadataCache.getFileCache(f)?.frontmatter ?? {}) as any }))
+        .filter((e) => String(e.fm.categoria).toLowerCase() === "incontro")
+        .sort((a, b) => String(a.fm.nome || a.f.basename).localeCompare(String(b.fm.nome || b.f.basename)));
+      if (!incontri.length) { new Notice("Nessuna nota Incontro nel vault."); return; }
+      const scelto = await suggester(this.app, (e: any) => String(e.fm.nome ?? e.f.basename), incontri, false, "Quale Incontro è risolto?");
+      if (!scelto) return;
+      file = scelto.f as TFile;
+    }
+    await this.app.fileManager.processFrontMatter(file, (fm: any) => { fm.stato = "risolto"; });
+    new Notice(`Incontro «${this.nomeNota(file)}» segnato risolto.`);
   }
 
   // Pannello Conseguenze: riepilogo dei PG con PF finali + azioni-ponte (opzionali, il GM
@@ -222,7 +237,8 @@ export class BoardView extends ItemView {
     const b = (label: string, fn: () => void) => { bar.createEl("button", { text: label }).onclick = fn; };
     if (pgFinali.length) b("🩹 Riporta PF ai PG", () => void this.riportaPfAiPg(s));
     b("📈 Avanza un fronte", () => void this.avanzaFronte());
-    b("✅ Marca Incontro risolto", () => void this.marcaIncontroRisolto());
+    const orig = this.incontroOrigine();
+    b(orig ? `✅ Marca «${this.nomeNota(orig)}» risolto` : "✅ Marca Incontro risolto", () => void this.marcaIncontroRisolto());
   }
 
   private render() {
