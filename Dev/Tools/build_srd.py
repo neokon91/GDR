@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
-"""Generazione dell'albero SRD/ (sola lettura) dai JSON italiani vendorizzati in
-Dev/Source/SRD/. Estratto da render.py: l'orchestratore chiama build_srd(core)."""
+"""Generazione dell'albero SRD/ (sola lettura) dall'ARCHIVIO condiviso
+(`archivio/srd/`). Estratto da render.py: l'orchestratore chiama build_srd(core)."""
 
 from __future__ import annotations
 
-import json
 import re
 from typing import Any
 
 import yaml
 
-from common import SRD_DIR, VAULT, frontmatter_block, write_text
+from common import VAULT, frontmatter_block, write_text
 import gen_bestiario
 
 # --- SRD 5.2.1 (CC-BY-4.0), traduzione italiana ----------------------------
-# I JSON tipizzati vendorizzati in Dev/Source/SRD/ (da github massimobarbieri/
-# DND-SRD-IT) sono generati in note per-voce in un albero di SOLA LETTURA SRD/,
-# separato dall'homebrew. Le pagine mostro emettono lo statblock nativo (```gdr statblock).
-# Config: { json, dest (sottocartella), cat (categoria), fm (campi -> frontmatter) }.
+# I dati SRD vengono dall'ARCHIVIO condiviso (`archivio/srd/`) e sono generati in note
+# per-voce in un albero di SOLA LETTURA SRD/, separato dall'homebrew. Le pagine mostro
+# emettono lo statblock nativo (```gdr statblock).
+# SRD_GEN: { json (chiave storica → cartella archivio), dest, cat, fm (→ frontmatter) }.
 SRD_GEN = [
     {"json": "srd_5_2_1_spells.json",      "dest": "Incantesimi",     "cat": "srd-incantesimo", "fm": ["livello", "scuola", "classi", "tempo_lancio", "gittata", "componenti", "durata"]},
     {"json": "srd_5_2_1_magic_items.json", "dest": "Oggetti",         "cat": "srd-oggetto",     "fm": ["tipo", "rarita"]},  # archivio: `tipo` (era `tipo_base` nel JSON, senza consumatori). `sintonia` da richiede_sintonia, sotto
@@ -45,11 +44,9 @@ def srd_slug(name: str) -> str:
     return cleaned or "voce"
 
 
-# Fonte unica = archivio (audit A1): le categorie qui mappate (json → sottocartella di
-# `archivio/srd/`) NON leggono più il JSON vendorizzato ma gli YAML dell'archivio. La
-# redirezione è a livello di `load_srd`, così PAGINE e strutture DERIVATE (id-index,
-# autolink, pool bottino) passano ad archivio insieme, per categoria. Le categorie non
-# ancora mappate restano sul JSON finché non migrano.
+# Fonte UNICA = archivio (audit A1, COMPLETO): la chiave storica (nome json) è mappata
+# alla cartella `archivio/srd/`. `load_srd` legge SOLO l'archivio (i JSON vendorizzati sono
+# stati ritirati). PAGINE + strutture derivate (id-index, autolink, pool) leggono da qui.
 ARCHIVIO_SRD = gen_bestiario.SRD_MONSTERS.parent  # ROOT/archivio/srd
 _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_spells.json": "spells",
@@ -63,7 +60,6 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_rules.json": "regole",
     "srd_5_2_1_monsters.json": "mostro",
     "srd_5_2_1_rules_glossary.json": "glossario",
-    # Manca solo rules_glossary (condizioni/glossario): loop dedicato in build_srd().
 }
 
 
@@ -282,20 +278,18 @@ _ADATTA = {
 
 
 def load_srd(name: str) -> list[dict[str, Any]]:
+    """Voci SRD di una categoria, dall'ARCHIVIO (fonte unica; i JSON vendorizzati sono
+    stati ritirati). `name` è la chiave storica (json) mappata alla cartella archivio in
+    `_ARCHIVIO_SUBDIR`; un adapter opzionale (`_ADATTA`) adatta la forma-dato ai consumatori."""
     subdir = _ARCHIVIO_SUBDIR.get(name)
-    if subdir:
-        data = _load_archivio(subdir)
-        if data:  # archivio assente/vuoto → ripiego sul JSON (build robusta)
-            adatta = _ADATTA.get(name)
-            if adatta:
-                for e in data:
-                    adatta(e)
-            return data
-    path = SRD_DIR / name
-    if not path.is_file():
+    if not subdir:
         return []
-    data = json.loads(path.read_text(encoding="utf-8"))
-    return data if isinstance(data, list) else []
+    data = _load_archivio(subdir)
+    adatta = _ADATTA.get(name)
+    if adatta:
+        for e in data:
+            adatta(e)
+    return data
 
 
 # Rarità SRD -> fascia canonica del generatore `tesoro`. Il JSON mescola genere
@@ -890,9 +884,9 @@ def gs_baselines() -> dict[str, dict[str, Any]]:
 
 
 def build_srd(core: dict[str, Any]) -> int:
-    """Genera l'albero SRD/ (sola lettura) dai JSON IT vendorizzati. Ritorna il
-    numero di note scritte. Cartella sorgente assente -> 0 (SRD opzionale)."""
-    if not SRD_DIR.is_dir():
+    """Genera l'albero SRD/ (sola lettura) dall'ARCHIVIO. Ritorna il numero di note
+    scritte. Archivio assente -> 0 (SRD opzionale)."""
+    if not ARCHIVIO_SRD.is_dir():
         return 0
     write_text(VAULT / "SRD" / "LICENZA.md", f"# Licenza SRD\n\n{SRD_ATTRIBUTION}\n")
     # Indice id->nome su tutte le voci, per risolvere i link 'vedi_anche'/evocate.
