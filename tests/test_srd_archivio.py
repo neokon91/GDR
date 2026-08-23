@@ -42,6 +42,52 @@ def test_spells_arrivano_dallarchivio():
     assert "Tocco del vampiro" not in nomi     # generico del JSON, ritirato
 
 
+def test_norm_ref_equivalenza_convenzioni():
+    """`_norm_ref` rende equivalenti le forme con cui una voce può essere citata:
+    id qualificato `dnd.<tipo>.<slug>`, nudo, o con underscore."""
+    assert bs._norm_ref("dnd.mostro.insetto-gigante") == "insetto-gigante"
+    assert bs._norm_ref("insetto_gigante") == "insetto-gigante"
+    assert bs._norm_ref("Insetto-Gigante") == "insetto-gigante"
+    assert bs._norm_ref(None) == ""
+
+
+def test_risolvi_id_tollerante_qualificato_e_nudo():
+    """`_risolvi_id` risolve un riferimento in QUALSIASI convenzione contro un indice
+    che tiene sia l'id completo sia la forma normalizzata. Il match esatto ha priorità."""
+    links = {"dnd.glossario.armature": "Armature", "insetto-gigante": "Insetto gigante"}
+    # forma normalizzata iniettata dall'indice (simula srd_id_index)
+    links["armature"] = "Armature"
+    assert bs._risolvi_id(links, "dnd.glossario.armature") == "Armature"  # qualificato esatto
+    assert bs._risolvi_id(links, "dnd.regole.armature") == "Armature"     # tipo diverso → via norm
+    assert bs._risolvi_id(links, "insetto_gigante") == "Insetto gigante"  # underscore → norm
+    assert bs._risolvi_id(links, "dnd.mostro.inesistente") is None        # nessuna voce
+    assert bs._risolvi_id(None, "x") is None
+
+
+def test_srd_id_index_indicizza_qualificato_e_normalizzato():
+    """L'indice id espone ogni voce SIA per id completo SIA per forma normalizzata
+    (se non ambigua): un `vedi_anche`/`creatura_evocata` in forma qualificata, nuda o
+    con underscore risolve alla stessa scheda."""
+    idx = bs.srd_id_index()
+    if not idx:
+        import pytest
+        pytest.skip("archivio/JSON SRD assenti")
+    # 'Insetto gigante' è un mostro citato da un incantesimo come `insetto_gigante`.
+    assert bs._risolvi_id(idx, "insetto_gigante") == "Insetto gigante"
+    assert bs._risolvi_id(idx, "dnd.mostro.insetto-gigante") == "Insetto gigante"
+
+
+def test_vedi_anche_risolve_forme_miste():
+    """Il footer «Vedi anche» linka [[Nome]] anche quando il riferimento usa una
+    convenzione diversa da quella con cui la voce è indicizzata."""
+    links = {"salto-in-alto": "Salto in alto"}
+    out = bs._vedi_anche(["dnd.glossario.salto-in-alto"], links)
+    assert "[[Salto in alto]]" in out
+    # riferimento irrisolvibile → termine in chiaro (underscore→spazio), niente wikilink
+    out2 = bs._vedi_anche(["termine_ignoto"], links)
+    assert "[[" not in out2 and "termine ignoto" in out2
+
+
 def test_magic_items_da_archivio_con_sintonia():
     """La categoria oggetti magici è mappata su archivio: >200 voci, con prosa e la
     sintonia derivata da `richiede_sintonia`."""

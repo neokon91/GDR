@@ -129,6 +129,23 @@ def _id_nudo(idv: Any) -> str:
     return str(idv or "").split(".")[-1]
 
 
+def _norm_ref(idv: Any) -> str:
+    """Chiave di confronto TOLLERANTE per i riferimenti id: ultimo segmento di un id
+    qualificato `dnd.<tipo>.<slug>`, underscore→trattino, minuscolo. Rende equivalenti le
+    convenzioni con cui una voce può essere citata — qualificato (`dnd.mostro.insetto-gigante`),
+    nudo (`insetto-gigante`) o con underscore (`insetto_gigante`)."""
+    return str(idv or "").split(".")[-1].replace("_", "-").strip().lower()
+
+
+def _risolvi_id(links: dict[str, str] | None, rid: Any) -> str | None:
+    """Risolve un riferimento id al Nome della scheda, tollerante alla convenzione: prova
+    l'id COSÌ COM'È (match esatto → disambigua i qualificati) e poi la forma NORMALIZZATA
+    (`_norm_ref`). Un riferimento qualificato, nudo o con underscore risolve alla stessa voce."""
+    if not links or rid in (None, ""):
+        return None
+    return links.get(str(rid)) or links.get(_norm_ref(rid))
+
+
 def _adatta_background(d: dict[str, Any]) -> None:
     # De-sluga i campi che build_backgrounds mappa via stats()/skills() (case-insensitive ma
     # NON convertono i trattini): punteggi + abilità → nomi-prosa; strumenti lista → stringa.
@@ -471,18 +488,28 @@ def _vedi_anche(ids: list[Any], links: dict[str, str]) -> str:
     l'id risolve a una voce SRD, altrimenti il termine in chiaro."""
     refs = []
     for rid in ids or []:
-        nome = (links or {}).get(str(rid))
+        nome = _risolvi_id(links, rid)
         refs.append(f"[[{nome}]]" if nome else str(rid).replace("_", " "))
     return ("> [!info]- Vedi anche\n> " + " · ".join(refs)) if refs else ""
 
 
 def srd_id_index() -> dict[str, str]:
-    """Mappa id->nome su TUTTE le voci SRD (per risolvere i link 'vedi_anche')."""
+    """Mappa id->nome su TUTTE le voci SRD, per risolvere i riferimenti incrociati
+    ('vedi_anche', 'creatura_evocata'). TOLLERANTE alla convenzione id: indicizza sia
+    l'id COMPLETO così com'è (qualificato o nudo → il match esatto disambigua gli omonimi
+    cross-categoria) sia la forma NORMALIZZATA (`_norm_ref`), quest'ultima SOLO quando punta
+    a una sola voce — così un riferimento in qualsiasi forma risolve senza falsi positivi."""
     idx: dict[str, str] = {}
+    norm: dict[str, set[str]] = {}   # forma normalizzata -> Nomi (per scartare gli ambigui)
     for name in [s["json"] for s in SRD_GEN] + ["srd_5_2_1_rules_glossary.json", "srd_5_2_1_monsters.json"]:
         for entry in load_srd(name):
             if isinstance(entry, dict) and entry.get("id") and entry.get("nome"):
-                idx.setdefault(str(entry["id"]), str(entry["nome"]))
+                rid, nome = str(entry["id"]), str(entry["nome"])
+                idx.setdefault(rid, nome)
+                norm.setdefault(_norm_ref(rid), set()).add(nome)
+    for k, nomi in norm.items():
+        if len(nomi) == 1:
+            idx.setdefault(k, next(iter(nomi)))
     return idx
 
 
@@ -774,7 +801,7 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
     # stesso incantesimo "Insetto gigante" e il mostro omonimo).
     ref = entry.get("creatura_evocata")
     if isinstance(ref, dict) and ref.get("id") and not (entry.get("creature_evocate_inline")):
-        nome_ref = (links or {}).get(str(ref["id"]))
+        nome_ref = _risolvi_id(links, ref["id"])
         if nome_ref:
             link = f"SRD/Mostri/{nome_ref}|{nome_ref}" if ref.get("fonte") == "mostri" else nome_ref
             parts.append(f"> [!example] Creatura evocata\n> [[{link}]]")
