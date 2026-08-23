@@ -62,6 +62,7 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_classes.json": "classi",
     "srd_5_2_1_rules.json": "regole",
     "srd_5_2_1_monsters.json": "mostro",
+    "srd_5_2_1_rules_glossary.json": "glossario",
     # Manca solo rules_glossary (condizioni/glossario): loop dedicato in build_srd().
 }
 
@@ -231,6 +232,34 @@ def _adatta_lingue(d: dict[str, Any]) -> None:
     if sez: d.setdefault("sezioni", []).extend(sez)
 
 
+def _blocchi_da_prosa(testo: str) -> list[dict[str, str]]:
+    """Prosa a paragrafi con intestazione in grassetto (`**Non è in grado di vedere**\\n…`)
+    → [{nome, descrizione}] — la forma `effetti` che srd_condizioni si aspetta."""
+    blocchi = []
+    parts = re.split(r"\*\*(.+?)\*\*", str(testo or ""))
+    for i in range(1, len(parts) - 1, 2):
+        nome = parts[i].strip()
+        desc = parts[i + 1].strip()
+        if nome:
+            blocchi.append({"nome": nome, "descrizione": desc})
+    return blocchi
+
+
+def _adatta_glossario(d: dict[str, Any]) -> None:
+    """Condizioni + glossario dall'archivio (doppio-file .yaml+.md / .md-solo). `descrittore`
+    dal tipo dell'id qualificato (dnd.<tipo>.slug). Per le condizioni: gli effetti (paragrafi
+    **grassetto** della prosa) diventano `sezioni.blocchi` (li legge srd_condizioni); la pagina
+    li rende come sezione «Effetti». L'id resta QUALIFICATO: i `vedi_anche` lo referenziano."""
+    idv = str(d.get("id") or "")
+    parts = idv.split(".")
+    d["descrittore"] = parts[1] if idv.startswith("dnd.") and len(parts) >= 3 else d.get("descrittore", "glossario")
+    if d["descrittore"] == "condizione":
+        blocchi = _blocchi_da_prosa(d.get("descrizione") or "")
+        if blocchi:
+            d["sezioni"] = [{"titolo": "Effetti", "blocchi": blocchi}]
+            d["descrizione"] = ""
+
+
 def _adatta_talento(d: dict[str, Any]) -> None:
     d["id"] = _id_nudo(d.get("id"))
     # categoria: archivio mescola slug (`talento-origine`/`talento-generale`) e prosa →
@@ -248,6 +277,7 @@ _ADATTA = {
     "srd_5_2_1_equipment.json": _adatta_equip,
     "srd_5_2_1_languages.json": _adatta_lingue,
     "srd_5_2_1_feats.json": _adatta_talento,
+    "srd_5_2_1_rules_glossary.json": _adatta_glossario,
 }
 
 
