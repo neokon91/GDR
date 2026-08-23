@@ -423,6 +423,35 @@ def install_authored_plugins() -> None:
     print("Plugin gdr installato in .obsidian/plugins/gdr/ e abilitato.")
 
 
+def prune_retired_plugins(plugins: dict[str, Any]) -> list[str]:
+    """Rimuove dal vault i community-plugin NON più dichiarati in plugins.yaml: la cartella
+    in .obsidian/plugins/<id>/ E l'id in community-plugins.json (la lista abilitati). Rende
+    il vault turnkey RIPRODUCIBILE anche su un dist GIÀ costruito: `clean()` preserva di
+    proposito `.obsidian` (per non riscaricare i plugin ogni build) e `community-plugins.json`
+    nasce da un'unione additiva (`union_list`), quindi senza questo passo un plugin ritirato
+    (es. Fantasy Statblocks / Initiative Tracker) resterebbe installato e attivo per sempre.
+    `plugins.yaml` è la fonte unica: l'id `gdr` (plugin autore) vi è dichiarato. Ritorna gli
+    id rimossi."""
+    declared = {p["id"] for p in (plugins.get("plugins") or []) if p.get("id")}
+    removed: list[str] = []
+    pdir = VAULT / ".obsidian" / "plugins"
+    if pdir.is_dir():
+        for d in sorted(pdir.iterdir()):
+            if d.is_dir() and d.name not in declared:
+                shutil.rmtree(d)
+                removed.append(d.name)
+    cp = VAULT / ".obsidian" / "community-plugins.json"
+    if cp.is_file():
+        enabled = json.loads(cp.read_text(encoding="utf-8"))
+        kept = [pid for pid in enabled if pid in declared]
+        if kept != enabled:
+            cp.write_text(json.dumps(kept, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            removed += [pid for pid in enabled if pid not in declared and pid not in removed]
+    if removed:
+        print(f"Plugin ritirati rimossi dal vault: {', '.join(sorted(set(removed)))}.")
+    return removed
+
+
 def build() -> dict[str, str]:
     """Orchestratore della build: carica il modello, scrive dati+script del JS
     Engine, rende tutte le note, genera Bases e SRD, scrive la config .obsidian
@@ -450,6 +479,9 @@ def build() -> dict[str, str]:
 
     write_obsidian_config(VAULT / ".obsidian", core, plugins, templates, pages)
     install_authored_plugins()
+    # Pota i plugin ritirati (non più in plugins.yaml): la config .obsidian è additiva e
+    # clean() la preserva, quindi un dist già costruito li terrebbe attivi all'infinito.
+    prune_retired_plugins(plugins)
     scaffold_folders(core)
     return rendered
 

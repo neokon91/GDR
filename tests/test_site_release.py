@@ -364,6 +364,35 @@ def test_assert_critical_present_gate(tmp_path, monkeypatch):
     fetch_plugins.assert_critical_present(vault)  # non solleva
 
 
+def test_prune_retired_plugins(tmp_path, monkeypatch):
+    """prune_retired_plugins(): rimuove dal vault i community-plugin NON più dichiarati in
+    plugins.yaml — la cartella .obsidian/plugins/<id>/ E l'id in community-plugins.json —
+    lasciando intatti quelli dichiarati (incl. `gdr`). Garanzia di riproducibilità: un dist
+    già costruito non tiene un plugin ritirato all'infinito (clean() preserva .obsidian)."""
+    import json as _json
+    import render
+    vault = tmp_path / "GDR-vault"
+    pdir = vault / ".obsidian" / "plugins"
+    for pid in ("gdr", "dataview", "obsidian-5e-statblocks", "initiative-tracker"):
+        (pdir / pid).mkdir(parents=True)
+        (pdir / pid / "main.js").write_text("x", encoding="utf-8")
+    cp = vault / ".obsidian" / "community-plugins.json"
+    cp.write_text(_json.dumps(
+        ["gdr", "dataview", "obsidian-5e-statblocks", "initiative-tracker"]), encoding="utf-8")
+    monkeypatch.setattr(render, "VAULT", vault)
+    plugins = {"plugins": [{"id": "gdr"}, {"id": "dataview"}]}  # FS/IT NON dichiarati
+
+    removed = render.prune_retired_plugins(plugins)
+
+    assert set(removed) == {"obsidian-5e-statblocks", "initiative-tracker"}
+    assert (pdir / "gdr").is_dir() and (pdir / "dataview").is_dir()
+    assert not (pdir / "obsidian-5e-statblocks").exists()
+    assert not (pdir / "initiative-tracker").exists()
+    assert _json.loads(cp.read_text(encoding="utf-8")) == ["gdr", "dataview"]
+    # Idempotente: una seconda passata non ha nulla da rimuovere.
+    assert render.prune_retired_plugins(plugins) == []
+
+
 def test_fetch_one_idempotent_and_pin_check(tmp_path, monkeypatch):
     """fetch_one(): salta se il manifest su disco è già alla versione pinnata
     ("presente"); su versione diversa riscarica; se il manifest scaricato non
