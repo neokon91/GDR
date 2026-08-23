@@ -64,7 +64,18 @@ export default class GdrPlugin extends Plugin {
     // 1. Blocco ```gdr <renderX> (o `radar <cat>` / `statblock <id>`) → monta la vista, con
     //    re-render reattivo sui cambi di frontmatter della nota-sorgente.
     this.registerMarkdownCodeBlockProcessor("gdr", async (source, el, ctx) => {
-      const tokens = source.trim().split(/\s+/);
+      // Tolleranza di sintassi. Per convenzione l'argomento (`statblock <id>` / `radar <cat>` /
+      // `<vista>`) è la PRIMA RIGA DEL CORPO (```gdr\nstatblock aboleth) — così Obsidian lo passa
+      // in `source`. Ma diversi generatori/note lo scrivono nella INFO-STRING del fence
+      // (```gdr statblock aboleth): lì Obsidian registra la lingua "gdr" e passa `source` = SOLO
+      // corpo, lasciando l'arg nel fence. Lo recuperiamo da getSectionInfo e lo anteponiamo, così
+      // le DUE forme rendono identiche (e le note homebrew già scritte a mano non si rompono).
+      const info = ctx.getSectionInfo(el);
+      const fenceArg = info
+        ? (info.text.split("\n")[info.lineStart] || "").replace(/^\s*`{3,}\s*gdr\b\s*/, "").trim()
+        : "";
+      const src = fenceArg ? fenceArg + (source ? "\n" + source : "") : source;
+      const tokens = src.trim().split(/\s+/);
       const name = tokens[0];
       const child = new MarkdownRenderChild(el);
       ctx.addChild(child);
@@ -101,9 +112,9 @@ export default class GdrPlugin extends Plugin {
       //  · `statblock` + CORPO YAML nella forma RawMostro → statblock INLINE homebrew (creature
       //    del vault), senza dipendere da un id del bestiario. Non reattivo (dato immutabile).
       if (name === "statblock") {
-        const nl = source.indexOf("\n");
-        const corpo = nl < 0 ? "" : source.slice(nl + 1).trim();
-        const id = (nl < 0 ? source : source.slice(0, nl)).replace(/^\s*statblock\s*/, "").trim();
+        const nl = src.indexOf("\n");
+        const corpo = nl < 0 ? "" : src.slice(nl + 1).trim();
+        const id = (nl < 0 ? src : src.slice(0, nl)).replace(/^\s*statblock\s*/, "").trim();
         el.empty();
         try {
           let raw: any;
