@@ -1,0 +1,40 @@
+name: ci
+
+# Suite pytest del vault/plugin (471 test). GDR consuma archivio e regole come SIBLING
+# (in dev sono symlink gitignorati): in CI li si clona in ROOT/archivio e ROOT/regole, dove
+# il codice li cerca (common.ROOT = radice del repo). Entrambi sono PRIVATI → serve un PAT in
+# `secrets.ECOSYSTEM_TOKEN` con accesso in lettura a neokon91/archivio e neokon91/regole
+# (Settings → Secrets and variables → Actions). Node serve ai test che invocano crea_pg.js;
+# esbuild (devDep del plugin) alla parità _pg_shared — se manca, quel test si salta da solo.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # GDR alla radice del workspace (= common.ROOT); i sibling nei percorsi attesi.
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: neokon91/archivio
+          path: archivio
+          token: ${{ secrets.ECOSYSTEM_TOKEN }}
+      - uses: actions/checkout@v4
+        with:
+          repository: neokon91/regole
+          path: regole
+          token: ${{ secrets.ECOSYSTEM_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pip install -r requirements-dev.txt
+      - name: Dipendenze del plugin (esbuild per la parità _pg_shared)
+        run: npm ci
+        working-directory: plugin
+      - run: python3 -m pytest -q
