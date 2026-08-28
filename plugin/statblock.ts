@@ -63,16 +63,32 @@ export function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia, md?
   const vel = m.velocita ? Object.entries(m.velocita).map(([k, v]) => (k === "camminata" ? `${v} m` : `${k} ${v} m`)).join(", ") : "";
   if (vel) riga("Velocità", vel);
 
-  // Caratteristiche: valore (mod) + eventuale TS.
+  // Caratteristiche in tabella (formato ufficiale 2024): Punteggio · Mod · TS, in DUE gruppi
+  // affiancati (FOR/DES/COS | INT/SAG/CAR). I TS sono SEMPRE mostrati: a riposo vengono da
+  // daMostro (mod + bonus competenza se la caratteristica è competente); in plancia dal
+  // combattente. Il salvezza non competente coincide col modificatore.
   const abil = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
-  const grid = c.createDiv({ cls: "gdr-sb-car" });
-  for (const a of abil) {
-    const v = n((m.caratteristiche ?? {})[a]?.valore ?? 10);
-    const ts = comb?.tiri_salvezza?.[a];
-    const cell = grid.createDiv({ cls: "gdr-sb-carcell" });
-    cell.createDiv({ cls: "gdr-sb-carnome", text: a.slice(0, 3).toUpperCase() });
-    cell.createDiv({ cls: "gdr-sb-carval", text: `${v} (${modCar(v)})` });
-    if (ts != null) cell.createDiv({ cls: "gdr-sb-carts", text: `TS ${ts >= 0 ? "+" : ""}${ts}` });
+  const saves: Record<string, number> = comb?.tiri_salvezza ?? dm?.tiri_salvezza ?? {};
+  const seg = (v: number) => (v >= 0 ? `+${v}` : String(v));
+  const abilBox = c.createDiv({ cls: "gdr-sb-abil" });
+  for (const gruppo of [abil.slice(0, 3), abil.slice(3)]) {
+    const tab = abilBox.createEl("table", { cls: "gdr-sb-abil-tab" });
+    const trh = tab.createEl("thead").createEl("tr");
+    trh.createEl("th");
+    trh.createEl("th", { cls: "gdr-sb-abil-h", text: "Pt" });
+    trh.createEl("th", { cls: "gdr-sb-abil-h", text: "Mod" });
+    trh.createEl("th", { cls: "gdr-sb-abil-h", text: "TS" });
+    const tbody = tab.createEl("tbody");
+    for (const a of gruppo) {
+      const v = n((m.caratteristiche ?? {})[a]?.valore ?? 10);
+      const mod = Math.floor((v - 10) / 2);
+      const ts = saves[a] ?? mod;
+      const tr = tbody.createEl("tr");
+      tr.createEl("th", { text: a.slice(0, 3).toUpperCase() });
+      tr.createEl("td", { text: String(v) });
+      tr.createEl("td", { text: seg(mod) });
+      tr.createEl("td", { cls: ts !== mod ? "gdr-sb-ts-prof" : "", text: seg(ts) });
+    }
   }
 
   // Abilità · Sensi · Lingue · GS (difensivo sulle forme dei dati).
