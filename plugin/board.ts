@@ -43,7 +43,7 @@ export class BoardView extends ItemView {
   async onOpen() {
     try { this.bestiario = await this.plugin.bestiarioCompleto(); }
     catch (e: any) { this.errore = e?.message ?? String(e); }
-    this.condLista = await this.plugin.loadCondizioni(); // per il picker manuale
+    this.condLista = await this.plugin.condizioniComplete(); // SRD + homebrew, per il picker manuale
     this.defs = await this.plugin.loadDefsCondizioni(); // effetti-condizione automatici sui tiri
     this.eventi = this.plugin.loadBoard(); // ripristina il combattimento in corso
     this.render();

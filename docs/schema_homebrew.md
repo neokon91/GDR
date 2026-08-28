@@ -143,8 +143,24 @@ attivita:
 ```
 `bersaglio` ∈ `tiri_colpire · tiri_salvezza · prove · velocita …` · `operazione` ∈
 `svantaggio · vantaggio · …`. Il motore (`risolviCondizioni`) le combina e le applica ai
-comandi. *(La discovery degli effetti homebrew dal vault è un passo della Rotta homebrew —
-oggi le condizioni sono quelle bundlate.)*
+comandi.
+
+**Discovery homebrew** (implementata): una nota `categoria: condizione` nel vault viene
+scoperta dal plugin (`homebrewCondizioni`) e **fusa** con le SRD (`condizioniComplete`) →
+appare nel picker «＋stato» della Board e **morde i tiri** come le SRD. Forma ergonomica nel
+frontmatter — `effetti:` diretto (lo si avvolge in un'attività passiva):
+```yaml
+---
+categoria: condizione
+nome: Maledetto
+effetti:
+  - { bersaglio: tiri_colpire,  operazione: svantaggio }
+  - { bersaglio: tiri_salvezza, operazione: svantaggio }
+---
+prosa della condizione…
+```
+oppure `attivita:` completo (identico alle SRD). L'id nasce dallo slug del nome-file
+(`homebrew:<slug>`) se il frontmatter non lo porta.
 
 ---
 

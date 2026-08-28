@@ -495,11 +495,35 @@ export default class GdrPlugin extends Plugin {
     return this.condizioni;
   }
 
+  // Condizioni/effetti HOMEBREW del vault (categoria: condizione): un def della stessa forma
+  // delle SRD, autorato nel frontmatter. Ergonomico: `effetti:` diretto (lo avvolgo in
+  // un'attività passiva) OPPURE `attivita:` completo (come le SRD). Rilette a ogni chiamata
+  // (l'utente le edita). Rese mordenti+schiera-bili come le SRD — stesso motore risolviCondizioni.
+  async homebrewCondizioni(): Promise<any[]> {
+    const out: any[] = [];
+    for (const f of this.app.vault.getMarkdownFiles()) {
+      const fm = this.frontmatterOf(f.path);
+      if (!fm || String(fm.categoria ?? "").toLowerCase() !== "condizione") continue;
+      let attivita = (fm as any).attivita;
+      if (!Array.isArray(attivita) && Array.isArray((fm as any).effetti)) {
+        attivita = [{ tipo: "passivo", effetti: (fm as any).effetti }];
+      }
+      if (!Array.isArray(attivita)) continue; // nessun effetto meccanico → è solo prosa, salta
+      const id = (fm as any).id ? String((fm as any).id) : `homebrew:${f.basename.toLowerCase().replace(/\s+/g, "-")}`;
+      out.push({ id, nome: String((fm as any).nome ?? f.basename), attivita });
+    }
+    return out;
+  }
+
+  // Le condizioni complete per la Board/motore: le SRD bundlate + gli effetti homebrew del vault.
+  async condizioniComplete(): Promise<any[]> {
+    return [...(await this.loadCondizioni()), ...(await this.homebrewCondizioni())];
+  }
+
   // Le DEFINIZIONI delle condizioni risolte (prono→svantaggio…): il motore le applica ai tiri
-  // quando gliele si passa come `defs`. Risolte una volta.
+  // quando gliele si passa come `defs`. Include l'homebrew → NON cachato (l'utente edita).
   async loadDefsCondizioni(): Promise<DefinizioniCondizioni> {
-    if (!this.condDefs) this.condDefs = risolviCondizioni(await this.loadCondizioni());
-    return this.condDefs;
+    return risolviCondizioni(await this.condizioniComplete());
   }
 
   // I PG del vault (categoria=personaggio, tipo=pg), col frontmatter. Sorgente condivisa fra
