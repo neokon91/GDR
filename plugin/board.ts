@@ -6,6 +6,7 @@ import { ItemView, Notice, TFile, WorkspaceLeaf } from "obsidian";
 import {
   ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
   comandoIniziativa, comandoAttacco, comandoSalvezza, comandoMultiattacco, comandoCura,
+  comandoLeggendaria, leggendarieRestanti,
   type Evento, type Dado, type InPlancia, type Stato, type DefinizioniCondizioni,
 } from "../regole/src/motore/motore";
 import { daMostro, type Combattente, type Azione } from "../regole/src/motore/combattente";
@@ -127,6 +128,40 @@ export class BoardView extends ItemView {
       if (t) this.push(...comandoCura(s, t.key, az, dadoVero));
     } else {
       new Notice(`Azione «${az.nome}» (${az.tipo}) non ancora gestita dalla board.`);
+    }
+  }
+
+  // Azione leggendaria: spende dal pozzo (una/round, si ricarica) e risolve l'effetto su un
+  // bersaglio (il motore la incanala in comandoAzione). Il bersaglio si sceglie come un attacco.
+  private async agisciLeggendaria(attore: InPlancia, leg: { id: string; nome: string; costo?: number }) {
+    const s = this.stato();
+    const nemici = ordine(s).filter((c) => c.schieramento !== attore.schieramento && inPiedi(c));
+    if (!nemici.length) { new Notice("Nessun bersaglio in piedi."); return; }
+    const t = await this.pickBersaglio(nemici, `${leg.nome} (leggendaria) → bersaglio`);
+    if (t) this.push(...comandoLeggendaria(s, attore.key, t.key, leg.id, dadoVero, this.defs));
+  }
+
+  // Pannello Azioni leggendarie: fra un turno e l'altro il boss spende utilizzi leggendari.
+  // Mostra ogni creatura col pozzo residuo (esclusa quella di turno: non si usano sul PROPRIO
+  // turno). Bottone per azione, disabilitato se il costo supera gli utilizzi rimasti.
+  private renderLeggendarie(root: HTMLElement, s: Stato) {
+    const attivoOra = attivo(s);
+    const legendari = s.combattenti.filter((c) =>
+      c.leggendarie && c.leggendarie.utilizzi > 0 && inPiedi(c) &&
+      (!attivoOra || c.key !== attivoOra.key) && leggendarieRestanti(s, c.key) > 0);
+    if (!legendari.length) return;
+    const pan = root.createDiv({ cls: "gdr-board-leggendarie" });
+    for (const c of legendari) {
+      const restanti = leggendarieRestanti(s, c.key);
+      const box = pan.createDiv({ cls: "gdr-board-legg-box" });
+      box.createEl("h4", { text: `⭐ Azioni leggendarie — ${c.nome} (${restanti}/${c.leggendarie!.utilizzi})` });
+      const btns = box.createDiv({ cls: "gdr-board-azioni-box" });
+      for (const leg of c.leggendarie!.azioni) {
+        const costo = Number(leg.costo) || 1;
+        const b = btns.createEl("button", { text: costo > 1 ? `${leg.nome} (${costo})` : leg.nome });
+        if (costo > restanti) b.disabled = true;
+        else b.onclick = () => void this.agisciLeggendaria(c, leg);
+      }
     }
   }
 
@@ -344,6 +379,9 @@ export class BoardView extends ItemView {
         box.createSpan({ cls: "gdr-board-vuoto", text: "(nessuna azione eseguibile — passa il turno)" });
       }
     }
+
+    // Azioni leggendarie: i boss agiscono fra un turno e l'altro (pozzo che si ricarica ogni round).
+    if (iniziato && !esito) this.renderLeggendarie(root, s);
 
     // Registro.
     const log = root.createDiv({ cls: "gdr-board-log" });

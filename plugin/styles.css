@@ -213,6 +213,12 @@
   transition: background .12s ease, border-color .12s ease;
 }
 .gdr-board-azioni-box button:hover { background: var(--background-modifier-hover); border-color: var(--interactive-accent); }
+.gdr-board-azioni-box button:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Azioni leggendarie: pannello dei boss fra un turno e l'altro (accento distinto). */
+.gdr-board-leggendarie { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+.gdr-board-legg-box { padding: 8px 12px; border-radius: 10px; background: var(--background-secondary); border: 1px dashed var(--text-accent); }
+.gdr-board-legg-box h4 { margin: 0 0 8px; font-size: var(--font-ui-small); color: var(--text-accent); }
 
 /* --- Board: coda riga (condizioni + controlli manuali GM, Spike B) ---------- */
 .gdr-board-tail { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
