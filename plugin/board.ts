@@ -7,6 +7,7 @@ import {
   ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
   comandoIniziativa, comandoAttacco, comandoSalvezza, comandoMultiattacco, comandoCura,
   comandoLeggendaria, leggendarieRestanti,
+  comandoSostituisciEsito, sostituzioniDisponibili, sostituzioniRestanti,
   type Evento, type Dado, type InPlancia, type Stato, type DefinizioniCondizioni,
 } from "../regole/src/motore/motore";
 import { daMostro, type Combattente, type Azione } from "../regole/src/motore/combattente";
@@ -162,6 +163,24 @@ export class BoardView extends ItemView {
         if (costo > restanti) b.disabled = true;
         else b.onclick = () => void this.agisciLeggendaria(c, leg);
       }
+    }
+  }
+
+  // Reazioni all'ESITO offerte dal motore: la Resistenza Leggendaria & simili, che
+  // trasformano un TS FALLITO in superato. Il motore le offre (sostituzioniDisponibili) subito
+  // dopo il tiro; la Board le mostra come banner d'interruzione, il GM decide se spenderle.
+  private renderReazioni(root: HTMLElement, s: Stato) {
+    const offerte = sostituzioniDisponibili(this.eventi, s);
+    if (!offerte.length) return;
+    const pan = root.createDiv({ cls: "gdr-board-reazioni" });
+    for (const o of offerte) {
+      const c = s.combattenti.find((x) => x.key === o.key);
+      const restanti = sostituzioniRestanti(s, o.key);
+      const box = pan.createDiv({ cls: "gdr-board-reaz-box" });
+      box.createSpan({ cls: "gdr-board-reaz-txt",
+        text: `⚡ ${c?.nome ?? o.key}: usa ${o.nome} (${restanti} rimaste) per superare il tiro salvezza fallito?` });
+      const b = box.createEl("button", { text: `Usa ${o.nome}` });
+      b.onclick = () => this.push(...comandoSostituisciEsito(this.eventi, o.key, o.indice, o.interno));
     }
   }
 
@@ -358,6 +377,10 @@ export class BoardView extends ItemView {
       const bDel = ctrl.createEl("button", { text: "✕", cls: "gdr-board-del" }); bDel.setAttribute("aria-label", "Rimuovi dalla plancia");
       bDel.onclick = () => this.push({ tipo: "rimosso", key: c.key });
     }
+
+    // Reazioni all'esito (Resistenza Leggendaria…): banner d'interruzione, PRIMA di tutto il
+    // resto — così un TS fallito può essere ribaltato anche se ha appena deciso lo scontro.
+    if (iniziato) this.renderReazioni(root, s);
 
     // Conseguenze: a scontro deciso, il pannello-ponte verso il mondo (PF ai PG, fronti, risolto).
     if (esito) this.renderConseguenze(root, s, esito);
