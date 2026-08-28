@@ -242,7 +242,10 @@
    caratteristiche e meta a piena larghezza; Tratti/Azioni fluiscono in due colonne.
    `column-width` lo rende responsive da sé: 1 colonna sul modal stretto, 2 sulla nota larga. */
 .gdr-sb { column-width: 300px; column-gap: 26px; }
-.gdr-sb-nome, .gdr-sb-sotto, .gdr-sb > .gdr-sb-blocco, .gdr-sb-abil { column-span: all; }
+/* Come nel Manuale: solo nome e riga-tipo a piena larghezza; TUTTO il resto (difese,
+   caratteristiche, meta, tratti, azioni) fluisce nelle colonne. */
+.gdr-sb-nome, .gdr-sb-sotto { column-span: all; }
+.gdr-sb > .gdr-sb-blocco, .gdr-sb-abil { break-inside: avoid; }
 .gdr-sb-sez { break-after: avoid; break-inside: avoid; }
 .gdr-sb-voce { break-inside: avoid; }
 .gdr-sb-nome { margin: 0 0 2px; color: var(--text-accent); }
@@ -251,9 +254,9 @@
 .gdr-sb-blocco strong { color: var(--text-accent); }
 /* Caratteristiche in tabella stile 2024, due gruppi affiancati (FOR/DES/COS | INT/SAG/CAR).
    Su pannelli stretti i due gruppi vanno a capo (wrap) senza rompere il layout. */
-.gdr-sb-abil { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0; }
-.gdr-sb-abil-tab { flex: 1 1 220px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-.gdr-sb-abil-tab th, .gdr-sb-abil-tab td { padding: 3px 8px; text-align: right; }
+.gdr-sb-abil { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 10px 0; }
+.gdr-sb-abil-tab { flex: 1 1 128px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.gdr-sb-abil-tab th, .gdr-sb-abil-tab td { padding: 2px 5px; text-align: right; }
 .gdr-sb-abil-tab thead th { color: var(--text-muted); font-size: var(--font-ui-smaller); font-weight: 600; border-bottom: 1px solid var(--background-modifier-border); }
 .gdr-sb-abil-tab tbody th { text-align: left; color: var(--text-muted); font-weight: 700; letter-spacing: .04em; }
 .gdr-sb-abil-tab tbody tr + tr th, .gdr-sb-abil-tab tbody tr + tr td { border-top: 1px solid var(--background-modifier-border); }
