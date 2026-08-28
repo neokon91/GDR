@@ -49,6 +49,21 @@ const DEFAULT_SETTINGS: GdrSettings = {
 const VIEWS_PATH = "z.automazioni/views.js";
 const META_PATH = "z.automazioni/meta_actions.js";
 
+// Estrae il RawMostro dal primo blocco ```gdr statblock inline di una nota (creatura homebrew).
+// Tollerante alle due forme dell'arg: nel fence (```gdr statblock) o nella prima riga del corpo
+// (```gdr\nstatblock). Ritorna null se il blocco manca, non è YAML, o non ha `nome`.
+function estraiRawMostro(testo: string): any | null {
+  const m = testo.match(/```gdr[^\n]*\n([\s\S]*?)\n?```/);
+  if (!m) return null;
+  const corpo = m[1].replace(/^\s*statblock[^\n]*\n/, "");
+  try {
+    const raw = parseYaml(corpo);
+    return raw && typeof raw === "object" && (raw as any).nome ? raw : null;
+  } catch {
+    return null;
+  }
+}
+
 export default class GdrPlugin extends Plugin {
   private views: any = null;
   private meta: any = null;
@@ -261,7 +276,7 @@ export default class GdrPlugin extends Plugin {
   // il vecchio flusso ```encounter + Initiative Tracker.
   async apriIncontroInBoard(file: any) {
     let bestiario: any[];
-    try { bestiario = await this.loadBestiario(); }
+    try { bestiario = await this.bestiarioCompleto(); }
     catch (e: any) { new Notice(`Bestiario non caricato: ${e?.message ?? e}`); return; }
     const fm = this.frontmatterOf(file.path);
     const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs());
@@ -402,6 +417,28 @@ export default class GdrPlugin extends Plugin {
       this.bestiario = JSON.parse(await this.app.vault.adapter.read(`${this.manifest.dir}/data/srd_bestiario.json`)) as any[];
     }
     return this.bestiario;
+  }
+
+  // Creature HOMEBREW del vault: le note `categoria: creatura` col loro RawMostro nel blocco
+  // ```gdr statblock inline. Rilette a ogni chiamata (l'utente le edita); l'id nasce dallo slug
+  // del nome-file se il blocco non lo porta. Rende l'homebrew schiera-bile come i mostri SRD —
+  // stesso schema, stesso motore (daMostro), stessa Board.
+  async homebrewCreature(): Promise<any[]> {
+    const out: any[] = [];
+    for (const f of this.app.vault.getMarkdownFiles()) {
+      if (String(this.frontmatterOf(f.path)?.categoria ?? "").toLowerCase() !== "creatura") continue;
+      const raw = estraiRawMostro(await this.app.vault.cachedRead(f));
+      if (raw) {
+        if (!raw.id) raw.id = `homebrew:${f.basename.toLowerCase().replace(/\s+/g, "-")}`;
+        out.push(raw);
+      }
+    }
+    return out;
+  }
+
+  // Roster completo per la Board: bestiario SRD bundlato + creature homebrew del vault.
+  async bestiarioCompleto(): Promise<any[]> {
+    return [...(await this.loadBestiario()), ...(await this.homebrewCreature())];
   }
 
   // Le condizioni GREZZE dal sidecar (gen_condizioni.py): per il picker manuale.

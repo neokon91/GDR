@@ -41,7 +41,7 @@ export class BoardView extends ItemView {
   getIcon() { return "swords"; }
 
   async onOpen() {
-    try { this.bestiario = await this.plugin.loadBestiario(); }
+    try { this.bestiario = await this.plugin.bestiarioCompleto(); }
     catch (e: any) { this.errore = e?.message ?? String(e); }
     this.condLista = await this.plugin.loadCondizioni(); // per il picker manuale
     this.defs = await this.plugin.loadDefsCondizioni(); // effetti-condizione automatici sui tiri
@@ -70,7 +70,9 @@ export class BoardView extends ItemView {
   // Picker sul bestiario (334 mostri) → aggiunge un mostro del lato scelto.
   private async aggiungi(lato: "alleato" | "nemico") {
     if (!this.bestiario.length) { new Notice("Bestiario non caricato."); return; }
-    const raw = await suggester(this.app, (m: any) => m.nome, this.bestiario, false, `Aggiungi ${lato === "nemico" ? "un nemico" : "un alleato"}`);
+    // Le creature homebrew del vault (id `homebrew:*`) sono marcate 🏠 nel picker, accanto agli SRD.
+    const etich = (m: any) => (typeof m.id === "string" && m.id.startsWith("homebrew:") ? `🏠 ${m.nome}` : m.nome);
+    const raw = await suggester(this.app, etich, this.bestiario, false, `Aggiungi ${lato === "nemico" ? "un nemico" : "un alleato"}`);
     if (raw) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(raw), lato) });
   }
 
