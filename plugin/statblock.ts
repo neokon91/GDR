@@ -4,6 +4,35 @@ import { App, MarkdownRenderer, MarkdownRenderChild, Modal } from "obsidian";
 import { daMostro } from "../regole/src/motore/combattente";
 import type { InPlancia } from "../regole/src/motore/motore";
 
+// Validazione di una creatura HOMEBREW (forma RawMostro): rende visibile la "wrongness
+// silenziosa" — daMostro è tollerante (usa default per i campi mancanti), quindi una creatura
+// incompleta schiera lo stesso ma con CA/PF/TS sbagliati e l'autore non lo sa. `errori` =
+// non utilizzabile (niente nome/YAML rotto); `avvisi` = schiera con valori di default.
+export interface ValidazioneMostro { errori: string[]; avvisi: string[]; }
+const _ABIL6 = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
+export function validaRawMostro(m: any): ValidazioneMostro {
+  const errori: string[] = [];
+  const avvisi: string[] = [];
+  if (!m || typeof m !== "object") { errori.push("lo statblock non è un oggetto YAML valido"); return { errori, avvisi }; }
+  if (!m.nome) errori.push("manca «nome»");
+  const car = m.caratteristiche;
+  if (!car || typeof car !== "object") {
+    avvisi.push("manca «caratteristiche» → mod, tiri salvezza e PF usano il default (10)");
+  } else {
+    const senza = _ABIL6.filter((a) => (car as any)[a]?.valore == null);
+    if (senza.length) avvisi.push(`caratteristiche senza valore: ${senza.join(", ")} → default 10`);
+  }
+  if (m.ca?.valore == null) avvisi.push("manca «ca.valore» → CA 10");
+  // PF calcolati: servono dadi_vita (intero positivo) E taglia; altrimenti daMostro usa 10.
+  const dv = m.dadi_vita;
+  const taglia = Array.isArray(m.taglia) ? m.taglia[0] : m.taglia;
+  if (!(typeof dv === "number" && Number.isInteger(dv) && dv > 0) || !taglia) {
+    avvisi.push("manca «dadi_vita» o «taglia» → PF 10 (i PF si calcolano da dadi_vita + taglia)");
+  }
+  if (m.gs == null || m.gs === "") avvisi.push("manca «gs» → niente bonus di competenza (TS/CD/attacchi senza PB)");
+  return { errori, avvisi };
+}
+
 // Modificatore di caratteristica, formattato col segno (+3, -1, +0).
 export function modCar(valore: number): string {
   const m = Math.floor((valore - 10) / 2);

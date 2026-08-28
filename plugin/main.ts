@@ -14,7 +14,7 @@
  * ../docs/combat_engine.md.
  */
 import {
-  App, MarkdownRenderer, MarkdownRenderChild, Notice, Plugin, PluginSettingTab, Setting, parseYaml,
+  App, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, PluginSettingTab, Setting, parseYaml,
 } from "obsidian";
 // @ts-ignore — .mjs JS del vault, senza tipi; esbuild lo risolve e tree-shaka al solo PANELS.
 import { PANELS } from "../Dev/Source/JS/_panels.mjs";
@@ -29,7 +29,7 @@ import {
 import { risolviCondizioni } from "../regole/src/motore/combattente";
 import { evalCjs } from "./util";
 import { suggester, tpShim } from "./modali";
-import { renderStatblock, trovaMostro } from "./statblock";
+import { renderStatblock, trovaMostro, validaRawMostro } from "./statblock";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
 import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
@@ -62,6 +62,17 @@ function estraiRawMostro(testo: string): any | null {
   } catch {
     return null;
   }
+}
+
+// Modale generica che rende del Markdown (usata per il report di validazione homebrew).
+class ReportModal extends Modal {
+  constructor(app: App, private md: string) { super(app); }
+  onOpen() {
+    this.contentEl.empty();
+    this.contentEl.addClass("gdr-report");
+    void MarkdownRenderer.render(this.app, this.md, this.contentEl, "", new MarkdownRenderChild(this.contentEl));
+  }
+  onClose() { this.contentEl.empty(); }
 }
 
 export default class GdrPlugin extends Plugin {
@@ -138,6 +149,16 @@ export default class GdrPlugin extends Plugin {
           else raw = trovaMostro(await this.loadBestiario(), id);            // lookup SRD per id
           if (raw && typeof raw === "object") {
             renderStatblock(el.createDiv(), raw, undefined, { app: this.app, component: child, sourcePath: ctx.sourcePath });
+            // Validazione inline SOLO per l'homebrew (corpo YAML): i campi mancanti schierano
+            // con default silenziosi (CA/PF 10, niente PB) → un callout li rende visibili.
+            if (corpo) {
+              const { errori, avvisi } = validaRawMostro(raw);
+              if (errori.length || avvisi.length) {
+                const righe = [...errori.map((x) => `> - ❌ ${x}`), ...avvisi.map((x) => `> - ⚠️ ${x}`)].join("\n");
+                const md = `> [!${errori.length ? "error" : "warning"}]- Statblock homebrew da rifinire (${errori.length + avvisi.length})\n${righe}`;
+                await MarkdownRenderer.render(this.app, md, el.createDiv(), ctx.sourcePath, child);
+              }
+            }
           } else if (corpo) {
             el.createEl("pre", { text: "Statblock GDR: corpo YAML inline non valido." });
           } else {
@@ -208,6 +229,7 @@ export default class GdrPlugin extends Plugin {
     this.addCommand({ id: "apri-cruscotto", name: "Apri il Cruscotto DM", callback: () => this.activateCruscotto() });
     this.registerView(VIEW_TYPE_BOARD, (leaf) => new BoardView(leaf, this));
     this.addCommand({ id: "apri-board", name: "Apri la Board di combattimento", callback: () => this.activateBoard() });
+    this.addCommand({ id: "valida-homebrew", name: "Valida le creature homebrew", callback: () => void this.apriValidazioneHomebrew() });
     // Ricucitura prepara→gioca (F2): dalla nota-Incontro attiva schiera nella Board.
     this.addCommand({
       id: "apri-incontro-in-board",
@@ -439,6 +461,29 @@ export default class GdrPlugin extends Plugin {
   // Roster completo per la Board: bestiario SRD bundlato + creature homebrew del vault.
   async bestiarioCompleto(): Promise<any[]> {
     return [...(await this.loadBestiario()), ...(await this.homebrewCreature())];
+  }
+
+  // Check batch di TUTTE le creature homebrew (categoria: creatura): apre un report con, per
+  // ogni nota, gli errori (non utilizzabile) e gli avvisi (schiera con default). Complementa la
+  // validazione inline nel blocco statblock.
+  async apriValidazioneHomebrew() {
+    const note = this.app.vault.getMarkdownFiles()
+      .filter((f) => String(this.frontmatterOf(f.path)?.categoria ?? "").toLowerCase() === "creatura")
+      .sort((a, b) => a.basename.localeCompare(b.basename));
+    if (!note.length) { new Notice("Nessuna creatura homebrew (categoria: creatura) nel vault."); return; }
+    const righe: string[] = [];
+    let ok = 0, conAvvisi = 0, conErrori = 0;
+    for (const f of note) {
+      const raw = estraiRawMostro(await this.app.vault.cachedRead(f));
+      if (!raw) { conErrori++; righe.push(`### ❌ ${f.basename}\n- nessun blocco \`gdr statblock\` valido nella nota`); continue; }
+      const { errori, avvisi } = validaRawMostro(raw);
+      if (!errori.length && !avvisi.length) { ok++; righe.push(`### ✅ ${raw.nome ?? f.basename}`); continue; }
+      if (errori.length) conErrori++; else conAvvisi++;
+      const lista = [...errori.map((x) => `- ❌ ${x}`), ...avvisi.map((x) => `- ⚠️ ${x}`)].join("\n");
+      righe.push(`### ${errori.length ? "❌" : "⚠️"} ${raw.nome ?? f.basename}\n${lista}`);
+    }
+    const md = `# 🏠 Validazione creature homebrew\n\n**${note.length}** creature — ✅ ${ok} · ⚠️ ${conAvvisi} · ❌ ${conErrori}\n\n${righe.join("\n\n")}`;
+    new ReportModal(this.app, md).open();
   }
 
   // Le condizioni GREZZE dal sidecar (gen_condizioni.py): per il picker manuale.
