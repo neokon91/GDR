@@ -238,7 +238,13 @@
 .gdr-board-nome.is-click:hover { color: var(--text-accent); text-decoration: underline; }
 
 /* --- Statblock nativo (Modal, sostituisce Fantasy Statblocks, Strada 1) ----- */
-.gdr-sb { max-height: 75vh; overflow-y: auto; }
+/* Statblock a DUE COLONNE (stile pagina del Manuale) sui pannelli larghi: testata,
+   caratteristiche e meta a piena larghezza; Tratti/Azioni fluiscono in due colonne.
+   `column-width` lo rende responsive da sé: 1 colonna sul modal stretto, 2 sulla nota larga. */
+.gdr-sb { column-width: 300px; column-gap: 26px; }
+.gdr-sb-nome, .gdr-sb-sotto, .gdr-sb > .gdr-sb-blocco, .gdr-sb-abil { column-span: all; }
+.gdr-sb-sez { break-after: avoid; break-inside: avoid; }
+.gdr-sb-voce { break-inside: avoid; }
 .gdr-sb-nome { margin: 0 0 2px; color: var(--text-accent); }
 .gdr-sb-sotto { font-style: italic; color: var(--text-muted); margin-bottom: 10px; }
 .gdr-sb-blocco { border-top: 2px solid var(--interactive-accent); border-bottom: 2px solid var(--interactive-accent); padding: 8px 0; margin: 8px 0; display: flex; flex-direction: column; gap: 3px; }
