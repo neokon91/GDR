@@ -207,6 +207,7 @@
 .gdr-board-azioni { margin-top: 14px; padding: 10px 12px; border-radius: 10px; background: var(--background-secondary); border: 1px solid var(--interactive-accent); }
 .gdr-board-azioni h4 { margin: 0 0 8px; font-size: var(--font-ui-small); }
 .gdr-board-azioni-box { display: flex; flex-wrap: wrap; gap: 8px; }
+.gdr-board-azioni-sub { margin: 10px 0 6px; font-size: var(--font-ui-smaller); font-weight: 600; color: var(--text-muted); letter-spacing: .02em; }
 .gdr-board-azioni-box button {
   cursor: pointer; font-size: var(--font-ui-smaller); padding: 5px 12px; border-radius: 8px;
   border: 1px solid var(--background-modifier-border); background: var(--background-primary);

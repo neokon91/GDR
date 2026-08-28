@@ -386,20 +386,30 @@ export class BoardView extends ItemView {
     if (esito) this.renderConseguenze(root, s, esito);
 
     // Azioni dell'attivo (a battaglia iniziata, se in piedi e non c'è ancora un esito).
+    // Divise per economia del turno: Azioni (principali) e Azioni bonus.
     if (iniziato && !esito && attivoOra && inPiedi(attivoOra)) {
       const disponibili: Azione[] = (attivoOra.azioni && attivoOra.azioni.length)
         ? attivoOra.azioni
         : (attivoOra.attacco ? [{ nome: attivoOra.attacco.nome, tipo: "attacco", colpire: attivoOra.attacco.colpire, danno: attivoOra.attacco.danno } as Azione] : []);
+      const principali = disponibili.filter((a) => a.economia !== "azione-bonus");
+      const bonus = disponibili.filter((a) => a.economia === "azione-bonus");
       const pan = root.createDiv({ cls: "gdr-board-azioni" });
       pan.createEl("h4", { text: `Azioni di turno — ${attivoOra.nome}` });
-      const box = pan.createDiv({ cls: "gdr-board-azioni-box" });
-      if (disponibili.length) {
-        for (const az of disponibili) {
+      const gruppo = (voci: Azione[], etich?: string) => {
+        if (!voci.length) return;
+        if (etich) pan.createEl("div", { cls: "gdr-board-azioni-sub", text: etich });
+        const box = pan.createDiv({ cls: "gdr-board-azioni-box" });
+        for (const az of voci) {
           const b = box.createEl("button", { text: etichettaAzione(az) });
           b.onclick = () => void this.agisci(attivoOra, az);
         }
+      };
+      if (principali.length || bonus.length) {
+        gruppo(principali);
+        gruppo(bonus, "⚡ Azioni bonus");
       } else {
-        box.createSpan({ cls: "gdr-board-vuoto", text: "(nessuna azione eseguibile — passa il turno)" });
+        pan.createDiv({ cls: "gdr-board-azioni-box" })
+          .createSpan({ cls: "gdr-board-vuoto", text: "(nessuna azione eseguibile — passa il turno)" });
       }
     }
 
