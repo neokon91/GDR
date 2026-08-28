@@ -11,7 +11,7 @@
  *
  * Struttura (esbuild bundla tutto da qui): util.ts (helper puri) · modali.ts (modali+tpShim) ·
  * adapters.ts (PG→Combattente) · statblock.ts · board.ts · cruscotto.ts. Vedi
- * ../docs/combat_engine.md.
+ * ../docs/architecture.md.
  */
 import {
   App, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, PluginSettingTab, Setting, parseYaml,

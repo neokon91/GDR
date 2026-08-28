@@ -91,15 +91,16 @@ GDR non è più isolato: è parte di un ecosistema a 4 repo condivisi (sotto
 plugin), **Compendio** (app Astro). In sviluppo `archivio` e `regole` sono **symlink
 gitignorati** dentro `GDR/`; esbuild bundla il motore `regole` nel plugin e i generatori
 leggono `archivio`. Il plugin ha un **runtime di combattimento nativo** (Board + motore +
-statblock + condizioni "vere"). → [docs/combat_engine.md](docs/combat_engine.md).
+statblock + condizioni "vere"). → [docs/architecture.md](docs/architecture.md).
 
 ## Documentazione
 
-Approfondimenti in [`docs/`](docs/): [architecture](docs/architecture.md) ·
-[combat_engine (motore + Board + ecosistema)](docs/combat_engine.md) ·
-[data_model](docs/data_model.md) · [plugin_contracts](docs/plugin_contracts.md) ·
-[rules_layer](docs/rules_layer.md) · [play_layer](docs/play_layer.md) ·
-[releasing](docs/releasing.md) · **[roadmap & analisi](docs/roadmap.md)**.
+Tre doc di sviluppo in [`docs/`](docs/):
+- **[architecture.md](docs/architecture.md)** — panoramica completa (pipeline di build, modello
+  dati, plugin GDR, rules-engine PG, play layer, motore di combattimento, validazione).
+- **[schema_homebrew.md](docs/schema_homebrew.md)** — il contratto delle entità homebrew giocabili
+  (RawMostro, condizioni/effetti, blocco ` ```gdr statblock `).
+- **[releasing.md](docs/releasing.md)** — rilascio, QA clean-install, copy della pagina itch.
 
 ## Struttura
 
@@ -110,16 +111,15 @@ Dev/Source/Jinja/     _macros.j2 · _entity_base.j2 + un template per entità
 Dev/Source/SiteJinja/ page.html.j2 · index.html.j2 · site.css (sito dei giocatori)
 Dev/Source/JS/        create_entity.js · crea_pg.js/sali_pg.js · meta_actions.js · views.js
                       genera.js · _panels.mjs (mappa pannelli → plugin) · _comparators.js/_homebrew_bridge.js (sorgenti canoniche)
-Dev/Source/SRD/       JSON SRD 5.2.1 IT · statblocks/ layout Fantasy Statblocks
-Dev/Tools/            common.py · render.py · build_srd.py · build_personaggio/ · fetch_plugins.py · validate.py
-Dev/Reference/        cheat-sheet sintassi dei plugin installati
-docs/                 architecture · data_model · rules_layer · play_layer · plugin_contracts · roadmap
+Dev/Tools/            common.py · render.py · build_srd.py · build_personaggio/ · gen_bestiario.py · fetch_plugins.py · validate.py
+docs/                 architecture · schema_homebrew · releasing
 ```
+(Dati SRD e motore vivono nei repo `archivio` e `regole`, symlink gitignorati.)
 
 ## Il modello (YAML)
 
 `render.load_core()` fonde tre file in un unico modello (vedi
-[data_model](docs/data_model.md)):
+[architecture](docs/architecture.md)):
 
 - **`core.yaml`** — globali worldbuilding: `fields` (registro centrale), `tavolo`
   (superficie giocabile), `states`.
@@ -146,7 +146,7 @@ estende (`{% block lore %}`/`{% block extra_tabs %}`); le pagine `home`/`index`/
 
 - **Campo editabile**: voce in `core.fields` (o `entities/<id>.fields`) → usalo con
   `field('id')`; se il widget non è `text`/`number`, dichiaralo in `plugins.yaml:metabind_inputs`.
-- **Entità**: *prima* applica il [principio di inclusione](docs/data_model.md#principio-di-inclusione--cosa-diventa-unentità)
+- **Entità**: *prima* applica il [principio di inclusione](docs/architecture.md#principio-dinclusione-larbitro-anti-bloat)
   (relazioni proprie **e** superficie giocabile propria — altrimenti è campo/subtype/tag).
   Se è davvero un'entità: un file `entities/<id>.yaml` (`folder`/`order`/`templates`/`subtypes` +
   opz. `fields`/`scheda`/`assi`/`relazioni`/`creation`) + il template `Jinja/<id>.md.j2`.

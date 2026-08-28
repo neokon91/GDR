@@ -23,7 +23,7 @@ CommonJS) e importa la mappa pannelli da `../Dev/Source/JS/_panels.mjs`.
    (`renderStatblock` + blocco ```gdr statblock`) e **condizioni "vere"** (gli effetti modificano
    i tiri via `risolviCondizioni`). Adapter `daMostro`/`daPgGdr`. Dataset **sidecar** in
    `plugin/data/` (bestiario, condizioni) generati da archivio. → dettagli in
-   [../docs/combat_engine.md](../docs/combat_engine.md). Ha **sostituito** Fantasy Statblocks +
+   [../docs/architecture.md](../docs/architecture.md). Ha **sostituito** Fantasy Statblocks +
    Initiative Tracker (ritirati: nessun plugin di terze parti per il combattimento).
 
 ## Build e installazione

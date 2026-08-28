@@ -1,94 +1,123 @@
-# Pubblicare una release
+# Rilascio, QA e pagina itch
 
-Come confezionare e distribuire il vault. Gli artefatti sono **versionati** e
-riproducibili; gli zip vivono in `dist/` (gitignorato) e si **allegano** a una
-release — non si committano.
+Come confezionare, verificare e distribuire il vault. Gli artefatti sono **versionati** e
+riproducibili; gli zip vivono in `dist/` (gitignorato) e si **allegano** a una release — non si
+committano.
 
 ## Cosa esce
 
-`npm run dist` (→ `Dev/Tools/release.py`) fa una build pulita e produce in `dist/`:
+`npm run dist` (→ `Dev/Tools/release.py`) fa una build pulita e produce
+`dist/GDR-vault-v<ver>.zip`: il **vault Obsidian pronto** (plugin inclusi) — si scompatta in una
+cartella `GDR-vault/` → «Apri cartella come vault». Lo stato locale (workspace/cache/.DS_Store) è
+escluso. *(Il sito dei giocatori NON è un artefatto di release: lo genera il DM in-app dal
+bottone «Genera sito».)*
 
-| Artefatto | Cos'è |
-|---|---|
-| `GDR-vault-v<ver>.zip` | Il **vault Obsidian pronto** (plugin inclusi). Si scompatta in una cartella `GDR-vault/` → «Apri cartella come vault». |
-
-Lo stato locale (workspace, cache, `.DS_Store`) è escluso, così lo zip è pulito. *(Il **sito
-dei giocatori** non è più un artefatto di release: lo genera il DM in-app dal bottone «Genera
-sito» — [[Occhi del giocatore]] — sul suo mondo; vedi README.)*
-
-I **plugin sono bundlati in modo riproducibile e pinnato**: `release.py` invoca
-`Dev/Tools/fetch_plugins.py`, che scarica i plugin con `repo`+`version` in
-`plugins.yaml` dalle loro **GitHub release** (asset `main.js`/`manifest.json`/
-`styles.css`) dentro `dist/GDR-vault/.obsidian/plugins/<id>/` **prima** dello zip.
-Non dipende più dai plugin installati a mano sul PC del maintainer → lo zip esce
-uguale da un **clone pulito**. Un **gate** (`assert_critical_present`) fa **fallire**
-`npm run dist` se manca un plugin `critico`: mai uno zip turnkey rotto in silenzio.
+I **plugin sono bundlati, pinnati e riproducibili**: `release.py` invoca `fetch_plugins.py`, che
+scarica i plugin con `repo`+`version` in `plugins.yaml` dalle loro **GitHub release** dentro
+`.obsidian/plugins/<id>/` **prima** dello zip (idempotente; verifica che il manifest scaricato
+combaci col pin). Non dipende dai plugin installati sul PC del maintainer → lo zip esce uguale da
+un clone pulito. Un **gate** (`assert_critical_present`) fa fallire `npm run dist` se manca un
+plugin `critico`. Il plugin autoriale `gdr` è **esente dal pin** (buildato da `plugin/`).
 
 ## Passi
 
-1. **Versione**: aggiorna `version` in `package.json` (SemVer). È la single source che
-   `release.py` legge per i nomi-file e il tag.
-2. **Changelog**: sposta le voci da *Non rilasciato* a `## [<ver>] — AAAA-MM-GG` in
-   [`CHANGELOG.md`](../CHANGELOG.md).
-3. **Verifica**: `npm run check && npm test` (devono essere verdi).
-4. **Pacchetto**: `npm run dist`. Stampa anche il comando `gh` pronto.
-5. **Pubblica** (GitHub):
-   ```
-   gh release create v<ver> dist/GDR-vault-v<ver>.zip \
-     --title "GDR v<ver>" --notes-file CHANGELOG.md
-   ```
-   In alternativa, o in parallelo, **itch.io** (vetrina + *name-your-price*) — sotto.
+1. **Versione**: `version` in `package.json` (SemVer) — single source per nomi-file e tag.
+2. **Changelog**: sposta le voci da *Non rilasciato* a `## [<ver>] — AAAA-MM-GG` in `CHANGELOG.md`.
+3. **Verifica**: `npm run check && npm test` verdi. Per una release pubblica, la **QA
+   clean-install** (sotto).
+4. **Pacchetto**: `npm run dist`.
+5. **Pubblica**: GitHub (`gh release create v<ver> dist/GDR-vault-v<ver>.zip --title "GDR v<ver>"
+   --notes-file CHANGELOG.md`) e/o **itch.io** (sotto).
 
 ## itch.io (via butler)
 
-itch è il canale di **scoperta** per i Game Master (GitHub resta la sorgente + le issue).
-Il caricamento è automatizzato con **butler**, la CLI ufficiale di itch.
+Canale di **scoperta** per i Game Master (GitHub resta sorgente + issue). CLI ufficiale **butler**.
 
-**Una-tantum**
-1. **Installa butler** — https://itch.io/docs/butler/ (scaricalo, mettilo nel PATH).
-2. **`butler login`** — apre il browser, autentica col tuo account itch (la sessione resta
-   locale; nessuna credenziale nel repo).
-3. **Crea il progetto** su itch.io: tipo **«Downloadable»**, prezzo **free / name-your-price**.
-   Annota lo slug «utente/gioco» (es. `tuonome/gdr`).
-4. **Imposta il target**: `config.itch` in `package.json` (`"itch": "tuonome/gdr"`) **oppure**
-   l'env `ITCH_TARGET=tuonome/gdr`.
-5. **Pagina**: incolla titolo, tagline, descrizione e tag da [`docs/itch-page.md`](itch-page.md).
+**Una-tantum**: installa butler (https://itch.io/docs/butler/) + `butler login`; crea il progetto
+itch tipo «Downloadable», free/name-your-price; imposta `config.itch` in `package.json`
+(`"itch": "utente/gioco"`) o `ITCH_TARGET`; incolla la pagina dall'appendice sotto.
+**Ogni release**: `npm run publish:itch` (build+zip + `butler push` sul canale `…:vault`,
+versionato). `butler status <target>:vault` mostra la versione online.
 
-**Ogni release**
-```
-npm run publish:itch
-```
-Fa build+zip e poi `butler push` del vault sul canale `…:vault` (il vault Obsidian pronto), versionato con la
-`version` di package.json. itch tiene lo storico dei build per canale.
+## Licenze
 
-> **Turnkey vs lite**: il vault include i plugin, scaricati e **pinnati** da
-> `fetch_plugins.py` (vedi *Cosa esce* e Note). Per una release pubblica turnkey va
-> bene (licenze verificate); la variante *lite* (senza `.obsidian/plugins/`) è opzionale
-> se vuoi azzerare ogni dubbio sulle licenze altrui — togli i campi `version` da
-> `plugins.yaml` così nessun plugin viene bundlato (si installano via BRAT/community al
-> primo avvio), e documentalo nel LEGGIMI. NB: i plugin `critico` devono restare pinnati
-> (il gate lo impone), quindi la *lite* pura richiede prima di renderli non critici.
+- **Plugin bundlati** (verificato): redistribuibili (MIT/GPL-3.0/AGPL-3.0), inclusi **non
+  modificati** come mera aggregazione. Attribuzione auto-generata da `plugins.yaml`
+  (`author/repo/license`) in `THIRD-PARTY-LICENSES.md`, incluso nello zip (un test lo impone).
+  Alternativa *lite* (senza `.obsidian/plugins/`): togli i `version` da `plugins.yaml` (i plugin
+  si installano al primo avvio) — richiede prima di rendere non-critici i plugin critici.
+- **SRD 5.2.1** = CC-BY-4.0 (attribuzione in `archivio`); codice/tooling = MIT.
 
-## Note
+---
 
-- **Plugin bundlati (pin)**: un plugin si bundla dichiarando in `plugins.yaml` sia
-  `repo` sia `version` (il **tag** della GitHub release, che Obsidian impone == versione
-  del manifest, **senza** prefisso `v`). `fetch_plugins.py` scarica gli asset di quella
-  release e **verifica** che il manifest scaricato dichiari `id`/`version` attesi (pin
-  integro). È **idempotente**: salta un plugin già presente alla versione pinnata. Per
-  **aggiornare** un plugin, cambia il suo `version` e rilancia `npm run dist` (o
-  `python3 Dev/Tools/fetch_plugins.py --force`). Un plugin **senza** `version` non è
-  bundlato (si installa via BRAT/community). `npm run check` fallisce se un plugin
-  `critico` non è pinnato.
-- **Licenze dei plugin** (verificato 2026-06-04): tutti i plugin bundlati sono
-  **redistribuibili** — MIT, GPL-3.0, AGPL-3.0. Inclusi **non modificati** come *mera
-  aggregazione* (non relicenzia il codice MIT del progetto). L'attribuzione è
-  **auto-generata** da `plugins.yaml` (campi `author/repo/license`) nel file
-  `THIRD-PARTY-LICENSES.md`, incluso nel vault → nello zip. *Mantieni i plugin non
-  modificati*; se ne aggiungi uno, metti i suoi `author/repo/license` (un test lo impone).
-  In alternativa, per azzerare ogni dubbio, una release *senza* `.obsidian/plugins/`
-  (lite) con i plugin installati al primo avvio.
-- **SRD**: il contenuto SRD 5.2.1 è CC-BY-4.0 (attribuzione in `Dev/Source/SRD/LICENSE_SRD`);
-  il codice/tooling è MIT. Vedi [README §Licenza](../README.md#licenza).
-- **Feedback**: il template issue *🎲 Feedback beta* (`.github/ISSUE_TEMPLATE/`) è già
-  pronto per raccogliere segnalazioni dai primi DM.
+## QA clean-install (pre-beta)
+
+Checklist per il **path turnkey da zip pulito** — l'esperienza del **DM esterno**, non la
+dev-copy. La suite automatica copre generazione + logica; **qui** si copre l'**integrazione
+plugin** (Meta Bind, Dataview, il plugin `gdr` che disegna i blocchi ` ```gdr `, reattività
+live) — non testabile headless, ed è dove ogni QA in-app ha trovato bug veri. Il sintomo n.1 di
+rottura è **codice grezzo** (`INPUT[...]`, ` ```dataview `, ` ```gdr `) al posto di
+pulsanti/schede. Ogni FAIL → issue **🎲 Feedback beta**.
+
+- **§0 Setup** — `check && test` verdi; `npm run dist`; scompatta in una cartella **NUOVA** (non
+  la dev-vault); *Apri cartella come vault*. ⚠️ **Primo-open in Restricted Mode** (plugin spenti):
+  la vault è navigabile? *È qui che un DM non-tecnico rimbalza — trattalo come blocco di rilascio.*
+- **§1 Attivazione** — *Trust author*; i plugin si attivano; **Diagnostica** li mostra attivi; su
+  Home nessun codice grezzo.
+- **§2 Onboarding** — Home rende le dashboard; tour *Crea il tuo mondo* (5 tappe) crea le note
+  giuste; wizard **Mondo→Luogo→Fazione** (chiede solo nome+tipo, nota snella); **＋ Componenti**
+  appende il blocco ed è idempotente.
+- **§3 Integrazione** (rischio #1) — **Meta Bind** (VIEW mostra valori, INPUT persistono);
+  **Dataview** (dashboard/relazioni popolate); **pannelli ```gdr** (Rete, radar Carattere SVG,
+  Fronti); **Board** («Apri la Board» → ➕Nemico + 🎭PG → iniziativa → attacco applica danno →
+  click nome = statblock nativo → reload persiste); **reattività** (slider asse → radar live);
+  **statblock** (link `[[Afferrato]]` cliccabili, danno `(2d6+5)` e «+9 a colpire» tirabili).
+- **§4 Demo Astaria** — un luogo (lore+pin), Korbin Salmastro (tiri col bonus reale, *Sali di
+  livello*), incontro «Guardiani» (budget XP + *Schiera nella Board*), mappe zoom-map/import.
+- **§5 Sito giocatori** — «Genera sito» → `Sito-giocatori/` spoiler-free (`rivelazione: segreto`
+  non compare; `visibilita: dm` mai).
+- **§6 Esito** — zero codice-grezzo lungo tutto il percorso.
+
+---
+
+## Appendice — Copy per la pagina itch.io
+
+Testo da incollare nella pagina itch (adatta nomi/link).
+
+**Titolo**: *GDR Italian Vault — il mondo che si calcola, il tavolo 5.5e che si gioca*
+**Tagline**: Un vault Obsidian dove il **worldbuilding diventa tavolo**: scrivi la lore, la
+prep-sessione si accende da sola. D&D 5.5e (2024) completo. **Locale, gratis, i tuoi file restano
+tuoi.**
+
+**Descrizione** — *Il tuo mondo non è uno schedario: è un motore.* Scrivi la lore di una nota (una
+pressione, una prossima mossa) e la *superficie giocabile* si accende **da sola**, calcolata dal
+grafo del mondo. Le fazioni si contendono le risorse; gli eventi muovono i **Fronti**.
+
+- **🌍 Worldbuilding che fa qualcosa**: grafo di entità tipizzate (luoghi/fazioni/divinità/culti…)
+  con inversi automatici; **assi tematici** (radar), motore di **coerenza**, economia, geografia,
+  **timeline causale**; strato cosmico/teologico; World Board su Canvas + 🔎 Esplora (Bases).
+- **🎲 Si gioca davvero a 5.5e (2024)**: PG **1-20** (creazione + level-up), **multiclasse** RAW,
+  **statblock 2024**, incontri col budget 2024, condizioni "vere", maestrie, **tiri col bonus
+  reale**; loop di sessione (Esaurimento/Dadi Vita/riposi/concentrazione/risorse di classe);
+  **homebrew giocabile** accanto all'**SRD 5.2.1 in italiano**.
+- **🗺️ Mappe**: disegna (Excalidraw) o immagine pannabile/zoomabile con segnaposto; **import da
+  Azgaar/Watabou**; hexcrawl.
+- **👥 Condividi senza spoiler**: **sito statico per i giocatori** (un clic, spoiler-free) con
+  rivelazione progressiva anche per singole sezioni.
+- **🔒 Locale, tuo, per sempre**: una cartella sul disco, offline, nessun account; gratis e aperto.
+
+**Perché non una wiki?** Quella *descrive* il mondo; qui il mondo **si calcola**. **Non un VTT?**
+Quello dà il tavolo ma non il mondo; qui **il tavolo nasce dal mondo**. **Non un cloud?** Markdown,
+locale, tuo — niente lock-in.
+
+**Come si parte (2 min)**: scarica, scompatta, *Apri cartella come vault* → *fidati dell'autore,
+attiva i plugin*. Dentro un **mondo-esempio giocabile** (Astaria): apri **«Inizia da qui»** per
+vedere *lore → superficie giocabile*, poi cancella Astaria per il foglio bianco (tour «Crea il tuo
+mondo» + callout ℹ️ Guida su ogni nota).
+
+> 🧪 **Beta aperta.** Template **«🎲 Feedback beta»** sul repo. Include materiale dal **SRD 5.2.1**
+> (CC-BY-4.0) di Wizards of the Coast. Non affiliato né approvato da WotC.
+
+**Campi itch**: Classificazione *Tool* · Prezzo *Name your own price* · Piattaforme
+Windows/macOS/Linux (richiede [Obsidian](https://obsidian.md)) · Tag `worldbuilding`, `tabletop`,
+`dnd`, `dnd-5e`, `obsidian`, `ttrpg`, `game-master`, `hexcrawl`, `italiano` · Canale butler `vault`.
