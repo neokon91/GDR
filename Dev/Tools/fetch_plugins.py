@@ -135,8 +135,13 @@ def fetch_one(plugin: dict[str, Any], vault: Path, *, force: bool = False) -> st
 
 
 def _assert_critical_pinned(plugins: list[dict[str, Any]]) -> None:
-    """Ogni plugin critico deve avere `repo`+`version` (bundlabile in modo riproducibile)."""
-    unpinned = [p["id"] for p in critical(plugins) if not (p.get("repo") and p.get("version"))]
+    """Ogni plugin critico DA SCARICARE deve avere `repo`+`version` (bundlabile in modo
+    riproducibile). Il plugin AUTORIALE (`autoriale: true`, es. `gdr`) è escluso: non si
+    scarica da una release GitHub, lo installa render.py (install_authored_plugins) dal
+    codice buildato — la sua presenza è comunque garantita da assert_critical_present,
+    che gira DOPO la build."""
+    unpinned = [p["id"] for p in critical(plugins)
+                if not p.get("autoriale") and not (p.get("repo") and p.get("version"))]
     if unpinned:
         raise FetchError(
             "Plugin CRITICI senza pin `repo`+`version` in plugins.yaml "
