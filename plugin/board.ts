@@ -6,14 +6,14 @@ import { ItemView, Notice, TFile, WorkspaceLeaf } from "obsidian";
 import {
   ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
   comandoIniziativa, comandoAttacco, comandoSalvezza, comandoMultiattacco, comandoCura,
-  comandoLeggendaria, leggendarieRestanti,
+  comandoLeggendaria, leggendarieRestanti, comandoLancia, slotRestanti, usiRestanti,
   comandoSostituisciEsito, sostituzioniDisponibili, sostituzioniRestanti,
   type Evento, type Dado, type InPlancia, type Stato, type DefinizioniCondizioni,
 } from "../regole/src/motore/motore";
-import { daMostro, type Combattente, type Azione } from "../regole/src/motore/combattente";
+import { daMostro, type Combattente, type Azione, type RisolviIncantesimo, type IncantesimoLanciabile } from "../regole/src/motore/combattente";
 import { StatblockModal, trovaMostro } from "./statblock";
 import { daPgGdr } from "./adapters";
-import { suggester } from "./modali";
+import { suggester, multiSuggester } from "./modali";
 import type GdrPlugin from "./main";
 
 export const VIEW_TYPE_BOARD = "gdr-board";
@@ -27,11 +27,22 @@ function etichettaAzione(az: Azione): string {
   return `• ${az.nome}`;
 }
 
+// Etichetta breve per un bottone-incantesimo: costo (trucchetto/livello/usi) + 🌀 concentrazione
+// + «·narrato» se non ancora meccanizzato (si lancia lo stesso, lo risolve il GM leggendo).
+function etichettaIncantesimo(spell: IncantesimoLanciabile, costo: string): string {
+  const conc = spell.concentrazione ? " 🌀" : "";
+  const narrato = spell.azioni.length ? "" : " ·narrato";
+  return `🔮 ${spell.nome} (${costo})${conc}${narrato}`;
+}
+
 export class BoardView extends ItemView {
   private eventi: Evento[] = [];
   private bestiario: any[] = [];
   private condLista: any[] = [];
+  private oggetti: any[] = []; // oggetti-effetto homebrew, per il picker «🎒 Equipaggia»
+  private nomiEffetti: Record<string, string> = {}; // id → nome, per i chip (condizioni + oggetti)
   private defs: DefinizioniCondizioni = {};
+  private risolvi: RisolviIncantesimo = () => undefined; // catalogo incantesimi SRD+homebrew → attività eseguibile
   private errore: string | null = null;
 
   constructor(leaf: WorkspaceLeaf, private plugin: GdrPlugin) { super(leaf); }
@@ -44,7 +55,12 @@ export class BoardView extends ItemView {
     try { this.bestiario = await this.plugin.bestiarioCompleto(); }
     catch (e: any) { this.errore = e?.message ?? String(e); }
     this.condLista = await this.plugin.condizioniComplete(); // SRD + homebrew, per il picker manuale
-    this.defs = await this.plugin.loadDefsCondizioni(); // effetti-condizione automatici sui tiri
+    this.oggetti = await this.plugin.oggettiComplete(); // oggetti-effetto homebrew, per «🎒 Equipaggia»
+    this.defs = await this.plugin.loadDefsCondizioni(); // effetti condizioni+oggetti automatici sui tiri
+    this.risolvi = await this.plugin.risolviIncantesimo(); // incantesimi SRD+homebrew, per il lancio
+    // Mappa id→nome per i chip (invece del crudo id): condizioni + oggetti.
+    this.nomiEffetti = {};
+    for (const x of [...this.condLista, ...this.oggetti]) if (x?.id) this.nomiEffetti[String(x.id)] = String(x.nome ?? x.id);
     this.eventi = this.plugin.loadBoard(); // ripristina il combattimento in corso
     this.render();
   }
@@ -73,7 +89,7 @@ export class BoardView extends ItemView {
     // Le creature homebrew del vault (id `homebrew:*`) sono marcate 🏠 nel picker, accanto agli SRD.
     const etich = (m: any) => (typeof m.id === "string" && m.id.startsWith("homebrew:") ? `🏠 ${m.nome}` : m.nome);
     const raw = await suggester(this.app, etich, this.bestiario, false, `Aggiungi ${lato === "nemico" ? "un nemico" : "un alleato"}`);
-    if (raw) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(raw), lato) });
+    if (raw) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(raw, this.risolvi), lato) });
   }
 
   // Picker sui PG del vault → aggiunge un personaggio come alleato (via daPgGdr).
@@ -89,6 +105,21 @@ export class BoardView extends ItemView {
     if (!this.condLista.length) { new Notice("Nessuna condizione caricata."); return; }
     const scelta = await suggester(this.app, (x: any) => String(x.nome ?? x.id), this.condLista, false, `Condizione su ${c.nome}`);
     if (scelta?.id) this.push({ tipo: "condizione-inflitta", key: c.key, condizione: scelta.id });
+  }
+
+  // Equipaggia un oggetto-effetto homebrew: un Active Effect sul portatore (Spada +1 → +1
+  // colpire/danno), applicato come una condizione. Il chip 🎒 lo mostra; cliccarlo lo disequipaggia.
+  private async equipaggia(c: InPlancia) {
+    if (!this.oggetti.length) { new Notice("Nessun oggetto homebrew (categoria: oggetto con effetti) nel vault."); return; }
+    const scelta = await suggester(this.app, (x: any) => `🎒 ${x.nome ?? x.id}`, this.oggetti, false, `Equipaggia su ${c.nome}`);
+    if (scelta?.id) this.push({ tipo: "condizione-inflitta", key: c.key, condizione: scelta.id });
+  }
+
+  // Nome leggibile di un effetto applicato (condizione o oggetto): dalla mappa id→nome, con
+  // ripiego sullo slug nudo dell'id. Gli oggetti (id `oggetto:*`) portano il prefisso 🎒.
+  private nomeEffetto(id: string): string {
+    const nome = this.nomiEffetti[id] ?? id.split(/[:.]/).pop() ?? id;
+    return id.startsWith("oggetto:") ? `🎒 ${nome}` : nome;
   }
 
   // Statblock del combattente: mostro → StatblockModal nativa (dal bestiario grezzo);
@@ -132,6 +163,40 @@ export class BoardView extends ItemView {
     } else {
       new Notice(`Azione «${az.nome}» (${az.tipo}) non ancora gestita dalla board.`);
     }
+  }
+
+  // Lancia un incantesimo: sceglie il livello di slot (upcast, se serve), poi i BERSAGLI (uno o
+  // più — le aree si risolvono con un solo picker multi-selezione, come un template VTT che
+  // "prende" chi capita). Il motore (comandoLancia) spende slot/uso, apre la concentrazione,
+  // esegue le attività coi numeri del lanciatore o LOGGA narrato se non meccanizzato.
+  private async lancia(attore: InPlancia, spell: IncantesimoLanciabile) {
+    const s = this.stato();
+    // Il livello di lancio. `livelloLancio` = livello FISSO (mostri: "Cono di freddo di 9º").
+    // Un trucchetto (livello 0) o un "X/giorno" non scelgono lo slot; un incantesimo di livello
+    // con slot lascia scegliere il livello (≥ suo) fra quelli con slot residui (upcasting).
+    const livelloBase = spell.livelloLancio ?? spell.livello;
+    let livelloSlot = livelloBase;
+    if (spell.usiGiornalieri == null && spell.livello > 0) {
+      const maxLiv = attore.incantatore?.slot.length ?? 0;
+      const scelte: number[] = [];
+      for (let L = spell.livello; L <= maxLiv; L++) if (slotRestanti(s, attore.key, L) > 0) scelte.push(L);
+      if (!scelte.length) { new Notice(`Nessuno slot disponibile per ${spell.nome}.`); return; }
+      if (scelte.length === 1) livelloSlot = scelte[0];
+      else {
+        const L = await suggester(this.app, (n: number) => `Livello ${n} (${slotRestanti(s, attore.key, n)} slot)`, scelte, false, `Lancia ${spell.nome} a che livello?`);
+        if (L == null) return;
+        livelloSlot = L;
+      }
+    }
+    // I bersagli: tutti i combattenti in piedi (anche alleati — buff/cura; anche sé). Il GM
+    // spunta chi è preso. Nessun bersaglio = lancio "a vuoto"/su di sé narrato (il motore regge []).
+    const cands = ordine(s).filter((c) => inPiedi(c));
+    const scelti = await multiSuggester(this.app, (c: InPlancia) => `${c.nome} — ${c.pf_attuali}/${c.pf_max} PF`, cands, `${spell.nome} → bersagli (spunta chi è colpito)`);
+    if (scelti == null) return; // annullato
+    const bersagli = scelti.map((c) => c.key);
+    const ev = comandoLancia(s, attore.key, bersagli, spell.id, livelloSlot, dadoVero, this.defs);
+    if (!ev.length) { new Notice(`Impossibile lanciare ${spell.nome} (slot/uso esauriti o azione già spesa).`); return; }
+    this.push(...ev);
   }
 
   // Azione leggendaria: spende dal pozzo (una/round, si ricarica) e risolve l'effetto su un
@@ -192,7 +257,7 @@ export class BoardView extends ItemView {
     const vuoi = ["lupo-feroce", "orso-bruno", "goblin-guerriero", "goblin-guerriero"];
     const lati: ("alleato" | "nemico")[] = ["alleato", "alleato", "nemico", "nemico"];
     this.eventi = [];
-    vuoi.forEach((id, i) => { const raw = trovaMostro(this.bestiario, id); if (raw) this.eventi.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(raw), lati[i]) }); });
+    vuoi.forEach((id, i) => { const raw = trovaMostro(this.bestiario, id); if (raw) this.eventi.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(raw, this.risolvi), lati[i]) }); });
     let s = (seme >>> 0); const dado: Dado = (f) => { s = (s * 1664525 + 1013904223) >>> 0; return (s % f) + 1; };
     this.eventi.push(...comandoIniziativa(this.stato(), dado), { tipo: "cominciato" });
     for (let step = 0; step < 60 && !esitoScontro(this.stato()); step++) {
@@ -363,8 +428,9 @@ export class BoardView extends ItemView {
       // Coda: condizioni (chip cliccabili per toglierle) + controlli manuali del GM.
       const coda = riga.createDiv({ cls: "gdr-board-tail" });
       for (const id of s.condizioni[c.key] ?? []) {
-        const chip = coda.createSpan({ cls: "gdr-board-cond-chip is-click", text: id });
-        chip.setAttribute("aria-label", `Togli «${id}»`);
+        const chip = coda.createSpan({ cls: "gdr-board-cond-chip is-click", text: this.nomeEffetto(id) });
+        if (id.startsWith("oggetto:")) chip.addClass("is-oggetto");
+        chip.setAttribute("aria-label", `Togli «${this.nomeEffetto(id)}»`);
         chip.onclick = () => this.push({ tipo: "condizione-finita", key: c.key, condizione: id });
       }
       const ctrl = coda.createDiv({ cls: "gdr-board-ctrl" });
@@ -376,6 +442,8 @@ export class BoardView extends ItemView {
       bHeal.onclick = () => this.push({ tipo: "cura", key: c.key, quanti: quanti() });
       const bCond = ctrl.createEl("button", { text: "＋stato", cls: "gdr-board-cond-add" }); bCond.setAttribute("aria-label", "Applica una condizione");
       bCond.onclick = () => void this.applicaCondizione(c);
+      const bEquip = ctrl.createEl("button", { text: "🎒", cls: "gdr-board-equip" }); bEquip.setAttribute("aria-label", "Equipaggia un oggetto");
+      bEquip.onclick = () => void this.equipaggia(c);
       const bDel = ctrl.createEl("button", { text: "✕", cls: "gdr-board-del" }); bDel.setAttribute("aria-label", "Rimuovi dalla plancia");
       bDel.onclick = () => this.push({ tipo: "rimosso", key: c.key });
     }
@@ -412,6 +480,45 @@ export class BoardView extends ItemView {
       } else {
         pan.createDiv({ cls: "gdr-board-azioni-box" })
           .createSpan({ cls: "gdr-board-vuoto", text: "(nessuna azione eseguibile — passa il turno)" });
+      }
+
+      // 🔮 Incantesimi: se l'attivo è un incantatore, il pozzo di slot + un bottone per lancio.
+      // Un click apre la scelta del livello (upcast) e dei bersagli (§lancia).
+      const inc = attivoOra.incantatore;
+      if (inc?.lanciabili.length) {
+        const panI = root.createDiv({ cls: "gdr-board-incantesimi" });
+        panI.createEl("h4", { text: `🔮 Incantesimi — ${attivoOra.nome}` });
+        // Lettura degli slot: "Slot: 1º ●●○ · 2º ●○" (● residuo · ○ speso), solo i livelli col pozzo.
+        const slotTxt = inc.slot
+          .map((max, i) => {
+            if (!max || max <= 0) return null; // livello senza slot (array sparso) → salta
+            const r = slotRestanti(s, attivoOra.key, i + 1);
+            return `${i + 1}º ${"●".repeat(r)}${"○".repeat(Math.max(0, max - r))}`;
+          })
+          .filter((x): x is string => x != null).join(" · ");
+        if (slotTxt) panI.createDiv({ cls: "gdr-board-slot", text: `Slot: ${slotTxt}` });
+        const boxI = panI.createDiv({ cls: "gdr-board-azioni-box" });
+        for (const spell of inc.lanciabili) {
+          // Il livello fisso di lancio (mostri 2024: "Cono di freddo di 9º"), da appendere al costo.
+          const liv = spell.livelloLancio ? ` · ${spell.livelloLancio}º` : "";
+          let costo: string, esaurito = false;
+          if (spell.usiGiornalieri != null) {
+            // X/giorno (mostri 2024): costa un uso, non uno slot.
+            const rest = usiRestanti(s, attivoOra.key, spell.id);
+            costo = `${rest}/${spell.usiGiornalieri}/dì${liv}`;
+            esaurito = rest <= 0;
+          } else if (spell.livello === 0) {
+            // Livello 0 senza usi = a volontà (mostri 2024) / trucchetto (PG): illimitato.
+            costo = `a volontà${liv}`;
+          } else {
+            // Livello > 0 con slot: è il caso PG (upcasting); le creature 2024 non hanno slot.
+            costo = `Liv ${spell.livello}`;
+            esaurito = !inc.slot.some((_m, i) => i + 1 >= spell.livello && slotRestanti(s, attivoOra.key, i + 1) > 0);
+          }
+          const b = boxI.createEl("button", { text: etichettaIncantesimo(spell, costo) });
+          if (esaurito) b.disabled = true;
+          else b.onclick = () => void this.lancia(attivoOra, spell);
+        }
       }
     }
 

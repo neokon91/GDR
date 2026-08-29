@@ -2,7 +2,7 @@
 // che popolano la Board. Legge le creature collegate (nemici), gli alleati e i PG del party;
 // applica gli override `varianti` (hp/ca) per boss/gregari. Le creature si risolvono nel
 // bestiario per nome/slug (via trovaMostro), tollerante alla migrazione degli id.
-import { daMostro, type Combattente } from "../regole/src/motore/combattente";
+import { daMostro, type Combattente, type RisolviIncantesimo } from "../regole/src/motore/combattente";
 import type { Evento, InPlancia } from "../regole/src/motore/motore";
 import { daPgGdr } from "./adapters";
 import { trovaMostro } from "./statblock";
@@ -53,6 +53,7 @@ export function eventiDaIncontro(
   fm: any,
   bestiario: any[],
   party: { f: any; fm: any }[],
+  risolvi?: RisolviIncantesimo, // catalogo incantesimi SRD+homebrew → creature schierate lanciano
 ): { eventi: Evento[]; saltati: string[] } {
   const conteggi: Record<string, number> = {};
   const saltati: string[] = [];
@@ -75,7 +76,7 @@ export function eventiDaIncontro(
   for (const link of asArray(fm?.creature)) {
     const nome = nomeDaLink(link);
     const raw = trovaMostro(bestiario, nome);
-    if (raw) schiera(daMostro(raw), "nemico");
+    if (raw) schiera(daMostro(raw, risolvi), "nemico");
     else if (nome && !saltati.includes(nome)) saltati.push(nome);
   }
 
@@ -83,7 +84,7 @@ export function eventiDaIncontro(
   for (const link of asArray(fm?.alleati)) {
     const nome = nomeDaLink(link);
     const raw = trovaMostro(bestiario, nome);
-    if (raw) schiera(daMostro(raw), "alleato");
+    if (raw) schiera(daMostro(raw, risolvi), "alleato");
     else if (nome && !saltati.includes(nome)) saltati.push(nome);
   }
 

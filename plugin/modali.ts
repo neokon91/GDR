@@ -64,6 +64,42 @@ export function promptModal(app: App, message: string, def = "", throwOnCancel =
   });
 }
 
+// Modale a MULTI-selezione (checkbox): il GM spunta uno o più elementi e conferma. Serve alle
+// aree (un incantesimo che prende più bersagli con un solo picker, come un template VTT). Ritorna
+// la lista degli scelti (anche vuota) su Conferma, o null se annullata.
+class GdrMultiModal<T> extends Modal {
+  private done = false;
+  private sel = new Set<number>();
+  constructor(app: App, private labels: string[], private items: T[], private titolo: string, private onDone: (v: T[] | null) => void) {
+    super(app);
+  }
+  onOpen() {
+    const { contentEl } = this;
+    contentEl.addClass("gdr-multi");
+    if (this.titolo) contentEl.createEl("h4", { text: this.titolo });
+    const lista = contentEl.createDiv({ cls: "gdr-multi-lista" });
+    this.labels.forEach((l, i) => {
+      const riga = lista.createEl("label", { cls: "gdr-multi-riga" });
+      const cb = riga.createEl("input", { type: "checkbox" }) as HTMLInputElement;
+      cb.onchange = () => { cb.checked ? this.sel.add(i) : this.sel.delete(i); };
+      riga.createSpan({ text: ` ${l}` });
+    });
+    const bar = contentEl.createDiv({ cls: "modal-button-container" });
+    const ok = bar.createEl("button", { text: "Conferma", cls: "mod-cta" });
+    ok.onclick = () => { this.done = true; this.onDone([...this.sel].sort((a, b) => a - b).map((i) => this.items[i])); this.close(); };
+    bar.createEl("button", { text: "Annulla" }).onclick = () => this.close();
+  }
+  onClose() { this.contentEl.empty(); window.setTimeout(() => { if (!this.done) this.onDone(null); }, 0); }
+}
+
+// Come `suggester` ma a selezione multipla; ritorna l'array degli scelti (o null se annullato).
+export function multiSuggester<T>(app: App, textItems: ((x: T) => string) | string[], items: T[], titolo = ""): Promise<T[] | null> {
+  const labels = (typeof textItems === "function" ? (items || []).map(textItems) : (textItems || [])).map(String);
+  return new Promise((resolve) => {
+    new GdrMultiModal<T>(app, labels, items, titolo, (v) => resolve(v)).open();
+  });
+}
+
 // tp compatibile per il dispatcher: `date.now`, le modali native (suggester/prompt) e un
 // proxy `user` che carica lazy gli script `tp.user.<name>` da z.automazioni (usati da alcune
 // azioni: sali_pg, genera, importa_*, genera_sito, world_board). NIENTE multi_suggester: il

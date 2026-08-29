@@ -23,6 +23,17 @@
 > Cosa è, com'è, perché conta al tavolo.
 
 {{ m.wizard_body(template.category) }}
+{% if template.category == 'oggetto' %}
+> [!tip]- 🎒 Rendilo GIOCABILE (Active Effect)
+> Compila il blocco sotto (togli i `#`): gli `effetti` MORDONO i tiri di chi lo equipaggia nella Board (bottone «🎒 Equipaggia»). `bersaglio`: colpire · danno · salvezza · ca · tiri_colpire · tiri_salvezza · prove. `operazione`: `somma` (con `valore: {piatto}` o `{dado}`) · `vantaggio` · `svantaggio`.
+
+```yaml
+# Esempio: una spada +1. Togli i # per attivare.
+# effetti:
+#   - { bersaglio: colpire, operazione: somma, valore: { piatto: 1 } }
+#   - { bersaglio: danno,   operazione: somma, valore: { piatto: 1 } }
+```
+{% endif %}
 {% if template.category == 'bastione' %}
 {{ m.ordini_bastione() }}
 

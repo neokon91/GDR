@@ -9,6 +9,17 @@
 --- ⚙ Meccanica
 
 {{ m.scheda(template.category) }}
+> [!tip]- 🎯 Rendilo LANCIABILE con meccanica (facoltativo)
+> Compila il blocco sotto (togli i `#`): l'incantesimo diventa un bottone di lancio nella Board coi numeri di chi lo lancia (`cd: incantesimo` / `caratteristica: incantesimo`). Senza, si lancia *narrato*. Le forme di `attivita` sono quelle dello statblock: `tiro-salvezza` · `attacco`.
+
+```yaml
+# Esempio: 4d8 danni, TS Costituzione dimezza. Togli i # per attivare.
+# attivita:
+#   - tipo: tiro-salvezza
+#     tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+#     fallimento: { danno: { numero_dadi: 4, dado: d8, tipo_danno: necrotico } }
+#     successo: danno-dimezzato
+```
 --- ✨ Effetto
 
 {{ m.wizard_body(template.category) }}

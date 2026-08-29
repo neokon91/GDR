@@ -236,6 +236,16 @@
 .gdr-board-legg-box { padding: 8px 12px; border-radius: 10px; background: var(--background-secondary); border: 1px dashed var(--text-accent); }
 .gdr-board-legg-box h4 { margin: 0 0 8px; font-size: var(--font-ui-small); color: var(--text-accent); }
 
+/* Incantesimi: pozzo di slot + bottoni di lancio, sotto le azioni dell'attivo. */
+.gdr-board-incantesimi { margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: var(--background-secondary); border: 1px solid var(--text-accent); }
+.gdr-board-incantesimi h4 { margin: 0 0 6px; font-size: var(--font-ui-small); color: var(--text-accent); }
+.gdr-board-slot { margin: 0 0 8px; font-size: var(--font-ui-smaller); color: var(--text-muted); letter-spacing: .04em; }
+
+/* Modale a multi-selezione (bersagli d'area): lista di checkbox. */
+.gdr-multi-lista { display: flex; flex-direction: column; gap: 4px; margin: 8px 0; max-height: 50vh; overflow-y: auto; }
+.gdr-multi-riga { display: flex; align-items: center; gap: 6px; padding: 4px 6px; border-radius: 6px; cursor: pointer; }
+.gdr-multi-riga:hover { background: var(--background-modifier-hover); }
+
 /* --- Board: coda riga (condizioni + controlli manuali GM, Spike B) ---------- */
 .gdr-board-tail { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .gdr-board-cond-chip.is-click { cursor: pointer; }
@@ -290,6 +300,10 @@
 /* Bottone "applica condizione" (più largo dei ±, ha testo) */
 .gdr-board-cond-add { width: auto !important; padding: 0 7px !important; font-size: var(--font-ui-smaller); }
 .gdr-board-cond-add:hover { border-color: var(--interactive-accent); color: var(--text-accent); }
+.gdr-board-equip { width: auto !important; padding: 0 6px !important; }
+.gdr-board-equip:hover { border-color: var(--text-accent); }
+/* Chip di un oggetto equipaggiato (Active Effect da item): accento distinto dalle condizioni. */
+.gdr-board-cond-chip.is-oggetto { background: var(--background-secondary); color: var(--text-accent); border: 1px solid var(--text-accent); }
 
 /* Statblock: prosa resa come markdown (paragrafi senza margini extra) */
 .gdr-sb-voce p { margin: 0; }

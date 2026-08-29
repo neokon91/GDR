@@ -7,7 +7,7 @@ combattimento). È l'analogo del *data model* di un System Foundry.
 
 Principio: **il motore è tollerante** — `daMostro` non va mai in crash, usa valori di default
 per i campi mancanti. Quindi una creatura incompleta *schiera lo stesso*, ma silenziosamente
-sbagliata. La validazione (§6) rende visibile questa "wrongness silenziosa".
+sbagliata. La validazione (§7) rende visibile questa "wrongness silenziosa".
 
 ---
 
@@ -112,7 +112,7 @@ attivita:
 ```
 
 Una voce **con `attivita`** può anche imporre condizioni: aggiungi `concede`/`condizione` nel
-ramo `colpito`/`fallimento` (l'engine le applica e le condizioni "mordono" i tiri, §5).
+ramo `colpito`/`fallimento` (l'engine le applica e le condizioni "mordono" i tiri, §6).
 
 ---
 
@@ -129,7 +129,71 @@ ramo `colpito`/`fallimento` (l'engine le applica e le condizioni "mordono" i tir
 
 ---
 
-## 5. Condizioni ed effetti (Active Effects)
+## 5. Incantesimi — creature incantatrici e homebrew
+
+Due pezzi indipendenti, stesso motore.
+
+### a) L'incantesimo homebrew (una nota)
+
+Una nota `categoria: incantesimo` (cartella `Mondi/Incantesimi`) descrive un incantesimo
+lanciabile. La meccanica sta nel frontmatter `attivita:` — **le stesse forme del §3**
+(attacco / tiro-salvezza / …); senza `attivita` l'incantesimo è solo prosa e si lancia
+*narrato* (la Board lo logga, spende la risorsa, l'effetto lo applica il DM leggendo).
+
+```yaml
+---
+categoria: incantesimo
+id: fulmine-nero          # se assente → homebrew:<slug-del-nome-file>
+nome: Fulmine Nero
+livello: 2
+tempo_lancio: azione      # → economia del turno (azione/bonus/reazione)
+concentrazione: false
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }   # CD = quella del lanciatore
+    fallimento: { danno: { numero_dadi: 4, dado: d8, tipo_danno: necrotico } }
+    successo: danno-dimezzato
+---
+```
+
+Il plugin lo scopre (`homebrewIncantesimi`) e lo **fonde** col catalogo SRD bundlato
+(`srd_incantesimi.json`, generato da `gen_incantesimi.py`) → `incantesimiCompleti()`. Da qui
+nasce il `RisolviIncantesimo` che il motore usa (§b). `cd: incantesimo` / `caratteristica:
+incantesimo` = "usa i numeri di CHI lancia" (CD e attacco magico dal blocco `incantatore`).
+
+### b) La creatura che lo lancia (blocco `incantatore`, **forma 2024**)
+
+Una creatura lancia dandosi un'attività `incantatore` (in un tratto o in `azioni`). **Le
+creature 2024 NON hanno slot**: lanciano **a volontà** e **X/giorno**, e alcune a un
+**livello fisso** (`{id, livello}`). Gli id referenziano il catalogo (§a): SRD o homebrew.
+
+```yaml
+azioni:
+  - nome: Incantesimi
+    testo: "Lo stregone lancia i suoi incantesimi (CD 14, +6 al colpire)."
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma       # informativa
+        cd: 14                        # la CD dei suoi incantesimi (→ `cd: incantesimo`)
+        attacco: 6                    # il bonus d'attacco magico (→ attacchi d'incantesimo)
+        a_volonta: [dardo-di-fuoco, fulmine-nero]     # illimitati (SRD + homebrew)
+        al_giorno:
+          - usi: 1
+            incantesimi: [{ id: palla-di-fuoco, livello: 3 }, cono-di-freddo]  # 1/giorno; livello fisso opzionale
+```
+
+La Board mostra un gruppo «🔮 Incantesimi» nel turno: un bottone per incantesimo (etichetta
+col costo — *a volontà* · *N/M/dì* · livello fisso *Nº* · 🌀 concentrazione), e un unico
+picker multi-bersaglio (le aree "prendono" chi il DM spunta). Lanciare spende l'uso/economia,
+apre la concentrazione, esegue le attività coi numeri del lanciatore.
+
+> **Slot** (`slot: [{livello, quanti, incantesimi}]`) esistono ancora nel motore ma servono ai
+> **PG** (che nel 2024 gli slot ce li hanno): il loro readout «Slot: 1º ●●○ …» compare solo
+> quando il combattente ha slot. Per le creature 2024, usa `a_volonta`/`al_giorno`.
+
+---
+
+## 6. Condizioni ed effetti (Active Effects)
 
 Una condizione è un def che **morde i tiri**, nella stessa forma delle 15 SRD:
 ```yaml
@@ -164,7 +228,7 @@ oppure `attivita:` completo (identico alle SRD). L'id nasce dallo slug del nome-
 
 ---
 
-## 6. Validazione — la rete di sicurezza
+## 7. Validazione — la rete di sicurezza
 
 Il contratto sopra è **applicato** da `validaRawMostro` (plugin/statblock.ts), su due superfici:
 

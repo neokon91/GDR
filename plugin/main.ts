@@ -26,7 +26,7 @@ import {
   ricostruisci, registro, comandoIniziativa, comandoAttacco,
   type Evento, type Dado, type InPlancia, type DefinizioniCondizioni,
 } from "../regole/src/motore/motore";
-import { risolviCondizioni } from "../regole/src/motore/combattente";
+import { risolviCondizioni, type RisolviIncantesimo } from "../regole/src/motore/combattente";
 import { evalCjs } from "./util";
 import { suggester, tpShim } from "./modali";
 import { renderStatblock, trovaMostro, validaRawMostro } from "./statblock";
@@ -64,6 +64,25 @@ function estraiRawMostro(testo: string): any | null {
   }
 }
 
+// Estrae una def MECCANICA (`effetti`/`attivita`) dal primo blocco ```yaml del CORPO che ne
+// contiene una. Complementare al frontmatter: un blocco YAML nel corpo è VISIBILE ed editabile
+// a vista (come lo statblock delle creature), meglio dei dati strutturati nascosti nelle
+// Proprietà — così un non-tecnico può autorare la meccanica di oggetti/incantesimi. Scandisce
+// tutti i blocchi yaml e ritorna il primo oggetto con `effetti` o `attivita` (gli altri — prosa,
+// render — si scartano). Ritorna l'oggetto YAML o null.
+function estraiDefBody(testo: string): any | null {
+  const re = /```ya?ml[^\n]*\n([\s\S]*?)\n?```/gi;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(testo))) {
+    try {
+      const raw = parseYaml(m[1]);
+      if (raw && typeof raw === "object" && (Array.isArray((raw as any).effetti) || Array.isArray((raw as any).attivita)))
+        return raw;
+    } catch { /* blocco non-YAML: passa al prossimo */ }
+  }
+  return null;
+}
+
 // Modale generica che rende del Markdown (usata per il report di validazione homebrew).
 class ReportModal extends Modal {
   constructor(app: App, private md: string) { super(app); }
@@ -81,6 +100,7 @@ export default class GdrPlugin extends Plugin {
   private core: CoreData | null = null;
   private bestiario: any[] | null = null;
   private condizioni: any[] | null = null;
+  private incantesimi: any[] | null = null;
   private condDefs: DefinizioniCondizioni | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
@@ -301,7 +321,7 @@ export default class GdrPlugin extends Plugin {
     try { bestiario = await this.bestiarioCompleto(); }
     catch (e: any) { new Notice(`Bestiario non caricato: ${e?.message ?? e}`); return; }
     const fm = this.frontmatterOf(file.path);
-    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs());
+    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs(), await this.risolviIncantesimo());
     if (!eventi.length) { new Notice("Incontro vuoto: nessuna creatura/PG risolti."); return; }
     // Traccia la nota d'origine: il pannello Conseguenze potrà marcarla «risolto» senza chiedere.
     this.settings.boardOrigine = file.path;
@@ -520,10 +540,98 @@ export default class GdrPlugin extends Plugin {
     return [...(await this.loadCondizioni()), ...(await this.homebrewCondizioni())];
   }
 
-  // Le DEFINIZIONI delle condizioni risolte (prono→svantaggio…): il motore le applica ai tiri
-  // quando gliele si passa come `defs`. Include l'homebrew → NON cachato (l'utente edita).
+  // Oggetti-effetto HOMEBREW del vault (categoria: oggetto): un oggetto magico è un Active
+  // Effect sul portatore — la STESSA forma delle condizioni (§5): `effetti:` diretto o
+  // `attivita:` completo. Es. Spada +1 → {bersaglio: colpire/danno, operazione: somma, valore:
+  // {piatto:1}}. Id `oggetto:<slug>` (distinto dalle condizioni `homebrew:*`) → chip 🎒 nella
+  // Board. Rilette a ogni chiamata (l'utente le edita). Mordono i tiri come le condizioni.
+  async homebrewOggetti(): Promise<any[]> {
+    const out: any[] = [];
+    for (const f of this.app.vault.getMarkdownFiles()) {
+      const fm = this.frontmatterOf(f.path);
+      if (!fm || String(fm.categoria ?? "").toLowerCase() !== "oggetto") continue;
+      let attivita = (fm as any).attivita;
+      let effetti = (fm as any).effetti;
+      if (!Array.isArray(attivita) && !Array.isArray(effetti)) {
+        // Fallback: blocco ```yaml nel corpo (visibile/editabile, come lo statblock delle creature).
+        const def = estraiDefBody(await this.app.vault.cachedRead(f));
+        if (def) { attivita = def.attivita; effetti = def.effetti; }
+      }
+      if (!Array.isArray(attivita) && Array.isArray(effetti)) {
+        attivita = [{ tipo: "passivo", effetti }];
+      }
+      if (!Array.isArray(attivita)) continue; // nessun effetto meccanico → è solo prosa, salta
+      const id = (fm as any).id ? String((fm as any).id) : `oggetto:${f.basename.toLowerCase().replace(/\s+/g, "-")}`;
+      out.push({ id, nome: String((fm as any).nome ?? f.basename), attivita });
+    }
+    return out;
+  }
+
+  // Gli oggetti-effetto completi per la Board: oggi solo homebrew (gli oggetti magici SRD sono
+  // prosa, senza `effetti` meccanici → non morderebbero). Sorgente del picker «🎒 Equipaggia».
+  async oggettiComplete(): Promise<any[]> {
+    return [...(await this.homebrewOggetti())];
+  }
+
+  // Le DEFINIZIONI risolte che il motore applica ai tiri (`defs`): condizioni (prono→svantaggio…)
+  // E oggetti-effetto (Spada +1 → +1 colpire/danno). Stessa macchina risolviCondizioni: entrambi
+  // sono Active Effects applicati via `condizione-inflitta`. Include l'homebrew → NON cachato.
   async loadDefsCondizioni(): Promise<DefinizioniCondizioni> {
-    return risolviCondizioni(await this.condizioniComplete());
+    return risolviCondizioni([...(await this.condizioniComplete()), ...(await this.oggettiComplete())]);
+  }
+
+  // Gli incantesimi SRD (sidecar generato da gen_incantesimi.py): il catalogo GREZZO da cui il
+  // `RisolviIncantesimo` pesca l'attività eseguibile. Letto una volta, on-demand.
+  async loadIncantesimi(): Promise<any[]> {
+    if (!this.incantesimi) {
+      try { this.incantesimi = JSON.parse(await this.app.vault.adapter.read(`${this.manifest.dir}/data/srd_incantesimi.json`)) as any[]; }
+      catch { this.incantesimi = []; }
+    }
+    return this.incantesimi;
+  }
+
+  // Incantesimi HOMEBREW del vault (categoria: incantesimo): un def della stessa forma degli SRD,
+  // autorato nel frontmatter (`attivita:` come nello statblock §3 — attacco/tiro-salvezza/…).
+  // L'id nasce dallo slug del nome-file se assente. Rilette a ogni chiamata (l'utente le edita).
+  // Rese lanciabili come le SRD: una creatura le referenzia per id nel suo blocco `incantatore`.
+  async homebrewIncantesimi(): Promise<any[]> {
+    const out: any[] = [];
+    for (const f of this.app.vault.getMarkdownFiles()) {
+      const fm = this.frontmatterOf(f.path);
+      if (!fm || String(fm.categoria ?? "").toLowerCase() !== "incantesimo") continue;
+      const id = (fm as any).id ? String((fm as any).id) : `homebrew:${f.basename.toLowerCase().replace(/\s+/g, "-")}`;
+      let attivita = Array.isArray((fm as any).attivita) ? (fm as any).attivita : undefined;
+      let def: any = null;
+      if (!attivita) {
+        // Fallback: blocco ```yaml nel corpo (visibile/editabile, tab ⚙ Meccanica del template).
+        def = estraiDefBody(await this.app.vault.cachedRead(f));
+        if (Array.isArray(def?.attivita)) attivita = def.attivita;
+      }
+      out.push({
+        id,
+        nome: String((fm as any).nome ?? f.basename),
+        livello: Number((fm as any).livello) || Number(def?.livello) || 0,
+        tempo_lancio: (fm as any).tempo_lancio ?? def?.tempo_lancio,
+        concentrazione: (fm as any).concentrazione === true || def?.concentrazione === true,
+        attivita,
+      });
+    }
+    return out;
+  }
+
+  // Il catalogo completo per la Board/motore: gli incantesimi SRD bundlati + gli homebrew del vault.
+  async incantesimiCompleti(): Promise<any[]> {
+    return [...(await this.loadIncantesimi()), ...(await this.homebrewIncantesimi())];
+  }
+
+  // La funzione che il motore (`daMostro(m, risolvi)`) usa per rendere ESEGUIBILE un incantesimo
+  // referenziato per id nel blocco `incantatore` di una creatura: cerca nel catalogo (SRD+homebrew)
+  // e ne restituisce nome/livello/attività. Indice per id costruito una volta a schieramento;
+  // ciò che non trova → l'incantesimo si lancia NARRATO (il motore lo logga, spende lo slot).
+  async risolviIncantesimo(): Promise<RisolviIncantesimo> {
+    const per_id = new Map<string, any>();
+    for (const s of await this.incantesimiCompleti()) if (s?.id) per_id.set(String(s.id), s);
+    return (id: string) => per_id.get(id);
   }
 
   // I PG del vault (categoria=personaggio, tipo=pg), col frontmatter. Sorgente condivisa fra
