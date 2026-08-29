@@ -201,6 +201,12 @@ def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict
                     for s in raw_subs if isinstance(s, dict) and s.get("nome")}
         if profiles:
             cat["subtype_profiles"] = profiles
+        # Infobox: se i campi-scheda sono in realtà campi PER-SOTTOTIPO (es. oggetto: un'arma
+        # vuole danni/padronanza, un amuleto rarità/sintonia), l'entità mette `infobox_scheda:
+        # false` → l'infobox resta essenziale e i campi giusti li mostra il blocco adattivo
+        # (renderTipoProfilo), che si adatta al `tipo`. Default: scheda fissa nell'infobox.
+        if entity.get("infobox_scheda") is False:
+            cat["infobox_scheda"] = False
         if entity.get("gruppo"):
             cat["gruppo"] = entity["gruppo"]
         # Classificazione a 2 livelli (opzionale): le 'famiglie' (con descrizione)

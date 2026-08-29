@@ -3,6 +3,11 @@
 # `=this.nome`
 
 {{ m.identita_card(template) }}
+{# Infobox essenziale (infobox_scheda:false): i campi PER-TIPO stanno subito sotto, nel blocco
+   adattivo che segue il `tipo` (arma→danni/padronanza, amuleto→rarità/sintonia). #}
+{% if core.get('categories', {}).get(template.category, {}).get('infobox_scheda') == false %}
+{{ m.tipo_profilo() }}
+{% endif %}
 
 {% if core.get('categories', {}).get(template.category, {}).get('famiglie') %}
 {{ m.classificazione(template.category) }}
@@ -16,7 +21,7 @@
 {% endif %}
 --- 📖 Lore
 
-{% if core.get('categories', {}).get(template.category, {}).get('subtype_profiles') %}
+{% if core.get('categories', {}).get(template.category, {}).get('subtype_profiles') and core.get('categories', {}).get(template.category, {}).get('infobox_scheda') != false %}
 {{ m.tipo_profilo() }}
 {% endif %}
 > [!note]- Descrizione

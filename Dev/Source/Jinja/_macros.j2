@@ -151,9 +151,11 @@
 > | **{{ r.label }}** | {{ view_md(r.field) }} |
 {% endif %}
 {% endfor %}
+{% if cat.get('infobox_scheda', true) %}
 {% for fid in scheda %}
 > | **{{ core.fields[fid].label }}** | {{ field(fid, label=false) }} |
 {% endfor %}
+{% endif %}
 > | **Stato** | {{ field('stato', label=false) }} |
 
 {{ opzioni(template) }}

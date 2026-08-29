@@ -6,6 +6,10 @@ id: oggetto
 folder: Mondi/Oggetti
 order: 11
 gruppo: regole
+# I campi meccanici dell'oggetto dipendono dal TIPO (arma→danni/padronanza, amuleto→rarità/
+# sintonia): l'infobox non li fissa, li mostra il blocco adattivo (renderTipoProfilo) che segue
+# il `tipo`. Così cambiando tipo si vedono i campi giusti, non quelli dell'oggetto magico sempre.
+infobox_scheda: false
 templates:
 - id: oggetto
   title: Oggetto

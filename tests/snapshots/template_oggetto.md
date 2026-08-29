@@ -8,10 +8,6 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][link]` |
-> | **Rarità** | `INPUT[rarita][:rarita]` |
-> | **Sintonia** | `INPUT[text(placeholder(es. sì oppure solo da un incantatore)):sintonia]` |
-> | **Cariche** | `INPUT[text:cariche]` |
-> | **Ricarica** | `INPUT[text:ricarica]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -19,6 +15,9 @@
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+```gdr
+renderTipoProfilo
+```
 
 > [!info]- ℹ️ Guida — Oggetto
 > **Cos'è** · Un oggetto del mondo — da equipaggiamento mondano ad artefatto senziente; armi/armature homebrew diventano giocabili.
@@ -31,9 +30,6 @@
 
 --- 📖 Lore
 
-```gdr
-renderTipoProfilo
-```
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 
