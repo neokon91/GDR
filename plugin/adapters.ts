@@ -80,6 +80,23 @@ export function personaggioAFrontmatter(attore: Attore): Record<string, any> {
   // Le armi impugnabili → `padronanze_armi` (i nomi nudi): diventano bottoni d'attacco nella Board.
   const armi = (attore.azioni ?? []).map((a) => a.nome).filter(Boolean);
   if (armi.length) fm.padronanze_armi = armi;
+
+  // --- Campi che la SCHEDA e il level-up (sali_pg) leggono, dai dati che l'Attore già porta ---
+  // L'inventario iniziale (nomi leggibili, con la quantità se > 1), come lista di stringhe.
+  const inv = (attore.equipaggiamento ?? []).map((v) => (v.quantita > 1 ? `${v.quantita} ${v.nome}` : v.nome));
+  if (inv.length) fm.inventario = inv;
+  // I privilegi di classe/sottoclasse e i tratti di specie (nomi), per la scheda.
+  if (attore.privilegi?.length) fm.privilegi_classe = attore.privilegi;
+  if (attore.tratti?.length) fm.tratti_specie = attore.tratti.join(", ");
+  if (attore.lingue?.length) fm.lingue = attore.lingue;
+  if (attore.competenza_strumenti?.length) fm.competenze_strumenti = attore.competenza_strumenti;
+  // Il blocco incantatore: flag + gli incantesimi scelti (trucchetti = livello 0, gli altri = incantesimi),
+  // come id. Gli slot li ricalcola il level-up dalle tabelle di classe, non serve scriverli qui.
+  fm.incantatore = !!attore.incantatore;
+  if (attore.incantatore?.noti?.length) {
+    fm.trucchetti = attore.incantatore.noti.filter((s) => s.livello === 0).map((s) => s.id);
+    fm.incantesimi = attore.incantatore.noti.filter((s) => s.livello > 0).map((s) => s.id);
+  }
   return fm;
 }
 

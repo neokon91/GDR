@@ -81,6 +81,35 @@ const skillRi = Object.keys(ri.competenza_abilita ?? {}).sort()
 assert(JSON.stringify(skillAttese) === JSON.stringify(skillRi), `round-trip abilità: ${skillRi} ≠ ${skillAttese}`)
 
 console.log('✓ round-trip Attore→frontmatter→Attore OK — nota PG coerente col reader del combattimento')
+
+// --- Parità: un INCANTATORE con incantesimi + equipaggiamento produce la nota completa ----------
+// Sceglie dinamicamente id validi dal catalogo (niente hardcoding): un bardo liv3 con 2 trucchetti,
+// 3 incantesimi e l'opzione di equipaggiamento di classe → la nota deve avere incantatore/trucchetti/
+// incantesimi/inventario, così il ritiro di crea_pg non perde né spell né equip.
+const bardo = cat.classi.find((c) => c.id === 'dnd.classe.bardo')
+if (bardo) {
+  const trucco = cat.incantesimi.filter((s) => s.classi.includes('bardo') && s.livello === 0).slice(0, 2)
+  const magie = cat.incantesimi.filter((s) => s.classi.includes('bardo') && s.livello === 1).slice(0, 3)
+  const pgB: Personaggio = {
+    nome: 'Cantore di Prova', livello: 3,
+    caratteristiche_base: { forza: 8, destrezza: 14, costituzione: 13, intelligenza: 10, saggezza: 12, carisma: 16 },
+    specieId: 'dnd.specie.elfo', classeId: 'dnd.classe.bardo', backgroundId: 'dnd.background.sapiente',
+    bonus_background: {}, abilita_classe: [], talenti: [],
+    trucchetti: trucco.map((s) => s.id), incantesimi: magie.map((s) => s.id),
+    equipClasse: bardo.equipaggiamento?.[0]?.nome,
+  }
+  const attB = assembla(pgB, caricaFonti(cat, pgB))
+  const fmB = personaggioAFrontmatter(attB)
+  assert(fmB.incantatore === true, `bardo: incantatore atteso true`)
+  assert(Array.isArray(fmB.trucchetti) && fmB.trucchetti.length === 2, `bardo: 2 trucchetti attesi, ${fmB.trucchetti}`)
+  assert(Array.isArray(fmB.incantesimi) && fmB.incantesimi.length === 3, `bardo: 3 incantesimi attesi, ${fmB.incantesimi}`)
+  assert(Array.isArray(fmB.inventario) && fmB.inventario.length > 0, `bardo: inventario atteso dall'equip di classe`)
+  console.log('✓ incantatore+equip OK — bardo:', JSON.stringify({
+    incantatore: fmB.incantatore, trucchetti: fmB.trucchetti.length, incantesimi: fmB.incantesimi.length,
+    inventario: fmB.inventario.length, cd: attB.incantatore?.cd,
+  }))
+}
+
 console.log('✓ smoke catalogo OK —', JSON.stringify({
   classi: cat.classi.length, specie: cat.specie.length, background: cat.background.length,
   sottoclassi: cat.sottoclassi.length, talenti: cat.talenti.length, lingue: cat.lingue.length,

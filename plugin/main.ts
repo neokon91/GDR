@@ -944,10 +944,46 @@ export default class GdrPlugin extends Plugin {
         if (scelta && scelta.id) sottoclasseId = scelta.id;
       }
 
+      // Equipaggiamento iniziale: scegli l'opzione (A/B…) di classe e di background; il motore la
+      // risolve in inventario. (Salta in silenzio se una fonte non offre opzioni.)
+      const opzione = async (opts: any[] | undefined, titolo: string) =>
+        opts?.length ? (await suggester(app, opts.map((o) => o.nome), opts, false, titolo))?.nome : undefined;
+      const equipClasse = await opzione(classe.equipaggiamento, "Equipaggiamento di classe?");
+      const equipBackground = await opzione(bg.equipaggiamento, "Equipaggiamento del background?");
+
+      // Incantesimi (se la classe lancia): trucchetti + incantesimi noti, coi conteggi della
+      // progressione al livello scelto; il pool sono gli incantesimi di classe (join sullo slug corto).
+      let trucchetti: string[] = [];
+      let incantesimi: string[] = [];
+      if (classe.incantesimi) {
+        const shortCls = corto(classe.id);
+        const riga = (classe.progressione ?? []).find((p) => p.livello === livello);
+        const maxLiv = (riga?.slot ?? []).reduce((m, s, i) => (s > 0 ? i + 1 : m), 0);
+        const pool = (liv0: boolean) => cat.incantesimi
+          .filter((s) => s.classi.includes(shortCls) && (liv0 ? s.livello === 0 : s.livello >= 1 && s.livello <= maxLiv))
+          .sort((a, b) => a.livello - b.livello || a.nome.localeCompare(b.nome));
+        const nTruc = riga?.trucchetti ?? 0;
+        const nSpell = riga?.preparati ?? 0;
+        if (nTruc > 0) {
+          const p = pool(true);
+          const sel = await multiSuggester<any>(app, p.map((s) => s.nome), p, `Scegli ${nTruc} trucchetti`);
+          trucchetti = (sel ?? []).slice(0, nTruc).map((s) => s.id);
+        }
+        if (nSpell > 0 && maxLiv > 0) {
+          const p = pool(false);
+          const sel = await multiSuggester<any>(app, p.map((s) => `[${s.livello}] ${s.nome}`), p, `Scegli ${nSpell} incantesimi`);
+          incantesimi = (sel ?? []).slice(0, nSpell).map((s) => s.id);
+        }
+      }
+
       const pg: Personaggio = {
         nome, livello, caratteristiche_base,
         specieId: spec.id, classeId: classe.id, backgroundId: bg.id,
         ...(sottoclasseId ? { sottoclasseId } : {}),
+        ...(equipClasse ? { equipClasse } : {}),
+        ...(equipBackground ? { equipBackground } : {}),
+        ...(trucchetti.length ? { trucchetti } : {}),
+        ...(incantesimi.length ? { incantesimi } : {}),
         bonus_background, abilita_classe, talenti: [],
       };
 
