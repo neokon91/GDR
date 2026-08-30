@@ -94,6 +94,7 @@ dv.paragraph(done === 5
 > `BUTTON[crea-incantesimo]`
 > `BUTTON[crea-insidia]`
 > `BUTTON[crea-classe]`
+> `BUTTON[crea-condizione]`
 > `BUTTON[crea-sottoclasse]`
 > `BUTTON[crea-background]`
 > `BUTTON[crea-talento]`

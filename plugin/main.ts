@@ -526,8 +526,14 @@ export default class GdrPlugin extends Plugin {
       const fm = this.frontmatterOf(f.path);
       if (!fm || String(fm.categoria ?? "").toLowerCase() !== "condizione") continue;
       let attivita = (fm as any).attivita;
-      if (!Array.isArray(attivita) && Array.isArray((fm as any).effetti)) {
-        attivita = [{ tipo: "passivo", effetti: (fm as any).effetti }];
+      let effetti = (fm as any).effetti;
+      if (!Array.isArray(attivita) && !Array.isArray(effetti)) {
+        // Fallback: blocco ```yaml nel corpo (visibile/editabile, come oggetti/incantesimi).
+        const def = estraiDefBody(await this.app.vault.cachedRead(f));
+        if (def) { attivita = def.attivita; effetti = def.effetti; }
+      }
+      if (!Array.isArray(attivita) && Array.isArray(effetti)) {
+        attivita = [{ tipo: "passivo", effetti }];
       }
       if (!Array.isArray(attivita)) continue; // nessun effetto meccanico → è solo prosa, salta
       const id = (fm as any).id ? String((fm as any).id) : `homebrew:${f.basename.toLowerCase().replace(/\s+/g, "-")}`;

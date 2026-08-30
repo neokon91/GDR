@@ -1,0 +1,43 @@
+# Schema per-entità: condizione. Single source di tassonomia, template, wizard.
+# render.py lo distribuisce nel modello 'core' (apply_entities) e raccoglie il template.
+# Le condizioni SRD stanno in archivio (glossario/condizioni); qui il template per autorare
+# una condizione HOMEBREW nel vault (categoria: condizione) — la discovery del plugin
+# (homebrewCondizioni) la fonde con le SRD e la fa MORDERE i tiri come loro.
+id: condizione
+folder: Mondi/Condizioni
+order: 14
+gruppo: regole
+templates:
+- id: condizione
+  title: Condizione
+  default_type: stato
+  target: z.modelli/Condizione.md
+  jinja: reference.md.j2
+subtypes:
+- { nome: stato,       descrizione: "Stato temporaneo standard: prono, accecato, avvelenato, spaventato." }
+- { nome: malattia,    descrizione: "Contagio che peggiora nel tempo, spesso con soglie e cure." }
+- { nome: maledizione, descrizione: "Effetto persistente magico, tolto solo da rimozione specifica." }
+- { nome: benedizione, descrizione: "Effetto favorevole: un buff che aiuta chi lo porta." }
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di condizione
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo (opzionale)
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  body:
+  - field: effetto
+    prompt: 'Effetto narrativo: cosa comporta al tavolo'
+    heading: Effetto
+  - field: fine
+    prompt: 'Come finisce: durata, tiro salvezza, rimozione'
+    heading: Come finisce
+
+guida:
+  scopo: Una condizione/effetto persistente che MORDE i tiri (come le 15 SRD), applicabile nella Board col picker «＋stato».
+  campi_chiave: 'La **meccanica** sta nel blocco `effetti` (⚙ Meccanica): `bersaglio` (tiri_colpire/tiri_salvezza/prove/velocita) + `operazione` (svantaggio/vantaggio/…). Senza, la condizione è solo prosa.'

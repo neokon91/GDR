@@ -39,6 +39,17 @@
 #   - { bersaglio: danno,   operazione: somma, valore: { piatto: 1 } }
 ```
 {% endif %}
+{% if template.category == 'condizione' %}
+> [!tip]- ⚙️ Rendila MORDENTE (Active Effect)
+> Compila il blocco sotto (togli i `#`): gli `effetti` mordono i tiri di chi ha la condizione, applicata nella Board col picker «＋stato». `bersaglio`: tiri_colpire · tiri_salvezza · prove · velocita. `operazione`: `svantaggio` · `vantaggio` · `somma` (con `valore`).
+
+```yaml
+# Esempio: una maledizione (svantaggio a colpire e ai TS). Togli i # per attivare.
+# effetti:
+#   - { bersaglio: tiri_colpire,  operazione: svantaggio }
+#   - { bersaglio: tiri_salvezza, operazione: svantaggio }
+```
+{% endif %}
 {% if template.category == 'bastione' %}
 {{ m.ordini_bastione() }}
 
