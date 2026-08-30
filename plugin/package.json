@@ -8,9 +8,10 @@
     "gen:bestiario": "python3 ../Dev/Tools/gen_bestiario.py",
     "gen:condizioni": "python3 ../Dev/Tools/gen_condizioni.py",
     "gen:incantesimi": "python3 ../Dev/Tools/gen_incantesimi.py",
+    "gen:oggetti": "python3 ../Dev/Tools/gen_oggetti.py",
     "typecheck": "tsc --noEmit",
-    "build": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run typecheck && node esbuild.config.mjs --prod",
-    "dev": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && node esbuild.config.mjs"
+    "build": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run typecheck && node esbuild.config.mjs --prod",
+    "dev": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && node esbuild.config.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

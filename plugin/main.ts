@@ -101,6 +101,7 @@ export default class GdrPlugin extends Plugin {
   private bestiario: any[] | null = null;
   private condizioni: any[] | null = null;
   private incantesimi: any[] | null = null;
+  private oggetti: any[] | null = null;
   private condDefs: DefinizioniCondizioni | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
@@ -567,10 +568,30 @@ export default class GdrPlugin extends Plugin {
     return out;
   }
 
-  // Gli oggetti-effetto completi per la Board: oggi solo homebrew (gli oggetti magici SRD sono
-  // prosa, senza `effetti` meccanici → non morderebbero). Sorgente del picker «🎒 Equipaggia».
+  // Gli oggetti-effetto SRD bundlati (sidecar gen_oggetti.py): le voci di archivio magic_items
+  // che portano `effetti:` (il dato vive in archivio, qui si legge). Letto una volta, on-demand.
+  async loadOggetti(): Promise<any[]> {
+    if (!this.oggetti) {
+      let grezzi: any[] = [];
+      try { grezzi = JSON.parse(await this.app.vault.adapter.read(`${this.manifest.dir}/data/srd_oggetti.json`)) as any[]; }
+      catch { grezzi = []; }
+      // Normalizza al formato di homebrewOggetti: `effetti:` → attività passiva, così
+      // risolviCondizioni li fa mordere e il picker mostra il nome.
+      this.oggetti = grezzi.map((o) => ({
+        id: o.id,
+        nome: o.nome,
+        attivita: Array.isArray(o.attivita) ? o.attivita
+          : Array.isArray(o.effetti) ? [{ tipo: "passivo", effetti: o.effetti }] : undefined,
+      })).filter((o) => Array.isArray(o.attivita));
+    }
+    return this.oggetti;
+  }
+
+  // Gli oggetti-effetto completi per la Board: SRD bundlati + homebrew del vault. Sorgente del
+  // picker «🎒 Equipaggia». Ognuno può portare `effetti:` (avvolto in un'attività passiva a
+  // schieramento) o `attivita:` completo — loadDefsCondizioni li risolve e li fa mordere.
   async oggettiComplete(): Promise<any[]> {
-    return [...(await this.homebrewOggetti())];
+    return [...(await this.loadOggetti()), ...(await this.homebrewOggetti())];
   }
 
   // Le DEFINIZIONI risolte che il motore applica ai tiri (`defs`): condizioni (prono→svantaggio…)
