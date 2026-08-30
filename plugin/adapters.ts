@@ -50,19 +50,26 @@ export function attoreDaPgGdr(fm: any): Attore {
 // condiviso senza cambiare la forma-nota. Round-trip garantito: `attoreDaPgGdr(questo) ≈ attore`
 // sui campi che il combattimento usa (verificato in smoke_catalogo).
 export function personaggioAFrontmatter(attore: Attore): Record<string, any> {
+  const pf = attore.punti_ferita.massimi;
   const fm: Record<string, any> = {
     nome: attore.nome,
     categoria: "personaggio",
     tipo: "pg",
     ...(attore.livello ? { livello: attore.livello } : {}),
     competenza: attore.bonus_competenza,
-    pf_max: attore.punti_ferita.massimi,
+    // `pf_max` è la chiave canonica; `pf` è l'alias che il reader accetta (attuali = massimi a nuovo).
+    pf_max: pf,
+    pf,
     ca: attore.ca.valore,
+    ...(attore.taglia ? { taglia: attore.taglia } : {}),
+    ...(attore.velocita?.camminata != null ? { velocita: attore.velocita.camminata } : {}),
   };
-  // Le caratteristiche: valore grezzo top-level + `ts_<car>` come flag 0/1 di competenza al TS.
+  // Le caratteristiche: valore grezzo top-level, `mod_<car>` precomputato (come le note del vault)
+  // e `ts_<car>` come flag 0/1 di competenza al TS.
   for (const c of ABIL) {
     const p = attore.caratteristiche[c];
     fm[c] = p?.valore ?? 10;
+    fm[`mod_${c}`] = modificatore(p?.valore ?? 10);
     fm[`ts_${c}`] = p?.competenza ? 1 : 0;
   }
   // Le competenze di abilità: `prof_<id>: 1` per ogni abilità con grado > 0 (la maestria, grado 2,

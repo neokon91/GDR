@@ -28,12 +28,15 @@ import {
 } from "../regole/src/motore/motore";
 import { risolviCondizioni, type RisolviIncantesimo } from "../regole/src/motore/combattente";
 // CREATORE PG dal repo condiviso `regole` (Tier 3): il `Catalogo` magro guida `assembla`.
-// Solo type-import → esbuild lo strippa; il dato arriva da `data/srd_catalogo.json` (gen_catalogo.py).
-import type { Catalogo } from "../regole/src/creatore/catalogo";
+// Il dato arriva da `data/srd_catalogo.json` (gen_catalogo.py); `caricaFonti`+`assembla` derivano l'Attore.
+import { caricaFonti, type Catalogo } from "../regole/src/creatore/catalogo";
+import { assembla } from "../regole/src/creatore/motore";
+import type { Personaggio } from "../regole/src/creatore/personaggio";
+import type { Caratteristica } from "../regole/src/creatore/attore";
 import { evalCjs } from "./util";
-import { suggester, tpShim } from "./modali";
+import { suggester, promptModal, tpShim } from "./modali";
 import { renderStatblock, trovaMostro, validaRawMostro, validaDef } from "./statblock";
-import type { ArmaCat } from "./adapters";
+import { type ArmaCat, personaggioAFrontmatter } from "./adapters";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
 import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
@@ -270,6 +273,7 @@ export default class GdrPlugin extends Plugin {
       },
     });
     this.addCommand({ id: "motore-smoke", name: "DEV: Smoke del motore di combattimento", callback: () => this.motoreSmoke() });
+    this.addCommand({ id: "crea-pg-kernel", name: "Crea PG (kernel condiviso · beta)", callback: () => void this.creaPgKernel() });
     this.addRibbonIcon("swords", "GDR: Board di combattimento", () => this.activateBoard());
     this.addRibbonIcon("layout-dashboard", "GDR: Cruscotto DM", () => this.activateCruscotto());
     this.addRibbonIcon("moon", "GDR: Riposo lungo (PG attivo)", () => {
@@ -860,6 +864,77 @@ export default class GdrPlugin extends Plugin {
     app.workspace.getLeaf(false).openFile(created as any);
   }
 
+  // TIER 3 FASE C (beta, ADDITIVO — non ritira crea_pg.js): crea un PG col KERNEL condiviso.
+  // Wizard nativo (classe/specie/background dal catalogo + caratteristiche) → Personaggio →
+  // `assembla` → Attore → `personaggioAFrontmatter` → nota PG (stesso corpo del template pg, così
+  // rende come scheda). Prova che il kernel guida la creazione reale nel plugin, senza toccare il
+  // flusso Templater esistente. Ogni passo annullabile (suggester/prompt con throwOnCancel).
+  async creaPgKernel() {
+    const app = this.app;
+    const cat = await this.loadCatalogo();
+    if (!cat.classi.length) { new Notice("Catalogo vuoto: lancia la build del plugin (`npm run build`)."); return; }
+
+    const byNome = <T extends { nome: string }>(xs: T[]) => [...xs].sort((a, b) => a.nome.localeCompare(b.nome));
+    const classi = byNome(cat.classi), specie = byNome(cat.specie), background = byNome(cat.background);
+
+    try {
+      const classe = await suggester(app, classi.map((c) => c.nome), classi, true, "Classe?");
+      const spec = await suggester(app, specie.map((s) => s.nome), specie, true, "Specie?");
+      const bg = await suggester(app, background.map((b) => b.nome), background, true, "Background?");
+      const nome = ((await promptModal(app, "Nome del PG?", "Nuovo PG", true)) ?? "").trim() || "Nuovo PG";
+      const livello = Math.max(1, Number.parseInt((await promptModal(app, "Livello?", "1", true)) || "1", 10) || 1);
+
+      // Caratteristiche: array standard 5.5 come default, una per una (l'utente ritocca al volo).
+      const ORDINE: Caratteristica[] = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
+      const STD = [15, 14, 13, 12, 10, 8];
+      const caratteristiche_base = {} as Record<Caratteristica, number>;
+      for (let i = 0; i < ORDINE.length; i++) {
+        const v = await promptModal(app, `${ORDINE[i]} (standard ${STD[i]})`, String(STD[i]), true);
+        caratteristiche_base[ORDINE[i]] = Number.parseInt(v || String(STD[i]), 10) || STD[i];
+      }
+
+      const pg: Personaggio = {
+        nome, livello, caratteristiche_base,
+        specieId: spec.id, classeId: classe.id, backgroundId: bg.id,
+        bonus_background: {}, abilita_classe: [], talenti: [],
+      };
+
+      let fm: Record<string, any>;
+      try {
+        const attore = assembla(pg, caricaFonti(cat, pg));
+        fm = personaggioAFrontmatter(attore);
+      } catch (e: any) { new Notice(`Kernel — assemblaggio fallito: ${e?.message ?? e}`); return; }
+
+      // Provenienza (slug corti, come le note del vault) + blocco classi.
+      const corto = (id: string) => id.split(".").pop() ?? id;
+      fm.classe = corto(classe.id); fm.specie = corto(spec.id); fm.background = corto(bg.id);
+      fm.classi = [{ id: corto(classe.id), livello, sottoclasse: "" }];
+
+      await this.scriviNotaPg(fm, nome);
+    } catch { new Notice("Creazione PG annullata."); }
+  }
+
+  // Scrive la nota PG: serializza il frontmatter e lo inietta nel corpo del template pg (le viste
+  // meta-bind leggono i campi). Cartella e template dal core; ripiego prudente se mancano.
+  private async scriviNotaPg(fm: Record<string, any>, nome: string) {
+    const app = this.app;
+    let core: any; try { core = await this.loadCore(); } catch { core = {}; }
+    const tpl = (core.templates || []).find((t: any) => t.id === "pg");
+    const folder = core.folders?.personaggio ?? "Mondi/Personaggi";
+    let body: string;
+    try { body = await app.vault.adapter.read(tpl?.target ?? "z.modelli/PG.md"); }
+    catch { body = "<% await tp.user.crea_pg(tp) %>\n# `=this.nome`\n"; }
+    let content = body.replace(/^<%\s*await\s+tp\.user\.[^%]*%>\s*\n?/m, toFrontmatter(fm));
+    const base = nome.replace(/[\\/:]+/g, "-");
+    content = content.split("<% tp.config.target_file.basename %>").join(base);
+    let dest = `${folder}/${base}.md`;
+    for (let n = 2; app.vault.getAbstractFileByPath(dest); n++) dest = `${folder}/${base} ${n}.md`;
+    await this.ensureParent(dest);
+    const created = await app.vault.create(dest, content);
+    app.workspace.getLeaf(false).openFile(created as any);
+    new Notice(`PG creato col kernel condiviso → ${dest}`);
+  }
+
   // Crea le cartelle-genitore di un path (idempotente).
   private async ensureParent(path: string) {
     const dir = path.split("/").slice(0, -1).join("/");
@@ -900,4 +975,31 @@ class GdrSettingTab extends PluginSettingTab {
         t.inputEl.rows = 3; t.inputEl.style.width = "100%";
       });
   }
+}
+
+// --- Serializzazione frontmatter (per la creazione PG col kernel) ------------------------
+// Un mini-serializzatore YAML per il frontmatter: scalari, liste di scalari e liste di oggetti
+// inline (`- { id: ladro, livello: 1 }`), la forma che usano le note PG del vault. Cita solo i
+// valori che lo richiedono. Niente dipendenze: `parseYaml` di Obsidian legge, non scrive.
+function yamlScalar(v: any): string {
+  if (typeof v === "number") return String(v);
+  if (typeof v === "boolean") return v ? "true" : "false";
+  const s = String(v ?? "");
+  return /[:#[\]{}"'\n,]|^\s|\s$|^$/.test(s) ? JSON.stringify(s) : s;
+}
+function toFrontmatter(fm: Record<string, any>): string {
+  const lines: string[] = [];
+  for (const [k, v] of Object.entries(fm)) {
+    if (Array.isArray(v)) {
+      if (!v.length) { lines.push(`${k}: []`); continue; }
+      lines.push(`${k}:`);
+      for (const item of v) {
+        if (item && typeof item === "object") {
+          const inner = Object.entries(item).map(([ik, iv]) => `${ik}: ${yamlScalar(iv)}`).join(", ");
+          lines.push(`  - { ${inner} }`);
+        } else lines.push(`  - ${yamlScalar(item)}`);
+      }
+    } else lines.push(`${k}: ${yamlScalar(v)}`);
+  }
+  return `---\n${lines.join("\n")}\n---\n`;
 }
