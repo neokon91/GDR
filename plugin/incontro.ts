@@ -54,6 +54,7 @@ export function eventiDaIncontro(
   bestiario: any[],
   party: { f: any; fm: any }[],
   risolvi?: RisolviIncantesimo, // catalogo incantesimi SRD+homebrew → creature schierate lanciano
+  armi?: Record<string, any>, // catalogo armi → i PG schierati hanno i bottoni d'attacco
 ): { eventi: Evento[]; saltati: string[] } {
   const conteggi: Record<string, number> = {};
   const saltati: string[] = [];
@@ -89,7 +90,7 @@ export function eventiDaIncontro(
   }
 
   // Il gruppo: i PG del vault entrano come alleati.
-  for (const pg of party) schiera(daPgGdr(pg.fm), "alleato");
+  for (const pg of party) schiera(daPgGdr(pg.fm, armi), "alleato");
 
   return { eventi, saltati };
 }

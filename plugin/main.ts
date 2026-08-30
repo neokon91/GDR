@@ -30,6 +30,7 @@ import { risolviCondizioni, type RisolviIncantesimo } from "../regole/src/motore
 import { evalCjs } from "./util";
 import { suggester, tpShim } from "./modali";
 import { renderStatblock, trovaMostro, validaRawMostro, validaDef } from "./statblock";
+import type { ArmaCat } from "./adapters";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
 import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
@@ -102,6 +103,7 @@ export default class GdrPlugin extends Plugin {
   private condizioni: any[] | null = null;
   private incantesimi: any[] | null = null;
   private oggetti: any[] | null = null;
+  private armi: any[] | null = null;
   private condDefs: DefinizioniCondizioni | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
@@ -322,7 +324,7 @@ export default class GdrPlugin extends Plugin {
     try { bestiario = await this.bestiarioCompleto(); }
     catch (e: any) { new Notice(`Bestiario non caricato: ${e?.message ?? e}`); return; }
     const fm = this.frontmatterOf(file.path);
-    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs(), await this.risolviIncantesimo());
+    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs(), await this.risolviIncantesimo(), await this.armiCatalogo());
     if (!eventi.length) { new Notice("Incontro vuoto: nessuna creatura/PG risolti."); return; }
     // Traccia la nota d'origine: il pannello Conseguenze potrà marcarla «risolto» senza chiedere.
     this.settings.boardOrigine = file.path;
@@ -637,6 +639,38 @@ export default class GdrPlugin extends Plugin {
   // schieramento) o `attivita:` completo — loadDefsCondizioni li risolve e li fa mordere.
   async oggettiComplete(): Promise<any[]> {
     return [...(await this.loadOggetti()), ...(await this.homebrewOggetti())];
+  }
+
+  // Le ARMI SRD bundlate (gen_armi.py): forma normalizzata per il deriver arma→attacco dei PG.
+  async loadArmi(): Promise<any[]> {
+    if (!this.armi) {
+      try { this.armi = JSON.parse(await this.app.vault.adapter.read(`${this.manifest.dir}/data/srd_armi.json`)) as any[]; }
+      catch { this.armi = []; }
+    }
+    return this.armi;
+  }
+
+  // Il catalogo armi (nome-minuscolo → arma) per l'offensiva dei PG nella Board: SRD bundlate +
+  // homebrew del vault (note `oggetto` con tipo=arma; parità di campi danno/proprieta). Passato a
+  // `daPgGdr`, trasforma le `padronanze_armi` del PG in bottoni d'attacco.
+  async armiCatalogo(): Promise<Record<string, ArmaCat>> {
+    const cat: Record<string, ArmaCat> = {};
+    for (const a of await this.loadArmi()) if (a?.nome) cat[String(a.nome).toLowerCase()] = a;
+    // Homebrew (le armi del vault): sovrascrivono/aggiungono, come per le altre entità.
+    for (const f of this.app.vault.getMarkdownFiles()) {
+      const fm = this.frontmatterOf(f.path);
+      if (!fm || String(fm.categoria ?? "").toLowerCase() !== "oggetto" || String((fm as any).tipo ?? "").toLowerCase() !== "arma") continue;
+      const nome = String((fm as any).nome ?? f.basename);
+      const proprieta = Array.isArray((fm as any).proprieta) ? (fm as any).proprieta
+        : String((fm as any).proprieta ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+      cat[nome.toLowerCase()] = {
+        nome,
+        dado: String((fm as any).danni ?? (fm as any).dado ?? ""),
+        proprieta,
+        distanza: /distanza/i.test(String((fm as any).categoria_arma ?? (fm as any).tipo_arma ?? "")),
+      };
+    }
+    return cat;
   }
 
   // Le DEFINIZIONI risolte che il motore applica ai tiri (`defs`): condizioni (prono→svantaggio…)

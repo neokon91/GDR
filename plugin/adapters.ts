@@ -1,6 +1,6 @@
 // Adapter: dato-di-dominio GDR → `Combattente` del motore `regole`. (I mostri li converte
 // `daMostro` in `regole`; qui il PG, la cui forma-dato è specifica di GDR.)
-import type { Combattente } from "../regole/src/motore/combattente";
+import type { Combattente, Azione } from "../regole/src/motore/combattente";
 import { daAttore } from "../regole/src/motore/combattente";
 import { modificatore } from "../regole/src/creatore/risolutore";
 import type { Attore, Caratteristica } from "../regole/src/creatore/attore";
@@ -42,13 +42,62 @@ export function attoreDaPgGdr(fm: any): Attore {
   };
 }
 
+// --- L'OFFENSIVA DEL PG: arma → azione d'attacco (2024) --------------------
+// La forma-arma normalizzata (srd_armi.json + armi homebrew): il plugin la passa qui.
+export type ArmaCat = { nome: string; dado: string; tipo_danno?: string; proprieta?: string[]; distanza?: boolean };
+
+// Il nome-arma nudo da una voce `padronanze_armi` ("Ascia — Vessazione" → "ascia").
+const nomeArma = (v: any) => String(v ?? "").split("—")[0].trim().toLowerCase();
+const modDi = (fm: any, car: string) =>
+  Number.isFinite(Number(fm?.[`mod_${car}`])) ? Number(fm[`mod_${car}`]) : modificatore(n(fm?.[car]));
+
+// La caratteristica d'attacco (2024): a distanza → Destrezza; accurata (finesse) → la
+// migliore fra Forza e Destrezza; altrimenti Forza.
+function abilitaArma(arma: ArmaCat, fm: any): "forza" | "destrezza" {
+  const props = (arma.proprieta ?? []).map((p) => String(p).toLowerCase());
+  if (props.some((p) => p.startsWith("accurata")))
+    return modDi(fm, "destrezza") > modDi(fm, "forza") ? "destrezza" : "forza";
+  return arma.distanza ? "destrezza" : "forza";
+}
+// "d8"→{numero:1,facce:8} · "2d6"→{numero:2,facce:6}.
+function dado(d: string): { numero: number; facce: number } | null {
+  const m = String(d ?? "").match(/(\d*)d(\d+)/i);
+  return m ? { numero: Number(m[1] || 1), facce: Number(m[2]) } : null;
+}
+// Un'arma → azione d'attacco del PG: colpire = mod + competenza, danni = dado + mod.
+export function azioneDaArma(arma: ArmaCat, fm: any, pb: number): Azione | null {
+  const dd = dado(arma.dado);
+  if (!dd) return null;
+  const abil = abilitaArma(arma, fm);
+  const mod = modDi(fm, abil);
+  return {
+    nome: arma.nome,
+    tipo: "attacco",
+    colpire: mod + pb,
+    danno: { numero: dd.numero, facce: dd.facce, bonus: mod } as any,
+    mischia: !arma.distanza,
+    caratteristica: abil,
+  };
+}
+
 // Adapter PG GDR → Combattente: costruisce l'`Attore` e lo passa per `daAttore` (motore
 // `regole`), così la matematica di derivazione (mod, tiri salvezza) vive UNA volta sola in
 // `regole/creatore`, non duplicata qui (chiude il TODO dell'audit A5). L'id resta slug-ato
 // `pg:<slug>` perché più PG possano stare in plancia senza collidere (`daAttore` usa `pg`).
-export function daPgGdr(fm: any): Combattente {
+// Con un catalogo `armi` (nome-minuscolo → arma), l'offensiva del PG NON è più manuale: le
+// `padronanze_armi` diventano bottoni d'attacco nella Board (come le azioni delle creature).
+export function daPgGdr(fm: any, armi?: Record<string, ArmaCat>): Combattente {
   const c = daAttore(attoreDaPgGdr(fm));
   const slug = String(fm.nome ?? "pg").toLowerCase().replace(/\s+/g, "-");
   c.id = `pg:${slug}`;
+  if (armi) {
+    const pb = n(fm.competenza);
+    const azioni = (Array.isArray(fm.padronanze_armi) ? fm.padronanze_armi : [])
+      .map((v: any) => armi[nomeArma(v)])
+      .filter(Boolean)
+      .map((a: ArmaCat) => azioneDaArma(a, fm, pb))
+      .filter((a: Azione | null): a is Azione => a != null);
+    if (azioni.length) (c as any).azioni = azioni;
+  }
   return c;
 }

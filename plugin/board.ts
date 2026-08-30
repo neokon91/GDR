@@ -40,6 +40,7 @@ export class BoardView extends ItemView {
   private bestiario: any[] = [];
   private condLista: any[] = [];
   private oggetti: any[] = []; // oggetti-effetto homebrew, per il picker «🎒 Equipaggia»
+  private armiCat: Record<string, any> = {}; // catalogo armi (nome→arma), per l'offensiva PG
   private nomiEffetti: Record<string, string> = {}; // id → nome, per i chip (condizioni + oggetti)
   private defs: DefinizioniCondizioni = {};
   private risolvi: RisolviIncantesimo = () => undefined; // catalogo incantesimi SRD+homebrew → attività eseguibile
@@ -56,6 +57,7 @@ export class BoardView extends ItemView {
     catch (e: any) { this.errore = e?.message ?? String(e); }
     this.condLista = await this.plugin.condizioniComplete(); // SRD + homebrew, per il picker manuale
     this.oggetti = await this.plugin.oggettiComplete(); // oggetti-effetto homebrew, per «🎒 Equipaggia»
+    this.armiCat = await this.plugin.armiCatalogo(); // armi SRD+homebrew, per gli attacchi dei PG
     this.defs = await this.plugin.loadDefsCondizioni(); // effetti condizioni+oggetti automatici sui tiri
     this.risolvi = await this.plugin.risolviIncantesimo(); // incantesimi SRD+homebrew, per il lancio
     // Mappa id→nome per i chip (invece del crudo id): condizioni + oggetti.
@@ -97,7 +99,7 @@ export class BoardView extends ItemView {
     const pgs = this.plugin.partyPgs();
     if (!pgs.length) { new Notice("Nessun PG nel vault (categoria=personaggio, tipo=pg)."); return; }
     const scelto = await suggester(this.app, (e: any) => String(e.fm.nome || e.f.basename), pgs, false, "Aggiungi un PG");
-    if (scelto) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daPgGdr(scelto.fm), "alleato") });
+    if (scelto) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daPgGdr(scelto.fm, this.armiCat), "alleato") });
   }
 
   // Applica una condizione a mano (il GM la impone spesso da effetti non meccanizzati).
