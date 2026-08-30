@@ -14,6 +14,7 @@ import { resolve } from 'node:path'
 import { caricaFonti, type Catalogo } from '../../regole/src/creatore/catalogo'
 import { assembla } from '../../regole/src/creatore/motore'
 import type { Personaggio } from '../../regole/src/creatore/personaggio'
+import { personaggioAFrontmatter, attoreDaPgGdr } from '../../plugin/adapters'
 
 // Il catalogo: da argv[2], altrimenti `plugin/data/srd_catalogo.json` relativo al cwd
 // (lo script gira dalla cartella `plugin/` via `npm run smoke:catalogo`).
@@ -59,6 +60,27 @@ assert(attore.bonus_competenza === 2, `PB atteso 2 al liv 3, trovato ${attore.bo
 assert(attore.punti_ferita.massimi > 0, `PF massimi non calcolati: ${attore.punti_ferita.massimi}`)
 assert(attore.ca.valore > 0, `CA non calcolata: ${attore.ca.valore}`)
 
+// --- Round-trip Fase C: Attore → frontmatter PG → Attore ---------------------
+// Il ponte `personaggioAFrontmatter` deve produrre una nota che il reader del combattimento
+// (`attoreDaPgGdr`) rilegge negli STESSI numeri: è la garanzia che la creazione col kernel non
+// cambia la forma-nota del vault.
+const fm = personaggioAFrontmatter(attore)
+assert(fm.categoria === 'personaggio' && fm.tipo === 'pg', `frontmatter non marcato come PG`)
+const ri = attoreDaPgGdr(fm)
+for (const c of ['forza', 'destrezza', 'costituzione', 'intelligenza', 'saggezza', 'carisma'] as const) {
+  assert(ri.caratteristiche[c].valore === attore.caratteristiche[c].valore,
+    `round-trip ${c}: ${ri.caratteristiche[c].valore} ≠ ${attore.caratteristiche[c].valore}`)
+  const tsAtteso = attore.caratteristiche[c].competenza ? 1 : 0
+  assert(ri.caratteristiche[c].competenza === tsAtteso, `round-trip TS ${c}: flag non conservato`)
+}
+assert(ri.ca.valore === attore.ca.valore, `round-trip CA: ${ri.ca.valore} ≠ ${attore.ca.valore}`)
+assert(ri.punti_ferita.massimi === attore.punti_ferita.massimi, `round-trip PF: ${ri.punti_ferita.massimi} ≠ ${attore.punti_ferita.massimi}`)
+assert(ri.bonus_competenza === attore.bonus_competenza, `round-trip PB: ${ri.bonus_competenza} ≠ ${attore.bonus_competenza}`)
+const skillAttese = Object.entries(attore.competenza_abilita ?? {}).filter(([, g]) => g > 0).map(([id]) => id).sort()
+const skillRi = Object.keys(ri.competenza_abilita ?? {}).sort()
+assert(JSON.stringify(skillAttese) === JSON.stringify(skillRi), `round-trip abilità: ${skillRi} ≠ ${skillAttese}`)
+
+console.log('✓ round-trip Attore→frontmatter→Attore OK — nota PG coerente col reader del combattimento')
 console.log('✓ smoke catalogo OK —', JSON.stringify({
   classi: cat.classi.length, specie: cat.specie.length, background: cat.background.length,
   sottoclassi: cat.sottoclassi.length, talenti: cat.talenti.length, lingue: cat.lingue.length,

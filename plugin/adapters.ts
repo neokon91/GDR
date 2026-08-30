@@ -42,6 +42,40 @@ export function attoreDaPgGdr(fm: any): Attore {
   };
 }
 
+// Ponte INVERSO (Tier 3 Fase C): `Attore` del kernel → frontmatter PG del vault. È l'inverso di
+// `attoreDaPgGdr`: prende l'Attore che `assembla` deriva dalle scelte del PG (classe/specie/
+// background + caratteristiche) e ne scrive i campi PIATTI che il vault e il motore rileggono
+// (stat grezze top-level, `ts_<car>` = flag competenza TS, `competenza` = PB, `pf_max`, `ca`,
+// `prof_<id>` = flag abilità, `padronanze_armi`). Così la creazione PG può passare al kernel
+// condiviso senza cambiare la forma-nota. Round-trip garantito: `attoreDaPgGdr(questo) ≈ attore`
+// sui campi che il combattimento usa (verificato in smoke_catalogo).
+export function personaggioAFrontmatter(attore: Attore): Record<string, any> {
+  const fm: Record<string, any> = {
+    nome: attore.nome,
+    categoria: "personaggio",
+    tipo: "pg",
+    ...(attore.livello ? { livello: attore.livello } : {}),
+    competenza: attore.bonus_competenza,
+    pf_max: attore.punti_ferita.massimi,
+    ca: attore.ca.valore,
+  };
+  // Le caratteristiche: valore grezzo top-level + `ts_<car>` come flag 0/1 di competenza al TS.
+  for (const c of ABIL) {
+    const p = attore.caratteristiche[c];
+    fm[c] = p?.valore ?? 10;
+    fm[`ts_${c}`] = p?.competenza ? 1 : 0;
+  }
+  // Le competenze di abilità: `prof_<id>: 1` per ogni abilità con grado > 0 (la maestria, grado 2,
+  // resta un flag 1 qui — il frontmatter piatto non traccia il grado; è coerente con `attoreDaPgGdr`).
+  for (const [id, grado] of Object.entries(attore.competenza_abilita ?? {})) {
+    if (n(grado) > 0) fm[`prof_${id}`] = 1;
+  }
+  // Le armi impugnabili → `padronanze_armi` (i nomi nudi): diventano bottoni d'attacco nella Board.
+  const armi = (attore.azioni ?? []).map((a) => a.nome).filter(Boolean);
+  if (armi.length) fm.padronanze_armi = armi;
+  return fm;
+}
+
 // --- L'OFFENSIVA DEL PG: arma → azione d'attacco (2024) --------------------
 // La forma-arma normalizzata (srd_armi.json + armi homebrew): il plugin la passa qui.
 export type ArmaCat = { nome: string; dado: string; tipo_danno?: string; proprieta?: string[]; distanza?: boolean };
