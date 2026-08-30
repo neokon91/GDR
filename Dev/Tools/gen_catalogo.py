@@ -9,7 +9,7 @@ che il plugin (`loadCatalogo`) legge a runtime, così può chiamare `assembla` c
 per il combattimento.
 
 FONTE: solo il CORE SRD di archivio, letto PER CARTELLA (`srd/classi`, `srd/specie`, `srd/background`,
-`srd/subclasses`, `srd/talenti`, `srd/lingue`, `srd/spells`, `srd/equipaggiamento`, `srd/magic_items`).
+`srd/sottoclassi`, `srd/talenti`, `srd/lingue`, `srd/spells`, `srd/equipaggiamento`, `srd/magic_items`).
 ⚠️ Il naming di archivio è incoerente (il core SRD usa cartella+slug piano — `classi/barbaro.yaml` —
 mentre `books/` e gli spell usano suffissi puntati — `.subclass.yaml`); il caricatore Compendio globba i
 suffissi puntati e col reorg NON pesca più il core. Qui leggo per cartella, che è dove il core vive
@@ -399,7 +399,7 @@ def costruisci_catalogo() -> dict:
         "classi": _da_cartella("classi", "*.yaml", costruisci_classe),
         "specie": _da_cartella("specie", "*.yaml", costruisci_specie),
         "background": _da_cartella("background", "*.yaml", costruisci_background),
-        "sottoclassi": _da_cartella("subclasses", "*.subclass.yaml", costruisci_sottoclasse),
+        "sottoclassi": _da_cartella("sottoclassi", "*.yaml", costruisci_sottoclasse),
         "talenti": [
             {"id": d.get("id") or _id_da_file(f), "nome": d.get("nome") or _id_da_file(f), "effetti": effetti_passivi(d)}
             for f in sorted((SRD / "talenti").glob("*.yaml"))
