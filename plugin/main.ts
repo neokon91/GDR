@@ -34,7 +34,7 @@ import { assembla } from "../regole/src/creatore/motore";
 import type { Personaggio } from "../regole/src/creatore/personaggio";
 import type { Caratteristica } from "../regole/src/creatore/attore";
 import { evalCjs } from "./util";
-import { suggester, promptModal, tpShim } from "./modali";
+import { suggester, promptModal, multiSuggester, tpShim } from "./modali";
 import { renderStatblock, trovaMostro, validaRawMostro, validaDef } from "./statblock";
 import { type ArmaCat, personaggioAFrontmatter } from "./adapters";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
@@ -111,6 +111,7 @@ export default class GdrPlugin extends Plugin {
   private oggetti: any[] | null = null;
   private armi: any[] | null = null;
   private catalogo: Catalogo | null = null;
+  private abilita: Record<string, { label: string; caratteristica?: string }> | null = null;
   private condDefs: DefinizioniCondizioni | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
@@ -676,6 +677,19 @@ export default class GdrPlugin extends Plugin {
     return this.catalogo;
   }
 
+  // Il vocabolario delle abilità (slug → {label, caratteristica}) dal `personaggio.json` del vault:
+  // serve al wizard kernel per etichette leggibili e per il caso «scegli fra TUTTE le abilità».
+  // Fonte-dati del vault (la stessa di crea_pg); on-demand, tollerante (mappa vuota se assente).
+  async loadAbilita(): Promise<Record<string, { label: string; caratteristica?: string }>> {
+    if (!this.abilita) {
+      try {
+        const d = JSON.parse(await this.app.vault.adapter.read("z.automazioni/data/personaggio.json"));
+        this.abilita = (d && typeof d.abilita === "object") ? d.abilita : {};
+      } catch { this.abilita = {}; }
+    }
+    return this.abilita;
+  }
+
   // Il catalogo armi (nome-minuscolo → arma) per l'offensiva dei PG nella Board: SRD bundlate +
   // homebrew del vault (note `oggetto` con tipo=arma; parità di campi danno/proprieta). Passato a
   // `daPgGdr`, trasforma le `padronanze_armi` del PG in bottoni d'attacco.
@@ -892,11 +906,49 @@ export default class GdrPlugin extends Plugin {
         const v = await promptModal(app, `${ORDINE[i]} (standard ${STD[i]})`, String(STD[i]), true);
         caratteristiche_base[ORDINE[i]] = Number.parseInt(v || String(STD[i]), 10) || STD[i];
       }
+      const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+      // ASI del background (2024): +2 a una caratteristica fra quelle offerte, +1 a un'altra.
+      const bonus_background: Partial<Record<Caratteristica, number>> = {};
+      const offerte = (bg.punteggi_caratteristica ?? []) as Caratteristica[];
+      if (offerte.length >= 2) {
+        const due = await suggester(app, offerte.map(cap), offerte, false, "Background: +2 a quale caratteristica?");
+        if (due) {
+          bonus_background[due] = 2;
+          const resto = offerte.filter((c) => c !== due);
+          const uno = await suggester(app, resto.map(cap), resto, false, "Background: +1 a quale caratteristica?");
+          if (uno) bonus_background[uno] = 1;
+        }
+      }
+
+      // Abilità di classe: scegline `quantita` fra le `scelte` (o fra TUTTE se la classe lo permette).
+      const ca = classe.competenze_abilita;
+      let abilita_classe: string[] = [];
+      if (ca && ca.quantita > 0) {
+        const vocab = await this.loadAbilita();
+        const pool = ca.scelte.includes("tutte") ? Object.keys(vocab) : ca.scelte;
+        const label = (slug: string) => vocab[slug]?.label ?? cap(slug);
+        const scelti = await multiSuggester<string>(app, pool.map(label), pool, `Scegli ${ca.quantita} abilità di classe`);
+        abilita_classe = (scelti ?? []).slice(0, ca.quantita);
+      }
+
+      // Sottoclasse: le sottoclassi della classe scelta (in 2024 dal 3º livello). Il campo `classe`
+      // delle sottoclassi è lo slug corto → confronto sullo slug finale dell'id classe.
+      const corto = (id: string) => id.split(".").pop() ?? id;
+      let sottoclasseId: string | undefined;
+      const sottoclassi = cat.sottoclassi.filter((s) => corto(String(s.classe ?? "")) === corto(classe.id));
+      if (livello >= 3 && sottoclassi.length) {
+        const SENZA: any = { id: undefined, nome: "(nessuna)" };
+        const opts = [SENZA, ...[...sottoclassi].sort((a, b) => a.nome.localeCompare(b.nome))];
+        const scelta = await suggester(app, opts.map((s) => s.nome), opts, false, "Sottoclasse?");
+        if (scelta && scelta.id) sottoclasseId = scelta.id;
+      }
 
       const pg: Personaggio = {
         nome, livello, caratteristiche_base,
         specieId: spec.id, classeId: classe.id, backgroundId: bg.id,
-        bonus_background: {}, abilita_classe: [], talenti: [],
+        ...(sottoclasseId ? { sottoclasseId } : {}),
+        bonus_background, abilita_classe, talenti: [],
       };
 
       let fm: Record<string, any>;
@@ -906,9 +958,13 @@ export default class GdrPlugin extends Plugin {
       } catch (e: any) { new Notice(`Kernel — assemblaggio fallito: ${e?.message ?? e}`); return; }
 
       // Provenienza (slug corti, come le note del vault) + blocco classi.
-      const corto = (id: string) => id.split(".").pop() ?? id;
       fm.classe = corto(classe.id); fm.specie = corto(spec.id); fm.background = corto(bg.id);
-      fm.classi = [{ id: corto(classe.id), livello, sottoclasse: "" }];
+      fm.classi = [{ id: corto(classe.id), livello, sottoclasse: sottoclasseId ? corto(sottoclasseId) : "" }];
+      // Campi che il level-up (sali_pg) e la scheda leggono: il dado vita della classe e quanti se
+      // ne sono spesi (1 per livello). NB: equipaggiamento/incantesimi/slot NON sono ancora coperti
+      // dal wizard kernel → il flusso PG standard resta su crea_pg.js finché non c'è parità piena.
+      fm.dado_vita = classe.dado_vita;
+      fm.dadi_vita_max = livello;
 
       await this.scriviNotaPg(fm, nome);
     } catch { new Notice("Creazione PG annullata."); }

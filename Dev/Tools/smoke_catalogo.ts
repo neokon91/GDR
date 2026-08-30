@@ -45,7 +45,7 @@ const pg: Personaggio = {
   sottoclasseId: 'cammino-del-berserker',
   backgroundId: 'dnd.background.soldato',
   bonus_background: { forza: 2, costituzione: 1 },
-  abilita_classe: [],
+  abilita_classe: ['atletica'],
   talenti: [],
 }
 
