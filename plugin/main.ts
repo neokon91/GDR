@@ -29,7 +29,7 @@ import {
 import { risolviCondizioni, type RisolviIncantesimo } from "../regole/src/motore/combattente";
 import { evalCjs } from "./util";
 import { suggester, tpShim } from "./modali";
-import { renderStatblock, trovaMostro, validaRawMostro } from "./statblock";
+import { renderStatblock, trovaMostro, validaRawMostro, validaDef } from "./statblock";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
 import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
@@ -250,7 +250,7 @@ export default class GdrPlugin extends Plugin {
     this.addCommand({ id: "apri-cruscotto", name: "Apri il Cruscotto DM", callback: () => this.activateCruscotto() });
     this.registerView(VIEW_TYPE_BOARD, (leaf) => new BoardView(leaf, this));
     this.addCommand({ id: "apri-board", name: "Apri la Board di combattimento", callback: () => this.activateBoard() });
-    this.addCommand({ id: "valida-homebrew", name: "Valida le creature homebrew", callback: () => void this.apriValidazioneHomebrew() });
+    this.addCommand({ id: "valida-homebrew", name: "Valida l'homebrew del vault (creature, oggetti, incantesimi, condizioni)", callback: () => void this.apriValidazioneHomebrew() });
     // Ricucitura prepara→gioca (F2): dalla nota-Incontro attiva schiera nella Board.
     this.addCommand({
       id: "apri-incontro-in-board",
@@ -484,26 +484,65 @@ export default class GdrPlugin extends Plugin {
     return [...(await this.loadBestiario()), ...(await this.homebrewCreature())];
   }
 
-  // Check batch di TUTTE le creature homebrew (categoria: creatura): apre un report con, per
-  // ogni nota, gli errori (non utilizzabile) e gli avvisi (schiera con default). Complementa la
-  // validazione inline nel blocco statblock.
-  async apriValidazioneHomebrew() {
-    const note = this.app.vault.getMarkdownFiles()
-      .filter((f) => String(this.frontmatterOf(f.path)?.categoria ?? "").toLowerCase() === "creatura")
-      .sort((a, b) => a.basename.localeCompare(b.basename));
-    if (!note.length) { new Notice("Nessuna creatura homebrew (categoria: creatura) nel vault."); return; }
-    const righe: string[] = [];
-    let ok = 0, conAvvisi = 0, conErrori = 0;
-    for (const f of note) {
-      const raw = estraiRawMostro(await this.app.vault.cachedRead(f));
-      if (!raw) { conErrori++; righe.push(`### ❌ ${f.basename}\n- nessun blocco \`gdr statblock\` valido nella nota`); continue; }
-      const { errori, avvisi } = validaRawMostro(raw);
-      if (!errori.length && !avvisi.length) { ok++; righe.push(`### ✅ ${raw.nome ?? f.basename}`); continue; }
-      if (errori.length) conErrori++; else conAvvisi++;
-      const lista = [...errori.map((x) => `- ❌ ${x}`), ...avvisi.map((x) => `- ⚠️ ${x}`)].join("\n");
-      righe.push(`### ${errori.length ? "❌" : "⚠️"} ${raw.nome ?? f.basename}\n${lista}`);
+  // La `attivita` risolta di una nota def-entity (oggetto/incantesimo/condizione), come la
+  // vede la discovery: frontmatter `attivita:`, oppure `effetti:` avvolto, oppure il blocco
+  // ```yaml del corpo. undefined se è solo prosa. Usata dalla validazione batch.
+  private async attivitaDefNota(f: any, fm: any): Promise<any[] | undefined> {
+    let attivita = (fm as any).attivita;
+    let effetti = (fm as any).effetti;
+    if (!Array.isArray(attivita) && !Array.isArray(effetti)) {
+      const def = estraiDefBody(await this.app.vault.cachedRead(f));
+      if (def) { attivita = def.attivita; effetti = def.effetti; }
     }
-    const md = `# 🏠 Validazione creature homebrew\n\n**${note.length}** creature — ✅ ${ok} · ⚠️ ${conAvvisi} · ❌ ${conErrori}\n\n${righe.join("\n\n")}`;
+    if (Array.isArray(attivita)) return attivita;
+    if (Array.isArray(effetti)) return [{ tipo: "passivo", effetti }];
+    return undefined;
+  }
+
+  // Check batch di TUTTO l'homebrew giocabile del vault: creature (categoria: creatura, forma
+  // RawMostro) + le def-entities (oggetto/incantesimo/condizione, forma effetti/attivita). Per
+  // ogni nota: errori (non utilizzabile) e avvisi (utilizzabile ma non giocabile/incompleto).
+  // Complementa la validazione inline nel blocco statblock delle creature.
+  async apriValidazioneHomebrew() {
+    const mdFiles = this.app.vault.getMarkdownFiles();
+    const sezioni: string[] = [];
+    let totali = 0, ok = 0, conAvvisi = 0, conErrori = 0;
+    const conta = (e: string[], a: string[]) => { totali++; if (e.length) conErrori++; else if (a.length) conAvvisi++; else ok++; };
+    const riga = (icona: string, nome: string, e: string[], a: string[]) => {
+      if (!e.length && !a.length) return `### ✅ ${nome}`;
+      const lista = [...e.map((x) => `- ❌ ${x}`), ...a.map((x) => `- ⚠️ ${x}`)].join("\n");
+      return `### ${e.length ? "❌" : "⚠️"} ${nome}\n${lista}`;
+    };
+
+    // Creature (blocco gdr statblock).
+    const creature = mdFiles.filter((f) => String(this.frontmatterOf(f.path)?.categoria ?? "").toLowerCase() === "creatura").sort((a, b) => a.basename.localeCompare(b.basename));
+    if (creature.length) {
+      const righe: string[] = [];
+      for (const f of creature) {
+        const raw = estraiRawMostro(await this.app.vault.cachedRead(f));
+        if (!raw) { totali++; conErrori++; righe.push(`### ❌ ${f.basename}\n- nessun blocco \`gdr statblock\` valido nella nota`); continue; }
+        const { errori, avvisi } = validaRawMostro(raw);
+        conta(errori, avvisi); righe.push(riga("", raw.nome ?? f.basename, errori, avvisi));
+      }
+      sezioni.push(`## 🐾 Creature (${creature.length})\n\n${righe.join("\n\n")}`);
+    }
+
+    // Def-entities: oggetto · incantesimo · condizione (effetti/attivita).
+    for (const [cat, titolo] of [["oggetto", "🎒 Oggetti"], ["incantesimo", "🔮 Incantesimi"], ["condizione", "＋ Condizioni"]] as const) {
+      const note = mdFiles.filter((f) => String(this.frontmatterOf(f.path)?.categoria ?? "").toLowerCase() === cat).sort((a, b) => a.basename.localeCompare(b.basename));
+      if (!note.length) continue;
+      const righe: string[] = [];
+      for (const f of note) {
+        const fm = this.frontmatterOf(f.path);
+        const attivita = await this.attivitaDefNota(f, fm);
+        const { errori, avvisi } = validaDef((fm as any)?.nome ?? f.basename, attivita);
+        conta(errori, avvisi); righe.push(riga("", String((fm as any)?.nome ?? f.basename), errori, avvisi));
+      }
+      sezioni.push(`## ${titolo} (${note.length})\n\n${righe.join("\n\n")}`);
+    }
+
+    if (!totali) { new Notice("Nessun homebrew giocabile (creatura/oggetto/incantesimo/condizione) nel vault."); return; }
+    const md = `# 🏠 Validazione homebrew del vault\n\n**${totali}** voci — ✅ ${ok} · ⚠️ ${conAvvisi} · ❌ ${conErrori}\n\n${sezioni.join("\n\n")}`;
     new ReportModal(this.app, md).open();
   }
 

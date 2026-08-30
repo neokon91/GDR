@@ -33,6 +33,29 @@ export function validaRawMostro(m: any): ValidazioneMostro {
   return { errori, avvisi };
 }
 
+// Validazione di una DEF-ENTITY homebrew (oggetto / incantesimo / condizione): la meccanica
+// vive in `attivita` (o `effetti`, avvolto). `errori` = non utilizzabile (niente nome);
+// `avvisi` = utilizzabile ma non giocabile/incompleto (solo prosa, o effetti malformati).
+// `attivita` è la forma già risolta (frontmatter o blocco corpo), undefined se assente.
+export function validaDef(nome: any, attivita: any[] | undefined): ValidazioneMostro {
+  const errori: string[] = [];
+  const avvisi: string[] = [];
+  if (!nome) errori.push("manca «nome»");
+  if (!Array.isArray(attivita) || !attivita.length) {
+    avvisi.push("nessuna meccanica (`effetti`/`attivita`) → è solo prosa: non morde né si lancia");
+    return { errori, avvisi };
+  }
+  for (const a of attivita) {
+    const eff = Array.isArray(a?.effetti) ? a.effetti : [];
+    for (const e of eff) {
+      if (!e || typeof e !== "object") { avvisi.push("un effetto non è un oggetto valido"); continue; }
+      if (!e.bersaglio) avvisi.push("un effetto senza «bersaglio» → ignorato dal motore");
+      if (!e.operazione) avvisi.push("un effetto senza «operazione» → ignorato dal motore");
+    }
+  }
+  return { errori, avvisi };
+}
+
 // Modificatore di caratteristica, formattato col segno (+3, -1, +0).
 export function modCar(valore: number): string {
   const m = Math.floor((valore - 10) / 2);
