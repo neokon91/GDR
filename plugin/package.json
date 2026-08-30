@@ -10,9 +10,11 @@
     "gen:incantesimi": "python3 ../Dev/Tools/gen_incantesimi.py",
     "gen:oggetti": "python3 ../Dev/Tools/gen_oggetti.py",
     "gen:armi": "python3 ../Dev/Tools/gen_armi.py",
+    "gen:catalogo": "python3 ../Dev/Tools/gen_catalogo.py",
+    "smoke:catalogo": "esbuild ../Dev/Tools/smoke_catalogo.ts --bundle --platform=node --format=cjs --outfile=node_modules/.cache/smoke_catalogo.cjs && node node_modules/.cache/smoke_catalogo.cjs",
     "typecheck": "tsc --noEmit",
-    "build": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && npm run typecheck && node esbuild.config.mjs --prod",
-    "dev": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && node esbuild.config.mjs"
+    "build": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && npm run gen:catalogo && npm run typecheck && node esbuild.config.mjs --prod",
+    "dev": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && npm run gen:catalogo && node esbuild.config.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

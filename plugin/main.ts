@@ -27,6 +27,9 @@ import {
   type Evento, type Dado, type InPlancia, type DefinizioniCondizioni,
 } from "../regole/src/motore/motore";
 import { risolviCondizioni, type RisolviIncantesimo } from "../regole/src/motore/combattente";
+// CREATORE PG dal repo condiviso `regole` (Tier 3): il `Catalogo` magro guida `assembla`.
+// Solo type-import → esbuild lo strippa; il dato arriva da `data/srd_catalogo.json` (gen_catalogo.py).
+import type { Catalogo } from "../regole/src/creatore/catalogo";
 import { evalCjs } from "./util";
 import { suggester, tpShim } from "./modali";
 import { renderStatblock, trovaMostro, validaRawMostro, validaDef } from "./statblock";
@@ -104,6 +107,7 @@ export default class GdrPlugin extends Plugin {
   private incantesimi: any[] | null = null;
   private oggetti: any[] | null = null;
   private armi: any[] | null = null;
+  private catalogo: Catalogo | null = null;
   private condDefs: DefinizioniCondizioni | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
@@ -648,6 +652,24 @@ export default class GdrPlugin extends Plugin {
       catch { this.armi = []; }
     }
     return this.armi;
+  }
+
+  // Il CATALOGO magro del creatore PG (sidecar gen_catalogo.py): classi/specie/background/
+  // sottoclassi/talenti/lingue/incantesimi/oggetti SRD, la forma che il kernel condiviso
+  // (`regole/creatore`, `caricaFonti` + `assembla`) sa risolvere in un `Attore`. Tier 3 Fase B:
+  // qui c'è solo il caricamento; chi lo consuma (creazione PG col kernel) è la Fase C. Letto una
+  // volta, on-demand. Su file mancante torna un catalogo VUOTO (mai crash): l'assenza dei dati non
+  // deve rompere il plugin, si vede a valle come "nessuna classe disponibile".
+  async loadCatalogo(): Promise<Catalogo> {
+    if (!this.catalogo) {
+      const vuoto: Catalogo = {
+        classi: [], specie: [], background: [], sottoclassi: [],
+        talenti: [], lingue: [], incantesimi: [], oggetti: [],
+      };
+      try { this.catalogo = JSON.parse(await this.app.vault.adapter.read(`${this.manifest.dir}/data/srd_catalogo.json`)) as Catalogo; }
+      catch { this.catalogo = vuoto; }
+    }
+    return this.catalogo;
   }
 
   // Il catalogo armi (nome-minuscolo → arma) per l'offensiva dei PG nella Board: SRD bundlate +
