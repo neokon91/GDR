@@ -169,6 +169,11 @@ SRD (archivio) + pg_rules.yaml + system.yaml
 - **Presentazione** (`scheda_pg_rules()`): caratteristiche/abilità con tiri Dice Roller col bonus
   reale, risorse di classe a barre (`renderRisorsePG`), slot, riposi (loop di sessione 2024),
   incantesimi con CD/attacco.
+- **Kernel condiviso (Tier 3, in corso)**: il builder del PG (`assembla`: scelte + catalogo →
+  Attore) è **canonico in `regole/src/creatore`** (motore/catalogo/fonti/personaggio/attore/
+  risolutore); Compendio lo **symlinka** (fonte unica). Fase A fatta. Resta: bundlare il catalogo
+  per il plugin (`gen_catalogo.py`) e ritirare `crea_pg.js` a favore del kernel condiviso, così le
+  tre impl. di creazione PG (crea_pg.js · Compendio · regole) diventano UNA.
 
 ---
 
@@ -223,13 +228,22 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   → `defs` passati ai comandi (prono/avvelenato→svantaggio, afferrato→velocità 0, buff…).
 
 ### Homebrew giocabile al tavolo (Rotta homebrew)
-`RawMostro` è il **contratto**: SRD e homebrew sono "solo dati nello schema". Il plugin
-**scopre** l'homebrew del vault e lo fonde col bundlato — creature (`homebrewCreature` →
-`bestiarioCompleto`, `categoria: creatura` + blocco `` ```gdr statblock `` inline) e
-condizioni/effetti (`homebrewCondizioni` → `condizioniComplete`, `categoria: condizione` +
-`effetti`/`attivita` nel frontmatter, che **mordono** come le SRD). Validazione:
-`validaRawMostro` inline nel blocco + comando batch. Contratto completo e forme di authoring in
-**[schema_homebrew.md](schema_homebrew.md)**.
+Il **contratto** (RawMostro per le creature, `effetti`/`attivita` per le def) vale per SRD e
+homebrew: sono "solo dati nello schema". Il plugin **scopre** l'homebrew del vault e lo fonde col
+bundlato, con lo STESSO rituale per ogni entità (`homebrewX` → `Xcompleti` = SRD + vault):
+- **creature** (`categoria: creatura` + blocco `` ```gdr statblock ``);
+- **condizioni** (`categoria: condizione` + `effetti`/`attivita`, che **mordono** come le 15 SRD);
+- **incantesimi** (`categoria: incantesimo` + `attivita`; sidecar SRD `gen_incantesimi.py`;
+  `RisolviIncantesimo` passato a `daMostro` → le creature lanciano coi loro numeri);
+- **oggetti-effetto** (`categoria: oggetto` + `effetti`; sidecar SRD `gen_oggetti.py`) →
+  picker **«🎒 Equipaggia»**, un Active Effect sul portatore (riusa la macchina condizioni).
+
+La meccanica delle def si autora nel frontmatter **o** in un blocco `` ```yaml `` del corpo
+(`estraiDefBody`); i template «Crea …» la scaffoldano (⚙️ Meccanica). **Offensiva PG**: i PG
+schierati derivano i bottoni d'attacco dalle `padronanze_armi` (`gen_armi.py` +
+`adapters.ts:azioneDaArma`), non più manuale. **Validazione** unica: «Valida l'homebrew del
+vault» copre tutte e quattro le entità. Contratto e authoring in
+**[schema_homebrew.md](schema_homebrew.md)**; il piano entità-per-entità è nella roadmap di memoria.
 
 ---
 

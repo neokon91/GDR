@@ -7,7 +7,7 @@ combattimento). È l'analogo del *data model* di un System Foundry.
 
 Principio: **il motore è tollerante** — `daMostro` non va mai in crash, usa valori di default
 per i campi mancanti. Quindi una creatura incompleta *schiera lo stesso*, ma silenziosamente
-sbagliata. La validazione (§7) rende visibile questa "wrongness silenziosa".
+sbagliata. La validazione (§8) rende visibile questa "wrongness silenziosa".
 
 ---
 
@@ -228,14 +228,48 @@ oppure `attivita:` completo (identico alle SRD). L'id nasce dallo slug del nome-
 
 ---
 
-## 7. Validazione — la rete di sicurezza
+## 7. Oggetti-effetto (equipaggiabili)
 
-Il contratto sopra è **applicato** da `validaRawMostro` (plugin/statblock.ts), su due superfici:
+Un oggetto magico è un **Active Effect sul portatore**: la STESSA forma delle condizioni (§6),
+ma applicato equipaggiando invece che affliggendo. Una nota `categoria: oggetto` con `effetti:`
+(o `attivita:` completo) è scoperta dal plugin (`homebrewOggetti`) e fusa col bundle SRD
+(`oggettiComplete`) → appare nel picker **«🎒 Equipaggia»** della Board; gli `effetti` MORDONO i
+tiri di chi la porta (via `risolviCondizioni`, come le condizioni). Il chip 🎒 col nome; cliccarlo
+disequipaggia. Id `oggetto:<slug>` se assente.
 
-- **Inline**: sotto ogni statblock homebrew incompleto compare un callout con errori (`nome`
-  mancante / YAML rotto) e avvisi (campi mancanti → default). Feedback dove autori.
-- **Batch**: il comando **«GDR: Valida le creature homebrew»** scansiona tutte le note
-  `categoria: creatura`, ne estrae il blocco `gdr statblock` e apre un report ✅ / ⚠️ / ❌.
+Oltre a (s)vantaggio, gli effetti fanno **bonus additivi** (`operazione: somma`) sui canali
+`colpire · danno · salvezza · ca`, con `valore: {piatto: N}` o `{dado: dN}`:
+```yaml
+---
+categoria: oggetto
+nome: Spada Lunga +1
+effetti:
+  - { bersaglio: colpire, operazione: somma, valore: { piatto: 1 } }
+  - { bersaglio: danno,   operazione: somma, valore: { piatto: 1 } }
+---
+prosa dell'oggetto…
+```
+**Dati SRD in archivio** (principio: dati in archivio, codice consuma): un magic item di
+`archivio/srd/magic_items/*.oggetto-magico.yaml` che porta un `effetti:` viene bundlato da
+`gen_oggetti.py` (→ `srd_oggetti.json`) e diventa equipaggiabile (es. Mantello/Anello di
+protezione = +1 CA e TS). Gli item senza `effetti` restano prosa (il DM li gioca a mano).
+
+> **La meccanica anche nel CORPO** — per oggetti/incantesimi/condizioni la discovery legge
+> `effetti`/`attivita` dal frontmatter **oppure** da un blocco ```yaml nel corpo (`estraiDefBody`):
+> più visibile ed editabile a vista, come lo statblock delle creature. Il template «Crea …»
+> scaffolda un blocco commentato (`⚙️ Meccanica`) da attivare togliendo i `#`.
+
+---
+
+## 8. Validazione — la rete di sicurezza
+
+Il contratto sopra è **applicato** da `validaRawMostro` / `validaDef` (plugin/statblock.ts):
+
+- **Inline** (creature): sotto ogni statblock homebrew incompleto compare un callout con errori
+  (`nome` mancante / YAML rotto) e avvisi (campi mancanti → default). Feedback dove autori.
+- **Batch**: il comando **«GDR: Valida l'homebrew del vault»** scansiona TUTTE le entità giocabili
+  — creature (`gdr statblock`) + oggetti/incantesimi/condizioni (`effetti`/`attivita`) — e apre un
+  report unico raggruppato ✅ / ⚠️ / ❌ (avviso se una def è solo-prosa o ha effetti malformati).
 
 I dati SRD dell'archivio hanno il loro gate a build (`archivio/tools/validate_archivio.py`).
 
