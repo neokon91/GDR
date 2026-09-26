@@ -17,7 +17,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import yaml
+from archivio_io import voci
 
 ROOT = Path(__file__).resolve().parents[2]
 SRD = ROOT / "archivio" / "srd"
@@ -27,15 +27,13 @@ OUT = ROOT / "plugin" / "data" / "srd_condizioni.json"
 def main() -> None:
     if not SRD.is_dir():
         raise SystemExit(f"archivio/srd non trovato ({SRD}). Manca il symlink/submodule 'archivio'?")
-    # Transizione: le condizioni passano dal file unico `*.condition.yaml` al DOPPIO FILE
-    # `srd/glossario/condizioni/*.yaml` (dati) + `*.md` (prosa). Si leggono ENTRAMBE le
-    # forme e si deduplica per `id` (l'ultima vince), così regge il dato in migrazione.
-    files = sorted(SRD.rglob("*.condition.yaml")) + sorted((SRD / "glossario" / "condizioni").glob("*.yaml"))
+    # Tutte le condizioni che il MOTORE conosce, comprese quelle che un incantesimo concede
+    # (`benedetto`, `arma-magica`): senza, `concede: benedetto` applicherebbe una condizione
+    # inesistente. Il tipo dall'id, non dal nome-file (vedi archivio_io).
+    files = voci(SRD / "glossario" / "condizioni", "condizione")
     per_id: dict[str, dict] = {}
-    for f in files:
-        c = yaml.safe_load(f.read_text(encoding="utf-8"))
-        if isinstance(c, dict) and c.get("id"):
-            per_id[c["id"]] = c
+    for _f, c in files:
+        per_id[c["id"]] = c
     condizioni = list(per_id.values())
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(condizioni, ensure_ascii=False), encoding="utf-8")

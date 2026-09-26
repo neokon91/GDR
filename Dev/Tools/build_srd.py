@@ -66,6 +66,33 @@ _ARCHIVIO_SUBDIR: dict[str, str] = {
 }
 
 
+# Un riferimento puntato dell'archivio: `dnd.<tipo>.<slug>` come VALORE INTERO (non dentro
+# la prosa, dove i wikilink li risolve `_risolvi_wikilink`).
+_RIF_PUNTATO = re.compile(r"dnd\.[a-z0-9-]+\.([a-z0-9-]+)")
+
+
+def _denuda_riferimenti(v: Any) -> Any:
+    """Proietta i riferimenti puntati sul loro slug, in profondità. Dal 12/09/2026 l'archivio
+    scrive `classe: dnd.classe.ranger`, `classi: [dnd.classe.mago]`, `talento_origine:
+    dnd.talento.iniziato-alla-magia`; GDR chiavizza per slug (`ranger`, `mago`) e senza questa
+    proiezione le sottoclassi perdevano la classe e i PG incantatori gli incantesimi. È il
+    confine archivio→GDR: qui e solo qui, così a valle nessuno deve sapere delle due forme."""
+    if isinstance(v, str):
+        m = _RIF_PUNTATO.fullmatch(v)
+        return m.group(1) if m else v
+    if isinstance(v, list):
+        return [_denuda_riferimenti(x) for x in v]
+    if isinstance(v, dict):
+        return {k: _denuda_riferimenti(x) for k, x in v.items()}
+    return v
+
+
+def _denuda(voce: dict[str, Any]) -> dict[str, Any]:
+    """I riferimenti di una voce, non il suo `id`: l'id-index lo usa qualificato per
+    disambiguare gli slug che vivono in più tipi (`scurovisione` senso E incantesimo)."""
+    return {k: (x if k == "id" else _denuda_riferimenti(x)) for k, x in voce.items()}
+
+
 def _load_archivio(subdir: str) -> list[dict[str, Any]]:
     """Carica una categoria SRD dagli YAML dell'archivio (ricorsivo). Dedup per nome;
     id dal frontmatter o dallo slug del file. Forma-dato specifica dell'archivio: i
@@ -110,7 +137,7 @@ def _load_archivio(subdir: str) -> list[dict[str, Any]]:
             per_slug[slug] = entry
         if corpo and not entry.get("descrizione"):
             entry["descrizione"] = corpo
-    return [per_slug[k] for k in sorted(per_slug)]
+    return [_denuda(per_slug[k]) for k in sorted(per_slug)]
 
 
 # --- Adapter per-categoria: la forma-dato dell'archivio è STRUTTURATA (privilegi,
@@ -225,15 +252,17 @@ def _adatta_classe(d: dict[str, Any]) -> None:
 
 
 def _adatta_subclass(d: dict[str, Any]) -> None:
-    # I `benefici` (livello + privilegio + descrizione) diventano sezioni renderizzabili,
-    # una per privilegio, ordinate come nell'archivio. `classe` resta nel frontmatter (query/
+    # I `privilegi` (livello + nome + descrizione) diventano sezioni renderizzabili, una per
+    # privilegio, ordinate come nell'archivio. `classe` resta nel frontmatter (query/
     # relazioni); la citazione va nell'header (srd_header). id nudo per le chiavi downstream.
+    # Erano `benefici: [{privilegio}]`: migrati al canonico delle voci (`nome` + `descrizione`)
+    # a set 2026, e da allora le pagine delle sottoclassi uscivano senza privilegi.
     d["id"] = _id_nudo(d.get("id"))
     sez = []
-    for b in d.get("benefici") or []:
+    for b in d.get("privilegi") or []:
         if not isinstance(b, dict):
             continue
-        priv = str(b.get("privilegio") or "").strip()
+        priv = str(b.get("nome") or "").strip()
         liv = b.get("livello")
         if priv and liv is not None:
             titolo = f"Livello {liv} · {priv}"
@@ -337,15 +366,16 @@ def load_srd(name: str) -> list[dict[str, Any]]:
     return data
 
 
-# Rarità SRD -> fascia canonica del generatore `tesoro`. Il JSON mescola genere
-# (rara/raro, leggendaria/leggendario) e rarità composte/variabili ("non comune
-# (+1)…", "rarità variabile", "manufatto", None) che NON mappiamo: restano fuori
-# dal bottino per non confondere il colpo d'occhio al tavolo.
+# Rarità dell'archivio -> fascia del generatore `tesoro`. Dal 14/09/2026 la rarità è un
+# vocabolario CHIUSO a slug (`RARITA` in Compendio/campi.ts: comune, non-comune, rara,
+# molto-rara, leggendaria, artefatto, variabile): le grafie tollerate prima (maschili,
+# «molto rara» con lo spazio) non esistono più, e con loro il pool restava vuoto. Comune,
+# artefatto e variabile restano fuori dal bottino, come prima.
 _LOOT_RARITY = {
-    "non comune": "non comune",
-    "rara": "rara", "raro": "rara",
-    "molto rara": "molto rara", "molto raro": "molto rara",
-    "leggendaria": "leggendaria", "leggendario": "leggendaria",
+    "non-comune": "non comune",
+    "rara": "rara",
+    "molto-rara": "molto rara",
+    "leggendaria": "leggendaria",
 }
 # Tipi di equipaggiamento che hanno senso come bottino non magico (gli altri —
 # vitto/alloggio, servizi, cavalcature, veicoli, monete — non sono "tesoro").
@@ -922,8 +952,9 @@ def gs_baselines() -> dict[str, dict[str, Any]]:
         pb = _pb(cr)
         g["pb"].append(pb)
         g["init"].append(_car(mon, "destrezza") + (pb if str(mon.get("iniziativa")) == "maestria" else 0))
-        # Attacco/danno/CD dalla PROSA delle azioni (l'archivio le tiene come `testo`).
-        testo = " ".join(str(a.get("testo", "")) for a in (mon.get("azioni") or []) if isinstance(a, dict))
+        # Attacco/danno/CD dalla PROSA delle azioni: le voci si chiamano `nome` + `descrizione`
+        # (migrate da `testo` a set 2026; con `testo` le baseline perdevano l'attacco).
+        testo = " ".join(str(a.get("descrizione", "")) for a in (mon.get("azioni") or []) if isinstance(a, dict))
         for m in re.finditer(r"per colpire[^+\-\d]*([+-]?\d+)", testo, re.I):
             g["atk"].append(int(m.group(1)))
         for m in re.finditer(r"olpito:\**\s*(\d+)\s*\(([^)]*\d+d\d+[^)]*)\)\s*danni\s*([a-zà-ú]+)", testo):

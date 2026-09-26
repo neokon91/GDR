@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import yaml
+from archivio_io import voci
 
 ROOT = Path(__file__).resolve().parents[2]
 SRD = ROOT / "archivio" / "srd"
@@ -35,12 +35,9 @@ def _slug(name: str) -> str:
 def main() -> None:
     if not SRD.is_dir():
         raise SystemExit(f"archivio/srd non trovato ({SRD}). Manca il symlink/submodule 'archivio'?")
-    files = sorted((SRD / "magic_items").glob("*.oggetto-magico.yaml"))
+    files = voci(SRD / "magic_items", "oggetto-magico")
     per_id: dict[str, dict] = {}
-    for f in files:
-        o = yaml.safe_load(f.read_text(encoding="utf-8"))
-        if not isinstance(o, dict):
-            continue
+    for f, o in files:
         effetti = o.get("effetti")
         attivita = o.get("attivita")
         # Solo gli oggetti con meccanica: gli altri (solo prosa) non sono equipaggiabili.

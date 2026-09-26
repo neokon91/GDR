@@ -28,7 +28,7 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
-import yaml
+from archivio_io import leggi, voci
 
 ROOT = Path(__file__).resolve().parents[2]
 SRD = ROOT / "archivio" / "srd"
@@ -311,8 +311,7 @@ _CARTELLA_A_SEZIONE = {
 
 
 def _leggi(path: Path) -> dict | None:
-    d = yaml.safe_load(path.read_text(encoding="utf-8"))
-    return d if isinstance(d, dict) else None
+    return leggi(path)  # .yaml o nota .md: vedi archivio_io
 
 
 def _id_da_file(path: Path) -> str:
@@ -320,14 +319,10 @@ def _id_da_file(path: Path) -> str:
     return path.name.split(".")[0]
 
 
-def _da_cartella(sub: str, glob: str, costruisci) -> list:
-    """Legge srd/<sub>/<glob>, costruisce con `costruisci` le voci con `id`, ordina per nome."""
-    voci = []
-    for f in sorted((SRD / sub).glob(glob)):
-        d = _leggi(f)
-        if d and d.get("id") and d.get("nome"):
-            voci.append(costruisci(d))
-    return voci
+def _da_cartella(sub: str, tipo: str, costruisci) -> list:
+    """Le voci di un TIPO sotto srd/<sub> (dall'id puntato, .yaml e .md: vedi archivio_io),
+    costruite con `costruisci`."""
+    return [costruisci(d) for _f, d in voci(SRD / sub, tipo) if d.get("nome")]
 
 
 def _lingue() -> list:
@@ -343,11 +338,8 @@ def _lingue() -> list:
 
 def _incantesimi() -> list:
     out = []
-    for f in sorted((SRD / "spells").glob("*.spell.yaml")):
-        d = _leggi(f)
-        if not d:
-            continue
-        iid = str(d.get("id") or _id_da_file(f))
+    for _f, d in voci(SRD / "spells", "incantesimo"):
+        iid = str(d["id"])
         voce = {
             "id": iid,
             "nome": str(d.get("nome") or iid),
@@ -373,8 +365,7 @@ def _oggetti() -> list:
     fonti = [(f, _CARTELLA_A_SEZIONE.get(sub)) for sub in
              ("armi", "armature", "item", "tool", "cavalcature", "veicoli", "valute")
              for f in sorted((SRD / "equipaggiamento" / sub).glob("*.yaml"))]
-    fonti += [(f, _CARTELLA_A_SEZIONE["magic_items"])
-              for f in sorted((SRD / "magic_items").glob("*.oggetto-magico.yaml"))]
+    fonti += [(f, _CARTELLA_A_SEZIONE["magic_items"]) for f, _d in voci(SRD / "magic_items", "oggetto-magico")]
     for f, sezione in fonti:
         d = _leggi(f)
         if not d:
@@ -396,10 +387,10 @@ def _oggetti() -> list:
 
 def costruisci_catalogo() -> dict:
     return {
-        "classi": _da_cartella("classi", "*.yaml", costruisci_classe),
-        "specie": _da_cartella("specie", "*.yaml", costruisci_specie),
-        "background": _da_cartella("background", "*.yaml", costruisci_background),
-        "sottoclassi": _da_cartella("sottoclassi", "*.yaml", costruisci_sottoclasse),
+        "classi": _da_cartella("classi", "classe", costruisci_classe),
+        "specie": _da_cartella("specie", "specie", costruisci_specie),
+        "background": _da_cartella("background", "background", costruisci_background),
+        "sottoclassi": _da_cartella("subclasses", "sottoclasse", costruisci_sottoclasse),
         "talenti": [
             {"id": d.get("id") or _id_da_file(f), "nome": d.get("nome") or _id_da_file(f), "effetti": effetti_passivi(d)}
             for f in sorted((SRD / "talenti").glob("*.yaml"))

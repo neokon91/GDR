@@ -27,7 +27,9 @@ _GS = str(render.JS_DIR / "genera_sito.js")
 def _gs(js_body):
     """Esegue `js_body` contro genera_sito.js (richiesto come `g`); ritorna il JSON su stdout."""
     src = f"const g=require({json.dumps(_GS)});\n{js_body}"
-    res = subprocess.run(["node", "-e", src], capture_output=True, text=True)
+    # Via stdin, non `-e`: il sorgente porta il JSON del modello, e con l'archivio cresciuto
+    # superava il limite degli argomenti del sistema («Argument list too long»).
+    res = subprocess.run(["node", "-"], input=src, capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     return json.loads(res.stdout)
 

@@ -23,7 +23,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import yaml
+from archivio_io import voci
 
 ROOT = Path(__file__).resolve().parents[2]
 SRD = ROOT / "archivio" / "srd"
@@ -36,15 +36,11 @@ CAMPI = ("nome", "livello", "tempo_lancio", "concentrazione", "attivita")
 def main() -> None:
     if not SRD.is_dir():
         raise SystemExit(f"archivio/srd non trovato ({SRD}). Manca il symlink/submodule 'archivio'?")
-    files = sorted(SRD.rglob("*.spell.yaml"))
+    files = voci(SRD / "spells", "incantesimo")
     per_id: dict[str, dict] = {}
     con_attivita = 0
-    for f in files:
-        c = yaml.safe_load(f.read_text(encoding="utf-8"))
-        if not isinstance(c, dict):
-            continue
-        # id dal campo, con ripiego sullo stem del nome-file (prima del primo punto).
-        idn = c.get("id") or f.name.split(".")[0]
+    for _f, c in files:
+        idn = c["id"]
         voce = {"id": idn}
         for k in CAMPI:
             if k in c and c[k] is not None:

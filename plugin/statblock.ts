@@ -3,6 +3,7 @@
 import { App, MarkdownRenderer, MarkdownRenderChild, Modal } from "obsidian";
 import { daMostro } from "../regole/src/motore/combattente";
 import type { InPlancia } from "../regole/src/motore/motore";
+import { voceDanno } from "../regole/src/lib/dadi";
 
 // Validazione di una creatura HOMEBREW (forma RawMostro): rende visibile la "wrongness
 // silenziosa" — daMostro è tollerante (usa default per i campi mancanti), quindi una creatura
@@ -191,10 +192,18 @@ export function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia, md?
     const p = meta.createEl("div"); p.createEl("strong", { text: `${etich} ` });
     p.appendText(arr.map((x: any) => (typeof x === "string" ? x : String(x?.nome ?? x?.id ?? x))).join(", "));
   };
-  listaTesto("Resistenze", m.resistenze);
-  listaTesto("Immunità ai danni", m.immunita_danni);
+  // Tipi di danno: slug, {scelta} (il mezzodrago) o {tipo, condizione} (il rakshasa). Le
+  // risolve il kernel, lo stesso di Compendio: prima qui usciva «[object Object]».
+  const listaDanni = (etich: string, v: any) => {
+    const arr = (Array.isArray(v) ? v : v != null ? [v] : []).map((x: unknown) => voceDanno(x, m)).filter(Boolean);
+    if (!arr.length) return;
+    const p = meta.createEl("div"); p.createEl("strong", { text: `${etich} ` });
+    p.appendText(arr.join(", "));
+  };
+  listaDanni("Resistenze", m.resistenze);
+  listaDanni("Immunità ai danni", m.immunita_danni);
   listaTesto("Immunità alle condizioni", m.immunita_condizioni);
-  listaTesto("Vulnerabilità", m.vulnerabilita);
+  listaDanni("Vulnerabilità", m.vulnerabilita);
   listaTesto("Equipaggiamento", m.equipaggiamento);
   if (m.gs != null) { const p = meta.createEl("div"); p.createEl("strong", { text: "GS " }); p.appendText(String(m.gs)); }
 
@@ -204,7 +213,8 @@ export function renderStatblock(host: HTMLElement, m: any, comb?: InPlancia, md?
     c.createEl("h3", { cls: "gdr-sb-sez", text: titolo });
     for (const v of voci) {
       const p = c.createEl("div", { cls: "gdr-sb-voce" });
-      const testo = v?.testo ? String(v.testo).trim() : "";
+      // Le voci dell'archivio si chiamano `nome` + `descrizione` (migrate da `testo` a set 2026).
+      const testo = v?.descrizione ? String(v.descrizione).trim() : "";
       if (md) {
         const sorgente = (v?.nome ? `***${v.nome}.*** ` : "") + testo;
         void MarkdownRenderer.render(md.app, sorgente, p, md.sourcePath ?? "", md.component);

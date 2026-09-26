@@ -47,9 +47,10 @@ moduli, tutti importano `common` (nessun ciclo):
 | Modulo | Responsabilità |
 |---|---|
 | `common.py` | Percorsi, IO, e il **modello**: `deep_merge`, `load_core`, `load_templates`, `load_pages`, `apply_entities`. |
-| `build_srd.py` | Genera l'albero `SRD/` (sola lettura) da `archivio`. `srd_note` rende il contenuto (infobox, sezioni, potenziamento, evocazioni inline, footer *Vedi anche*). Le pagine mostro emettono `` ```gdr statblock <id> ``. Fonte UNICA = archivio. |
+| `build_srd.py` | Genera l'albero `SRD/` (sola lettura) da `archivio`. Al confine (`_load_archivio`) i riferimenti puntati `dnd.<tipo>.<slug>` si proiettano sullo slug, la chiave di tutto GDR; l'`id` della voce resta qualificato per l'id-index. `srd_note` rende il contenuto (infobox, sezioni, potenziamento, evocazioni inline, footer *Vedi anche*). Le pagine mostro emettono `` ```gdr statblock <id> ``. Fonte UNICA = archivio. |
 | `build_personaggio/` | Converter del rules-engine PG: SRD (da archivio) + `pg_rules.yaml` → `personaggio.json`. |
 | `gen_bestiario.py` / `gen_condizioni.py` | Sidecar del motore (`plugin/data/srd_bestiario.json`, `srd_condizioni.json`) da `archivio`. |
+| `archivio_io.py` | **Lettura unica dell'archivio** per i generatori: `.yaml` (entità) e `.md` (note con prosa, corpo → `descrizione`), tipo riconosciuto dall'id `dnd.<tipo>.…`, mai dal nome-file. Nato dopo che i vecchi glob a suffisso (`*.spell.yaml`…) leggevano 0 file e il plugin usciva vuoto con la build verde (set 2026); `tests/test_generatori_plugin.py` ne tiene le soglie. |
 | `render_config/` | Config `.obsidian` (merge non distruttivo, un writer per plugin), bottoni/fileClass dal modello, viste **Bases**, CSS colore-categoria. |
 | `validate.py` | `check()`: confine core/system, dup-ID, snake_case, shape, schema wizard, inversi reciproci, uguaglianza byte delle sorgenti `_*.js`. |
 
