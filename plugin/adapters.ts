@@ -159,3 +159,21 @@ export function daPgGdr(fm: any, armi?: Record<string, ArmaCat>): Combattente {
   }
   return c;
 }
+
+// Uno statblock SCRITTO A MANO nel vault (```gdr statblock) → la forma canonica che il motore
+// del kernel legge. È input dell'utente, non dato d'archivio: può arrivare con l'alias inglese
+// `ac` o con la frase del manuale dentro la CA («19 (25 con Ira della Natura)»). Il kernel non
+// tollera più alias (un canonico solo: `ca: {valore: numero, nota?}`), quindi la tolleranza sta
+// QUI, al confine dove entra l'input — com'era nel motore di regole fino alla riunificazione
+// (set 2026). La frase non si perde: finisce in `nota`, come vuole il canonico.
+export function canonizzaMostroScritto(raw: any): any {
+  if (!raw || typeof raw !== "object") return raw;
+  const { ac, ...resto } = raw;
+  const ca = raw.ca ?? ac;
+  if (ca == null || typeof ca === "number") return ca == null ? resto : { ...resto, ca };
+  const valore = typeof ca === "object" ? ca.valore : ca;
+  if (typeof valore === "number") return { ...resto, ca };
+  const n = typeof valore === "string" ? valore.match(/-?\d+/)?.[0] : undefined;
+  if (n == null) return resto;
+  return { ...resto, ca: { ...(typeof ca === "object" ? ca : {}), valore: Number(n), variabile: true, nota: String(valore) } };
+}

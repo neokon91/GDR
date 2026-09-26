@@ -36,7 +36,7 @@ import type { Caratteristica } from "../regole/src/creatore/attore";
 import { evalCjs } from "./util";
 import { suggester, promptModal, multiSuggester, tpShim } from "./modali";
 import { renderStatblock, trovaMostro, validaRawMostro, validaDef } from "./statblock";
-import { type ArmaCat, personaggioAFrontmatter } from "./adapters";
+import { type ArmaCat, canonizzaMostroScritto, personaggioAFrontmatter } from "./adapters";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
 import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
@@ -65,7 +65,8 @@ function estraiRawMostro(testo: string): any | null {
   const corpo = m[1].replace(/^\s*statblock[^\n]*\n/, "");
   try {
     const raw = parseYaml(corpo);
-    return raw && typeof raw === "object" && (raw as any).nome ? raw : null;
+    // Scritto a mano: alla forma canonica prima del motore (alias `ac`, CA in prosa).
+    return raw && typeof raw === "object" && (raw as any).nome ? canonizzaMostroScritto(raw) : null;
   } catch {
     return null;
   }
