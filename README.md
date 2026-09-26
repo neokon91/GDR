@@ -38,6 +38,11 @@ guida completa è nel **LEGGIMI** dentro il vault.
 
 > Il resto di questo README è per chi vuole **costruire da sorgente** o contribuire.
 
+> **Stato: manutenzione** (decisione di set 2026). Niente sviluppo nuovo: la suite resta
+> verde e GDR si riallinea quando cambiano `archivio` o `regole` (la CI gira anche ogni
+> notte per accorgersene). Il Tier 3 — un solo creatore di PG, `crea_pg.js` ritirato per il
+> kernel — è sospeso, non abbandonato.
+
 ## Come funziona
 
 ```

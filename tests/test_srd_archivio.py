@@ -143,3 +143,16 @@ def test_magic_items_da_archivio_con_sintonia():
     baston = next((x for x in items if str(x.get("nome")).lower() == "bastone del fuoco"), None)
     assert baston and baston.get("richiede_sintonia") is True
     assert isinstance(baston.get("descrizione"), str) and baston["descrizione"].strip()
+
+
+def test_la_cache_dell_archivio_non_trasmette_le_modifiche_degli_adapter():
+    """`_load_archivio` legge una volta sola e consegna copie: gli adapter di load_srd
+    modificano le voci sul posto, e la lettura seguente deve trovarle intatte."""
+    prima = bs.load_srd("srd_5_2_1_subclasses.json")
+    if not prima:
+        import pytest
+        pytest.skip("archivio subclasses assenti")
+    prima[0]["nome"] = "manomesso"
+    dopo = bs.load_srd("srd_5_2_1_subclasses.json")
+    assert dopo[0]["nome"] != "manomesso"
+    assert bs._leggi_archivio.cache_info().hits >= 1

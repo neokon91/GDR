@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+import copy
+import functools
 import re
 from typing import Any
 
@@ -94,6 +96,15 @@ def _denuda(voce: dict[str, Any]) -> dict[str, Any]:
 
 
 def _load_archivio(subdir: str) -> list[dict[str, Any]]:
+    """Le voci di una categoria, lette UNA volta per processo (`_leggi_archivio`) e
+    consegnate come COPIA: gli adapter di `load_srd` le modificano sul posto, e una voce
+    condivisa ne porterebbe le tracce alla lettura seguente. Senza la cache ogni build e
+    ogni test rileggeva ~1800 file (2,8 s a giro): la suite scendeva da 138 a 47 s."""
+    return copy.deepcopy(_leggi_archivio(subdir))
+
+
+@functools.lru_cache(maxsize=None)
+def _leggi_archivio(subdir: str) -> list[dict[str, Any]]:
     """Carica una categoria SRD dagli YAML dell'archivio (ricorsivo). Dedup per nome;
     id dal frontmatter o dallo slug del file. Forma-dato specifica dell'archivio: i
     consumatori (srd_note/id-index/autolink) leggono gli stessi nomi-campo del JSON."""
