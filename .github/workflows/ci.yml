@@ -10,6 +10,11 @@ name: ci
 on:
   push:
   pull_request:
+  # Una migrazione di archivio e di regole non fa push qui: il giro notturno e quello a richiesta
+  # sono ciò che fa emergere una rottura nei dati che questo repo consuma.
+  workflow_dispatch:
+  schedule:
+    - cron: '23 3 * * *'
 
 jobs:
   test:
