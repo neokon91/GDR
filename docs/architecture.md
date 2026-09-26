@@ -258,7 +258,8 @@ id qualificato sia per slug nudo (`risolviCondizioni`/`risolviAzione`, `norm_ref
 - `validate.py check()`: confine core-only (`tavolo`/`states`) vs system-only
   (`scheda`/`caratteristiche`/`abilita`); dup-ID; snake_case (eccetto `fc-*` di Calendarium);
   shape; schema wizard; reciproci; uguaglianza byte delle sorgenti `_*.js`. Dati archivio:
-  `archivio/tools/validate_archivio.py` (gate a build/CI).
+  `archivio/tools/validate_archivio.py` (ogni file si apre) e `npm run valida` di Compendio
+  (le regole sui dati: una copia sola).
 - **Verifica**: `npm test` (pytest) + `npm run check`; il **rendering reale dei plugin** va
   confermato aprendo `dist/GDR-vault` in Obsidian dopo un build.
 - Build/commit/push **solo con ok esplicito**; MAI build sul vault utente né `rm` su `dist`.

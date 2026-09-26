@@ -271,7 +271,7 @@ Il contratto sopra è **applicato** da `validaRawMostro` / `validaDef` (plugin/s
   — creature (`gdr statblock`) + oggetti/incantesimi/condizioni (`effetti`/`attivita`) — e apre un
   report unico raggruppato ✅ / ⚠️ / ❌ (avviso se una def è solo-prosa o ha effetti malformati).
 
-I dati SRD dell'archivio hanno il loro gate a build (`archivio/tools/validate_archivio.py`).
+I dati dell'archivio hanno due gate: `archivio/tools/validate_archivio.py` (ogni file si apre) e `npm run valida` di Compendio (le regole sui dati).
 
 ---
 
