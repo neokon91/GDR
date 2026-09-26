@@ -42,6 +42,11 @@ guida completa è nel **LEGGIMI** dentro il vault.
 > verde e GDR si riallinea quando cambiano `archivio` o `regole` (la CI gira anche ogni
 > notte per accorgersene). Il Tier 3 — un solo creatore di PG, `crea_pg.js` ritirato per il
 > kernel — è sospeso, non abbandonato.
+>
+> **Il mondo del DM non passa da qui** (confermato set 2026): l'archivio è il modello
+> canonico del mondo e la sua superficie è il Compendio (i mondi di
+> worldbuilding-collaborativo arrivano lì, in `archivio/mondi/`). GDR resta un prodotto
+> a sé col suo modello; nessun flusso archivio → vault è in programma.
 
 ## Come funziona
 
