@@ -88,8 +88,8 @@ console.log('✓ round-trip Attore→frontmatter→Attore OK — nota PG coerent
 // incantesimi/inventario, così il ritiro di crea_pg non perde né spell né equip.
 const bardo = cat.classi.find((c) => c.id === 'dnd.classe.bardo')
 if (bardo) {
-  const trucco = cat.incantesimi.filter((s) => s.classi.includes('bardo') && s.livello === 0).slice(0, 2)
-  const magie = cat.incantesimi.filter((s) => s.classi.includes('bardo') && s.livello === 1).slice(0, 3)
+  const trucco = cat.incantesimi.filter((s) => s.classi.includes('dnd.classe.bardo') && s.livello === 0).slice(0, 2)
+  const magie = cat.incantesimi.filter((s) => s.classi.includes('dnd.classe.bardo') && s.livello === 1).slice(0, 3)
   const pgB: Personaggio = {
     nome: 'Cantore di Prova', livello: 3,
     caratteristiche_base: { forza: 8, destrezza: 14, costituzione: 13, intelligenza: 10, saggezza: 12, carisma: 16 },
