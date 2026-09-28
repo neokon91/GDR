@@ -333,11 +333,13 @@ def _adatta_glossario(d: dict[str, Any]) -> None:
     idv = str(d.get("id") or "")
     parts = idv.split(".")
     d["descrittore"] = parts[1] if idv.startswith("dnd.") and len(parts) >= 3 else d.get("descrittore", "glossario")
-    # Una condizione CONCESSA da un incantesimo (`benedetto`, `arma-magica`: `concessa_da`)
-    # non è una delle 15 del manuale: la usa il motore (il sidecar la tiene, gen_condizioni),
-    # ma nel vault sta nel Glossario come effetto d'incantesimo, non fra le Condizioni.
+    # Una condizione CONCESSA (`concessa_da`) da un incantesimo (`benedetto`, `arma-magica`)
+    # o da un privilegio di classe (l'Aura di Protezione: `dnd.classe.paladino`) non è una
+    # delle 15 del manuale: la usa il motore (il sidecar la tiene, gen_condizioni), ma nel
+    # vault sta nel Glossario come effetto, non fra le Condizioni.
     if d["descrittore"] == "condizione" and d.get("concessa_da"):
-        d["descrittore"] = "effetto-incantesimo"
+        da_classe = str(d["concessa_da"]).startswith("dnd.classe.")
+        d["descrittore"] = "effetto-privilegio" if da_classe else "effetto-incantesimo"
     if d["descrittore"] == "condizione":
         blocchi = _blocchi_da_prosa(d.get("descrizione") or "")
         if blocchi:
