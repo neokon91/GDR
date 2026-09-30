@@ -232,6 +232,14 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   `` ```gdr statblock ``. `scaffold_statblock` genera una base dal GS.
 - **Condizioni "vere"**: `gen_condizioni.py`→sidecar; il plugin risolve via `risolviCondizioni()`
   → `defs` passati ai comandi (prono/avvelenato→svantaggio, afferrato→velocità 0, buff…).
+- **Tavolo virtuale (Atlas VTT, terzo, non critico, solo desktop)**: solo mappa, token, nebbia
+  e vista giocatori; PF, turni e condizioni restano alla Board. Atlas non ha API pubblica: il
+  contatto passa per i file. (1) Le pagine mostro SRD portano `name` e `hp` (PF medi,
+  `build_srd.pf_medi`, la regola di `puntiFeritaCalcolati` del kernel): un token collegato
+  alla nota li legge dal frontmatter. (2) Le scene sono file `.atlasmap`; l'azione
+  `collega_mappa_battaglia` (bottone `collega-tavolo`, Luogo e Incontro) le elenca dal vault e
+  scrive il link in `mappa_battaglia`. Non usati: il tracker d'iniziativa di Atlas (doppione
+  della Board) e l'importazione «da statblock» (richiede Fantasy Statblocks).
 
 ### Homebrew giocabile al tavolo (Rotta homebrew)
 Il **contratto** (RawMostro per le creature, `effetti`/`attivita` per le def) vale per SRD e

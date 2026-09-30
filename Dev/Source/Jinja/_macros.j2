@@ -642,7 +642,7 @@ sort tipo asc, file.name asc
 
 {# Tab Mappa (luogo/mondo): collega ed embedda una mappa (disegno Excalidraw,
    immagine o nota) col campo 'mappa'; l'embed vive in views.renderMap. #}
-{% macro mappa() -%}
+{% macro mappa(battaglia=false) -%}
 > [!info] Mappa
 > **1.** Pesca l'**immagine**: {{ field('mappa', label=false) }} — compare interattiva qui sotto (zoom/pan, righello distanze→tempi).
 > **2.** Aggiungi i **segnaposto** con *Shift+clic* e linkali ai `[[Luoghi]]` (restano salvati accanto all'immagine).
@@ -658,6 +658,9 @@ sort tipo asc, file.name asc
 > [!tip]- 🧭 Pin a mano, disegno e hexcrawl
 > - **Immagine caricata da te:** piazza i pin (*Shift+clic*), linkali ai `[[Luoghi]]`, poi `BUTTON[sincronizza-pin]` riscrive le **coordinate** delle note dai pin → distanze in linea d'aria e *Dintorni* si calcolano da sé.
 > - **Disegna tu:** `BUTTON[disegna-mappa]` (Excalidraw → `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con livelli/overlay).
+{% if battaglia %}
+> - **Mappa di battaglia** (Atlas VTT, solo desktop): `= this.mappa_battaglia` · `BUTTON[collega-tavolo]` · `BUTTON[apri-tavolo]`. Griglia, token e nebbia per gli scontri in questo luogo; un token collegato a una pagina mostro dell'SRD ne prende nome e PF.
+{% endif %}
 > - **Hexcrawl giocabile:** apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, tiri incontri). Le cartelle sono già puntate alle tue note (Towns/Dungeons→`Mondi/Luoghi`, Factions→`Mondi/Fazioni`, Quests→`Mondi/Missioni`, Regions→`Mondi/Regni`). *Al 1° avvio del suo wizard scegli «Don't show again».*
 {{ vista("renderMap") }}
 {%- endmacro %}

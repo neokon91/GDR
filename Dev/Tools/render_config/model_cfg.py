@@ -41,7 +41,7 @@ _PLUGIN_ACTIONS = {
     "applica_profilo", "marca_canonico", "archivia",
     "scaffold_statblock", "avanza_fronte", "scatena_conseguenza",
     "tira_tabella", "turno_bastione", "inserisci_componente", "giro_del_mondo",
-    "genera", "sincronizza_pin", "importa_mappa", "importa_azgaar", "world_board",
+    "genera", "sincronizza_pin", "collega_mappa_battaglia", "importa_mappa", "importa_azgaar", "world_board",
     "genera_sito",
 }
 

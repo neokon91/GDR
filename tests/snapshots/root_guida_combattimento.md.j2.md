@@ -35,8 +35,16 @@ calcolati dalla scheda.
 ## 3. Cosa resta al DM
 - **Posizione e distanze**: la Board non ha griglia né token. Per una mappa di battaglia
   c'è il **tavolo virtuale** (Atlas VTT, solo desktop: `BUTTON[apri-tavolo]`): griglia,
-  token, nebbia di guerra e una finestra per i giocatori su un secondo schermo. I tiri e
-  le condizioni restano alla Board; sulla mappa tieni posizioni e distanze.
+  token, nebbia di guerra e una finestra per i giocatori su un secondo schermo.
+  - **Una scena per luogo o incontro**: creala in Atlas dalla tua immagine, poi collegala
+    dalla nota (Incontro, tab *Combattimento*; Luogo, tab *Mappa*) con
+    `BUTTON[collega-tavolo]`. Il link riapre la scena con un clic.
+  - **Token**: nascono dalle tue immagini. Collegati a una pagina mostro dell'SRD
+    (`SRD/Mostri`) ne prendono nome e PF medi. L'importazione automatica di Atlas «da
+    statblock» richiede Fantasy Statblocks, che questo vault non usa.
+  - **Chi fa cosa**: tiri, PF, turni e condizioni restano alla Board; su Atlas tieni solo
+    posizioni e distanze. Il suo tracker d'iniziativa e i suoi dadi non servono: con due
+    segnapunti i PF si segnerebbero due volte.
 - **Durate narrative** e le scelte di trama (quando finisce un effetto «a scelta del GM»).
 
 ## 4. Creature homebrew giocabili

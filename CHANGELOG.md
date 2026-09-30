@@ -17,6 +17,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   Bottone `apri-tavolo` nel tab *Combattimento* dell'Incontro e nella Guida al combattimento.
   Limite noto: i suoni predefiniti di Atlas non sono nelle sue release (i suoni personali
   vanno in `.atlas/sounds`).
+- **Atlas collegato al vault**: le pagine mostro SRD portano `name` e `hp` (PF medi dai dadi
+  vita, come il kernel), così un token collegato alla nota nasce col nome e i PF giusti (prima
+  10 PF). Nuovo bottone `collega-tavolo` (Luogo, tab *Mappa*; Incontro, tab *Combattimento*):
+  sceglie una scena di Atlas (`.atlasmap`) e la collega in `mappa_battaglia`, che la riapre
+  con un clic. La Guida al combattimento dice chi fa cosa fra Board e Atlas.
 
 ### Corretto
 - **Elenco dei plugin nel Manuale**: finiva su una riga sola (`{%- endfor %}` mangiava

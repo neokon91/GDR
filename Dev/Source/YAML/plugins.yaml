@@ -391,6 +391,10 @@ buttons:
   - id: genera-sito
     label: Genera sito giocatori
     action: genera_sito
+  # Mappa di battaglia: collega alla nota una scena di Atlas VTT (file .atlasmap).
+  - id: collega-tavolo
+    label: Collega la mappa di battaglia
+    action: collega_mappa_battaglia
   # --- Comandi-strumento (button con 'command'): aprono DIRETTAMENTE lo strumento
   # del plugin senza cercarlo nella tavolozza comandi né nelle impostazioni → tolgono
   # l'attrito di "dov'è la mappa / il calendario". NON richiedono un'azione-nota

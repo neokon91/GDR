@@ -19,7 +19,7 @@
 {% import '_macros.j2' as m with context %}
 --- 🧭 Spazio
 
-{{ m.mappa() }}
+{{ m.mappa(battaglia=true) }}
 
 > [!info] Posizione
 > Coordinate sulla mappa: {{ m.field('coord', label=false) }} — `x, y` (per la distanza in linea d'aria; la scala è sul **Mondo**).

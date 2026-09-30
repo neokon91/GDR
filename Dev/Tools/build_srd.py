@@ -95,6 +95,47 @@ def _denuda(voce: dict[str, Any]) -> dict[str, Any]:
     return {k: (x if k == "id" else _denuda_riferimenti(x)) for k, x in voce.items()}
 
 
+_FACCE_DV = {"minuscola": 4, "piccola": 6, "media": 8, "grande": 10, "enorme": 12, "mastodontica": 20}
+
+
+def _mod_caratteristica(a: dict[str, Any], nome: str) -> int:
+    v = ((a.get("caratteristiche") or {}).get(nome) or {}).get("valore")
+    return (int(v) - 10) // 2 if v is not None else 0
+
+
+def pf_medi(a: dict[str, Any]) -> int | None:
+    """PF medi di una creatura dai dadi vita: dadi x media del dado di taglia + dadi x mod(Cos),
+    per difetto. È la regola di `puntiFeritaCalcolati` del kernel (regole/src/lib/regole.ts),
+    portata qui perché la build è Python; `dadi_vita` variabile o taglia ignota → None."""
+    dv = a.get("dadi_vita")
+    if dv is None:
+        return a.get("pf") or a.get("pf_max")
+    t = a.get("taglia")
+    facce = _FACCE_DV.get(str((t[0] if isinstance(t, list) and t else t) or "").lower())
+    if not isinstance(dv, int) or dv <= 0 or not facce:
+        return None
+    return dv * (facce + 1) // 2 + dv * _mod_caratteristica(a, "costituzione")
+
+
+def frontmatter_mostro(monster: dict[str, Any]) -> dict[str, Any]:
+    """Il frontmatter della pagina di un mostro SRD."""
+    nome = monster.get("nome", "")
+    fm: dict[str, Any] = {"nome": nome, "categoria": "srd-mostro", "srd": True, "fonte": "SRD 5.2.1"}
+    # gs/pe interrogabili: il GS resta in formato archivio (frazione `1/2`), le stesse chiavi
+    # di `core.xp.cr_xp` → il fallback XP da GS funziona per i mostri senza `pe` esplicito.
+    if monster.get("gs") is not None:
+        fm["gs"] = str(monster["gs"])
+    if monster.get("punti_esperienza") is not None:
+        fm["pe"] = monster["punti_esperienza"]
+    # Per Atlas VTT (tavolo virtuale): un token collegato a questa nota ne legge `name` e `hp`
+    # dal frontmatter, senza Fantasy Statblocks. Nota generata → le due chiavi non divergono.
+    fm["name"] = nome
+    pf = pf_medi(monster)
+    if pf is not None:
+        fm["hp"] = pf
+    return fm
+
+
 def _load_archivio(subdir: str) -> list[dict[str, Any]]:
     """Le voci di una categoria, lette UNA volta per processo (`_leggi_archivio`) e
     consegnate come COPIA: gli adapter di `load_srd` le modificano sul posto, e una voce
@@ -932,22 +973,8 @@ def gs_baselines() -> dict[str, dict[str, Any]]:
     vincolo di licenza. Alimenta lo scaffolder di statblock per le creature homebrew
     (meta_actions.scaffold_statblock): un boss con solo `gs` diventa subito giocabile."""
     import math
-    _FACCE = {"minuscola": 4, "piccola": 6, "media": 8, "grande": 10, "enorme": 12, "mastodontica": 20}
-
-    def _taglia1(a: dict[str, Any]) -> str:
-        t = a.get("taglia")
-        return str((t[0] if isinstance(t, list) and t else t) or "").lower()
-
-    def _car(a: dict[str, Any], nome: str) -> int:
-        v = ((a.get("caratteristiche") or {}).get(nome) or {}).get("valore")
-        return (int(v) - 10) // 2 if v is not None else 0
-
-    def _pf(a: dict[str, Any]) -> float | None:
-        dv = a.get("dadi_vita")
-        if dv is None:
-            return a.get("pf") or a.get("pf_max")
-        f = _FACCE.get(_taglia1(a))
-        return math.floor(dv * (f / 2 + 0.5)) + dv * _car(a, "costituzione") if f else None
+    _car = _mod_caratteristica
+    _pf = pf_medi
 
     def _pb(cr: float) -> int:  # tabella DMG (PB per GS): 2 fino a GS4, poi +1 ogni 4
         return 2 + max(0, (math.ceil(cr) - 1) // 4) if cr >= 1 else 2
@@ -1029,14 +1056,7 @@ def build_srd(core: dict[str, Any]) -> int:
     # l'ultimo segmento dell'id — `trovaMostro` lo risolve sul bestiario (qualificato o meno).
     for monster in gen_bestiario.carica_mostri(gen_bestiario.SRD_MONSTERS):
         nome = monster.get("nome", "")
-        fm = {"nome": nome, "categoria": "srd-mostro", "srd": True, "fonte": "SRD 5.2.1"}
-        # gs/pe nel frontmatter (interrogabili): il GS resta in formato archivio (frazione
-        # `1/2`), le stesse chiavi di `core.xp.cr_xp` → il fallback XP da GS funziona per i
-        # mostri senza `pe` esplicito.
-        if monster.get("gs") is not None:
-            fm["gs"] = str(monster["gs"])
-        if monster.get("punti_esperienza") is not None:
-            fm["pe"] = monster["punti_esperienza"]
+        fm = frontmatter_mostro(monster)
         slug = str(monster.get("id", "")).split(".")[-1] or srd_slug(nome)
         content = frontmatter_block(fm) + f"# {nome}\n\n```gdr statblock {slug}\n```\n"
         write_text(VAULT / "SRD" / "Mostri" / f"{srd_slug(nome)}.md", content)

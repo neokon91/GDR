@@ -56,3 +56,23 @@ async function sincronizza_pin(tp, file) {
   new Notice(`Sincronizzati ${synced} pin → coord${coda ? ` (${coda})` : ""}.`);
   return "";
 }
+
+// Mappa di battaglia (Atlas VTT): collega alla nota attiva (Luogo, Incontro) una scena di Atlas,
+// cioè un file `.atlasmap` del vault. Meta Bind non sa elencarli (il suo suggester passa da
+// Dataview, che vede solo le note): li elenca qui il vault. Il link nel frontmatter
+// (`mappa_battaglia`) apre la scena in Atlas con un clic; Atlas assente → nessuna scena.
+async function collega_mappa_battaglia(tp, file) {
+  const scene = app.vault.getFiles()
+    .filter((f) => f.extension === "atlasmap")
+    .sort((a, b) => a.basename.localeCompare(b.basename));
+  if (!scene.length) {
+    new Notice("Nessuna scena di Atlas VTT nel vault: creala dal tavolo (Apri il tavolo), poi collegala qui.");
+    return "";
+  }
+  const scelta = await tp.system.suggester(scene.map((f) => `${f.basename}  ·  ${f.parent?.path ?? ""}`), scene, false,
+    "Scena di Atlas VTT da collegare");
+  if (!scelta) return "";
+  await updateFrontmatter(file, (fm) => { fm.mappa_battaglia = `[[${scelta.path}|${scelta.basename}]]`; });
+  new Notice(`Mappa di battaglia collegata: ${scelta.basename}.`);
+  return "";
+}

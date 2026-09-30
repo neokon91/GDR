@@ -63,8 +63,10 @@ renderEncounter
 > combattimento si apre **pre-popolata**: le *Creature* collegate diventano nemici, gli
 > *Alleati* e i tuoi **PG** entrano dalla tua parte, gli override `varianti` (hp/ca) si
 > applicano. Poi tiri l'iniziativa e giochi lì (motore nativo: PF, condizioni, statblock).
-> Serve una **mappa** con token e nebbia per i giocatori? `BUTTON[apri-tavolo]` apre il
-> tavolo virtuale (Atlas VTT, solo desktop): la mappa è sua, le regole restano alla Board.
+> Serve una **mappa** con token e nebbia per i giocatori? Il tavolo virtuale è Atlas VTT
+> (solo desktop): la mappa è sua, le regole restano alla Board, quindi PF e turni si segnano
+> nella Board. Mappa di battaglia: `= this.mappa_battaglia` · `BUTTON[collega-tavolo]` ·
+> `BUTTON[apri-tavolo]`. Un token collegato a una pagina mostro dell'SRD ne prende nome e PF.
 >
 > **Boss/gregari**: una proprietà `varianti` nel frontmatter, una riga per creatura — es.
 > `[[Salamandra]]: hp 60, ca 12, init 20` (alias `pf`→hp) — applica gli override quando

@@ -490,3 +490,43 @@ def test_usa_risorsa_e2e(tmp_path):
     assert run(3)["usi_ira"] == 3   # già esaurita: invariato (non supera il max)
 
 
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_collega_mappa_battaglia(tmp_path):
+    """meta_actions.collega_mappa_battaglia: elenca SOLO i file .atlasmap del vault (Meta Bind
+    non li vede) e scrive il link nel frontmatter; senza scene avvisa e non scrive nulla."""
+    def run(files_js):
+        harness = tmp_path / "atlas.js"
+        harness.write_text(
+            'const avvisi = []; global.Notice = class { constructor(m){ avvisi.push(m); } };\n'
+            'const fm = {};\n'
+            'const file = { basename:"Cripta", path:"Mondi/Luoghi/Cripta.md" };\n'
+            f'const files = {files_js};\n'
+            'let offerte = null;\n'
+            'global.app = {\n'
+            '  workspace: { getActiveFile: () => file },\n'
+            '  vault: { getFiles: () => files },\n'
+            '  fileManager: { processFrontMatter: async (f, fn) => fn(fm) },\n'
+            '};\n'
+            'const tp = { system: { suggester: async (l, v) => { offerte = v.map(x => x.path); return v[0]; } } };\n'
+            f'const meta = require({json.dumps(META_ACTIONS_JS)});\n'
+            'meta(tp, "collega_mappa_battaglia").then(() => process.stdout.write(JSON.stringify({fm, offerte, avvisi})));\n',
+            encoding="utf-8")
+        res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+        assert res.returncode == 0, res.stderr
+        return json.loads(res.stdout)
+
+    scena = lambda p, b: f'{{ path:"{p}", basename:"{b}", extension:"atlasmap", parent:{{ path:"atlas-vtt" }} }}'
+    out = run("[" + ",".join([
+        scena("atlas-vtt/collections/c/scenes/Torre.atlasmap", "Torre"),
+        '{ path:"Mondi/Luoghi/Cripta.md", basename:"Cripta", extension:"md" }',
+        scena("atlas-vtt/collections/c/scenes/Cripta.atlasmap", "Cripta"),
+    ]) + "]")
+    assert out["offerte"] == ["atlas-vtt/collections/c/scenes/Cripta.atlasmap",
+                              "atlas-vtt/collections/c/scenes/Torre.atlasmap"]
+    assert out["fm"] == {"mappa_battaglia": "[[atlas-vtt/collections/c/scenes/Cripta.atlasmap|Cripta]]"}
+
+    vuoto = run('[{ path:"Mondi/Luoghi/Cripta.md", basename:"Cripta", extension:"md" }]')
+    assert vuoto["fm"] == {} and vuoto["offerte"] is None
+    assert "Nessuna scena" in vuoto["avvisi"][0]

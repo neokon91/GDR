@@ -4,6 +4,8 @@ stringa. Categorie mappate in `build_srd._ARCHIVIO_SUBDIR`."""
 
 import re
 
+import pytest
+
 import build_srd as bs
 
 
@@ -156,3 +158,28 @@ def test_la_cache_dell_archivio_non_trasmette_le_modifiche_degli_adapter():
     dopo = bs.load_srd("srd_5_2_1_subclasses.json")
     assert dopo[0]["nome"] != "manomesso"
     assert bs._leggi_archivio.cache_info().hits >= 1
+
+
+@pytest.mark.parametrize(("slug", "pf"), [
+    ("goblin-capo", 21), ("aboleth", 150), ("drago-rosso-adulto", 256), ("lich", 315),
+])
+def test_i_pf_medi_sono_quelli_del_manuale(slug, pf):
+    """`pf_medi` è la regola del kernel (`puntiFeritaCalcolati`) portata in Python: i valori
+    stampati sul manuale la tengono ferma."""
+    import build_srd
+    import gen_bestiario
+    [mostro] = [m for m in gen_bestiario.carica_mostri(gen_bestiario.SRD_MONSTERS)
+                if str(m.get("id", "")).endswith("." + slug)]
+    assert build_srd.pf_medi(mostro) == pf
+
+
+def test_la_pagina_mostro_porta_nome_e_pf_per_atlas():
+    """Atlas VTT legge `name` e `hp` dal frontmatter della nota collegata a un token; senza,
+    ogni token partiva da 10 PF. I PF variabili (evocazioni) restano fuori."""
+    import build_srd
+    fm = build_srd.frontmatter_mostro({"nome": "Goblin capo", "taglia": "piccola", "dadi_vita": 6,
+                                       "caratteristiche": {"costituzione": {"valore": 10}}, "gs": 1})
+    assert fm["name"] == "Goblin capo" and fm["hp"] == 21 and fm["nome"] == "Goblin capo"
+    variabile = build_srd.frontmatter_mostro({"nome": "Spirito", "taglia": "media",
+                                              "dadi_vita": {"valore": "vedi incantesimo", "variabile": True}})
+    assert "hp" not in variabile and variabile["name"] == "Spirito"

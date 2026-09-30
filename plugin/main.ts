@@ -238,6 +238,7 @@ export default class GdrPlugin extends Plugin {
       { id: "inserisci_componente", name: "Aggiungi componente" },
       { id: "genera", name: "Genera un nome (nota attiva)" },
       { id: "sincronizza_pin", name: "Sincronizza i pin dalla mappa" },
+      { id: "collega_mappa_battaglia", name: "Collega la mappa di battaglia (Atlas VTT)" },
       { id: "importa_mappa", name: "Importa mappa (Watabou)" },
       { id: "importa_azgaar", name: "Importa mappa (Azgaar)" },
       { id: "giro_del_mondo", name: "Giro del mondo", global: true },

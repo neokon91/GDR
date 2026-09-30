@@ -100,6 +100,10 @@ async function meta_actions(tp, action = "") {
     new Notice("importa_azgaar non disponibile."); return "";
   }
 
+  if (action === "collega_mappa_battaglia") {
+    return await collega_mappa_battaglia(tp, file);
+  }
+
   if (action === "sincronizza_pin") {
     // Sync inverso: i pin del sidecar markers.json → scrivono il `coord` delle note linkate
     // (la mappa diventa la fonte della geografia).

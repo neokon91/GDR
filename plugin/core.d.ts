@@ -155,6 +155,7 @@ export type AzioneId =
   | 'archivia'
   | 'avanza_fronte'
   | 'collega'
+  | 'collega_mappa_battaglia'
   | 'genera'
   | 'genera_sito'
   | 'giro_del_mondo'
