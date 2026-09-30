@@ -1,0 +1,5 @@
+id: dnd.oggetto.giaciglio
+nome: Giaciglio
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-oro}
+peso: {valore: 3.5, unita: kg}

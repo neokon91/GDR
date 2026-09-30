@@ -1,0 +1,79 @@
+id: dnd.mostro.erinni
+nome: Erinni
+taglia: media
+tipo: immondo
+sottotipo: diavolo
+allineamento: legale malvagio
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 16, competenza: true}
+  costituzione: {valore: 18, competenza: true}
+  intelligenza: {valore: 14, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 18, competenza: true}
+iniziativa: competenza
+dadi_vita: 21
+velocita: {camminata: 9, volo: 18}
+abilita: [percezione: competenza, persuasione: competenza]
+sensi: {vista_pura: 36, telepatia: 36}
+percezione_passiva: 16
+resistenze: [freddo]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Infernale]
+gs: 12
+
+tratti:
+  - nome: Corda magica
+    descrizione: |
+      L'erinni possiede una corda magica. Finché la porta con sé, può usare l'azione Corda avvinghiante. La corda ha CA 20, 90 PF, e immunità ai danni psichici e da veleno. La corda si trasforma in polvere se viene ridotta a 0 punti ferita, se si trova a 1,5 metri o più dall'erinni per 1 ora o più, o se l'erinni muore. Se la corda è danneggiata o distrutta, l'erinni può ripristinarla interamente al termine di un riposo breve o lungo.
+  - nome: Resistenza alla magia
+    descrizione: |
+      L'erinni dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro diabolico
+    descrizione: |
+      Se l'erinni muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo ed essa ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: spada-inaridente, ripetizioni: 3}
+    descrizione: |
+      L'erinni effettua tre attacchi Spada inaridente e può usare Corda avvinghiante.
+  - nome: Spada inaridente
+    id: spada-inaridente
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni taglienti più 11 (2d10) danni necrotici.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Corda avvinghiante (richiede Corda magica)"
+    id: corda-avvinghiante-richiede-corda-magica
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 16, una creatura che l'erinni è in grado di vedere entro 36 metri. *Fallimento:* 14 (4d6) danni da forza, e il bersaglio è trattenuto finché la corda non viene distrutta, finché l'erinni non usa un'azione bonus per liberare il bersaglio, o finché l'erinni non usa nuovamente Corda avvinghiante.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 4, dado: d6, tipo_danno: forza}
+reazioni:
+  - nome: Parata
+    descrizione: |
+      *Attivazione:* l'erinni viene colpita da un tiro per colpire in mischia mentre tiene in mano un'arma.
+
+      *Esito:* l'erinni aggiunge 4 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno.

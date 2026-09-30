@@ -1,0 +1,5 @@
+id: dnd.oggetto.focus-druidico
+nome: Focus druidico
+categoria: equipaggiamento-avventura
+costo: {variabile: true}
+peso: {variabile: true}

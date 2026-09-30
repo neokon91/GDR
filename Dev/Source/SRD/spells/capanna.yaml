@@ -1,0 +1,21 @@
+id: dnd.incantesimo.capanna
+nome: Capanna
+livello: 3
+scuola: invocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+tempo_lancio: 1 minuto
+gittata: incantatore
+componenti: [V, S, "M (una perla di cristallo)"]
+concentrazione: false
+rituale: true
+durata: 8 ore
+descrizione: |
+  Un'emanazione di 3 metri si materializza attorno all'incantatore e permane stazionaria per la durata dell'incantesimo. L'incantesimo fallisce quando l'incantatore lo lancia ma l'emanazione non è abbastanza grande da poter inglobare totalmente tutte le creature all'interno della sua area.
+
+  Le creature e gli oggetti all'interno dell'emanazione al momento del lancio dell'incantesimo possono attraversarla liberamente, mentre a tutte le altre creature e oggetti è proibito. Non è possibile lanciare incantesimi di 3º livello o inferiore attraverso l'emanazione, e gli effetti di tali incantesimi non si estendono al suo interno.
+
+  L'atmosfera all'interno dell'emanazione è gradevole e asciutta, a prescindere dal tempo atmosferico all'esterno. Fino al termine dell'incantesimo, l'incantatore può decidere che all'interno dell'emanazione ci sia luce fioca o oscurità (nessuna azione richiesta). Dall'esterno, l'emanazione appare opaca e di un qualsiasi colore a scelta dell'incantatore, ma dall'interno risulta trasparente.
+
+  L'incantesimo termina in anticipo se l'incantatore lo lancia di nuovo o se esce dall'area dell'emanazione.

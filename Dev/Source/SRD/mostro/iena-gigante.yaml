@@ -1,0 +1,43 @@
+id: dnd.mostro.iena-gigante
+nome: Iena gigante
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 15}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 1
+
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: "Furia (1/giorno)"
+    descrizione: |
+      Subito dopo aver inflitto danni a una creatura già sanguinante, la iena si muove fino a metà della sua velocità, ed effettua un attacco Morso.

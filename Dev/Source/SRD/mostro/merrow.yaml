@@ -1,0 +1,77 @@
+id: dnd.mostro.merrow
+nome: Merrow
+taglia: grande
+tipo: mostruosita
+allineamento: caotico malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 8, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 9, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 3, nuoto: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+lingue: [Abissale, "Primordiale (Aquan)"]
+gs: 2
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il merrow può respirare in aria e in acqua.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il merrow effettua due attacchi, usando Morso, Artiglio o Arpione in qualsiasi combinazione.
+  - nome: Arpione
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 6/18 m. *Colpito:* 11 (2d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, il merrow trascina il bersaglio in linea retta verso di sé fino a 4,5 metri.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 9 (2d4 + 4) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 6 (1d4 + 4) danni perforanti, e il bersaglio è avvelenato fino al termine del turno successivo del merrow.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

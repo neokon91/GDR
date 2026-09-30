@@ -1,0 +1,85 @@
+id: dnd.mostro.orso-mannaro
+nome: Orso mannaro
+taglia: [media, piccola]
+tipo: mostruosita
+sottotipo: licantropo
+allineamento: neutrale buono
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 12, competenza: false}
+iniziativa: competenza
+dadi_vita: 18
+velocita: {camminata: 12, scalata: 9}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 17
+equipaggiamento:
+  - {articolo: dnd.arma.ascia, quantita: 4}
+lingue: ["Comune (non può parlare in forma di orso)"]
+gs: 5
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      L'orso mannaro effettua due attacchi, usando Ascia o Squarcio in qualsiasi combinazione.
+  - nome: Può sostituire un attacco con un attacco Morso
+    descrizione: |
+
+  - nome: "Ascia (solo in forma umanoide o ibrida)"
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +7, portata 1,5 m o gittata 6/18 m. *Colpito:* 14 (3d6 + 4) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.ascia
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Morso (solo in forma di orso o ibrida)"
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 17 (2d12 + 4) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 14. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa un orso mannaro sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione dell'orso mannaro per 24 ore.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d12
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Squarcio (solo in forma di orso o ibrida)"
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Mutaforma
+    descrizione: |
+      L'orso mannaro si trasforma in un ibrido umanoide-orso di taglia Grande o in un orso di taglia Grande, altrimenti torna alla sua forma originale di umanoide. Le sue statistiche di gioco, a eccezione della taglia, restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato.

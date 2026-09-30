@@ -1,0 +1,23 @@
+id: dnd.oggetto-magico.bastone-dello-charme
+nome: Bastone dello charme
+categoria: bastone
+rarita: rara
+richiede_sintonia: true
+cariche: {massimo: 10, ricarica: "1d8+2"}
+attivita:
+  - tipo: incantatore
+    cariche:
+      - {incantesimo: dnd.incantesimo.charme-su-persone, costo: 1}
+      - {incantesimo: dnd.incantesimo.comando, costo: 1}
+      - {incantesimo: dnd.incantesimo.comprensione-dei-linguaggi, costo: 1}
+descrizione: |
+  Questo bastone ha 10 cariche. Mentre il personaggio lo impugna, può usare una qualsiasi delle sue proprietà:
+
+  **Lanciare incantesimi**
+  Il personaggio può consumare 1 carica del bastone e usarlo per lanciare charme su persone, comando o comprensione delle lingue usando la sua CD del tiro salvezza sull'incantesimo.
+
+  **Riflettere l'ammaliamento**
+  Se il personaggio supera il tiro salvezza contro un incantesimo di ammaliamento che ha solo lui come bersaglio, può usare la sua reazione e consumare 1 carica del bastone per riflettere l'incantesimo contro il suo incantatore, come se fosse stato il personaggio a lanciarlo.
+
+  **Ripristinare le cariche**
+  Il bastone recupera 1d8 + 2 cariche consumate all'alba di ogni giorno. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, il bastone si sbriciola e viene distrutto.

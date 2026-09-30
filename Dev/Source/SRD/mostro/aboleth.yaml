@@ -1,0 +1,149 @@
+id: dnd.mostro.aboleth
+nome: Aboleth
+taglia: grande
+tipo: aberrazione
+allineamento: legale malvagio
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 21, competenza: false}
+  destrezza: {valore: 9, competenza: true}
+  costituzione: {valore: 15, competenza: true}
+  intelligenza: {valore: 18, competenza: true}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 18, competenza: false}
+iniziativa: maestria
+dadi_vita: 20
+velocita: {camminata: 3, nuoto: 12}
+abilita: [percezione: maestria, storia: maestria]
+sensi: {scurovisione: 36}
+lingue: [dnd.lingua.gergo-delle-profondita, {telepatia: 36}]
+gs: 10
+habitat: [sottosuolo, sott'acqua]
+tratti:
+  - id: aboleth.anfibio
+    nome: Anfibio
+    descrizione: L'aboleth può respirare in aria e in acqua.
+    attivita:
+      - tipo: passivo
+        respira: [aria, acqua]
+  - id: aboleth.nube-di-muco
+    nome: "Nube di Muco"
+    descrizione: |
+      Finché si trova sott'acqua, l'aboleth è circondato da uno strato di muco.
+      *Tiro salvezza su Costituzione:* CD 14, tutte le creature in un'Emanazione di 1,5 metri di cui l'aboleth è il punto di origine, alla fine del turno dell'aboleth.
+      *Fallimento:* il bersaglio è maledetto.
+      Finché la maledizione perdura, la pelle del bersaglio diventa viscida, il bersaglio può respirare in aria e in acqua e non può recuperare Punti Ferita finché si trova sott'acqua.
+    attivita:
+      - tipo: tiro-salvezza
+        innesco: {momento: fine-turno-proprio, richiede: [sott-acqua]}
+        area: {forma: emanazione, raggio: 1.5, origine: se-stesso}
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {base: 8, caratteristica: costituzione, competenza: true}
+        fallimento:
+          - effetto: maledetto-aboleth
+        durata: permanente
+  - id: aboleth.resistenza-leggendaria
+    nome: "Resistenza Leggendaria (3/Giorno o 4/Giorno nella Tana)"
+    descrizione: Se l'aboleth fallisce un tiro salvezza, può scegliere di superarlo comunque.
+    attivita:
+      - { tipo: reazione-automatica, innesco: {evento: fallisce-tiro-salvezza}, usi: { numero: 3, nella_tana: 4, ricarica: giorno }, effetto: {sostituisci_esito: successo} }
+  - id: aboleth.ristoro-occulto
+    nome: Ristoro Occulto
+    descrizione: Se viene annientato, l'aboleth ottiene un nuovo corpo dopo 5d10 giorni, tornando in vita con tutti i suoi punti ferita nel Reame Remoto o in un altro luogo a scelta del GM.
+    attivita:
+      - { tipo: passivo, innesco: { evento: morte }, ritardo: { numero_dadi: 5, dado: d10, unita: giorni }, effetto: { rinasce: true, punti_ferita: massimi }}
+  - id: aboleth.sonda-telepatica
+    nome: Sonda Telepatica
+    descrizione: |
+      Se una creatura che l'aboleth è in grado di vedere comunica telepaticamente con l'aboleth, quest'ultimo apprende i più grandi desideri della creatura.
+      Finché la creatura maledetta si trova fuori da uno specchio d'acqua, subisce 6 (1d12) danni da Acido a intervalli di 10 minuti, a meno che la sua pelle non venga inumidita prima che siano trascorsi i 10 minuti.
+    attivita:
+      - { tipo: passivo, innesco: { evento: comunicazione-telepatica, richiede: [vista] }, effetto: { apprende: desideri-bersaglio } }
+azioni:
+  - id: aboleth.multiattacco
+    nome: Multiattacco
+    descrizione: L'aboleth effettua due attacchi Tentacolo e usa Consuma ricordi o Domina mente, se disponibili.
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: tentacolo, ripetizioni: 2}
+          - {scegli_una: [consuma-ricordi, domina-mente], se_disponibile: true}
+  - id: aboleth.tentacolo
+    nome: Tentacolo
+    descrizione: |
+      *Tiro per colpire in mischia:* +9, portata 4,5 m. *Colpito:* 12 (2d6 + 5) danni contundenti.
+      Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire)
+      da uno dei quattro tentacoli.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, portata: 4.5, bersagli: 1 }
+        colpito:
+          - danno: { numero_dadi: 2, dado: d6, bonus: { caratteristica: forza }, tipo_danno: contundente }
+          - concede: afferrato
+            solo_se: {taglia_massima: grande}
+            fuga: { cd: 14, fisso: true, nota: la formula darebbe 17, il manuale dà 14, prove: [ atletica, acrobazia ] }
+            prese_massime: 4
+  - id: aboleth.consuma-ricordi
+    nome: Consuma Ricordi
+    descrizione: |
+      *Tiro salvezza su Intelligenza:* CD 16, una creatura entro 9 metri Affascinata o Afferrata dall'aboleth.
+      *Fallimento:* 10 (3d6) danni Psichici. *Successo:* Danni dimezzati.
+      *Fallimento o Successo:* l'aboleth acquisisce i ricordi del bersaglio se questo è un Umanoide
+      e viene ridotto a 0 Punti Ferita da questa azione.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza: { caratteristica: intelligenza, cd: { base: 8, caratteristica: intelligenza, competenza: true } }
+        bersagli: { numero: 1, entro: 9, richiede_una_di: [ affascinato, afferrato ] }
+        fallimento:
+          - danno: {numero_dadi: 3, dado: d6, tipo_danno: psichico}
+        successo: danno-dimezzato
+        sempre:
+          - effetto: acquisisce-ricordi
+            solo_se: {tipo_bersaglio: umanoide, ridotto_a_zero_pf: true}
+  - id: aboleth.domina-mente
+    nome: "Domina mente (2/giorno)"
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 16, una creatura che l'aboleth è in grado di vedere entro 9 metri.
+      *Fallimento:* la creatura è affascinata finché l'aboleth muore o si sposta su un piano di esistenza
+      diverso da quello del bersaglio. Finché è affascinato, il bersaglio agisce come un alleato dell'aboleth
+      ed è sotto il suo controllo finché si trova entro 18 metri da esso. Inoltre, l'aboleth e il bersaglio
+      possono comunicare telepaticamente tra loro a qualsiasi distanza. Il bersaglio ripete il tiro salvezza
+      ogni volta che subisce danni e ogni volta che trascorre 24 ore ad almeno 1,5 chilometri
+      di distanza dall'aboleth e, se lo supera, l'effetto svanisce.
+    attivita:
+      - tipo: tiro-salvezza
+        usi: {numero: 2, ricarica: giorno}
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {base: 8, caratteristica: intelligenza, competenza: true}
+        bersagli: {numero: 1, entro: 9, richiede: [vista]}
+        fallimento:
+          - concede: affascinato
+            controllo: {entro: 18, telepatia: illimitata}
+            termina_se: [aboleth-morto, piano-diverso]
+            ripeti_salvezza:
+              - {evento: subisce-danni}
+              - {evento: lontano, distanza: 1500, per: {valore: 24, unita: ore}}
+azioni_leggendarie_utilizzi: {numero: 3, nella_tana: 4, ricarica: inizio-turno-proprio}
+azioni_leggendarie:
+  - id: aboleth.risucchio-psichico
+    nome: Risucchio Psichico
+    descrizione: |
+      Se l'aboleth ha affascinato o afferrato almeno una creatura,
+      utilizza Consuma ricordi e recupera 5 (1d10) Punti Ferita.
+    attivita:
+      - tipo: azione-leggendaria
+        costo: 1
+        richiede: {almeno_un_bersaglio_con: [affascinato, afferrato]}
+        effetti:
+          - {azione: consuma-ricordi}
+          - guarigione: {numero_dadi: 1, dado: d10, bersaglio: se-stesso}
+  - id: aboleth.sferzata
+    nome: Sferzata
+    descrizione: L'aboleth effettua un attacco Tentacolo.
+    attivita:
+      - tipo: azione-leggendaria
+        costo: 1
+        effetti:
+          - {azione: tentacolo}

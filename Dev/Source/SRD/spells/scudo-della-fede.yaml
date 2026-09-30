@@ -1,0 +1,15 @@
+id: dnd.incantesimo.scudo-della-fede
+nome: Scudo della fede
+livello: 1
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.paladino
+tempo_lancio: azione bonus
+gittata: 18
+componenti: [V, S, "M (una pergamena con una preghiera)"]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  Un campo di energia scintillante avvolge una creatura scelta dall'incantatore entro gittata, conferendole un bonus di +2 alla CA per la durata dell'incantesimo.

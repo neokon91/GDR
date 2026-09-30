@@ -1,0 +1,19 @@
+id: dnd.incantesimo.volare
+nome: Volare
+livello: 3
+scuola: trasmutazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (una piuma)"]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore tocca una creatura consenziente. Per la durata dell'incantesimo, il bersaglio ottiene una velocità di volo di 18 metri e può fluttuare. Al termine dell'incantesimo, il bersaglio ancora sospeso in aria cade, sempre che non abbia modo di impedire la caduta.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 3º.

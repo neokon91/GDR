@@ -1,0 +1,42 @@
+id: dnd.mostro.cane-intermittente
+nome: Cane Intermittente
+taglia: media
+tipo: folletto
+allineamento: legale buono
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 12, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 12}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18}
+lingue: [Cane intermittente, capisce l'Elfico e il Silvano ma non li parla]
+gs: 1/4
+azioni:
+  - id: cane-intermittente.morso
+    nome: Morso
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m
+      *Colpito:* 5 (1d4 + 3) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - id: cane-intermittente.teletrasporto
+    nome: "Teletrasporto (ricarica 4-6)"
+    descrizione: Il cane si teletrasporta fino a un massimo di 12 metri in uno spazio libero che è in grado di vedere.

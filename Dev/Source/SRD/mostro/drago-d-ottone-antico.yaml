@@ -1,0 +1,130 @@
+id: dnd.mostro.drago-d-ottone-antico
+nome: Drago d'ottone antico
+taglia: mastodontica
+tipo: drago
+sottotipo: metallico
+gruppo: Draghi d'ottone
+allineamento: caotico buono
+ca: {valore: 20}
+caratteristiche:
+  forza: {valore: 27, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 25, competenza: false}
+  intelligenza: {valore: 16, competenza: false}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 22, competenza: false}
+iniziativa: maestria
+dadi_vita: 19
+velocita: {scavo: 12, volo: 24}
+abilita: [furtivita: competenza, persuasione: competenza, storia: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 18}
+percezione_passiva: 24
+immunita_danni: [fuoco]
+lingue: [Comune, Draconico]
+gs: 20
+
+tratti:
+  - nome: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+    descrizione: |
+      Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio di sonno o (B) Incantesimi per lanciare raggio rovente (di 3º livello).
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +14, portata 4,5 m. *Colpito:* 19 (2d10 + 8) danni taglienti più 7 (2d6) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 4.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20):
+
+      *1/giorno ciascuno:*
+      - controllare tempo atmosferico
+      - individuazione dei pensieri
+
+      *A volontà:*
+      - illusione minore
+      - individuazione del magico
+      - parlare con gli animali
+      - raggio rovente (di 3º livello)
+      - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 20
+        a_volonta:
+          - dnd.incantesimo.illusione-minore
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.parlare-con-gli-animali
+          - id: dnd.incantesimo.raggio-rovente
+            livello: 3
+          - dnd.incantesimo.trasformazione
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.controllare-tempo-atmosferico
+              - dnd.incantesimo.individuazione-dei-pensieri
+  - nome: "Soffio di fuoco (ricarica 5-6)"
+    id: soffio-di-fuoco-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 21, tutte le creature in una linea lunga 27 metri e larga 1,5 metri. *Fallimento:* 58 (13d8) danni da fuoco. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 13, dado: d8, tipo_danno: fuoco}
+        successo: danno-dimezzato
+  - nome: Soffio di sonno
+    id: soffio-di-sonno
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 21, tutte le creature in un cono di 27 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
+
+      *Secondo fallimento:* il bersaglio cade privo di sensi per 10 minuti. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+azioni_leggendarie:
+  - nome: Utilizzi di azioni leggendarie
+    descrizione: |
+      3 (4 nella tana). Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Balzo
+    descrizione: |
+      Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+  - nome: Luce accecante
+    descrizione: |
+      Il drago usa Incantesimi per lanciare raggio rovente (di 3º livello).
+  - nome: Sabbie roventi
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 20, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 36 (8d8) danni da fuoco, e la velocità del bersaglio è dimezzata fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 8, dado: d8, tipo_danno: fuoco}

@@ -1,0 +1,9 @@
+id: dnd.arma.pistola
+nome: Pistola
+categoria: distanza-da-guerra
+costo: {valore: 250, valuta: moneta-oro}
+peso: {valore: 1.5, unita: kg}
+danno: {dado: d10, tipo_danno: perforante}
+gittata: {normale: 9, lunga: 27}
+proprieta: [munizioni, ricarica]
+padronanza: vessazione

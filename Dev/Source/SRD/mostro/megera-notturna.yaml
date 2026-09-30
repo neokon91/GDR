@@ -1,0 +1,86 @@
+id: dnd.mostro.megera-notturna
+nome: Megera notturna
+taglia: media
+tipo: immondo
+allineamento: neutrale malvagio
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 16, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 16, competenza: false}
+iniziativa: competenza
+dadi_vita: 15
+velocita: {camminata: 9}
+abilita: [furtivita: competenza, inganno: competenza, intuizione: competenza]
+sensi: {scurovisione: 36}
+percezione_passiva: 15
+resistenze: [freddo, fuoco]
+immunita_condizioni: [affascinato]
+lingue: [Abissale, Comune, Infernale, Primordiale]
+gs: 5
+
+tratti:
+  - nome: Borsa dell'anima
+    descrizione: |
+      La megera ha una borsa dell'anima. Finché impugna o trasporta la borsa, può usarne l'azione Infestare incubi. La borsa ha CA 15, 20 PF e resistenza a tutti i danni, e si trasforma in polvere se ridotta a 0 punti ferita. Se la borsa viene distrutta, qualsiasi anima al suo interno viene liberata. La megera può creare una nuova borsa dopo 7 giorni.
+  - nome: Magia della congrega
+    descrizione: |
+      Finché si trova entro 9 metri da almeno due megere alleate, la megera può lanciare uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando il normale tempo di lancio dell'incantesimo e Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14): identificare, localizza oggetto, presagio, scrutare, servitore inosservato o trova famiglio. La megera deve terminare un riposo lungo prima di utilizzare questo tratto per lanciare di nuovo l'incantesimo.
+  - nome: Resistenza alla magia
+    descrizione: |
+      La megera dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+    descrizione: |
+      La megera effettua due attacchi Artiglio.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      La megera lancia uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14): 2/giorno ciascuno: Allucinazione mortale, spostamento planare (solo se stessa) A volontà: Dardo incantato (di 4º livello), forma eterea, individuazione del magico
+    attivita:
+      - tipo: incantatore
+        caratteristica: intelligenza
+        cd: 14
+        a_volonta:
+          - id: dnd.incantesimo.dardo-incantato
+            livello: 4
+          - dnd.incantesimo.forma-eterea
+          - dnd.incantesimo.individuazione-del-magico
+        al_giorno:
+          - usi: 2
+            incantesimi:
+              - dnd.incantesimo.allucinazione-mortale
+              - dnd.incantesimo.spostamento-planare
+  - nome: "Infestare incubi (1/giorno; richiede Borsa dell'anima)"
+    id: infestare-incubi-1-giorno-richiede-borsa-dell-anima
+    descrizione: |
+      Finché si trova sul Piano Etereo, la megera lancia sogno, utilizzando la stessa caratteristica da incantatore di Incantesimi. Soltanto la megera può agire da messaggera dell'incantesimo, e il bersaglio deve essere una creatura che la megera è in grado di vedere sul Piano Materiale. L'incantesimo fallisce ed è sprecato se il bersaglio è sotto l'effetto dell'incantesimo protezione dal bene e dal male o se si trova nel raggio dell'incantesimo cerchio magico. Se il bersaglio subisce danni dall'incantesimo sogno, i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti. Se l'incantesimo uccide il bersaglio, la sua anima resta intrappolata nella borsa dell'anima della megera, e il bersaglio non può essere resuscitato finché la sua anima non viene liberata.
+azioni_bonus:
+  - nome: Mutaforma
+    descrizione: |
+      La megera si trasforma in un umanoide di taglia Piccola o Media, oppure torna alla sua vera forma. A eccezione della taglia, le sue statistiche di gioco restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato.

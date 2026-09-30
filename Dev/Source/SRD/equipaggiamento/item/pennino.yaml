@@ -1,0 +1,4 @@
+id: dnd.oggetto.pennino
+nome: Pennino
+categoria: equipaggiamento-avventura
+costo: {valore: 2, valuta: moneta-rame}

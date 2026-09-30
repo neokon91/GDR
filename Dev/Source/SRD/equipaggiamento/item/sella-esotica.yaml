@@ -1,0 +1,7 @@
+id: dnd.oggetto.sella-esotica
+nome: Sella esotica
+categoria: finimenti-e-veicoli
+costo: {valore: 60, valuta: moneta-oro}
+peso: {valore: 20, unita: kg}
+descrizione: |
+  È necessaria una Sella esotica per cavalcare una cavalcatura acquatica o volante.

@@ -1,0 +1,23 @@
+id: dnd.incantesimo.ragnatela
+nome: Ragnatela
+livello: 2
+scuola: evocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S, "M (un frammento di ragnatela comune)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore evoca un ammasso di ragnatele appiccicose in un punto entro gittata, che riempiono un cubo con spigolo di 6 metri per la durata dell'incantesimo. Le ragnatele contano come terreno difficile e l'area al loro interno e leggermente oscurata.
+
+  Se le ragnatele non sono ancorate tra due masse solide (per esempio pareti o alberi) o stese su un pavimento, un muro o un soffitto, collassano su se stesse e l'incantesimo termina all'inizio del turno successivo dell'incantatore. Le ragnatele stese su una superficie piatta hanno una profondità di 1,5 metri.
+
+  La prima volta che una creatura vi entra in un turno o inizia lì il suo turno, deve superare un tiro salvezza su Destrezza, altrimenti sarà trattenuta finché sarà al loro interno o non si libera.
+
+  Una creatura trattenuta dalle ragnatele può usare la un'azione per effettuare una prova di Forza (Atletica) contro la CD del tiro salvezza sull'incantesimo. Se supera la prova, non è più trattenuta.
+
+  Le ragnatele sono infiammabili. Un cubo di ragnatele con spigolo di 1,5 metri brucia in 1 round, infliggendo 2d4 danni da fuoco a ogni creatura che inizi il suo turno tra le fiamme.

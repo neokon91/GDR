@@ -1,0 +1,77 @@
+id: dnd.mostro.nalfeshnee
+nome: Nalfeshnee
+taglia: grande
+tipo: immondo
+sottotipo: demone
+allineamento: caotico malvagio
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 21, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 22, competenza: true}
+  intelligenza: {valore: 19, competenza: true}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 15, competenza: true}
+iniziativa: competenza
+dadi_vita: 16
+velocita: {camminata: 6, volo: 9}
+sensi: {vista_pura: 36, telepatia: 36}
+percezione_passiva: 11
+resistenze: [freddo, fulmine, fuoco]
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, spaventato]
+lingue: [Abissale]
+gs: 13
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il nalfeshnee dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro demoniaco
+    descrizione: |
+      Se il nalfeshnee muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il nalfeshnee effettua tre attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 16 (2d10 + 5) danni taglienti più 11 (2d10) danni da forza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Teletrasporto
+    id: teletrasporto
+    descrizione: |
+      Il nalfeshnee si teletrasporta fino a massimo di 36 metri in uno spazio libero che è in grado di vedere.
+azioni_bonus:
+  - nome: "Nube di orrore (ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 15, tutte le creature in un'emanazione di 4,5 metri di cui il nalfeshnee è il punto di origine. *Fallimento:* 28 (8d6) danni psichici, e il bersaglio è spaventato per 1 minuto, finché non subisce danni, o finché non termina il proprio turno con il nalfeshnee fuori dal proprio campo visivo. *Successo:* il bersaglio è immune a Nube di orrore di questo nalfeshnee per 24 ore.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 8, dado: d6, tipo_danno: psichico}
+reazioni:
+  - nome: Inseguimento
+    descrizione: |
+      Attivazione: un'altra creatura che il nalfeshnee è in grado di vedere termina il proprio movimento entro 36 metri dal nalfeshnee. Esito: il nalfeshnee usa Teletrasporto, ma lo spazio di destinazione deve trovarsi entro 3 metri dalla creatura che ha provocato la reazione.

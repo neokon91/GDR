@@ -1,0 +1,4 @@
+id: dnd.oggetto.servizio-magico-trucchetto
+nome: Servizio magico Trucchetto
+categoria: servizi-magici
+costo: {valore: 30, valuta: moneta-oro}

@@ -1,0 +1,88 @@
+id: dnd.mostro.gigante-delle-nuvole
+nome: Gigante delle nuvole
+taglia: enorme
+tipo: gigante
+gruppo: Giganti
+allineamento: neutrale
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 27, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 22, competenza: true}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 16, competenza: true}
+  carisma: {valore: 16, competenza: false}
+iniziativa: competenza
+dadi_vita: 16
+velocita: {camminata: 12, volo: 6}
+abilita: [intuizione: competenza, percezione: maestria]
+percezione_passiva: 21
+lingue: [Comune, Gigante]
+gs: 9
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il gigante effettua due attacchi, utilizzando Mazza tonante o Nuvola di tuoni in qualsiasi combinazione. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare nube di nebbia.
+  - nome: Mazza tonante
+    descrizione: |
+      *Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 21 (3d8 + 8) danni contundenti più 7 (2d6) danni da tuono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Nuvola di tuoni
+    descrizione: |
+      *Tiro per colpire a distanza:* +12, gittata 72 m. *Colpito:* 18 (3d6 + 8) danni da tuono, e il bersaglio è incapacitato fino al termine del proprio turno successivo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: tuono
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    descrizione: |
+      Il gigante lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15):
+
+      1/giorno ciascuno:
+      - controllare tempo atmosferico
+      - forma gassosa
+      - telecinesi
+
+      A volontà:
+      - individuazione del magico
+      - luce
+      - nube di nebbia
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 15
+        a_volonta:
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.luce
+          - dnd.incantesimo.nube-di-nebbia
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.controllare-tempo-atmosferico
+              - dnd.incantesimo.forma-gassosa
+              - dnd.incantesimo.telecinesi
+azioni_bonus:
+  - nome: Passo velato
+    descrizione: |
+      Il gigante lancia l'incantesimo passo velato, utilizzando la stessa caratteristica da incantatore di Incantesimi.

@@ -1,0 +1,11 @@
+id: dnd.armatura.mezza-armatura
+nome: Mezza Armatura
+tipo: armatura-media
+categoria: armature
+costo: {valore: 750, valuta: moneta-oro}
+peso: {valore: 20, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 15, caratteristiche: [destrezza], max_modificatore: 2}}
+svantaggio_furtivita: true

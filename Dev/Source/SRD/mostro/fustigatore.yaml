@@ -1,0 +1,68 @@
+id: dnd.mostro.fustigatore
+nome: Fustigatore
+taglia: grande
+tipo: aberrazione
+allineamento: neutrale malvagio
+ca: {valore: 20}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 16, competenza: false}
+  carisma: {valore: 6, competenza: false}
+iniziativa: maestria
+dadi_vita: 11
+velocita: {camminata: 3, scalata: 6}
+abilita: [percezione: competenza, furtivita: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 16
+lingue: [nessuna]
+gs: 5
+
+tratti:
+  - nome: Movimenti del ragno
+    descrizione: |
+      Il fustigatore può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: tentacolo, ripetizioni: 2}
+          - {azione: morso, ripetizioni: 2}
+    descrizione: |
+      Il fustigatore effettua due attacchi Tentacolo, usa Riavvolgere ed effettua due attacchi Morso.
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 17 (3d8 + 4) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Tentacolo
+    id: tentacolo
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 18 m. *Colpito:* il bersaglio è afferrato (CD 14 per sfuggire) da uno dei sei tentacoli, ed è avvelenato finché la presa perdura. Il tentacolo può essere danneggiato e, quando viene distrutto, libera la creatura che aveva afferrato (CA 20, PF 10, immunità ai danni psichici e da veleno). I danni inflitti al tentacolo non danneggiano in alcun modo il fustigatore, e il tentacolo distrutto ricresce all'inizio del turno successivo del fustigatore.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 18
+  - nome: Riavvolgere
+    id: riavvolgere
+    descrizione: |
+      Il fustigatore tira in linea retta verso di sé ogni creatura che ha afferrato per un massimo di 9 metri.

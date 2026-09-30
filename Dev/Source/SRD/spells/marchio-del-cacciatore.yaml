@@ -1,0 +1,19 @@
+id: dnd.incantesimo.marchio-del-cacciatore
+nome: Marchio del cacciatore
+livello: 1
+scuola: divinazione
+classi:
+  - dnd.classe.ranger
+tempo_lancio: azione bonus
+gittata: 27
+componenti: [V]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore marchia magicamente come sua preda una creatura entro gittata che egli è in grado di vedere. Fino al termine dell'incantesimo, l'incantatore infligge 1d6 danni da forza extra al bersaglio ogni volta che lo colpisce con un tiro per colpire. Inoltre, l'incantatore dispone di vantaggio a qualsiasi prova di Saggezza (Percezione o Sopravvivenza) che effettua per trovare il bersaglio.
+
+  Se il bersaglio scende a 0 punti ferita prima del termine dell'incantesimo, l'incantatore può effettuare un'azione bonus per spostare il marchio su un'altra creatura entro gittata che egli è in grado di vedere.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  La concentrazione dell'incantatore può durare di più utilizzando uno slot incantesimo di 3º o 4º livello (fino a 8 ore) o di 5º livello o superiore (fino a 24 ore).

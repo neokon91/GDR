@@ -1,0 +1,84 @@
+id: dnd.mostro.tigre-mannara
+nome: Tigre mannara
+taglia: [media, piccola]
+tipo: mostruosita
+sottotipo: licantropo
+allineamento: neutrale
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 16
+velocita: {camminata: 12}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 15
+equipaggiamento:
+  - {articolo: dnd.arma.arco-lungo}
+lingue: ["Comune (non può parlare in forma di tigre)"]
+gs: 4
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      La tigre mannara effettua due attacchi, usando Graffio o Arco lungo in qualsiasi combinazione. Può sostituire un attacco con un attacco Morso.
+  - nome: Graffio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Morso (solo in forma di tigre o ibrida)"
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 12 (2d8 + 3) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 13. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa una tigre mannara sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione della tigre mannara per 24 ore.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Arco lungo (solo in forma umanoide o ibrida)"
+    descrizione: |
+      *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 11 (2d8 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.arco-lungo
+          gittata: {normale: 45, lunga: 180}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: "Movimento predatorio (solo in forma di tigre o ibrida)"
+    descrizione: |
+      La tigre mannara si muove fino alla sua velocità massima senza provocare attacchi di opportunità. Alla fine di questo movimento, può effettuare l'azione di Nascondersi.
+  - nome: Mutaforma
+    descrizione: |
+      La tigre mannara si trasforma in un ibrido umanoide-tigre di taglia Grande o in una tigre di taglia Grande, altrimenti torna alla sua forma originale di umanoide. Le sue statistiche di gioco, a eccezione della taglia, restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato.

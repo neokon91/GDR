@@ -1,0 +1,10 @@
+id: dnd.armatura.armatura-di-pelle
+nome: Armatura di Pelle
+tipo: armatura-media
+categoria: armature
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 6, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 12, caratteristiche: [destrezza], max_modificatore: 2}}

@@ -1,0 +1,9 @@
+id: dnd.oggetto.borsa-per-componenti
+nome: Borsa per componenti
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 25
+  unita: moneta-oro
+peso: {valore: 1, unita: kg}
+descrizione: |
+  Una borsa per componenti è a tenuta stagna e dotata di scomparti che contengono tutte le componenti materiali non consumabili dei tuoi incantesimi.

@@ -1,0 +1,7 @@
+id: dnd.veicolo.biga
+nome: Biga
+tipo: veicolo-da-tiro
+costo: {valore: 250, valuta: moneta-oro}
+peso: {valore: 50, unita: kg}
+descrizione: |
+  Un animale che traina una carrozza, un carretto, un carro da guerra, una slitta o un carro può spostare un carico fino a cinque volte la sua capacità di carico base, compreso il peso del veicolo. Se più animali trainano lo stesso veicolo, si sommano le loro capacità di carico.

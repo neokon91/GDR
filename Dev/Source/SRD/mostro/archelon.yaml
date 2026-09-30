@@ -1,0 +1,42 @@
+id: dnd.mostro.archelon
+nome: Archelon
+taglia: enorme
+tipo: bestia
+sottotipo: dinosauro
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 4, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 6, nuoto: 24}
+abilita: [furtivita: competenza]
+lingue: [nessuna]
+gs: 4
+tratti:
+  - id: archelon.anfibio
+    nome: Anfibio
+    descrizione: L'archelon può respirare in aria e in acqua.
+azioni:
+  - id: archelon.multiattacco
+    nome: Multiattacco
+    descrizione: L'archelon effettua due attacchi Morso.
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+  - id: archelon.morso
+    nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m.
+      *Colpito:* 14 (3d6 + 4) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco: {categoria: attacco-naturale, bonus: {caratteristica: forza, competenza: true}, bersagli: 1, portata: 1.5}
+        colpito:
+          - danno: { numero_dadi: 3, dado: d6, tipo_danno: perforante, bonus: {caratteristica: forza}}

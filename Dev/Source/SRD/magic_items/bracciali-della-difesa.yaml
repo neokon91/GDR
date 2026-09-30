@@ -1,0 +1,12 @@
+id: dnd.oggetto-magico.bracciali-della-difesa
+nome: Bracciali della difesa
+categoria: oggetto-meraviglioso
+rarita: rara
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    condizione: no-armatura-no-scudo
+    effetti:
+      - {bersaglio: ca, operazione: somma, valore: 2}
+descrizione: |
+  Il personaggio che indossa questi bracciali ottiene un bonus di +2 alla Classe Armatura se non veste alcuna armatura e non usa uno scudo.

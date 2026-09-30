@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.anello-del-saltare
+nome: Anello del saltare
+categoria: anello
+rarita: non-comune
+richiede_sintonia: true
+descrizione: |
+  Finché il personaggio indossa quest'anello può lanciare saltare, ma solo su se stesso.

@@ -1,0 +1,42 @@
+id: dnd.mostro.tappeto-soffocante-animato
+nome: Tappeto soffocante animato
+taglia: grande
+tipo: costrutto
+gruppo: Oggetti animati
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 3, competenza: false}
+  carisma: {valore: 1, competenza: false}
+iniziativa: competenza
+dadi_vita: 5
+velocita: {camminata: 3}
+sensi: {vista_cieca: 18}
+percezione_passiva: 6
+immunita_danni: [psichico, veleno]
+immunita_condizioni: [affascinato, assordato, avvelenato, indebolimento, paralizzato, pietrificato, spaventato]
+lingue: [nessuna]
+gs: 2
+
+azioni:
+  - nome: Soffocare
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, il tappeto lo afferra (CD 13 per sfuggire) invece di infliggere danni. Finché la presa perdura, il bersaglio è accecato e trattenuto, soffoca, e subisce 10 (2d6 + 3) danni contundenti all'inizio di ogni suo turno. Il tappeto può soffocare solo una creatura alla volta. Finché afferra il bersaglio, il tappeto non può effettuare questa azione e dimezza i danni subiti (arrotondati per difetto); il bersaglio subisce la stessa quantità di danni.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

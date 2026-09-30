@@ -1,0 +1,34 @@
+id: dnd.mostro.cespuglio-risvegliato
+nome: Cespuglio risvegliato
+taglia: piccola
+tipo: vegetale
+gruppo: Vegetali risvegliati
+allineamento: neutrale
+ca: {valore: 9}
+caratteristiche:
+  forza: {valore: 3, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 6}
+percezione_passiva: 10
+resistenze: [perforante]
+vulnerabilita: [fuoco]
+lingue: [Comune più un'altra lingua]
+gs: 0
+
+azioni:
+  - nome: Graffiare
+    descrizione: |
+      *Tiro per colpire in mischia:* +1, portata 1,5 m. *Colpito:* 1 danno tagliente.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

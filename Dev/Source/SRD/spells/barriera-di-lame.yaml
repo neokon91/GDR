@@ -1,0 +1,22 @@
+id: dnd.incantesimo.barriera-di-lame
+nome: Barriera di lame
+livello: 6
+scuola: invocazione
+classi:
+  - dnd.classe.chierico
+tempo_lancio: azione
+gittata: 27
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore crea un muro di lame turbinanti composte da energia magica. Il muro compare entro gittata e permane per la durata dell'incantesimo. L'incantatore crea un muro lineare lungo fino a 30 metri, alto 6 metri e spesso 1,5 metri, oppure un muro circolare del diametro massimo di 18 metri, alto 6 metri e spesso 1,5 metri. Il muro garantisce tre quarti di copertura e il suo spazio è un terreno difficile.
+
+  Qualsiasi creatura situata nello spazio del muro deve effettuare un tiro salvezza su Destrezza, subendo 6d10 danni forza in caso di fallimento, o la metà dei danni in caso di successo. Una creatura effettua il tiro salvezza anche se entra nello spazio del muro o vi termina il suo turno. Il tiro salvezza può essere effettuato solo una volta per turno.
+attivita:
+  - tipo: tiro-salvezza
+    innesco: entra-nell-area
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento: { danno: { numero_dadi: 6, dado: d10, tipo_danno: forza } }
+    successo: danno-dimezzato

@@ -1,0 +1,19 @@
+id: dnd.incantesimo.spada-arcana
+nome: Spada arcana
+livello: 7
+scuola: invocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: 27
+componenti: [V, S, "M (una spada in miniatura del valore di 250 mo o più)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore crea una spada spettrale che fluttua entro gittata e permane per tutta la durata dell'incantesimo.
+
+  Quando la spada appare, l'incantatore può effettuare un attacco in mischia con questo incantesimo contro un bersaglio che si trova entro 1,5 metri dalla spada. Se il colpo va a segno, il bersaglio subisce 4d12 danni da forza più il modificatore di caratteristica da incantatore dell'incantatore.
+
+  Nei suoi turni successivi, l'incantatore può effettuare un'azione bonus per spostare la spada fino a 9 metri in un punto che è in grado di vedere e ripetere l'attacco contro lo stesso bersaglio o uno diverso.

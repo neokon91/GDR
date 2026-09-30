@@ -1,0 +1,12 @@
+id: dnd.oggetto.acqua-santa
+nome: Acqua Santa
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 25
+  unita: moneta-oro
+peso: {valore: 0.5, unita: kg}
+descrizione: |
+  Quando effettui l'azione Attacco, puoi sostituire uno dei tuoi attacchi lanciando una fiasca di acqua santa.
+  Scegli come bersaglio una creatura che puoi vedere entro 6 metri da te.
+  Il bersaglio deve superare un tiro salvezza su Destrezza (CD 8 più il tuo modificatore di Destrezza e il tuo bonus di competenza)
+  o subire 2d8 danni radiosi se è un Immondo (diavolo o demone) o un Non Morto.

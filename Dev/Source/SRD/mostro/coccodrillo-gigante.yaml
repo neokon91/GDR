@@ -1,0 +1,62 @@
+id: dnd.mostro.coccodrillo-gigante
+nome: Coccodrillo gigante
+taglia: enorme
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 21, competenza: false}
+  destrezza: {valore: 9, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 9
+velocita: {camminata: 9, nuoto: 15}
+abilita: [furtivita: maestria]
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 5
+
+tratti:
+  - nome: Apnea
+    descrizione: |
+      Il coccodrillo può trattenere il respiro per 1 ora.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il coccodrillo effettua un attacco Morso e un attacco Coda.
+  - nome: Coda
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 18 (3d8 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 21 (3d10 + 5) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 15 per sfuggire). Mentre è afferrato, il bersaglio è trattenuto e non può essere bersagliato dalla Coda del coccodrillo.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

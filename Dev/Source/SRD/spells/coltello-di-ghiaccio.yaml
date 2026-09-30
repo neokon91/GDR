@@ -1,0 +1,33 @@
+id: dnd.incantesimo.coltello-di-ghiaccio
+nome: Coltello di ghiaccio
+livello: 1
+scuola: evocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [S, "M (una goccia d'acqua o un frammento di ghiaccio)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Crei una scheggia di ghiaccio e la scagli contro una creatura entro gittata.
+  Effettua un attacco con incantesimo a distanza contro il bersaglio.
+  Se colpisci, il bersaglio subisce 1d10 danni Perforanti.
+  A prescindere dall'esito dell'attacco, la scheggia esplode.
+  Il bersaglio e ogni creatura entro 1,5 metri da esso devono superare
+  un tiro salvezza su Destrezza o subire 2d6 danni da Freddo.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni da freddo aumentano di 1d6 per ogni slot di livello superiore al 1º.
+attivita:
+  - tipo: attacco
+    attacco: { categoria: distanza, caratteristica: incantesimo }
+    colpito:
+      danno: { numero_dadi: 1, dado: d10, tipo_danno: perforante }
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 2, dado: d6, tipo_danno: freddo }

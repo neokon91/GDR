@@ -1,0 +1,7 @@
+id: dnd.arma.mazza
+nome: Mazza
+categoria: mischia-semplice
+costo: {valore: 5, valuta: moneta-oro}
+peso: {valore: 2, unita: kg}
+danno: {dado: d6, tipo_danno: contundente}
+padronanza: fiaccare

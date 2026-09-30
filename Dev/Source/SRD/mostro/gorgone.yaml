@@ -1,0 +1,58 @@
+id: dnd.mostro.gorgone
+nome: Gorgone
+taglia: grande
+tipo: costrutto
+allineamento: senza allineamento
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 20, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 12}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 17
+immunita_condizioni: [indebolimento, pietrificato]
+lingue: [nessuna]
+gs: 5
+
+azioni:
+  - nome: Trafiggere
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 1,5 m *Colpito:* 18 (2d12 + 5) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e la gorgone si è mossa di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d12
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Soffio pietrificante (ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un cono di 9 metri. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza al termine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+azioni_bonus:
+  - nome: Calpestare
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 16, una creatura prona entro 1,5 metri. *Fallimento:* 16 (2d10 + 5) danni contundenti. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        successo: danno-dimezzato

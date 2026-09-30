@@ -1,0 +1,4 @@
+id: dnd.oggetto.vino-pregiato
+nome: Vino Pregiato
+categoria: vitto-e-alloggio
+costo: {valore: 10, valuta: moneta-oro}

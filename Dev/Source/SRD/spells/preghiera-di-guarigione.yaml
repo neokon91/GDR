@@ -1,0 +1,21 @@
+id: dnd.incantesimo.preghiera-di-guarigione
+nome: Preghiera di guarigione
+livello: 2
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.paladino
+tempo_lancio: 10 minuti
+gittata: 9
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Fino a cinque creature a scelta dell'incantatore, situate entro gittata per l'intera durata del lancio dell'incantesimo, ottengono i benefici di un riposo breve e recuperano 2d8 punti ferita. Una creatura non può essere nuovamente influenzata da questo incantesimo fino a che non completa un riposo lungo.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  La guarigione aumenta di 1d8 per ogni slot di livello superiore al 2º.
+attivita:
+  - tipo: cura
+    cura: { numero_dadi: 2, dado: d8 }

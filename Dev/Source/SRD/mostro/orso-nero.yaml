@@ -1,0 +1,49 @@
+id: dnd.mostro.orso-nero
+nome: Orso nero
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 9, scalata: 9, nuoto: 9}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 15
+lingue: [nessuna]
+gs: 1/2
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 2}
+    descrizione: |
+      L'orso effettua due attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni taglienti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}

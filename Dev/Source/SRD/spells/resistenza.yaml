@@ -1,0 +1,15 @@
+id: dnd.incantesimo.resistenza
+nome: Resistenza
+livello: 0
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore tocca una creatura consenziente e sceglie un tipo di danno: acido, contundente, freddo, fulmine, fuoco, necrotico, perforante, radioso, tagliente, tuono, veleno. Quando una creatura subisce danni del tipo scelto prima del termine dell'incantesimo, riduce il totale dei danni subiti di 1d4. Una creatura può beneficiare di questo incantesimo solo una volta per turno.

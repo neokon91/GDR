@@ -1,0 +1,14 @@
+id: dnd.incantesimo.santuario
+nome: Santuario
+livello: 1
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+tempo_lancio: azione bonus
+gittata: 9
+componenti: [V, S, "M (un frammento di vetro di uno specchio)"]
+concentrazione: false
+rituale: false
+durata: 1 minuto
+descrizione: |
+  L'incantatore protegge una creatura situata entro gittata. Fino al termine dell'incantesimo, ogni creatura che bersaglia la creatura protetta con un tiro per colpire o con un incantesimo dannoso deve prima superare un tiro salvezza su Saggezza, altrimenti deve scegliere un bersaglio diverso o perdere l'attacco o l'incantesimo. Questo incantesimo non protegge la creatura protetta dalle aree di effetto. L'incantesimo termina se la creatura protetta effettua un tiro per colpire, lancia un incantesimo o infligge danni.

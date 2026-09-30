@@ -1,0 +1,14 @@
+id: dnd.talento.dono-dello-spirito-notturno
+nome: Dono dello spirito notturno
+categoria: dono-epico
+prerequisito: 19º livello o superiore
+ripetibile: false
+parametri:
+  - id: caratteristica
+    tipo: caratteristica
+    quantita: 1
+    scelte: [tutte]
+    valore: 1
+    massimo: 30
+descrizione: |
+  +1 a una caratteristica, massimo 30; in oscurita o luce fioca puoi diventare invisibile e resisti ai danni non psichici o radiosi.

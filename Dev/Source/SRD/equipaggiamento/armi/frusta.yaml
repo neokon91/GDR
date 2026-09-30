@@ -1,0 +1,8 @@
+id: dnd.arma.frusta
+nome: Frusta
+categoria: mischia-da-guerra
+costo: {valore: 2, valuta: moneta-oro}
+peso: {valore: 1.5, unita: kg}
+danno: {dado: d4, tipo_danno: tagliente}
+proprieta: [accurata, portata]
+padronanza: lentezza

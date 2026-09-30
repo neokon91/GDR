@@ -1,0 +1,21 @@
+id: dnd.oggetto-magico.tunica-degli-occhi
+nome: Tunica degli occhi
+categoria: oggetto-meraviglioso
+rarita: rara
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: sensi.scurovisione, operazione: aumento, valore: 36}
+      - {bersaglio: sensi.vista-pura, operazione: aumento, valore: 36}
+descrizione: |
+  Questa tunica è decorata con un motivo raffigurante vari occhi. Mentre il personaggio la indossa ottiene i benefici seguenti:
+
+  **Sensi speciali**
+  Il personaggio ha scurovisione e vista pura, entrambe con un raggio di 36 metri.
+
+  **Visione a tutto tondo**
+  La tunica conferisce vantaggio alle prove di Saggezza (Percezione) basate sulla vista.
+
+  **Debolezze**
+  Un incantesimo luce lanciato sulla tunica o un incantesimo luce diurna lanciato entro 1,5 metri dalla tunica rende il personaggio accecato per 1 minuto. Alla fine di ogni suo turno, il perso-naggio effettua un tiro salvezza su Costituzione (CD 11 per luce o CD 15 per luce diurna), terminando la cecità in caso di successo.

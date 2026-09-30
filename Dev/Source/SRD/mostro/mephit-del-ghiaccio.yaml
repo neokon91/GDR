@@ -1,0 +1,61 @@
+id: dnd.mostro.mephit-del-ghiaccio
+nome: Mephit del ghiaccio
+taglia: piccola
+tipo: elementale
+gruppo: Mephit
+allineamento: neutrale malvagio
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 7, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 9, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 12, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 9, volo: 9}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 12
+immunita_danni: [freddo, veleno]
+immunita_condizioni: [avvelenato, indebolimento]
+vulnerabilita: [fuoco]
+lingue: ["Primordiale (Aquan, Auran)"]
+gs: 1/2
+
+tratti:
+  - nome: Esplosione mortale
+    descrizione: |
+      Il mephit esplode quando muore. *Tiro salvezza su Costituzione:* CD 10, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 5 (2d4) danni da freddo. *Successo:* danni dimezzati.
+azioni:
+  - nome: Artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni taglienti più 2 (1d4) danni da freddo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: "Nube di nebbia (1/giorno)"
+    descrizione: |
+      Il mephit lancia nube di nebbia senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore.
+  - nome: "Soffio di gelo (ricarica 6)"
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 10, tutte le creature in un cono di 4,5 metri. *Fallimento:* 7 (3d4) danni da freddo. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 3, dado: d4, tipo_danno: freddo}
+        successo: danno-dimezzato

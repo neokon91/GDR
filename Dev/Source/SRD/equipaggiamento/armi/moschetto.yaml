@@ -1,0 +1,9 @@
+id: dnd.arma.moschetto
+nome: Moschetto
+categoria: distanza-da-guerra
+costo: {valore: 500, valuta: moneta-oro}
+peso: {valore: 5, unita: kg}
+danno: {dado: d12, tipo_danno: perforante}
+gittata: {normale: 12, lunga: 36}
+proprieta: [due-mani, munizioni, ricarica]
+padronanza: lentezza

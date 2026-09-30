@@ -1,0 +1,55 @@
+id: dnd.mostro.stormo-di-corvi
+nome: Stormo di corvi
+taglia: media
+sottodimensione: minuscole
+tipo: sciame
+sottotipo: di bestie
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 3, volo: 15}
+abilita: [percezione: maestria]
+percezione_passiva: 15
+resistenze: [contundente, perforante, tagliente]
+immunita_condizioni: [affascinato, afferrato, paralizzato, pietrificato, prono, spaventato, stordito, trattenuto]
+lingue: [nessuna]
+gs: 1/4
+
+tratti:
+  - nome: Sciame
+    descrizione: |
+      Lo stormo può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura abbastanza grande per un corvo Minuscolo. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+azioni:
+  - nome: Becchi
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti, o 2 (1d4) danni perforanti se lo stormo è sanguinante.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: "Cacofonia (ricarica 6)"
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 10, una creatura nello spazio dello stormo. *Fallimento:* il bersaglio è assordato fino all'inizio del turno successivo dello stormo. Quando è assordato, il bersaglio subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {valore: 10, fisso: true}

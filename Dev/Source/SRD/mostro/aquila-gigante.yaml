@@ -1,0 +1,48 @@
+id: dnd.mostro.aquila-gigante
+nome: Aquila gigante
+taglia: grande
+tipo: celestiale
+gruppo: Bestie
+allineamento: neutrale buono
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 8, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 3, volo: 24}
+abilita: [percezione: maestria]
+resistenze: [necrotico, radioso]
+lingue: [celestiale, "capisce il Comune e il Primordiale (Auran) ma non li parla"]
+gs: 1
+habitat: [costale, prateria, collina, montagna]
+azioni:
+  - id: aquila-gigante.multiattacco
+    nome: Multiattacco
+    descrizione: |
+      L'aquila effettua due attacchi con Squarcio.
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: aquila-gigante.squarcio, ripetizioni: 2}
+  - id: aquila-gigante.squarcio
+    nome: Squarcio
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m.
+      *Colpito:* 5 (1d4 + 3) danni Taglienti più 3 (1d6) danni Radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}

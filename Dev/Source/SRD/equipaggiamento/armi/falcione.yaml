@@ -1,0 +1,8 @@
+id: dnd.arma.falcione
+nome: Falcione
+categoria: mischia-da-guerra
+costo: {valore: 20, valuta: moneta-oro}
+peso: {valore: 3, unita: kg}
+danno: {dado: d10, tipo_danno: tagliente}
+proprieta: [due-mani, pesante, portata]
+padronanza: colpo-di-striscio

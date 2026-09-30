@@ -1,0 +1,87 @@
+id: dnd.mostro.naga-guardiana
+nome: Naga guardiana
+taglia: grande
+tipo: celestiale
+gruppo: Naga
+allineamento: legale buono
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 18, competenza: true}
+  costituzione: {valore: 16, competenza: true}
+  intelligenza: {valore: 16, competenza: true}
+  saggezza: {valore: 19, competenza: true}
+  carisma: {valore: 18, competenza: true}
+dadi_vita: 16
+velocita: {camminata: 12, nuoto: 12, scalata: 12}
+abilita: [arcano: maestria, religione: maestria, storia: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 14
+immunita_danni: [veleno]
+immunita_condizioni: [affascinato, avvelenato, paralizzato, trattenuto]
+lingue: [Celestiale, Comune]
+gs: 10
+
+tratti:
+  - nome: Ristoro celestiale
+    descrizione: |
+      Se la naga muore, torna in vita 1d6 giorni dopo e recupera tutti i suoi punti ferita, a meno che non venga lanciato dissolvi il bene e il male sui suoi resti.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+    descrizione: |
+      La naga effettua due attacchi Morso. Può sostituire qualsiasi attacco con un utilizzo di Sputo velenoso.
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 17 (2d12 + 4) danni perforanti più 22 (4d10) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d12
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      La naga lancia uno dei seguenti incantesimi, senza bisogno di componenti somatiche o materiali, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16): 1/giorno ciascuno: Chiaroveggenza, colpo infuocato (di 6º livello), costrizione, cura ferite (di 6º livello), visione del vero A volontà: taumaturgia
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        cd: 16
+        a_volonta:
+          - dnd.incantesimo.taumaturgia
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.chiaroveggenza
+              - id: dnd.incantesimo.colpo-infuocato
+                livello: 6
+              - dnd.incantesimo.costrizione
+              - id: dnd.incantesimo.cura-ferite
+                livello: 6
+              - dnd.incantesimo.visione-del-vero
+  - nome: Sputo velenoso
+    id: sputo-velenoso
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 16, una creatura che la naga è in grado di vedere entro 18 metri. *Fallimento:* 31 (7d8) danni da veleno, e il bersaglio è accecato fino all'inizio del turno successivo della naga. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 7, dado: d8, tipo_danno: veleno}
+        successo: danno-dimezzato

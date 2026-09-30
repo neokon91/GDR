@@ -1,0 +1,9 @@
+id: dnd.arma.ascia-da-battaglia
+nome: Ascia da battaglia
+categoria: mischia-da-guerra
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 2, unita: kg}
+danno: {dado: d8, tipo_danno: tagliente}
+proprieta:
+- versatile-1d10
+padronanza: rovesciamento

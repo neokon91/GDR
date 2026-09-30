@@ -1,0 +1,49 @@
+id: dnd.mostro.rana-gigante
+nome: Rana gigante
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 12, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 9, nuoto: 9}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 9}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 1/4
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      La rana può respirare in aria e in acqua.
+  - nome: Balzo da fermo
+    descrizione: |
+      La rana può compiere un salto in lungo di un massimo di 6 metri e uno in alto di un massimo di 3 metri, con o senza rincorsa.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 11 per sfuggire).
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {valore: 2, fisso: true}
+  - nome: Inghiottire
+    descrizione: |
+      La rana inghiotte un bersaglio di taglia Piccola o inferiore che sta afferrando. La creatura inghiottita non è afferrata, ma è accecata e trattenuta, e beneficia di copertura totale contro attacchi e altri effetti al di fuori della rana. Mentre inghiotte il bersaglio, la rana non può usare Morso; se la rana muore, il bersaglio inghiottito non è più trattenuto e può fuggire dal cadavere usando 1,5 metri di movimento, uscendo prono. Alla fine del turno successivo della rana, il bersaglio inghiottito subisce 5 (2d4) danni da acido. Se i danni non uccidono il bersaglio, la rana lo vomita, facendolo uscire prono.

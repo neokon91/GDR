@@ -1,0 +1,13 @@
+id: dnd.strumento.kit-di-camuffamento
+nome: Kit di Camuffamento
+categoria: strumenti
+costo: {valore: 25, valuta: moneta-oro}
+peso: {valore: 1.5, unita: kg}
+caratteristica: destrezza
+utilizzo:
+  - azione: Applicare il trucco
+    cd: 10
+creazione: [dnd.oggetto.costume]
+descrizione: |
+  Se possiedi la competenza in un attrezzo, aggiungi il tuo Bonus di Competenza a qualsiasi prova di caratteristica che richieda l'uso di tale attrezzo.
+  Se possiedi la competenza in un'abilità utilizzata per quella prova, ottieni anche Vantaggio alla prova stessa.

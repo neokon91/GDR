@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.lingua-di-fiamme
+nome: Lingua di fiamme
+categoria: arma
+sottotipo: qualsiasi arma da mischia
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Mentre il personaggio impugna quest'arma magica, può compiere un'azione bonus e usare una parola d'ordine per sprigionare le fiamme che avvolgono la parte dell'arma che infligge danni. Le fiamme proiettano luce intensa in un raggio di 12 metri e luce fioca per altri 12 metri. Quando la lama è in fiamme, infligge 2d6 danni da fuoco extra se il colpo va a segno. Le fiamme durano finché il personaggio non compie un'azione bonus per impartire nuovamente l'ordine o finché non lascia cadere, ripone o rinfodera l'arma.

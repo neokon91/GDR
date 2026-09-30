@@ -1,0 +1,17 @@
+id: dnd.incantesimo.caduta-morbida
+nome: Caduta morbida
+livello: 1
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: reazione
+innesco: "l'incantatore può effettuare quando egli stesso o una creatura entro 18 metri da lui che egli è in grado di vedere cade"
+gittata: 18
+componenti: [V, "M (una piccola piuma)"]
+concentrazione: false
+rituale: false
+durata: 1 minuto
+descrizione: |
+  L'incantatore sceglie fino a cinque creature in caduta entro gittata. La velocità di discesa di una creatura in caduta rallenta fino a 18 metri per round finché l'incantesimo non termina. Se una creatura cade prima del termine dell'incantesimo, non subisce alcun danno da caduta e interrompe l'effetto dell'incantesimo.

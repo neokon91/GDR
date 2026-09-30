@@ -28,14 +28,18 @@ Sotto `~/Documents/Sviluppo/projects/`:
 |---|---|---|
 | **archivio** | DATI SRD 5.5e (YAML+MD) + libri/mappe. Fonte-dati unica, multi-consumatore. | ✅ privato |
 | **regole** | Motore 5.5e in TS: primitive (`lib`) + creatore (`creatore`) + combattimento event-sourced (`motore`). **UI-agnostico**, testato. | ✅ privato |
-| **GDR** | Questo repo: vault + plugin. Consuma `archivio` + `regole`. | ✅ |
+| **GDR** | Questo repo (pubblico): vault + plugin. Consuma la copia vendorizzata di `archivio/srd` + `regole`. | ✅ |
 | **Compendio** | App Astro/Preact (catalogo/creatore web). Consuma `archivio` + `regole`. | ✅ |
 
-**Wiring**: in dev, `archivio` e `regole` sono **symlink gitignorati** dentro `GDR/`
-(co-sviluppo live; a release → submodule/dipendenze versionate). esbuild segue il symlink
-`regole/` e **bundla** la catena TS del motore in `plugin/main.js`. I generatori
-(`gen_bestiario.py`, `gen_condizioni.py`) leggono `archivio/` e scrivono i **sidecar** in
-`plugin/data/` (gitignorati, rigenerabili).
+**Wiring**: in dev, `archivio` e `regole` sono **symlink gitignorati** dentro `GDR/`.
+esbuild segue il symlink `regole/` e **bundla** la catena TS del motore in `plugin/main.js`.
+I dati NON vengono dall'archivio (privato) ma dalla sua **copia vendorizzata**
+`Dev/Source/SRD/` (= `common.SRD_DIR`, solo `srd/`, CC-BY-4.0): la leggono `build_srd.py` e
+i generatori (`gen_*.py`), che scrivono i **sidecar** in `plugin/data/` (gitignorati,
+rigenerabili). `sync_srd.py` la aggiorna dall'archivio accanto (specchio esatto: nuovi,
+cambiati, spariti; la licenza resta); `--check`, il job CI `deriva-srd` e
+`tests/test_sync_srd.py` segnalano quando resta indietro. Così GDR si costruisce da un
+clone pulito senza l'archivio.
 
 ---
 
@@ -47,10 +51,11 @@ moduli, tutti importano `common` (nessun ciclo):
 | Modulo | Responsabilità |
 |---|---|
 | `common.py` | Percorsi, IO, e il **modello**: `deep_merge`, `load_core`, `load_templates`, `load_pages`, `apply_entities`. |
-| `build_srd.py` | Genera l'albero `SRD/` (sola lettura) da `archivio`. Al confine (`_load_archivio`) i riferimenti puntati `dnd.<tipo>.<slug>` si proiettano sullo slug, la chiave di tutto GDR; l'`id` della voce resta qualificato per l'id-index. `srd_note` rende il contenuto (infobox, sezioni, potenziamento, evocazioni inline, footer *Vedi anche*). Le pagine mostro emettono `` ```gdr statblock <id> ``. Fonte UNICA = archivio. |
+| `build_srd.py` | Genera l'albero `SRD/` (sola lettura) dalla copia vendorizzata `Dev/Source/SRD/`. Al confine (`_load_archivio`) i riferimenti puntati `dnd.<tipo>.<slug>` si proiettano sullo slug, la chiave di tutto GDR; l'`id` della voce resta qualificato per l'id-index. `srd_note` rende il contenuto (infobox, sezioni, potenziamento, evocazioni inline, footer *Vedi anche*). Le pagine mostro emettono `` ```gdr statblock <id> ``. Fonte UNICA = la copia di `archivio/srd`. |
 | `build_personaggio/` | Converter del rules-engine PG: SRD (da archivio) + `pg_rules.yaml` → `personaggio.json`. |
-| `gen_bestiario.py` / `gen_condizioni.py` | Sidecar del motore (`plugin/data/srd_bestiario.json`, `srd_condizioni.json`) da `archivio`. |
-| `archivio_io.py` | **Lettura unica dell'archivio** per i generatori: `.yaml` (entità) e `.md` (note con prosa, corpo → `descrizione`), tipo riconosciuto dall'id `dnd.<tipo>.…`, mai dal nome-file. Nato dopo che i vecchi glob a suffisso (`*.spell.yaml`…) leggevano 0 file e il plugin usciva vuoto con la build verde (set 2026); `tests/test_generatori_plugin.py` ne tiene le soglie. |
+| `gen_bestiario.py` / `gen_condizioni.py` | Sidecar del motore (`plugin/data/srd_bestiario.json`, `srd_condizioni.json`) dalla copia SRD. |
+| `sync_srd.py` | Aggiorna la copia vendorizzata `Dev/Source/SRD/` da `archivio/srd` (solo quella cartella); `--check` per la deriva. |
+| `archivio_io.py` | **Lettura unica dei file in formato archivio** (la copia SRD) per i generatori: `.yaml` (entità) e `.md` (note con prosa, corpo → `descrizione`), tipo riconosciuto dall'id `dnd.<tipo>.…`, mai dal nome-file. Nato dopo che i vecchi glob a suffisso (`*.spell.yaml`…) leggevano 0 file e il plugin usciva vuoto con la build verde (set 2026); `tests/test_generatori_plugin.py` ne tiene le soglie. |
 | `render_config/` | Config `.obsidian` (merge non distruttivo, un writer per plugin), bottoni/fileClass dal modello, viste **Bases**, CSS colore-categoria. |
 | `validate.py` | `check()`: confine core/system, dup-ID, snake_case, shape, schema wizard, inversi reciproci, uguaglianza byte delle sorgenti `_*.js`. |
 

@@ -1,0 +1,63 @@
+id: dnd.mostro.gigante-del-gelo
+nome: Gigante del gelo
+taglia: enorme
+tipo: gigante
+gruppo: Giganti
+allineamento: neutrale malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 23, competenza: false}
+  destrezza: {valore: 9, competenza: false}
+  costituzione: {valore: 21, competenza: true}
+  intelligenza: {valore: 9, competenza: false}
+  saggezza: {valore: 10, competenza: true}
+  carisma: {valore: 12, competenza: true}
+iniziativa: competenza
+dadi_vita: 13
+velocita: {camminata: 12}
+abilita: [atletica: competenza, percezione: competenza]
+percezione_passiva: 13
+immunita_danni: [freddo]
+lingue: [Gigante]
+gs: 8
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il gigante effettua due attacchi, usando Ascia del gelo o Grande arco in qualsiasi combinazione.
+  - nome: Ascia del gelo
+    descrizione: |
+      *Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 19 (2d12 + 6) danni taglienti più 9 (2d8) danni da freddo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d12
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Grande arco
+    descrizione: |
+      *Tiro per colpire a distanza:* +9, gittata 45/180 m. *Colpito:* 17 (2d10 + 6) danni perforanti più 7 (2d6) danni da freddo, e la velocità del bersaglio è ridotta di 3 metri fino al termine del proprio turno successivo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 45, lunga: 180}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: "Grido di battaglia (ricarica 5-6)"
+    descrizione: |
+      Il gigante o una creatura a sua scelta che il gigante è in grado di vedere o di sentire ottiene 16 (2d10 + 5) punti ferita temporanei e dispone di vantaggio ai tiri per colpire fino all'inizio del turno successivo del gigante.

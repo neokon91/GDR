@@ -1,0 +1,9 @@
+id: dnd.oggetto.barile
+nome: Barile
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 2
+  unita: moneta-oro
+peso: {valore: 35, unita: kg}
+descrizione: |
+  Un barile può contenere fino a 40 galloni di liquido o fino a 1,2 metri cubi di merci secche.

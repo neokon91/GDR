@@ -1,0 +1,46 @@
+id: dnd.mostro.magmin
+nome: Magmin
+taglia: piccola
+tipo: elementale
+allineamento: caotico neutrale
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 7, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 8, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+immunita_danni: [fuoco]
+lingue: ["Primordiale (Ignan)"]
+gs: 1/2
+
+tratti:
+  - nome: Esplosione mortale
+    descrizione: |
+      Il magmin esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un'emanazione di 3 metri di cui il magmin è il punto di origine. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati.
+azioni:
+  - nome: Tocco
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (2d4 + 2) danni da fuoco. Se il bersaglio è una creatura o un oggetto infiammabile che non è indossato o trasportato, prende fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d4
+              tipo_danno: fuoco
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: Illuminazione fiammeggiante
+    descrizione: |
+      Il magmin si incendia o estingue le sue fiamme. Finché è in fiamme, proietta luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri.

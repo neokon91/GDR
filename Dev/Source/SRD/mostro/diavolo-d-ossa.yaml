@@ -1,0 +1,78 @@
+id: dnd.mostro.diavolo-d-ossa
+nome: Diavolo d'ossa
+taglia: grande
+tipo: immondo
+sottotipo: diavolo
+allineamento: legale malvagio
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 18, competenza: true}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 13, competenza: true}
+  saggezza: {valore: 14, competenza: true}
+  carisma: {valore: 16, competenza: true}
+iniziativa: competenza
+dadi_vita: 17
+velocita: {camminata: 12, volo: 12}
+abilita: [inganno: competenza, intuizione: competenza]
+sensi: {scurovisione: 36, telepatia: 36}
+scurovisione_magica: true
+percezione_passiva: 12
+resistenze: [freddo]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Infernale]
+gs: 9
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro diabolico
+    descrizione: |
+      Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+    descrizione: |
+      Il diavolo effettua due attacchi Artiglio e un attacco Pungiglione infernale.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 13 (2d8 + 4) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Pungiglione infernale
+    id: pungiglione-infernale
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 15 (2d10 + 4) danni perforanti più 18 (4d8) danni da veleno, e il bersaglio è avvelenato fino all'inizio del turno successivo del diavolo. Finché è avvelenato, il bersaglio non può recuperare punti ferita.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

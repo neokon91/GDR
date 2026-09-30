@@ -1,0 +1,92 @@
+id: dnd.mostro.medusa
+nome: Medusa
+taglia: media
+tipo: mostruosita
+allineamento: legale malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 13, competenza: true}
+  carisma: {valore: 15, competenza: false}
+iniziativa: competenza
+dadi_vita: 17
+velocita: {camminata: 9}
+abilita: [furtivita: competenza, inganno: competenza, percezione: competenza]
+sensi: {scurovisione: 45}
+percezione_passiva: 14
+lingue: [Comune più un'altra lingua]
+gs: 6
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+          - {azione: raggio-velenoso, ripetizioni: 3}
+    descrizione: |
+      La medusa effettua due attacchi Artiglio e un attacco Chioma di serpenti, o tre attacchi Raggio velenoso.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: Chioma di serpenti
+    id: chioma-di-serpenti
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti più 14 (4d6) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Raggio velenoso
+    id: raggio-velenoso
+    descrizione: |
+      *Tiro per colpire a distanza:* +5, gittata 45 m. *Colpito:* 11 (2d8 + 2) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: carisma, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: veleno
+              bonus: {caratteristica: carisma}
+azioni_bonus:
+  - nome: "Sguardo pietrificante (ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 13, tutte le creature in un cono di 9 metri. Se la medusa vede il suo riflesso nel cono, deve effettuare questo tiro salvezza. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza al termine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: carisma, base: 8, competenza: true}

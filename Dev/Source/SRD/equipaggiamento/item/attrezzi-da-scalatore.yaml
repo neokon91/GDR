@@ -1,0 +1,5 @@
+id: dnd.oggetto.attrezzi-da-scalatore
+nome: Attrezzi da scalatore
+categoria: equipaggiamento-avventura
+costo: {valore: 25, valuta: moneta-oro}
+peso: {valore: 6, unita: kg}

@@ -1,0 +1,20 @@
+id: dnd.incantesimo.aura-magica-dellarcanista
+nome: Aura magica dell'arcanista
+livello: 2
+scuola: illusione
+classi:
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (un piccolo pezzo quadrato di seta)"]
+concentrazione: false
+rituale: false
+durata: 24 ore
+descrizione: |
+  L'incantatore tocca una creatura consenziente o un oggetto che non sia indossato o trasportato e vi pone un'illusione. Una creatura riceve l'effetto Maschera, mentre un oggetto riceve l'effetto Falsa aura. Entrambi gli effetti, descritti di seguito, permangono per tutta la durata dell'incantesimo. Se l'incantatore lancia l'incantesimo sullo stesso bersaglio ogni giorno per 30 giorni, l'illusione permane finché non viene dissolta.
+
+  **Maschera (creatura)**
+  L'incantatore sceglie un tipo di creatura diverso da quello del bersaglio. Gli incantesimi e altri effetti magici considerano il bersaglio come se fosse una creatura del tipo scelto dall'incantatore.
+
+  **Falsa aura (oggetto)**
+  L'incantatore modifica il modo in cui il bersaglio appare agli incantesimi e agli effetti magici che individuano le aure magiche, come per esempio individuazione del magico. L'incantatore può fare in modo che un oggetto non magico appaia come magico e viceversa, oppure può cambiare l'aura di un oggetto in modo che sembri appartenere a una scuola di magia a sua scelta.

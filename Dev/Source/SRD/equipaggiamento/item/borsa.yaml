@@ -1,0 +1,9 @@
+id: dnd.oggetto.borsa
+nome: Borsa
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 5
+  unita: moneta-argento
+peso: {valore: 0.5, unita: kg}
+descrizione: |
+  Una sacca può contenere fino a 6 libbre in un volume pari a un quinto di piede cubo.

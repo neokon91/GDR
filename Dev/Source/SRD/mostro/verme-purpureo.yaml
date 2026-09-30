@@ -1,0 +1,71 @@
+id: dnd.mostro.verme-purpureo
+nome: Verme purpureo
+taglia: mastodontica
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 28, competenza: false}
+  destrezza: {valore: 7, competenza: false}
+  costituzione: {valore: 22, competenza: true}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 8, competenza: true}
+  carisma: {valore: 4, competenza: false}
+iniziativa: competenza
+dadi_vita: 15
+velocita: {scavo: 15}
+sensi: {percezione_tellurica: 18, vista_cieca: 9}
+percezione_passiva: 9
+lingue: [nessuna]
+gs: 15
+
+tratti:
+  - nome: Scavatore di tunnel
+    descrizione: |
+      Il verme può scavare attraverso la roccia solida a metà della sua velocità di scavo, formando un tunnel del diametro di 3 metri.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il verme effettua un attacco Morso e un attacco Pungiglione caudale.
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 22 (3d8 + 9) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 19 per sfuggire), ed è trattenuto finché la presa perdura.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Pungiglione caudale
+    descrizione: |
+      *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 16 (2d6 + 9) danni perforanti più 35 (10d6) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Inghiottire
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 19, una creatura di taglia Grande o inferiore afferrata dal verme (può inghiottire fino a tre creature alla volta). *Fallimento:* il bersaglio viene inghiottito dal verme, e non è più afferrato. Una creatura inghiottita è accecata e trattenuta, beneficia di copertura totale contro gli attacchi e altri effetti al di fuori del verme, e subisce 17 (5d6) danni da acido all'inizio di ogni turno del verme. Se il verme subisce 30 o più danni in un singolo turno da una creatura al suo interno, deve superare un tiro salvezza su Costituzione con CD 21 alla fine di quel turno, altrimenti rigurgita tutte le creature inghiottite, ognuna delle quali cade a terra prona in uno spazio entro 1,5 metri dal verme. Se il verme muore, qualsiasi creatura inghiottita non è più trattenuta e può fuggire dal cadavere usando 6 metri di movimento, uscendo prona.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}

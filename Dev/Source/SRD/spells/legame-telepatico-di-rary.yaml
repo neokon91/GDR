@@ -1,0 +1,19 @@
+id: dnd.incantesimo.legame-telepatico-di-rary
+nome: Legame Telepatico di Rary
+livello: 5
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (due uova)"]
+concentrazione: false
+rituale: true
+durata: 1 ora
+descrizione: |
+  L'incantatore stringe un legame telepatico con un massimo di otto creature consenzienti a sua scelta entro gittata, collegando mentalmente ogni creatura a tutte le altre per la durata dell'incantesimo.
+  Le creature che non sono in grado di comunicare in nessuna lingua, non sono influenzate da questo incantesimo.
+
+  Fino al termine dell'incantesimo, i bersagli possono comunicare telepaticamente attraverso il legame, a prescindere dal fatto che condividano la stessa lingua.
+  La comunicazione è possibile attraverso qualsiasi distanza, ma non può estendersi ad altri piani di esistenza.

@@ -1,0 +1,16 @@
+id: dnd.oggetto-magico.bacchetta-della-metamorfosi
+nome: Bacchetta della metamorfosi
+categoria: bacchetta
+rarita: molto-rara
+richiede_sintonia: true
+cariche: {massimo: 7, ricarica: "1d6+1"}
+attivita:
+  - tipo: incantatore
+    cd: 15
+    cariche:
+      - {incantesimo: dnd.incantesimo.metamorfosi, costo: 1}
+descrizione: |
+  Questa bacchetta ha 7 cariche. Mentre il personag-gio la impugna, può consumare 1 carica e usarla per lanciare metamorfosi (CD del tiro salvezza 15).
+
+  **Ripristinare le cariche**
+  All'alba di ogni giorno, la bacchetta recupera 1d6 + 1 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, la bacchetta va in cenere ed è distrutta.

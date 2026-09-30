@@ -1,0 +1,22 @@
+id: dnd.incantesimo.rianimare-morti
+nome: Rianimare morti
+livello: 5
+scuola: necromanzia
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.paladino
+tempo_lancio: 1 ora
+gittata: contatto
+componenti: [V, S, "M (un diamante del valore di 500 mo o più, che l'incantesimo consuma)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Con un tocco, l'incantatore riporta in vita una creatura morta, purché non sia deceduta da più di 10 giorni e non fosse un non morto al momento della morte.
+
+  La creatura torna in vita con 1 punto ferita. Inoltre, questo incantesimo neutralizza qualsiasi veleno che influenzava la creatura al momento della morte.
+
+  L'incantesimo richiude tutte le ferite mortali, ma non ripristina le parti del corpo mancanti. Se una creatura è priva di organi o parti del corpo essenziali per la sua sopravvivenza, come per esempio la testa, l'incantesimo fallisce automaticamente.
+
+  Il ritorno dalla morte è un vero e proprio travaglio. Il bersaglio subisce una penalità di -4 alle prove con d20. Ogni volta che completa un riposo lungo, questa penalità viene ridotta di 1 finché non arriva a 0.

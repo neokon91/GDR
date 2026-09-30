@@ -1,0 +1,27 @@
+id: dnd.mostro.boleto-stridente
+nome: Boleto Stridente
+taglia: media
+tipo: vegetale
+gruppo: Funghi
+allineamento: senza allineamento
+ca: {valore: 5}
+caratteristiche:
+  forza: {valore: 1, competenza: false}
+  destrezza: {valore: 1, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 3, competenza: false}
+  carisma: {valore: 1, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 5}
+sensi: {vista_cieca: 9}
+immunita_condizioni: [accecato, affascinato, assordato, spaventato]
+lingue: [nessuna]
+gs: 0
+reazioni:
+  - id: boleto-stridente.stridio
+    nome: Stridio
+    descrizione: |
+      *Attivazione:* una creatura o una fonte di luce intensa si muove entro 9 metri dal boleto stridente.
+
+      *Esito:* il boleto stridente emette uno stridio udibile fino a 90 metri da sé per 1 minuto o finché il boleto non muore.

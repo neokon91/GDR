@@ -1,0 +1,31 @@
+id: dnd.mostro.cavalcatura-ultraterrena
+nome: Cavalcatura ultraterrena
+taglia: grande
+tipo: celestiale
+sottotipo: Celestiale, Folletto o Immondo (a scelta)
+allineamento: senza allineamento
+ca: {valore: 13, variabile: true, nota: "+ il bonus di competenza dell'incantatore"}
+
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 10, competenza: false}
+velocita: {camminata: 18}
+percezione_passiva: 11
+lingue: [comprende le lingue dell'incantatore]
+
+tratti:
+  - nome: Legame con l'incantatore
+    descrizione: |
+      La cavalcatura è sotto il controllo dell'incantatore e agisce nel suo turno. Può muoversi e usare la sua reazione autonomamente, ma esegue le azioni secondo i comandi dell'incantatore.
+  - nome: "Tipo ultraterreno (scelta)"
+    descrizione: |
+      Quando viene evocata, scegli uno dei seguenti tipi: celestiale, folletto o immondo. Il tipo può influenzare l’aspetto e alcune interazioni magiche.
+azioni:
+  - nome: "Zoccoli (o attacco naturale equivalente)"
+    descrizione: |
+      *Tiro per colpire in mischia:* bonus pari al modificatore di attacco dell'incantesimo dell'incantatore, portata 1,5 m.  
+      *Colpito:* 1d8 + 4 + il bonus di competenza dell'incantatore danni contundenti (o altro tipo appropriato alla forma).

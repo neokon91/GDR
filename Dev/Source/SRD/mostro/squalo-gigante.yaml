@@ -1,0 +1,54 @@
+id: dnd.mostro.squalo-gigante
+nome: Squalo gigante
+taglia: enorme
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 23, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 21, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+iniziativa: competenza
+dadi_vita: 8
+velocita: {camminata: 5, nuoto: 18}
+abilita: [percezione: competenza]
+sensi: {vista_cieca: 18}
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 5
+
+tratti:
+  - nome: Respirare sott'acqua
+    descrizione: |
+      Lo squalo può respirare soltanto sott'acqua.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+    descrizione: |
+      Lo squalo effettua due attacchi Morso.
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +9 (con vantaggio se il bersaglio non ha tutti i punti ferita), portata 1,5 m. *Colpito:* 22 (3d10 + 6) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

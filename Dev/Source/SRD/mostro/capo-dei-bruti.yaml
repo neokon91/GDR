@@ -1,0 +1,68 @@
+id: dnd.mostro.capo-dei-bruti
+nome: Capo dei Bruti
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Bruti
+allineamento: neutrale
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 17, competenza: true}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 16, competenza: true}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 11, competenza: true}
+dadi_vita: 11
+velocita: {camminata: 9}
+equipaggiamento: [balestra pesante, cotta di maglia, martello da guerra]
+lingue: [Comune più un'altra lingua]
+gs: 4
+tratti:
+  - id: capo-dei-bruti.tattiche-del-branco
+    nome: Tattiche del Branco
+    descrizione: |
+      Il bruto dispone di Vantaggio a un tiro per colpire contro una creatura
+      se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è Incapacitato.
+azioni:
+  - id: capo-dei-bruti.multiattacco
+    nome: Multiattacco
+    descrizione: Il bruto effettua due attacchi, usando Martello da guerra o Balestra pesante in qualsiasi combinazione.
+  - id: capo-dei-bruti.martello-de-guerra
+    nome: Martello da Guerra
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m.
+      *Colpito:* 12 (2d8 + 3) danni Contundenti.
+      Se il bersaglio è una creatura di taglia Grande o inferiore, il bruto lo spinge fino a 3 metri lontano da sé.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.martello-da-guerra
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - id: capo-dei-bruti.balestra-pesante
+    nome: Balestra Pesante
+    descrizione: |
+      *Tiro per Colpire a Distanza:* +4, gittata 30/120 m.
+      *Colpito:* 13 (2d10 + 2) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.balestra-pesante
+          gittata: {normale: 30, lunga: 120}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

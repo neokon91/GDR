@@ -22,9 +22,10 @@ import json
 from pathlib import Path
 
 from archivio_io import voci
+from common import SRD_DIR
 
 ROOT = Path(__file__).resolve().parents[2]
-SRD = ROOT / "archivio" / "srd"
+SRD = SRD_DIR
 OUT = ROOT / "plugin" / "data" / "srd_oggetti.json"
 
 
@@ -34,7 +35,7 @@ def _slug(name: str) -> str:
 
 def main() -> None:
     if not SRD.is_dir():
-        raise SystemExit(f"archivio/srd non trovato ({SRD}). Manca il symlink/submodule 'archivio'?")
+        raise SystemExit(f"SRD non trovata ({SRD}): la copia vendorizzata manca (git checkout Dev/Source/SRD).")
     files = voci(SRD / "magic_items", "oggetto-magico")
     per_id: dict[str, dict] = {}
     for f, o in files:

@@ -1,0 +1,39 @@
+id: dnd.mostro.acquila
+nome: Aquila
+taglia: piccola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 3, volo: 18}
+abilita: [percezione: maestria]
+lingue: [nessuna]
+gs: 0
+habitat: [costale, prateria, collina, montagna]
+azioni:
+  - id: acquila.speroni
+    nome: Speroni
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +4, portata 1,5 m.
+      *Colpito:* 4 (1d4 + 2) danni Taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}

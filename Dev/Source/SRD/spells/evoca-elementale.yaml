@@ -1,0 +1,37 @@
+id: dnd.incantesimo.evoca-elementale
+nome: Evoca elementale
+livello: 5
+scuola: evocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore può evocare uno spirito intangibile di taglia Grande dai Piani Elementali che appare in uno spazio libero entro gittata. L'incantatore sceglie l'elemento dello spirito, che ne determina il tipo di danno: aria (fulmine), terra (tuono), fuoco (fuoco) o acqua (freddo). Lo spirito permane per la durata dell'incantesimo.
+
+  Ogni volta che una creatura che l'incantatore è in grado di vedere entra nello spazio dello spirito o inizia il suo turno entro un raggio di 1,5 metri da esso, l'incantatore può costringerla a effettuare un tiro salvezza su Destrezza, a patto che lo spirito non stia trattenendo una creatura. In caso di fallimento, il bersaglio subisce 8d8 danni del tipo dello spirito, e il bersaglio è trattenuto fino al termine dell'incantesimo. All'inizio di ogni suo turno, il bersaglio trattenuto ripete il tiro. In caso di fallimento, il bersaglio subisce 4d8 danni del tipo determinato dallo spirito. In caso di successo, il bersaglio non è più trattenuto dallo spirito.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d8 per ogni slot di livello superiore al 4º.
+attivita:
+  # contatto: entra o inizia il turno vicino allo spirito -> TS, 8d8 + trattenuto
+  - tipo: tiro-salvezza
+    innesco: entra-nell-area
+    scelta: { id: elemento-spirito, opzioni: [fulmine, tuono, fuoco, freddo] }
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      - danno: { numero_dadi: 8, dado: d8, tipo_danno: { scelta: elemento-spirito } }
+      - concede: trattenuto
+        durata: { valore: 1, unita: minuti }
+  # trattenuto: all inizio del suo turno ripete il TS -> 4d8 (o si libera)
+  - tipo: tiro-salvezza
+    innesco: turno-inizio
+    richiede: trattenuto
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 4, dado: d8, tipo_danno: { scelta: elemento-spirito } }

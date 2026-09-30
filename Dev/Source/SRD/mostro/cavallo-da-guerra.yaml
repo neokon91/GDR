@@ -1,0 +1,38 @@
+id: dnd.mostro.cavallo-da-guerra
+nome: Cavallo da guerra
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 18}
+percezione_passiva: 11
+lingue: [nessuna]
+gs: 1/2
+
+azioni:
+  - nome: Zoccoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 9 (2d4 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore e il cavallo si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 5 (2d4) danni contundenti extra e cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d4
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

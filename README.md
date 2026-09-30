@@ -41,8 +41,8 @@ guida completa è nel **LEGGIMI** dentro il vault.
 > **Stato: sviluppo attivo** (ripreso a fine set 2026, dopo la manutenzione decisa a
 > inizio mese). Obiettivo corrente: un vault **distribuibile** che si costruisca solo da
 > contenuti condivisibili (SRD 5.2.1 CC-BY-4.0 e il codice del motore), senza il
-> repo privato `archivio`. La CI gira anche ogni notte per accorgersi quando cambiano
-> `archivio` o `regole`.
+> repo privato `archivio` (FATTO per i dati: copia vendorizzata dell'SRD). La CI gira anche
+> ogni notte per accorgersi quando cambiano `archivio` o `regole`.
 >
 > **Il mondo del DM non passa da qui** (confermato set 2026): l'archivio è il modello
 > canonico del mondo e la sua superficie è il Compendio (i mondi di
@@ -99,9 +99,11 @@ ai giocatori: `visibilita: dm` (o `pubblico: false`) nel frontmatter. Implementa
 GDR non è più isolato: è parte di un ecosistema a 4 repo condivisi (sotto
 `~/Documents/Sviluppo/projects/`) — **archivio** (dati SRD condivisi, YAML), **regole**
 (motore D&D 5.5e in TS: primitive + combattimento event-sourced), **GDR** (questo: vault +
-plugin), **Compendio** (app Astro). In sviluppo `archivio` e `regole` sono **symlink
-gitignorati** dentro `GDR/`; esbuild bundla il motore `regole` nel plugin e i generatori
-leggono `archivio`. Il plugin ha un **runtime di combattimento nativo** (Board + motore +
+plugin), **Compendio** (app Astro). esbuild bundla il motore `regole` (symlink o checkout
+accanto, gitignorato) nel plugin. I generatori leggono **solo la copia vendorizzata
+dell'SRD** in `Dev/Source/SRD/` (CC-BY-4.0): l'archivio è privato e per costruire GDR non
+serve. Chi ha l'archivio accanto la aggiorna con `npm run sync-srd` (porta qui solo
+`srd/`); `npm run sync-srd:check`, la CI notturna e un test segnalano quando resta indietro. Il plugin ha un **runtime di combattimento nativo** (Board + motore +
 statblock + condizioni "vere"). → [docs/architecture.md](docs/architecture.md).
 
 ## Documentazione
@@ -125,7 +127,7 @@ Dev/Source/JS/        create_entity.js · crea_pg.js/sali_pg.js · meta_actions.
 Dev/Tools/            common.py · render.py · build_srd.py · build_personaggio/ · gen_bestiario.py · fetch_plugins.py · validate.py
 docs/                 architecture · schema_homebrew · releasing
 ```
-(Dati SRD e motore vivono nei repo `archivio` e `regole`, symlink gitignorati.)
+(`Dev/Source/SRD/` è la copia vendorizzata di `archivio/srd`; il motore vive in `regole`, symlink gitignorato.)
 
 ## Il modello (YAML)
 

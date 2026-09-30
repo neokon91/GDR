@@ -1,0 +1,14 @@
+id: dnd.oggetto-magico.scimitarra-della-velocità
+nome: Scimitarra della velocità
+categoria: arma
+sottotipo: scimitarra
+rarita: molto-rara
+richiede_sintonia: true
+base: dnd.arma.scimitarra
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_colpire, operazione: somma, valore: {piatto: 2}}
+      - {bersaglio: danni, operazione: somma, valore: {piatto: 2}}
+descrizione: |
+  Il personaggio ottiene un bonus di +2 ai tiri per col-pire e a quelli per i danni effettuati con  quest'arma magica. Può inoltre effettuare un attacco con quest'arma come azione bonus a ogni suo turno.

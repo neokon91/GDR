@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.anello-della-vista-a-raggi-x
+nome: Anello della vista a raggi X
+categoria: anello
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Finché il personaggio indossa questo anello, può effettuare un'azione di Magia per ottenere la vista a raggi X con un raggio d'azione di 9 metri per 1 minuto. Gli oggetti solidi che si trovano entro il raggio d'azione appaiono al personaggio come trasparenti e non impediscono alla luce di attra-versarli. La vista può penetrare 30 cm di pietra, 2,5 centimetri di metallo comune o fino a 90 cen-timetri di legno o terriccio. Tuttavia, è bloccata da sostanze più dense o da un sottile strato di piombo.
+  Ogni volta che usa di nuovo l'anello prima di completare un riposo lungo, il personaggio deve superare un tiro salvezza su Costituzione con CD 15, altrimenti ottiene 1 livello di indebolimento.

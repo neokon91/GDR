@@ -1,0 +1,5 @@
+id: dnd.oggetto.otre
+nome: Otre
+categoria: equipaggiamento-avventura
+costo: {valore: 2, valuta: moneta-argento}
+peso: {valore: 2.5, unita: kg, nota: pieno}

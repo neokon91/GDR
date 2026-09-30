@@ -1,0 +1,7 @@
+id: dnd.oggetto.sella-militare
+nome: Sella militare
+categoria: finimenti-e-veicoli
+costo: {valore: 20, valuta: moneta-oro}
+peso: {valore: 15, unita: kg}
+descrizione: |
+  Una sella militare conferisce Vantaggio a qualsiasi prova di caratteristica effettuata per rimanere in sella.

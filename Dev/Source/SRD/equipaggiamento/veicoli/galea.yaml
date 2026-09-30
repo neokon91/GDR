@@ -1,0 +1,8 @@
+id: dnd.veicolo.galea
+nome: Galea
+tipo: veicolo
+costo: {valore: 30, valuta: moneta-oro}
+classe_armatura: 15
+velocita: {viaggio: 6}  # km/h — i veicoli viaggiano, non camminano
+equipaggio: 80
+carico: 150 t

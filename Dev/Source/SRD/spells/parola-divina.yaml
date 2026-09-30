@@ -1,0 +1,23 @@
+id: dnd.incantesimo.parola-divina
+nome: Parola divina
+livello: 7
+scuola: invocazione
+classi:
+  - dnd.classe.chierico
+tempo_lancio: azione bonus
+gittata: 9
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore pronuncia una parola pervasa di potere dei Piani Superiori. Ogni creatura a sua scelta situata entro gittata effettua una tiro salvezza su Carisma. In caso di fallimento, un bersaglio che ha 50 punti ferita o meno subisce un effetto basato sui suoi punti ferita attuali, come indicato nella tabella Effetti della parola divina. Indipendentemente dai suoi punti ferita, un bersaglio celestiale, elementale, folletto o immondo che fallisce il suo tiro salvezza viene respinto sul suo piano d'origine (se non vi si trova già) e non può ritornare sul piano attuale per 24 ore in alcun modo se non tramite un incantesimo desiderio.
+
+  ### Effetti della parola divina
+
+  | Punti ferita | Effetto |
+  | --- | --- |
+  | 0-20 | Il bersaglio muore. |
+  | 21-30 | Il bersaglio è accecato, assordato e stordito per 1 ora. |
+  | 31-40 | Il bersaglio è accecato e assordato per 10 minuti. |
+  | 41-50 | Il bersaglio è assordato per 1 minuto. |

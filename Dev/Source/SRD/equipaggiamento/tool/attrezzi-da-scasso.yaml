@@ -1,0 +1,13 @@
+id: dnd.strumento.attrezzi-da-scasso
+nome: Attrezzi da Scasso
+categoria: strumenti
+costo: {valore: 25, valuta: moneta-oro}
+peso: {valore: 0.5, unita: kg}
+caratteristica: destrezza
+utilizzo:
+  - azione: Scassinare una serratura
+    cd: 15
+  - azione: Disinnescare una trappola
+    cd: 15
+creazione: []
+descrizione: |

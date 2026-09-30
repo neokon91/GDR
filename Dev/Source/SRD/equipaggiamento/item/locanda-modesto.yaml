@@ -1,0 +1,4 @@
+id: dnd.oggetto.locanda-modesto
+nome: Locanda Modesto
+categoria: vitto-e-alloggio
+costo: {valore: 5, valuta: moneta-argento}

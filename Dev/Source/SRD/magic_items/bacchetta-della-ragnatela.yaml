@@ -1,0 +1,16 @@
+id: dnd.oggetto-magico.bacchetta-della-ragnatela
+nome: Bacchetta della ragnatela
+categoria: bacchetta
+rarita: non-comune
+richiede_sintonia: true
+cariche: {massimo: 7, ricarica: "1d6+1"}
+attivita:
+  - tipo: incantatore
+    cd: 13
+    cariche:
+      - {incantesimo: dnd.incantesimo.ragnatela, costo: 1}
+descrizione: |
+  Questa bacchetta ha 7 cariche. Mentre il personaggio la impugna, può consumare 1 carica e usarla per lanciare ragnatela (CD del tiro salvezza 13).
+
+  **Ripristinare le cariche**
+  All'alba di ogni giorno, la bacchetta recupera 1d6 + 1 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, la bacchetta va in cenere ed è distrutta.

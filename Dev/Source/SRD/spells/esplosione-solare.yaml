@@ -1,0 +1,29 @@
+id: dnd.incantesimo.esplosione-solare
+nome: Esplosione solare
+livello: 8
+scuola: invocazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 45
+componenti: [V, S, "M (un frammento di pietra di sole)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+    fallimento:
+      - danno: { numero_dadi: 12, dado: d6, tipo_danno: radioso }
+      - concede: accecato
+        durata: { valore: 1, unita: minuti }
+    successo: danno-dimezzato
+descrizione: |
+  Una radiosa luce solare splende in una sfera del raggio di 18 metri, centrata su un punto entro gittata a scelta dell'incantatore. Ogni creatura al suo interno deve effettuare un tiro salvezza su Costituzione. Se lo fallisce, subisce 12d6 danni radiosi e rimane accecata per 1 minuto, mentre se lo supera subisce solo la metà dei danni.
+
+  Una creatura accecata da questo incantesimo effettua un altro tiro salvezza su Costituzione al termine di ogni suo turno, facendone svanire l'effetto in caso di successo.
+
+  Questo incantesimo dissolve qualsiasi oscurità nell'area creata da un incantesimo.

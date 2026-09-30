@@ -1,0 +1,5 @@
+id: dnd.oggetto.veste
+nome: Veste
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-oro}
+peso: {valore: 2, unita: kg}

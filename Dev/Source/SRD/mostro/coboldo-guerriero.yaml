@@ -1,0 +1,49 @@
+id: dnd.mostro.coboldo-guerriero
+nome: Coboldo guerriero
+taglia: piccola
+tipo: drago
+gruppo: Coboldo
+allineamento: neutrale
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 7, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 9, competenza: false}
+  intelligenza: {valore: 8, competenza: false}
+  saggezza: {valore: 7, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 8
+equipaggiamento:
+  - {articolo: dnd.arma.pugnale, quantita: 3}
+lingue: [Comune, Draconico]
+gs: 1/8
+
+tratti:
+  - nome: Sensibilità al sole
+    descrizione: |
+      Finché è esposto alla luce del sole, il coboldo subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+  - nome: Tattiche del branco
+    descrizione: |
+      Il coboldo dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno degli alleati del mostro si trova entro 1,5 metri dalla creatura e l'alleato non è incapacitato.
+azioni:
+  - nome: Pugnale
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +4, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d4 + 2) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.pugnale
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

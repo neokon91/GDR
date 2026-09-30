@@ -1,0 +1,50 @@
+id: dnd.mostro.satiro
+nome: Satiro
+taglia: media
+tipo: folletto
+allineamento: caotico neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 12, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 14, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 12}
+abilita: [furtivita: competenza, percezione: competenza, intrattenere: maestria]
+percezione_passiva: 12
+lingue: [Comune, Elfico, Silvano]
+gs: 1/2
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il satiro dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Zoccoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, il satiro lo spinge fino a 3 metri lontano da sé.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: contundente
+              bonus: {caratteristica: destrezza}
+  - nome: Derisione
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 12, una creatura che il satiro è in grado di vedere entro 27 metri. *Fallimento:* 5 (1d6 + 2) danni psichici.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: carisma, base: 8, competenza: true}

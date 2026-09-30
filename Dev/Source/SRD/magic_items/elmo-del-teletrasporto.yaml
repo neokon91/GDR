@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.elmo-del-teletrasporto
+nome: Elmo del teletrasporto
+categoria: oggetto-meraviglioso
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Questo elmo ha 3 cariche. Il personaggio che lo indossa può consumare 1 carica per lanciare teletrasporto da esso. L'elmo recupera 1d3 cariche consumate all'alba di ogni giorno.

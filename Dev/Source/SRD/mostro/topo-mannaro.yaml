@@ -1,0 +1,80 @@
+id: dnd.mostro.topo-mannaro
+nome: Topo mannaro
+taglia: [media, piccola]
+tipo: mostruosita
+sottotipo: licantropo
+allineamento: legale malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 11
+velocita: {camminata: 9, scalata: 9}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 14
+equipaggiamento:
+  - {articolo: dnd.arma.balestra-a-mano}
+lingue: ["Comune (non può parlare in forma di topo)"]
+gs: 2
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il topo mannaro effettua due attacchi, usando Graffio o Balestra a mano in qualsiasi combinazione. Può sostituire un attacco con un attacco Morso.
+  - nome: Graffio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: "Morso (solo in forma di topo o ibrida)"
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (2d4 + 3) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 11. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa un topo mannaro sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione del topo mannaro per 24 ore.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: "Balestra a mano (solo in forma umanoide o ibrida)"
+    descrizione: |
+      *Tiro per colpire a distanza:* +5, portata 9/36 m. *Colpito:* 6 (1d6 + 3) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.balestra-a-mano
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: Mutaforma
+    descrizione: |
+      Il topo mannaro si trasforma in un ibrido umanoide-topo di taglia Media o in un topo di taglia Piccola, altrimenti torna alla sua forma originale di umanoide. Le sue statistiche di gioco, a eccezione della taglia, restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato.

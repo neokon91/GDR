@@ -1,0 +1,16 @@
+id: dnd.incantesimo.vedere-invisibilita
+nome: Vedere invisibilità
+livello: 2
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (un pizzico di talco)"]
+concentrazione: false
+rituale: false
+durata: 1 ora
+descrizione: |
+  Per la durata dell'incantesimo, l'incantatore è in grado di vedere le creature e gli oggetti invisibili e proiettare la sua vista sul Piano Etereo. Le creature e gli oggetti appaiono spettrali.

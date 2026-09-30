@@ -1,0 +1,5 @@
+id: dnd.valuta.moneta-argento
+nome: Moneta d'Argento
+abb: ma
+categoria: valuta
+costo: {valore: 0.1, valuta: moneta-oro}

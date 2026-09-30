@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.ventaglio
+nome: Ventaglio
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Finché il personaggio impugna questo ventaglio, può usarlo per lanciare folata di vento (CD del tiro salvezza 13). Ogni volta che viene utilizzato di nuovo prima dell'alba successiva, c'è una probabilità cumulativa del 20% che non funzioni. Se ciò dovesse accadere, si ridurrà in inutili brandelli non magici.

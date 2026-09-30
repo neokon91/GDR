@@ -1,0 +1,24 @@
+id: dnd.incantesimo.palla-di-fuoco-ritardata
+nome: Palla di fuoco ritardata
+livello: 7
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 45
+componenti: [V, S, "M (una pallina di guano di pipistrello e zolfo)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Un raggio di luce gialla si sprigiona dall'incantatore per poi condensarsi in un punto a sua scelta entro gittata, formando una sfera scintillante che permane per la durata dell'incantesimo. Al termine dell'incantesimo, la sfera esplode e ogni creatura all'interno di una sfera del raggio di 6 metri centrata su quel punto effettua un tiro salvezza su Destrezza. In caso di fallimento, la creatura subisce una quantità di danni da fuoco pari al totale dei danni accumulati, o la metà dei danni in caso di successo.
+
+  I danni base dell'incantesimo sono pari a 12d6 e aumentano di 1d6 ogni volta che termina il turno dell'incantatore e l'incantesimo è ancora attivo.
+
+  Se una creatura tocca la sfera scintillante prima del termine dell'incantesimo, effettua un tiro salvezza su Destrezza. In caso di fallimento, l'incantesimo termina, causando l'esplosione della sfera. In caso di successo, la creatura può lanciare la sfera fino a una distanza di 12 metri: se entra nello spazio di una creatura o si scontra con un oggetto solido, l'incantesimo termina, facendo esplodere la sfera.
+
+  Quando la sfera esplode, gli oggetti infiammabili all'interno dell'esplosione che non sono indossati o trasportati iniziano a bruciare.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni base aumentano di 1d6 per ogni slot di livello superiore al 7º.

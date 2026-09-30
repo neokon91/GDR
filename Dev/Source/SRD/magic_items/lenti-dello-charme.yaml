@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.lenti-dello-charme
+nome: Lenti dello charme
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+descrizione: |
+  Queste lenti di cristallo si adattano agli occhi di chi le indossa. Possiedono 3 cariche. Mentre il personaggio le indossa, può consumare 1 o più cariche per lanciare un incantesimo charme su persone (CD del tiro salvezza 13). Consumando 1 carica, il personaggio lancia la versione di 1º livello  dell'incantesimo.
+  Può aumentare il livello  dell'incantesimo di 1 per ogni carica aggiuntiva consumata. Le lenti recuperano tutte le cariche consumate all'alba di ogni giorno.

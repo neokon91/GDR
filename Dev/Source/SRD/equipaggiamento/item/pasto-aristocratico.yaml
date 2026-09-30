@@ -1,0 +1,4 @@
+id: dnd.oggetto.pasto-aristocratico
+nome: Pasto Aristocratico
+categoria: vitto-e-alloggio
+costo: {valore: 6, valuta: moneta-argento}

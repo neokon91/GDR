@@ -1,0 +1,58 @@
+id: dnd.mostro.scheletro-di-minotauro
+nome: Scheletro di minotauro
+taglia: grande
+tipo: non-morto
+gruppo: Scheletri
+allineamento: legale malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 9
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, indebolimento]
+vulnerabilita: [contundente]
+lingue: [capisce l'Abissale ma non lo parla]
+gs: 2
+
+azioni:
+  - nome: Schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Trafiggere
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e lo scheletro si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 9 (2d8) danni perforanti extra e cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

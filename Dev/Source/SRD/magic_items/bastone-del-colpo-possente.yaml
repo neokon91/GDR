@@ -1,0 +1,17 @@
+id: dnd.oggetto-magico.bastone-del-colpo-possente
+nome: Bastone del colpo possente
+categoria: bastone
+rarita: molto-rara
+richiede_sintonia: true
+base: dnd.arma.bastone-ferrato
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_colpire, operazione: somma, valore: {piatto: 3}}
+      - {bersaglio: danni, operazione: somma, valore: {piatto: 3}}
+descrizione: |
+  Questo bastone può essere impugnato come un bastone ferrato magico che conferisce un bonus di +3 ai tiri per colpire e ai tiri per i danni effettuati con esso.Il bastone ha 10 cariche. Quando il personaggio colpisce con un attacco in mischia usando il bastone, può consumare fino a 3 delle sue cariche. 
+  Per ogni carica consumata, il bersaglio subisce 1d6 danni da forza extra.
+
+  **Ripristinare le cariche**
+  All'alba di ogni giorno, il bastone recupera 1d6 + 4 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, il bastone diventa un bastone ferrato non magico.

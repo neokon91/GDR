@@ -1,0 +1,65 @@
+id: dnd.mostro.segugio-infernale
+nome: Segugio infernale
+taglia: media
+tipo: immondo
+allineamento: legale malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 9
+velocita: {camminata: 15}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 15
+immunita_danni: [fuoco]
+lingue: [capisce l'Infernale ma non lo parla]
+gs: 3
+
+tratti:
+  - nome: Tattiche del branco
+    descrizione: |
+      Il segugio dispone di vantaggio nel tiro per colpire contro una creatura se almeno uno degli alleati del segugio si trova entro 1,5 metri dalla creatura e non è incapacitato.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+    descrizione: |
+      Il segugio effettua due attacchi Morso.
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni perforanti più 3 (1d6) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di fuoco (ricarica 5-6)"
+    id: soffio-di-fuoco-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 12, tutte le creature in un cono di 4,5 metri. *Fallimento:* 17 (5d6) danni da fuoco. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 5, dado: d6, tipo_danno: fuoco}
+        successo: danno-dimezzato

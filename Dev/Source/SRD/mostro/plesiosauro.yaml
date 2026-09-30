@@ -1,0 +1,44 @@
+id: dnd.mostro.plesiosauro
+nome: Plesiosauro
+taglia: grande
+tipo: bestia
+sottotipo: dinosauro
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 6, nuoto: 12}
+abilita: [furtivita: competenza, percezione: competenza]
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 2
+
+tratti:
+  - nome: Apnea
+    descrizione: |
+      Il plesiosauro può trattenere il respiro per 1 ora.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 11 (2d6 + 4) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

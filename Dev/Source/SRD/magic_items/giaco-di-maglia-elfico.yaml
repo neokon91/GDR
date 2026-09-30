@@ -1,0 +1,12 @@
+id: dnd.oggetto-magico.giaco-di-maglia-elfico
+nome: Giaco di maglia elfico
+categoria: armatura
+sottotipo: cotta di maglia o giaco di maglia
+rarita: rara
+richiede_sintonia: false
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: somma, valore: 1}
+descrizione: |
+  Quando il personaggio indossa quest'armatura, ottiene un bonus di +1 alla Classe Armatura. Inoltre, è considerato competente in questa armatura anche se non ha competenza nelle armature medie o pesanti.

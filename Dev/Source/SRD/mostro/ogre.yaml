@@ -1,0 +1,59 @@
+id: dnd.mostro.ogre
+nome: Ogre
+taglia: grande
+tipo: gigante
+allineamento: caotico malvagio
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 7, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 8
+equipaggiamento:
+  - {articolo: dnd.arma.giavellotto, quantita: 3}
+  - {articolo: dnd.arma.randello-pesante}
+lingue: [Comune, Gigante]
+gs: 2
+
+azioni:
+  - nome: Giavellotto
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 9/36 m. *Colpito:* 11 (2d6 + 4) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.giavellotto
+          gittata: {normale: 9, lunga: 36}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Randello pesante
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.randello-pesante
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

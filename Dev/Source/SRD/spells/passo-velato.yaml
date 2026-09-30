@@ -1,0 +1,16 @@
+id: dnd.incantesimo.passo-velato
+nome: Passo velato
+livello: 2
+scuola: evocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione bonus
+gittata: incantatore
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore è avvolto per un istante da una foschia argentata e si teletrasporta di un massimo di 9 metri fino a uno spazio libero che è in grado di vedere.

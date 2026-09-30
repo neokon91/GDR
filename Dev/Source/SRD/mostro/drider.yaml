@@ -1,0 +1,70 @@
+id: dnd.mostro.drider
+nome: Drider
+taglia: grande
+tipo: mostruosita
+allineamento: caotico malvagio
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 19, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 13, competenza: false}
+  saggezza: {valore: 16, competenza: false}
+  carisma: {valore: 12, competenza: false}
+dadi_vita: 13
+velocita: {camminata: 9, scalata: 9}
+abilita: [percezione: competenza, furtivita: maestria]
+sensi: {scurovisione: 36}
+percezione_passiva: 16
+lingue: [Elfico, Sottocomune]
+gs: 6
+
+tratti:
+  - nome: Andatura sulla ragnatela
+    descrizione: |
+      Il drider ignora le restrizioni di movimento causate dalle ragnatele e conosce l'ubicazione esatta di ogni altra creatura a contatto con la stessa ragnatela.
+  - nome: Movimenti del ragno
+    descrizione: |
+      Il drider può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+  - nome: Sensibilità al sole
+    descrizione: |
+      Finché è esposto alla luce del sole, il drider subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il drider effettua tre attacchi, usando Zampa anteriore o Esplosione di veleno in qualsiasi combinazione.
+  - nome: Zampa anteriore
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 13 (2d8 + 4) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Esplosione di veleno
+    descrizione: |
+      *Tiro per colpire a distanza:* +6, gittata 36 m. *Colpito:* 13 (3d6 + 3) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: veleno
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: "Magia della Regina Ragno (ricarica 5-6)"
+    descrizione: |
+      Il drider lancia luminescenza, oscurità o ragnatela, senza bisogno di componenti materiali e utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14).

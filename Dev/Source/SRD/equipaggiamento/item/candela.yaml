@@ -1,0 +1,10 @@
+id: dnd.oggetto.candela
+nome: Candela
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 1
+  unita: moneta-rame
+peso:
+  valore: null
+descrizione: |
+  Per 1 ora, una candela accesa emana Luce Intensa in un raggio di 1,5 metri e Luce Fioca per ulteriori 1,5 metri.

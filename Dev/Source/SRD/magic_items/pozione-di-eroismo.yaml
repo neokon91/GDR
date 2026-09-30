@@ -1,0 +1,14 @@
+id: dnd.oggetto-magico.pozione-di-eroismo
+nome: Pozione di eroismo
+categoria: pozione
+rarita: rara
+richiede_sintonia: false
+consumabile: true
+attivita:
+  - tipo: potenziamento
+    concede: benedetto
+    bersaglio: se-stesso
+    durata: {valore: 1, unita: ore}
+    pf_temporanei: {bonus: 10}
+descrizione: |
+  Quando il personaggio beve questa pozione, ottiene 10 punti ferita temporanei per 1 ora. Per la stessa durata, il personaggio è sotto l'effetto dell'incantesimo benedizione (non è richiesta la concentrazione).Il liquido blu della pozione genera bolle e vapore, come se stesse ribollendo.

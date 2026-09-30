@@ -1,0 +1,9 @@
+id: dnd.oggetto.bottiglia-di-vetro
+nome: Bottiglia di Vetro
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 2
+  unita: moneta-oro
+peso: {valore: 1, unita: kg}
+descrizione: |
+  Una bottiglia di vetro può contenere fino a una pinta e mezza.

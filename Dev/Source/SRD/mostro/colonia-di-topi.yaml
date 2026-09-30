@@ -1,0 +1,43 @@
+id: dnd.mostro.colonia-di-topi
+nome: Colonia di topi
+taglia: media
+sottodimensione: minuscole
+tipo: sciame
+sottotipo: di bestie
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 9, competenza: false}
+  destrezza: {valore: 11, competenza: true}
+  costituzione: {valore: 9, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 9, scalata: 9}
+sensi: {scurovisione: 9}
+percezione_passiva: 10
+resistenze: [contundente, perforante, tagliente]
+immunita_condizioni: [affascinato, afferrato, paralizzato, pietrificato, prono, spaventato, stordito, trattenuto]
+lingue: [nessuna]
+gs: 1/4
+
+tratti:
+  - nome: Sciame
+    descrizione: |
+      La colonia può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura abbastanza grande per un topo Minuscolo. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+azioni:
+  - nome: Morsi
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 5 (2d4) danni perforanti, o 2 (1d4) danni perforanti se lo sciame è sanguinante.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno: {numero_dadi: 2, dado: d4, tipo_danno: perforante}

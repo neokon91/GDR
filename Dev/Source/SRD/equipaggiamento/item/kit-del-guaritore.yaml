@@ -1,0 +1,10 @@
+id: dnd.oggetto.kit-del-guaritore
+nome: Kit del guaritore
+categoria: equipaggiamento-avventura
+costo:
+  valore: 5
+  unita: moneta-oro
+peso: {valore: 1.5, unita: kg}
+descrizione: |
+  Un kit del guaritore ha dieci utilizzi.
+  Come azione Utilizzo, puoi consumare uno dei suoi utilizzi per stabilizzare una creatura priva di sensi con 0 Punti Ferita, senza dover effettuare una prova di Saggezza (Medicina).

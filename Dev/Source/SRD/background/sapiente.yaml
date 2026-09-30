@@ -1,0 +1,13 @@
+id: dnd.background.sapiente
+nome: Sapiente
+punteggi_caratteristica: [costituzione, intelligenza, saggezza]
+talento_origine: dnd.talento.iniziato-alla-magia
+competenze:
+  abilita: [arcano, storia]
+  strumenti: [dnd.strumento.attrezzatura-da-calligrafo]
+equipaggiamento_alternativo:
+  scelte:
+    - nome: B
+      oggetti:
+        - articolo: dnd.valuta.moneta-oro
+          quantita: 50

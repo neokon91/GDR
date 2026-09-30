@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.solvente-universale
+nome: Solvente universale
+categoria: oggetto-meraviglioso
+rarita: leggendaria
+richiede_sintonia: true
+descrizione: |
+  Questa fiala contiene un liquido lattiginoso che emana un forte odore di alcool. Quando viene trovata, una fiala ne contiene (1d6 + 1) x 30 grammi.
+  Il personaggio può effettuare un'azione di Utilizzo per versare 30 grammi o più di solvente su una superficie a portata. Il liquido dissolve istanta-neamente qualsiasi materiale o sostanza adesiva toccata, inclusa la colla meravigliosa, che copra fino a un'area quadrata con lato di 30 centimetri.

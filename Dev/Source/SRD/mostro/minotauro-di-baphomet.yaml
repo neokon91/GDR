@@ -1,0 +1,55 @@
+id: dnd.mostro.minotauro-di-baphomet
+nome: Minotauro di Baphomet
+taglia: grande
+tipo: mostruosita
+allineamento: caotico malvagio
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 16, competenza: false}
+  carisma: {valore: 9, competenza: false}
+dadi_vita: 10
+velocita: {camminata: 12}
+abilita: [percezione: maestria, sopravvivenza: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 17
+lingue: [Abissale]
+gs: 3
+
+azioni:
+  - nome: Falcione abissale
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 10 (1d12 + 4) danni taglienti più 10 (3d6) danni necrotici.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d12
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Trafiggere (ricarica 5-6)"
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 18 (4d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e il minotauro si è mosso di 3 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 10 (3d6) danni perforanti extra e cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

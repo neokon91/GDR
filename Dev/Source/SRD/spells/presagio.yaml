@@ -1,0 +1,29 @@
+id: dnd.incantesimo.presagio
+nome: Presagio
+livello: 2
+scuola: divinazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+tempo_lancio: 1 minuto
+gittata: incantatore
+componenti: [V, S, "M (bastoncini, ossa, carte o altri oggetti da divinazione dotati di contrassegni speciali, del valore di 25 mo o più)"]
+concentrazione: false
+rituale: true
+durata: istantanea
+descrizione: |
+  L'incantatore riceve un presagio da un'entità ultraterrena sui risultati di un corso d'azione che intende effettuare nei prossimi 30 minuti. Il GM sceglie il presagio dalla tabella Presagi.
+
+  ### Presagi
+
+  | Presagio | Con risultati... |
+  | --- | --- |
+  | Ventura | Positivi |
+  | Sventura | Negativi |
+  | Ventura e sventura | Positivi e negativi |
+  | Indifferenza | Né positivi né negativi |
+
+  L'incantesimo non tiene conto delle circostanze, come altri incantesimi, che potrebbero modificare i risultati.
+
+  Se l'incantatore lancia l'incantesimo più volte prima di completare un riposo lungo, esiste una probabilità cumulativa del 25% di non ottenere risposta per ogni lancio dopo il primo.

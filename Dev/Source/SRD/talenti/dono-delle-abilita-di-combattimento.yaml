@@ -1,0 +1,14 @@
+id: dnd.talento.dono-delle-abilita-di-combattimento
+nome: Dono delle abilita di combattimento
+categoria: dono-epico
+prerequisito: 19º livello o superiore
+ripetibile: false
+parametri:
+  - id: caratteristica
+    tipo: caratteristica
+    quantita: 1
+    scelte: [tutte]
+    valore: 1
+    massimo: 30
+descrizione: |
+  +1 a una caratteristica, massimo 30; un tiro per colpire mancato puo comunque colpire, una volta per turno.

@@ -1,0 +1,46 @@
+id: dnd.mostro.bruto
+nome: Bruto
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Bruti
+allineamento: neutrale
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 9}
+equipaggiamento: [dnd.armatura.armatura-di-cuoio, dnd.arma.balestra-pesante, dnd.arma.mazza]
+lingue: [dnd.lingua.comune]
+gs: 1/2
+tratti:
+  - id: bruto.tattiche-del-branco
+    nome: Tattiche del Branco
+    descrizione: |
+      Il bruto dispone di Vantaggio a un tiro per colpire contro una creatura
+      se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è Incapacitato.
+azioni:
+  - id: bruto.mazza
+    nome: Mazza
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +4, portata 1,5 m.
+      *Colpito:* 5 (1d6 + 2) danni Contundenti
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: arma-mischia, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, usa: dnd.arma.mazza, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 1, dado: d6, tipo_danno: contundente, bonus: { caratteristica: forza } }
+  - id: bruto.balestra-pesante
+    nome: Balestra Pesante
+    descrizione: |
+      *Tiro per Colpire a Distanza:* [[attacco]], gittata 30/120 m.
+      *Colpito:* 6 ([[danno]]) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: arma-distanza, bonus: { caratteristica: destrezza, competenza: true }, bersagli: 1, usa: dnd.arma.balestra-pesante, gittata: { normale: 30, lunga: 120 } }
+        colpito:
+          - danno: { numero_dadi: 1, dado: d10, tipo_danno: perforante, bonus: { caratteristica: destrezza } }

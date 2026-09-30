@@ -1,0 +1,40 @@
+id: dnd.mostro.albero-risvegliato
+nome: Albero risvegliato
+taglia: enorme
+tipo: vegetale
+gruppo: Vegetali risvegliati
+allineamento: neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 6, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 6}
+percezione_passiva: 10
+resistenze: [contundente, perforante]
+vulnerabilita: [fuoco]
+lingue: [Comune più un'altra lingua]
+gs: 2
+habitat: [foresta]
+azioni:
+  - id: albero-risvegliato.schianto
+    nome: Schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 14 (3d6 + 4) danni contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

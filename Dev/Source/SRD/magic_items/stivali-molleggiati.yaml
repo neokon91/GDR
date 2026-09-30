@@ -1,0 +1,12 @@
+id: dnd.oggetto-magico.stivali-molleggiati
+nome: Stivali molleggiati
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: velocita.camminata, operazione: aumento, valore: 9}
+descrizione: |
+  Quando il personaggio indossa questi stivali, la sua velocità è pari a 9 metri, a meno che la velocità normale non sia superiore. Inoltre, la velocità non viene ridotta se il personaggio trasporta un peso superiore alla propria capacità di carico o indossa un'armatura pesante.
+  Una volta per ogni turno, può saltare fino a 9 metri usando solo 3 metri di movimento.

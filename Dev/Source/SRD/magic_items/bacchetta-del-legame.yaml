@@ -1,0 +1,24 @@
+id: dnd.oggetto-magico.bacchetta-del-legame
+nome: Bacchetta del legame
+categoria: bacchetta
+rarita: rara
+richiede_sintonia: true
+cariche: {massimo: 7, ricarica: "1d6+1"}
+attivita:
+  - tipo: incantatore
+    cd: 17
+    cariche:
+      - {incantesimo: dnd.incantesimo.blocca-persone, costo: 2}
+      - {incantesimo: dnd.incantesimo.blocca-mostri, costo: 5}
+descrizione: |
+  Questa bacchetta ha 7 cariche.
+
+  **Incantesimi**
+  Mentre il personaggio impugna la bacchetta, può usarla per lanciare uno degli incantesimi (CD del tiro salvezza 17) dalla seguente tabella. La tabella indica quante cariche vanno consumate per lanciare l'incantesimo.
+
+  ### Incantesimo Costo in cariche
+  **Blocca mostri** 5
+  **Blocca persone** 2
+
+  **Ripristinare le cariche**
+  All'alba di ogni giorno, la bacchetta recupera 1d6 + 1 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, la bacchetta va in cenere ed è distrutta

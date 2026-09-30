@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.anello-della-caduta-morbida
+nome: Anello della caduta morbida
+categoria: anello
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Quando il personaggio cade indossando questo anello, scende di 18 metri per round e non subisce danni dalla caduta.

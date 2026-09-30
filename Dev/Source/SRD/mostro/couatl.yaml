@@ -1,0 +1,88 @@
+id: dnd.mostro.couatl
+nome: Couatl
+taglia: media
+tipo: celestiale
+allineamento: legale buono
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 20, competenza: false}
+  costituzione: {valore: 17, competenza: true}
+  intelligenza: {valore: 18, competenza: false}
+  saggezza: {valore: 20, competenza: true}
+  carisma: {valore: 18, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 9, volo: 27}
+sensi: {vista_pura: 36, telepatia: 36}
+percezione_passiva: 15
+resistenze: [contundente, perforante, tagliente]
+immunita_danni: [psichico, radioso]
+lingue: [tutte]
+gs: 4
+
+tratti:
+  - nome: Mente schermata
+    descrizione: |
+      I pensieri del couatl non possono essere letti in alcun modo e le altre creature possono comunicare telepaticamente con lui solo se lo permette.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (1d12 + 5) danni perforanti, e il bersaglio è avvelenato fino al termine del turno successivo del couatl.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d12
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Incantesimi
+    descrizione: |
+      Il couatl lancia uno dei seguenti incantesimi, senza bisogno di componenti, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15):
+
+      *1/giorno ciascuno:*
+      - creare cibo e acqua
+      - ristorare superiore
+      - scrutare
+      - sogno
+      - sonno
+
+      *A volontà:*
+      - individuazione dei pensieri
+      - individuazione del bene e del male
+      - individuazione del magico
+      - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        cd: 15
+        a_volonta:
+          - dnd.incantesimo.individuazione-dei-pensieri
+          - dnd.incantesimo.individuazione-del-bene-e-del-male
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.trasformazione
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.creare-cibo-e-acqua
+              - dnd.incantesimo.ristorare-superiore
+              - dnd.incantesimo.scrutare
+              - dnd.incantesimo.sogno
+              - dnd.incantesimo.sonno
+  - nome: Stritolare
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 15, una creatura di taglia Media o inferiore che il couatl è in grado di vedere entro 1,5 metri. *Fallimento:* 8 (1d6 + 5) danni contundenti. Il bersaglio è afferrato (CD 13 per sfuggire) ed è trattenuto finché la presa perdura.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: destrezza, base: 8, competenza: true}
+azioni_bonus:
+  - nome: "Aiuto divino (2/giorno)"
+    descrizione: |
+      Il couatl lancia benedizione, ristorare inferiore o santuario senza bisogno di componenti, utilizzando la stessa caratteristica da incantatore di Incantesimi.

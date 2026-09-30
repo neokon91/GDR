@@ -1,0 +1,11 @@
+id: dnd.oggetto-magico.mantello-della-resistenza-agli-incantesimi
+nome: Mantello della resistenza agli incantesimi
+categoria: oggetto-meraviglioso
+rarita: rara
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_salvezza.incantesimi, operazione: vantaggio}
+descrizione: |
+  Finché il personaggio indossa questo mantello, dispone di vantaggio ai tiri salvezza contro gli incantesimi.

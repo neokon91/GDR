@@ -1,0 +1,5 @@
+id: dnd.valuta.moneta-platino
+nome: "Moneta di Platino"
+abb: mp
+categoria: valuta
+costo: {valore: 10, valuta: moneta-oro}

@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.lanterna-della-rivelazione
+nome: Lanterna della rivelazione
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Quando è accesa, questa lanterna schermabile arde per 6 ore con 0,5 litri d'olio, proiettando luce intensa in un raggio di 9 metri e luce fioca per altri 
+  9 metri. Quando si trovano nell'area di luce intensa della lanterna, le creature e gli oggetti invisibili diventano visibili. Il personaggio può effettuare un'azione di Utilizzo per schermare la lanterna, riducendo la luce proiettata a luce fioca in un raggio di 1,5 metri.

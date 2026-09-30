@@ -1,0 +1,63 @@
+id: dnd.mostro.capitano-delle-guardie
+nome: Capitano delle Guardie
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Guardie
+allineamento: neutrale
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 13, competenza: false}
+iniziativa: competenza
+dadi_vita: 10
+velocita: {camminata: 9}
+abilita: [atletica: competenza, percezione: competenza]
+equipaggiamento: [corazza di piastre, "giavellotti (6)", dnd.incantesimo.scudo, spada lunga]
+lingue: [comune]
+gs: 4
+azioni:
+  - id: capitano-delle-guardie.multiattacco
+    nome: Multiattacco
+    descrizione: La guardia effettua due attacchi, utilizzando Giavellotto o Spada lunga in qualsiasi combinazione.
+  - id: capitano-delle-guardie.giavellotto
+    nome: Giavellotto
+    descrizione: |
+      *Tiro per Colpire in Mischia o a Distanza:* +6, portata 1,5 m o gittata 9/36 m.
+      *Colpito:* 14 (3d6 + 4) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.giavellotto
+          gittata: {normale: 9, lunga: 36}
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - id: capitano-delle-guardie.spada-lunga
+    nome: Spada Lunga
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +6, portata 1,5 m.
+      *Colpito:* 15 (2d10 + 4) danni Taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.spada-lunga
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}

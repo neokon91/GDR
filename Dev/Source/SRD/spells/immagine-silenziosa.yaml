@@ -1,0 +1,20 @@
+id: dnd.incantesimo.immagine-silenziosa
+nome: Immagine silenziosa
+livello: 1
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S, "M (un ciuffo di lana)"]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore crea l'immagine di un oggetto, una creatura o qualche altro fenomeno visibile che non sia più grande di un cubo con spigolo di 4,5 metri. L'immagine compare in un punto situato entro gittata e permane per la durata dell'incantesimo. L'immagine è puramente visiva: non è accompagnata da suoni, odori o altri effetti sensoriali.
+
+  Come azione di Magia, il personaggio può far muovere l'immagine verso qualunque posizione entro gittata. Mentre l'immagine è in movimento, l'incantatore può alterarne l'aspetto in modo che i movimenti risultino naturali. Ad esempio, se l'incantatore crea l'immagine di una creatura e decide di farla muovere, può modificarla per simulare il fatto che sta camminando.
+
+  L'illusione può essere rivelata da un'interazione fisica, poiché gli oggetti possono attraversarla. Una creatura che effettua l'azione di Studio per esaminare l'immagine può determinare che si tratta di un'illusione superando una prova di Intelligenza (Indagare) contro la CD del tiro salvezza sull'incantesimo. Se una creatura riconosce l'illusione per ciò che è, riesce a vedere attraverso l'immagine.

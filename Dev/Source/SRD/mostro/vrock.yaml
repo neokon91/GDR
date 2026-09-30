@@ -1,0 +1,78 @@
+id: dnd.mostro.vrock
+nome: Vrock
+taglia: grande
+tipo: immondo
+sottotipo: demone
+allineamento: caotico malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 15, competenza: true}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 8, competenza: false}
+  saggezza: {valore: 13, competenza: true}
+  carisma: {valore: 8, competenza: true}
+dadi_vita: 16
+velocita: {camminata: 12, volo: 18}
+sensi: {scurovisione: 36, telepatia: 36}
+percezione_passiva: 11
+resistenze: [freddo, fulmine, fuoco]
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Abissale]
+gs: 6
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il vrock dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro demoniaco
+    descrizione: |
+      Se il vrock muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: sbrandellare, ripetizioni: 2}
+    descrizione: |
+      Il vrock effettua due attacchi Sbrandellare.
+  - nome: Sbrandellare
+    id: sbrandellare
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni perforanti più 10 (3d6) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Spore (ricarica 6)"
+    id: spore-ricarica-6
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un'emanazione di 6 metri di cui il vrock è il punto di origine. *Fallimento:* il bersaglio è avvelenato e ripete il tiro salvezza alla fine del suo turno successivo e, se lo supera, l'effetto svanisce. Finché è avvelenato, il bersaglio subisce 5 (1d10) danni da veleno all'inizio di ogni suo turno. L'effetto termina anticipatamente svuotandogli addosso un'ampolla di acqua santa.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+  - nome: "Stridio stordente (1/giorno)"
+    id: stridio-stordente-1-giorno
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un'emanazione di 6 metri di cui il vrock è il punto di origine (i demoni superano automaticamente il tiro). *Fallimento:* 10 (3d6) danni da tuono, e il bersaglio è stordito fino al termine del turno successivo del vrock.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 3, dado: d6, tipo_danno: tuono}

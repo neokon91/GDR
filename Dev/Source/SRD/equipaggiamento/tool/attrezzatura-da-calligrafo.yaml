@@ -1,0 +1,14 @@
+id: dnd.strumento.attrezzatura-da-calligrafo
+nome: Attrezzatura da Calligrafo
+categoria: strumenti
+famiglia: attrezzatura-da-artigiano
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 2.5, unita: kg}
+caratteristica: destrezza
+utilizzo:
+  - azione: Scrivere testi con fregi elaborati che proteggono dalla contraffazione
+    cd: 15
+creazione: [dnd.oggetto.inchiostro, pergamena-di-incantesimo]
+descrizione: |
+  Se possiedi la competenza in un attrezzo, aggiungi il tuo Bonus di Competenza a qualsiasi prova di caratteristica che richieda l'uso di tale attrezzo.
+  Se possiedi la competenza in un'abilità utilizzata per quella prova, ottieni anche Vantaggio alla prova stessa.

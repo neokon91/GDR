@@ -1,0 +1,40 @@
+id: dnd.mostro.bandito
+nome: Bandito
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Banditi
+allineamento: neutrale
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9}
+equipaggiamento: [armatura di cuoio, balestra leggera, scimitarra]
+lingue: [Comune, Gergo ladresco]
+gs: 1/8
+azioni:
+  - id: bandito.balestra-leggera
+    nome: Balestra Leggera
+    descrizione: |
+      *Tiro per Colpire a Distanza:* +3, gittata 24/96 m.
+      *Colpito:* 5 (1d8 + 1) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: arma-distanza, bonus: { caratteristica: destrezza, competenza: true }, bersagli: 1, usa: dnd.arma.balestra-leggera, gittata: { normale: 24, lunga: 96 } }
+        colpito:
+          - danno: { numero_dadi: 1, dado: d8, tipo_danno: perforante, bonus: { caratteristica: destrezza } }
+  - id: bandito.scimitarra
+    nome: Scimitarra
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +3, portata 1,5 m.
+      *Colpito:* 4 (1d6 + 1) danni Taglienti.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: arma-mischia, bonus: { caratteristica: destrezza, competenza: true }, bersagli: 1, usa: dnd.arma.scimitarra, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 1, dado: d6, tipo_danno: tagliente, bonus: { caratteristica: destrezza } }

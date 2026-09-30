@@ -1,0 +1,17 @@
+id: dnd.incantesimo.previsione
+nome: Previsione
+livello: 9
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.warlock
+tempo_lancio: 1 minuto
+gittata: contatto
+componenti: [V, S, "M (una piuma di colibrì)"]
+concentrazione: false
+rituale: false
+durata: 8 ore
+descrizione: |
+  L'incantatore tocca una creatura consenziente e le conferisce una capacità limitata di vedere nell'immediato futuro. Per la durata dell'incantesimo, il bersaglio dispone di vantaggio alle prove con d20. Inoltre, le altre creature subiscono svantaggio ai tiri per colpire contro di esso. L'incantesimo termina in anticipo se l'incantatore lo lancia di nuovo.

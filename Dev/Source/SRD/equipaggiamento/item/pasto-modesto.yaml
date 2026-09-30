@@ -1,0 +1,4 @@
+id: dnd.oggetto.pasto-modesto
+nome: Pasto Modesto
+categoria: vitto-e-alloggio
+costo: {valore: 1, valuta: moneta-argento}

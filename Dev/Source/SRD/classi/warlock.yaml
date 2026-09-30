@@ -1,0 +1,416 @@
+id: dnd.classe.warlock
+nome: Warlock
+caratteristica_primaria: [carisma]
+dado_vita: 8
+tiri_salvezza: [saggezza, carisma]
+competenze_abilita:
+  quantita: 2
+  scelte: [arcano, indagare, inganno, intimidire, natura, religione, storia]
+competenze_armi: [armi-semplici]
+competenze_armature: [armature-leggere]
+# Preso come classe secondaria (multiclasse): armatura leggera e armi semplici.
+competenze_multiclasse:
+  armi: [armi-semplici]
+  armature: [armature-leggere]
+equipaggiamento_iniziale: 
+  - nome: A
+    oggetti:
+      - articolo: dnd.armatura.armatura-di-cuoio
+      - articolo: dnd.arma.falcetto
+      - articolo: dnd.arma.pugnale
+        quantita: 2
+      - articolo: dnd.oggetto.focus-arcano
+      - articolo: dnd.arma.arco-corto
+      - articolo: dnd.oggetto.libro
+      - articolo: dnd.oggetto.dotazione-da-studioso
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 15
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 100
+descrizione: |
+  Il warlock è un incantatore occulto basato su Carisma, Magia del patto e Suppliche occulte. La sottoclasse SRD è il Patrono immondo.
+
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [suppliche-occulte, magia-del-patto]
+    suppliche_occulte: 1 
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 2
+    slot_incantesimo: { livello1: 1 }
+
+  - livello: 2
+    privilegi: [astuzia-magica]
+    suppliche_occulte: 3
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 3
+    slot_incantesimo: { livello1: 2 }
+  - livello: 3
+    privilegi: [sottoclasse-del-warlock]
+    suppliche_occulte: 3
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 4
+    slot_incantesimo: { livello2: 2 }
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    suppliche_occulte: 3
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 5
+    slot_incantesimo: { livello2: 2 }
+  - livello: 5
+    privilegi: []
+    suppliche_occulte: 5
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 6
+    slot_incantesimo: { livello3: 2 }
+  - livello: 6
+    privilegi: [privilegio-della-sottoclasse]
+    suppliche_occulte: 5
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 7
+    slot_incantesimo: { livello3: 2 }
+  - livello: 7
+    privilegi: []
+    suppliche_occulte: 6
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 8
+    slot_incantesimo: { livello4: 2 }
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    suppliche_occulte: 6
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 9
+    slot_incantesimo: { livello4: 2 }
+  - livello: 9
+    privilegi: [contatto-con-il-patrono]
+    suppliche_occulte: 7
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 10
+    slot_incantesimo: { livello5: 2 }
+  - livello: 10
+    privilegi: [privilegio-della-sottoclasse]
+    suppliche_occulte: 7
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 10
+    slot_incantesimo: { livello5: 2 }
+  - livello: 11
+    privilegi: [arcano-mistico]
+    suppliche_occulte: 7
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 11
+    slot_incantesimo: { livello5: 3 }
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    suppliche_occulte: 8
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 11
+    slot_incantesimo: { livello5: 3 }
+  - livello: 13
+    privilegi: [arcano-mistico]
+    suppliche_occulte: 8
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 12
+    slot_incantesimo: { livello5: 3 }
+  - livello: 14
+    privilegi: [privilegio-della-sottoclasse]
+    suppliche_occulte: 8
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 12
+    slot_incantesimo: { livello5: 3 }
+  - livello: 15
+    privilegi: [arcano-mistico]
+    suppliche_occulte: 9
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 13
+    slot_incantesimo: { livello5: 3 }
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    suppliche_occulte: 9
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 13
+    slot_incantesimo: { livello5: 3 }
+  - livello: 17
+    privilegi: [arcano-mistico]
+    suppliche_occulte: 9
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 14
+    slot_incantesimo: { livello5: 4 }
+  - livello: 18
+    privilegi: []
+    suppliche_occulte: 10
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 14
+    slot_incantesimo: { livello5: 4 }
+  - livello: 19
+    privilegi: [dono-epico]
+    suppliche_occulte: 10
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 15
+    slot_incantesimo: { livello5: 4 }
+  - livello: 20
+    privilegi: [maestro-arcano]
+    suppliche_occulte: 10
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 15
+    slot_incantesimo: { livello5: 4 }
+privilegi:
+- livello: 1
+  id: suppliche-occulte
+  nome: "Suppliche Occulte"
+  descrizione: |
+    Hai scoperto delle Suppliche Occulte, frammenti di conoscenza proibita che ti conferiscono una capacità magica permanente o altre nozioni. Ottieni una supplica a tua scelta. Le suppliche sono descritte nella sezione "Opzioni per le Suppliche Occulte".
+
+    **Prerequisiti.** Se una supplica presenta un prerequisito, devi soddisfarlo per poterla apprendere. Per esempio, se una supplica richiede di essere un Warlock di almeno 5° livello, puoi sceglierla una volta raggiunto il 5° livello da Warlock.
+
+    **Sostituire e Acquisire Suppliche.** Ogni volta che ottieni un livello da Warlock, puoi sostituire una delle tue suppliche con un'altra per la quale soddisfi i requisiti. Non puoi sostituire una supplica se essa costituisce un prerequisito per un'altra supplica in tuo possesso.
+
+    Quando raggiungi determinati livelli da Warlock, ottieni ulteriori suppliche a tua scelta, come indicato nella colonna "Suppliche" della tabella delle caratteristiche del Warlock.
+
+    Non puoi scegliere la stessa supplica più di una volta, a meno che la sua descrizione non specifichi diversamente.
+  attivita:
+    # Solo il conteggio delle suppliche note; l'effetto di ciascuna è prosa/runtime.
+    - {tipo: scelta, scelta: supplica-occulta, quantita_da_tabella: suppliche}
+- livello: 1
+  id: magia-del-patto
+  nome: "Magia del Patto"
+  attivita:
+    - tipo: incantatore
+      caratteristica: carisma
+      recupero: riposo-breve
+  descrizione: |
+    Tramite una cerimonia occulta, hai stipulato un patto con un'entità misteriosa per ottenere poteri magici. L'entità è una voce nell'ombra — la sua identità è incerta — ma il dono che ti offre è concreto: la capacità di lanciare incantesimi.
+
+    **Trucchetti.** Conosci due trucchetti da Stregone a tua scelta. Ogni volta che ottieni un livello da Stregone, puoi sostituire uno dei tuoi trucchetti derivanti da questa capacità con un altro trucchetto da Stregone a tua scelta.
+
+    Quando raggiungi il livello 4 e il livello 10 da Stregone, impari un altro trucchetto da Stregone a tua scelta, come indicato nella colonna Trucchetti della tabella Capacità dello Stregone.
+
+    **Slot Incantesimo.** La tabella Capacità dello Stregone indica quanti slot incantesimo possiedi per lanciare i tuoi incantesimi da Stregone di livello 1-5. La tabella indica anche il livello di tali slot; tutti gli slot sono dello stesso livello. Recuperi tutti gli slot incantesimo della Magia del Patto consumati al termine di un riposo breve o lungo.
+
+    Per esempio, quando sei uno Stregone di livello 5, possiedi due slot incantesimo di livello 3. Per lanciare l'incantesimo di livello 1 *Dardo Stregato* (Witch Bolt), devi consumare uno di quegli slot, lanciandolo quindi come incantesimo di livello 3.
+
+    **Incantesimi Preparati di Livello 1 o Superiore.** Prepari l'elenco degli incantesimi di livello 1 o superiore che puoi lanciare grazie a questa capacità. Per iniziare, scegli due incantesimi da Stregone di livello 1.
+
+    Il numero di incantesimi nel tuo elenco aumenta man mano che acquisisci livelli da Stregone, come indicato nella colonna Incantesimi Preparati della tabella Capacità dello Stregone. Ogni volta che tale numero aumenta, scegli ulteriori incantesimi da Stregone finché il numero di incantesimi nel tuo elenco non corrisponde a quello indicato nella tabella. Gli incantesimi scelti devono essere di livello non superiore a quello indicato nella colonna Livello Slot della tabella per il tuo livello attuale. Quando raggiungi il livello 6, per esempio, impari un nuovo incantesimo da Stregone, che può essere di livello compreso tra 1 e 3.
+
+    Se un'altra capacità da Stregone ti conferisce incantesimi che hai sempre preparati, tali incantesimi non vengono conteggiati nel numero di incantesimi che puoi preparare con questa capacità, ma per te contano comunque come incantesimi da Stregone.
+
+    **Cambiare gli Incantesimi Preparati.** Ogni volta che ottieni un livello da Stregone, puoi sostituire un incantesimo della tua lista con un altro incantesimo da Stregone di livello appropriato.
+
+    **Caratteristica da Incantatore.** Il Carisma è la caratteristica da incantatore per i tuoi incantesimi da Stregone.
+
+    **Focus di Incantamento.** Puoi usare un focus arcano come focus di incantamento per i tuoi incantesimi da Stregone.
+- livello: 2
+  id: astuzia-magica
+  nome: "Astuzia Magica"
+  descrizione: |
+    Puoi eseguire un rito esoterico della durata di 1 minuto. Al termine, recuperi gli slot incantesimo di Magia del Patto consumati, ma non più di un numero pari alla metà del tuo massimo (arrotondato per eccesso). Una volta utilizzata questa capacità, non puoi farlo di nuovo finché non completi un Riposo Lungo.
+- livello: 3
+  id: sottoclasse-del-warlock
+  nome: "Sottoclasse del Warlock"
+  descrizione: |
+    Ottieni una sottoclasse da Stregone a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Stregone. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Stregone o a livelli inferiori.
+- livello: 4
+  id: aumento-punteggi-caratteristica
+  nome: "Incremento del Punteggio di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento del Punteggio di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da Stregone 8, 12 e 16.
+- livello: 9
+  id: contatto-con-il-patrono
+  nome: "Contatto con il Patrono"
+  descrizione: |
+    In passato, di solito contattavi il tuo patrono tramite intermediari. Ora puoi comunicare direttamente; hai sempre preparato l'incantesimo *Contatto con Altri Piani*. Grazie a questa capacità, puoi lanciare l'incantesimo senza consumare uno slot incantesimo per contattare il tuo patrono e superi automaticamente il tiro salvezza previsto dall'incantesimo.
+
+    Una volta lanciato l'incantesimo con questa capacità, non puoi farlo di nuovo in questo modo finché non completi un Riposo Lungo.
+- livello: 11
+  id: arcano-mistico
+  nome: "Arcano Mistico"
+  descrizione: |
+    Il tuo patrono ti concede un segreto magico chiamato arcano. Scegli un incantesimo da Stregone di 6° livello come tuo arcano.
+
+    Puoi lanciare il tuo incantesimo arcano una volta senza consumare uno slot incantesimo; devi completare un Riposo Lungo prima di poterlo lanciare di nuovo in questo modo.
+
+    Come indicato nella tabella delle capacità dello Stregone, ottieni un altro incantesimo da Stregone a tua scelta, lanciabile in questo modo, quando raggiungi i livelli da Stregone 13 (incantesimo di 7° livello), 15 (incantesimo di 8° livello) e 17 (incantesimo di 9° livello). Recuperi tutti gli utilizzi del tuo Arcano Mistico quando completi un Riposo Lungo.
+
+    Ogni volta che ottieni un livello da Stregone, puoi sostituire uno dei tuoi incantesimi arcani con un altro incantesimo da Stregone dello stesso livello.
+- livello: 19
+  id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni un talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- livello: 20
+  id: maestro-arcano
+  nome: "Maestro Arcano"
+  descrizione: |
+    Quando utilizzi il tuo privilegio Astuzia Magica, recuperi tutti gli slot incantesimo della Magia del Patto che hai consumato.
+suppliche_occulte:
+  - nome: Esplosione Agonizzante
+    descrizione: |
+      Prerequisito: Stregone (Warlock) di 2° livello o superiore, un trucchetto da Stregone che infligge danni.
+
+      Scegli uno dei tuoi trucchetti da Stregone noti che infligge danni.
+      Puoi aggiungere il tuo modificatore di Carisma ai tiri per i danni di quell'incantesimo.
+
+      **Ripetibile.** Puoi acquisire questa invocazione più di una volta. Ogni volta che lo fai, scegli un trucchetto idoneo diverso.
+  - nome: Armatura d'Ombre
+    descrizione: |
+      Puoi lanciare *Armatura Magica* (Mage Armor) su te stesso senza consumare uno slot incantesimo.
+  - nome: Passo Ascendente
+    descrizione: |
+      Prerequisito: Stregone di 5° livello o superiore
+
+      Puoi lanciare *Levitazione* (Levitate) su te stesso senza consumare uno slot incantesimo.
+  - nome: Vista del Diavolo
+    descrizione: |
+      Prerequisito: Stregone di 2° livello o superiore
+
+      Puoi vedere normalmente in luce fioca e nell'oscurità — sia magica che non magica — entro un raggio di 120 piedi da te.
+  - nome: Lama Divoratrice
+    descrizione: |
+      Prerequisito: Stregone di 12° livello o superiore, invocazione Lama Assetata (Thirsting Blade)
+
+      L'Attacco Extra della tua invocazione Lama Assetata conferisce due attacchi extra invece di uno.
+  - nome: Mente Arcano-Eldritch
+    descrizione: |
+      Hai vantaggio ai tiri salvezza su Costituzione effettuati per mantenere la Concentrazione.
+  - nome: Punizione Arcano-Eldritch
+    descrizione: |
+      Prerequisito: Stregone di 5° livello o superiore, invocazione Patto della Lama (Pact of the Blade)
+
+      Una volta per turno, quando colpisci una creatura con la tua arma del patto, puoi consumare uno slot incantesimo di Magia del Patto per infliggere al bersaglio 1d8 danni da Forza extra, più un ulteriore 1d8 per ogni livello dello slot incantesimo; inoltre, puoi infliggere al bersaglio la condizione Prono se è di taglia Enorme o inferiore.
+  - nome: Lancia Arcano-Eldritch
+    descrizione: |
+      Prerequisito: Stregone di 2° livello o superiore, un trucchetto da Stregone che infligge danni
+
+      Scegli uno dei tuoi trucchetti da Stregone noti che infligge danni e ha una gittata di almeno 10 piedi. Quando lanci quell'incantesimo, la sua gittata aumenta di un numero di piedi pari a 30 volte il tuo livello da Stregone.
+
+      **Ripetibile.** Puoi acquisire questa invocazione più di una volta. Ogni volta che lo fai, scegli un trucchetto idoneo diverso.
+  - nome: Vigore Infernale
+    descrizione: |
+      Prerequisito: Stregone di 2° livello o superiore
+
+      Puoi lanciare *Falsa Vita* (False Life) su te stesso senza consumare uno slot incantesimo. Quando lanci l'incantesimo grazie a questa capacità, non tiri il dado per i Punti Ferita Temporanei; ottieni automaticamente il valore massimo indicato dal dado.
+  - nome: Sguardo a Due Menti
+    descrizione: |
+      Prerequisito: Stregone di 5° livello o superiore
+
+      Puoi usare un'Azione Bonus per toccare una creatura consenziente e percepire attraverso i suoi sensi fino alla fine del tuo turno successivo. Finché la creatura si trova sul tuo stesso piano di esistenza, puoi usare un'Azione Bonus nei turni successivi per mantenere questo collegamento, prolungandone la durata fino alla fine del tuo turno successivo. Il collegamento termina se non lo mantieni in questo modo.
+
+      Mentre percepisci attraverso i sensi dell'altra creatura, benefici di eventuali sensi speciali posseduti da essa e puoi lanciare incantesimi come se ti trovassi nel tuo spazio o in quello dell'altra creatura, a condizione che vi troviate entro 60 piedi l'uno dall'altra.
+  - nome: Dono degli Abissi
+    descrizione: |
+      Prerequisito: Stregone di 5° livello o superiore
+
+      Puoi respirare sott'acqua e ottieni una velocità di nuoto pari alla tua velocità.
+
+      Puoi inoltre lanciare *Respirare sott'acqua* una volta senza consumare uno slot incantesimo. Recuperi la capacità di lanciarlo nuovamente in questo modo dopo aver completato un riposo lungo.
+  - nome: Dono dei Protettori
+    descrizione: |
+      Prerequisito: Stregone di 9° livello o superiore, invocazione Patto del Tomo
+
+      Una nuova pagina appare nel tuo Libro delle Ombre quando lo evochi. Con il tuo permesso, una creatura può usare un'azione per scrivere il proprio nome su quella pagina; la pagina può contenere un numero di nomi pari al tuo modificatore di Carisma (minimo un nome).
+
+      Quando una creatura il cui nome è presente sulla pagina viene ridotta a 0 Punti Ferita senza però morire istantaneamente, la creatura scende magicamente a 1 Punto Ferita. Una volta attivata questa magia, nessuna creatura può beneficiarne finché non completi un riposo lungo.
+
+      Come azione Magica, puoi cancellare un nome dalla pagina toccandolo.
+  - nome: Investitura del Maestro della Catena
+    descrizione: |
+      Prerequisito: Stregone di 5° livello o superiore, invocazione Patto della Catena
+
+      Quando lanci *Trovare Famiglio*, infondi nel famiglio evocato una parte del tuo potere arcano, conferendo alla creatura i seguenti benefici.
+
+      Aereo o Acquatico. Il famiglio ottiene una velocità di volo o di nuoto (a tua scelta) di 12 metri (40 piedi).
+
+      Attacco Rapido. Come azione bonus, puoi ordinare al famiglio di effettuare l'azione di Attacco.
+
+      Danno Necrotico o Radioso. Ogni volta che il famiglio infligge danni contundenti, perforanti o taglienti, puoi far sì che infligga invece danni necrotici o radiosi.
+
+      La tua CD del Tiro Salvezza. Se il famiglio costringe una creatura a effettuare un tiro salvezza, utilizza la tua CD del tiro salvezza degli incantesimi.
+
+      Resistenza. Quando il famiglio subisce danni, puoi usare una reazione per conferirgli resistenza contro quel tipo di danno.
+  - nome: Lezioni dei Primordiali
+    descrizione: |
+      Prerequisito: Stregone di 2° livello o superiore
+
+      Hai ricevuto conoscenze da un'entità ancestrale del multiverso, ottenendo così un talento di Origine a tua scelta.
+
+      Ripetibile. Puoi acquisire questa invocazione più di una volta. Ogni volta che lo fai, scegli un talento di Origine diverso.
+  - nome: Bevitore di Vita
+    descrizione: |
+      Prerequisito: Stregone di 9° livello o superiore, Supplica del Patto della Lama
+
+      Una volta per turno, quando colpisci una creatura con la tua arma del patto, puoi infliggere alla creatura 1d6 danni extra di tipo Necrotico, Psichico o Radiante (a tua scelta) e puoi spendere uno dei tuoi Dadi Vita per tirarlo e recuperare un numero di Punti Ferita pari al risultato del tiro più il tuo modificatore di Costituzione (minimo 1 Punto Ferita).
+  - nome: Maschera dai Molteplici Volti
+    descrizione: |
+      Prerequisito: Stregone di 2° livello o superiore
+
+      Puoi lanciare *Camuffare Se Stesso* senza consumare uno slot incantesimo.
+  - nome: Maestro delle Mille Forme
+    descrizione: |
+      Prerequisito: Stregone di 5° livello o superiore
+
+      Puoi lanciare *Alterare Se Stesso* senza consumare uno slot incantesimo.
+  - nome: Visioni Nebbiose
+    descrizione: |
+      Prerequisito: Stregone di 2° livello o superiore
+
+      Puoi lanciare *Immagine Silenziosa* senza consumare uno slot incantesimo.
+  - nome: Uno con le Ombre
+    descrizione: |
+      Prerequisito: Stregone di 5° livello o superiore
+
+      Mentre ti trovi in un'area di Luce Debole o Oscurità, puoi lanciare *Invisibilità* su te stesso senza consumare uno slot incantesimo.
+  - nome: Balzo dell'Altrove
+    descrizione: |
+      Prerequisito: Stregone di 2° livello o superiore
+
+      Puoi lanciare *Salto* su te stesso senza consumare uno slot incantesimo.
+  - nome: Patto della Lama
+    descrizione: |
+      Come Azione Bonus, puoi evocare un'arma del patto nella tua mano — un'arma da mischia semplice o da guerra a tua scelta con cui crei un legame — oppure creare un legame con un'arma magica che tocchi; non puoi creare un legame con un'arma magica se qualcun altro vi è sintonizzato o se un altro Stregone vi è legato. Finché il legame persiste, possiedi competenza nell'arma e puoi usarla come Focus di Incantamento.
+
+      Ogni volta che attacchi con l'arma legata, puoi usare il tuo modificatore di Carisma per i tiri per colpire e per i danni invece di Forza o Destrezza; inoltre, puoi far sì che l'arma infligga danni necrotici, psichici o radiosi, oppure il suo normale tipo di danno.
+
+      Il legame con l'arma termina se usi nuovamente l'Azione Bonus di questa capacità, se l'arma si trova a più di 1,5 metri (5 piedi) da te per 1 minuto o più, oppure se muori. Un'arma evocata scompare quando il legame termina.
+  - nome: Patto della Catena
+    descrizione: |
+      Impari l'incantesimo *Trova Famiglio* e puoi lanciarlo come azione Magica senza consumare uno slot incantesimo.
+
+      Quando lanci l'incantesimo, scegli una delle forme normali per il tuo famiglio o una delle seguenti forme speciali: Diavoletto, Pseudodrago, Quasit, Scheletro, Girino di Slaad, Sfinge delle Meraviglie, Sprite o Serpente Velenoso.
+
+      Inoltre, quando effettui l'azione Attacco, puoi rinunciare a uno dei tuoi attacchi per permettere al tuo famiglio di effettuare un attacco usando la sua Reazione.
+  - nome: Patto del Tomo
+    descrizione: |
+      Intrecciando filamenti d'ombra, evochi un libro nella tua mano al termine di un Riposo Breve o Lungo. Questo Libro delle Ombre (di cui determini l'aspetto) contiene magia arcana a cui solo tu puoi accedere, conferendoti i benefici indicati di seguito. Il libro scompare se ne evochi un altro con questa capacità o se muori.
+
+      Trucchetti e Rituali. Quando il libro appare, scegli tre trucchetti e due incantesimi di 1° livello dotati della dicitura Rituale. Gli incantesimi possono provenire dalla lista di qualsiasi classe e devono essere incantesimi che non hai già preparati. Finché porti il ​​libro con te, hai gli incantesimi scelti preparati ed essi funzionano come incantesimi da Warlock per te.
+
+      Focus di Incantamento. Puoi usare il libro come focus di incantamento.
+  - nome: Esplosione Respingente
+    descrizione: |
+      Prerequisito: Stregone di 2° livello o superiore, un trucchetto da Stregone che infligge danni tramite un tiro per colpire
+
+      Scegli uno dei trucchetti da Stregone che conosci e che richiede un tiro per colpire. Quando colpisci una creatura di taglia Grande o inferiore con quel trucchetto, puoi spingerla fino a 3 metri (10 piedi) direttamente lontano da te.
+
+      Ripetibile. Puoi acquisire questa invocazione più di una volta. Ogni volta che lo fai, scegli un trucchetto idoneo diverso.
+  - nome: Lama Assetata
+    descrizione: |
+      Prerequisito: Stregone di 5° livello o superiore, invocazione Patto della Lama
+
+      Ottieni la capacità Attacco Extra limitatamente alla tua arma del patto. Grazie a questa capacità, puoi attaccare due volte con l'arma invece di una sola quando effettui l'azione di Attacco durante il tuo turno.
+  - nome: Visioni di Reami Lontani
+    descrizione: |
+      Prerequisito: Stregone di 9° livello o superiore
+
+      Puoi lanciare *Occhio Arcano* senza consumare uno slot incantesimo.
+  - nome: Sussurri della Tomba
+    descrizione: |
+      Prerequisito: Stregone di 7° livello o superiore
+
+      Puoi lanciare *Parlare con i Morti* senza consumare uno slot incantesimo.
+  - nome: Vista della Strega
+    descrizione: |
+      Prerequisito: Stregone di 15° livello o superiore
+
+      Possiedi Vista Vera con una gittata di 9 metri.

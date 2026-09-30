@@ -1,0 +1,63 @@
+id: dnd.mostro.esploratore
+nome: Esploratore
+taglia: [media, piccola]
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 9}
+abilita: [furtivita: maestria, natura: maestria, percezione: maestria, sopravvivenza: maestria]
+percezione_passiva: 15
+equipaggiamento:
+  - {articolo: dnd.arma.arco-lungo}
+  - {articolo: dnd.armatura.armatura-di-cuoio}
+  - {articolo: dnd.arma.spada-corta}
+lingue: [Comune più un'altra lingua]
+gs: 1/2
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      L'esploratore effettua due attacchi, usando Spada corta e Arco lungo in qualsiasi combinazione.
+  - nome: Spada corta
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.spada-corta
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Arco lungo
+    descrizione: |
+      *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.arco-lungo
+          gittata: {normale: 45, lunga: 180}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

@@ -1,0 +1,44 @@
+id: dnd.mostro.guardia
+nome: Guardia
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Guardie
+allineamento: neutrale
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9}
+abilita: [percezione: competenza]
+percezione_passiva: 12
+equipaggiamento:
+  - {articolo: dnd.armatura.giaco-di-maglia}
+  - {articolo: dnd.arma.lancia}
+  - {articolo: dnd.armatura.scudo}
+lingue: [Comune]
+gs: 1/8
+
+azioni:
+  - nome: Lancia
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +3, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d6 + 1) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.lancia
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

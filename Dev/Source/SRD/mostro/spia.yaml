@@ -1,0 +1,64 @@
+id: dnd.mostro.spia
+nome: Spia
+taglia: [media, piccola]
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 16, competenza: false}
+iniziativa: competenza
+dadi_vita: 6
+velocita: {camminata: 9, scalata: 9}
+abilita: [inganno: competenza, intuizione: competenza, rapidita-di-mano: competenza, furtivita: maestria, indagare: maestria, percezione: maestria]
+percezione_passiva: 16
+equipaggiamento:
+  - {articolo: dnd.strumento.attrezzi-da-scasso}
+  - {articolo: dnd.arma.balestra-a-mano}
+  - {articolo: dnd.arma.spada-corta}
+lingue: [Comune più un'altra lingua]
+gs: 1
+
+azioni:
+  - nome: Spada corta
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni perforanti più 7 (2d6) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.spada-corta
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Balestra a mano
+    descrizione: |
+      *Tiro per colpire a distanza:* +4, gittata 9/36 m. *Colpito:* 5 (1d6 + 2) danni perforanti più 7 (2d6) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.balestra-a-mano
+          gittata: {normale: 9, lunga: 36}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: Azione scaltra
+    descrizione: |
+      La spia effettua l'azione di Disimpegno, Nascondersi o Scatto.

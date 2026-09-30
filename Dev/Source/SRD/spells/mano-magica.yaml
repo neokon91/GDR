@@ -1,0 +1,23 @@
+id: dnd.incantesimo.mano-magica
+nome: Mano magica
+livello: 0
+scuola: evocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 1 minuto
+descrizione: |
+  Una mano spettrale fluttuante compare in un punto a scelta dell'incantatore situato entro gittata. La mano permane per la durata dell'incantesimo e svanisce se si trova a più di 9 metri dall'incantatore o se quest'ultimo lancia nuovamente l'incantesimo.
+
+  Quando lancia l'incantesimo, l'incantatore può usare la mano per maneggiare un oggetto, aprire una porta o un contenitore che non siano chiusi a chiave, riporre o estrarre un oggetto da un contenitore aperto o versare il contenuto di una fiala.
+
+  Come azione di Magia nei tuoi turni successivi, puoi controllare nuovamente la mano. Come parte di quell'azione, puoi muoverla fino a 9 metri.
+
+  La mano non può attaccare, attivare oggetti magici o trasportare più di 5 chilogrammi.

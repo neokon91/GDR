@@ -1,0 +1,10 @@
+id: dnd.oggetto-magico.borsa-conservante
+nome: Borsa conservante
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Lo spazio interno di questa borsa è molto più grande delle sue dimensioni esterne, pari a un quadrato con il lato di circa 60 centimetri e 120 centimetri di profondità. La borsa può contenere fino a 250 chilogrammi di materiale, per un volume massimo di 64 cubi con spigolo di 30 centimetri. La borsa pesa 2,5 chilogrammi a prescindere dal suo contenuto. Recuperare un oggetto dalla borsa richiede un'azione di Utilizzo.
+  Se la borsa viene caricata con un peso eccessivo, o viene bucata o strappata, viene distrutta e il suo contenuto viene sparpagliato sul Piano Astrale. Se la borsa viene rivoltata, il suo contenuto si riversa all'esterno, integro. Tuttavia, per essere riutilizzata, la borsa deve essere rivoltata di nuovo. 
+  La borsa contiene una quantità d'aria sufficiente per 10 minuti, da dividere per il numero di creature che respirano al suo interno.
+  Collocare una borsa conservante all'interno di uno spazio extradimensionale, come quello creato da uno zainetto pratico, da un buco portatile o da altri oggetti simili, distrugge istantaneamente entrambi gli oggetti e apre un portale sul Piano Astrale. Il portale ha origine nel punto in cui uno dei due oggetti è stato inserito nell'altro. Tutte le creature entro una sfera con un raggio di 3 metri centrata sul portale vengono attirate al suo interno e trasportate in un luogo casuale del Piano Astrale; dopodiché il portale si chiude. Il portale è a senso unico e non può essere riaperto.

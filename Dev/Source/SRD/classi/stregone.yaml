@@ -1,0 +1,318 @@
+id: dnd.classe.stregone
+nome: Stregone
+caratteristica_primaria: [carisma]
+dado_vita: 6
+tiri_salvezza: [costituzione, carisma]
+competenze_abilita:
+  quantita: 2
+  scelte: [arcano, inganno, intimidire, intuizione, persuasione, religione]
+competenze_armi: [armi-semplici]
+competenze_armature: []
+equipaggiamento_iniziale:
+  - nome: A
+    oggetti:
+      - articolo: dnd.arma.lancia
+      - articolo: dnd.arma.pugnale
+        quantita: 2
+      - articolo: dnd.oggetto.focus-arcano
+      - articolo: dnd.oggetto.dotazione-da-avventuriero
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 28
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 50
+descrizione: |
+  Lo stregone è un incantatore innato basato su Carisma, punti stregoneria e Metamagia. La sottoclasse SRD è la Stregoneria draconica.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [lancio-incantesimi, stregoneria-innata]
+    punti_stregoneria: 
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 2
+    slot_incantesimo: {livello1: 2, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 2
+    privilegi: [fonte-di-magia, metamagia]
+    punti_stregoneria: 2
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 4
+    slot_incantesimo: {livello1: 3, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 3
+    privilegi: [sottoclasse-del-stregone]
+    punti_stregoneria: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 6
+    slot_incantesimo: {livello1: 4, livello2: 2, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    punti_stregoneria: 4
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 7
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 5
+    privilegi: [ripristino-stregonesco]
+    punti_stregoneria: 5
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 9
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 2, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 6
+    privilegi: [privilegio-della-sottoclasse]
+    punti_stregoneria: 6
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 10
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 7
+    privilegi: [stregoneria-incarnata]
+    punti_stregoneria: 7
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 11
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 1, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    punti_stregoneria: 8
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 12
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 2, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 9
+    privilegi: []
+    punti_stregoneria: 9
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 14
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 1, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 10
+    privilegi: [metamagia]
+    punti_stregoneria: 10
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 15
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 11
+    privilegi: []
+    punti_stregoneria: 11
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    punti_stregoneria: 12
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 13
+    privilegi: []
+    punti_stregoneria: 13
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 14
+    privilegi: [privilegio-della-sottoclasse]
+    punti_stregoneria: 14
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 15
+    privilegi: []
+    punti_stregoneria: 15
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    punti_stregoneria: 16
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 17
+    privilegi: [metamagia]
+    punti_stregoneria: 17
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 19
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 18
+    privilegi: [privilegio-della-sottoclasse]
+    punti_stregoneria: 18
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 20
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 19
+    privilegi: [dono-epico]
+    punti_stregoneria: 19
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 21
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 20
+    privilegi: [apoteosi-arcana]
+    punti_stregoneria: 20
+    trucchetti_conosciuti: 6
+    incantesimi_preparati: 21
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 2, livello8: 1, livello9: 1}
+privilegi:
+- livello: 1
+  id: lancio-incantesimi
+  nome: "Lancio di Incantesimi"
+  attivita:
+    - tipo: incantatore
+      caratteristica: carisma
+  descrizione: |
+    Attingendo alla tua magia innata, puoi lanciare incantesimi.
+
+    **Trucchetti.** Conosci quattro trucchetti da Stregone a tua scelta. Ogni volta che ottieni un livello da Stregone, puoi sostituire uno dei trucchetti ottenuti tramite questa capacità con un altro trucchetto da Stregone a tua scelta.
+
+    Quando raggiungi il 4° e il 10° livello da Stregone, impari un altro trucchetto da Stregone a tua scelta, come indicato nella colonna Trucchetti della tabella Capacità dello Stregone.
+
+    **Slot Incantesimo.** La tabella Capacità dello Stregone indica quanti slot incantesimo possiedi per lanciare i tuoi incantesimi di 1° livello o superiore. Recuperi tutti gli slot consumati al termine di un Riposo Lungo.
+
+    **Incantesimi Preparati di 1° Livello o Superiore.** Prepari l'elenco degli incantesimi di 1° livello o superiore che puoi lanciare grazie a questa capacità. Per iniziare, scegli due incantesimi da Stregone di 1° livello.
+
+    Il numero di incantesimi nel tuo elenco aumenta man mano che ottieni livelli da Stregone, come indicato nella colonna Incantesimi Preparati della tabella Capacità dello Stregone. Ogni volta che tale numero aumenta, scegli ulteriori incantesimi da Stregone finché il numero di incantesimi nel tuo elenco non corrisponde a quello indicato nella tabella Capacità dello Stregone. Gli incantesimi scelti devono essere di un livello per il quale disponi di slot incantesimo. Per esempio, se sei uno Stregone di 3° livello, il tuo elenco di incantesimi preparati può includere sei incantesimi da Stregone di 1° o 2° livello, in qualsiasi combinazione.
+
+    Se un'altra capacità da Stregone ti conferisce incantesimi che hai sempre preparati, tali incantesimi non vengono conteggiati nel numero di incantesimi che puoi preparare con questa capacità, ma contano comunque come incantesimi da Stregone per te.
+
+    **Cambiare gli Incantesimi Preparati.** Ogni volta che ottieni un livello da Stregone, puoi sostituire un incantesimo del tuo elenco con un altro incantesimo da Stregone per il quale disponi di slot incantesimo.
+
+    **Caratteristica da Incantatore.** Il Carisma è la tua caratteristica da incantatore per i tuoi incantesimi da Stregone.
+
+    **Focus da Incantatore.** Puoi utilizzare un Focus Arcano come focus da incantatore per i tuoi incantesimi da Stregone.
+- livello: 1
+  id: stregoneria-innata
+  nome: "Stregoneria Innata"
+  descrizione: |
+    Un evento del tuo passato ha lasciato un segno indelebile su di te, infondendoti una magia in fermento.
+    Come azione bonus, puoi sprigionare quella magia per 1 minuto, ottenendo i seguenti benefici:
+
+    - La CD del tiro salvezza dei tuoi incantesimi da Stregone aumenta di 1.
+    - Ottieni vantaggio ai tiri per colpire degli incantesimi da Stregone che lanci.
+    
+    Puoi usare questa capacità due volte e ne recuperi tutti gli utilizzi spesi quando termini un riposo lungo.
+  attivita:
+    - tipo: attivabile
+      azione: azione-bonus
+      usi: {numero: 2, ricarica: {riposo-lungo: tutti}}
+      durata: {valore: 1, unita: minuti}
+      effetti:
+        - {bersaglio: cd_incantesimi, operazione: somma, valore: 1}
+        - {bersaglio: tiri_colpire.incantesimo, operazione: vantaggio}
+- livello: 2
+  id: fonte-di-magia
+  nome: "Fonte di Magia"
+  descrizione: |
+    Puoi attingere alla fonte di magia che risiede in te. Questa fonte è rappresentata dai Punti Stregoneria, che ti permettono di creare svariati effetti magici.
+
+    Possiedi 2 Punti Stregoneria e ne ottieni altri man mano che raggiungi livelli superiori, come indicato nella colonna Punti Stregoneria della tabella delle Capacità dello Stregone. Non puoi possedere più Punti Stregoneria di quanti ne indichi la tabella per il tuo livello. Recuperi tutti i Punti Stregoneria spesi al termine di un Riposo Lungo.
+
+    Puoi usare i tuoi Punti Stregoneria per alimentare le opzioni descritte di seguito, oltre ad altre capacità, come la Metamagia, che richiedono tali punti.
+
+    Conversione di Slot Incantesimo in Punti Stregoneria. Puoi spendere uno slot incantesimo per ottenere un numero di Punti Stregoneria pari al livello dello slot (non è richiesta alcuna azione).
+
+    Creazione di Slot Incantesimo. Come Azione Bonus, puoi trasformare Punti Stregoneria non spesi in uno slot incantesimo. La tabella "Creazione di Slot Incantesimo" indica il costo per creare uno slot incantesimo di un determinato livello ed elenca il livello minimo da Stregone necessario per crearlo. Non puoi creare uno slot incantesimo di livello superiore al 5°.
+
+    Qualsiasi slot incantesimo creato con questa capacità svanisce al termine di un Riposo Lungo.
+  prospetto:
+    nome: Creazione di Slot Incantesimo
+    righe:
+      - livello_slot: 1
+        punti-stregoneria: 2
+        livello_min_stregone: 2
+      - livello_slot: 2
+        punti-stregoneria: 3
+        livello_min_stregone: 3
+      - livello_slot: 3
+        punti-stregoneria: 5
+        livello_min_stregone: 5
+      - livello_slot: 4
+        punti-stregoneria: 6
+        livello_min_stregone: 7
+      - livello_slot: 5
+        punti-stregoneria: 7
+        livello_min_stregone: 9
+- livello: 2
+  id: metamagia
+  nome: "Metamagia"
+  descrizione: |
+    Poiché la tua magia scaturisce dal tuo interno, puoi modificare i tuoi incantesimi per adattarli alle tue esigenze; ​​ottieni due opzioni di Metamagia a tua scelta tra quelle elencate nella sezione "Opzioni di Metamagia", più avanti nella descrizione di questa classe. Utilizzi le opzioni scelte per modificare temporaneamente gli incantesimi che lanci. Per usare un'opzione, devi spendere il numero di Punti Stregoneria richiesto.
+
+    Puoi applicare una sola opzione di Metamagia a un incantesimo quando lo lanci, a meno che non sia diversamente specificato nell'opzione stessa.
+
+    Ogni volta che ottieni un livello da Stregone, puoi sostituire una delle tue opzioni di Metamagia con una che non conosci. Ottieni altre due opzioni al livello 10 da Stregone e altre due al livello 17 da Stregone.
+  attivita:
+    # Solo QUALI opzioni conosci; l'applicazione (costo in Punti Stregoneria) è runtime/prosa.
+    - {tipo: scelta, scelta: opzione-metamagia, quantita: 2}
+- livello: 3
+  id: sottoclasse-del-stregone
+  nome: "Sottoclasse da Stregone"
+  descrizione: |
+    Ottieni una sottoclasse da Stregone a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Stregone. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Stregone o a un livello inferiore.
+- livello: 4
+  id: aumento-punteggi-caratteristica
+  nome: "Incremento del Punteggio di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento del Punteggio di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da Stregone 8, 12 e 16.
+- livello: 5
+  id: ripristino-stregonesco
+  nome: "Ripristino Stregonesco"
+  descrizione: |
+    Quando termini un Riposo Breve, puoi recuperare Punti Stregoneria spesi, fino a un massimo pari alla metà del tuo livello da Stregone (arrotondato per difetto). Una volta utilizzata questa capacità, non puoi farlo di nuovo finché non termini un Riposo Lungo.
+- livello: 7
+  id: stregoneria-incarnata
+  nome: "Stregoneria Incarnata"
+  descrizione: |
+    Se non ti sono rimasti utilizzi di Stregoneria Innata, puoi usarla spendendo 2 Punti Stregoneria nel momento in cui effettui l'Azione Bonus per attivarla.
+
+    Inoltre, mentre la tua capacità Stregoneria Innata è attiva, puoi utilizzare fino a due delle tue opzioni di Metamagia su ogni incantesimo che lanci.
+- livello: 19
+  id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni un talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- livello: 20
+  id: apoteosi-arcana
+  nome: "Apoteosi Arcana"
+  descrizione: |
+    Mentre la tua capacità Stregoneria Innata è attiva, puoi utilizzare un'opzione di Metamagia in ognuno dei tuoi turni senza spendere Punti Stregoneria per farlo.
+opzioni_metamagia:
+  - nome: Incantesimo Accorto
+    costo_punti_stregoneria: 1
+    descrizione: |
+      Quando lanci un incantesimo che costringe altre creature a effettuare un tiro salvezza, puoi proteggere alcune di esse dalla piena potenza dell'incantesimo. Per farlo, spendi 1 Punto Stregoneria e scegli un numero di creature pari al massimo al tuo modificatore di Carisma (minimo una creatura). Una creatura scelta supera automaticamente il tiro salvezza contro l'incantesimo e non subisce danni se normalmente ne subirebbe la metà in caso di successo.
+  - nome: Incantesimo a Distanza
+    costo_punti_stregoneria: 1
+    descrizione: |
+      Quando lanci un incantesimo con una gittata di almeno 1,5 metri (5 piedi), puoi spendere 1 Punto Stregoneria per raddoppiarne la gittata. Oppure, quando lanci un incantesimo con gittata "Contatto", puoi spendere 1 Punto Stregoneria per portarne la gittata a 9 metri (30 piedi).
+  - nome: Incantesimo Potenziato
+    costo_punti_stregoneria: 1
+    descrizione: |
+      Quando tiri i danni per un incantesimo, puoi spendere 1 Punto Stregoneria per ritirare un numero di dadi danno pari al massimo al tuo modificatore di Carisma (minimo uno); devi utilizzare i nuovi risultati.
+
+      Puoi usare Incantesimo Potenziato anche se hai già utilizzato un'altra opzione di Metamagia durante il lancio dell'incantesimo.
+  - nome: Incantesimo Prolungato
+    costo_punti_stregoneria: 1
+    descrizione: |
+      Quando lanci un incantesimo con una durata di 1 minuto o superiore, puoi spendere 1 Punto Stregoneria per raddoppiarne la durata, fino a un massimo di 24 ore.
+
+      Se l'incantesimo in questione richiede Concentrazione, ottieni Vantaggio a qualsiasi tiro salvezza effettuato per mantenere tale Concentrazione.
+  - nome: Incantesimo Rafforzato
+    costo_punti_stregoneria: 2
+    descrizione: |
+      Quando lanci un incantesimo che costringe una creatura a effettuare un tiro salvezza, puoi spendere 2 Punti Stregoneria per imporre Svantaggio ai tiri salvezza contro l'incantesimo a un bersaglio dell'incantesimo stesso.
+  - nome: Incantesimo Rapido
+    costo_punti_stregoneria: 2
+    descrizione: |
+      Quando lanci un incantesimo che richiede un'azione per essere lanciato, puoi spendere 2 Punti Stregoneria per modificare il tempo di lancio in un'azione bonus per quel lancio specifico. Non puoi modificare un incantesimo in questo modo se hai già lanciato un incantesimo di 1° livello o superiore nel turno corrente, né puoi lanciare un incantesimo di 1° livello o superiore in questo turno dopo aver modificato un incantesimo in questo modo.
+  - nome: Incantesimo Inseguitore
+    costo_punti_stregoneria: 1
+    descrizione: |
+      Se effettui un tiro per colpire con un incantesimo e manchi il bersaglio, puoi spendere 1 Punto Stregoneria per ritirare il d20; devi utilizzare il nuovo risultato.
+
+      Puoi usare Incantesimo Inseguitore anche se hai già utilizzato un'altra opzione di Metamagia durante il lancio dell'incantesimo.
+  - nome: Incantesimo Sottile
+    costo_punti_stregoneria: 1
+    descrizione: |
+      Quando lanci un incantesimo, puoi spendere 1 Punto Stregoneria per lanciarlo senza alcuna componente verbale, somatica o materiale, a eccezione delle componenti materiali che vengono consumate dall'incantesimo o che hanno un costo specificato nell'incantesimo stesso.
+  - nome: Incantesimo Trasmutato
+    costo_punti_stregoneria: 1
+    descrizione: |
+      Quando lanci un incantesimo che infligge un tipo di danno tra quelli del seguente elenco, puoi spendere 1 Punto Stregoneria per cambiare quel tipo di danno in uno degli altri tipi elencati: Acido, Freddo, Fuoco, Fulmine, Veleno, Tuono.
+  - nome: Incantesimo Gemellato
+    costo_punti_stregoneria: 1
+    descrizione: |
+      Quando lanci un incantesimo, come *Charme su Persone*, che può essere lanciato usando uno slot incantesimo di livello superiore per bersagliare una creatura aggiuntiva, puoi spendere 1 Punto Stregoneria per aumentare di 1 il livello effettivo dell'incantesimo.

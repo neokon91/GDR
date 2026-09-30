@@ -1,0 +1,37 @@
+id: dnd.oggetto-magico.pozione-della-forza-dei-giganti
+nome: Pozione della forza dei giganti
+categoria: pozione
+rarita: variabile
+richiede_sintonia: false
+consumabile: true
+versioni:
+  - nome: "Colline"
+    rarita: non-comune
+    valore: 21
+  - nome: "Gelo o pietre"
+    rarita: rara
+    valore: 23
+  - nome: "Fuoco"
+    rarita: rara
+    valore: 25
+  - nome: "Nuvole"
+    rarita: molto-rara
+    valore: 27
+  - nome: "Tempeste"
+    rarita: leggendaria
+    valore: 29
+attivita:
+  - tipo: attivabile
+    durata: {valore: 1, unita: ore}
+    effetti:
+      - {bersaglio: caratteristiche.forza.valore, operazione: aumento, valore: versione}
+descrizione: |
+  Quando il personaggio beve questa pozione, il suo punteggio di Forza cambia per 1 ora, come determi-nato dal tipo di gigante (vedi la tabella sottostante). Se il punteggio di Forza del personaggio è pari o superiore a quello conferito dalla pozione, non ha alcun effetto.Nel liquido trasparente di questa pozione galleggia un frammento argenteo che ricorda l'unghia di un gigante.
+
+  ### Pozione per Rarità
+
+  **Pozione della forza dei giganti (delle colline)** 21 Non comune
+  **Pozione della forza dei giganti (del gelo o delle pietre)** 23 Rara
+  **Pozione della forza dei giganti (del fuoco)** 25 Rara
+  **Pozione della forza dei giganti (delle nuvole)** 27 Molto rara
+  **Pozione della forza dei giganti (delle tempeste)** 29 Leggendaria

@@ -1,0 +1,104 @@
+id: dnd.mostro.drago-rosso-adulto
+nome: Drago rosso adulto
+taglia: enorme
+tipo: drago
+sottotipo: cromatico
+gruppo: Draghi rossi
+allineamento: caotico malvagio
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 27, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 25, competenza: false}
+  intelligenza: {valore: 16, competenza: false}
+  saggezza: {valore: 13, competenza: true}
+  carisma: {valore: 23, competenza: false}
+iniziativa: maestria
+dadi_vita: 19
+velocita: {camminata: 12, scalata: 12, volo: 24}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 18}
+percezione_passiva: 23
+immunita_danni: [fuoco]
+lingue: [Comune, Draconico]
+gs: 17
+tratti:
+  - nome: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+    descrizione: |
+      Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare raggio rovente.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 13 (1d10 + 8) danni taglienti più 5 (2d4) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20, +12 al tiro per colpire degli attacchi con incantesimo):
+
+      *1/giorno:*
+      - palla di fuoco
+
+      *A volontà:*
+      - comando (di 2º livello)
+      - individuazione del magico
+      - raggio rovente
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 20
+        a_volonta:
+          - id: dnd.incantesimo.comando
+            livello: 2
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.raggio-rovente
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.palla-di-fuoco
+  - nome: "Soffio di fuoco (ricarica 5-6)"
+    id: soffio-di-fuoco-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 21, tutte le creature in un cono di 18 metri. *Fallimento:* 59 (17d6) danni da fuoco. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 17, dado: d6, tipo_danno: fuoco}
+        successo: danno-dimezzato
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Balzo
+    descrizione: |
+      Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio.
+  - nome: Presenza imponente
+    descrizione: |
+      Il drago usa Incantesimi per lanciare comando (di 2º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+  - nome: Raggi fiammeggianti
+    descrizione: |
+      Il drago usa Incantesimi per lanciare raggio rovente. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.

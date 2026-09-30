@@ -1,0 +1,38 @@
+id: dnd.mostro.gufo
+nome: Gufo
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 3, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 8, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 5, volo: 18}
+abilita: [furtivita: maestria, percezione: maestria]
+sensi: {scurovisione: 36}
+percezione_passiva: 15
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Volo sfuggente
+    descrizione: |
+      Il gufo non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+azioni:
+  - nome: Speroni
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 1 danno tagliente.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

@@ -1,0 +1,44 @@
+id: dnd.mostro.sciame-di-pipistrelli
+nome: Sciame di pipistrelli
+taglia: grande
+sottodimensione: minuscole
+tipo: sciame
+sottotipo: di bestie
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 5, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 5, volo: 9}
+sensi: {vista_cieca: 18}
+percezione_passiva: 11
+resistenze: [contundente, perforante, tagliente]
+immunita_condizioni: [affascinato, afferrato, paralizzato, pietrificato, prono, spaventato, stordito, trattenuto]
+lingue: [nessuna]
+gs: 1/4
+
+tratti:
+  - nome: Sciame
+    descrizione: |
+      Lo sciame può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare un
+      pipistrello di taglia Minuscola. L'orda non può recupe-rare punti ferita o ottenere punti ferita temporanei.
+azioni:
+  - nome: Morsi
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (2d4) danni perforanti, o 2 (1d4) danni perforanti se lo sciame è sanguinante.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno: {numero_dadi: 2, dado: d4, tipo_danno: perforante}

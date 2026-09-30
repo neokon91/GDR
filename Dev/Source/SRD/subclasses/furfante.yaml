@@ -1,0 +1,29 @@
+id: dnd.sottoclasse.furfante
+nome: Furfante
+classe: dnd.classe.ladro
+citazione: "Vai a caccia di tesori nei panni di un autentico avventuriero"
+privilegi:
+- livello: 3
+  nome: "Mani Veloci"
+  descrizione: |
+    Come azione bonus usa Rapidita di mano o Utilizzo/Magia per oggetti magici compatibili.
+
+- livello: 3
+  nome: "Lavoro al Secondo Piano"
+  descrizione: |
+    Ottiene velocita di scalata e usa Destrezza per determinare le distanze di salto.
+
+- livello: 9
+  nome: "Furtivita Suprema"
+  descrizione: |
+    Ottiene Attacco nascosto come opzione di Colpo astuto.
+
+- livello: 13
+  nome: "Usare Oggetto Magico"
+  descrizione: |
+    Migliora cariche, pergamene e limite di sintonia degli oggetti magici.
+
+- livello: 17
+  nome: "Riflessi da Furfante"
+  descrizione: |
+    Effettua due turni nel primo round di ogni combattimento.

@@ -1,0 +1,21 @@
+id: dnd.incantesimo.charme-sui-mostri
+nome: Charme sui mostri
+livello: 4
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 1 ora
+descrizione: |
+  Una creatura entro gittata che l'incantatore è in grado di vedere effettua un tiro salvezza su Saggezza, disponendo di vantaggio se l'incantatore o i suoi alleati stanno combattendo contro di essa. In caso di fallimento, il bersaglio è affascinato fino al termine dell'incantesimo o finché non gli vengono inflitti danni dall'incantatore o i suoi alleati. La creatura affascinata è amichevole nei confronti dell'incantatore. Al termine dell'incantesimo, il bersaglio capirà di essere stato affascinato dall'incantatore.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 4º.

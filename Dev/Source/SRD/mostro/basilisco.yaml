@@ -1,0 +1,41 @@
+id: dnd.mostro.basilisco
+nome: Basilisco
+taglia: media
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 6}
+sensi: {scurovisione: 18}
+lingue: [nessuna]
+gs: 3
+azioni:
+  - id: basilisco.morso
+    nome: Morso
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m.
+      *Colpito:* 10 (2d6 + 3) danni Perforanti più 7 (2d6) danni da Veleno.
+    attivita:
+      - tipo: attacco
+        attacco: {categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 2, dado: d6, tipo_danno: perforante, bonus: { caratteristica: forza } }
+azioni_bonus:
+  - id: basilisco.sguardo-pietrificante
+    nome: "Sguardo Pietrificante (ricarica 4-6)"
+    descrizione: |
+      *Tiro Salvezza su Costituzione:* CD 12, tutte le creature in un Cono di 9 metri.
+      Se il basilisco vede il suo riflesso nel cono, deve effettuare questo tiro salvezza.
+      *Primo Fallimento:* il bersaglio è Trattenuto.
+      Ripete il tiro salvezza al termine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce.
+      *Secondo Fallimento:* il bersaglio è Pietrificato invece che Trattenuto.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza: { caratteristica: costituzione, cd: { caratteristica: costituzione, base: 8, competenza: true } }

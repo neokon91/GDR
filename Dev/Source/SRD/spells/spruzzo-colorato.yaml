@@ -1,0 +1,22 @@
+id: dnd.incantesimo.spruzzo-colorato
+nome: Spruzzo colorato
+livello: 1
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (un pizzico di sabbia colorata)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore lancia un lampo abbagliante di luce multicolore. Ogni creatura entro un cono di 4,5 metri originato dall'incantatore deve superare un tiro salvezza su Costituzione, altrimenti è accecata fino al termine del turno successivo dell'incantatore.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+    fallimento:
+      - concede: accecato
+        durata: { valore: 1, unita: round }

@@ -1,0 +1,42 @@
+id: dnd.mostro.cinghiale-gigante
+nome: Cinghiale gigante
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 17, competenza: true}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 7, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 12}
+percezione_passiva: 8
+lingue: [nessuna]
+gs: 2
+
+tratti:
+  - nome: Furia sanguinante
+    descrizione: |
+      Il cinghiale dispone di vantaggio ai tiri per colpire in mischia mentre è sanguinante.
+azioni:
+  - nome: Trafiggere
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e il cinghiale si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 7 (2d6) danni perforanti extra e cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

@@ -1,0 +1,47 @@
+id: dnd.mostro.piovra-gigante
+nome: Piovra gigante
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 3, nuoto: 18}
+abilita: [furtivita: maestria, percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 14
+lingue: [nessuna]
+gs: 1
+
+tratti:
+  - nome: Respirare sott'acqua
+    descrizione: |
+      La piovra può respirare soltanto sott'acqua e può trattenere il respiro per 1 ora fuori dall'acqua.
+azioni:
+  - nome: Tentacoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 3 m. *Colpito:* 10 (2d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 13 per sfuggire) da tutti e otto i tentacoli. Mentre è afferrato, il bersaglio è anche trattenuto.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+reazioni:
+  - nome: "Nube di inchiostro (1/Giorno)"
+    descrizione: |
+      Attivazione: la piovra subisce danni finché si trova sott'acqua. Esito: la piovra rilascia abbastanza inchiostro da riempire un cubo con spigolo di 3 metri intorno a sé, e può muoversi fino alla sua velocità di nuoto massima. Il cubo è pesantemente oscurato per 1 minuto, o finché una corrente forte o un altro effetto simile non disperde l'inchiostro.

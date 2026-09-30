@@ -1,0 +1,25 @@
+id: dnd.incantesimo.paura
+nome: Paura
+livello: 3
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (una piuma bianca)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Ogni creatura entro un cono di 9 metri deve superare un tiro salvezza su Saggezza, altrimenti lascia cadere ciò che tiene in mano e diventa spaventata per la durata dell'incantesimo.
+
+  Una creatura spaventata effettua l'azione di Scatto e si muove a ogni suo turno per allontanarsi dall'incantatore lungo il percorso più sicuro possibile, sempre che abbia lo spazio per muoversi. Se la creatura termina il suo turno in uno spazio dove l'incantatore non è in vista, effettua un tiro salvezza su Saggezza. In caso di successo, l'incantesimo termina.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: saggezza, cd: incantesimo }
+    fallimento:
+      - concede: spaventato
+        durata: { valore: 1, unita: minuti }

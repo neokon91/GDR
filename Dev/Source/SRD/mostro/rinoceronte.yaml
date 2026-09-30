@@ -1,0 +1,38 @@
+id: dnd.mostro.rinoceronte
+nome: Rinoceronte
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 21, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 12}
+percezione_passiva: 11
+lingue: [nessuna]
+gs: 2
+
+azioni:
+  - nome: Trafiggere
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e il rinoceronte si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 9 (2d8) danni perforanti extra e cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

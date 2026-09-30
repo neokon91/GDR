@@ -1,0 +1,10 @@
+id: dnd.armatura.giaco-di-maglia
+nome: Giaco di Maglia
+tipo: armatura-media
+categoria: armature
+costo: {valore: 50, valuta: moneta-oro}
+peso: {valore: 10, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 13, caratteristiche: [destrezza], max_modificatore: 2}}

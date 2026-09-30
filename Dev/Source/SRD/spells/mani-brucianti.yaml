@@ -1,0 +1,26 @@
+id: dnd.incantesimo.mani-brucianti
+nome: Mani brucianti
+livello: 1
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Un sottile velo di fiamme si propaga dall'incantatore. Ogni creatura entro un cono di 4,5 metri effettua un tiro salvezza su Destrezza, subendo 3d6 danni da fuoco in caso di fallimento, o la metà dei danni in caso di successo.
+
+  Gli oggetti infiammabili nel cono che non sono indossati o trasportati iniziano a bruciare.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d6 per ogni slot di livello superiore al 1º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 3, dado: d6, tipo_danno: fuoco }
+    successo: danno-dimezzato

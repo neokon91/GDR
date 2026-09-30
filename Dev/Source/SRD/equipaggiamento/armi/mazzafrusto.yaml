@@ -1,0 +1,7 @@
+id: dnd.arma.mazzafrusto
+nome: Mazzafrusto
+categoria: mischia-da-guerra
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 1, unita: kg}
+danno: {dado: d8, tipo_danno: contundente}
+padronanza: fiaccare

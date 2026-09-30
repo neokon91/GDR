@@ -1,0 +1,65 @@
+id: dnd.mostro.hezrou
+nome: Hezrou
+taglia: grande
+tipo: immondo
+sottotipo: demone
+allineamento: caotico malvagio
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 19, competenza: true}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 20, competenza: true}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 13, competenza: false}
+iniziativa: competenza
+dadi_vita: 15
+velocita: {camminata: 9}
+sensi: {scurovisione: 36, telepatia: 36}
+percezione_passiva: 11
+resistenze: [freddo, fulmine, fuoco]
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Abissale]
+gs: 8
+
+tratti:
+  - nome: Fetore
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 16, ogni creatura che inizi il suo turno in un'emanazione di 3 metri di cui l'hezrou è il punto di origine. *Fallimento:* il bersaglio è avvelenato fino all'inizio del proprio turno successivo.
+  - nome: Resistenza alla magia
+    descrizione: |
+      L'hezrou dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro demoniaco
+    descrizione: |
+      Se l'hezrou muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      L'hezrou effettua tre attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 6 (1d4 + 4) danni taglienti più 9 (2d8) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Balzo
+    descrizione: |
+      L'hezrou salta fino a 9 metri usando 3 metri di movimento.

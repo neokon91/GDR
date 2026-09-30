@@ -1,0 +1,6 @@
+id: dnd.specie.goliath
+nome: Goliath
+tipo: umanoide
+taglia: media
+velocita: {camminata: 10.5}
+tratti_sintesi: costituzione robusta, discendenza gigantica e forma Grande dal 5º livello

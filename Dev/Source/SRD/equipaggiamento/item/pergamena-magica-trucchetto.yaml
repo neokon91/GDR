@@ -1,0 +1,4 @@
+id: dnd.oggetto.pergamena-magica-trucchetto
+nome: Pergamena magica trucchetto
+categoria: equipaggiamento-avventura
+costo: {valore: 30, valuta: moneta-oro}

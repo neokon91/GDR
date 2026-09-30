@@ -1,0 +1,4 @@
+id: dnd.oggetto.locanda-agiato
+nome: Locanda Agiato
+categoria: vitto-e-alloggio
+costo: {valore: 8, valuta: moneta-argento}

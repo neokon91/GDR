@@ -1,0 +1,24 @@
+id: dnd.oggetto-magico.bacchetta-della-paura
+nome: Bacchetta della paura
+categoria: bacchetta
+rarita: rara
+richiede_sintonia: true
+cariche: {massimo: 7, ricarica: "1d6+1"}
+attivita:
+  - tipo: incantatore
+    cd: 15
+    cariche:
+      - {incantesimo: dnd.incantesimo.comando, costo: 1}
+      - {incantesimo: dnd.incantesimo.paura, costo: 3}
+descrizione: |
+  Questa bacchetta ha 7 cariche.
+
+  **Incantesimi**
+  Mentre il personaggio impugna la bacchetta, può usarla per lanciare uno degli incantesimi (CD del tiro salvezza 15) dalla seguente tabella. La tabella indica quante cariche vanno consumate per lanciare l'incantesimo.
+
+  ### Incantesimo Costo in cariche
+  **Comando (solo "fuggire" o "supplicare")** 1
+  **Paura** (cono di 18 metri) 3
+
+  **Ripristinare le cariche**
+  All'alba di ogni giorno, la bacchetta recupera 1d6 + 1 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, la bacchetta va in cenere ed è distrutta.

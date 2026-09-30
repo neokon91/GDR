@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.amuleto-anti-individuazione-e-localizzazione
+nome: Amuleto anti-individuazione e localizzazione
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+descrizione: |
+  Il personaggio che indossa questo amuleto non può essere bersagliato da incantesimi di divinazione o percepito attraverso sensori di scrutamento magico, a meno che il personaggio non lo permetta.

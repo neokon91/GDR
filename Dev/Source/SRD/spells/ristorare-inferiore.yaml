@@ -1,0 +1,18 @@
+id: dnd.incantesimo.ristorare-inferiore
+nome: Ristorare inferiore
+livello: 2
+scuola: abiurazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.paladino
+  - dnd.classe.ranger
+tempo_lancio: azione bonus
+gittata: contatto
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore tocca una creatura e pone fine a una delle condizioni che la affligge tra: accecato, assordato, avvelenato o paralizzato.

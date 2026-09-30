@@ -1,0 +1,37 @@
+id: dnd.mostro.corvo
+nome: Corvo
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 2, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 3, volo: 15}
+abilita: [percezione: competenza]
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Imitare
+    descrizione: |
+      Il corvo può imitare dei suoni semplici che ha sentito, come sussurri o cinguettii. Chi li ascolta può capire che si tratta di imitazioni superando una prova di Saggezza (Intuizione) con CD 10.
+azioni:
+  - nome: Becco
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno perforante.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

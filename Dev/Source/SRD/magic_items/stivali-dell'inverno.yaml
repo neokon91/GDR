@@ -1,0 +1,16 @@
+id: dnd.oggetto-magico.stivali-dell'inverno
+nome: Stivali dell'inverno
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: resistenze, operazione: concedi, valore: [freddo]}
+descrizione: |
+  Questi stivali foderati di pelliccia sono comodi e caldi. Il personaggio ottiene i seguenti benefici.
+  **Resistenza al freddo**
+  Ottiene resistenza ai danni da freddo e può tollerare temperature fino a -17 gradi Celsius o inferiori senza bisogno di ulte-riori protezioni.
+
+  **Passo invernale**
+  Ignora il terreno difficile dovuto al ghiaccio o alla neve.

@@ -1,0 +1,282 @@
+id: dnd.classe.chierico
+nome: Chierico
+caratteristica_primaria: [saggezza]
+dado_vita: 8
+tiri_salvezza: [saggezza, carisma]
+competenze_abilita:
+  quantita: 2
+  scelte: [intuizione, medicina, persuasione, religione, storia]
+competenze_armi: [armi-semplici]
+competenze_armature: [armature-leggere, armature-medie, scudi]
+# Preso come classe secondaria (multiclasse): sottoinsieme delle competenze.
+competenze_multiclasse:
+  armature: [armature-leggere, armature-medie, scudi]
+equipaggiamento_iniziale: 
+  - nome: A
+    oggetti:
+      - articolo: dnd.armatura.giaco-di-maglia
+      - articolo: dnd.armatura.scudo
+      - articolo: dnd.arma.mazza
+      - articolo: dnd.oggetto.simbolo-sacro
+      - articolo: dnd.oggetto.dotazione-da-sacerdote
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 7
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 110
+descrizione: |
+  Il chierico è un incantatore divino basato su Saggezza, capace di guarire, proteggere e incanalare energia sacra. La sottoclasse SRD è il Dominio della Vita.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [lancio-incantesimi, ordine-divino]
+    incanalare_divinita: 
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 4
+    slot_incantesimo: {livello1: 2, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 2
+    privilegi: [incanalare-divinita]
+    incanalare_divinita: 2
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 5
+    slot_incantesimo: {livello1: 3, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 3
+    privilegi: [sottoclasse-del-chierico]
+    incanalare_divinita: 2
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 6
+    slot_incantesimo: {livello1: 4, livello2: 2, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    incanalare_divinita: 2
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 7
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 5
+    privilegi: [bruciare-non-morti]
+    incanalare_divinita: 2
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 9
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 2, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 6
+    privilegi: [privilegio-della-sottoclasse]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 10
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 7
+    privilegi: [colpi-benedetti]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 11
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 1, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 12
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 2, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 9
+    privilegi: []
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 14
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 10
+    privilegi: [intervento-divino]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 15
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 11
+    privilegi: []
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 13
+    privilegi: []
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 14
+    privilegi: [colpi-benedetti-migliorati]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 15
+    privilegi: []
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 17
+    privilegi: [privilegio-della-sottoclasse]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 19
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 18
+    privilegi: []
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 20
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 19
+    privilegi: [dono-epico]
+    incanalare_divinita: 3
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 21
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 20
+    privilegi: [intervento-divino-superiore]
+    incanalare_divinita: 4
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 22
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 2, livello8: 1, livello9: 1}
+privilegi:
+- id: lancio-incantesimi
+  nome: "Lancio di Incantesimi"
+  attivita:
+    - tipo: incantatore
+      caratteristica: saggezza
+  livello: 1
+  descrizione: |
+    Hai imparato a lanciare incantesimi tramite la preghiera e la meditazione.
+    Le informazioni seguenti descrivono come applicare tali regole agli incantesimi da Chierico, presenti nell'apposita lista.
+
+    **Trucchetti.** Conosci tre trucchetti a tua scelta tratti dalla lista degli incantesimi da Chierico.
+
+    Ogni volta che ottieni un livello da Chierico, puoi sostituire uno dei tuoi trucchetti con un altro a tua scelta tratto dalla lista degli incantesimi da Chierico.
+
+    Quando raggiungi il 4° e il 10° livello da Chierico, impari un altro trucchetto a tua scelta dalla lista degli incantesimi da Chierico, come indicato nella colonna Trucchetti della tabella delle Capacità del Chierico.
+
+    **Slot Incantesimo.** La tabella delle Capacità del Chierico indica quanti slot incantesimo possiedi per lanciare i tuoi incantesimi di 1° livello o superiore. Recuperi tutti gli slot consumati al termine di un Riposo Lungo.
+
+    **Incantesimi Preparati di 1° Livello o Superiore.** Prepari la lista degli incantesimi di 1° livello o superiore che puoi lanciare grazie a questa capacità. Per iniziare, scegli quattro incantesimi di 1° livello dalla lista degli incantesimi da Chierico.
+
+    Il numero di incantesimi nella tua lista aumenta man mano che acquisisci livelli da Chierico, come indicato nella colonna Incantesimi Preparati della tabella delle Capacità del Chierico. Ogni volta che tale numero aumenta, scegli ulteriori incantesimi dalla lista degli incantesimi da Chierico finché il numero di incantesimi nella tua lista non corrisponde a quello indicato nella tabella. Gli incantesimi scelti devono essere di un livello per il quale disponi di slot incantesimo. Per esempio, se sei un Chierico di 3° livello, la tua lista di incantesimi preparati può includere sei incantesimi di 1° e 2° livello in qualsiasi combinazione.
+
+    Se un'altra capacità da Chierico ti fornisce incantesimi che hai sempre preparati, tali incantesimi non contano ai fini del numero di incantesimi che puoi preparare con questa capacità, ma per te sono comunque considerati incantesimi da Chierico.
+
+    **Cambiare gli Incantesimi Preparati.** Al termine di un Riposo Lungo, puoi modificare la tua lista di incantesimi preparati, sostituendo qualsiasi incantesimo presente con altri incantesimi da Chierico per i quali disponi di slot incantesimo.
+
+    **Caratteristica da Incantatore.** La Saggezza è la tua caratteristica da incantatore per gli incantesimi da Chierico.
+
+    **Focus di Incantesimo.** Puoi utilizzare un Simbolo Sacro come focus di incantesimo per i tuoi incantesimi da Chierico.
+- id: ordine-divino
+  nome: "Ordine Divino"
+  livello: 1
+  descrizione: |
+    Ti sei dedicato a uno dei seguenti ruoli sacri a tua scelta.
+
+    **Protettore**
+
+    Addestrato al combattimento, ottieni competenza nelle armi da guerra e nell'uso delle armature pesanti.
+
+    **Taumaturgo**
+    
+    Conosci un trucchetto aggiuntivo dalla lista degli incantesimi del Chierico. 
+    noltre, il tuo legame mistico con il divino ti conferisce un bonus alle prove di Intelligenza (Arcani o Religione).
+    Il bonus è pari al tuo modificatore di Saggezza (minimo +1).
+  attivita:
+    # Protettore concede competenze; Taumaturgo (trucchetto extra + bonus prove) resta prosa.
+    - tipo: scelta
+      scelta: ordine-divino
+      quantita: 1
+      opzioni:
+        - id: protettore
+          nome: Protettore
+          effetti:
+            - {bersaglio: competenza_arma, operazione: concedi, valore: armi-da-guerra}
+            - {bersaglio: competenza_armatura, operazione: concedi, valore: armature-pesanti}
+        - {id: taumaturgo, nome: Taumaturgo}
+- id: incanalare-divinita
+  nome: "Incanalare Divinità"
+  livello: 2
+  descrizione: |
+    Puoi incanalare energia divina direttamente dai Piani Esterni per alimentare effetti magici. Inizi con due di questi effetti: Scintilla Divina e Scacciare Non Morti, entrambi descritti di seguito. Ogni volta che utilizzi la capacità Incanalare Divinità di questa classe, scegli quale effetto di Incanalare Divinità di questa classe attivare. Ottieni ulteriori opzioni di effetto ai livelli più alti da Chierico.
+
+    Puoi utilizzare la capacità Incanalare Divinità di questa classe due volte. Recuperi un utilizzo speso al termine di un Riposo Breve e tutti gli utilizzi spesi al termine di un Riposo Lungo. Ottieni utilizzi aggiuntivi quando raggiungi determinati livelli da Chierico, come indicato nella colonna Incanalare Divinità della tabella delle Capacità del Chierico.
+
+    Se un effetto di Incanalare Divinità richiede un tiro salvezza, la CD è pari alla CD del tiro salvezza degli incantesimi della capacità Incantesimi di questa classe.
+
+    **Scintilla Divina.** Come azione Magica, punti il ​​tuo Simbolo Sacro verso un'altra creatura che puoi vedere entro 9 metri (30 piedi) da te e vi concentri sopra l'energia divina. Tira 1d8 e aggiungi il tuo modificatore di Saggezza. Puoi scegliere di ripristinare Punti Ferita alla creatura pari a quel totale oppure costringere la creatura a effettuare un tiro salvezza su Costituzione. Se fallisce il tiro salvezza, la creatura subisce danni Necrotici o Radiosi (a tua scelta) pari a quel totale. Se supera il tiro salvezza, la creatura subisce la metà dei danni (arrotondando per difetto).
+
+    Tiri un d8 aggiuntivo quando raggiungi i livelli da Chierico 7 (2d8), 13 (3d8) e 18 (4d8).
+
+    **Scacciare Non Morti.** Come azione Magica, mostri il tuo Simbolo Sacro e pronunci parole di condanna contro le creature Non Morte. Ogni Non Morto a tua scelta entro 9 metri (30 piedi) da te deve effettuare un tiro salvezza su Saggezza. Se la creatura fallisce il tiro salvezza, subisce le condizioni Spaventato e Incapace per 1 minuto. Per tutta la durata dell'effetto, durante i propri turni cerca di allontanarsi da te il più possibile. L'effetto termina in anticipo se la creatura subisce danni, se tu subisci la condizione Incapace o se muori.
+  attivita:
+    # Solo il serbatoio di usi. I singoli effetti (Scintilla Divina, Scacciare Non Morti)
+    # impongono condizioni via TS: restano PROSA (runtime).
+    - {tipo: attivabile, azione: azione, usi: {da_tabella: incanalare_divinita, ricarica: {riposo-breve: 1, riposo-lungo: tutti}}}
+- id: sottoclasse-del-chierico
+  nome: "Sottoclasse da Chierico"
+  livello: 3
+  descrizione: |
+    Ottieni una sottoclasse da Chierico a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Chierico. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Chierico o a un livello inferiore.
+- id: aumento-punteggi-caratteristica
+  nome: "Aumento dei Punteggi di Caratteristica"
+  livello: 4
+  descrizione: |
+    Ottieni il talento Incremento dei Punteggi di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da Chierico 8, 12 e 16.
+- id: bruciare-non-morti
+  nome: "Bruciare Non Morti"
+  livello: 5
+  descrizione: |
+    Ogni volta che usi Scacciare Non Morti, puoi tirare un numero di d8 pari al tuo modificatore di Saggezza (minimo 1d8) e sommare i risultati. Ogni Non Morto che fallisce il tiro salvezza contro quell'uso di Scacciare Non Morti subisce danni radiosi pari al totale del tiro. Questi danni non pongono fine all'effetto di Scacciare Non Morti.
+- id: colpi-benedetti
+  nome: "Colpi Benedetti"
+  livello: 7
+  descrizione: |
+    Il potere divino ti infonde energia in battaglia. Ottieni una delle seguenti opzioni a tua scelta (se ottieni una di queste opzioni da una sottoclasse da Chierico presente in un manuale precedente, usa solo l'opzione scelta per questa capacità).
+
+    **Colpo Divino.** Una volta per turno, quando colpisci una creatura con un tiro per colpire effettuato con un'arma, puoi far subire al bersaglio 1d8 danni necrotici o radiosi extra (a tua scelta).
+
+    **Incantare Potente.** Aggiungi il tuo modificatore di Saggezza ai danni inflitti con qualsiasi trucchetto da Chierico.
+  attivita:
+    # Solo la scelta fra le due opzioni; l'effetto di ciascuna resta PROSA/runtime.
+    - {tipo: scelta, scelta: colpi-benedetti, quantita: 1, opzioni: [colpo-divino, incantare-potente]}
+- id: intervento-divino
+  nome: "Intervento Divino"
+  livello: 10
+  descrizione: |
+    Puoi invocare la tua divinità o il tuo pantheon affinché intervengano in tuo favore. Come azione Magica, scegli un qualsiasi incantesimo da Chierico di livello 5 o inferiore che non richieda una Reazione per essere lanciato. Come parte della stessa azione, lanci quell'incantesimo senza consumare uno slot incantesimo né richiedere componenti materiali. Non puoi usare nuovamente questa capacità finché non completi un Riposo Lungo.
+- id: colpi-benedetti-migliorati
+  nome: "Colpi Benedetti Migliorati"
+  livello: 14
+  descrizione: |
+    L'opzione scelta per Colpi Benedetti diventa più potente.
+
+    **Colpo Divino**
+    
+    I danni extra del tuo Colpo Divino aumentano a 2d8.
+
+    **Lancio di Incantesimi Potenziato**
+    
+    Quando lanci un trucchetto da Chierico e infliggi danni a una creatura, puoi infondere vitalità in te stesso o in un'altra creatura entro 18 metri (60 piedi) da te, conferendo un numero di Punti Ferita Temporanei pari al doppio del tuo modificatore di Saggezza.
+- id: dono-epico
+  nome: "Dono Epico"
+  livello: 19
+  descrizione: |
+    Ottieni il talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- id: intervento-divino-superiore
+  nome: "Intervento Divino Superiore"
+  livello: 20
+  descrizione: |
+    Puoi invocare un intervento divino ancora più potente. Quando utilizzi la capacità Intervento Divino, puoi scegliere l'incantesimo *Desiderio* (*Wish*) quando selezioni l'incantesimo da lanciare. Se lo fai, non puoi utilizzare nuovamente Intervento Divino finché non avrai completato un numero di Riposi Lunghi compreso tra 2 e 8 (2d4).

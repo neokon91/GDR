@@ -1,0 +1,4 @@
+id: dnd.oggetto.pasto-squallido
+nome: Pasto Squallido
+categoria: vitto-e-alloggio
+costo: {valore: 1, valuta: moneta-rame}

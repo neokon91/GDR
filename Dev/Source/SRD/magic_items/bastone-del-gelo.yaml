@@ -1,0 +1,29 @@
+id: dnd.oggetto-magico.bastone-del-gelo
+nome: Bastone del gelo
+categoria: bastone
+rarita: molto-rara
+richiede_sintonia: true
+cariche: {massimo: 10, ricarica: "1d6+4"}
+attivita:
+  - tipo: incantatore
+    cariche:
+      - {incantesimo: dnd.incantesimo.nube-di-nebbia, costo: 1}
+      - {incantesimo: dnd.incantesimo.muro-di-ghiaccio, costo: 4}
+      - {incantesimo: dnd.incantesimo.tempesta-di-ghiaccio, costo: 4}
+      - {incantesimo: dnd.incantesimo.cono-di-freddo, costo: 5}
+  - tipo: passivo
+    effetti:
+      - {bersaglio: resistenze, operazione: concedi, valore: [freddo]}
+descrizione: |
+  Mentre il personaggio impugna questo bastone, ottiene resistenza ai danni da freddo.
+
+  **Incantesimi**
+  Il bastone ha 10 cariche. Mentre il personaggio lo impugna, può lanciare uno degli incantesimi dalla seguente tabella utilizzando la sua CD del tiro salvezza sull'incantesimo. La tabella indica quante cariche vanno consumate per lanciare l'incantesimo.
+  **Incantesimo Costo in cariche**
+  **Cono di freddo** 5
+  **Nube di nebbia** 1
+  **Muro di ghiaccio** 4
+  **Tempesta di ghiaccio** 4
+
+  **Ripristinare le cariche**
+  All'alba di ogni giorno, il bastone recupera 1d6 + 4 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, il bastone si trasforma in acqua e viene distrutto.

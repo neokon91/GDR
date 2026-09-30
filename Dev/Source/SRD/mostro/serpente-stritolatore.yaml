@@ -1,0 +1,50 @@
+id: dnd.mostro.serpente-stritolatore
+nome: Serpente stritolatore
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9, nuoto: 9}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {vista_cieca: 3}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 1/4
+
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Stritolare
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 12, una creatura di taglia Media o inferiore che il serpente è in grado di vedere entro 1,5 metri. *Fallimento:* 7 (3d4) danni contundenti e il bersaglio viene afferrato (CD 12 per sfuggire).
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 3, dado: d4, tipo_danno: contundente}

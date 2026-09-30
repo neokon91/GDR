@@ -1,0 +1,131 @@
+id: dnd.mostro.drago-di-bronzo-adulto
+nome: Drago di bronzo adulto
+taglia: enorme
+tipo: drago
+sottotipo: metallico
+gruppo: Draghi di bronzo
+allineamento: legale buono
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 25, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 23, competenza: false}
+  intelligenza: {valore: 16, competenza: false}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 20, competenza: false}
+iniziativa: maestria
+dadi_vita: 17
+velocita: {camminata: 12, nuoto: 12, volo: 24}
+abilita: [furtivita: competenza, intuizione: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 18}
+percezione_passiva: 22
+immunita_danni: [fulmine]
+lingue: [Comune, Draconico]
+gs: 15
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il drago può respirare in aria e in acqua.
+  - nome: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+    descrizione: |
+      Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio repulsivo o (B) Incantesimi per lanciare dardo tracciante (di 2º livello).
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 16 (2d8 + 7) danni taglienti più 5 (1d10) danni da fulmine.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17, +10 al tiro per colpire degli attacchi con incantesimo):
+
+      *1/giorno ciascuno:*
+      - individuazione dei pensieri
+      - respirare sott'acqua
+
+      *A volontà:*
+      - dardo tracciante (di 2º livello)
+      - individuazione del magico
+      - parlare con gli animali
+      - taumaturgia
+      - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 17
+        a_volonta:
+          - id: dnd.incantesimo.dardo-tracciante
+            livello: 2
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.parlare-con-gli-animali
+          - dnd.incantesimo.taumaturgia
+          - dnd.incantesimo.trasformazione
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.individuazione-dei-pensieri
+              - dnd.incantesimo.respirare-sott-acqua
+  - nome: "Soffio di fulmini (ricarica 5-6)"
+    id: soffio-di-fulmini-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 19, tutte le creature in una linea lunga 27 metri e larga 1,5 metri. *Fallimento:* 55 (10d10) danni da fulmine. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 10, dado: d10, tipo_danno: fulmine}
+        successo: danno-dimezzato
+  - nome: Soffio repulsivo
+    id: soffio-repulsivo
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 19, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 18 metri di distanza dal drago e cade a terra prono.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Balzo
+    descrizione: |
+      Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+  - nome: Luce guida
+    descrizione: |
+      Il drago usa Incantesimi per lanciare dardo tracciante (di 2º livello).
+  - nome: Rombo di tuono
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 17, tutte le creature in una sfera di 6 metri di raggio centrata su un punto che il drago è in grado di vedere entro 27 metri. *Fallimento:* 10 (3d6) danni da tuono, e il bersaglio è assordato fino al termine del proprio turno successivo.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {valore: 17, fisso: true}
+        fallimento:
+          - danno: {numero_dadi: 3, dado: d6, tipo_danno: tuono}

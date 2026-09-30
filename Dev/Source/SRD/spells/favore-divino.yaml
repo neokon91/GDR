@@ -1,0 +1,14 @@
+id: dnd.incantesimo.favore-divino
+nome: Favore divino
+livello: 1
+scuola: trasmutazione
+classi:
+  - dnd.classe.paladino
+tempo_lancio: azione bonus
+gittata: incantatore
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 1 minuto
+descrizione: |
+  Fino al termine dell'incantesimo, i suoi attacchi con le armi infliggono 1d4 danni radiosi extra se il colpo va a segno.

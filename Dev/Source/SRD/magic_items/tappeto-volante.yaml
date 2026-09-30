@@ -1,0 +1,14 @@
+id: dnd.oggetto-magico.tappeto-volante
+nome: Tappeto volante
+categoria: oggetto-meraviglioso
+rarita: molto-rara
+richiede_sintonia: false
+descrizione: |
+  Il personaggio può far fluttuare e volare il tappeto volante effettuando un'azione di Magia e usando la parola d'ordine dell'oggetto. Il tappeto si muove in base ai comandi impartiti dal personaggio, che deve trovarsi entro 9 metri da esso.Esistono tappeti volanti di quattro misure diverse. Il GM sceglie la dimensione di un tappeto o la determina in modo casuale tirando sulla seguente tabella. Un tappeto può trasportare fino al doppio del peso indicato in tabella, ma se trasporta più di quanto indicato la sua velocità di volo è dimezzata.
+
+  ### 1d100 Dimensioni Capacità di trasporto Velocità di volo
+
+  **01–20** 90 cm × 150 cm 100 kg 24 metri
+  **21–55** 120 cm × 180 cm 200 kg 18 metri
+  **56–80** 150 cm × 210 cm 300 kg 12 metri
+  **81–00** 180 cm × 270 cm 400 kg 9 metri

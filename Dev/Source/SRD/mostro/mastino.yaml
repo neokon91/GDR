@@ -1,0 +1,40 @@
+id: dnd.mostro.mastino
+nome: Mastino
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 12}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 15
+lingue: [nessuna]
+gs: 1/8
+
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

@@ -1,0 +1,22 @@
+id: dnd.incantesimo.scassinare
+nome: Scassinare
+livello: 2
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore sceglie un oggetto entro gittata che egli è in grado di vedere. Può trattarsi di una porta, uno scrigno, un forziere, un paio di manette, un lucchetto o un altro oggetto dotato di un mezzo normale o magico per la chiusura.
+
+  Un bersaglio tenuto chiuso da una normale serratura, incastrato o sbarrato, cessa di essere tale. Se l'oggetto è protetto da più serrature, con questo incantesimo se ne sblocca soltanto una.
+
+  Se il bersaglio è tenuto chiuso da Serratura Arcana, quell'incantesimo è soppresso per 10 minuti, nel corso dei quali l'oggetto può essere aperto e chiuso.
+
+  Quando l'incantatore lancia l'incantesimo, si percepisce un forte rumore simile al bussare proveniente dal bersaglio, udibile fino a una distanza di 90 metri.

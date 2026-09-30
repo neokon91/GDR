@@ -1,0 +1,13 @@
+id: dnd.oggetto-magico.spada-danzante
+nome: Spada danzante
+categoria: arma
+sottotipo: scimitarra, spada corta, spada lunga, spadone o stocco
+rarita: molto-rara
+richiede_sintonia: true
+descrizione: |
+  Il personaggio può effettuare un'azione bonus per lanciare quest'arma magica in aria. Quando lo fa, la spada inizia a fluttuare, vola fino a una distanza 
+  di 9 metri e attacca una creatura a scelta del personaggio situata entro 1,5 metri da sé. L'arma utilizza il proprio tiro per colpire e aggiunge il proprio 
+  modificatore di caratteristica ai tiri per i danni.Finché la spada fluttua, il personaggio può effet-tuare un'azione bonus per farla volare in un altro 
+  punto entro 9 metri da sé. Come parte della stessa azione bonus, il personaggio può far sì che l'arma attacchi una creatura entro 1,5 metri da essa.
+  Dopo il quarto attacco, l'arma fluttuante vola verso il personaggio e cerca di tornare nella sua mano. Se il personaggio non ha una mano libera, l'arma cade a terra ai suoi piedi. Se non esiste un percorso sgombro fino al personaggio, la spada si avvicina a lui quanto più possibile e poi cade a 
+  terra. Smette di fluttuare anche se il personaggio la prende in mano o se si allontana più di 9 metri da essa.

@@ -1,0 +1,54 @@
+id: dnd.mostro.lupo-invernale
+nome: Lupo invernale
+taglia: grande
+tipo: mostruosita
+allineamento: neutrale malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 10
+velocita: {camminata: 15}
+abilita: [furtivita: maestria, percezione: maestria]
+percezione_passiva: 15
+immunita_danni: [freddo]
+lingue: [Comune, Gigante]
+gs: 3
+
+tratti:
+  - nome: Tattiche del branco
+    descrizione: |
+      Il lupo dispone di vantaggio al tiro per colpire contro una creatura se almeno uno degli alleati dell'animale si trova entro 1,5 metri dalla creatura e non è incapacitato.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di freddo (ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 12, tutte le creature in un cono di 4,5 metri. *Fallimento:* 18 (4d8) danni da freddo. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 4, dado: d8, tipo_danno: freddo}
+        successo: danno-dimezzato

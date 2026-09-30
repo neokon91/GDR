@@ -1,0 +1,114 @@
+id: dnd.mostro.signore-delle-mummie
+nome: Signore delle mummie
+taglia: [media, piccola]
+tipo: non-morto
+sottotipo: chierico
+gruppo: Mummie
+allineamento: legale malvagio
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 11, competenza: true}
+  saggezza: {valore: 19, competenza: true}
+  carisma: {valore: 16, competenza: false}
+iniziativa: maestria
+dadi_vita: 25
+velocita: {camminata: 9}
+abilita: [percezione: competenza, religione: competenza, storia: competenza]
+sensi: {vista_pura: 18}
+percezione_passiva: 19
+immunita_danni: [necrotico, veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, paralizzato, spaventato]
+vulnerabilita: [fuoco]
+lingue: [Comune più altre tre lingue]
+gs: 15
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il signore delle mummie dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+    descrizione: |
+      Se il signore delle mummie fallisce un tiro salvezza, può scegliere di superarlo comunque.
+  - nome: Ristoro non morto
+    descrizione: |
+      Se annientata, la mummia acquisisce un nuovo corpo dopo 24 ore se il suo cuore è intatto, tornando in vita con tutti i suoi punti ferita. Il nuovo corpo appare in uno spazio libero all'interno della tana della mummia. Il cuore è un oggetto di taglia Minuscola con CA 17, PF 10 e immunità a tutti i danni, eccetto ai danni da fuoco.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il signore delle mummie effettua un attacco Pugno di putrefazione o Incanalare energia negativa, e usa Sguardo funesto.
+  - nome: Pugno di putrefazione
+    descrizione: |
+      *Tiro per colpire in mischia:* +9, portata 1,5 m *Colpito:* 15 (2d10 + 4) danni contundenti più 10 (3d6) danni necrotici. Se il bersaglio è una creatura, viene maledetto. Finché è maledetto, il bersaglio non può recuperare punti ferita, non ottiene alcun beneficio dai riposi lunghi, e i suoi punti ferita massimi sono ridotti di 10 (3d6) ogni 24 ore trascorse. Una creatura muore e si disintegra in polvere se viene ridotta a 0 punti ferita da questo attacco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Incanalare energia negativa
+    descrizione: |
+      *Tiro per colpire a distanza:* +9, gittata 18 m. *Colpito:* 25 (6d6 + 4) danni necrotici.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno:
+              numero_dadi: 6
+              dado: d6
+              tipo_danno: necrotico
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    descrizione: |
+      Il signore delle mummie lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17, +9 al tiro per colpire degli attacchi con incantesimo): 1/giorno ciascuno: Animare morti, ferire, piaga degli insetti (di 7º livello) A volontà: Dissolvi magie, taumaturgia
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        cd: 17
+        a_volonta:
+          - dnd.incantesimo.dissolvi-magie
+          - dnd.incantesimo.taumaturgia
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.animare-morti
+              - dnd.incantesimo.ferire
+              - id: dnd.incantesimo.piaga-degli-insetti
+                livello: 7
+  - nome: Sguardo funesto
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 17, una creatura che la mummia è in grado di vedere entro 18 metri. *Fallimento:* 25 (6d6 + 4) danni psichici, e il bersaglio è paralizzato fino al termine del turno successivo della mummia.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie: 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, la mummia può consumare un utilizzo per effettuare una delle seguenti azioni. La mummia recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Colpo necrotico
+    descrizione: |
+      La mummia effettua un attacco Pugno di putrefazione o Incanalare energia negativa.
+  - nome: Comando intimidatorio
+    descrizione: |
+      La mummia lancia comando (di 2º livello), utilizzando la stessa caratteristica da incantatore di Incantesimi. Non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+  - nome: Sguardo
+    descrizione: |
+      La mummia usa Sguardo funesto. Non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+reazioni:
+  - nome: Vortice di sabbia
+    descrizione: |
+      Attivazione: la mummia viene colpita con un tiro per colpire. Esito: la mummia aggiunge 2 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno, e si teletrasporta fino a 18 metri in uno spazio libero che è in grado di vedere. Ogni creatura a sua scelta che è in grado di vedere entro 1,5 metri dallo spazio di destinazione è accecata fino al termine del turno successivo della mummia.

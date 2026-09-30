@@ -1,0 +1,54 @@
+id: dnd.mostro.ameba-paglierina
+nome: Ameba paglierina
+taglia: grande
+tipo: melma
+allineamento: senza allineamento
+ca: {valore: 8}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 6, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 6, competenza: false}
+  carisma: {valore: 1, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 6, scalata: 6}
+sensi: {vista_cieca: 18}
+resistenze: [acido]
+immunita_danni: [fulmine, tagliente]
+immunita_condizioni: [affascinato, afferrato, assordato, indebolimento, prono, spaventato, trattenuto]
+lingue: [nessuna]
+gs: 2
+habitat: [sottosuolo]
+tratti:
+  - id: ameba-paglierina.amorfo
+    nome: Amorfo
+    descrizione: |
+      L'ameba può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+  - id: ameba-paglierina.movimenti-del-ragno
+    nome: Movimenti del ragno
+    descrizione: |
+      L'ameba può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+azioni:
+  - id: ameba-paglierina.psudopode
+    nome: Pseudopode
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 12 (3d6 + 2) danni da acido.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: acido
+              bonus: {caratteristica: forza}
+reazioni:
+  - id: ameba-paglierina.scindersi
+    nome: Scindersi
+    descrizione: |
+      *Attivazione:* l'ameba, finché è di taglia Grande o Media e ha 10 punti ferita o più, diventa sanguinante o è soggetta a danni da fulmine o taglienti. *Esito:* l'ameba paglierina si scinde in due nuove amebe paglierine. Ogni nuova ameba è inferiore di una taglia rispetto all'ameba originale, e agisce di propria iniziativa. I punti ferita dell'ameba originale sono divisi equamente tra le due nuove amebe (arrotondati per difetto).

@@ -1,0 +1,44 @@
+id: dnd.mostro.granchio-gigante
+nome: Granchio gigante
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 9, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 9, nuoto: 9}
+abilita: [furtivita: competenza]
+sensi: {vista_cieca: 9}
+percezione_passiva: 9
+lingue: [nessuna]
+gs: 1/8
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il granchio può respirare in aria e in acqua.
+azioni:
+  - nome: Artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 11 per sfuggire) da una delle due chele.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

@@ -1,0 +1,18 @@
+id: dnd.incantesimo.dardo-incantato
+nome: Dardo incantato
+livello: 1
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore crea tre dardi lucenti di forza magica. Ogni dardo colpisce una creatura a scelta dell'incantatore situata entro gittata che egli è in grado di vedere. Un dardo infligge 1d4 + 1 danni da forza al suo bersaglio. Tutti i dardi colpiscono simultaneamente e l'incantatore può dirigerli per colpire una o più creature.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantesimo crea un dardo aggiuntivo per ogni slot di livello superiore al 1º.

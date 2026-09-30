@@ -1,0 +1,86 @@
+id: dnd.mostro.planetar
+nome: Planetar
+taglia: grande
+tipo: celestiale
+sottotipo: angelo
+allineamento: legale buono
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 24, competenza: true}
+  destrezza: {valore: 20, competenza: false}
+  costituzione: {valore: 24, competenza: true}
+  intelligenza: {valore: 19, competenza: false}
+  saggezza: {valore: 22, competenza: true}
+  carisma: {valore: 25, competenza: true}
+iniziativa: competenza
+dadi_vita: 21
+velocita: {camminata: 12, volo: 36}
+abilita: [percezione: competenza]
+sensi: {vista_pura: 36, telepatia: 36}
+percezione_passiva: 21
+resistenze: [radioso]
+immunita_condizioni: [affascinato, indebolimento, spaventato]
+lingue: [tutte]
+gs: 16
+
+tratti:
+  - nome: Consapevolezza divina
+    descrizione: |
+      Il planetar sa riconoscere le menzogne.
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il planetar dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro glorioso
+    descrizione: |
+      Se il planetar muore al di fuori di Monte Celestia, il suo corpo scompare e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte a Monte Celestia.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il planetar effettua tre attacchi Spada radiosa oppure usa Conflagrazione divina due volte.
+  - nome: Spada radiosa
+    descrizione: |
+      *Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 14 (2d6 + 7) danni taglienti più 18 (4d8) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Conflagrazione divina
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 20, tutti i nemici in una sfera di 6 metri di raggio centrata su un punto che il planetar è in grado di vedere entro 36 metri. *Fallimento:* 24 (7d6) danni radiosi. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 7, dado: d6, tipo_danno: radioso}
+        successo: danno-dimezzato
+  - nome: Incantesimi
+    descrizione: |
+      Il planetar lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20): A volontà: Individuazione del bene e del male1/giorno ciascuno: Comunione, controllare tempo atmosferico, dissolvi il bene e il male, rianimare morti
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 20
+        a_volonta:
+          - dnd.incantesimo.individuazione-del-bene-e-del-male
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.comunione
+              - dnd.incantesimo.controllare-tempo-atmosferico
+              - dnd.incantesimo.dissolvi-il-bene-e-il-male
+              - dnd.incantesimo.rianimare-morti
+azioni_bonus:
+  - nome: "Aiuto divino (2/giorno)"
+    descrizione: |
+      Il planetar lancia cura ferite, invisibilità, rimuovi maledizione o ristorare inferiore, utilizzando la stessa caratteristica da incantatore di Incantesimi.

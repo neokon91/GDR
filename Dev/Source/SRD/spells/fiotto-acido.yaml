@@ -1,0 +1,23 @@
+id: dnd.incantesimo.fiotto-acido
+nome: Fiotto acido
+livello: 0
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore crea una bolla di acido in un punto entro gittata, dove la bolla esplode in una sfera del raggio di 1,5 metri. Ogni creatura all'interno della sfera deve superare un tiro salvezza su Destrezza, altrimenti subisce 1d6 danni da acido.
+scaling: |
+  **Trucchetto potenziato**
+  I danni aumentano di 1d6 quando l'incantatore raggiunge il 5º livello (2d6), l'11º livello (3d6) e il 17º livello (4d6).
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 1, dado: d6, tipo_danno: acido }

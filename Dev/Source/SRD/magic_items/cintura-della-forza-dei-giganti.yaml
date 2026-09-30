@@ -1,0 +1,36 @@
+id: dnd.oggetto-magico.cintura-della-forza-dei-giganti
+nome: Cintura della forza dei giganti
+categoria: oggetto-meraviglioso
+rarita: variabile
+richiede_sintonia: true
+versioni:
+  - nome: "Colline"
+    rarita: rara
+    valore: 21
+  - nome: "Gelo o pietre"
+    rarita: molto-rara
+    valore: 23
+  - nome: "Fuoco"
+    rarita: molto-rara
+    valore: 25
+  - nome: "Nuvole"
+    rarita: leggendaria
+    valore: 27
+  - nome: "Tempeste"
+    rarita: leggendaria
+    valore: 29
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: caratteristiche.forza.valore, operazione: aumento, valore: versione}
+descrizione: |
+  Finché il personaggio indossa questa cintura, la sua Forza cambia in un determinato punteggio conferito dalla cintura, come determinato dal tipo di gigante (vedi la tabella sottostante).
+  Se il punteggio di Forza del personaggio senza cintura è pari o superiore a quello conferito dall'oggetto, non ha alcun effetto.
+  
+  |Cintura|Forza|Rarità|
+  |:-:|:-:|:-:|
+  |**Cintura della forza dei giganti (delle colline)**|21|Rara|
+  |**Cintura della forza dei giganti (del gelo o delle pietre)**|23|Molto rara|
+  |**Cintura della forza dei giganti (del fuoco)**|25|Molto rara|
+  |**Cintura della forza dei giganti (delle nuvole)**|27|Leggendaria|
+  |**Cintura della forza dei giganti (delle tempeste)**|29|Leggendaria|

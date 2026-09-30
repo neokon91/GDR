@@ -1,0 +1,22 @@
+id: dnd.incantesimo.guardiano-della-fede
+nome: Guardiano della fede
+livello: 4
+scuola: evocazione
+classi:
+  - dnd.classe.chierico
+tempo_lancio: azione
+gittata: 9
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: 8 ore
+descrizione: |
+  Per la durata dell'incantesimo, un guardiano spettrale di taglia Grande compare e fluttua in uno spazio libero entro gittata che l'incantatore è in grado di vedere. Il guardiano occupa quello spazio ed è invulnerabile: assume inoltre una forma appropriata alla divinità o al pantheon dell'incantatore.
+
+  Qualsiasi nemico si muova in uno spazio entro 3 metri dal guardiano per la prima volta in un turno o che inizi il proprio turno lì, effettua un tiro salvezza su Destrezza. In caso di fallimento, subisce 20 danni radiosi o la metà dei danni in caso di successo. Il guardiano svanisce quando ha inflitto un totale di 60 danni.
+attivita:
+  - tipo: tiro-salvezza
+    innesco: entra-nell-area
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento: { danno: { bonus: 20, tipo_danno: radioso } }
+    successo: danno-dimezzato

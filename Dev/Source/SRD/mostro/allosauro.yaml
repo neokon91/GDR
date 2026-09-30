@@ -1,0 +1,63 @@
+id: dnd.mostro.allosauro
+nome: Allosauro
+taglia: grande
+tipo: bestia
+sottotipo: dinosauro
+gruppo: Bestie
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 18}
+abilita: [percezione: maestria]
+lingue: [nessuna]
+gs: 2
+habitat: [prateria]
+azioni:
+  - id: allosauro.artigli
+    nome: Artigli
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +6, portata 1,5 m.
+      *Colpito:* 8 (1d8 + 4) danni Taglienti.
+      Se il bersaglio è una creatura di taglia Grande o inferiore
+      e l'allosauro si è mosso di 9 metri o più in linea retta verso di esso
+      subito prima del colpo,
+      il bersaglio cade a terra Prono e l'allosauro può effettuare
+      un attacco Morso contro di esso.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - id: allosauro.morso
+    nome: Morso
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +6, portata 1,5 m.
+      *Colpito:* 15 (2d10 + 4) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

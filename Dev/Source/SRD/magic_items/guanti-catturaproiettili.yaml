@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.guanti-catturaproiettili
+nome: Guanti catturaproiettili
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+descrizione: |
+  Se il personaggio viene colpito con un tiro per colpire effettuato con un'arma a distanza o da lancio mentre indossa questi guanti, può usare una  reazione per ridurre i danni di 1d10 più il suo modificatore di Destrezza se ha una mano libera.
+  Se riduce i danni a 0, può afferrare l'arma o la munizione, purché si tratti di un oggetto abbastanza piccolo da essere tenuto in mano.

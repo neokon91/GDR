@@ -1,0 +1,22 @@
+id: dnd.incantesimo.anatema
+nome: Anatema
+livello: 1
+scuola: ammaliamento
+classi: 
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (una goccia di sangue)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore sceglie fino a tre creature situate entro gittata che egli è in grado di vedere,
+  ciascuna delle quali deve effettuare un tiro salvezza su Carisma. Se un bersaglio fallisce il tiro,
+  ogni volta che effettua un tiro per colpire o un tiro salvezza prima del termine dell'incantesimo
+  deve sottrarre 1d4 da essi.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore** L'incantatore può bersagliare
+  una creatura aggiuntiva per ogni slot di livello superiore al 1º.

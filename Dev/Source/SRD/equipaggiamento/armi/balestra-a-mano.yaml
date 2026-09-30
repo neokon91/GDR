@@ -1,0 +1,14 @@
+id: dnd.arma.balestra-a-mano
+nome: Balestra a mano
+categoria: distanza-da-guerra
+costo: {valore: 75, valuta: moneta-oro}
+peso: {valore: 1.5, unita: kg}
+danno: {dado: d6, tipo_danno: perforante}
+gittata:
+  normale: 9
+  lunga: 36
+proprieta:
+- leggera
+- munizioni
+- ricarica
+padronanza: vessazione

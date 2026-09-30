@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.anello-di-invisibilità
+nome: Anello di invisibilità
+categoria: anello
+rarita: leggendaria
+richiede_sintonia: true
+descrizione: |
+  Fintanto che il personaggio indossa quest'anello, può effettuare un'azione di Magia per rendersi invisibile. Rimarrà tale finché l'anello non viene rimosso o il personaggio non usa un'azione bonus per tornare visibile.

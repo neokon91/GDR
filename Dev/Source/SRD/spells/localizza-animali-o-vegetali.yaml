@@ -1,0 +1,16 @@
+id: dnd.incantesimo.localizza-animali-o-vegetali
+nome: Localizza animali o vegetali
+livello: 2
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (un ciuffo di peli di un segugio)"]
+concentrazione: false
+rituale: true
+durata: istantanea
+descrizione: |
+  L'incantatore descrive o nomina un tipo specifico di bestia o creatura vegetale, oppure un vegetale non magico. Apprende la direzione e la distanza fino alla creatura o al vegetale di quel tipo più vicino entro 7,5 chilometri, se ne è presente almeno uno.

@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.pietra-della-buona-fortuna-(pietrafortuna)
+nome: "Pietra della buona fortuna (pietrafortuna)"
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+descrizione: |
+  Mentre il personaggio ha con sé quest'agata  levigata, ottiene un bonus di +1 alle prove di  caratteristica e ai tiri salvezza.

@@ -1,0 +1,60 @@
+id: dnd.mostro.quasit
+nome: Quasit
+taglia: minuscola
+tipo: immondo
+allineamento: caotico malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 5, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 10
+velocita: {camminata: 12}
+abilita: [furtivita: competenza]
+sensi: {scurovisione: 36}
+percezione_passiva: 10
+resistenze: [freddo, fulmine, fuoco]
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Abissale, Comune]
+gs: 1
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il quasit dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni taglienti, e il bersaglio è avvelenato fino all'inizio del turno successivo del quasit.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: Invisibilità
+    descrizione: |
+      Il quasit può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore.
+  - nome: Mutaforma
+    descrizione: |
+      Il quasit può assumere la forma bestiale di un pipistrello (velocità 3 m, volo 12 m), un millepiedi (12 m, scalata 12 m) o un rospo (12 m, scalata 12 m), o tornare alla sua vera forma. Le sue statistiche di gioco restano le stesse in ogni forma, a eccezione della velocità. Nessun oggetto che indossa o trasporta viene trasformato.
+  - nome: "Spaventare (1/giorno)"
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 10, una creatura entro 6 metri. *Fallimento:* il bersaglio è spaventato. Alla fine di ogni suo turno, il bersaglio ripete il tiro salvezza e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}

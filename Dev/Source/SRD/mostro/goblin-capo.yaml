@@ -1,0 +1,75 @@
+id: dnd.mostro.goblin-capo
+nome: Goblin capo
+taglia: piccola
+tipo: folletto
+gruppo: Goblin
+allineamento: caotico neutrale
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 9}
+abilita: [furtivita: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 9
+equipaggiamento:
+  - {articolo: dnd.arma.arco-corto}
+  - {articolo: dnd.armatura.giaco-di-maglia}
+  - {articolo: dnd.arma.scimitarra}
+  - {articolo: dnd.armatura.scudo}
+lingue: [Comune, Goblin]
+gs: 1
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il goblin effettua due attacchi, utilizzando Scimitarra o Arco corto in qualsiasi combinazione.
+  - nome: Scimitarra
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni taglienti, più 2 (1d4) danni taglienti se il tiro per colpire è stato effettuato con vantaggio.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.scimitarra
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: Arco corto
+    descrizione: |
+      *Tiro per colpire a distanza:* +4, gittata 24/96 m. *Colpito:* 5 (1d6 + 2) danni perforanti, più 2 (1d4) danni perforanti se il tiro per colpire è stato effettuato con vantaggio.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.arco-corto
+          gittata: {normale: 24, lunga: 96}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: Fuga agile
+    descrizione: |
+      Il goblin effettua l'azione di Disimpegno o Nascondersi.
+reazioni:
+  - nome: Sviare attacco
+    descrizione: |
+      **Attivazione:** Una creatura che il goblin è in grado di vedere effettua un tiro per colpire contro di lui.
+
+      **Esito:** Il goblin sceglie un alleato di taglia Piccola o Media entro 1,5 metri da sé. Il goblin e l'alleato si scambiano di posto, facendo sì che quest'ultimo diventi il bersaglio dell'attacco al suo posto.

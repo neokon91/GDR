@@ -1,0 +1,34 @@
+id: dnd.mostro.faina
+nome: Faina
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 3, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 8, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 9, scalata: 9}
+abilita: [acrobazia: competenza, percezione: competenza, furtivita: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 0
+
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 1 danno perforante.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

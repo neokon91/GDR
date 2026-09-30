@@ -1,0 +1,57 @@
+id: dnd.mostro.mephit-della-polvere
+nome: Mephit della polvere
+taglia: piccola
+tipo: elementale
+gruppo: Mephit
+allineamento: neutrale malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 5, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 9, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 9, volo: 9}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 12
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, indebolimento]
+vulnerabilita: [fuoco]
+lingue: ["Primordiale (Auran, Terran)"]
+gs: 1/2
+
+tratti:
+  - nome: Esplosione mortale
+    descrizione: |
+      Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 10, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 5 (2d4) danni contundenti. *Successo:* danni dimezzati.
+azioni:
+  - nome: Artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: "Soffio accecante (ricarica 6)"
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 10, tutte le creature in un cono di 4,5 metri. *Fallimento:* il bersaglio è accecato fino al termine del turno successivo del mephit.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+  - nome: "Sonno (1/giorno)"
+    descrizione: |
+      Il mephit lancia sonno senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 10).

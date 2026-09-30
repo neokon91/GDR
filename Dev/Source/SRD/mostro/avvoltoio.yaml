@@ -1,0 +1,36 @@
+id: dnd.mostro.avvoltoio
+nome: Avvoltoio
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 7, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 3, volo: 15}
+abilita: [percezione: competenza]
+lingue: [nessuna]
+gs: 0
+tratti:
+  - id: avvoltoio.tattiche-del-branco
+    nome: Tattiche del branco
+    descrizione: |
+      L'avvoltoio dispone di Vantaggio a un tiro per colpire contro una creatura
+      se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è Incapacitato.
+azioni:
+  - id: avvoltoio.becco
+    nome: Becco
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +2, portata 1,5 m.
+      *Colpito:* 2 (1d4) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: destrezza, competenza: true }, bersagli: 1, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 1, dado: d4, tipo_danno: perforante }

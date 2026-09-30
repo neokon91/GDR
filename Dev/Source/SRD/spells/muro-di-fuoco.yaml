@@ -1,0 +1,33 @@
+id: dnd.incantesimo.muro-di-fuoco
+nome: Muro di fuoco
+livello: 4
+scuola: invocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S, "M (un pezzo di carbone)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore crea un muro di fuoco su una superficie solida entro gittata. Il muro può essere lungo fino a 18 metri, alto 6 metri e spesso 30 cm, oppure essere un muro circolare del diametro massimo di 6 metri, alto 6 metri e spesso 30 cm. Il muro è opaco e permane per la durata dell'incantesimo.
+
+  Quando compare, ogni creatura al suo interno effettua un tiro salvezza su Destrezza, subendo 5d8 danni da fuoco in caso di fallimento, o la metà dei danni in caso di successo.
+
+  Un lato del muro, scelto dall'incantatore al momento del lancio dell'incantesimo, infligge 5d8 danni da fuoco a ogni creatura che termina il proprio turno entro 3 metri da quel lato o all'interno del muro. Una creatura subisce gli stessi danni quando lo attraversa per la prima volta in un turno o vi termina il suo turno. L'altro lato del muro non infligge danni.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d8 per ogni slot di livello superiore al 4º.
+attivita:
+  # colpo iniziale (quando compare): TS, metà al successo
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento: { danno: { numero_dadi: 5, dado: d8, tipo_danno: fuoco } }
+    successo: danno-dimezzato
+  # lato ardente: danno automatico (SENZA TS) a chi vi termina il turno vicino
+  - tipo: danno-periodico
+    innesco: fine-turno-nell-area
+    danno: { numero_dadi: 5, dado: d8, tipo_danno: fuoco }

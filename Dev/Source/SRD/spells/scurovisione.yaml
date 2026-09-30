@@ -1,0 +1,17 @@
+id: dnd.incantesimo.scurovisione
+nome: Scurovisione
+livello: 2
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (una carota essiccata)"]
+concentrazione: false
+rituale: false
+durata: 8 ore
+descrizione: |
+  Per la durata dell'incantesimo, una creatura consenziente toccata dall'incantatore è dotata di scurovisione fino a 45 metri.

@@ -1,0 +1,4 @@
+id: dnd.oggetto.locanda-squallido
+nome: Locanda Squallido
+categoria: vitto-e-alloggio
+costo: {valore: 7, valuta: moneta-rame}

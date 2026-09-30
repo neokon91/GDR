@@ -1,0 +1,8 @@
+id: dnd.arma.stocco
+nome: Stocco
+categoria: mischia-da-guerra
+costo: {valore: 25, valuta: moneta-oro}
+peso: {valore: 1, unita: kg}
+danno: {dado: d8, tipo_danno: perforante}
+proprieta: [accurata]
+padronanza: vessazione

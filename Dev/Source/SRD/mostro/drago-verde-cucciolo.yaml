@@ -1,0 +1,69 @@
+id: dnd.mostro.drago-verde-cucciolo
+nome: Drago verde cucciolo
+taglia: media
+tipo: drago
+sottotipo: cromatico
+gruppo: Draghi verdi
+allineamento: legale malvagio
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 12, competenza: true}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 14, competenza: false}
+  saggezza: {valore: 11, competenza: true}
+  carisma: {valore: 13, competenza: false}
+iniziativa: competenza
+dadi_vita: 7
+velocita: {camminata: 9, nuoto: 9, volo: 18}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18, vista_cieca: 3}
+percezione_passiva: 14
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Draconico]
+gs: 2
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il drago può respirare in aria e in acqua.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 2}
+    descrizione: |
+      Il drago effettua due attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti più 3 (1d6) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di veleno (ricarica 5-6)"
+    id: soffio-di-veleno-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* 21 (6d6) danni da veleno. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: destrezza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 6, dado: d6, tipo_danno: veleno}
+        successo: danno-dimezzato

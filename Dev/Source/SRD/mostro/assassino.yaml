@@ -1,0 +1,59 @@
+id: dnd.mostro.assassino
+nome: Assassino
+taglia: [media, piccola]
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 18, competenza: true}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 16, competenza: true}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 10, competenza: false}
+iniziativa: maestria
+dadi_vita: 15
+velocita: {camminata: 9}
+abilita: [acrobazia: competenza, furtivita: maestria, percezione: maestria]
+resistenze: [veleno]
+equipaggiamento: [armatura di cuoio borchiato, balestra leggera, spada corta]
+lingue: [comune, gergo-ladresco]
+gs: 8
+tratti:
+  - id: assassino.elusione
+    nome: Elusione
+    descrizione: |
+      Se l'assassino è soggetto a un effetto che gli consente di effettuare un tiro salvezza su Destrezza
+      per subire danni dimezzati, non subisce alcun danno in caso di successo, e ne subisce solo metà in caso di fallimento.
+      Non può usare questo tratto se è incapacitato.
+azioni:
+  - id: assassino.multiattacco
+    nome: Multiattacco
+    descrizione: L'assassino effettua tre attacchi, usando Spada corta o Balestra leggera in qualsiasi combinazione.
+  - id: assassino.balestra-leggera
+    nome: Balestra leggera
+    descrizione: |
+      *Tiro per Colpire a Distanza:* +7, gittata 24/96 m.
+      *Colpito:* 8 (1d8 + 4) danni Perforanti più 21 (6d6) danni da Veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          { categoria: arma-distanza, bonus: { caratteristica: destrezza, competenza: true }, bersagli: 1, usa: dnd.arma.balestra-leggera, gittata: { normale: 24, lunga: 96 } }
+        colpito:
+          - danno: {numero_dadi: 1, dado: d8, tipo_danno: perforante, bonus: { caratteristica: destrezza } }
+  - id: assassino.spada-corta
+    nome: Spada Corta
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +7, portata 1,5 m.
+      *Colpito:* 7 (1d6 + 4) danni Perforanti più 17 (5d6) danni da Veleno,
+      e il bersaglio è Avvelenato fino all'inizio del turno successivo dell'assassino.
+    attivita:
+      - tipo: attacco
+        attacco: {categoria: arma-mischia, bonus: { caratteristica: destrezza, competenza: true }, bersagli: 1, usa: dnd.arma.spada-corta, portata: 1.5 }
+        colpito:
+          - danno:
+              { numero_dadi: 1, dado: d6, tipo_danno: perforante, bonus: { caratteristica: destrezza } }
+azioni_bonus:
+  - id: assassino.azione-scaltra
+    nome: Azione Scaltra
+    descrizione: L'assassino effettua l'azione di Disimpegno, Nascondersi o Scatto.

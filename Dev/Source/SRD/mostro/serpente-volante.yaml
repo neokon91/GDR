@@ -1,0 +1,37 @@
+id: dnd.mostro.serpente-volante
+nome: Serpente volante
+taglia: minuscola
+tipo: mostruosita
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 4, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9, nuoto: 9, volo: 18}
+sensi: {vista_cieca: 3}
+percezione_passiva: 11
+lingue: [nessuna]
+gs: 1/8
+
+tratti:
+  - nome: Volo sfuggente
+    descrizione: |
+      Il serpente non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno perforante più 5 (2d4) danni da veleno.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

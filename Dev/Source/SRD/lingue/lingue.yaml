@@ -1,0 +1,53 @@
+id: dnd.lingua.lingue
+nome: Lingue
+
+lingue_standard:
+  - id: dnd.lingua.comune
+    nome: Comune
+  - id: dnd.lingua.lingua-dei-segni-comune
+    nome: Lingua dei segni comune
+    tiro_casuale: 1
+  - id: dnd.lingua.draconico
+    nome: Draconico
+    tiro_casuale: 2
+  - id: dnd.lingua.nanico
+    nome: Nanico
+    tiro_casuale: [3, 4]
+  - id: dnd.lingua.elfico
+    nome: Elfico
+    tiro_casuale: [5, 6]
+  - id: dnd.lingua.gigante
+    nome: Gigante
+    tiro_casuale: 7
+  - id: dnd.lingua.gnomesco
+    nome: Gnomesco
+    tiro_casuale: 8
+  - id: dnd.lingua.goblin
+    nome: Goblin
+    tiro_casuale: 9
+  - id: dnd.lingua.halfling
+    nome: Halfling
+    tiro_casuale: [10, 11]
+  - id: dnd.lingua.orchesco
+    nome: Orchesco
+    tiro_casuale: 12
+
+lingue_rare:
+  - id: dnd.lingua.abissale
+    nome: Abissale
+  - id: dnd.lingua.celestiale
+    nome: Celestiale
+  - id: dnd.lingua.druidico
+    nome: Druidico
+  - id: dnd.lingua.gergo-delle-profondita
+    nome: Gergo delle profondita
+  - id: dnd.lingua.gergo-ladresco
+    nome: Gergo ladresco
+  - id: dnd.lingua.infernale
+    nome: Infernale
+  - id: dnd.lingua.primordiale
+    nome: Primordiale
+  - id: dnd.lingua.silvano
+    nome: Silvano
+  - id: dnd.lingua.sottocomune
+    nome: Sottocomune

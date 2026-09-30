@@ -1,0 +1,44 @@
+id: dnd.mostro.ragno-lupo-gigante
+nome: Ragno lupo gigante
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 12, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 12, scalata: 12}
+abilita: [percezione: competenza, furtivita: maestria]
+sensi: {scurovisione: 18, vista_cieca: 3}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1/4
+
+tratti:
+  - nome: Movimenti del ragno
+    descrizione: |
+      Il ragno può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti più 5 (2d4) danni da veleno.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

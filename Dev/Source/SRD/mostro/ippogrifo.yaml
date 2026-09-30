@@ -1,0 +1,51 @@
+id: dnd.mostro.ippogrifo
+nome: Ippogrifo
+taglia: grande
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 12, volo: 18}
+abilita: [percezione: maestria]
+percezione_passiva: 15
+lingue: [nessuna]
+gs: 1
+
+tratti:
+  - nome: Volo sfuggente
+    descrizione: |
+      L'ippogrifo non provoca attacchi d'opportunità quando vola oltre la portata di un nemico.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 2}
+    descrizione: |
+      L'ippogrifo effettua due attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni taglienti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}

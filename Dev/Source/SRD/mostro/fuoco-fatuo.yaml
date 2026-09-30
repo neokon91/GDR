@@ -1,0 +1,62 @@
+id: dnd.mostro.fuoco-fatuo
+nome: Fuoco fatuo
+taglia: minuscola
+tipo: non-morto
+allineamento: caotico malvagio
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 1, competenza: false}
+  destrezza: {valore: 28, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 13, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 11
+velocita: {camminata: 5, volo: 15}
+sensi: {scurovisione: 36}
+percezione_passiva: 12
+resistenze: [acido, contundente, freddo, fuoco, necrotico, perforante, tagliente]
+immunita_danni: [fulmine, veleno]
+immunita_condizioni: [afferrato, avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi, prono, trattenuto]
+lingue: [Comune più un'altra lingua]
+gs: 2
+
+tratti:
+  - nome: Effimero
+    descrizione: |
+      Il fuoco fatuo non può indossare o trasportare niente.
+  - nome: Illuminazione
+    descrizione: |
+      Il fuoco fatuo emana luce intensa in un raggio di 6 metri e luce fioca per altri 6 metri.
+  - nome: Movimento incorporeo
+    descrizione: |
+      Il fuoco fatuo può muoversi attraverso altre creature e oggetti come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza.
+azioni:
+  - nome: Folgore
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 11 (2d8 + 2) danni da fulmine.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: saggezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: fulmine
+              bonus: {caratteristica: saggezza}
+azioni_bonus:
+  - nome: Assorbire vita
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 10, una creatura vivente che il fuoco fatuo è in grado di vedere entro 1,5 metri con 0 punti ferita. *Fallimento:* il bersaglio muore, e il fuoco fatuo recupera 10 (3d6) punti ferita.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+  - nome: Svanire
+    descrizione: |
+      Il fuoco fatuo e la luce che emana sono invisibili finché la sua concentrazione non termina su tale effetto; l'effetto cessa immediatamente dopo che il fuoco fatuo effettua un tiro per colpire o usa Assorbire vita.

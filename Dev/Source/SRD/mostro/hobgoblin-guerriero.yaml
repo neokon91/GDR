@@ -1,0 +1,68 @@
+id: dnd.mostro.hobgoblin-guerriero
+nome: Hobgoblin guerriero
+taglia: media
+tipo: folletto
+sottotipo: goblinoide
+gruppo: Hobgoblin
+allineamento: legale malvagio
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 9, competenza: false}
+iniziativa: competenza
+dadi_vita: 2
+velocita: {camminata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+equipaggiamento:
+  - {articolo: dnd.arma.arco-lungo}
+  - {articolo: dnd.armatura.mezza-armatura}
+  - {articolo: dnd.armatura.scudo}
+  - spada
+lingue: [Comune, Goblin]
+gs: 1/2
+
+tratti:
+  - nome: Tattiche del branco
+    descrizione: |
+      L'hobgoblin dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e l'alleato non è incapacitato.
+azioni:
+  - nome: Spada lunga
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m *Colpito:* 12 (2d10 + 1) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.spada-lunga
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Arco lungo
+    descrizione: |
+      *Tiro per colpire a distanza:* +3, gittata 45/180 m. *Colpito:* 5 (1d8 + 1) danni perforanti più 7 (3d4) danni da veleno.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.arco-lungo
+          gittata: {normale: 45, lunga: 180}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

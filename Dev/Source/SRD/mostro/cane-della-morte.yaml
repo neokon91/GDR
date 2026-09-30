@@ -1,0 +1,53 @@
+id: dnd.mostro.cane-della-morte
+nome: Cane della Morte
+taglia: media
+tipo: mostruosita
+allineamento: neutrale malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 12}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 36}
+immunita_condizioni: [accecato, affascinato, assordato, privo-di-sensi, spaventato, stordito]
+lingue: [nessuna]
+gs: 1
+azioni:
+  - id: cane-della-morte.multiattacco
+    nome: Multiattacco
+    descrizione: |
+      Il cane della morte effettua due attacchi Morso.
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+  - id: cane-della-morte.morso
+    nome: Morso
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +4, portata 1,5 m.
+      *Colpito:* 4 (1d4 + 2) danni Perforanti.
+      Se il bersaglio è una creatura, subisce il seguente effetto.
+      *Tiro salvezza su Costituzione:* CD 12.
+      *Primo fallimento:* il bersaglio è Avvelenato.
+      Finché lo resta, i Punti Ferita Massimi del bersaglio non tornano alla normalità al termine di un Riposo Lungo.
+      La creatura ripete il tiro salvezza ogni 24 ore trascorse e, se lo supera, l'effetto svanisce.
+      *Fallimenti Successivi:* i Punti Ferita Massimi del bersaglio Avvelenato sono ridotti di 5 (1d10).
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

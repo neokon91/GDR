@@ -1,0 +1,30 @@
+id: dnd.incantesimo.aculeo-mentale
+nome: Aculeo Mentale
+livello: 2
+scuola: divinazione
+classi: 
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 36
+componenti: [S]
+concentrazione: true
+rituale: false
+durata: "fino a 1 ora"
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: saggezza, cd: incantesimo }
+    fallimento:
+      - danno: { numero_dadi: 3, dado: d8, tipo_danno: psichico }
+    successo: danno-dimezzato
+descrizione: |
+  L'incantatore guida un flusso di energia psionica nella mente di una creatura entro gittata che egli è in grado di vedere.
+  Il bersaglio effettua un tiro salvezza su Saggezza, subendo 3d8 danni Psichici in caso di fallimento,
+  o la metà dei danni in caso di successo. Se fallisce il tiro, l'incantatore sa sempre dove si trova il bersaglio
+  fino al termine dell'incantesimo, ma solo se entrambi si trovano sullo stesso piano di esistenza.
+  Finché l'incantatore è in possesso di queste conoscenze, il bersaglio non può nascondersi da lui e,
+  se è [[invisibile]], non ottiene alcun beneficio da questa condizione contro di lui.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d8 per ogni slot di livello superiore al 2º.

@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.sfera-di-cristallo-della-visione-del-vero
+nome: Sfera di cristallo della visione del vero
+categoria: oggetto-meraviglioso
+rarita: leggendaria
+richiede_sintonia: true
+descrizione: |
+  Toccando questa sfera di cristallo, il personaggio può lanciare scrutare (CD del tiro salvezza 17) con essa. Inoltre, dispone di vista pura entro un raggio di 36 metri centrato sul sensore dell'incantesimo.

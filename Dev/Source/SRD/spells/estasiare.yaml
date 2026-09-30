@@ -1,0 +1,15 @@
+id: dnd.incantesimo.estasiare
+nome: Estasiare
+livello: 2
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore pronuncia una sequenza di parole disorientante, costringendo le creature da lui scelte entro gittata e che egli è in grado di vedere a effettuare un tiro salvezza su Saggezza. Se l'incantatore o i suoi compagni stanno combattendo contro una creatura, quella supera automaticamente questo tiro salvezza. In caso di fallimento, il bersaglio subisce una penalità di -10 alle prove di Saggezza (Percezione) e alla Percezione passiva fino al termine dell'incantesimo.

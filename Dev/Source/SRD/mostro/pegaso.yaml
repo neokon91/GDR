@@ -1,0 +1,38 @@
+id: dnd.mostro.pegaso
+nome: Pegaso
+taglia: grande
+tipo: celestiale
+allineamento: caotico buono
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 15, competenza: true}
+  costituzione: {valore: 16, competenza: true}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 13, competenza: true}
+dadi_vita: 7
+velocita: {camminata: 18, volo: 27}
+abilita: [percezione: maestria]
+percezione_passiva: 16
+lingue: ["capisce il Celestiale, il Comune, l'Elfico e il Silvano ma non li parla"]
+gs: 2
+
+azioni:
+  - nome: Zoccoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni contundenti più 5 (2d4) danni radiosi.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

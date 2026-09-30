@@ -1,0 +1,43 @@
+id: dnd.mostro.falco-di-sangue
+nome: Falco di sangue
+taglia: piccola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 3, volo: 18}
+abilita: [percezione: maestria]
+percezione_passiva: 16
+lingue: [nessuna]
+gs: 1/8
+
+tratti:
+  - nome: Tattiche del branco
+    descrizione: |
+      Il falco dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+azioni:
+  - nome: Becco
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni perforanti, o 6 (1d8 + 2) danni perforanti se il bersaglio è sanguinante.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

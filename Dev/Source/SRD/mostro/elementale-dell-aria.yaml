@@ -1,0 +1,64 @@
+id: dnd.mostro.elementale-dell-aria
+nome: Elementale dell'aria
+taglia: grande
+tipo: elementale
+allineamento: neutrale
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 14, competenza: false}
+  destrezza: {valore: 20, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 3, volo: 27}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+resistenze: [contundente, fulmine, perforante, tagliente]
+immunita_danni: [tuono, veleno]
+immunita_condizioni: [afferrato, avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi, prono, trattenuto]
+lingue: ["Primordiale (Auran)"]
+gs: 5
+
+tratti:
+  - nome: Forma d'aria
+    descrizione: |
+      L'elementale può entrare nello spazio di una creatura e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: schianto-tonante, ripetizioni: 2}
+    descrizione: |
+      L'elementale effettua due attacchi Schianto tonante.
+  - nome: Schianto tonante
+    id: schianto-tonante
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 14 (2d8 + 5) danni da tuono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tuono
+              bonus: {caratteristica: destrezza}
+  - nome: "Vortice (ricarica 4-6)"
+    id: vortice-ricarica-4-6
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 13, una creatura di taglia Media o inferiore nello spazio dell'elementale. *Fallimento:* 24 (4d10 + 2) danni da tuono, il bersaglio viene spinto fino a un massimo di 6 metri di distanza dall'elementale e cade a terra prono. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        successo: danno-dimezzato

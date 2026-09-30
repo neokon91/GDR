@@ -1,0 +1,87 @@
+id: dnd.mostro.drago-bianco-antico
+nome: Drago bianco antico
+taglia: mastodontica
+tipo: drago
+sottotipo: cromatico
+gruppo: Draghi bianchi
+allineamento: caotico malvagio
+ca: {valore: 20}
+caratteristiche:
+  forza: {valore: 26, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 26, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 13, competenza: true}
+  carisma: {valore: 18, competenza: false}
+iniziativa: maestria
+dadi_vita: 18
+velocita: {scavo: 12, nuoto: 12, volo: 24}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 18}
+percezione_passiva: 23
+immunita_danni: [freddo]
+lingue: [Comune, Draconico]
+gs: 20
+
+tratti:
+  - nome: Camminare sul ghiaccio
+    descrizione: |
+      Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +14, portata 4,5 m. *Colpito:* 17 (2d8 + 8) danni taglienti più 7 (2d6) danni da freddo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 4.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di freddo (ricarica 5-6)"
+    id: soffio-di-freddo-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 22, tutte le creature in un cono di 27 metri. *Fallimento:* 63 (14d8) danni da freddo. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 14, dado: d8, tipo_danno: freddo}
+        successo: danno-dimezzato
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Esplosione congelante
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 20, tutte le creature in una sfera di 9 metri di raggio centrata su un punto che il drago è in grado di vedere entro 36 metri. *Fallimento:* 14 (4d6) danni da freddo, e la velocità del bersaglio è pari a 0 fino al termine del turno successivo del bersaglio. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {valore: 20, fisso: true}
+        fallimento:
+          - danno: {numero_dadi: 4, dado: d6, tipo_danno: freddo}
+  - nome: Presenza terrificante
+    descrizione: |
+      Il drago lancia paura senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 18). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+  - nome: Balzo
+    descrizione: |
+      Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio.

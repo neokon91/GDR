@@ -1,0 +1,31 @@
+id: dnd.incantesimo.animale-messaggero
+nome: Animale messaggero
+livello: 2
+scuola: ammaliamento
+classi: 
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (un boccone di cibo)"]
+concentrazione: false
+rituale: true
+durata: 24 ore
+descrizione: |
+  Una bestia Minuscola a scelta entro gittata che l'incantatore è in grado di vedere deve superare
+  un tiro salvezza su Carisma, altrimenti deve cercare di consegnare un messaggio da parte dell'incantatore
+  (se il grado di sfida del bersaglio non è 0, la prova viene superata automaticamente).
+  L'incantatore specifica il luogo di consegna, che ha già visitato, e un destinatario che corrisponda
+  a una descrizione generica, come "una persona che indossa l'uniforme della guardia cittadina"
+  o "un nano dai capelli rossi che indossa un cappello a punta". Inoltre, l'incantatore comunica un messaggio
+  composto da un massimo di venticinque parole. La bestia bersaglio viaggia per la durata dell'incantesimo
+  verso il luogo specificato, percorrendo circa 37,5 chilometri in 24 ore o 75 chilometri se è una bestia volante.
+
+  Quando la Bestia arriva a destinazione, trasmette il messaggio alla creatura descritta,
+  imitando il modo di comunicare dell'incantatore. Se la Bestia non raggiunge la sua destinazione
+  prima della fine dell'incantesimo, il messaggio viene perso e la bestia torna nel luogo dove l'incantatore
+  ha lanciato l'incantesimo.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore.** La durata dell'incantesimo aumenta di 48 ore
+  per ogni slot di livello superiore al 2º.

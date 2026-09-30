@@ -1,0 +1,19 @@
+id: dnd.incantesimo.movimenti-del-ragno
+nome: Movimenti del ragno
+livello: 2
+scuola: trasmutazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (una goccia di bitume e un ragno)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  Fino al termine dell'incantesimo, una creatura consenziente toccata dall'incantatore ottiene la capacità di muoversi verticalmente e orizzontalmente su pareti e soffitti, mantenendo le mani libere. Il bersaglio ottiene anche una velocità di scalata pari alla sua velocità.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 2º.

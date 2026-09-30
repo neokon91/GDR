@@ -1,0 +1,18 @@
+id: dnd.incantesimo.fabbricare
+nome: Fabbricare
+livello: 4
+scuola: trasmutazione
+classi:
+  - dnd.classe.mago
+tempo_lancio: 10 minuti
+gittata: 36
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore converte materie prime in prodotti dello stesso materiale. Per esempio, può fabbricare un ponte di legno da una catasta di tronchi, una corda da un groviglio di canapa o abiti da lino o lana.
+
+  L'incantatore sceglie materie prime entro gittata che egli è in grado di vedere e, qualora ne possegga una quantità sufficiente, può fabbricare un oggetto di taglia Grande o inferiore (contenuto in un cubo con spigolo di 3 metri o in otto cubi con spigolo di 1,5 metri collegati tra loro). Tuttavia, se l'incantatore lavora con metallo, pietra o un'altra sostanza minerale, l'oggetto fabbricato potrà essere al massimo di taglia Media (contenuto in un cubo con spigolo di 1,5 metri). La qualità degli oggetti realizzati è basata sulla qualità delle materie prime.
+
+  Questo incantesimo non può creare creature o oggetti magici. Inoltre, l'incantatore non può utilizzarlo per creare oggetti che richiedono un alto grado di precisione, come armi o armature, a meno che non possegga competenza con il tipo di strumenti da artigiano usati per realizzare tali oggetti.

@@ -1,0 +1,5 @@
+id: dnd.oggetto.cesto
+nome: Cesto
+categoria: equipaggiamento-avventura
+costo: {valore: 4, valuta: moneta-argento}
+peso: {valore: 1, unita: kg}

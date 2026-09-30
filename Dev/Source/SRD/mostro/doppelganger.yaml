@@ -1,0 +1,65 @@
+id: dnd.mostro.doppelganger
+nome: Doppelganger
+taglia: media
+tipo: mostruosita
+allineamento: neutrale
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 18, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 14, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 9}
+abilita: [intuizione: competenza, inganno: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 11
+immunita_condizioni: [affascinato]
+lingue: [Comune più altre tre lingue]
+gs: 3
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: schianto, ripetizioni: 2}
+    descrizione: |
+      Il doppelganger effettua due attacchi Schianto e usa Sembianze inquietanti.
+  - nome: Schianto
+    id: schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +6 (con vantaggio durante il primo round di ogni combattimento), portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: destrezza}
+  - nome: Lettura del pensiero
+    id: lettura-del-pensiero
+    descrizione: |
+      Il doppelganger lancia individuazione dei pensieri senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 12).
+  - nome: "Sembianze inquietanti (ricarica 6)"
+    id: sembianze-inquietanti-ricarica-6
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 12, tutte le creature in grado di vedere il doppelganger e che si trovano in un'emanazione di 4,5 metri di cui il doppelganger è il punto di origine. *Fallimento:* il bersaglio è spaventato, ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+azioni_bonus:
+  - nome: Mutaforma
+    descrizione: |
+      Il doppelganger si trasforma in un umanoide di taglia Media o Piccola, oppure ritorna alla sua vera forma. Le sue statistiche di gioco, a eccezione della taglia, restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato.

@@ -1,0 +1,4 @@
+id: dnd.oggetto.birra-boccale
+nome: Birra Boccale
+categoria: vitto-e-alloggio
+costo: {valore: 4, valuta: moneta-rame}

@@ -1,0 +1,42 @@
+id: dnd.mostro.cinghiale
+nome: Cinghiale
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 9, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 12}
+percezione_passiva: 9
+lingue: [nessuna]
+gs: 1/4
+
+tratti:
+  - nome: Furia sanguinante
+    descrizione: |
+      Se il cinghiale è sanguinante, ha vantaggio ai tiri per colpire.
+azioni:
+  - nome: Trafiggere
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m *Colpito:* 4 (1d6 + 1) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore e il cinghiale si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 3 (1d6) danni perforanti extra e cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

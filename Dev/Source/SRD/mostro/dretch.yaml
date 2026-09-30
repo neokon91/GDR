@@ -1,0 +1,50 @@
+id: dnd.mostro.dretch
+nome: Dretch
+taglia: piccola
+tipo: immondo
+sottotipo: demone
+allineamento: caotico malvagio
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 12, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 6}
+sensi: {scurovisione: 18}
+percezione_passiva: 9
+resistenze: [freddo, fulmine, fuoco]
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Abissale, "telepatia 18 m (funziona solo le creature che capiscono l'Abissale)"]
+gs: 1/4
+
+azioni:
+  - nome: Squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Nube fetida (1/giorno)"
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 11, tutte le creature in un'emanazione di 3 metri di cui il dretch è il punto di origine. *Fallimento:* il bersaglio è avvelenato fino al termine del proprio turno successivo. Finché è avvelenata, la creatura può effettuare nel suo turno un'azione o un'azione bonus, ma non entrambe, e non può effettuare reazioni.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: forza, base: 8, competenza: true}

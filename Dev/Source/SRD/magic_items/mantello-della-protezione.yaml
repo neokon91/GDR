@@ -1,0 +1,13 @@
+id: dnd.oggetto-magico.mantello-della-protezione
+nome: Mantello della protezione
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+# Meccanica giocabile (contratto canonico effetti): +1 CA e ai tiri salvezza → morde nella Board.
+attivita:
+  - tipo: passivo
+    effetti:
+      - { bersaglio: ca, operazione: somma, valore: 1 }
+      - { bersaglio: tiri_salvezza, operazione: somma, valore: { piatto: 1 } }
+descrizione: |
+  Finché il personaggio indossa questo mantello riceve un bonus di +1 alla Classe Armatura e ai tiri salvezza.

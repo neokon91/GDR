@@ -1,0 +1,14 @@
+id: dnd.strumento.attrezzatura-da-falegname
+nome: Attrezzatura da Falegname
+categoria: strumenti
+famiglia: attrezzatura-da-artigiano
+costo: {valore: 8, valuta: moneta-oro}
+peso: {valore: 3, unita: kg}
+caratteristica: forza
+utilizzo:
+  - azione: Sigillare o forzare l'apertura di una porta o di un contenitore
+    cd: 20
+creazione: [randello, randello-pesante, bastone-ferrato, dnd.oggetto.barile, baule, scala, dnd.oggetto.asta, dnd.oggetto.ariete-portatile, dnd.oggetto.torcia]
+descrizione: |
+  Se possiedi la competenza in uno strumento, aggiungi il tuo Bonus di Competenza a qualsiasi prova di caratteristica che richieda l'uso di tale strumento.
+  Se possiedi anche la competenza in un'abilità utilizzata per quella prova, ottieni Vantaggio alla prova stessa.

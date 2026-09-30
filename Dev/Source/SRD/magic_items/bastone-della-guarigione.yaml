@@ -1,0 +1,21 @@
+id: dnd.oggetto-magico.bastone-della-guarigione
+nome: Bastone della guarigione
+categoria: bastone
+rarita: rara
+richiede_sintonia: true
+cariche: {massimo: 10, ricarica: "1d6+4"}
+attivita:
+  - tipo: incantatore
+    cariche:
+      - {incantesimo: dnd.incantesimo.cura-ferite, costo: 1, massimo: 4}
+      - {incantesimo: dnd.incantesimo.ristorare-inferiore, costo: 2}
+      - {incantesimo: dnd.incantesimo.cura-ferite-di-massa, costo: 5}
+descrizione: |
+  Questo bastone ha 10 cariche. Mentre il personaggio lo impugna, può lanciare uno degli incantesimi dalla seguente tabella utilizzando il suo modificatore di caratteristica da incantatore. La tabella indica quante cariche vanno consumate per lanciare l'incantesimo.
+  **Incantesimo Costo in cariche**
+  **Cura ferite di massa** 5
+  **Cura ferite** 1 carica per livello dell'incantesimo (massimo 4 per un incantesimo di 4º livello)
+  **Ristorare inferiore** 2
+
+  **Ripristinare le cariche**
+  All'alba di ogni giorno, il bastone recupera 1d6 + 4 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, il bastone svanisce in un lampo di luce ed è perduto per sempre.

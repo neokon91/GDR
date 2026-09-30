@@ -1,0 +1,23 @@
+id: dnd.incantesimo.trasformazione
+nome: Trasformazione
+livello: 9
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (un diadema di giada del valore di 1.500 mo o più)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore assume la forma di una creatura diversa per la durata dell'incantesimo o finché non effettua un'azione di Magia per mutare in un'altra forma possibile. La nuova forma deve essere quella di una creatura con un grado di sfida pari o inferiore al livello o al grado di sfida dell'incantatore. La creatura non può essere un costrutto o un non morto e deve essere un tipo di creatura che l'incantatore abbia già visto.
+
+  Quando l'incantatore lancia l'incantesimo, ottiene un numero di punti ferita temporanei pari ai punti ferita della prima forma in cui si trasforma.
+
+  Al termine dell'incantesimo, il bersaglio perde tutti i punti ferita temporanei rimasti.
+
+  Le statistiche di gioco dell'incantatore vengono sostituite dalla scheda delle statistiche della forma scelta, ma l'incantatore conserva il suo tipo di creatura, allineamento, personalità, punteggi di Intelligenza, Saggezza e Carisma, punti ferita, Dadi Vita, competenze e abilità di comunicare. Se l'incantatore possiede il privilegio Incantesimi, conserva anche quello.
+
+  Quando si trasforma, l'incantatore sceglie se lasciare a terra il suo equipaggiamento o se cambiarne taglia e aspetto per adattarlo alla sua nuova forma e continuare a indossarlo.

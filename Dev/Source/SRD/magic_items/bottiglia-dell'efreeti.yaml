@@ -1,0 +1,13 @@
+id: dnd.oggetto-magico.bottiglia-dell'efreeti
+nome: Bottiglia dell'efreeti
+categoria: oggetto-meraviglioso
+rarita: molto-rara
+richiede_sintonia: false
+descrizione: |
+  Quando il personaggio compie un'azione di Magia per rimuovere il tappo di questa bottiglia in ottone verniciato, fuoriesce una nuvola di fumo denso. 
+  Alla fine del turno del personaggio, il fumo scom-pare con un lampo di fuoco innocuo e in uno spazio libero entro 9 metri da lui compare un efreeti.
+  La prima volta che la bottiglia viene aperta, il GM tira sulla seguente tabella per determinare cosa succede.
+  **1d10 Effetto**
+  **1** L'efreeti attacca il personaggio. Dopo avere combattuto per 5 round, l'efreeti scompare e la bottiglia perde la sua magia.
+  **2–9** L'efreeti capisce le lingue parlate dal perso-naggio e obbedisce ai suoi ordini per 1 ora. Dopodiché torna nella bottiglia, la quale viene chiusa da un nuovo tappo che non può essere rimosso per 24 ore. Le due volte successive in cui la bottiglia viene aperta, si ottiene lo stesso effetto. Se la bottiglia viene aperta una quarta volta, l'efreeti fugge scomparendo e la bottiglia perde la sua magia.
+  **10** L'efreeti comprende le lingue che parla il personaggio e può lanciare un incantesimo desiderio per una volta per il personaggio. Scompare dopo aver concesso il desiderio o dopo 1 ora, e la bottiglia perde la sua magia.

@@ -1,0 +1,90 @@
+id: dnd.mostro.glabrezu
+nome: Glabrezu
+taglia: grande
+tipo: immondo
+sottotipo: demone
+allineamento: caotico malvagio
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 20, competenza: true}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 21, competenza: true}
+  intelligenza: {valore: 19, competenza: false}
+  saggezza: {valore: 17, competenza: true}
+  carisma: {valore: 16, competenza: true}
+iniziativa: competenza
+dadi_vita: 18
+velocita: {camminata: 12}
+abilita: [inganno: competenza, percezione: competenza]
+sensi: {vista_pura: 36, telepatia: 36}
+percezione_passiva: 17
+resistenze: [freddo, fulmine, fuoco]
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Abissale]
+gs: 9
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il glabrezu dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro demoniaco
+    descrizione: |
+      Se il glabrezu muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il glabrezu effettua due attacchi Tenaglia, e utilizza Pugno o Incantesimi.
+  - nome: Tenaglia
+    descrizione: |
+      *Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 16 (2d10 + 5) danni taglienti. Se il bersaglio è una creatura di taglia Media o inferiore viene afferrato (CD 15 per sfuggire) da una delle due tenaglie.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    descrizione: |
+      Il glabrezu lancia uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16):
+
+      1/giorno ciascuno:
+      - confusione
+      - parola del potere stordire
+      - volare
+
+      A volontà:
+      - dissolvi magie
+      - individuazione del magico
+      - oscurità
+    attivita:
+      - tipo: incantatore
+        caratteristica: intelligenza
+        cd: 16
+        a_volonta:
+          - dnd.incantesimo.dissolvi-magie
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.oscurita
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.confusione
+              - dnd.incantesimo.parola-del-potere-stordire
+              - dnd.incantesimo.volare
+  - nome: Pugno
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 17, una creatura afferrata dal glabrezu. *Fallimento:* 15 (3d6 + 5) danni contundenti. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        successo: danno-dimezzato

@@ -1,0 +1,4 @@
+id: dnd.oggetto.pasto-agiato
+nome: Pasto Agiato
+categoria: vitto-e-alloggio
+costo: {valore: 2, valuta: moneta-argento}

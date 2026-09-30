@@ -1,0 +1,23 @@
+id: dnd.incantesimo.metamorfosi
+nome: Metamorfosi
+livello: 4
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S, "M (il bozzolo di un bruco)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore tenta di trasformare in bestia una creatura entro gittata che egli è in grado di vedere. Il bersaglio deve superare un tiro salvezza su Saggezza, altrimenti assume la forma di una bestia per la durata dell'incantesimo. La forma in cui muta può essere quella di qualsiasi bestia, a scelta dell'incantatore, il cui grado di sfida sia pari o inferiore a quello del bersaglio (o al livello del bersaglio, se esso non possiede un grado di sfida). Le statistiche di gioco del bersaglio vengono sostituite dalla scheda delle statistiche della bestia scelta, ma il bersaglio conserva il proprio allineamento, personalità, tipo di creatura, punti ferita e Dadi Vita. Vedi la sezione "Animali" in "Mostri" per un esempio di scheda delle statistiche di una bestia.
+
+  Il bersaglio guadagna un numero di punti ferita temporanei pari ai punti ferita della forma bestiale. Al termine dell'incantesimo, il bersaglio perde tutti i punti ferita temporanei rimasti. L'incantesimo termina in anticipo se il bersaglio non ha punti ferita temporanei rimasti.
+
+  Il bersaglio è limitato alle azioni che può effettuare in base alla anatomia della sua nuova forma e non può parlare o lanciare incantesimi.
+
+  L'attrezzatura del bersaglio si fonde nella sua nuova forma e la creatura non può utilizzare il suo equipaggiamento o beneficiarne in alcun modo.

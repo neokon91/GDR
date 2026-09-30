@@ -1,0 +1,42 @@
+id: dnd.mostro.cultista
+nome: Cultista
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Cultisti
+allineamento: neutrale
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 11, competenza: true}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9}
+abilita: [inganno: competenza, religione: competenza]
+percezione_passiva: 10
+equipaggiamento:
+  - {articolo: dnd.armatura.armatura-di-cuoio}
+  - {articolo: dnd.arma.falcetto}
+lingue: [Comune]
+gs: 1/8
+
+azioni:
+  - nome: Falcetto rituale
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni taglienti più 1 danno necrotico.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}

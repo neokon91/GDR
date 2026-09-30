@@ -1,0 +1,11 @@
+id: dnd.strumento.kit-da-erborista
+nome: Kit da erborista
+categoria: strumenti
+costo: {valore: 5, valuta: moneta-oro}
+peso: {valore: 1.5, unita: kg}
+caratteristica: intelligenza
+utilizzo:
+  - azione: Identificare una pianta
+    cd: 10
+creazione: [dnd.oggetto.antitossina, dnd.oggetto.candela, dnd.oggetto.kit-del-guaritore, dnd.oggetto.pozione-di-guarigione]
+descrizione: |

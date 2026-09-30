@@ -1,0 +1,37 @@
+id: dnd.oggetto-magico.pozione-di-resistenza
+nome: Pozione di resistenza
+categoria: pozione
+rarita: non-comune
+richiede_sintonia: false
+consumabile: true
+versioni:
+  - {nome: "Acido", valore: acido}
+  - {nome: "Forza", valore: forza}
+  - {nome: "Freddo", valore: freddo}
+  - {nome: "Fulmine", valore: fulmine}
+  - {nome: "Fuoco", valore: fuoco}
+  - {nome: "Necrotico", valore: necrotico}
+  - {nome: "Psichico", valore: psichico}
+  - {nome: "Radioso", valore: radioso}
+  - {nome: "Tuono", valore: tuono}
+  - {nome: "Veleno", valore: veleno}
+attivita:
+  - tipo: attivabile
+    durata: {valore: 1, unita: ore}
+    effetti:
+      - {bersaglio: resistenze, operazione: concedi, valore: versione}
+descrizione: |
+  Quando beve questa pozione, il personaggio ottiene resistenza per 1 ora a un tipo di danno a scelta del GM o determinato in modo casuale tirando sulla seguente tabella.
+
+  ### 1d10 Tipo di danno
+
+  **1** Acido
+  **2** Forza
+  **3** Freddo
+  **4** Fulmine
+  **5** Fuoco
+  **6** Necrotico
+  **7** Psichico
+  **8** Radioso
+  **9** Tuono
+  **10** Veleno

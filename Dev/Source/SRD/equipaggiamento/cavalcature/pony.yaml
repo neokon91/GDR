@@ -1,0 +1,6 @@
+id: dnd.cavalcatura.pony
+nome: Pony
+costo: {valore: 30, valuta: moneta-oro}
+capacita_trasporto: {valore: 112.5, unita: kg}
+descrizione: |
+  Una buona cavalcatura può aiutarti a spostarti più rapidamente attraverso le terre selvagge, ma il suo scopo principale è trasportare l'equipaggiamento che altrimenti ti rallenterebbe.

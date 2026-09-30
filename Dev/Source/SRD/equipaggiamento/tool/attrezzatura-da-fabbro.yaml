@@ -1,0 +1,14 @@
+id: dnd.strumento.attrezzatura-da-fabbro
+nome: Attrezzatura da Fabbro
+categoria: strumenti
+famiglia: attrezzatura-da-artigiano
+costo: {valore: 20, valuta: moneta-oro}
+peso: {valore: 4, unita: kg}
+caratteristica: forza
+utilizzo:
+  - azione: Forzare l'apertura di una porta o di un contenitore
+    cd: 20
+creazione: [Qualsiasi arma da mischia (tranne randello, randello-pesante, bastone-ferrato e frusta), armatura-media (tranne armatura-di-cuoio-grezzo), armatura-pesante, cuscinetti-a-sfera, dnd.oggetto.secchio, dnd.oggetto.triboli, dnd.oggetto.catena, dnd.oggetto.piede-di-porco, proiettili-per-armi-da-fuoco, dnd.oggetto.rampino, dnd.oggetto.pentola-di-ferro, picchetti-di-ferro, proiettili-per-fionda]
+descrizione: |
+  Se possiedi la competenza in uno strumento, aggiungi il tuo Bonus di Competenza a qualsiasi prova di caratteristica che richieda l'uso di tale strumento.
+  Se possiedi anche la competenza in un'abilità utilizzata per quella prova, ottieni Vantaggio alla prova stessa.

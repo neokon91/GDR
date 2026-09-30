@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.mantello-elfico
+nome: Mantello elfico
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+descrizione: |
+  Quando il personaggio indossa questo mantello, le prove di Saggezza (Percezione) eseguite per percepirti subiscono svantaggio, mentre il personaggio dispone di vantaggio alle prove di Destrezza (Furtività).

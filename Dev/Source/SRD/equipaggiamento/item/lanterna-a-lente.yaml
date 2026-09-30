@@ -1,0 +1,9 @@
+id: dnd.oggetto.lanterna-a-lente
+nome: Lanterna a lente
+categoria: equipaggiamento-avventura
+costo:
+  valore: 10
+  unita: moneta-oro
+peso: {valore: 1, unita: kg}
+descrizione: |
+  Una lanterna a lente utilizza olio come combustibile per proiettare [[luce-intensa]] in un [[cono]] di 18 metri e [luce-fioca] per ulteriori 18 metri.

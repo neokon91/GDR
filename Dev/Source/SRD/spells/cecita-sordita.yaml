@@ -1,0 +1,26 @@
+id: dnd.incantesimo.cecita-sordita
+nome: "Cecità/sordità"
+livello: 2
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 36
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: 1 minuto
+descrizione: |
+  Una creatura entro gittata che l'incantatore è in grado di vedere deve superare un tiro salvezza su Costituzione, altrimenti viene accecata o assordata (a scelta dell'incantatore) per la durata dell'incantesimo. Alla fine di ogni suo turno, il bersaglio ripete il tiro salvezza e, se lo supera, termina l'incantesimo su di sé.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 2º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+    fallimento:
+      - concede: accecato
+        durata: { valore: 1, unita: minuti }

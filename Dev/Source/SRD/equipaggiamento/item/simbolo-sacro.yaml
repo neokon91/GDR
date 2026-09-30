@@ -1,0 +1,5 @@
+id: dnd.oggetto.simbolo-sacro
+nome: Simbolo sacro
+categoria: equipaggiamento-avventura
+costo: {variabile: true}
+peso: {variabile: true}

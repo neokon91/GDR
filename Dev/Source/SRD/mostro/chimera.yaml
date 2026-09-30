@@ -1,0 +1,85 @@
+id: dnd.mostro.chimera
+nome: Chimera
+taglia: grande
+tipo: mostruosita
+allineamento: caotico malvagio
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 19, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 9, volo: 18}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 18
+lingue: [capisce il Draconico ma non lo parla]
+gs: 6
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      La chimera effettua un attacco Sfondamento, un attacco Morso e un attacco Artiglio. Può sostituire l'attacco Artiglio con un utilizzo di Soffio di fuoco, se disponibile.
+  - nome: Artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni taglienti
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti, o 18 (4d6 + 4) danni perforanti se la chimera dispone di vantaggio al tiro per colpire.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Sfondamento
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 10 (1d12 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d12
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di fuoco (ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 15, tutte le creature in un cono di 4,5 metri. *Fallimento:* 31 (7d8) danni da fuoco. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 7, dado: d8, tipo_danno: fuoco}
+        successo: danno-dimezzato

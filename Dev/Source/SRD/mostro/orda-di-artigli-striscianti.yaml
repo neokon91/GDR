@@ -1,0 +1,48 @@
+id: dnd.mostro.orda-di-artigli-striscianti
+nome: Orda di artigli striscianti
+taglia: media
+sottodimensione: Minuscoli
+tipo: sciame
+sottotipo: non morti
+gruppo: Artiglio strisciante
+allineamento: neutrale malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 14, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 11
+velocita: {camminata: 9, scalata: 9}
+sensi: {vista_cieca: 9}
+percezione_passiva: 10
+resistenze: [contundente, perforante, tagliente]
+immunita_danni: [necrotico, veleno]
+immunita_condizioni: [affascinato, afferrato, avvelenato, incapacitato, indebolimento, paralizzato, pietrificato, prono, spaventato, stordito, trattenuto]
+lingue: [capisce il Comune ma non lo parla]
+gs: 3
+
+tratti:
+  - nome: Sciame
+    descrizione: |
+      L'orda può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare una creatura di taglia Minuscola. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+azioni:
+  - nome: Orda di mani afferranti
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 20 (4d8 + 2) danni necrotici, o 11 (2d8 + 2) danni necrotici se l'orda è sanguinante. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d8
+              tipo_danno: necrotico
+              bonus: {caratteristica: forza}

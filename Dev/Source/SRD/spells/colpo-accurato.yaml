@@ -1,0 +1,20 @@
+id: dnd.incantesimo.colpo-accurato
+nome: Colpo accurato
+livello: 0
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: incantatore
+componenti: [S, "M (un'arma nel cui uso l'incantatore ha competenza e ha un valore di 1 mr o più)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Guidato da un lampo di intuizione magica, l'incantatore effettua un attacco con l'arma utilizzata per lanciare l'incantesimo. Per determinare il tiro per colpire e il tiro per i danni, l'incantatore utilizza la sua caratteristica da incantatore invece che la Forza o la Destrezza. Se l'attacco infligge danni, possono essere danni radiosi o danni normali inflitti dall'arma (a scelta dell'incantatore).
+scaling: |
+  **Trucchetto potenziato**
+  A prescindere dal tipo di danni che l'incantatore sceglie (danni radiosi o danni normali dell'arma), l'attacco infligge danni radiosi extra quando l'incantatore raggiunge il 5º livello (1d6), l'11º livello (2d6) e il 17º livello (3d6).

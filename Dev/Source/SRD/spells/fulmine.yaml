@@ -1,0 +1,28 @@
+id: dnd.incantesimo.fulmine
+nome: Fulmine
+livello: 3
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (un ciuffo di pelo e una verga di cristallo)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Un fulmine parte dall'incantatore in una direzione a sua scelta,
+  formando una linea lunga 30 metri e larga 1,5 metri.
+  Ogni creatura sulla linea effettua un tiro salvezza su Destrezza; se lo fallisce, subisce 8d6 danni da fulmine,
+  mentre se lo supera subisce la metà dei danni.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d6 per ogni slot di livello superiore al 3º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 8, dado: d6, tipo_danno: fulmine }
+    successo: danno-dimezzato
+    scaling: { quando: slot, danno: { numero_dadi: 1, dado: d6, tipo_danno: fulmine } }

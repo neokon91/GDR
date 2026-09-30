@@ -1,0 +1,47 @@
+id: dnd.mostro.squalo-tropicale
+nome: Squalo tropicale
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 14, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 5, nuoto: 9}
+abilita: [percezione: competenza]
+sensi: {vista_cieca: 9}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 1/2
+
+tratti:
+  - nome: Tattiche del branco
+    descrizione: |
+      Lo squalo dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+  - nome: Respirare sott'acqua
+    descrizione: |
+      Lo squalo può respirare soltanto sott'acqua.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (2d4 + 2) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

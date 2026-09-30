@@ -1,0 +1,5 @@
+id: dnd.valuta.moneta-rame
+nome: "Moneta di Rame"
+abb: mr
+categoria: valuta
+costo: {valore: 0.01, valuta: moneta-oro}

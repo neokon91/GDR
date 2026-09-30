@@ -1,0 +1,76 @@
+id: dnd.mostro.wight
+nome: Wight
+taglia: media
+tipo: non-morto
+allineamento: neutrale malvagio
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 15, competenza: false}
+iniziativa: competenza
+dadi_vita: 11
+velocita: {camminata: 9}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 13
+resistenze: [necrotico]
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, indebolimento]
+equipaggiamento:
+  - {articolo: dnd.armatura.armatura-di-cuoio-borchiato}
+lingue: [Comune più un'altra lingua]
+gs: 3
+
+tratti:
+  - nome: Sensibilità al sole
+    descrizione: |
+      Finché è esposto alla luce del sole, il wight subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il wight effettua due attacchi, usando Spada necrotica o Arco necrotico in qualsiasi combinazione. Può sostituire un attacco con un utilizzo di Risucchio di vita.
+  - nome: Spada necrotica
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 6 (1d8 + 2) danni taglienti più 4 (1d8) danni necrotici.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Arco necrotico
+    descrizione: |
+      *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti più 4 (1d8) danni necrotici.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 45, lunga: 180}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Risucchio di vita
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 13, una creatura entro 1,5 metri. *Fallimento:* 6 (1d8 + 2) danni necrotici, e i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti. Un umanoide ucciso da questo attacco si anima 24 ore dopo come zombi sotto il controllo del wight, a meno che l'umanoide non sia riportato in vita o il suo corpo non venga distrutto. Il wight non può controllare più di dodici zombi simultaneamente.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}

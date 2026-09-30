@@ -1,0 +1,33 @@
+id: dnd.specie.nano
+nome: Nano
+tipo: umanoide
+taglia: media
+velocita: {camminata: 9}
+tratti:
+  - id: nano.scurovisione
+    nome: Scurovisione
+    descrizione: |
+      Possiedi la Scurovisione con una gittata di 36 metri.
+    attivita:
+      - tipo: passivo
+        effetti: [{bersaglio: sensi.scurovisione, operazione: aumento, valore: 36}]
+  - id: nano.resilienza-nanica
+    nome: Resilienza Nanica
+    descrizione: |
+      Possiedi resistenza ai danni da veleno.
+      Inoltre, hai vantaggio ai tiri salvezza effettuati per evitare o terminare la condizione di avvelenato.
+    attivita:
+      - tipo: passivo
+        effetti: [{bersaglio: tiri_salvezza.veleno, operazione: vantaggio}]
+  - id: nano.robustezza-nanica
+    nome: Robustezza Nanica
+    descrizione: |
+      Il tuo massimo di Punti Ferita aumenta di 1 e aumenta nuovamente di 1 ogni volta che sali di livello.
+  - id: nano.conoscenza-della-pietra
+    nome: Conoscenza della Pietra
+    descrizione: |
+      Come Azione Bonus, ottieni Senso Tellurico con una gittata di 18 metri per 10 minuti.
+      Per utilizzare questo Senso Tellurico, devi trovarti su una superficie di pietra o toccarne una.
+      La pietra può essere naturale o lavorata.
+
+      Puoi utilizzare questa azione bonus un numero di volte pari al tuo bonus di competenza e recuperi tutti gli utilizzi spesi al termine di un Riposo Lungo.

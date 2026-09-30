@@ -1,0 +1,20 @@
+id: dnd.incantesimo.passo-veloce
+nome: Passo veloce
+livello: 1
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (un pizzico di terriccio)"]
+concentrazione: false
+rituale: false
+durata: 1 ora
+descrizione: |
+  L'incantatore tocca una creatura, la cui velocità aumenta di 3 metri fino al termine dell'incantesimo.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 1º.

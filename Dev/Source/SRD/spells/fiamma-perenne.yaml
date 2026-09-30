@@ -1,0 +1,16 @@
+id: dnd.incantesimo.fiamma-perenne
+nome: Fiamma perenne
+livello: 2
+scuola: invocazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (polvere di rubino del valore di 50 mo o più, che l'incantesimo consuma)"]
+concentrazione: false
+rituale: false
+durata: finché non viene dissolto
+descrizione: |
+  Una fiamma si sprigiona da un oggetto toccato dall'incantatore. L'effetto proietta luce intensa in un raggio di 6 metri e luce fioca per ulteriori 6 metri. L'effetto è quello di una fiamma comune, ma non genera calore e non utilizza combustibile. La fiamma può essere coperta o nascosta, ma non soffocata o estinta.

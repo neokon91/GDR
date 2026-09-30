@@ -1,0 +1,21 @@
+id: dnd.oggetto-magico.cintura-nanica
+nome: Cintura nanica
+categoria: oggetto-meraviglioso
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Il personaggio che indossa questa cintura riceve i seguenti benefici:
+  **Amico dei nani**
+  Dispone di vantaggio alle prove di Carisma (Persuasione) effettuate per interagire con i nani e i duergar.
+  **Nanico**
+  Impara il nanico.
+  **Robustezza**
+  Il suo punteggio di Costituzione aumenta di 2, fino a un massimo di 20.
+
+  Inoltre, dopo che il personaggio che indossa la cintura è entrato in sintonia con essa, ogni mattina all'alba c'è una probabilità del 50% che gli spuntino 
+  barba e baffi, premesso che il suo corpo possa svilupparli, o che la sua barba cresca se ne ha già una.Se non è un nano o un duergar, ottiene i seguenti 
+  benefici aggiuntivi finché indossa la cintura:
+  **Resilienza**
+  Ha resistenza ai danni da veleno.  Dispone di vantaggio sui tiri salvezza eseguiti per evitare o terminare la condizione avvelenato su se stesso.
+  **Scurovisione**
+  Ha scurovisione fino a un raggio di 18 metri.

@@ -1,0 +1,51 @@
+id: dnd.mostro.rospo-gigante
+nome: Rospo gigante
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 9, nuoto: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il rospo può respirare in aria e in acqua.
+  - nome: Balzo da fermo
+    descrizione: |
+      Il rospo può compiere un salto in lungo di massimo 6 metri e uno in alto di massimo 3 metri, con o senza rincorsa.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni perforanti più 5 (2d4) danni da veleno. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire).
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Inghiottire
+    descrizione: |
+      Il rospo inghiotte un bersaglio di taglia
+  - nome: Media o inferiore che sta afferrando
+    descrizione: |
+      La creatura inghiottita non è afferrata, ma è accecata e trattenuta, e beneficia di copertura totale contro attacchi e altri effetti al di fuori del rospo. Inoltre, il bersaglio subisce 10 (3d6) danni da acido al termine di ogni turno del rospo. Il rospo può inghiottire un solo bersaglio alla volta e non può usare Morso finché ha un bersaglio inghiottito. Se il rospo muore, la creatura inghiottita non è più trattenuta e può fuggire dal cadavere usando 1,5 metri di movimento, uscendo prona.

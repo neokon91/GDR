@@ -1,0 +1,25 @@
+id: dnd.oggetto-magico.bastone-ferrato-dell'acrobata
+nome: Bastone ferrato dell'acrobata
+categoria: arma
+sottotipo: bastone ferrato
+rarita: molto-rara
+richiede_sintonia: true
+base: dnd.arma.bastone-ferrato
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_colpire, operazione: somma, valore: {piatto: 2}}
+      - {bersaglio: danni, operazione: somma, valore: {piatto: 2}}
+descrizione: |
+  Il personaggio ottiene un bonus di +2 ai tiri per colpire e ai tiri per i danni effettuati con quest'arma magica.
+  Finché impugna quest'arma, come azione bonus o dopo aver tirato per l'iniziativa, può far sì che emetta una luce fioca verdastra in un raggio di 3 metri, oppure può spegnerla con un'azione bonus.
+  Finché il personaggio impugna quest'arma, può alterarne la forma con un'azione bonus, trasfor-mandola in una verga di 15 centimetri (per facilità di trasporto) o un'asta di 3 metri, altrimenti può ripristinare le sue sembianze di bastone ferrato; l'arma si allungherà solo fino al massimo dello spazio disponibile.In determinate forme, l'arma ha le seguenti  proprietà aggiuntive.
+
+  **Arma a distanza (solo forma di bastone ferrato)**
+  L'arma possiede la proprietà da lancio con una gittata normale di 9 metri e una gittata lunga di 36 metri. Subito dopo aver effettuato un attacco a distanza, l'arma vola nella mano del personaggio. 
+
+  **Deviazione attacchi (solo forma di bastone ferrato)** Se il personaggio viene colpito da un attacco mentre impugna l'arma, può usare una reazione 
+  per rotearla intorno a sé, ottenendo un bonus di +5 alla Classe Armatura contro l'attacco scatenante e aumentando le probabilità che non vada a segno. Il personaggio non può riutilizzare questa proprietà prima di aver completato un riposo breve o lungo.
+
+  **Supporto acrobatico (solo forme di bastone ferrato o asta da 3 metri)**
+  Mentre il personaggio impugna l'arma, effettua le prove di Destrezza (Acrobazia) con vantaggio.

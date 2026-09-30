@@ -1,0 +1,48 @@
+id: dnd.mostro.sfinge-della-meraviglia
+nome: Sfinge della meraviglia
+taglia: minuscola
+tipo: celestiale
+gruppo: Sfingi
+allineamento: legale buono
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 15, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 6, volo: 12}
+abilita: [arcano: competenza, religione: competenza, furtivita: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 11
+resistenze: [necrotico, psichico, radioso]
+lingue: [Celestiale, Comune]
+gs: 1
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      La sfinge dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni taglienti più 7 (2d6) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+reazioni:
+  - nome: "Impeto di ingegno (2 al giorno)"
+    descrizione: |
+      Attivazione: la sfinge o un'altra creatura entro 9 metri effettua una prova di caratteristica o un tiro salvezza. Esito: la sfinge aggiunge 2 al risultato del tiro.

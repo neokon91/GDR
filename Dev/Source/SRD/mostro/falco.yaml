@@ -1,0 +1,33 @@
+id: dnd.mostro.falco
+nome: Falco
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 5, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 8, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 3, volo: 18}
+abilita: [percezione: maestria]
+percezione_passiva: 16
+lingue: [nessuna]
+gs: 0
+
+azioni:
+  - nome: Speroni
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 1 danno tagliente.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

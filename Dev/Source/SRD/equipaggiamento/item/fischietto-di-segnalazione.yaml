@@ -1,0 +1,4 @@
+id: dnd.oggetto.fischietto-di-segnalazione
+nome: Fischietto di Segnalazione
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-rame}

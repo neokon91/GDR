@@ -1,0 +1,19 @@
+id: dnd.incantesimo.parola-del-potere-guarire
+nome: Parola del potere guarire
+livello: 9
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+tempo_lancio: azione
+gittata: 18
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+attivita:
+  - tipo: cura
+    cura: tutti
+    rimuove: [affascinato, avvelenato, paralizzato, spaventato, stordito]
+descrizione: |
+  Un'ondata di energia curativa investe una creatura entro gittata che l'incantatore è in grado di vedere. Il bersaglio recupera tutti i suoi punti ferita. Se la creatura è affascinata, avvelenata, paralizzata, spaventata o stordita, questa condizione termina. Se la creatura è prona, può usare la sua reazione per rialzarsi.

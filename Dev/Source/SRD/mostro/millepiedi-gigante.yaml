@@ -1,0 +1,39 @@
+id: dnd.mostro.millepiedi-gigante
+nome: Millepiedi gigante
+taglia: piccola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 5, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 7, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9, scalata: 9}
+sensi: {vista_cieca: 9}
+percezione_passiva: 8
+lingue: [nessuna]
+gs: 1/4
+
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 4 (1d4 + 2) danni perforanti, e il bersaglio è avvelenato fino all'inizio del turno successivo del millepiedi.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

@@ -1,0 +1,10 @@
+id: dnd.oggetto.antitossina
+nome: Antitossina
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 50
+  unita: moneta-oro
+peso:
+  valore: null
+descrizione: |
+  Come Azione Bonus, puoi bere una fiala di antitossina per ottenere Vantaggio ai tiri salvezza per evitare o terminare la condizione Avvelenato per 1 ora.

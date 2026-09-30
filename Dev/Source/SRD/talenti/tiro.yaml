@@ -1,0 +1,11 @@
+id: dnd.talento.tiro
+nome: Tiro
+categoria: stile-di-combattimento
+prerequisito: Privilegio Stile di combattimento
+ripetibile: false
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_colpire.distanza, operazione: somma, valore: 2}
+descrizione: |
+  Ottieni +2 ai tiri per colpire con armi a distanza.

@@ -1,0 +1,10 @@
+id: dnd.armatura.corazza-di-piastre
+nome: Corazza di Piastre
+tipo: armatura-media
+categoria: armature
+costo: {valore: 400, valuta: moneta-oro}
+peso: {valore: 10, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 14, caratteristiche: [destrezza], max_modificatore: 2}}

@@ -1,0 +1,115 @@
+id: dnd.mostro.solar
+nome: Solar
+taglia: grande
+tipo: celestiale
+sottotipo: angelo
+allineamento: legale buono
+ca: {valore: 21}
+caratteristiche:
+  forza: {valore: 26, competenza: false}
+  destrezza: {valore: 22, competenza: false}
+  costituzione: {valore: 26, competenza: false}
+  intelligenza: {valore: 25, competenza: false}
+  saggezza: {valore: 25, competenza: false}
+  carisma: {valore: 30, competenza: false}
+iniziativa: maestria
+dadi_vita: 22
+velocita: {camminata: 15, volo: 45}
+abilita: [percezione: competenza]
+sensi: {vista_pura: 36, telepatia: 36}
+percezione_passiva: 24
+immunita_danni: [radioso, veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, spaventato]
+lingue: [tutte]
+gs: 21
+
+tratti:
+  - nome: Consapevolezza divina
+    descrizione: |
+      Il solar sa riconoscere le menzogne.
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il solar dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: "Resistenza leggendaria (4/giorno)"
+    descrizione: |
+      Se il solar fallisce un tiro salvezza, può scegliere di superarlo comunque.
+  - nome: Ristoro glorioso
+    descrizione: |
+      Se il solar muore al di fuori di Monte Celestia, il suo corpo scompare e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte a Monte Celestia.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: spada-volante, ripetizioni: 2}
+    descrizione: |
+      Il solar effettua due attacchi Spada volante. Può sostituire un attacco con un utilizzo di Arco assassino.
+  - nome: Spada volante
+    id: spada-volante
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +15, portata 3 m o gittata 36 m. *Colpito:* 22 (4d6 + 8) danni taglienti più 36 (8d8) danni radiosi. Colpito o mancato: la spada torna magicamente nella mano del solar o fluttua entro 1,5 metri dal solar subito dopo un attacco a distanza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Arco assassino
+    id: arco-assassino
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 21, una creatura che il solar è in grado di vedere entro 180 metri. *Fallimento:* se la creatura possiede 100 punti ferita o meno, muore. Altrimenti, subisce 24 (4d8 + 6) danni perforanti più 36 (8d8) danni radiosi.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: destrezza, base: 8, competenza: true}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il solar lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 25): 1/giorno ciascuno: comunione, controllare tempo atmosferico, dissolvi il bene e il male, resurrezioneA volontà: individuazione del bene e del male
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 25
+        a_volonta:
+          - dnd.incantesimo.individuazione-del-bene-e-del-male
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.comunione
+              - dnd.incantesimo.controllare-tempo-atmosferico
+              - dnd.incantesimo.dissolvi-il-bene-e-il-male
+              - dnd.incantesimo.resurrezione
+azioni_bonus:
+  - nome: "Aiuto divino (3/giorno)"
+    descrizione: |
+      Il solar lancia cura ferite (di 2º livello), rimuovi maledizione o ristorare inferiore, utilizzando la stessa caratteristica da incantatore di Incantesimi.
+azioni_leggendarie:
+  - nome: Sguardo accecante
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 25, una creatura che il solar è in grado di vedere entro 36 metri. *Fallimento:* il bersaglio è accecato per 1 minuto. *Fallimento o successo:* il solar non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+  - nome: Teletrasporto radioso
+    descrizione: |
+      Il solar si teletrasporta fino a un massimo di 18 metri in uno spazio libero che è in grado di vedere. *Tiro salvezza su Destrezza:* CD 25, tutte le creature in un'emanazione di 3 metri di cui il solar è il punto di origine nel suo spazio di destinazione. *Fallimento:* 11 (2d10) danni radiosi. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 2, dado: d10, tipo_danno: radioso}
+        successo: danno-dimezzato

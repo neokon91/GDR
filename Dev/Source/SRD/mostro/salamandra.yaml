@@ -1,0 +1,55 @@
+id: dnd.mostro.salamandra
+nome: Salamandra
+taglia: grande
+tipo: elementale
+allineamento: neutrale malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 12, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 9, scalata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+immunita_danni: [fuoco]
+vulnerabilita: [freddo]
+lingue: ["Primordiale (Ignan)"]
+gs: 5
+
+tratti:
+  - nome: Aura di fuoco
+    descrizione: |
+      Alla fine di ogni turno della salamandra, ciascuna creatura a sua scelta in un'emanazione di 1,5 metri di cui la salamandra è il punto di origine subisce 7 (2d6) danni da fuoco.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      La salamandra effettua due attacchi Lancia di fuoco. Può sostituire un attacco con un utilizzo di Stritolare.
+  - nome: Lancia di fuoco
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +7, portata 1,5 m o gittata 6/18 m. *Colpito:* 13 (2d8 + 4) danni perforanti più 7 (2d6) danni da fuoco. Colpito o mancato: la lancia torna magicamente tra le mani della salamandra subito dopo un attacco a distanza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Stritolare
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 15, una creatura di taglia Grande o inferiore che la salamandra è in grado di vedere entro 3 metri. *Fallimento:* 11 (2d6 + 4) danni contundenti più 7 (2d6) danni da fuoco. Il bersaglio è afferrato (CD 14 per sfuggire) ed è trattenuto finché la presa perdura.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: forza, base: 8, competenza: true}

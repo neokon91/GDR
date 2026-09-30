@@ -1,4 +1,4 @@
-"""I generatori dei sidecar del plugin leggono DAVVERO l'archivio.
+"""I generatori dei sidecar del plugin leggono DAVVERO l'SRD (la copia vendorizzata di archivio/srd).
 
 Dopo le migrazioni dell'archivio di set 2026 (id puntati, `.md` per le note, niente più
 suffissi `*.spell.yaml`) i generatori globbavano i vecchi nomi e leggevano 0 file: il plugin
@@ -6,15 +6,10 @@ usciva senza condizioni, incantesimi, sottoclassi né oggetti magici, e la build
 Qui le soglie stanno sotto i conteggi reali (17, 339, 12, 256): scendere a zero è un errore.
 """
 
-from pathlib import Path
-
 import pytest
 
 import archivio_io
-
-SRD = Path(__file__).resolve().parents[1] / "archivio" / "srd"
-
-pytestmark = pytest.mark.skipif(not SRD.is_dir(), reason="archivio assente (symlink/checkout fratello)")
+from common import SRD_DIR as SRD
 
 
 @pytest.mark.parametrize(

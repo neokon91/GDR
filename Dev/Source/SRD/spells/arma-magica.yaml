@@ -1,0 +1,28 @@
+id: dnd.incantesimo.arma-magica
+nome: Arma magica
+livello: 2
+scuola: trasmutazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.paladino
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+tempo_lancio: azione bonus
+gittata: contatto
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 1 ora
+attivita:
+  - tipo: potenziamento
+    bersaglio: alleato
+    concede: arma-magica
+    durata: {valore: 1, unita: ore}
+    scaling_grado:
+      - {da: 3, grado: 2}
+      - {da: 6, grado: 3}
+descrizione: |
+  L'incantatore tocca un'arma non magica, e, fino al termine dell'incantesimo, quell'arma diventa un'arma magica con un bonus di +1 ai tiri per colpire e ai tiri per i danni. L'incantesimo termina in anticipo se l'incantatore lo lancia di nuovo.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  Il bonus aumenta a +2 con uno slot incantesimo compreso tra il 3º e 5º livello. Il bonus aumenta a +3 con uno slot incantesimo di 6º livello o superiore.

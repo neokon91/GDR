@@ -1,0 +1,77 @@
+id: dnd.mostro.xorn
+nome: Xorn
+taglia: media
+tipo: elementale
+allineamento: neutrale
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 22, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 8
+velocita: {scavo: 6}
+abilita: [furtivita: maestria, percezione: maestria]
+sensi: {percezione_tellurica: 18, scurovisione: 18}
+percezione_passiva: 16
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, paralizzato, pietrificato]
+lingue: ["Primordiale (Terran)"]
+gs: 5
+
+tratti:
+  - nome: Percezione dei tesori
+    descrizione: |
+      Lo xorn può individuare la posizione di pietre e metalli preziosi entro 18 metri da sé.
+  - nome: Scivolare nella terra
+    descrizione: |
+      Lo xorn può scavare attraverso la terra e la pietra non magiche e non lavorate, senza disturbare il materiale attraverso cui si muove.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 3}
+    descrizione: |
+      Lo xorn effettua un attacco Morso e tre attacchi Artiglio.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 8 (1d10 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 17 (4d6 + 3) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Carica
+    descrizione: |
+      Lo xorn si muove fino al massimo della sua velocità o velocità di scavo in linea retta verso un nemico che è in grado di percepire.

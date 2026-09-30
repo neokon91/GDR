@@ -1,0 +1,20 @@
+id: dnd.incantesimo.salto
+nome: Salto
+livello: 1
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+tempo_lancio: azione bonus
+gittata: contatto
+componenti: [V, S, "M (la zampa posteriore di una cavalletta)"]
+concentrazione: false
+rituale: false
+durata: 1 minuto
+descrizione: |
+  L'incantatore tocca una creatura consenziente. La creatura, in ogni suo turno fino al termine dell'incantesimo, può saltare fino a 9 metri, usando 3 metri di movimento.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 1º.

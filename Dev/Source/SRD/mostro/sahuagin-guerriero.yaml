@@ -1,0 +1,63 @@
+id: dnd.mostro.sahuagin-guerriero
+nome: Sahuagin guerriero
+taglia: media
+tipo: immondo
+gruppo: Sahuagin
+allineamento: legale malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 9, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 9, nuoto: 12}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 36}
+percezione_passiva: 15
+resistenze: [acido, freddo]
+lingue: [Sahuagin]
+gs: 1/2
+
+tratti:
+  - nome: Anfibio limitato
+    descrizione: |
+      Il sahuagin può respirare in aria e in acqua, ma deve immergersi in acqua almeno una volta ogni 4 ore per evitare di soffocare.
+  - nome: Frenesia di sangue
+    descrizione: |
+      Il sahuagin dispone di vantaggio ai tiri per colpire contro ogni creatura che non possieda tutti i propri punti ferita.
+  - nome: Telepatia con gli squali
+    descrizione: |
+      Il sahuagin può comandare magicamente ogni squalo entro 36 metri da sé, usando una forma di telepatia speciale.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+    descrizione: |
+      Il sahuagin effettua due attacchi Artiglio.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Carica acquatica
+    descrizione: |
+      Il sahuagin nuota fino al massimo della sua velocità di nuoto in linea retta verso un nemico che è in grado di vedere.

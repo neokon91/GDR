@@ -1,0 +1,5 @@
+id: dnd.oggetto.dotazione-da-sacerdote
+nome: Dotazione da sacerdote
+categoria: equipaggiamento-avventura
+costo: {valore: 33, valuta: moneta-oro}
+peso: {valore: 14, unita: kg}

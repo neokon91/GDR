@@ -1,0 +1,24 @@
+id: dnd.incantesimo.scagliare-maledizione
+nome: Scagliare maledizione
+livello: 3
+scuola: necromanzia
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore tocca una creatura che deve superare un tiro salvezza su Saggezza, altrimenti verrà maledetta per la durata dell'incantesimo. Finché la maledizione non svanisce, il bersaglio subisce uno dei seguenti effetti a scelta:
+
+  - L'incantatore sceglie una caratteristica. Il bersaglio subisce svantaggio alle prove di caratteristica e ai tiri salvezza effettuati con quella caratteristica.
+  - Il bersaglio subisce svantaggio ai tiri per colpire contro l'incantatore.
+  - In combattimento, il bersaglio deve superare un tiro salvezza su Saggezza all'inizio di ogni suo turno, altrimenti in quel turno è costretto a effettuare l'azione Schivata.
+  - Se l'incantatore infligge danni al bersaglio con un tiro per colpire o un incantesimo, il bersaglio subisce 1d8 danni necrotici extra.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  Se l'incantatore lancia questo incantesimo usando uno slot incantesimo di 4º livello, può mantenere la concentrazione su di esso fino a un massimo di 10 minuti. Se usa uno slot incantesimo di 5º livello o superiore, l'incantesimo non richiede concentrazione e la durata diventa di 8 ore (slot di 5º e 6º livello) o 24 ore (slot di 7º o 8º livello). Se usa uno slot incantesimo di 9º livello, l'incantesimo dura finché non viene dissolto.

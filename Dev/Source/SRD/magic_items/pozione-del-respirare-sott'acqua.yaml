@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.pozione-del-respirare-sott'acqua
+nome: "Pozione del respirare sott'acqua"
+categoria: pozione
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Il personaggio può respirare sott'acqua per 24 ore dopo aver bevuto questa pozione.Il suo liquido verde torbido ha un odore salmastro e al suo interno galleggia una bolla simile a una medusa.

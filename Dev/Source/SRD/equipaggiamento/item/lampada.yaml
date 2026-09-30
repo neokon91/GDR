@@ -1,0 +1,5 @@
+id: dnd.oggetto.lampada
+nome: Lampada
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-argento}
+peso: {valore: 0.5, unita: kg}

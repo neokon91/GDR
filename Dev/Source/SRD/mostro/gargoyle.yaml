@@ -1,0 +1,55 @@
+id: dnd.mostro.gargoyle
+nome: Gargoyle
+taglia: media
+tipo: elementale
+allineamento: caotico malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 7, competenza: false}
+iniziativa: competenza
+dadi_vita: 9
+velocita: {camminata: 9, volo: 18}
+abilita: [furtivita: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, indebolimento, pietrificato]
+lingue: ["Primordiale (Terran)"]
+gs: 2
+
+tratti:
+  - nome: Volo sfuggente
+    descrizione: |
+      Il gargoyle non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+    descrizione: |
+      Il gargoyle effettua due attacchi Artiglio.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (2d4 + 2) danni taglienti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}

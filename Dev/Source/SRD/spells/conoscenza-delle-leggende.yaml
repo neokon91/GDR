@@ -1,0 +1,20 @@
+id: dnd.incantesimo.conoscenza-delle-leggende
+nome: Conoscenza delle leggende
+livello: 5
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.mago
+tempo_lancio: 10 minuti
+gittata: incantatore
+componenti: [V, S, "M (incenso del valore di 250 mo o più, che l'incantesimo consuma, e quattro bastoncini d'avorio del valore di 50 mo o più ciascuno)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore nomina o descrive una persona, un luogo o un oggetto famosi. L'incantesimo riporta alla mente dell'incantatore un breve riassunto delle conoscenze più significative relative a ciò che ha nominato, come descritto dal GM.
+
+  Queste conoscenze possono includere dettagli importanti, rivelazioni sorprendenti o persino conoscenze segrete che non sono note ai più. Più informazioni l'incantatore conosce già riguardo a ciò che ha nominato, più precise e dettagliate saranno le informazioni che riceverà. Le informazioni che riceve sono accurate, ma potrebbero essere celate da un linguaggio figurativo o sotto forma di poesia, in base alla scelta del GM.
+
+  Se l'incantatore nomina qualche cosa che in realtà non è famosa, sente il suono delle tristi note di un trombone, e l'incantesimo fallisce.

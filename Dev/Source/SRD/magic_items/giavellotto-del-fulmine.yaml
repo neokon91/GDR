@@ -1,0 +1,11 @@
+id: dnd.oggetto-magico.giavellotto-del-fulmine
+nome: Giavellotto del fulmine
+categoria: arma
+sottotipo: giavellotto
+rarita: rara
+richiede_sintonia: false
+descrizione: |
+  Ogni volta che il personaggio effettua un tiro per colpire con quest'arma magica e colpisce, può far sì che infligga danni da fulmine anziché danni perforanti.
+
+  **Fulmine**
+  Quando il personaggio scaglia quest'arma contro un bersaglio a non più di 36 metri da sé, può evitare di effettuare un tiro per colpire a distanza e trasformare l'arma in un fulmine, formando una linea larga 1,5 metri tra lui e la creatura colpita. Il bersaglio e ogni creatura lungo la linea (a eccezione del personaggio) effettuano un tiro salvezza su Destrezza con CD 13; se falliscono, subiscono 4d6 danni da fulmine, mentre se lo superano subiscono la metà di quei danni. Subito dopo aver colpito, l'arma riappare in mano al perso-naggio. Questa proprietà non può essere riutilizzata fino all'alba successiva.

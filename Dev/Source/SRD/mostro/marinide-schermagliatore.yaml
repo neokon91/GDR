@@ -1,0 +1,38 @@
+id: dnd.mostro.marinide-schermagliatore
+nome: Marinide schermagliatore
+taglia: media
+tipo: elementale
+gruppo: Marinide
+allineamento: neutrale
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 12, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 3, nuoto: 12}
+percezione_passiva: 12
+lingue: [Comune, "Primordiale (Aquan)"]
+gs: 1/8
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il marinide può respirare in aria e in acqua.
+azioni:
+  - nome: Lancia oceanica
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +2, portata 1,5 m o gittata 6/18 m. *Colpito:* 3 (1d6) danni perforanti più 2 (1d4) danni da freddo. Se il bersaglio è una creatura, la sua velocità è ridotta di 3 metri fino al termine del proprio turno successivo. Colpito o mancato: la lancia fa magicamente ritorno nella mano del marinide subito dopo un attacco a distanza.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno: {numero_dadi: 1, dado: d6, tipo_danno: perforante}

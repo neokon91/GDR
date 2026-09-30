@@ -1,0 +1,63 @@
+id: dnd.mostro.elementale-del-fuoco
+nome: Elementale del fuoco
+taglia: grande
+tipo: elementale
+allineamento: neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 11
+velocita: {camminata: 15}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+resistenze: [contundente, perforante, tagliente]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [afferrato, avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi, prono, trattenuto]
+lingue: ["Primordiale (Ignan)"]
+gs: 5
+
+tratti:
+  - nome: Aura di fuoco
+    descrizione: |
+      Alla fine di ogni turno dell'elementale, tutte le creature in un'emanazione di 3 metri di cui l'elementale è il punto di origine subiscono 5 (1d10) danni da fuoco. Le creature e gli oggetti infiammabili che si trovano nell'emanazione iniziano a bruciare.
+  - nome: Forma di fuoco
+    descrizione: |
+      L'elementale può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo, e può entrare nello spazio di una creatura e fermarvisi. La prima volta che entra nello spazio di una creatura in un turno, quella creatura subisce 5 (1d10) danni da fuoco.
+  - nome: Illuminazione
+    descrizione: |
+      L'elementale emana luce intensa in un raggio di 9 metri e luce fioca per altri 9 metri.
+  - nome: Suscettibilità all'acqua
+    descrizione: |
+      Per ogni 1,5 metri di cui l'elementale si muove nell'acqua o per ogni 4 litri d'acqua versatigli addosso, l'elementale subisce 3 (1d6) danni da freddo.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: bruciatura, ripetizioni: 2}
+    descrizione: |
+      L'elementale effettua due attacchi Bruciatura.
+  - nome: Bruciatura
+    id: bruciatura
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni da fuoco. Se il bersaglio è una creatura o un oggetto infiammabile, inizia a bruciare.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: fuoco
+              bonus: {caratteristica: destrezza}

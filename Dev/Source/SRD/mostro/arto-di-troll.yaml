@@ -1,0 +1,42 @@
+id: dnd.mostro.arto-di-troll
+nome: Arto di Troll
+taglia: piccola
+tipo: gigante
+allineamento: caotico malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 9, competenza: false}
+  carisma: {valore: 1, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 6}
+sensi: {scurovisione: 18}
+lingue: [nessuna]
+gs: 1/2
+tratti:
+  - id: arto-di-troll.gereare-troll
+    nome: Generare troll
+    descrizione: |
+      Stranamente, l'arto possiede gli stessi sensi di un troll integro.
+      Se non viene distrutto entro 24 ore, tira 1d12.
+      Con un risultato di 12, l'arto diventa un troll, altrimenti avvizzisce e si decompone.
+  - id: arto-di-troll.rigenerazione
+    nome: Rigenerazione
+    descrizione: |
+      L'arto recupera 5 punti ferita all'inizio di ogni suo turno.
+      Se l'arto subisce danni da acido o fuoco, questo tratto non funziona all'inizio del suo turno successivo.
+      L'arto muore solo se inizia il suo turno con 0 punti ferita e non si rigenera.
+azioni:
+  - id: arto-di-troll.squarcio
+    nome: Squarcio
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +6, portata 1,5 m.
+      *Colpito:* 9 (2d4 + 4) danni Taglienti.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 2, dado: d4, tipo_danno: tagliente, bonus: { caratteristica: forza } }

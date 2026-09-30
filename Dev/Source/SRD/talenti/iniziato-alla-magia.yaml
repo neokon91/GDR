@@ -1,0 +1,28 @@
+id: dnd.talento.iniziato-alla-magia
+nome: Iniziato alla Magia
+categoria: talento-origine
+ripetibile: true
+scelte:
+  # `classe`: la lista da cui si scelgono i 2 trucchetti + 1 incantesimo (e da cui
+  # deriva la caratteristica da incantatore del talento).
+  - id: dnd.talento.iniziato-alla-magia-chierico
+    nome: Iniziato alla Magia (Chierico)
+    classe: dnd.classe.chierico
+  - id: dnd.talento.iniziato-alla-magia-druido
+    nome: Iniziato alla Magia (Druido)
+    classe: dnd.classe.druido
+  - id: dnd.talento.iniziato-alla-magia-mago
+    nome: Iniziato alla Magia (Mago)
+    classe: dnd.classe.mago
+descrizione: |
+  Ottieni i seguenti benefici.
+
+  **Due Trucchetti.** Impari due trucchetti a tua scelta dalla lista degli incantesimi del chierico, del druido o del mago. Intelligenza, Saggezza o Carisma è la tua caratteristica da incantatore per gli incantesimi di questo talento (sceglila quando selezioni il talento).
+
+  **Incantesimo di 1° Livello.** Scegli un incantesimo di 1° livello dalla stessa lista che hai selezionato per i trucchetti di questo talento.
+  Hai sempre quell'incantesimo preparato. Puoi lanciarlo una volta senza consumare uno slot incantesimo e recuperi la capacità di lanciarlo in questo modo dopo aver terminato un riposo lungo.
+  Puoi anche lanciare l'incantesimo utilizzando gli slot incantesimo a tua disposizione.
+
+  **Cambio di Incantesimo.** Ogni volta che ottieni un nuovo livello, puoi sostituire uno degli incantesimi scelti per questo talento con un incantesimo diverso dello stesso livello, tratto dalla lista prescelta.
+
+  **Ripetibile.** Puoi acquisire questo talento più di una volta, ma devi scegliere una lista di incantesimi diversa ogni volta.

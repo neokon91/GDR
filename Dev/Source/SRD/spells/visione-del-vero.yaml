@@ -1,0 +1,18 @@
+id: dnd.incantesimo.visione-del-vero
+nome: Visione del vero
+livello: 6
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (polvere di funghi del valore di 25 mo o più, che l'incantesimo consuma)"]
+concentrazione: false
+rituale: false
+durata: 1 ora
+descrizione: |
+  Per la durata dell'incantesimo, una creatura consenziente toccata dall'incantatore è dotata di vista pura fino a 36 metri.

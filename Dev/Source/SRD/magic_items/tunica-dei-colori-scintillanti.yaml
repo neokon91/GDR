@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.tunica-dei-colori-scintillanti
+nome: Tunica dei colori scintillanti
+categoria: oggetto-meraviglioso
+rarita: molto-rara
+richiede_sintonia: true
+descrizione: |
+  Questa tunica ha 3 cariche e recupera 1d3 cariche consumate all'alba di ogni giorno. Finché il perso-naggio la indossa, può effettuare un'azione di Magia e consumare 1 carica per far comparire sull'indumento un motivo cangiante dai colori sgargianti, che permane fino alla fine del suo turno successivo. 
+  In questo frangente, la tunica emana luce intensa in un raggio di 9 metri e luce fioca per ulteriori 9 metri; le creature che vedono il personaggio hanno svantaggio ai tiri per colpire effettuati con-tro di lui. Inoltre, ogni creatura che si trova entro la luce intensa e che può vedere il personaggio quando la proprietà della tunica è attivata deve superare un tiro salvezza su Saggezza con CD 15, altrimenti diventa stordita finché l'effetto non termina.

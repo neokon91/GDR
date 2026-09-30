@@ -1,0 +1,37 @@
+id: dnd.mostro.spirito-draconico
+nome: Spirito draconico
+taglia: grande
+tipo: drago
+allineamento: senza allineamento
+ca: {valore: 14, variabile: true, nota: "+ il livello dell'incantesimo"}
+
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 12, competenza: false}
+velocita: {camminata: 9, volo: 18}
+sensi: {scurovisione: 18}
+percezione_passiva: 12
+# immunità a un tipo di danno scelto alla creazione (acido/freddo/fuoco/fulmine/veleno): vedi descrizione
+lingue: [Draconico]
+
+tratti:
+  - nome: Resistenza magica
+    descrizione: |
+      Lo spirito dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Lo spirito effettua un numero di attacchi pari alla metà del livello dell'incantesimo (arrotondato per difetto).
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* bonus pari al modificatore di attacco dell'incantesimo dell'incantatore, portata 1,5 m.
+      *Colpito:* 1d10 + 4 + il livello dell'incantesimo danni del tipo scelto (acido, freddo, fuoco, fulmine o veleno).
+  - nome: "Soffio draconico (Ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD del tiro salvezza dell'incantesimo dell'incantatore, tutte le creature in un cono di 4,5 metri.
+      *Fallimento:* 2d6 + il livello dell'incantesimo danni del tipo scelto.
+      *Successo:* danni dimezzati.

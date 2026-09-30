@@ -1,0 +1,8 @@
+id: dnd.arma.lancia-da-cavaliere
+nome: Lancia da cavaliere
+categoria: mischia-da-guerra
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 3, unita: kg}
+danno: {dado: d10, tipo_danno: perforante}
+proprieta: [due-mani-eccetto-in-sella, pesante, portata]
+padronanza: rovesciamento

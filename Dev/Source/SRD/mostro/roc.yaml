@@ -1,0 +1,68 @@
+id: dnd.mostro.roc
+nome: Roc
+taglia: mastodontica
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 28, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 20, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 10, competenza: true}
+  carisma: {valore: 9, competenza: false}
+iniziativa: maestria
+dadi_vita: 16
+velocita: {camminata: 6, volo: 36}
+abilita: [percezione: maestria]
+percezione_passiva: 18
+lingue: [nessuna]
+gs: 11
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: becco, ripetizioni: 2}
+    descrizione: |
+      Il roc effettua due attacchi Becco. Può sostituire un attacco con un attacco Speroni.
+  - nome: Becco
+    id: becco
+    descrizione: |
+      *Tiro per colpire in mischia:* +13, portata 3 m. *Colpito:* 28 (3d12 + 9) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d12
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Speroni
+    id: speroni
+    descrizione: |
+      *Tiro per colpire in mischia:* +13, portata 1,5 m. *Colpito:* 23 (4d6 + 9) danni taglienti. Se il bersaglio è una creatura di taglia Enorme o inferiore, è afferrato (CD 19 per sfuggire) da entrambi gli speroni, ed è trattenuto finché la presa perdura.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: "In picchiata (ricarica 5-6)"
+    descrizione: |
+      Se il roc ha afferrato una creatura, vola fino a metà della sua velocità di volo senza provocare attacchi di opportunità e lascia cadere la creatura.

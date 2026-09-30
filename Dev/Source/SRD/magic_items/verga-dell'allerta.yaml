@@ -1,0 +1,23 @@
+id: dnd.oggetto-magico.verga-dell'allerta
+nome: Verga dell'allerta
+categoria: verga
+rarita: molto-rara
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: iniziativa, operazione: vantaggio}
+descrizione: |
+  Questa verga è dotata delle seguenti proprietà.
+
+  **Allerta**
+  Mentre il personaggio impugna la verga, dispone di vantaggio alle prove di Saggezza (Perce-zione) e ai tiri per l'iniziativa.
+
+  **Incantesimi**
+  Mentre impugna la verga, il personaggio può usarla per lanciare i seguenti incantesimi:• Individuazione del bene e del male
+  • Individuazione del magico
+  • Individuazione delle malattie e dei veleni
+  • Vedere invisibilità
+
+  **Aura protettiva**
+  Con un'azione di Magia, il personaggio può piantare l'asta della verga nel terreno; quando lo fa, l'estremità superiore della verga proietta luce intensa in un raggio di 18 metri e luce fioca per altri 18 metri. Finché il personaggio e i suoi alleati si trovano entro il raggio di quella luce intensa, ottengono un bonus di +1 alla Classe Armatura e ai tiri salvezza, e possono percepire la presenza di eventuali creature invisibili che si trovano a loro volta entro la luce intensa.La punta della verga smette di brillare e l'effetto termina dopo 10 minuti o quando una creatura usa un'azione di Magia per estrarla dal terreno. Una volta usata, questa proprietà non può essere  riutilizzata fino all'alba successiva.

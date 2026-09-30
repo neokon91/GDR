@@ -1,0 +1,8 @@
+id: dnd.arma.fionda
+nome: Fionda
+categoria: distanza-semplice
+costo: {valore: 1, valuta: moneta-argento}
+danno: {dado: d4, tipo_danno: contundente}
+gittata: {normale: 9, lunga: 36}
+proprieta: [munizioni]
+padronanza: lentezza

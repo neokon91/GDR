@@ -1,0 +1,76 @@
+id: dnd.mostro.golem-di-ferro
+nome: Golem di Ferro
+taglia: grande
+tipo: costrutto
+allineamento: senza allineamento
+ca: {valore: 20}
+caratteristiche:
+  forza: {valore: 24, competenza: false}
+  destrezza: {valore: 9, competenza: false}
+  costituzione: {valore: 20, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 1, competenza: false}
+iniziativa: maestria
+dadi_vita: 24
+velocita: {camminata: 9}
+sensi: {scurovisione: 36}
+percezione_passiva: 10
+immunita_danni: [fuoco, psichico, veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, paralizzato, pietrificato, spaventato]
+lingue: [capisce il Comune più altre due lingue ma non le parla]
+gs: 16
+
+tratti:
+  - nome: Assorbimento del fuoco
+    descrizione: |
+      Ogni volta che il golem subisce danni da fuoco, recupera un numero di punti ferita pari ai danni da fuoco inflitti.
+  - nome: Forma immutabile
+    descrizione: |
+      Il golem non può mutare forma.
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il golem effettua due attacchi, usando Braccio affilato o Dardo di fuoco in qualsiasi combinazione.
+  - nome: Braccio affilato
+    descrizione: |
+      *Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 20 (3d8 + 7) danni taglienti più 10 (3d6) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Dardo di fuoco
+    descrizione: |
+      *Tiro per colpire a distanza:* +10, gittata 36 m. *Colpito:* 36 (8d8) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: costituzione, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno: {numero_dadi: 8, dado: d8, tipo_danno: fuoco}
+  - nome: "Soffio di veleno (ricarica 6)"
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 18, tutte le creature in un cono di 18 metri. *Fallimento:* 55 (10d10) danni da veleno. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 10, dado: d10, tipo_danno: veleno}
+        successo: danno-dimezzato

@@ -1,0 +1,86 @@
+id: dnd.mostro.lupo-mannaro
+nome: Lupo mannaro
+taglia: [media, piccola]
+tipo: mostruosita
+sottotipo: licantropo
+allineamento: caotico malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 10, competenza: false}
+iniziativa: competenza
+dadi_vita: 11
+velocita: {camminata: 12}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 14
+equipaggiamento:
+  - {articolo: dnd.arma.arco-lungo}
+lingue: ["Comune (non può parlare quando ha le sembianze di un lupo)"]
+gs: 3
+
+tratti:
+  - nome: Tattiche del branco
+    descrizione: |
+      Il lupo mannaro dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il lupo mannaro effettua due attacchi, usando Graffio o Arco lungo in qualsiasi combinazione. Può sostituire un attacco con un attacco Morso.
+  - nome: Graffio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Morso (solo in forma di lupo o ibrida)"
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 12 (2d8 + 3) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 12. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa un lupo mannaro sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione del lupo mannaro per 24 ore.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Arco lungo (solo in forma umanoide o ibrida)"
+    descrizione: |
+      *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 11 (2d8 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.arco-lungo
+          gittata: {normale: 45, lunga: 180}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: Mutaforma
+    descrizione: |
+      Il lupo mannaro si trasforma in un ibrido umanoide-lupo di taglia Grande o in un lupo di taglia Media, altrimenti torna alla sua forma originale di umanoide. Le sue statistiche di gioco, a eccezione della taglia, restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato.

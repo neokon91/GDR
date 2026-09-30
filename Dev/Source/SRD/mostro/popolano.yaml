@@ -1,0 +1,40 @@
+id: dnd.mostro.popolano
+nome: Popolano
+taglia: [media, piccola]
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 9}
+percezione_passiva: 10
+equipaggiamento:
+  - {articolo: dnd.arma.randello}
+lingue: [Comune]
+gs: 0
+
+tratti:
+  - nome: Addestramento
+    descrizione: |
+      Il popolano ha competenza in un'abilità a scelta del GM e dispone di vantaggio ogni volta che effettua una prova di caratteristica utilizzando quell'abilità.
+azioni:
+  - nome: Randello
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni contundenti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.randello
+          portata: 1.5
+        colpito:
+          - danno: {numero_dadi: 1, dado: d4, tipo_danno: contundente}

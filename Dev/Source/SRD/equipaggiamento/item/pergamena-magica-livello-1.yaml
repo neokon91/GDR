@@ -1,0 +1,4 @@
+id: dnd.oggetto.pergamena-magica-livello-1
+nome: Pergamena magica livello 1
+categoria: equipaggiamento-avventura
+costo: {valore: 50, valuta: moneta-oro}

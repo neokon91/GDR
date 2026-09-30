@@ -1,0 +1,69 @@
+id: dnd.mostro.mago
+nome: Mago
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Maghi
+allineamento: neutrale
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 9, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 17, competenza: true}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 18
+velocita: {camminata: 9}
+abilita: [arcano: competenza, percezione: competenza, storia: competenza]
+percezione_passiva: 14
+equipaggiamento:
+  - bacchetta
+lingue: [Comune più altre tre lingue]
+gs: 6
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: esplosione-arcana, ripetizioni: 3}
+    descrizione: |
+      Il mago effettua tre attacchi Esplosione arcana.
+  - nome: Esplosione arcana
+    id: esplosione-arcana
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 36 m. *Colpito:* 16 (3d8 + 3) danni da forza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: intelligenza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d8
+              tipo_danno: forza
+              bonus: {caratteristica: intelligenza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il mago lancia uno dei seguenti incantesimi, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14): 1/giorno ciascuno: Cono di freddo, volare 2/giorno ciascuno: Invisibilità, palla di fuoco (di 4º livello) A volontà: Armatura magica (inclusa nella CA), individuazione del magico, luce, mano magica, prestidigitazione
+    attivita:
+      - tipo: incantatore
+        caratteristica: intelligenza
+        cd: 14
+        a_volonta: [dnd.incantesimo.armatura-magica, dnd.incantesimo.individuazione-del-magico, dnd.incantesimo.luce, dnd.incantesimo.mano-magica, dnd.incantesimo.prestidigitazione]
+        al_giorno:
+          - {usi: 1, incantesimi: [dnd.incantesimo.cono-di-freddo, dnd.glossario.volare]}
+          - {usi: 2, incantesimi: [dnd.incantesimo.invisibilita, dnd.incantesimo.palla-di-fuoco]}
+azioni_bonus:
+  - nome: "Passo velato (3/giorno)"
+    descrizione: |
+      Il mago lancia passo velato, utilizzando la stessa caratteristica da incantatore di Incantesimi.
+reazioni:
+  - nome: "Magia di protezione (3/giorno)"
+    descrizione: |
+      Il mago lancia controincantesimo o scudo come risposta all'innesco dell'incantesimo, utilizzando la stessa caratteristica da incantatore di Incantesimi.

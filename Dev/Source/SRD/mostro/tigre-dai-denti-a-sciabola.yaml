@@ -1,0 +1,56 @@
+id: dnd.mostro.tigre-dai-denti-a-sciabola
+nome: Tigre dai denti a sciabola
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 18, competenza: true}
+  destrezza: {valore: 17, competenza: true}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 12}
+abilita: [furtivita: maestria, percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 15
+lingue: [nessuna]
+gs: 2
+
+tratti:
+  - nome: Balzo in corsa
+    descrizione: |
+      Dopo una rincorsa di 3 metri, la tigre può effettuare un salto in lungo di un massimo di 7,5 metri.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 2}
+    descrizione: |
+      La tigre effettua due attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Fuga agile
+    descrizione: |
+      La tigre effettua l'azione di Disimpegno o Nascondersi.

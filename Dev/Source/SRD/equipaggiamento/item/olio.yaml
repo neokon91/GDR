@@ -1,0 +1,5 @@
+id: dnd.oggetto.olio
+nome: Olio
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-argento}
+peso: {valore: 0.5, unita: kg}

@@ -1,0 +1,66 @@
+id: dnd.mostro.bugbear-guerriero
+nome: Bugbear Guerriero
+taglia: media
+tipo: folletto
+sottotipo: goblinoide
+gruppo: Bugbear
+allineamento: caotico malvagio
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 8, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 9, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 9}
+abilita: [sopravvivenza: competenza, furtivita: maestria]
+sensi: {scurovisione: 18}
+equipaggiamento: [armatura di pelle, "martelli leggeri (3)"]
+lingue: [comune, goblin]
+gs: 1
+tratti:
+  - id: bugbear-guerriero.rapimento
+    nome: Rapimento
+    descrizione: |
+      Il bugbear non ha bisogno di usare movimento extra per spostare una creatura che sta afferrando.
+azioni:
+  - id: bugbear-guerriero.martello-leggero
+    nome: Martello Leggero
+    descrizione: |
+      *Tiro per Colpire in Mischia o a distanza:* +4 (con Vantaggio se il bersaglio è afferrato dal bugbear), portata 3 m o gittata 6/18 m.
+      *Colpito:* 9 (3d4 + 2) danni Contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.martello-leggero
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d4
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - id: bugbear-guerriero.presa
+    nome: Presa
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +4, portata 3 m.
+      *Colpito:* 9 (2d6 + 2) danni Contundenti.
+      Se il bersaglio è una creatura di taglia Media o inferiore, è Afferrato (CD 12 per sfuggire).
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

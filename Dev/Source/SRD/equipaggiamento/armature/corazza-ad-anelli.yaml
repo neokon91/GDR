@@ -1,0 +1,11 @@
+id: dnd.armatura.corazza-ad-anelli
+nome: Corazza ad Anelli
+tipo: armatura-pesante
+categoria: armature
+costo: {valore: 30, valuta: moneta-oro}
+peso: {valore: 20, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 14}}
+svantaggio_furtivita: true

@@ -1,0 +1,57 @@
+id: dnd.mostro.manticora
+nome: Manticora
+taglia: grande
+tipo: mostruosita
+allineamento: legale malvagio
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 9, volo: 15}
+sensi: {scurovisione: 18}
+percezione_passiva: 11
+lingue: [Comune]
+gs: 3
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      La manticora effettua tre attacchi, usando Squarcio o Aculeo caudale in qualsiasi combinazione.
+  - nome: Squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Aculeo caudale
+    descrizione: |
+      *Tiro per colpire a distanza:* +5, gittata 30/60 m. *Colpito:* 7 (1d8 + 3) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 30, lunga: 60}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

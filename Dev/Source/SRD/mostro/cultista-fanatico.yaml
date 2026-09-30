@@ -1,0 +1,72 @@
+id: dnd.mostro.cultista-fanatico
+nome: Cultista fanatico
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Cultisti
+allineamento: neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 14, competenza: true}
+  carisma: {valore: 13, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 9}
+abilita: [inganno: competenza, persuasione: competenza, religione: competenza]
+percezione_passiva: 12
+equipaggiamento:
+  - {articolo: dnd.armatura.armatura-di-cuoio}
+  - {articolo: dnd.oggetto.simbolo-sacro}
+lingue: [Comune]
+gs: 2
+
+azioni:
+  - nome: Lama del patto
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni taglienti più 7 (2d6) danni necrotici.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: Incantesimi
+    descrizione: |
+      Il cultista lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 12, +4 al tiro per colpire degli attacchi con incantesimo):
+
+      *1/giorno:*
+      - blocca persone
+
+      *2/giorno:*
+      - comando
+
+      *A volontà:*
+      - luce
+      - taumaturgia
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        cd: 12
+        a_volonta:
+          - dnd.incantesimo.luce
+          - dnd.incantesimo.taumaturgia
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.blocca-persone
+          - usi: 2
+            incantesimi:
+              - dnd.incantesimo.comando
+azioni_bonus:
+  - nome: "Arma spirituale (2/giorno)"
+    descrizione: |
+      Il cultista lancia l'incantesimo arma spirituale, utilizzando la stessa caratteristica da incantatore di Incantesimi.

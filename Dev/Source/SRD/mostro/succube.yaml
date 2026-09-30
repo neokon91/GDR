@@ -1,0 +1,64 @@
+id: dnd.mostro.succube
+nome: Succube
+taglia: media
+tipo: immondo
+allineamento: neutrale malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 8, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 15, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 20, competenza: false}
+dadi_vita: 13
+velocita: {camminata: 9, volo: 18}
+abilita: [furtivita: maestria, inganno: maestria, intuizione: maestria, percezione: maestria, persuasione: maestria]
+sensi: {scurovisione: 18, telepatia: 18}
+percezione_passiva: 15
+resistenze: [freddo, fuoco, psichico, veleno]
+lingue: [Abissale, Comune, Infernale]
+gs: 4
+
+tratti:
+  - nome: Forma incubo
+    descrizione: |
+      Quando la succube termina un riposo lungo, può trasformarsi in un incubo, utilizzando la relativa scheda delle statistiche al posto di questa.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      La succube effettua un attacco Tocco immondo e utilizza Fascino o Bacio prosciugante.
+  - nome: Tocco immondo
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 16 (2d10 + 5) danni psichici.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: carisma, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: psichico
+              bonus: {caratteristica: carisma}
+  - nome: Bacio prosciugante
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 15, una creatura affascinata dalla succube entro 1,5 metri. *Fallimento:* 13 (3d8) danni psichici. *Successo:* danni dimezzati. *Fallimento o successo:* i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 3, dado: d8, tipo_danno: psichico}
+        successo: danno-dimezzato
+  - nome: Fascino
+    descrizione: |
+      La succube lancia dominare persone (di 8º livello), senza bisogno di componenti e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15).
+azioni_bonus:
+  - nome: Mutaforma
+    descrizione: |
+      La succube si trasforma in un umanoide di taglia Media o Piccola, oppure ritorna alla sua vera forma. Le sue statistiche di gioco sono le stesse in ogni forma, a eccezione della velocità di volo disponibile solo nella sua vera forma. Nessun oggetto che indossa o trasporta viene trasformato.

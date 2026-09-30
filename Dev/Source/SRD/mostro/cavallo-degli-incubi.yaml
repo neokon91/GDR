@@ -1,0 +1,47 @@
+id: dnd.mostro.cavallo-degli-incubi
+nome: Cavallo degli incubi
+taglia: grande
+tipo: immondo
+allineamento: neutrale malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 15, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 18, volo: 27}
+percezione_passiva: 11
+immunita_danni: [fuoco]
+lingue: ["capisce l'Abissale, il Comune e l'Infernale ma non li parla"]
+gs: 3
+
+tratti:
+  - nome: Conferire resistenza al fuoco
+    descrizione: |
+      Il cavallo degli incubi può conferire resistenza ai danni da fuoco a un cavaliere finché questi si trova sul cavallo.
+  - nome: Illuminazione
+    descrizione: |
+      Il cavallo degli incubi emana luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri.
+azioni:
+  - nome: Zoccoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti più 10 (3d6) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Passo etereo
+    descrizione: |
+      Il cavallo degli incubi e un massimo di tre creature consenzienti situate entro 1,5 metri da esso si teletrasportano dal Piano Materiale al Piano Etereo o viceversa.

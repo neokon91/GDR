@@ -1,0 +1,34 @@
+id: dnd.sottoclasse.campione
+nome: Campione
+classe: dnd.classe.guerriero
+citazione: "Raggiungi l'eccellenza fisica nel combattimento"
+privilegi:
+- livello: 3
+  nome: "Critico Migliorato"
+  descrizione: |
+    Colpo critico con armi e colpi senz armi su 19-20.
+
+- livello: 3
+  nome: "Atleta Straordinario"
+  descrizione: |
+    Vantaggio a iniziativa e Atletica; dopo un critico puo muoversi senza provocare opportunita.
+
+- livello: 7
+  nome: "Stile di Combattimento Aggiuntivo"
+  descrizione: |
+    Ottiene un altro talento Stile di combattimento.
+
+- livello: 10
+  nome: "Guerriero Eroico"
+  descrizione: |
+    In combattimento ottiene Ispirazione eroica se inizia il turno senza averla.
+
+- livello: 15
+  nome: "Critico Superiore"
+  descrizione: |
+    Colpo critico con armi e colpi senz armi su 18-20.
+
+- livello: 18
+  nome: "Sopravvissuto"
+  descrizione: |
+    Vantaggio ai TS morte e recupero PF a inizio turno se sanguinante.

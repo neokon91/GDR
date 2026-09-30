@@ -1,0 +1,5 @@
+id: dnd.oggetto.sacco
+nome: Sacco
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-rame}
+peso: {valore: 0.25, unita: kg}

@@ -1,0 +1,17 @@
+id: dnd.incantesimo.interdizione-alla-morte
+nome: Interdizione alla morte
+livello: 4
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.paladino
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 8 ore
+descrizione: |
+  L'incantatore tocca una creatura e le concede una misura di protezione dalla morte. La prima volta che il bersaglio scende a 0 punti ferita prima del termine dell'incantesimo, scende invece a 1 punto ferita e l'incantesimo termina.
+
+  Se l'incantesimo è ancora attivo quando il bersaglio è soggetto a un effetto che ne provocherebbe la morte istantanea senza infliggere danni, quell'effetto viene annullato e l'incantesimo termina.

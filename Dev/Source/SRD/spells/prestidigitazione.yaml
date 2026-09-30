@@ -1,0 +1,35 @@
+id: dnd.incantesimo.prestidigitazione
+nome: Prestidigitazione
+livello: 0
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 3
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore crea un effetto magico entro gittata, scegliendolo tra quelli illustrati di seguito. Se l'incantatore lancia questo incantesimo più volte, può tenere attivi fino a tre dei suoi effetti non istantanei contemporaneamente.
+
+  **Effetto sensoriale**
+  L'incantatore crea un effetto sensoriale innocuo e istantaneo, come una pioggia di scintille, una folata di vento, una tenue melodia musicale o uno strano odore.
+
+  **Trucchetto col fuoco**
+  L'incantatore accende o spegne istantaneamente una candela, una torcia o un piccolo fuoco da campo.
+
+  **Pulire o sporcare**
+  L'incantatore pulisce o sporca istantaneamente un oggetto non più grande di un cubo con spigolo di 30 centimetri.
+
+  **Lieve sensazione**
+  L'incantatore riscalda, raffredda o condisce materiale non vivente del volume massimo di un cubo con spigolo di 30 centimetri per 1 ora.
+
+  **Segno magico**
+  L'incantatore fa comparire un colore, un piccolo segno o un simbolo su un oggetto o una superficie per 1 ora.
+
+  **Creazione minore**
+  L'incantatore crea un monile non magico o un'immagine illusoria che può stare nel palmo della sua mano e che permane fino al termine del suo turno successivo. Un monile non può infliggere danni e non ha valore monetario.

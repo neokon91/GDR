@@ -1,0 +1,62 @@
+id: dnd.mostro.guardiano-protettore
+nome: Guardiano protettore
+taglia: grande
+tipo: costrutto
+allineamento: senza allineamento
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 15
+velocita: {camminata: 9}
+sensi: {scurovisione: 18, vista_cieca: 3}
+percezione_passiva: 10
+immunita_danni: [veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, paralizzato, pietrificato, spaventato]
+lingue: ["capisce i comandi impartiti in qualsiasi lingua, ma non è in grado di parlare"]
+gs: 7
+
+tratti:
+  - nome: Incantesimo custodito
+    descrizione: |
+      Un incantatore che indossa l'amuleto del guardiano protettore può fare in modo che il guardiano custodisca un incantesimo di 4º livello o inferiore. Per farlo, il portatore deve lanciare l'incantesimo sul guardiano finché si trova entro 1,5 metri da esso. L'incantesimo non ha effetto, ma è custodito all'interno del guardiano. Quando gli viene affidato un nuovo incantesimo, quello custodito in precedenza viene sovrascritto. Il guardiano protettore può lanciare l'incantesimo custodito con qualsiasi parametro deciso dall'incantatore originale, senza bisogno di componenti e utilizzando la caratteristica da incantatore di quest'ultimo. Così facendo, l'incantesimo custodito va perduto.
+  - nome: Rigenerazione
+    descrizione: |
+      Il guardiano protettore recupera 10 punti ferita all'inizio di ogni suo turno, se ha almeno 1 punto ferita.
+  - nome: Vincolato
+    descrizione: |
+      Il guardiano protettore è vincolato magicamente a un amuleto. Finché il guardiano e il suo amuleto si trovano sullo stesso piano di esistenza, il portatore dell'amuleto può chiamare telepaticamente ilguardiano affinché viaggi fino a lui. Il guardiano conosce la distanza e la direzione in cui si trova l'oggetto. Se il guardiano si trova entro 18 metri dal portatore dell'amuleto, la metà dei danni (arrotondati per eccesso) che il portatore subisce viene trasferita al guardiano.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: pugno, ripetizioni: 2}
+    descrizione: |
+      Il guardiano effettua due attacchi Pugno.
+  - nome: Pugno
+    id: pugno
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni contundenti più 7 (2d6) danni da forza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+reazioni:
+  - nome: Protezione
+    descrizione: |
+      Attivazione: un tiro per colpire va a segno sul portatore dell'amuleto del guardiano protettore finché egli si trova entro 1,5 metri dal costrutto. Esito: il portatore dell'amuleto ottiene un bonus di +5 alla CA anche contro il tiro che ha provocato la reazione, aumentando le probabilità che il colpo non vada a segno, fino all'inizio del turno successivo del guardiano protettore.

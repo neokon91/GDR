@@ -1,0 +1,11 @@
+id: dnd.oggetto.ariete-portatile
+nome: Ariete portatile
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 4
+  unita: moneta-oro
+peso: {valore: 17.5, unita: kg}
+descrizione: |
+  Puoi usare un ariete portatile per sfondare le porte.
+  Quando lo fai, ottieni un bonus di +4 alla prova di Forza.
+  Un altro personaggio può aiutarti a usare l'ariete, conferendoti Vantaggio nella prova.

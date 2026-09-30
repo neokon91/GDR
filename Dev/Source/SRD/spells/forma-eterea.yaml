@@ -1,0 +1,27 @@
+id: dnd.incantesimo.forma-eterea
+nome: Forma eterea
+livello: 7
+scuola: evocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 8 ore
+descrizione: |
+  L'incantatore mette piede nelle regioni di confine in cui il Piano Etereo si sovrappone al suo piano attuale. Rimane nel Confine Etereo per la durata dell'incantesimo. Durante questo periodo, l'incantatore può muoversi in ogni direzione. Muovendosi su o giù, ogni 30 cm di movimento gli costano 30 cm extra. L'incantatore può percepire il piano da cui proviene, che appare in scala di grigi ed è visibile solo fino a una distanza di 18 metri.
+
+  Mentre si trova sul Piano Etereo, l'incantatore può influenzare ed essere influenzato solo dalle creature, gli oggetti e gli effetti che si trovano su quel piano. Le creature che non sono presenti sul Piano Etereo non possono percepire o interagire con l'incantatore, a meno che un privilegio non dia loro la capacità per farlo.
+
+  Al termine dell'incantesimo, l'incantatore torna sul piano da cui proviene, sul punto che corrisponde al suo spazio nel Confine Etereo. Se l'incantatore appare in uno spazio occupato, viene sbalzato nello spazio libero più vicino e subisce una quantità di danni da forza pari al doppio del numero di metri di cui si è mosso.
+
+  Questo incantesimo termina all'istante se l'incantatore lo lancia mentre si trova sul Piano Etereo o su un piano non confinante, come uno dei Piani Esterni.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare fino a un massimo di tre creature consenzienti (incluso se stesso) per ogni slot di livello superiore al 7º. Al momento del lancio dell'incantesimo, le creature non devono trovarsi a più di 3 metri dall'incantatore.

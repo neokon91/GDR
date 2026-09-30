@@ -1,0 +1,65 @@
+id: dnd.mostro.gorilla
+nome: Gorilla
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 9, scalata: 9}
+abilita: [atletica: competenza, percezione: competenza]
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 1/2
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: pugno, ripetizioni: 2}
+    descrizione: |
+      Il gorilla effettua due attacchi Pugno.
+  - nome: Pugno
+    id: pugno
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: "Roccia (ricarica 6)"
+    id: roccia-ricarica-6
+    descrizione: |
+      *Tiro per colpire a distanza:* +5, gittata 7,5/15 m *Colpito:* 10 (2d6 + 3) danni contundenti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 7.5, lunga: 15}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

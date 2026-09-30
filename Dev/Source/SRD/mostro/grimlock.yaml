@@ -1,0 +1,39 @@
+id: dnd.mostro.grimlock
+nome: Grimlock
+taglia: media
+tipo: aberrazione
+allineamento: neutrale malvagio
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 9, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9, scalata: 9}
+abilita: [atletica: competenza, furtivita: maestria, percezione: maestria]
+sensi: {vista_cieca: 9}
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 1/4
+
+azioni:
+  - nome: Randello d'ossa
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni contundenti più 2 (1d4) danni psichici.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

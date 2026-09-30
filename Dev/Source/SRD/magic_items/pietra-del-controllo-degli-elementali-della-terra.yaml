@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.pietra-del-controllo-degli-elementali-della-terra
+nome: Pietra del controllo degli elementali della terra
+categoria: oggetto-meraviglioso
+rarita: rara
+richiede_sintonia: false
+descrizione: |
+  Se il personaggio tocca il terreno con questa pietra da 2,5 chilogrammi, può effettuare un'azione di Magia per richiamare un elementale della terra. L'elementale appare in uno spazio libero a scelta del giocatore entro 9 metri dal personaggio, obbedisce ai suoi ordini e svolge il proprio turno immediatamente dopo quello del personaggio che l'ha evocato con il suo punteggio di iniziativa. L'elementale scompare dopo 1 ora, quando muore o quando viene congedato come azione bonus. La pietra non può più essere utilizzata in questo modo fino all'alba successiva.

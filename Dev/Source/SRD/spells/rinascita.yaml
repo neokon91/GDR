@@ -1,0 +1,17 @@
+id: dnd.incantesimo.rinascita
+nome: Rinascita
+livello: 3
+scuola: necromanzia
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.paladino
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (un diamante del valore di 300 mo o più, che l'incantesimo consuma)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore tocca una creatura morta nell'ultimo minuto, la quale ritorna in vita con 1 punto ferita. Questo incantesimo non può riportare in vita una creatura morta di vecchiaia e non ripristina le eventuali parti del corpo mancanti.

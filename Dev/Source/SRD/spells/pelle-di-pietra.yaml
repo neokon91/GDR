@@ -1,0 +1,17 @@
+id: dnd.incantesimo.pelle-di-pietra
+nome: Pelle di pietra
+livello: 4
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (polvere di diamante del valore di 100 mo o più, che l'incantesimo consuma)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  Fino al termine dell'incantesimo, una creatura consenziente toccata dall'incantatore avrà resistenza a danni contundenti, perforanti e taglienti.

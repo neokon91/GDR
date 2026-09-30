@@ -1,0 +1,5 @@
+id: dnd.valuta.moneta-di-electrum
+nome: "Moneta di Electrum"
+abb: me
+categoria: valuta
+costo: {valore: 0.5, valuta: moneta-oro}

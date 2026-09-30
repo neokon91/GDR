@@ -1,0 +1,39 @@
+id: dnd.mostro.serpente-velenoso
+nome: Serpente velenoso
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 2, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9, nuoto: 9}
+sensi: {vista_cieca: 3}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1/8
+
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 4 (1d4 + 2) danni perforanti più 3 (1d6) danni da veleno.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

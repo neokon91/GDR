@@ -1,0 +1,40 @@
+id: dnd.mostro.serpente-velenoso-gigante
+nome: Serpente velenoso gigante
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 18, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 12, nuoto: 12}
+abilita: [percezione: competenza]
+sensi: {vista_cieca: 3}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 1/4
+
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 6 (1d4 + 4) danni perforanti più 4 (1d8) danni da veleno.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

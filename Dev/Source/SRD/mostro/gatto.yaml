@@ -1,0 +1,38 @@
+id: dnd.mostro.gatto
+nome: Gatto
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 3, competenza: false}
+  destrezza: {valore: 15, competenza: true}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 12, scalata: 12}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Saltatore
+    descrizione: |
+      La distanza dei salti del gatto è determinata dalla sua Destrezza piuttosto che dalla Forza.
+azioni:
+  - nome: Graffio
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno tagliente.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

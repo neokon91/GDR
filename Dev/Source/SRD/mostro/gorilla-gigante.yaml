@@ -1,0 +1,64 @@
+id: dnd.mostro.gorilla-gigante
+nome: Gorilla gigante
+taglia: enorme
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 23, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+iniziativa: competenza
+dadi_vita: 16
+velocita: {camminata: 12, scalata: 12}
+abilita: [atletica: competenza, percezione: competenza, sopravvivenza: competenza]
+percezione_passiva: 14
+lingue: [nessuna]
+gs: 7
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: pugno, ripetizioni: 2}
+    descrizione: |
+      Il gorilla effettua due attacchi Pugno.
+  - nome: Pugno
+    id: pugno
+    descrizione: |
+      *Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 22 (3d10 + 6) danni contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: "Lancio di massi (ricarica 6)"
+    id: lancio-di-massi-ricarica-6
+    descrizione: |
+      Il gorilla scaglia un masso verso un punto che è in grado di vedere entro 27 metri. *Tiro salvezza su Destrezza:* CD 17, tutte le creature in una sfera dal raggio di 1,5 metri centrata su quel punto. *Fallimento:* 24 (7d6) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 7, dado: d6, tipo_danno: contundente}
+        successo: danno-dimezzato
+azioni_bonus:
+  - nome: Balzo
+    descrizione: |
+      Il gorilla salta fino a 9 metri usando 3 metri di movimento.

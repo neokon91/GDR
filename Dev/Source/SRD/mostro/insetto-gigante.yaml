@@ -1,0 +1,20 @@
+id: dnd.mostro.insetto-gigante
+nome: Insetto gigante
+taglia: [minuscola, piccola, media, grande]
+tipo: bestia
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 4, competenza: false}
+  saggezza: {valore: 14, competenza: true}
+  carisma: {valore: 3, competenza: false}
+velocita: {camminata: 12, scalata: 12, volo: 12}
+percezione_passiva: 12
+lingue: [Se evocato con incantesimo comprende le lingue parlate dal personaggio]
+azioni:
+  - nome: "Attacco naturale (variabile)"
+    descrizione: |
+      *Tiro per colpire in mischia:* bonus variabile, portata 1,5 m (o diversa in base all’insetto). *Colpito:* danni variabili in base al tipo di insetto (per esempio morso, pungiglione, ecc.), eventualmente con effetti aggiuntivi come veleno.

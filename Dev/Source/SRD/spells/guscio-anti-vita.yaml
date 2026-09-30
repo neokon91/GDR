@@ -1,0 +1,16 @@
+id: dnd.incantesimo.guscio-anti-vita
+nome: Guscio anti-vita
+livello: 5
+scuola: abiurazione
+classi:
+  - dnd.classe.druido
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  Un'aura si estende dall'incantatore in un'emanazione di 3 metri e permane per la durata dell'incantesimo, impedendo a tutte le creature che non siano non morti e costrutti di attraversarla o protendersi oltre essa. Una creatura influenzata può lanciare incantesimi o effettuare attacchi utilizzando armi a distanza o con portata attraverso la barriera.
+
+  Se l'incantatore si muove in modo che una creatura influenzata sia costretta ad attraversare la barriera, l'incantesimo termina.

@@ -1,0 +1,15 @@
+id: dnd.incantesimo.passare-senza-tracce
+nome: Passare senza tracce
+livello: 2
+scuola: abiurazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (ceneri di vischio bruciato)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore irradia un'aura occultante in un'emanazione di 9 metri per la durata dell'incantesimo. Finché si trovano nell'aura, l'incantatore e ogni creatura a sua scelta ricevono un bonus di +10 alle prove di Destrezza (Furtività) e non lasciano tracce.

@@ -1,0 +1,25 @@
+id: dnd.incantesimo.spruzzo-velenoso
+nome: Spruzzo velenoso
+livello: 0
+scuola: necromanzia
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore spruzza una nebbia tossica contro una creatura entro gittata, effettuando un attacco a distanza con incantesimo contro il bersaglio. Se il colpo va a segno, il bersaglio subisce 1d12 danni da veleno.
+scaling: |
+  **Trucchetto potenziato**
+  I danni aumentano di 1d12 quando l'incantatore raggiunge il 5º livello (2d12), l'11º livello (3d12) e il 17º livello (4d12).
+attivita:
+  - tipo: attacco
+    attacco: { categoria: distanza, caratteristica: incantesimo }
+    colpito:
+      danno: { numero_dadi: 1, dado: d12, tipo_danno: veleno }

@@ -1,0 +1,20 @@
+id: dnd.incantesimo.fuorviare
+nome: Fuorviare
+livello: 5
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: incantatore
+componenti: [S]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore diventa invisibile nello stesso momento in cui un suo sosia illusorio appare nel punto in cui si trova. Il sosia permane per la durata dell'incantesimo, ma l'invisibilità termina se non appena l'incantatore effettua un tiro per colpire, infligge danni o lancia un incantesimo.
+
+  Come azione di Magia, l'incantatore può muovere il sosia illusorio fino al doppio della sua velocità e farlo gesticolare, parlare e comportare nel modo che ritiene più opportuno. Il sosia è intangibile e invulnerabile.
+
+  Inoltre, l'incantatore può vedere e sentire attraverso il sosia, come se si trovasse nello stesso punto.

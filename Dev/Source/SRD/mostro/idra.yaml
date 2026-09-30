@@ -1,0 +1,54 @@
+id: dnd.mostro.idra
+nome: Idra
+taglia: enorme
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 20, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 20, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 7, competenza: false}
+iniziativa: competenza
+dadi_vita: 16
+velocita: {camminata: 12, nuoto: 12}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 16
+immunita_condizioni: [accecato, affascinato, assordato, privo-di-sensi, spaventato, stordito]
+lingue: [nessuna]
+gs: 8
+
+tratti:
+  - nome: Apnea
+    descrizione: |
+      L'idra può trattenere il respiro per 1 ora.
+  - nome: Teste multiple
+    descrizione: |
+      L'idra possiede cinque teste. Ogni volta che subisce 25 o più danni in un singolo turno, una delle teste muore. Se tutte le teste muoiono, l'idra muore. Alla fine del suo turno e finché ha almeno una testa vivente, l'idra fa ricrescere due teste per ogni testa morta dal suo ultimo turno, a meno che nel corso di tale periodo non abbia subito danni da fuoco. L'idra recupera 20 punti ferita quando fa ricrescere delle nuove teste.
+  - nome: Teste reattive
+    descrizione: |
+      Per ogni testa che l'idra possiede oltre la prima, riceve una reazione extra che può essere usata soltanto per gli attacchi di opportunità.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      L'idra effettua un numero di attacchi Morso pari al numero di teste che possiede.
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 10 (1d10 + 5) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

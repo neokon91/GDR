@@ -1,0 +1,22 @@
+id: dnd.incantesimo.muovere-il-terreno
+nome: Muovere il terreno
+livello: 6
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S, "M (una pala in miniatura)"]
+concentrazione: true
+rituale: false
+durata: fino a 2 ore
+descrizione: |
+  L'incantatore sceglie un'area di terreno entro gittata con un lato lungo al massimo 12 metri. Per la durata dell'incantesimo, può rimodellare come desidera l'argilla, il terriccio o la sabbia presente nell'area. L'incantatore può aumentare o ridurre l'elevazione dell'area, creare o riempire una fossa, erigere o spianare una parete, oppure innalzare una colonna. Tuttavia, l'estensione di tali cambiamenti non può superare la metà della dimensione più grande dell'area. Ad esempio, se l'area dell'incantesimo è un quadrato con lato di 12 metri, l'incantatore può creare una colonna alta fino a 6 metri, aumentare o ridurre l'elevazione del terreno di 6 metri, scavare una fossa della profondità massima di 6 metri e così via. Le modifiche verranno completate in 10 minuti. Dal momento che la trasformazione del terreno avviene lentamente, le creature nell'area non restano intrappolate o ferite a causa dei movimenti del suolo.
+
+  Al termine di ogni 10 minuti trascorsi a concentrarsi sull'incantesimo, l'incantatore può scegliere una nuova area di terreno entro gittata da influenzare.
+
+  Questo incantesimo non può manipolare la pietra naturale e le costruzioni realizzate in pietra: le rocce e le strutture si spostano per adattarsi al nuovo terreno. Se il modo in cui l'incantatore modella il terreno rende una struttura instabile, essa potrebbe crollare.
+
+  Allo stesso modo, questo incantesimo non influenza in modo diretto la crescita vegetale: la terra in movimento trasporta con sé i vegetali presenti.

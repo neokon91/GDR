@@ -1,0 +1,39 @@
+id: dnd.sottoclasse.dominio-della-vita
+nome: Dominio della Vita
+classe: dnd.classe.chierico
+citazione: "Allevia le ferite del mondo"
+privilegi:
+- livello: 3
+  nome: "Discepolo della vita"
+  descrizione: |
+    Gli incantesimi con slot che curano ripristinano PF aggiuntivi pari a 2 + livello dello slot.
+
+- livello: 3
+  nome: "Incantesimi del Dominio della Vita"
+  descrizione: |
+    Gli incantesimi della tabella sono sempre preparati.
+
+- livello: 3
+  nome: "Preservare la Vita"
+  descrizione: |
+    Spende Incanalare Divinita per distribuire cure pari a cinque volte il livello da chierico. |
+
+- livello: 6
+  nome: "Guaritore Benedetto"
+  descrizione: |
+    Quando cura altri con uno slot, cura anche se stesso di 2 + livello dello slot. |
+
+- livello: 17
+  nome: "Guarigione Suprema"
+  descrizione: |
+    Usa il risultato massimo dei dadi quando cura con incantesimi o Incanalare divinita. |
+
+incantesimi:
+- livello: 3
+  incantesimi_preparati: [dnd.incantesimo.aiuto, dnd.incantesimo.benedizione, dnd.incantesimo.cura-ferite, dnd.incantesimo.ristorare-inferiore]
+- livello: 5
+  incantesimi_preparati: [dnd.incantesimo.parola-guaritrice-di-massa, dnd.incantesimo.rinascita]
+- livello: 7
+  incantesimi_preparati: [dnd.incantesimo.aura-di-vita, dnd.incantesimo.interdizione-alla-morte]
+- livello: 9
+  incantesimi_preparati: [dnd.incantesimo.ristorare-superiore, dnd.incantesimo.cura-ferite-di-massa]

@@ -1,0 +1,15 @@
+id: dnd.arma.balestra-pesante
+nome: Balestra pesante
+categoria: distanza-da-guerra
+costo: {valore: 50, valuta: moneta-oro}
+peso: {valore: 9, unita: kg}
+danno: {dado: d10, tipo_danno: perforante}
+gittata:
+  normale: 30
+  lunga: 120
+proprieta:
+- due-mani
+- munizioni
+- pesante
+- ricarica
+padronanza: spinta

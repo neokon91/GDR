@@ -1,0 +1,5 @@
+id: dnd.oggetto.focus-arcano
+nome: Focus arcano
+categoria: equipaggiamento-avventura
+costo: {variabile: true}
+peso: {variabile: true}

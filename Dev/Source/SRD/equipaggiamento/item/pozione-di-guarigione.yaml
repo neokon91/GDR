@@ -1,0 +1,5 @@
+id: dnd.oggetto.pozione-di-guarigione
+nome: Pozione di guarigione
+categoria: equipaggiamento-avventura
+costo: {valore: 50, valuta: moneta-oro}
+peso: {valore: 0.25, unita: kg}

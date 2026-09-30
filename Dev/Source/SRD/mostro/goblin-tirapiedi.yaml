@@ -1,0 +1,47 @@
+id: dnd.mostro.goblin-tirapiedi
+nome: Goblin tirapiedi
+taglia: piccola
+tipo: folletto
+sottotipo: goblinoide
+gruppo: Goblin
+allineamento: caotico neutrale
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 8, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9}
+abilita: [furtivita: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 9
+equipaggiamento:
+  - {articolo: dnd.arma.pugnale, quantita: 3}
+lingue: [Comune, Goblin]
+gs: 1/8
+
+azioni:
+  - nome: Pugnale
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +4, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d4 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.pugnale
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: Fuga agile
+    descrizione: |
+      Il goblin effettua l'azione di Disimpegno o Nascondersi.

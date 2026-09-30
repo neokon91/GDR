@@ -1,0 +1,18 @@
+id: dnd.incantesimo.salvare-i-morenti
+nome: Salvare i morenti
+livello: 0
+scuola: necromanzia
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+tempo_lancio: azione
+gittata: 4.5
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore sceglie una creatura entro gittata con 0 punti ferita ma che è ancora in vita, facendola diventare stabile.
+scaling: |
+  **Trucchetto potenziato**
+  La gittata raddoppia quando l'incantatore raggiunge il 5º livello (9 metri), l'11º livello (18 metri) e il 17º livello (36 metri).

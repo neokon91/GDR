@@ -1,0 +1,12 @@
+id: dnd.oggetto-magico.armatura-nanica
+nome: Armatura nanica
+categoria: armatura
+sottotipo: mezza armatura o armatura a piastre
+rarita: molto-rara
+richiede_sintonia: false
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: somma, valore: 2}
+descrizione: |
+  Il personaggio che indossa quest'armatura ottiene un bonus di +2 alla Classe Armatura. Inoltre, se un effetto lo fa muovere sul terreno contro la sua volontà, il personaggio può effettuare una reazione per ridurre la distanza di cui viene mosso di un massimo di 3 metri.

@@ -1,0 +1,48 @@
+id: dnd.incantesimo.teletrasporto
+nome: Teletrasporto
+livello: 7
+scuola: evocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 3
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Questo incantesimo teletrasporta immediatamente l'incantatore e un solo oggetto o un massimo di otto creature consenzienti, che si trovano entro gittata e che egli è in grado di vedere, fino a una destinazione a sua scelta. Se il bersaglio è un oggetto, deve essere di taglia Grande o inferiore e non può essere impugnato o trasportato da una creatura non consenziente.
+
+  La destinazione scelta deve essere nota all'incantatore e deve trovarsi sul suo stesso piano di esistenza. La sua familiarità con la destinazione determina il successo del teletrasporto. Il GM tira 1d100 e consulta la tabella Risultato del teletrasporto e le spiegazioni successive.
+
+  ### Risultato del teletrasporto
+
+  | Familiarità | Errore | Area simile | Fuori bersaglio | Sul bersaglio |
+  | --- | --- | --- | --- | --- |
+  | Cerchio permanente | - | - | - | 01–00 |
+  | Oggetto collegato | - | - | - | 01–00 |
+  | Molto familiare | 01–05 | 06–13 | 14–24 | 25–00 |
+  | Visto occasionalmente | 01–33 | 34–43 | 44–53 | 54–00 |
+  | Visto una volta o descritto | 01–43 | 44–53 | 54–73 | 74–00 |
+  | Falsa destinazione | 01–50 | 51–00 | - | - |
+
+  Familiarità. Di seguito vengono spiegati i significati dei termini presenti nella colonna Familiarità:
+
+  - "Cerchio permanente" indica un cerchio di teletrasporto permanente di cui l'incantatore conosce la sequenza di sigilli.
+  - "Oggetto collegato" indica un oggetto in possesso dell'incantatore prelevato dalla destinazione desiderata negli ultimi sei mesi, come un libro della biblioteca di un mago.
+  - "Molto familiare" indica un luogo che l'incantatore ha visitato spesso, un luogo che ha studiato con attenzione o un luogo che è in grado di vedere quando lancia l'incantesimo.
+  - "Visto occasionalmente" indica un luogo che l'incantatore ha visto più di una volta, ma che non gli è troppo familiare.
+  - "Visto una volta o descritto" indica un luogo che l'incantatore ha visto una volta, magari usando la magia, o un luogo noto attraverso la descrizione di un'altra persona o una mappa.
+  - "Falsa destinazione" è un luogo inesistente.
+
+  Per esempio, l'incantatore ha cercato di scrutare il rifugio segreto di un nemico ma ha visto invece un'illusione, oppure tenta di teletrasportarsi in un luogo che non esiste più.
+
+  Errore. La magia imprevedibile dell'incantesimo rende difficile il viaggio. Ogni creatura che si teletrasporta (o l'oggetto bersaglio) subisce 3d10 danni da forza e il GM lancia di nuovo sulla tabella per determinare dove arriverà (potrebbero verificarsi vari errori, nel qual caso i danni verranno inflitti ogni volta).
+
+  Area simile. L'incantatore e il suo gruppo (o l'oggetto bersaglio) arrivano in un'area diversa che è visivamente o tematicamente simile all'area bersaglio, oltre a essere nelle sue immediate vicinanze. Per esempio, se l'incantatore vuole dirigersi al suo laboratorio personale, potrebbe comparire in quello di un'altra persona nella stessa città.
+
+  Fuori bersaglio. L'incantatore e il suo gruppo (o l'oggetto bersaglio) compaiono a una distanza di 2d12 chilometri dalla destinazione in una direzione casuale. Tira 1d8 per la direzione: 1, est; 2, sud-est; 3, sud; 4, sud-ovest; 5, ovest; 6, nord-ovest; 7, nord; oppure 8, nord-est.
+
+  Sul bersaglio. L'incantatore e il suo gruppo (o l'oggetto bersaglio) compaiono nel luogo designato.

@@ -1,0 +1,33 @@
+id: dnd.glossario.tipo-di-creatura
+nome: Tipo di creatura
+descrizione: |
+  Ogni creatura ha un descrittore che identifica il tipo di creatura. I tipi non hanno regole proprie, ma alcune regole influenzano certi tipi diversamente.
+tipi:
+- id: dnd.tipo-di-creatura.aberrazione
+  nome: Aberrazione
+- id: dnd.tipo-di-creatura.bestia
+  nome: Bestia
+- id: dnd.tipo-di-creatura.celestiale
+  nome: Celestiale
+- id: dnd.tipo-di-creatura.costrutto
+  nome: Costrutto
+- id: dnd.tipo-di-creatura.drago
+  nome: Drago
+- id: dnd.tipo-di-creatura.elementale
+  nome: Elementale
+- id: dnd.tipo-di-creatura.folletto
+  nome: Folletto
+- id: dnd.tipo-di-creatura.gigante
+  nome: Gigante
+- id: dnd.tipo-di-creatura.immmondo
+  nome: Immondo
+- id: dnd.tipo-di-creatura.melma
+  nome: Melma
+- id: dnd.tipo-di-creatura.mostruosità
+  nome: Mostruosità
+- id: dnd.tipo-di-creatura.non-morto
+  nome: Non Morto 
+- id: dnd.tipo-di-creatura.umanoide
+  nome: Umanoide
+- id: dnd.tipo-di-creatura.vegetale
+  nome: Vegetale

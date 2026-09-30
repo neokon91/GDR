@@ -1,0 +1,17 @@
+id: dnd.incantesimo.parola-del-potere-uccidere
+nome: Parola del potere uccidere
+livello: 9
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 18
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore costringe una creatura entro gittata che egli è in grado di vedere a morire. Se il bersaglio possiede 100 punti ferita o meno, muore. Altrimenti, subisce 12d12 danni psichici.

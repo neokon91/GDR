@@ -1,0 +1,20 @@
+id: dnd.incantesimo.scritto-illusorio
+nome: Scritto illusorio
+livello: 1
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.warlock
+tempo_lancio: 1 minuto
+gittata: contatto
+componenti: [S, "M (inchiostro del valore di 10 mo o più, che l'incantesimo consuma)"]
+concentrazione: false
+rituale: true
+durata: 10 giorni
+descrizione: |
+  L'incantatore scrive su una pergamena, un foglio o un altro materiale adatto e infonde nello scritto un'illusione che permane per la durata dell'incantesimo. All'incantatore e a qualsiasi creatura indicata da lui al momento del lancio, lo scritto appare normale, sembra essere stilato nella calligrafia dell'incantatore e trasmette il significato inteso nel momento in cui è stato scritto. Agli occhi di tutti gli altri, il messaggio appare scritto in una lingua magica o ignota che risulta per loro incomprensibile. In alternativa, l'illusione può alterare il significato, la calligrafia e la lingua del testo, ma questa deve essere una lingua conosciuta dall'incantatore.
+
+  Se l'incantesimo viene dissolto, il messaggio originale e l'illusione scompaiono.
+
+  Una creatura con vista pura può leggere il messaggio nascosto.

@@ -1,0 +1,97 @@
+id: dnd.mostro.vampiro
+nome: Vampiro
+taglia: [media, piccola]
+tipo: non-morto
+gruppo: Vampiri
+allineamento: legale malvagio
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 18, competenza: true}
+  costituzione: {valore: 18, competenza: true}
+  intelligenza: {valore: 17, competenza: false}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 18, competenza: true}
+iniziativa: maestria
+dadi_vita: 23
+velocita: {camminata: 12, scalata: 12}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 36}
+percezione_passiva: 17
+resistenze: [necrotico]
+lingue: [Comune più altre due lingue]
+gs: 13
+
+tratti:
+  - nome: Acqua corrente
+    descrizione: |
+      Il vampiro subisce 20 danni da acido se termina il suo turno nell'acqua corrente.
+  - nome: Debolezze dei vampiri
+    descrizione: |
+      Il vampiro ha le seguenti debolezze:
+  - nome: Fuga nebbiosa
+    descrizione: |
+      Se il vampiro scende a 0 punti ferita al di fuori del suo luogo di riposo, usa Mutaforma per trasformarsi in nebbia (nessuna azione richiesta). Se non può usare Mutaforma, viene distrutto. Finché ha 0 punti ferita in forma nebbiosa, non può tornare alla forma di vampiro e deve raggiungere il suo luogo di riposo entro 2 ore, altrimenti viene distrutto. Una volta raggiunto il luogo di riposo, torna alla forma di vampiro ed è paralizzato finché non recupera un qualsiasi numero di punti ferita; recupera 1 punto ferita una volta trascorsa 1 ora in questo stato.
+  - nome: Luce del sole
+    descrizione: |
+      Il vampiro subisce 20 danni radiosi quando inizia il suo turno alla luce del sole. Finché è esposto alla luce del sole, subisce svantaggio a tiri per colpire e prove di caratteristica.
+  - nome: Movimenti del ragno
+    descrizione: |
+      Il vampiro può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+  - nome: Paletto nel cuore
+    descrizione: |
+      Se un'arma che infligge danni perforanti gli viene conficcata nel cuore mentre è incapacitato nel suo luogo di riposo, il vampiro è paralizzato finché non viene rimossa l'arma.
+  - nome: Proibizione
+    descrizione: |
+      Il vampiro non può entrare in casa di qualcuno se non viene invitato da chi vi risiede.
+  - nome: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+    descrizione: |
+      Se il vampiro fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: "Multiattacco (solo in forma di vampiro)"
+    descrizione: |
+      Il vampiro effettua due attacchi Colpo tombale e usa Morso.
+  - nome: "Colpo tombale (solo in forma di vampiro)"
+    descrizione: |
+      *Tiro per colpire in mischia:* +9, portata 1,5 m. *Colpito:* 8 (1d8 + 4) danni contundenti più 7 (2d6) danni necrotici. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da una delle due mani.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: "Morso (solo in forma di pipistrello o vampiro)"
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 17, una creatura entro 1,5 metri che sia consenziente, afferrata, incapacitata o trattenuta. *Fallimento:* 6 (1d4 + 4) danni perforanti più 13 (3d8) danni necrotici. I punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni necrotici subiti, e il vampiro recupera punti ferita pari a quell'ammontare. Un umanoide ridotto a 0 punti ferita da questi danni e poi sepolto, risorge al tramonto seguente in forma di progenie vampirica controllata dal vampiro.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: forza, base: 8, competenza: true}
+azioni_bonus:
+  - nome: "Fascino (ricarica 5-6)"
+    descrizione: |
+      Il vampiro lancia charme su persone, senza bisogno di componenti e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17), con una durata di 24 ore. Il bersaglio affascinato si presta di suo spontanea volontà a Morso del vampiro; i danni subiti non pongono fine all'incantesimo. Al termine dell'incantesimo, il bersaglio non sa di essere stato affascinato dal vampiro.
+  - nome: Mutaforma
+    descrizione: |
+      Se il vampiro non è alla luce del sole o in acqua corrente, si trasforma in un pipistrello di taglia Minuscola (velocità 1,5 metri, volo 9 metri) o una nube di nebbia di taglia Media (velocità 1,5 metri, volo 6 metri [fluttuare]), oppure torna alla forma di vampiro.
+  - nome: "Qualsiasi cosa indossi, si trasforma insieme a lui"
+    descrizione: |
+      Finché è in forma di pipistrello, il vampiro non può parlare. Le sue statistiche di gioco, a eccezione della taglia e della velocità, non cambiano. Finché è in forma di nebbia, il vampiro non può effettuare alcuna azione, né parlare o manipolare oggetti. Non ha peso e può entrare nello spazio di un nemico e fermarvisi. Inoltre, se l'aria può passare attraverso uno spazio, anche la nebbia può farlo, ma non può attraversare l'acqua. È resistente a tutti i danni, eccetto quelli subiti dalla luce del sole.
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie: 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il vampiro può consumare un utilizzo per effettuare una delle seguenti azioni. Il vampiro recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Colpo immortale
+    descrizione: |
+      Il vampiro si muove fino a metà della sua velocità, ed effettua un attacco Colpo tombale.
+  - nome: Incantare
+    descrizione: |
+      Il vampiro lancia comando senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17). Il vampiro non può ripetere quest'azione fino all'inizio del proprio turno successivo.

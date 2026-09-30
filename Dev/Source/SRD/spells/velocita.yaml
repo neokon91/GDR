@@ -1,0 +1,23 @@
+id: dnd.incantesimo.velocita
+nome: Velocità
+livello: 3
+scuola: trasmutazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (una scaglia di radice di liquirizia)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+attivita:
+  - tipo: potenziamento
+    bersaglio: alleato
+    concede: velocizzato
+    durata: {valore: 1, unita: minuti}
+    concentrazione: true
+descrizione: |
+  L'incantatore sceglie una creatura consenziente entro gittata che egli è in grado di vedere. Fino al termine dell'incantesimo, il bersaglio ottiene un bonus di +2 alla Classe Armatura, dispone di vantaggio ai tiri salvezza su Destrezza, la sua velocità raddoppia e ottiene un'azione aggiuntiva per ogni turno. Tale azione può essere utilizzata solo per effettuare un'azione di Attacco (un solo attacco), Scatto, Disimpegno, Nascondersi o Utilizzo.
+
+  Al termine dell'incantesimo, il bersaglio è incapacitato e ha una velocità pari a 0 fino al termine del proprio turno successivo, essendo sopraffatto da un'ondata di spossatezza.

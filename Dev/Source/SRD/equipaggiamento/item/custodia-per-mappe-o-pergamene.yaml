@@ -1,0 +1,5 @@
+id: dnd.oggetto.custodia-per-mappe-o-pergamene
+nome: Custodia per mappe o pergamene
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-oro}
+peso: {valore: 0.5, unita: kg}

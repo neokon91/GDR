@@ -1,0 +1,24 @@
+id: dnd.incantesimo.raggio-rovente
+nome: Raggio rovente
+livello: 2
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore lancia tre raggi di fuoco contro uno o più bersagli entro gittata. Con questo incantesimo, l'incantatore effettua un attacco a distanza per ogni raggio. Se il colpo va a segno, il bersaglio subisce 2d6 danni da fuoco.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore crea un raggio aggiuntivo per ogni slot di livello superiore al 2º.
+attivita:
+  - tipo: attacco
+    attacco: { categoria: distanza, caratteristica: incantesimo, ripetizioni: 3 }
+    bersagli: { numero: 3 }
+    colpito:
+      danno: { numero_dadi: 2, dado: d6, tipo_danno: fuoco }

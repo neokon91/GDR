@@ -1,0 +1,29 @@
+id: dnd.incantesimo.spruzzo-prismatico
+nome: Spruzzo prismatico
+livello: 7
+scuola: invocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Otto raggi di luce si sprigionano dall'incantatore in un cono di 18 metri. Ogni creatura presente nel cono effettua un tiro salvezza su Destrezza. Per ogni bersaglio, si tira 1d8 per determinare da quale raggio viene influenzato, consultando la tabella Raggi prismatici.
+
+  ### Raggi prismatici
+
+  | 1d8 | Raggio |
+  | --- | --- |
+  | 1 Rosso | Tiro salvezza fallito: 12d6 danni da fuoco. Tiro salvezza superato: la metà dei danni. |
+  | 2 Arancione | Tiro salvezza fallito: 12d6 danni da acido. Tiro salvezza superato: la metà dei danni. |
+  | 3 Giallo | Tiro salvezza fallito: 12d6 danni da fulmine. Tiro salvezza superato: la metà dei danni. |
+  | 4 Verde | Tiro salvezza fallito: 12d6 danni da veleno. Tiro salvezza superato: la metà dei danni. |
+  | 5 Blu | Tiro salvezza fallito: 12d6 danni da freddo. Tiro salvezza superato: la metà dei danni. |
+  | 6 Indaco | Tiro salvezza fallito: il bersaglio è trattenuto ed effettua un tiro salvezza su Costituzione alla fine di ogni suo turno. Se lo supera per tre volte, pone fine alla condizione. Se fallisce per tre volte, resta pietrificato finché non viene liberato da un effetto come quello dell'incantesimo ristorare superiore. Non è necessario che i tiri superati o falliti siano consecutivi: si tiene semplicemente il conto di entrambi finché il bersaglio non ne accumula tre di un certo tipo. |
+  | 7 Viola | Tiro salvezza fallito: il bersaglio è accecato ed effettua un tiro salvezza su Saggezza all'inizio del turno successivo dell'incantatore. Se lo supera, non è più accecato. Se lo fallisce, non è più accecato e viene teletrasportato su un altro piano di esistenza (a scelta del GM). |
+  | 8 Speciale | Il bersaglio viene colpito da due raggi. Si tira altre due volte, rilanciando i dadi se il risultato ottenuto è 8. |

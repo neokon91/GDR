@@ -1,0 +1,76 @@
+id: dnd.mostro.sacerdote
+nome: Sacerdote
+taglia: [media, piccola]
+tipo: umanoide
+sottotipo: chierico
+gruppo: Sacerdoti
+allineamento: neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 13, competenza: false}
+  saggezza: {valore: 16, competenza: false}
+  carisma: {valore: 13, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 9}
+abilita: [percezione: competenza, medicina: maestria, religione: maestria]
+percezione_passiva: 15
+equipaggiamento:
+  - {articolo: dnd.arma.mazza}
+  - {articolo: dnd.armatura.giaco-di-maglia}
+  - {articolo: dnd.oggetto.simbolo-sacro}
+lingue: [Comune più un'altra lingua]
+gs: 2
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il sacerdote effettua due attacchi, usando Mazza o Fiamma radiosa in qualsiasi combinazione.
+  - nome: Mazza
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni contundenti più 5 (2d4) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.mazza
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Fiamma radiosa
+    descrizione: |
+      *Tiro per colpire a distanza:* +5, gittata 18 m. *Colpito:* 11 (2d10) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno: {numero_dadi: 2, dado: d10, tipo_danno: radioso}
+  - nome: Incantesimi
+    descrizione: |
+      Il sacerdote lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13):A volontà: Luce, taumaturgia 1/giorno: Guardiani spirituali
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        cd: 13
+        a_volonta:
+          - dnd.incantesimo.luce
+          - dnd.incantesimo.taumaturgia
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.guardiani-spirituali
+azioni_bonus:
+  - nome: "Aiuto divino (3/giorno)"
+    descrizione: |
+      Il sacerdote lancia benedizione, dissolvi magie, parola guaritrice o ristorare inferiore, utilizzando la stessa caratteristica da incantatore di Incantesimi.

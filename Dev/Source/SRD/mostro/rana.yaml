@@ -1,0 +1,41 @@
+id: dnd.mostro.rana
+nome: Rana
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 1, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 8, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 6, nuoto: 6}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 9}
+percezione_passiva: 11
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      La rana può respirare in aria e in acqua.
+  - nome: Balzo da fermo
+    descrizione: |
+      La rana può compiere un salto in lungo di un massimo di 3 metri e uno in alto di un massimo di 1,5 metri, con o senza rincorsa.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 1 danno perforante.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

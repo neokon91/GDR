@@ -1,0 +1,130 @@
+id: dnd.mostro.drago-d-oro-antico
+nome: Drago d'oro antico
+taglia: mastodontica
+tipo: drago
+sottotipo: metallico
+gruppo: Draghi d'oro
+allineamento: legale buono
+ca: {valore: 22}
+caratteristiche:
+  forza: {valore: 30, competenza: false}
+  destrezza: {valore: 14, competenza: true}
+  costituzione: {valore: 29, competenza: false}
+  intelligenza: {valore: 18, competenza: false}
+  saggezza: {valore: 17, competenza: true}
+  carisma: {valore: 28, competenza: false}
+iniziativa: maestria
+dadi_vita: 28
+velocita: {camminata: 12, nuoto: 12, volo: 24}
+abilita: [furtivita: competenza, intuizione: competenza, persuasione: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 18}
+percezione_passiva: 27
+immunita_danni: [fuoco]
+lingue: [Comune, Draconico]
+gs: 24
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il drago può respirare in aria e in acqua.
+  - nome: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+    descrizione: |
+      Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Incantesimi per lanciare dardo tracciante (di 4º livello) o (B) Soffio indebolente.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +17 al tiro per colpire, portata 4,5 m. *Colpito:* 19 (2d8 + 10) danni taglienti più 9 (2d8) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 4.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 24, +16 al tiro per colpire degli attacchi con incantesimo):
+
+      *1/giorno ciascuno:*
+      - colpo infuocato (versione di 6º livello)
+      - parola del ritiro
+      - zona di verità
+
+      *A volontà:*
+      - dardo tracciante (di 4º livello)
+      - individuazione del magico
+      - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 24
+        a_volonta:
+          - id: dnd.incantesimo.dardo-tracciante
+            livello: 4
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.trasformazione
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - id: dnd.incantesimo.colpo-infuocato
+                livello: 6
+              - dnd.incantesimo.parola-del-ritiro
+              - dnd.incantesimo.zona-di-verita
+  - nome: "Soffio di fuoco (ricarica 5-6)"
+    id: soffio-di-fuoco-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 24, tutte le creature in un cono di 27 metri. *Fallimento:* 71 (13d10) danni da fuoco. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 13, dado: d10, tipo_danno: fuoco}
+        successo: danno-dimezzato
+  - nome: Soffio indebolente
+    id: soffio-indebolente
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 24, ogni creatura che al momento non è sotto l'effetto di questo soffio in un cono di 27 metri. *Fallimento:* il bersaglio subisce svantaggio alle prove con d20 basate sulla Forza e sottrae 5 (1d10) ai tiri per i danni. La creatura ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Balzo
+    descrizione: |
+      Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+  - nome: Luce guida
+    descrizione: |
+      Il drago usa Incantesimi per lanciare dardo tracciante (di 4º livello).
+  - nome: Ostracismo
+    descrizione: |
+      *Tiro salvezza su Carisma:* CD 24, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 24 (7d6) danni da forza, il bersaglio è incapacitato e viene trasportato su un semipiano sicuro fino all'inizio del turno successivo del drago, durante cui riappare in uno spazio libero a scelta del drago entro 36 metri da quest'ultimo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: carisma
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 7, dado: d6, tipo_danno: forza}

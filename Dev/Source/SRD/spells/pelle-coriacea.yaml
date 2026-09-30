@@ -1,0 +1,15 @@
+id: dnd.incantesimo.pelle-coriacea
+nome: Pelle coriacea
+livello: 2
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.ranger
+tempo_lancio: azione bonus
+gittata: contatto
+componenti: [V, S, "M (un pezzo di corteccia)"]
+concentrazione: false
+rituale: false
+durata: 1 ora
+descrizione: |
+  L'incantatore tocca una creatura consenziente. Fino al termine dell'incantesimo, la pelle del bersaglio assume l'aspetto della corteccia. Inoltre, il bersaglio ha una Classe Armatura di 17 se la sua CA è inferiore a tale valore.

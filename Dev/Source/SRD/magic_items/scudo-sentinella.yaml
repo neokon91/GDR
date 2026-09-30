@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.scudo-sentinella
+nome: Scudo sentinella
+categoria: armatura
+sottotipo: scudo
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Finché il personaggio impugna questo scudo, dispone di vantaggio ai tiri per l'iniziativa e alle prova di Saggezza (Percezione). Sullo scudo è inciso il simbolo di un occhio.

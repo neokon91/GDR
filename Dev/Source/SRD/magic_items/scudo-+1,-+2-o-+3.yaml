@@ -1,0 +1,25 @@
+id: dnd.oggetto-magico.scudo-+1,-+2-o-+3
+nome: "Scudo +1, +2 o +3"
+categoria: armatura
+sottotipo: scudo
+rarita: variabile
+nota_rarita: non comune (+1), rara (+2) o molto rara (+3)
+richiede_sintonia: false
+base: dnd.armatura.scudo
+versioni:
+  - nome: "+1"
+    rarita: non-comune
+    valore: 1
+  - nome: "+2"
+    rarita: rara
+    valore: 2
+  - nome: "+3"
+    rarita: molto-rara
+    valore: 3
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: somma, valore: versione}
+descrizione: |
+  Finché il personaggio impugna questo scudo, ha 
+  un bonus alla Classe Armatura determinato dalla rarità dello scudo, oltre al normale bonus alla CA fornito da esso.

@@ -1,0 +1,78 @@
+id: dnd.mostro.progenie-vampirica
+nome: Progenie vampirica
+taglia: [media, piccola]
+tipo: non-morto
+gruppo: Vampiri
+allineamento: neutrale malvagio
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 16, competenza: true}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 10, competenza: true}
+  carisma: {valore: 12, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 9}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 13
+resistenze: [necrotico]
+lingue: [Comune più un'altra lingua]
+gs: 5
+
+tratti:
+  - nome: Acqua corrente
+    descrizione: |
+      Il vampiro subisce 20 danni da acido se termina il suo turno nell'acqua corrente.
+  - nome: Debolezze dei vampiri
+    descrizione: |
+      Il vampiro ha le seguenti debolezze:
+  - nome: Luce del sole
+    descrizione: |
+      Il vampiro subisce 20 danni radiosi quando inizia il suo turno alla luce del sole. Finché è esposto alla luce del sole, subisce svantaggio a tiri per colpire e prove di caratteristica.
+  - nome: Movimenti del ragno
+    descrizione: |
+      Il vampiro può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+  - nome: Paletto nel cuore
+    descrizione: |
+      Il vampiro viene distrutto se un'arma che infligge danni perforanti gli viene conficcata nel cuore mentre è incapacitato.
+  - nome: Proibizione
+    descrizione: |
+      Il vampiro non può entrare in casa di qualcuno se non viene invitato da chi vi risiede.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+    descrizione: |
+      Il vampiro effettua due attacchi Artiglio e usa Morso.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m.
+
+      **Colpito:** 8 (2d4 + 3) danni taglienti
+      Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 13 per sfuggire) da uno dei due artigli.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 14, una creatura entro 1,5 metri che sia consenziente, afferrata, incapacitata o trattenuta. *Fallimento:* 5 (1d4 + 3) danni perforanti più 10 (3d6) danni necrotici. I punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni necrotici subiti, e il vampiro recupera punti ferita pari a quell'ammontare.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: forza, base: 8, competenza: true}
+azioni_bonus:
+  - nome: Agilità immortale
+    descrizione: |
+      Il vampiro effettua l'azione di Disimpegno o Scatto.

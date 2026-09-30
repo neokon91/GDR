@@ -1,0 +1,13 @@
+id: dnd.background.accolito
+nome: Accolito
+punteggi_caratteristica: [intelligenza, saggezza, carisma]
+talento_origine: dnd.talento.iniziato-alla-magia
+competenze:
+  abilita: [intuizione, religione]
+  strumenti: [dnd.strumento.attrezzatura-da-calligrafo]
+equipaggiamento_alternativo:
+  scelte:
+    - nome: B
+      oggetti:
+        - articolo: dnd.valuta.moneta-oro
+          quantita: 50

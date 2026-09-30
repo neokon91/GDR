@@ -1,0 +1,35 @@
+id: dnd.mostro.tasso
+nome: Tasso
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 5}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 9}
+percezione_passiva: 13
+resistenze: [veleno]
+lingue: [nessuna]
+gs: 0
+
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 1 danno perforante.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5

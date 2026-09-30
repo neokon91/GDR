@@ -1,0 +1,35 @@
+id: dnd.incantesimo.animare-morti
+nome: Animare Morti
+livello: 3
+scuola: necromanzia
+classi: 
+  - dnd.classe.chierico
+  - dnd.classe.mago
+tempo_lancio: 1 minuto
+gittata: 3
+componenti: [V, S, "M (una goccia di sangue, un pezzo di carne e un pizzico di polvere d'osso)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore sceglie una pila di ossa o un cadavere umanoide di taglia Media o Piccola entro gittata,
+  animandolo come creatura non morta. Il bersaglio si trasforma in uno scheletro se l'incantatore sceglie
+  la pila di ossa, o in uno zombi se l'incantatore sceglie un cadavere (vedi "Mostri" per le schede delle statistiche).
+
+  A ogni suo turno, l'incantatore può effettuare un'azione bonus per comandare mentalmente qualsiasi creatura
+  creata con questo incantesimo, a patto che si trovi entro 18 metri da lui (se controlla varie creature,
+  l'incantatore può comandarne più di una allo stesso momento, impartendo lo stesso comando a ciascuna di loro).
+  L'incantatore decide quale azione effettuerà la creatura e dove si muoverà nel suo turno successivo, oppure può
+  impartirle un comando generale, come restare a guardia di una stanza o un di corridoio. Se invece non impartisce
+  alcun comando, la creatura effettua l'azione Schivata e si sposta solo per evitare di subire danni. Una volta
+  ricevuto un ordine, la creatura continua a seguirlo finché non ha portato a termine il compito.
+
+  La creatura rimane sotto il controllo dell'incantatore per 24 ore, passate le quali smette di obbedire
+  a qualsiasi comando ulteriore. Per mantenere il controllo sulla creatura per altre 24 ore, l'incantatore deve
+  lanciare di nuovo questo incantesimo su di essa prima che l'attuale periodo di 24 ore termini.
+  Questo uso dell'incantesimo gli permette di ristabilire il controllo su un massimo di quattro creature da
+  lui animate tramite questo incantesimo, anziché animarne una nuova.
+scaling: |
+  **Utilizzo di uno Slot Incantesimo di Livello Superiore**. L'incantatore anima due creature Non Morte
+  aggiuntive o ristabilisce il controllo su di esse per ogni slot incantesimo di livello superiore al 3º.
+  Ognuna delle creature deve provenire da un diverso cadavere o mucchio d'ossa.

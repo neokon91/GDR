@@ -1,0 +1,18 @@
+id: dnd.incantesimo.scopri-trappole
+nome: Scopri trappole
+livello: 2
+scuola: divinazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore percepisce qualsiasi trappola piazzata entro gittata e nel suo campo visivo. Ai fini di questo incantesimo, per trappola si intende qualsiasi oggetto o meccanismo creato per provocare danni o altri pericoli. Pertanto, l'incantesimo è in grado di percepire gli incantesimi allarme o glifo di interdizione, o una fossa meccanica nascosta, ma non di rivelare un cedimento naturale del pavimento, un soffitto instabile o una voragine nascosta.
+
+  Questo incantesimo rivela la presenza di una trappola ma non la sua ubicazione. L'incantatore scopre solo la natura generale del pericolo che la trappola pone.

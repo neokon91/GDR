@@ -46,7 +46,9 @@ versionato). `butler status <target>:vault` mostra la versione online.
   (`author/repo/license`) in `THIRD-PARTY-LICENSES.md`, incluso nello zip (un test lo impone).
   Alternativa *lite* (senza `.obsidian/plugins/`): togli i `version` da `plugins.yaml` (i plugin
   si installano al primo avvio) — richiede prima di rendere non-critici i plugin critici.
-- **SRD 5.2.1** = CC-BY-4.0 (attribuzione in `archivio`); codice/tooling = MIT.
+- **SRD 5.2.1** = CC-BY-4.0 (copia vendorizzata in `Dev/Source/SRD/`, attribuzione in
+  `Dev/Source/SRD/LICENSE_SRD`); codice/tooling = MIT. Prima di una release: `npm run
+  sync-srd` con l'archivio accanto, così lo zip porta i dati aggiornati.
 
 ---
 

@@ -1,0 +1,9 @@
+id: dnd.veicolo.nave-lunga
+nome: Nave lunga
+tipo: veicolo
+costo: {valore: 10, valuta: moneta-oro}
+classe_armatura: 15
+velocita: {viaggio: 4.5}  # km/h — i veicoli viaggiano, non camminano
+equipaggio: 40
+passeggeri: 150
+carico: 10 t

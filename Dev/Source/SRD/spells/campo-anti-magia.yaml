@@ -1,0 +1,21 @@
+id: dnd.incantesimo.campo-anti-magia
+nome: Campo anti-magia
+livello: 8
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (limatura di ferro)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  Un'aura di anti-magia circonda l'incantatore in un'emanazione di 3 metri. Nessuno può lanciare incantesimi, compiere azioni di Magia o creare altri effetti magici all'interno dell'aura, e tali azioni non possono colpire o influenzare in alcun modo nulla al suo interno. Le proprietà degli oggetti magici non funzionano all'interno dell'aura o su qualsiasi cosa al suo interno.
+
+  Le aree di effetto create da incantesimi o da altre magie non possono estendersi all'interno dell'aura e nessuno può teletrasportarsi all'interno o all'esterno di essa o utilizzare il viaggio planare. I portali si chiudono temporaneamente quando si trovano all'interno dell'aura.
+
+  Gli incantesimi già in corso, tranne quelli lanciati da manufatti o divinità, sono soppressi all'interno dell'area. Mentre un effetto è soppresso non funziona, ma il tempo che trascorre in questo stato conta ai fini della sua durata.
+
+  Dissolvi magie non ha alcun effetto sull'aura, e le aure create da più incantesimi campo anti-magia non si annullano a vicenda.

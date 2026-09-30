@@ -1,0 +1,20 @@
+id: dnd.incantesimo.ferire
+nome: Ferire
+livello: 6
+scuola: necromanzia
+classi:
+  - dnd.classe.chierico
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+    fallimento:
+      - danno: { numero_dadi: 14, dado: d6, tipo_danno: necrotico }
+    successo: danno-dimezzato
+descrizione: |
+  L'incantatore scatena una malattia virulenta su una creatura entro gittata che egli è in grado di vedere. Il bersaglio effettua un tiro salvezza su Costituzione. Se lo fallisce, subisce 14d6 danni necrotici, e i suoi punti ferita massimi vengono ridotti di una quantità pari ai danni necrotici subiti, mentre se lo supera, subisce solo la metà dei danni. Questo incantesimo non può ridurre i punti ferita massimi del bersaglio a meno di 1.

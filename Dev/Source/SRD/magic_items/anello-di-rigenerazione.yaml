@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.anello-di-rigenerazione
+nome: Anello di rigenerazione
+categoria: anello
+rarita: molto-rara
+richiede_sintonia: true
+descrizione: |
+  Finché il personaggio indossa questo anello, recupera 1d6 punti ferita ogni 10 minuti, purché possieda almeno 1 punto ferita. Se il personaggio perde una parte del corpo, l'anello fa ricrescere la parte mancante facendola tornare alla piena funzionalità dopo 1d6 + 1 giorni, purché il personaggio abbia almeno 1 punto ferita in tutto questo periodo di tempo.

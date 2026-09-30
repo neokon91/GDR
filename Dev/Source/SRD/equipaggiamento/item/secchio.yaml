@@ -1,0 +1,5 @@
+id: dnd.oggetto.secchio
+nome: Secchio
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-rame}
+peso: {valore: 1, unita: kg}

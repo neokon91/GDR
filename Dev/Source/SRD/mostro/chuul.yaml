@@ -1,0 +1,66 @@
+id: dnd.mostro.chuul
+nome: Chuul
+taglia: grande
+tipo: aberrazione
+allineamento: caotico malvagio
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 9
+velocita: {camminata: 9, nuoto: 9}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 14
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato]
+lingue: [capisce il Gergo delle Profondità ma non lo parla]
+gs: 4
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il chuul può respirare in aria e in acqua.
+  - nome: Percezione della magia
+    descrizione: |
+      Il chuul percepisce la magia entro 36 metri da sé. Sotto ogni altro aspetto, questo tratto funziona come l'incantesimo individuazione del magico, ma di per sé non è magico.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: tenaglia, ripetizioni: 2}
+    descrizione: |
+      Il chuul effettua due attacchi Tenaglia e utilizza Tentacoli paralizzanti.
+  - nome: Tenaglia
+    id: tenaglia
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 9 (1d10 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da una delle due tenaglie.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Tentacoli paralizzanti
+    id: tentacoli-paralizzanti
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 13, una creatura afferrata dal chuul. *Fallimento:* il bersaglio è avvelenato e ripete il tiro salvezza alla fine del suo turno successivo e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente. Finché è avvelenato, il bersaglio è paralizzato.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}

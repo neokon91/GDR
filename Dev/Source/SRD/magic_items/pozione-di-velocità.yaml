@@ -1,0 +1,14 @@
+id: dnd.oggetto-magico.pozione-di-velocità
+nome: Pozione di velocità
+categoria: pozione
+rarita: molto-rara
+richiede_sintonia: false
+consumabile: true
+attivita:
+  - tipo: potenziamento
+    bersaglio: se-stesso
+    concede: velocizzato
+    durata: {valore: 1, unita: minuti}
+descrizione: |
+  Quando il personaggio beve questa pozione, ottiene l'effetto dell'incantesimo velocità per 1 minuto (non è richiesta la concentrazione) senza patire la sensazione di letargia che solitamente ne accompagna la conclusione.
+  Il fluido giallo della pozione è striato di nero e vortica costantemente.

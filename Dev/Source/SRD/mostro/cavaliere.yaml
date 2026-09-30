@@ -1,0 +1,62 @@
+id: dnd.mostro.cavaliere
+nome: Cavaliere
+taglia: [media, piccola]
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 14, competenza: true}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 11, competenza: true}
+  carisma: {valore: 15, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 9}
+percezione_passiva: 10
+immunita_condizioni: [spaventato]
+equipaggiamento:
+  - {articolo: dnd.armatura.armatura-a-piastre}
+  - {articolo: dnd.arma.balestra-pesante}
+  - {articolo: dnd.arma.spadone}
+lingue: [Comune più un'altra lingua]
+gs: 3
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il cavaliere effettua due attacchi, usando Spadone o Balestra pesante in qualsiasi combinazione.
+  - nome: Spadone
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni taglienti più 4 (1d8) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.spadone
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Balestra pesante
+    descrizione: |
+      *Tiro per colpire a distanza:* +2, gittata 30/120 m. *Colpito:* 11 (2d10) danni perforanti più 4 (1d8) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.balestra-pesante
+          gittata: {normale: 30, lunga: 120}
+        colpito:
+          - danno: {numero_dadi: 2, dado: d10, tipo_danno: perforante}
+reazioni:
+  - nome: Parata
+    descrizione: |
+      *Attivazione:* il cavaliere viene colpito da un tiro per colpire in mischia mentre tiene in mano un'arma. *Esito:* il cavaliere aggiunge 2 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno.

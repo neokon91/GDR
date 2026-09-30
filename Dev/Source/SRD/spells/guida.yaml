@@ -1,0 +1,15 @@
+id: dnd.incantesimo.guida
+nome: Guida
+livello: 0
+scuola: divinazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore tocca una creatura consenziente e sceglie un'abilità. Fino al termine dell'incantesimo, la creatura aggiunge 1d4 a qualsiasi prova di caratteristica effettuata utilizzando l'abilità scelta.

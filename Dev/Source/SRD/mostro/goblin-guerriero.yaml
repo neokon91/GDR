@@ -1,0 +1,67 @@
+id: dnd.mostro.goblin-guerriero
+nome: Goblin guerriero
+taglia: piccola
+tipo: folletto
+sottotipo: goblinoide
+gruppo: Goblin
+allineamento: caotico neutrale
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 8, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 9}
+abilita: [furtivita: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 9
+equipaggiamento:
+  - {articolo: dnd.arma.arco-corto}
+  - {articolo: dnd.armatura.armatura-di-cuoio}
+  - {articolo: dnd.arma.scimitarra}
+  - {articolo: dnd.armatura.scudo}
+lingue: [Comune, Goblin]
+gs: 1/4
+
+azioni:
+  - nome: Scimitarra
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni taglienti, più 2 (1d4) danni taglienti se il tiro per colpire è stato effettuato con vantaggio.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.scimitarra
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: Arco corto
+    descrizione: |
+      *Tiro per colpire a distanza:* +4, gittata 24/96 m. *Colpito:* 5 (1d6 + 2) danni perforanti, più 2 (1d4) danni perforanti se il tiro per colpire è stato effettuato con vantaggio.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.arco-corto
+          gittata: {normale: 24, lunga: 96}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: Fuga agile
+    descrizione: |
+      Il goblin effettua l'azione di Disimpegno o Nascondersi.

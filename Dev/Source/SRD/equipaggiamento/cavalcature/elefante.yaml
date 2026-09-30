@@ -1,0 +1,6 @@
+id: dnd.cavalcatura.elefante
+nome: Elefante
+costo: {valore: 200, valuta: moneta-oro}
+capacita_trasporto: {valore: 660, unita: kg}
+descrizione: |
+  Una buona cavalcatura può aiutarti a spostarti più rapidamente attraverso le terre selvagge, ma il suo scopo principale è trasportare l'equipaggiamento che altrimenti ti rallenterebbe.

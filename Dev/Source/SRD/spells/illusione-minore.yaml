@@ -1,0 +1,25 @@
+id: dnd.incantesimo.illusione-minore
+nome: Illusione minore
+livello: 0
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 9
+componenti: [S, "M (un ciuffo di lana)"]
+concentrazione: false
+rituale: false
+durata: 1 minuto
+descrizione: |
+  L'incantatore crea un suono o un'immagine di un oggetto entro gittata che permane per la durata dell'incantesimo. Di seguito sono descritti gli effetti di ciascuno di essi. L'illusione termina se l'incantatore lancia nuovamente l'incantesimo.
+
+  Se una creatura effettua l'azione di Studio per esaminare il suono o l'immagine, può determinare che si tratta di un'illusione superando una prova di Intelligenza (Indagare) contro la CD del tiro salvezza sull'incantesimo. Se una creatura riconosce l'illusione per ciò che è, l'illusione risulta attenuata per quella creatura.
+
+  **Suono**
+  Se l'incantatore crea un suono, la sua intensità può variare da quella di un sussurro a quella di un urlo. Può trattarsi della voce dell'incantatore o di altri, del ruggito di un leone, di un rullo di tamburi o di un qualsiasi altro suono a sua scelta. Il suono può echeggiare ininterrottamente per tutta la durata dell'incantesimo, oppure l'incantatore può emettere dei suoni separati in momenti diversi prima che l'incantesimo termini.
+
+  **Immagine**
+  Se l'incantatore crea l'immagine di un oggetto (come per esempio una sedia, una serie di impronte nel fango o uno scrigno), quell'oggetto non deve essere più grande di un cubo con spigolo di 1,5 metri. L'illusione non può emettere suoni, luci, odori o qualsiasi altro effetto sensoriale L'illusione può essere rivelata da un'interazione fisica, poiché gli oggetti possono attraversarla.

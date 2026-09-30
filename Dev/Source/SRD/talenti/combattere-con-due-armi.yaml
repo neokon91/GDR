@@ -1,0 +1,7 @@
+id: dnd.talento.combattere-con-due-armi
+nome: Combattere con due armi
+categoria: stile-di-combattimento
+prerequisito: Privilegio Stile di combattimento
+ripetibile: false
+descrizione: |
+  Aggiungi il modificatore di caratteristica al danno dell'attacco extra da arma leggera se non gia aggiunto.

@@ -1,0 +1,44 @@
+id: dnd.mostro.orca-assassina
+nome: Orca assassina
+taglia: enorme
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 5, nuoto: 18}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {vista_cieca: 36}
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 3
+
+tratti:
+  - nome: Apnea
+    descrizione: |
+      L'orca può trattenere il respiro per 30 minuti.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 21 (5d6 + 4) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 5
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

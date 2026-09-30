@@ -1,0 +1,64 @@
+id: dnd.mostro.bulette
+nome: Bulette
+taglia: grande
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 21, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 9
+velocita: {scavo: 12}
+abilita: [percezione: maestria]
+sensi: {percezione_tellurica: 36, scurovisione: 18}
+lingue: [nessuna]
+gs: 5
+azioni:
+  - id: bulette.multiattacco
+    nome: Multiattacco
+    descrizione: Il bulette effettua due attacchi Morso.
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+  - id: bulette.morso
+    nome: Morso
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +7, portata 1,5 m.
+      *Colpito:* 17 (2d12 + 4) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d12
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - id: bulette.balzo-letale
+    nome: Balzo Letale
+    descrizione: |
+      Il bulette usa 1,5 metri di movimento per saltare in uno spazio entro 4,5 metri che contiene una o più creature di taglia Grande o inferiore.
+      *Tiro Salvezza su Destrezza:* CD 15, tutte le creature nello spazio di destinazione del bulette.
+      *Fallimento:* 19 (3d12) danni Contundenti, e il bersaglio è Prono.
+      *Successo:* Danni dimezzati, e il bersaglio viene spinto a 1,5 metri di distanza dal bulette.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 3, dado: d12, tipo_danno: contundente}
+        successo: danno-dimezzato
+azioni_bonus:
+  - id: bulette.balzo
+    nome: Balzo
+    descrizione: Il bulette salta fino a un massimo di 9 metri usando 3 metri di movimento.

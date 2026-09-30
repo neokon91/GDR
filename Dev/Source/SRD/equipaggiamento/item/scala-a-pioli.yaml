@@ -1,0 +1,5 @@
+id: dnd.oggetto.scala-a-pioli
+nome: Scala a pioli
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-argento}
+peso: {valore: 12.5, unita: kg}

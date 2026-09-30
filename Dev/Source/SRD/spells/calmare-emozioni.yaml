@@ -1,0 +1,18 @@
+id: dnd.incantesimo.calmare-emozioni
+nome: Calmare Emozioni
+livello: 2
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Ogni umanoide all'interno di una sfera del raggio di 6 metri centrata su un punto scelto dall'incantatore entro gittata deve effettuare un tiro salvezza su Carisma o essere influenzato da uno dei seguenti effetti (a scelta per ogni creatura):
+
+  - La creatura è immune alle condizioni affascinato e spaventato fino al termine dell'incantesimo. Se la creatura è già affascinata o spaventata, queste condizioni sono soppresse per la durata dell'incantesimo.
+  - La creatura diventa indifferente alle creature (a scelta dell'incantatore) verso cui è ostile. Questa indifferenza termina se il bersaglio subisce danni o se vede uno dei suoi alleati subire danni. Al termine dell'incantesimo, l'atteggiamento della creatura torna alla normalità.

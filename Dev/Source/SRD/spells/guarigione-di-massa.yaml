@@ -1,0 +1,14 @@
+id: dnd.incantesimo.guarigione-di-massa
+nome: Guarigione di massa
+livello: 9
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Un'ondata di energia curativa si sprigiona dall'incantatore, investendo le creature intorno a lui. In questo modo, ripristina fino a 700 punti ferita, ripartendoli come desidera tra un qualsiasi numero di creature entro gittata che egli è in grado di vedere. Le creature guarite da questo incantesimo vengono inoltre curate dalle condizioni accecato, assordato e avvelenato.

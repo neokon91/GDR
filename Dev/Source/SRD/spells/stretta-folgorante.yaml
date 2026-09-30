@@ -1,0 +1,23 @@
+id: dnd.incantesimo.stretta-folgorante
+nome: Stretta folgorante
+livello: 0
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Un fulmine si sprigiona dall'incantatore verso una creatura da lui toccata. Con questo incantesimo, l'incantatore effettua un attacco in mischia contro il bersaglio. Se il colpo va a segno, il bersaglio subisce 1d8 danni da fulmine e non può effettuare attacchi di opportunità fino all'inizio del proprio turno successivo.
+scaling: |
+  **Trucchetto potenziato**
+  I danni aumentano di 1d8 quando l'incantatore raggiunge il 5º livello (2d8), l'11º livello (3d8) e il 17º livello (4d8).
+attivita:
+  - tipo: attacco
+    attacco: { categoria: mischia, caratteristica: incantesimo }
+    colpito:
+      danno: { numero_dadi: 1, dado: d8, tipo_danno: fulmine }

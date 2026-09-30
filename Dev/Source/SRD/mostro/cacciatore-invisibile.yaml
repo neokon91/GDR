@@ -1,0 +1,67 @@
+id: dnd.mostro.cacciatore-invisibile
+nome: Cacciatore Invisibile
+taglia: grande
+tipo: elementale
+allineamento: neutrale
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 19, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 15, competenza: false}
+  carisma: {valore: 11, competenza: false}
+iniziativa: competenza
+dadi_vita: 13
+velocita: {camminata: 15, volo: 15}
+abilita: [furtivita: maestria, percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 18
+resistenze: [contundente, perforante, tagliente]
+immunita_danni: [veleno]
+immunita_condizioni: [afferrato, avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi, prono, trattenuto]
+lingue: [comune, primordiale (Auran)]
+gs: 6
+tratti:
+  - id: cacciatore-invisibile.forma-d-aria
+    nome: Forma d'Aria
+    descrizione: |
+      Il cacciatore invisibile può entrare nello spazio di un nemico e fermarvisi.
+      Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+  - id: cacciatore-invisibile.invisibilita
+    nome: Invisibilità
+    descrizione: Il cacciatore è invisibile.
+azioni:
+  - id: cacciatore-invisibile.multiattacco
+    nome: Multiattacco
+    descrizione: Il cacciatore invisibile effettua tre attacchi. Può sostituire un attacco con un utilizzo di Vortice.
+  - id: cacciatore-invisibile.colpo-di-vento
+    nome: Colpo di Vento
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +7, portata 1,5 m.
+      *Colpito:* 11 (2d6 + 4) danni da Forza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: forza
+              bonus: {caratteristica: destrezza}
+  - id: cacciatore-invisibile.vortice
+    nome: Vortice
+    descrizione: |
+      *Tiro Salvezza su Costituzione:* CD 14, una creatura di taglia Grande o inferiore nello spazio del cacciatore.
+      *Fallimento:* 7 (1d8 + 3) danni da Tuono, e il bersaglio è Afferrato (CD 13 per sfuggire).
+      Finché la presa perdura, il bersaglio non può lanciare incantesimi con una componente Verbale,
+      e subisce 7 (2d6) danni da Tuono all'inizio di ogni turno del cacciatore.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: forza, base: 8, competenza: true}

@@ -1,0 +1,210 @@
+id: dnd.classe.guerriero
+nome: Guerriero
+caratteristica_primaria: [forza, destrezza]
+dado_vita: 10
+tiri_salvezza: [forza, costituzione]
+competenze_abilita:
+  quantita: 2
+  scelte: [acrobazia, addestrare-animali, atletica, intimidire, intuizione, percezione, persuasione, sopravvivenza, storia]
+competenze_armi: [armi-semplici, armi-da-guerra]
+competenze_armature: [armature-leggere, armature-medie, armature-pesanti, scudi]
+# Preso come classe secondaria (multiclasse): sottoinsieme delle competenze.
+competenze_multiclasse:
+  armi: [armi-semplici, armi-da-guerra]
+  armature: [armature-leggere, armature-medie, scudi]
+equipaggiamento_iniziale:
+  - nome: A
+    oggetti:
+      - articolo: dnd.armatura.cotta-di-maglia
+      - articolo: dnd.arma.spadone
+      - articolo: dnd.arma.mazzafrusto
+      - articolo: dnd.arma.giavellotto
+        quantita: 8
+      - articolo: dnd.oggetto.dotazione-da-avventuriero
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 4
+  - nome: B
+    oggetti:
+      - articolo: dnd.armatura.armatura-di-cuoio-borchiato
+      - articolo: dnd.arma.scimitarra
+      - articolo: dnd.arma.spada-corta
+      - articolo: dnd.arma.arco-lungo
+      - articolo: frecce
+        quantita: 20
+      - articolo: dnd.oggetto.faretra
+      - articolo: dnd.oggetto.dotazione-da-avventuriero
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 11
+  - nome: C
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 155
+descrizione: |
+  Il guerriero è uno specialista marziale basato su Forza o Destrezza, padronanza delle armi e resistenza.
+  La sottoclasse SRD è il Campione.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [stile-di-combattimento, recuperare-le-energie, maestria-armi]
+    recuperare_energie: 2
+    padronanza_armi: 3
+  - livello: 2
+    privilegi: [azione-impetuosa, mente-tattica]
+    recuperare_energie: 2
+    padronanza_armi: 3
+  - livello: 3
+    privilegi: [sottoclasse-del-guerriero]
+    recuperare_energie: 2
+    padronanza_armi: 3
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    recuperare_energie: 3
+    padronanza_armi: 4
+  - livello: 5
+    privilegi: [attacco-extra, spostamento-tattico]
+    recuperare_energie: 3
+    padronanza_armi: 4
+  - livello: 6
+    privilegi: [aumento-punteggi-caratteristica]
+    recuperare_energie: 3
+    padronanza_armi: 4
+  - livello: 7
+    privilegi: [privilegio-della-sottoclasse]
+    recuperare_energie: 3
+    padronanza_armi: 4
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    recuperare_energie: 3
+    padronanza_armi: 4
+  - livello: 9
+    privilegi: [indomabile, maestro-di-tattica]
+    recuperare_energie: 3
+    padronanza_armi: 4
+  - livello: 10
+    privilegi: [privilegio-della-sottoclasse]
+    recuperare_energie: 4
+    padronanza_armi: 5
+  - livello: 11
+    privilegi: [due-attacchi-extra]
+    recuperare_energie: 4
+    padronanza_armi: 5
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    recuperare_energie: 4
+    padronanza_armi: 5
+  - livello: 13
+    privilegi: [attacchi-studiati, indomabile]
+    recuperare_energie: 4
+    padronanza_armi: 5
+  - livello: 14
+    privilegi: [aumento-punteggi-caratteristica]
+    recuperare_energie: 4
+    padronanza_armi: 5
+  - livello: 15
+    privilegi: [privilegio-della-sottoclasse]
+    recuperare_energie: 4
+    padronanza_armi: 5
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    recuperare_energie: 4
+    padronanza_armi: 6
+  - livello: 17
+    privilegi: [azione-impetuosa, indomabile]
+    recuperare_energie: 4
+    padronanza_armi: 6
+  - livello: 18
+    privilegi: [privilegio-della-sottoclasse]
+    recuperare_energie: 4
+    padronanza_armi: 6
+  - livello: 19
+    privilegi: [dono-epico]
+    recuperare_energie: 4
+    padronanza_armi: 6
+  - livello: 20
+    privilegi: [tre-attacchi-extra]
+    recuperare_energie: 4
+    padronanza_armi: 6
+privilegi:
+- id: stile-di-combattimento
+  nome: "Stile di Combattimento"
+  descrizione: |
+    Hai affinato la tua abilità marziale e ottieni un talento di Stile di Combattimento a tua scelta.
+
+    Ogni volta che ottieni un livello da Guerriero, puoi sostituire il talento scelto con un diverso talento di Stile di Combattimento.
+- id: recuperare-le-energie
+  nome: "Recuperare le Energie"
+  descrizione: |
+    Disponi di una riserva limitata di resistenza fisica e mentale a cui puoi attingere. Come Azione Bonus, puoi usarla per recuperare Punti Ferita pari a 1d10 più il tuo livello da Guerriero.
+
+    Puoi usare questa capacità due volte. Recuperi un utilizzo speso quando termini un Riposo Breve e recuperi tutti gli utilizzi spesi quando termini un Riposo Lungo.
+
+    Quando raggiungi determinati livelli da Guerriero, ottieni ulteriori utilizzi di questa capacità, come indicato nella colonna Secondo Fiato della tabella Capacità del Guerriero.
+  attivita:
+    # La guarigione (1d10 + livello) resta in prosa; qui l'attivazione e gli usi.
+    - {tipo: attivabile, azione: azione-bonus, usi: {da_tabella: recuperare_energie, ricarica: {riposo-breve: 1, riposo-lungo: tutti}}}
+- id: maestria-armi
+  nome: "Maestria nelle Armi"
+  descrizione: |
+    Il tuo addestramento con le armi ti permette di utilizzare le proprietà di maestria di tre tipi di armi Semplici o Marziali a tua scelta. Ogni volta che termini un Riposo Lungo, puoi esercitarti con le armi e cambiare una di quelle scelte.
+
+    Quando raggiungi determinati livelli da Guerriero, ottieni la capacità di utilizzare le proprietà di maestria di un numero maggiore di tipi di armi, come indicato nella colonna Maestria nelle Armi della tabella Capacità del Guerriero.
+  attivita:
+    - {tipo: scelta, scelta: maestria-arma, quantita_da_tabella: padronanza_armi, recupero: riposo-lungo}
+- id: azione-impetuosa
+  nome: "Azione Impetuosa"
+  descrizione: |
+    Puoi spingerti oltre i tuoi limiti abituali per un istante. Durante il tuo turno, puoi effettuare un'azione aggiuntiva, a eccezione dell'azione Magia.
+
+    Una volta utilizzata questa capacità, non puoi farlo di nuovo finché non termini un Riposo Breve o Lungo. A partire dal livello 17, puoi usarla due volte prima di un riposo, ma solo una volta per turno.
+- id: mente-tattica
+  nome: "Mente Tattica"
+  descrizione: |
+    Possiedi una mente portata per la tattica, sia sul campo di battaglia che fuori. Quando fallisci una prova di caratteristica, puoi consumare un utilizzo di Secondo Fiato per spingerti verso il successo. Invece di recuperare Punti Ferita, tiri 1d10 e aggiungi il risultato alla prova di caratteristica, trasformandola potenzialmente in un successo. Se la prova fallisce comunque, questo utilizzo di Secondo Fiato non viene consumato.
+- id: sottoclasse-del-guerriero
+  nome: "Sottoclasse del Guerriero"
+  descrizione: |
+    Ottieni una sottoclasse del Guerriero a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Guerriero. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Guerriero o a livelli inferiori.
+- id: aumento-punteggi-caratteristica
+  nome: "Aumento del Punteggio di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento del Punteggio di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da Guerriero 6, 8, 12, 14 e 16.
+- id: attacco-extra
+  nome: "Attacco Extra"
+  descrizione: |
+    Puoi attaccare due volte invece di una ogni volta che effettui l'azione Attaccare durante il tuo turno.
+  attivita:
+    - {tipo: passivo, effetti: [{bersaglio: attacchi-per-azione, operazione: aumento, valore: 2}]}
+- id: spostamento-tattico
+  nome: "Spostamento Tattico"
+  descrizione: |
+    Ogni volta che attivi Secondo Fiato come Azione Bonus, puoi muoverti fino a metà della tua Velocità senza provocare Attacchi di Opportunità.
+- id: maestro-di-tattica
+  nome: "Maestro di Tattica"
+  descrizione: |
+    Quando attacchi con un'arma di cui puoi utilizzare la proprietà di maestria, puoi sostituire tale proprietà con la proprietà Spingere, Indebolire o Rallentare per quell'attacco.
+- id: indomabile
+  nome: "Indomabile"
+  descrizione: |
+    Se fallisci un tiro salvezza, puoi ritirarlo con un bonus pari al tuo livello da Guerriero. Devi utilizzare il nuovo risultato e non puoi usare nuovamente questa capacità finché non completi un riposo lungo.
+
+    A partire dal livello 13 puoi usare questa capacità due volte prima di un riposo lungo, e tre volte prima di un riposo lungo a partire dal livello 17.
+- id: due-attacchi-extra
+  nome: "Due Attacchi Extra"
+  descrizione: |
+    Puoi attaccare tre volte invece di una ogni volta che effettui l'azione di Attacco durante il tuo turno.
+  attivita:
+    - {tipo: passivo, effetti: [{bersaglio: attacchi-per-azione, operazione: aumento, valore: 3}]}
+- id: attacchi-studiati
+  nome: "Attacchi Studiati"
+  descrizione: |
+    Studi i tuoi avversari e impari da ogni attacco che effettui. Se effettui un tiro per colpire contro una creatura e manchi il bersaglio, ottieni Vantaggio al tuo successivo tiro per colpire contro quella stessa creatura prima della fine del tuo turno successivo.
+- id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni il talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- id: tre-attacchi-extra
+  nome: "Tre Attacchi Extra"
+  descrizione: |
+    Puoi attaccare quattro volte invece di una ogni volta che effettui l'azione di Attacco durante il tuo turno.
+  attivita:
+    - {tipo: passivo, effetti: [{bersaglio: attacchi-per-azione, operazione: aumento, valore: 4}]}

@@ -1,0 +1,34 @@
+id: dnd.mostro.berserker
+nome: Berserker
+taglia: [media, piccola]
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 9, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 9, competenza: false}
+dadi_vita: 9
+velocita: {camminata: 9}
+equipaggiamento: [ascia bipenne, armatura di pelle]
+lingue: [comune]
+gs: 2
+tratti:
+  - id: berserker.frenesia-sanguinante
+    nome: Frenesia Sanguinante
+    descrizione: |
+      Finché è Sanguinante, il berserker dispone di Vantaggio ai tiri per colpire e ai tiri salvezza.
+azioni:
+  - id: berserker.ascia-bipenne
+    nome: Ascia Bipenne
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m.
+      *Colpito:* 9 (1d12 + 3) danni Taglienti.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: arma-mischia, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, usa: dnd.arma.ascia-bipenne, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 1, dado: d12, tipo_danno: tagliente, bonus: { caratteristica: forza } }

@@ -1,0 +1,5 @@
+id: dnd.oggetto.corda
+nome: Corda
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-oro}
+peso: {valore: 2.5, unita: kg}

@@ -1,0 +1,13 @@
+id: dnd.strumento.strumento-musicale
+nome: Strumento Musicale
+categoria: strumenti
+costo: {valore: 5, valuta: moneta-oro}
+caratteristica: carisma
+utilizzo:
+  - azione: Suonare una melodia nota
+    cd: 10
+  - azione: Improvvisare un brano
+    cd: 15
+creazione: [dnd.oggetto.antitossina, dnd.oggetto.candela, dnd.oggetto.kit-del-guaritore, dnd.oggetto.pozione-di-guarigione]
+descrizione: |
+varianti: Cornamusa (30 mo, 6 libbre), tamburo (6 mo, 3 libbre), salterio (25 mo, 10 libbre), flauto (2 mo, 1 libbra), corno (3 mo, 2 libbre), liuto (35 mo, 2 libbre), lira (30 mo, 2 libbre), flauto di Pan (12 mo, 2 libbre), ciaramella (2 mo, 1 libbra), viola (30 mo, 1 libbra)

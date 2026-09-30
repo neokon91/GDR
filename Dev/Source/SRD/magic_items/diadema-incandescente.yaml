@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.diadema-incandescente
+nome: Diadema incandescente
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Indossando questo diadema, il personaggio può lanciare un incantesimo raggio rovente (+5 per colpire). L'oggetto non può lanciare di nuovo questo incantesimo fino all'alba successiva.

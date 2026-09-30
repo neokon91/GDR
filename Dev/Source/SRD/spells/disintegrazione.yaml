@@ -1,0 +1,27 @@
+id: dnd.incantesimo.disintegrazione
+nome: Disintegrazione
+livello: 6
+scuola: trasmutazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S, "M (una calamita e della polvere)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore lancia un raggio verde verso un bersaglio entro gittata che egli è in grado di vedere. Il bersaglio può essere una creatura, un oggetto non magico o una creazione di forza magica, come un muro creato da muro di forza.
+
+  Una creatura bersagliata da questo incantesimo effettua un tiro salvezza su Destrezza. Se lo fallisce, subisce 10d6 + 40 danni da forza. Se tali danni riducono i punti ferita del bersaglio a 0, la creatura, insieme a qualsiasi oggetto non magico indossi o trasporti, viene disintegrata in polvere grigia. Il bersaglio può essere rianimato solo da un incantesimo desiderio o resurrezione pura.
+
+  Questo incantesimo disintegra automaticamente un oggetto non magico di taglia Grande o inferiore, oppure una creazione di forza magica. Se il bersaglio è Enorme o superiore, questo incantesimo ne disintegra una parte pari a un cubo con spigolo di 3 metri.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 3d6 per ogni slot di livello superiore al 6º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 10, dado: d6, bonus: 40, tipo_danno: forza }

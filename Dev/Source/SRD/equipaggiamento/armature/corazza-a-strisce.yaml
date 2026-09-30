@@ -1,0 +1,12 @@
+id: dnd.armatura.corazza-a-strisce
+nome: Corazza a Strisce
+tipo: armatura-pesante
+categoria: armature
+costo: {valore: 200, valuta: moneta-oro}
+peso: {valore: 30, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 17}}
+requisito_forza: 15
+svantaggio_furtivita: true

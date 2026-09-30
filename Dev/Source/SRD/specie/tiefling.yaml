@@ -1,0 +1,24 @@
+id: dnd.specie.tiefling
+nome: Tiefling
+tipo: umanoide
+taglia: [piccola, media]
+velocita: {camminata: 9}
+tratti_sintesi: retaggio immondo, presenza ultraterrena e scurovisione
+retaggi_immondi:
+- id: tiefling.retaggio-immondo.abissale
+  nome: Abissale
+  livello1: resistenza veleno e spruzzo velenoso
+  livello3: raggio di infermita
+  livello5: blocca persone
+
+- id: tiefling.retaggio-immondo.ctonio
+  nome: Ctonio
+  livello1: resistenza necrotico e tocco gelido
+  livello3: vita falsata
+  livello5: raggio di affaticamento
+
+- id: tiefling.retaggio-immondo.infernale
+  nome: Infernale
+  livello1: resistenza fuoco e dardo di fuoco
+  livello3: intimorire infernale
+  livello5: dnd.incantesimo.oscurita

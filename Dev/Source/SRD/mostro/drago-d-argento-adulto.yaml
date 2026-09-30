@@ -1,0 +1,131 @@
+id: dnd.mostro.drago-d-argento-adulto
+nome: Drago d'argento adulto
+taglia: enorme
+tipo: drago
+sottotipo: metallico
+gruppo: Draghi d'argento
+allineamento: legale buono
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 27, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 25, competenza: false}
+  intelligenza: {valore: 16, competenza: false}
+  saggezza: {valore: 13, competenza: true}
+  carisma: {valore: 22, competenza: false}
+iniziativa: maestria
+dadi_vita: 16
+velocita: {camminata: 12, volo: 24}
+abilita: [furtivita: competenza, storia: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 18}
+percezione_passiva: 21
+immunita_danni: [freddo]
+lingue: [Comune, Draconico]
+gs: 16
+
+tratti:
+  - nome: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+    descrizione: |
+      Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio paralizzante o (B) Incantesimi per lanciare coltello di ghiaccio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +13, portata 3 m. *Colpito:* 17 (2d8 + 8) danni taglienti più 4 (1d8) danni da freddo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 19, +11 al tiro per colpire degli attacchi con incantesimo):
+
+      *1/giorno ciascuno:*
+      - tempesta di ghiaccio (di 5º livello)
+      - zona di verità
+
+      *A volontà:*
+      - blocca mostri
+      - coltello di ghiaccio
+      - individuazione del magico
+      - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 19
+        a_volonta:
+          - dnd.incantesimo.blocca-mostri
+          - dnd.incantesimo.coltello-di-ghiaccio
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.trasformazione
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - id: dnd.incantesimo.tempesta-di-ghiaccio
+                livello: 5
+              - dnd.incantesimo.zona-di-verita
+  - nome: "Soffio di freddo (ricarica 5-6)"
+    id: soffio-di-freddo-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 20, tutte le creature in un cono di 18 metri. *Fallimento:* 54 (12d8) danni da freddo. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 12, dado: d8, tipo_danno: freddo}
+        successo: danno-dimezzato
+  - nome: Soffio paralizzante
+    id: soffio-paralizzante
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 20, tutte le creature in un cono di 18 metri.
+
+      *Primo fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo. A quel punto, ripete il tiro salvezza.
+
+      *Secondo fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Assideramento
+    descrizione: |
+      Il drago usa Incantesimi per lanciare blocca mostri. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+  - nome: Balzo
+    descrizione: |
+      Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+  - nome: Bufera
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 19, tutte le creature in una linea lunga 18 metri e larga 3 metri. *Fallimento:* 14 (4d6) danni da freddo, e il bersaglio viene spinto in linea retta fino a un massimo di 9 metri lontano dal drago. *Successo:* danni dimezzati. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 4, dado: d6, tipo_danno: freddo}
+        successo: danno-dimezzato

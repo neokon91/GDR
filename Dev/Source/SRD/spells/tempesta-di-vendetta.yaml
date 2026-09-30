@@ -1,0 +1,24 @@
+id: dnd.incantesimo.tempesta-di-vendetta
+nome: Tempesta di vendetta
+livello: 9
+scuola: evocazione
+classi:
+  - dnd.classe.druido
+tempo_lancio: azione
+gittata: 1500
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Per la durata dell'incantesimo, l'incantatore genera una minacciosa nube temporalesca che si espande fino a una raggio di 90 metri centrata su un punto entro gittata. Ogni creatura che si trova sotto alla nube quando appare deve superare un tiro salvezza su Costituzione, altrimenti subirà 2d6 danni da tuono e sarà assordata per la durata dell'incantesimo.
+
+  All'inizio di ciascun turno successivo, la tempesta produce effetti diversi, come indicato sotto.
+
+  2º turno. Cade della pioggia acida. Ogni creatura e ogni oggetto sotto la nube subisce 4d6 danni da acido.
+
+  3º turno. L'incantatore invoca sei fulmini che scendono dalla nube e colpiscono sei creature o oggetti situati sotto di essa. Ogni bersaglio effettua un tiro salvezza su Destrezza, subendo 10d6 danni da fulmine in caso di fallimento, o la metà dei danni in caso di successo.
+
+  4º turno. Cade della grandine. Ogni creatura sotto la nube subisce 2d6 danni contundenti.
+
+  Dal 5º al 10º turno. L'area sotto la nube è attraversata da raffiche di vento e pioggia gelida, ogni creatura sotto di essa subisce 1d6 danni da freddo. Fino al termine dell'incantesimo, quest'area è considerata terreno difficile ed è pesantemente oscurata. È sferzata da forti venti e al suo interno è impossibile eseguire attacchi a distanza.

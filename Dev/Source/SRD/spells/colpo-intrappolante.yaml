@@ -1,0 +1,20 @@
+id: dnd.incantesimo.colpo-intrappolante
+nome: Colpo intrappolante
+livello: 1
+scuola: evocazione
+classi:
+  - dnd.classe.ranger
+tempo_lancio: azione bonus
+innesco: "l'incantatore effettua subito dopo aver colpito una creatura con un'arma"
+gittata: incantatore
+componenti: [V]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Quando l'incantatore colpisce il bersaglio, su di esso appare un groviglio di rampicanti. Il bersaglio effettua un tiro salvezza su Forza, disponendo di vantaggio a questo tiro se è una creatura di taglia Grande o superiore. Se lo fallisce, il bersaglio è trattenuto fino al termine dell'incantesimo. Se lo supera, i rampicanti si ritraggono e avvizziscono, ponendo fine all'incantesimo.
+
+  Finché è trattenuto, il bersaglio subisce 1d6 danni perforanti all'inizio di ogni suo turno. Il bersaglio o una creatura alla sua portata può usare un'azione per effettuare una prova di Forza (Atletica) contro la CD del tiro salvezza sull'incantesimo. In caso di successo, l'incantesimo termina.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d6 per ogni slot di livello superiore al 1º.

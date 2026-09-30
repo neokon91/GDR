@@ -1,0 +1,63 @@
+id: dnd.mostro.pseudodrago
+nome: Pseudodrago
+taglia: minuscola
+tipo: drago
+allineamento: neutrale buono
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 5, volo: 18}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18, vista_cieca: 3}
+percezione_passiva: 15
+lingue: ["capisce Comune e Draconico, ma non li parla"]
+gs: 1/4
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Lo pseudodrago dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+    descrizione: |
+      Lo pseudodrago effettua due attacchi Morso.
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Pungiglione
+    id: pungiglione
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 12, una creatura che lo pseudodrago è in grado di vedere entro 1,5 metri. *Fallimento:* 5 (2d4) danni da veleno, e il bersaglio è avvelenato per 1 ora. Fallimento di 5 o più: finché rimane avvelenato, il bersaglio è privo di sensi. Il bersaglio si sveglia se subisce danni o se una creatura entro 1,5 metri da esso effettua un'azione per svegliarlo.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: destrezza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 2, dado: d4, tipo_danno: veleno}

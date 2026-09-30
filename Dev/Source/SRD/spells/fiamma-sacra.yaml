@@ -1,0 +1,24 @@
+id: dnd.incantesimo.fiamma-sacra
+nome: Fiamma sacra
+livello: 0
+scuola: invocazione
+classi:
+  - dnd.classe.chierico
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Un bagliore simile a una fiamma discende su una creatura entro gittata che egli è in grado di vedere.
+  Il bersaglio deve superare un tiro salvezza su Destrezza, altrimenti subisce 1d8 danni Radiosi.
+  Per questo tiro salvezza, il bersaglio non trae beneficio dalla mezza copertura o dai tre quarti di copertura.
+
+  **Trucchetto potenziato.**
+  I danni aumentano di 1d8 quando l'incantatore raggiunge il 5º livello (2d8), l'11º livello (3d8) e il 17º livello (4d8).
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 1, dado: d8, tipo_danno: radioso }

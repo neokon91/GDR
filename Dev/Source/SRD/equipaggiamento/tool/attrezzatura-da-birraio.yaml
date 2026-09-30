@@ -1,0 +1,16 @@
+id: dnd.strumento.attrezzatura-da-birraio
+nome: Attrezzatura da Birraio
+categoria: strumenti
+famiglia: attrezzatura-da-artigiano
+costo: {valore: 20, valuta: moneta-oro}
+peso: {valore: 4, unita: kg}
+caratteristica: intelligenza
+utilizzo:
+  - azione: Rilevare bevande avvelenate
+    cd: 15
+  - azione: Identificare alcolici
+    cd: 10
+creazione: [dnd.oggetto.antitossina]
+descrizione: |
+  Se possiedi la competenza in uno strumento, aggiungi il tuo Bonus di Competenza a qualsiasi prova di caratteristica che richieda l'uso di tale strumento.
+  Se possiedi anche la competenza in un'abilità utilizzata per quella prova, ottieni Vantaggio alla prova stessa.

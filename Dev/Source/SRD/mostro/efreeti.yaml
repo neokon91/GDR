@@ -1,0 +1,95 @@
+id: dnd.mostro.efreeti
+nome: Efreeti
+taglia: grande
+tipo: elementale
+sottotipo: genio
+allineamento: neutrale
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 22, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 24, competenza: false}
+  intelligenza: {valore: 16, competenza: false}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 19, competenza: true}
+dadi_vita: 17
+velocita: {camminata: 12, volo: 18}
+sensi: {scurovisione: 36}
+percezione_passiva: 12
+immunita_danni: [fuoco]
+lingue: ["Primordiale (Ignan)"]
+gs: 11
+
+tratti:
+  - nome: Desideri
+    descrizione: |
+      L'efreeti ha una probabilità del 30% di conoscere l'incantesimo desiderio. Se l'efreeti lo conosce, può lanciarlo solo per conto di una creatura diversa da un genio che comunica un desiderio in un modo che l'efreeti è in grado di comprendere. Se l'efreeti lancia l'incantesimo per conto della creatura, non subisce alcuna conseguenza derivante dal lancio dell'incantesimo. Una volta che l'efreeti l'ha lanciato tre volte, non può farlo di nuovo per 365 giorni.
+  - nome: Resistenza alla magia
+    descrizione: |
+      L'efreeti dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro elementale
+    descrizione: |
+      Se l'efreeti muore al di fuori del Piano Elementale del Fuoco, il suo corpo si dissolve in cenere ed esso ne acquisisce uno nuovo dopo 1d4 giorni, tornando in vita con tutti i suoi punti ferita da qualche parte sul Piano Elementale del Fuoco.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      L'efreeti effettua tre attacchi, usando Lama cocente o Scagliare fiamma in qualsiasi combinazione.
+  - nome: Lama cocente
+    descrizione: |
+      *Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 13 (2d6 + 6) danni taglienti più 13 (2d12) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Scagliare fiamma
+    descrizione: |
+      *Tiro per colpire a distanza:* +8, gittata 36 m. *Colpito:* 24 (7d6) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: carisma, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno: {numero_dadi: 7, dado: d6, tipo_danno: fuoco}
+  - nome: Incantesimi
+    descrizione: |
+      L'efreeti lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16):
+
+      *1/giorno ciascuno:*
+      - forma gassosa
+      - immagine maggiore
+      - invisibilità
+      - linguaggi
+      - muro di fuoco (di 7º livello)
+      - spostamento planare
+
+      *A volontà:*
+      - elementalismo
+      - individuazione del magico
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 16
+        a_volonta:
+          - dnd.incantesimo.elementalismo
+          - dnd.incantesimo.individuazione-del-magico
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.forma-gassosa
+              - dnd.incantesimo.immagine-maggiore
+              - dnd.incantesimo.invisibilita
+              - dnd.incantesimo.linguaggi
+              - id: dnd.incantesimo.muro-di-fuoco
+                livello: 7
+              - dnd.incantesimo.spostamento-planare

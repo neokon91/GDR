@@ -1,0 +1,38 @@
+id: dnd.mostro.cavallo-da-galoppo
+nome: Cavallo da galoppo
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 18}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1/4
+
+azioni:
+  - nome: Zoccoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni contundenti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

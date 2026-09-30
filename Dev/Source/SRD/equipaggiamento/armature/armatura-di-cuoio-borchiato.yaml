@@ -1,0 +1,10 @@
+id: dnd.armatura.armatura-di-cuoio-borchiato
+nome: Armatura di Cuoio Borchiato
+tipo: armatura-leggera
+categoria: armature
+costo: {valore: 45, valuta: moneta-oro}
+peso: {valore: 6.5, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 12, caratteristiche: [destrezza], max_modificatore: 2}}

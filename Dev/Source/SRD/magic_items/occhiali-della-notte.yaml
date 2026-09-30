@@ -1,0 +1,11 @@
+id: dnd.oggetto-magico.occhiali-della-notte
+nome: Occhiali della notte
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: false
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: sensi.scurovisione, operazione: somma, valore: 18}
+descrizione: |
+  Finché il personaggio indossa queste lenti scure, ottiene scurovisione fino a 18 metri. Se ha già scurovisione, gli occhiali ne aumentano il raggio di 18 metri.

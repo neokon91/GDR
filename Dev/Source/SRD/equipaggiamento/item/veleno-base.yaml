@@ -1,0 +1,4 @@
+id: dnd.oggetto.veleno-base
+nome: Veleno Base
+categoria: equipaggiamento-avventura
+costo: {valore: 100, valuta: moneta-oro}

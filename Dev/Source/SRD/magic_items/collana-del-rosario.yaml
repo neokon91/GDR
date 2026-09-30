@@ -1,0 +1,15 @@
+id: dnd.oggetto-magico.collana-del-rosario
+nome: Collana del rosario
+categoria: oggetto-meraviglioso
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Questa collana ha 1d4 + 2 perle magiche fatte di acquamarina, perla nera o topazio, oltre a molte perle non magiche fatte di ambra, diaspro, citrino, corallo, giada, perla o quarzo. Se una perla magica viene rimossa dalla collana, perde la sua magia.
+  Esistono sei tipi di perline magiche. La loro tipologia è a discrezione del GM o determinata casual-mente tirando sulla tabella sottostante. La collana può includere più perle dello stesso tipo. Per usarne una, il personaggio deve indossare la collana. Ogni perla contiene un incantesimo che il personaggio può lanciare come azione bonus (usando la sua CD del tiro salvezza sull'incantesimo, quando è richiesto un tiro salvezza). Una volta lanciato l'incantesimo di una perla magica, quella perla non può più essere usata fino all'alba successiva.
+  **1d20 Perla Incantesimo**
+  **1–4** Perla del favore Ristorare superiore
+  *5* Perla del richiamo Guardiano della fede
+  **6–11** Perla della benedizione Benedizione
+  **12** Perla della camminata nel vento Camminare nel vento
+  **13–18** Perla della guarigione Cura ferite (versione di 2º livello)
+  **19–20** Perla della punizione Punizione splendente

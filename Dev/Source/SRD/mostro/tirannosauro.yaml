@@ -1,0 +1,60 @@
+id: dnd.mostro.tirannosauro
+nome: Tirannosauro
+taglia: enorme
+tipo: bestia
+sottotipo: dinosauro
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 25, competenza: true}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 19, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 9, competenza: false}
+iniziativa: competenza
+dadi_vita: 13
+velocita: {camminata: 15}
+abilita: [percezione: competenza]
+percezione_passiva: 14
+lingue: [nessuna]
+gs: 8
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il tirannosauro effettua un attacco Morso e un attacco Coda.
+  - nome: Coda
+    descrizione: |
+      *Tiro per colpire in mischia:* +10, portata 4,5 m. *Colpito:* 25 (4d8 + 7) danni contundenti. Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 4.5
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 33 (4d12 + 7) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 17 per sfuggire). Mentre è afferrato, il bersaglio è trattenuto e non può essere bersagliato dalla Coda del tirannosauro.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d12
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

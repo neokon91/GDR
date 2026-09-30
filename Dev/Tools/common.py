@@ -16,7 +16,11 @@ SOURCE = ROOT / "Dev" / "Source"
 YAML_DIR = SOURCE / "YAML"
 JINJA_DIR = SOURCE / "Jinja"
 JS_DIR = SOURCE / "JS"
-SRD_DIR = SOURCE / "SRD"  # SRD 5.2.1 vendorizzata (JSON IT, CC-BY-4.0)
+# SRD 5.2.1 (CC-BY-4.0): copia VENDORIZZATA di `archivio/srd/`, la sola fonte di dati della
+# build. GDR è pubblico e l'archivio no: la copia si aggiorna con `sync_srd.py` (che porta qui
+# solo srd/) e la CI notturna segnala quando resta indietro.
+SRD_DIR = SOURCE / "SRD"
+ARCHIVIO_SRD = ROOT / "archivio" / "srd"  # solo per sync_srd.py
 
 
 def bundle_js(stem: str) -> str:

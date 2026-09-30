@@ -1,0 +1,5 @@
+id: dnd.oggetto.serratura
+nome: Serratura
+categoria: equipaggiamento-avventura
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 0.5, unita: kg}

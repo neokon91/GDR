@@ -1,0 +1,43 @@
+id: dnd.mostro.lemure
+nome: Lemure
+taglia: media
+tipo: immondo
+sottotipo: diavolo
+allineamento: legale malvagio
+ca: {valore: 9}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 5, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 6}
+sensi: {scurovisione: 36}
+scurovisione_magica: true
+percezione_passiva: 10
+resistenze: [freddo]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [affascinato, avvelenato, spaventato]
+lingue: [capisce l'Infernale ma non lo parla]
+gs: 0
+
+tratti:
+  - nome: Ristoro immondo
+    descrizione: |
+      Se il lemure muore nei Nove Inferi, torna in vita con tutti i suoi punti ferita dopo 1d10 giorni, a meno che non venga ucciso da una creatura sotto gli effetti di un incantesimo benedizione o i suoi resti vengano spruzzati di acqua santa.
+azioni:
+  - nome: Melma vile
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni da veleno.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno: {numero_dadi: 1, dado: d4, tipo_danno: veleno}

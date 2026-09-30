@@ -1,0 +1,22 @@
+id: dnd.incantesimo.scudo
+nome: Scudo
+livello: 1
+scuola: abiurazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: reazione
+innesco: "l'incantatore effettua quando è colpito da un tiro per colpire o bersagliato dall'incantesimo dardo incantato"
+gittata: incantatore
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 1 round
+attivita:
+  - tipo: potenziamento
+    bersaglio: se-stesso
+    concede: scudo-arcano
+    durata: {valore: 1, unita: round}
+    innesco: colpito
+descrizione: |
+  Una barriera impercettibile di forza magica protegge l'incantatore. Fino all'inizio del suo turno successivo, l'incantatore ottiene un bonus di +5 alla CA da applicare anche all'attacco innescante e non subisce danni da dardo incantato.

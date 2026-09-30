@@ -1,0 +1,78 @@
+id: dnd.mostro.incubo
+nome: Incubo
+taglia: media
+tipo: immondo
+allineamento: neutrale malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 8, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 15, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 20, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 9, volo: 18}
+abilita: [furtivita: maestria, inganno: maestria, intuizione: maestria, percezione: maestria, persuasione: maestria]
+sensi: {scurovisione: 18, telepatia: 18}
+percezione_passiva: 15
+resistenze: [freddo, fuoco, psichico, veleno]
+lingue: [Abissale, Comune, Infernale]
+gs: 4
+
+tratti:
+  - nome: Forma succube
+    descrizione: |
+      Quando l'incubo termina un riposo lungo, può trasformarsi in una succube, utilizzando la relativa scheda delle statistiche al posto di questa. Nessun oggetto che indossa o trasporta viene trasformato.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: tocco-irrequieto, ripetizioni: 2}
+    descrizione: |
+      L'incubo effettua due attacchi Tocco irrequieto.
+  - nome: Tocco irrequieto
+    id: tocco-irrequieto
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 15 (3d6 + 5) danni psichici, e il bersaglio è maledetto per 24 ore o finché l'incubo non muore. Finché la maledizione perdura, il bersaglio non ottiene alcun beneficio dai riposi brevi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: carisma, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: psichico
+              bonus: {caratteristica: carisma}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      L'incubo lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15): 1/giorno ciascuno: Sogno, trama ipnotica A volontà: Camuffare se stesso, forma eterea
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 15
+        a_volonta:
+          - dnd.incantesimo.camuffare-se-stesso
+          - dnd.incantesimo.forma-eterea
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.sogno
+              - dnd.incantesimo.trama-ipnotica
+azioni_bonus:
+  - nome: "Sogno spaventoso (ricarica 6)"
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 15, una creatura che l'incubo è in grado di vedere entro 18 metri. *Fallimento:* Se il bersaglio ha 20 punti ferita o meno, è privo di sensi per 1 ora, finché non subisce danni o un'altra creatura entro 1,5 metri da lui non usa un'azione per svegliarlo. Altrimenti, il bersaglio subisce 18 (4d8) danni psichici.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: carisma, base: 8, competenza: true}

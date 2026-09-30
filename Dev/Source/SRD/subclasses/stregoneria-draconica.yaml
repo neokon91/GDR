@@ -1,0 +1,40 @@
+id: dnd.sottoclasse.stregoneria-draconica
+nome: Stregoneria Draconica
+classe: dnd.classe.stregone
+citazione: "Lasciati inebriare dalla magia dei draghi"
+descrizione: |
+privilegi:
+- livello: 3
+  nome: "Resilienza Draconica"
+  descrizione: |
+    Aumenta i PF e, senza armatura, usa 10 + Des + Car come CA base.
+
+- livello: 3
+  nome: "Incantesimi Draconici"
+  descrizione: |
+    Gli incantesimi della tabella sono sempre preparati.
+
+- livello: 6
+  nome: "Affinita Elementale"
+  descrizione: |
+    Sceglie acido, freddo, fulmine, fuoco o veleno; ottiene resistenza e aggiunge Carisma ai danni.
+
+- livello: 14
+  nome: "Ali di Drago"
+  descrizione: |
+    Come azione bonus ottiene velocita di volo 18 m per 1 ora.
+
+- livello: 18
+  nome: "Seguace Draconico"
+  descrizione: |
+    Lancia richiama drago senza materiale, una volta gratis, e puo rimuovere concentrazione riducendo la durata.
+
+incantesimi:
+- livello: 3
+  incantesimi_preparati: [dnd.incantesimo.alterare-se-stesso, dnd.incantesimo.globo-cromatico, dnd.incantesimo.comando, dnd.incantesimo.soffio-del-drago]
+- livello: 5
+  incantesimi_preparati: [dnd.incantesimo.paura, dnd.incantesimo.volare]
+- livello: 7
+  incantesimi_preparati: [dnd.incantesimo.occhio-arcano, dnd.incantesimo.charme-sui-mostri]
+- livello: 9
+  incantesimi_preparati: [dnd.incantesimo.conoscenza-delle-leggende, dnd.incantesimo.richiama-drago]

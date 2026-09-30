@@ -1,0 +1,79 @@
+id: dnd.mostro.behir
+nome: Behir
+taglia: enorme
+tipo: mostruosita
+allineamento: neutrale malvagio
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 23, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 12, competenza: false}
+dadi_vita: 16
+velocita: {camminata: 15, scalata: 15}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 27}
+immunita_danni: [fulmine]
+lingue: [Draconico]
+gs: 11
+azioni:
+  - id: behir.multiattacco
+    nome: Multiattacco
+    descrizione: Il behir effettua un attacco Morso e usa Stritolare.
+  - id: behir.morso
+    nome: Morso
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +10, portata 3 m.
+      *Colpito:* 19 (2d12 + 6) danni Perforanti più 11 (2d10) danni da Fulmine.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 3 }
+        colpito:
+          - danno: { numero_dadi: 2, dado: d12, tipo_danno: perforante, bonus: { caratteristica: forza } }
+  - id: behir.soffio-di-fulmini
+    nome: "Soffio di Fulmini (ricarica 5-6)"
+    descrizione: |
+      *Tiro Salvezza su Destrezza:* CD 16, tutte le creature in una Linea lunga 27 metri e larga 1,5 metri.
+      *Fallimento:* 66 (12d10) danni da Fulmine.
+      *Successo:* Danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: { caratteristica: costituzione, base: 8, competenza: true }
+        fallimento:
+          - danno: {numero_dadi: 12, dado: d10, tipo_danno: fulmine}
+        successo: danno-dimezzato
+  - id: behir.stritolare
+    nome: Stritolare
+    descrizione: |
+      *Tiro Salvezza su Forza:* CD 18, una creatura di taglia Grande o inferiore che il behir è in grado di vedere entro 1,5 metri.
+      *Fallimento:* 28 (5d8 + 6) danni Contundenti.
+      Il bersaglio è Afferrato (CD 16 per sfuggire) ed è Trattenuto finché la presa perdura.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+azioni_bonus:
+  - id: behir.inghiottire
+    nome: Inghiottire
+    descrizione: |
+      *Tiro Salvezza su Destrezza:* CD 18, una creatura di taglia Grande o inferiore Afferrata dal behir
+      (il behir può inghiottire solo una creatura alla volta).
+      *Fallimento:* Il behir inghiotte il bersaglio, che non è più afferrato.
+      Finché è inghiottita, la creatura è accecata e Trattenuta,
+      beneficia di Copertura Totale contro gli attacchi e altri effetti al di fuori del behir,
+      e subisce 21 (6d6) danni da Acido all'inizio di ogni turno del behir.
+      Se il behir subisce 30 o più danni in un singolo turno dalla creatura inghiottita,
+      deve superare un tiro salvezza su Costituzione con CD 14 alla fine di quel turno,
+      altrimenti rigurgita la creatura, che cade prona in uno spazio entro 3 metri dal behir.
+      Se il behir muore, la creatura inghiottita non è più trattenuta e può fuggire dal cadavere
+      usando 4,5 metri di movimento, uscendo Prona.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}

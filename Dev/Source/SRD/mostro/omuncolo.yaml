@@ -1,0 +1,38 @@
+id: dnd.mostro.omuncolo
+nome: Omuncolo
+taglia: minuscola
+tipo: costrutto
+allineamento: neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 4, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 10, competenza: true}
+  carisma: {valore: 7, competenza: true}
+dadi_vita: 1
+velocita: {camminata: 6, volo: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+immunita_danni: [veleno]
+immunita_condizioni: [affascinato, avvelenato]
+lingue: [capisce il Comune più un'altra lingua ma non le parla]
+gs: 0
+
+tratti:
+  - nome: Legame telepatico
+    descrizione: |
+      Finché l'omuncolo si trova sullo stesso piano di esistenza del suo padrone, i due possono comunicare telepaticamente tra loro.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 1 danno perforante, e il bersaglio subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 12. *Fallimento:* il bersaglio è avvelenato fino al termine del turno successivo dell'omuncolo. Fallimento di 5 o più: il bersaglio è avvelenato per 1 minuto. Finché è avvelenato, è privo di sensi, ma la condizione termina prima se subisce dei danni.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

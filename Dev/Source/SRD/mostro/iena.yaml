@@ -1,0 +1,40 @@
+id: dnd.mostro.iena
+nome: Iena
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 15}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Tattiche del branco
+    descrizione: |
+      La iena dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 3 (1d6) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno: {numero_dadi: 1, dado: d6, tipo_danno: perforante}

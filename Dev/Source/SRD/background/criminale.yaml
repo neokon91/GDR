@@ -1,0 +1,13 @@
+id: dnd.background.criminale
+nome: Criminale
+punteggi_caratteristica: [destrezza, costituzione, intelligenza]
+talento_origine: dnd.talento.allerta
+competenze:
+  abilita: [rapidita-di-mano, furtivita]
+  strumenti: [dnd.strumento.attrezzi-da-scasso]
+equipaggiamento_alternativo:
+  scelte:
+    - nome: B
+      oggetti:
+        - articolo: dnd.valuta.moneta-oro
+          quantita: 50

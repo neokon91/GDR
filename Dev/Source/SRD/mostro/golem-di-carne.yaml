@@ -1,0 +1,65 @@
+id: dnd.mostro.golem-di-carne
+nome: Golem di carne
+taglia: media
+tipo: costrutto
+allineamento: neutrale
+ca: {valore: 9}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 9, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 15
+velocita: {camminata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+immunita_danni: [fulmine, veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, paralizzato, pietrificato, spaventato]
+lingue: [capisce il Comune più un'altra lingua ma non le parla]
+gs: 5
+
+tratti:
+  - nome: Assorbimento del fulmine
+    descrizione: |
+      Ogni volta che il golem subisce danni da fulmine, recupera un numero di punti ferita pari ai danni da fulmine inflitti.
+  - nome: Avversione al fuoco
+    descrizione: |
+      Se il golem subisce danni da fuoco, subisce svantaggio ai tiri per colpire e alle prove di caratteristica fino al termine del proprio turno successivo.
+  - nome: Berserk
+    descrizione: |
+      Ogni volta che il golem inizia il suo turno sanguinante, tira 1d6. Se esce 6, il golem entra in uno stato di berserk. A ogni suo turno, finché è in stato di berserk, il golem attacca la creatura più vicina che è in grado di vedere. Se nessuna creatura è abbastanza vicina per essere attaccata, il golem si scaglia contro un oggetto. Una volta che il golem entra in stato di berserk, rimane in questo stato finché non viene distrutto o non è più sanguinante. Il creatore del golem, se si trova entro 18 metri dal golem in stato di berserk, può cercare di calmarlo eseguendo un'azione per effettuare una prova di Carisma (Persuasione) con CD 15. Il golem deve essere in grado di udire il suo creatore. Se la prova ha successo, il golem esce dallo stato di berserk fino all'inizio del proprio turno successivo; a quel punto, se è ancora sanguinante, riprende a effettuare il tiro del tratto Berserk.
+  - nome: Forma immutabile
+    descrizione: |
+      Il golem non può mutare forma.
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: schianto, ripetizioni: 2}
+    descrizione: |
+      Il golem effettua due attacchi Schianto.
+  - nome: Schianto
+    id: schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti più 4 (1d8) danni da fulmine.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

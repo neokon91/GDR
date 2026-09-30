@@ -1,0 +1,79 @@
+id: dnd.mostro.balor
+nome: Balor
+taglia: enorme
+tipo: immondo
+sottotipo: demone
+allineamento: caotico malvagio
+ca: {valore: 19}
+caratteristiche:
+  forza: {valore: 26, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 22, competenza: true}
+  intelligenza: {valore: 20, competenza: false}
+  saggezza: {valore: 16, competenza: true}
+  carisma: {valore: 22, competenza: false}
+iniziativa: maestria
+dadi_vita: 23
+velocita: {camminata: 12, volo: 24}
+abilita: [percezione: competenza]
+sensi: {vista_pura: 36}
+resistenze: [freddo, fulmine]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [affascinato, avvelenato, spaventato]
+lingue: [abissale, telepatia 36 m]
+gs: 19
+tratti:
+  - id: balor.aura-di-fuoco
+    nome: Aura di Fuoco
+    descrizione: |
+      Al termine di ogni turno del balor, tutte le creature in un'emanazione di 1,5 metri di cui il balor è il punto di origine subiscono 13 (3d8) danni da fuoco.
+  - id: balor.resistenza-alla-magia
+    nome: Resistenza alla Magia
+    descrizione: |
+      Il balor dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - id: balor.resistenza-leggendaria
+    nome: "Resistenza Leggendaria (3/giorno)"
+    descrizione: |
+      Se il balor fallisce un tiro salvezza, può scegliere di superarlo comunque.
+  - id: balor.spasmi-di-morte
+    nome: Spasmi di Morte
+    descrizione: |
+      Quando il balor muore, esplode.
+      *Tiro salvezza su Destrezza:* CD 20, tutte le creature in u n'emanazione di 9 metri di cui il balor è il punto di origine.
+      *Fallimento:* 31 (9d6) danni da fuoco più 31 (9d6) danni da forza.
+      *Successo:* danni dimezzati.
+      *Fallimento o Successo:* se il balor muore al di fuori dell'Abisso, acquisisce un corpo nuovo all'istante,
+      tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+azioni:
+  - id: balor.multiattacco
+    nome: Multiattacco
+    descrizione: Il balor effettua un attacco Frusta Fiammeggiante e un attacco Lama Fulminante.
+  - id: balor.frusta-fiammeggiante
+    nome: Frusta Fiammeggiante
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +14, portata 9 m.
+      *Colpito:* 18 (3d6 + 8) danni da Forza più 17 (5d6) danni da Fuoco.
+      Se il bersaglio è una creatura di taglia Enorme o inferiore, il balor trascina il bersaglio
+      in Linea retta verso di sé fino a 7,5 metri, e il bersaglio cade a terra Prono.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 9 }
+        colpito:
+          - danno: { numero_dadi: 3, dado: d6, tipo_danno: forza, bonus: { caratteristica: forza } }
+  - id: balor.lama-fulminante
+    nome: Lama Fulminante
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +14, portata 3 m.
+      *Colpito:* 21 (3d8 + 8) danni da Forza più 22 (4d10) danni da Fulmine,
+      e il bersaglio non può effettuare Reazioni fino all'inizio del turno successivo del balor.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 3 }
+        colpito:
+          - danno: { numero_dadi: 3, dado: d8, tipo_danno: forza, bonus: { caratteristica: forza } }
+azioni_bonus:
+  - id: balor.teletrasporto
+    nome: Teletrasporto
+    descrizione: |
+      Il balor teletrasporta se stesso (o un demone consenziente entro 3 metri da sé) fino a 18 metri
+      in uno spazio libero che il balor è in grado di vedere.

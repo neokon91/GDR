@@ -1,0 +1,33 @@
+id: dnd.incantesimo.nube-incendiaria
+nome: Nube incendiaria
+livello: 8
+scuola: evocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 45
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+# Il tiro salvezza si ripete a ogni turno passato dentro la nube. Come per nube
+# mortale, si esegue quello di FINE TURNO: il manuale ne concede uno solo per
+# turno, e un secondo innesco all'ingresso lo raddoppierebbe.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: {caratteristica: destrezza, cd: incantesimo}
+    fallimento: {danno: {numero_dadi: 10, dado: d8, tipo_danno: fuoco}}
+    successo: danno-dimezzato
+  - tipo: tiro-salvezza
+    innesco: fine-turno-nell-area
+    tiro_salvezza: {caratteristica: destrezza, cd: incantesimo}
+    fallimento: {danno: {numero_dadi: 10, dado: d8, tipo_danno: fuoco}}
+    successo: danno-dimezzato
+descrizione: |
+  Una nube turbinante di fumo e tizzoni incandescenti appare in una sfera del raggio di 6 metri centrata su un punto entro gittata. L'area coperta dalla nuvola è pesantemente oscurata. La nube permane per la durata dell'incantesimo o finché un vento forte (come quello creato da folata di vento) non la disperde.
+
+  Quando essa compare, ogni creatura al suo interno effettua un tiro salvezza su Destrezza, subendo 10d8 danni da fuoco in caso di fallimento, o la metà dei danni in caso di successo. Una creatura deve effettuare questo tiro salvezza anche quando la sfera si muove nel suo spazio e quando la creatura entra nella sfera o vi termina il suo turno. Una creatura effettua questo tiro salvezza solo una volta per turno.
+
+  La nube si allontana di 3 metri dall'incantatore in una direzione scelta da quest'ultimo all'inizio di ogni suo turno.

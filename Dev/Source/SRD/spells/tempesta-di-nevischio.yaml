@@ -1,0 +1,23 @@
+id: dnd.incantesimo.tempesta-di-nevischio
+nome: Tempesta di nevischio
+livello: 3
+scuola: evocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 45
+componenti: [V, S, "M (un ombrello in miniatura)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Fino al termine dell'incantesimo cade del nevischio in un cilindro alto 12 metri dal raggio di 6 metri il cui centro è un punto a scelta dell'incantatore entro gittata. L'area è pesantemente oscurata e le fiamme libere al suo interno vengono estinte.
+
+  La superficie all'interno del cilindro è un terreno difficile. Quando una creatura entra nell'area del cilindro per la prima volta in un turno o vi inizia il proprio turno, deve superare un tiro salvezza su Destrezza, altrimenti cadrà a terra prona e perderà la concentrazione.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      - concede: prono

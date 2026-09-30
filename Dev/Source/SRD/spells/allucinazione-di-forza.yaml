@@ -1,0 +1,34 @@
+id: dnd.incantesimo.allucinazione-di-forza
+nome: Allucinazione di forza
+livello: 2
+scuola: illusione
+classi: 
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S, "M (un ciuffo di lana)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore tenta di creare un'illusione nella mente di una creatura entro gittata che egli è in grado di vedere.
+  Il bersaglio effettua un tiro salvezza su Intelligenza. Se lo fallisce, l'incantatore crea l'illusione di un oggetto,
+  una creatura o un fenomeno di altra natura, che non sia più grande di un cubo con spigolo di 3 metri
+  e che sia percepibile soltanto dal bersaglio per la durata dell'incantesimo. L'allucinazione include suoni,
+  temperature e altri stimoli analoghi.
+
+  Il bersaglio può effettuare un'azione di Studio per esaminare l'allucinazione con una prova di Intelligenza (Indagare)
+  contro la CD del tiro salvezza sull'incantesimo. Se supera la prova, il bersaglio capisce
+  che l'allucinazione è un'illusione e l'incantesimo termina.
+
+  Finché il bersaglio è influenzato dall'incantesimo, considera l'allucinazione come se fosse reale
+  e razionalizza qualsiasi esito illogico prodotto dalle sue interazioni con essa. Ad esempio, se il bersaglio
+  cammina attraverso un ponte illusorio e sopravvive alla caduta, crederà comunque che il ponte esista
+  e che sia stato qualcos'altro a causare la caduta.
+
+  Un bersaglio influenzato può perfino subire danni dall'illusione se l'allucinazione rappresenta una creatura pericolosa
+  o un pericolo. In ogni turno dell'incantatore, l'allucinazione può infliggere 2d8 danni psichici al bersaglio
+  se questo si trova nell'area dell'allucinazione o entro 1,5 metri da essa. Il bersaglio percepisce i danni
+  come se fossero del tipo appropriato per l'illusione.

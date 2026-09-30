@@ -1,0 +1,8 @@
+id: dnd.arma.randello-pesante
+nome: Randello pesante
+categoria: mischia-semplice
+costo: {valore: 2, valuta: moneta-argento}
+peso: {valore: 5, unita: kg}
+danno: {dado: d8, tipo_danno: contundente}
+proprieta: [due-mani]
+padronanza: spinta

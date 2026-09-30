@@ -1,0 +1,93 @@
+id: dnd.mostro.kraken
+nome: Kraken
+taglia: mastodontica
+tipo: mostruosita
+allineamento: caotico malvagio
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 30, competenza: true}
+  destrezza: {valore: 11, competenza: true}
+  costituzione: {valore: 26, competenza: true}
+  intelligenza: {valore: 22, competenza: false}
+  saggezza: {valore: 18, competenza: true}
+  carisma: {valore: 20, competenza: false}
+iniziativa: maestria
+dadi_vita: 26
+velocita: {camminata: 9, nuoto: 36}
+abilita: [percezione: competenza, storia: competenza]
+sensi: {vista_pura: 36, telepatia: 36}
+percezione_passiva: 21
+immunita_danni: [freddo, fulmine]
+immunita_condizioni: [afferrato, paralizzato, spaventato, trattenuto]
+lingue: ["capisce l'Abissale, il Celestiale, l'Infernale e il Primordiale ma non li parla"]
+gs: 23
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il kraken può respirare in aria e in acqua.
+  - nome: Mostro da assedio
+    descrizione: |
+      Il kraken infligge danni doppi a oggetti e strutture. Resistenza leggendaria (4/giorno o 5/giorno nella tana). Se il kraken fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il kraken effettua due attacchi Tentacolo e usa Scagliare, Colpo del fulmine o Inghiottire.
+  - nome: Tentacolo
+    descrizione: |
+      *Tiro per colpire in mischia:* +17, portata 9 m.
+
+      **Colpito:** 24 (4d6 + 10) danni contundenti
+      Il bersaglio è afferrato (CD 20 per sfuggire) da uno dei dieci tentacoli, ed è trattenuto finché la presa perdura.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 9
+  - nome: Colpo del fulmine
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 23, una creatura che il kraken è in grado di vedere entro 36 metri. *Fallimento:* 33 (6d10) danni da fulmine. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 6, dado: d10, tipo_danno: fulmine}
+        successo: danno-dimezzato
+  - nome: Inghiottire
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 25, una creatura afferrata dal kraken (può inghiottire fino a quattro creature in una volta). *Fallimento:* 23 (3d8 + 10) danni perforanti. Se il bersaglio è di taglia Grande o inferiore, viene inghiottito e non è più afferrato. Una creatura inghiottita viene trattenuta, beneficia di copertura totale contro attacchi e altri effetti al di fuori del kraken, e subisce 24 (7d6) danni da acido all'inizio di ogni suo turno. Se il kraken subisce 50 danni o più in un singolo turno da una creatura al suo interno, deve superare un tiro salvezza su Costituzione con CD 25 alla fine di quel turno, altrimenti rigurgita tutte le creature inghiottite, che cadono prone in uno spazio entro 3 metri da lui. Se il kraken muore, qualsiasi creatura inghiottita non è più trattenuta e può fuggire dal cadavere usando 4,5 metri di movimento, uscendo prona.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+  - nome: Scagliare
+    descrizione: |
+      Il kraken scaglia una creatura di taglia Grande che ha afferrato in uno spazio che è in grado di vedere entro 18 metri da sé e che non sia in aria. *Tiro salvezza su Destrezza:* CD 25, la creatura scagliata e tutte le creature nello spazio di destinazione. *Fallimento:* 18 (4d8) danni contundenti, e il bersaglio cade a terra prono. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 4, dado: d8, tipo_danno: contundente}
+        successo: danno-dimezzato
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie: 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il kraken può consumare un utilizzo per effettuare una delle seguenti azioni. Il kraken recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Inchiostro nocivo
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 23, tutte le creature in un'emanazione di 4,5 metri di cui il kraken è il punto di origine finché si trova sott'acqua. *Fallimento:* il bersaglio è accecato e avvelenato fino al termine del turno successivo del kraken. Dopodiché il kraken si muove fino alla sua velocità massima. *Fallimento o successo:* il kraken non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+  - nome: Lampo burrascoso
+    descrizione: |
+      Il kraken usa Colpo del fulmine.

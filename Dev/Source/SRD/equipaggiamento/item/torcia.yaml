@@ -1,0 +1,5 @@
+id: dnd.oggetto.torcia
+nome: Torcia
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-rame}
+peso: {valore: 0.5, unita: kg}

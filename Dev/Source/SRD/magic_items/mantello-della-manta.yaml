@@ -1,0 +1,11 @@
+id: dnd.oggetto-magico.mantello-della-manta
+nome: Mantello della manta
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: velocita.nuoto, operazione: aumento, valore: 18}
+descrizione: |
+  Il personaggio che indossa questo mantello può respirare sott'acqua e ottiene una velocità di nuoto pari a 18 metri.

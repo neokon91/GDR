@@ -1,0 +1,17 @@
+id: dnd.incantesimo.protezione-dai-veleni
+nome: Protezione dai veleni
+livello: 2
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.paladino
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 1 ora
+descrizione: |
+  L'incantatore tocca una creatura e pone fine alla condizione avvelenato che la affligge. Per la durata dell'incantesimo, il bersaglio dispone di vantaggio ai tiri salvezza eseguiti per evitare o terminare la condizione avvelenato, ed è resistente ai danni da veleno.

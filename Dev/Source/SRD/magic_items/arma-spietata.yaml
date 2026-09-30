@@ -1,0 +1,12 @@
+id: dnd.oggetto-magico.arma-spietata
+nome: Arma spietata
+categoria: arma
+sottotipo: qualsiasi arma semplice o da guerra
+rarita: rara
+richiede_sintonia: false
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: danni, operazione: somma, valore: {numero_dadi: 2, dado: d6}}
+descrizione: |
+  Quest'arma magica infligge 2d6 danni extra a qua-lunque creatura colpisca. Il tipo dei danni aggiuntivi inferti corrisponde a quelli normali dell'arma.

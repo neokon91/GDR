@@ -1,0 +1,98 @@
+id: dnd.mostro.unicorno
+nome: Unicorno
+taglia: grande
+tipo: celestiale
+allineamento: legale buono
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 17, competenza: false}
+  carisma: {valore: 16, competenza: false}
+iniziativa: maestria
+dadi_vita: 13
+velocita: {camminata: 15}
+sensi: {scurovisione: 18, telepatia: 36}
+percezione_passiva: 13
+immunita_danni: [veleno]
+immunita_condizioni: [affascinato, avvelenato, paralizzato]
+lingue: [Celestiale, Elfico, Silvano]
+gs: 5
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      L'unicorno dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: "Resistenza leggendaria (3/giorno)"
+    descrizione: |
+      Se l'unicorno fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      L'unicorno effettua un attacco Zoccoli e un attacco Corno radioso.
+  - nome: Corno radioso
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 9 (1d10 + 4) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: radioso
+              bonus: {caratteristica: forza}
+  - nome: Zoccoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    descrizione: |
+      L'unicorno lancia uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14):1/giorno ciascuno: Calmare emozioni, dissolvi il bene e il male, intralciare, parola del ritiro, passare senza tracceA volontà: Artificio druidico, individuazione del bene e del male
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 14
+        a_volonta:
+          - dnd.incantesimo.artificio-druidico
+          - dnd.incantesimo.individuazione-del-bene-e-del-male
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.calmare-emozioni
+              - dnd.incantesimo.dissolvi-il-bene-e-il-male
+              - dnd.incantesimo.intralciare
+              - dnd.incantesimo.parola-del-ritiro
+              - dnd.incantesimo.passare-senza-tracce
+azioni_bonus:
+  - nome: "Benedizione dell'unicorno (3/giorno)"
+    descrizione: |
+      L'unicorno tocca un'altra creatura col suo corno e lancia cura ferite o ristorare inferiore su di essa, utilizzando la stessa caratteristica da incantatore di Incantesimi.
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie: 3 Subito dopo il turno di un'altra creatura, l'unicorno può consumare un utilizzo per effettuare una delle seguenti azioni. L'unicorno recupera tutti gli utilizzi consumati all'inizio di ogni suo turno."
+    descrizione: |
+
+  - nome: Incornata in carica
+    descrizione: |
+      L'unicorno si muove fino a metà della sua velocità senza provocare attacchi di opportunità, ed effettua un attacco Corno radioso.
+  - nome: Scudo luccicante
+    descrizione: |
+      L'unicorno prende di mira se stesso o una creatura che è in grado di vedere entro 18 metri da sé. Il bersaglio ottiene 10 (3d6) punti ferita temporanei, e la sua CA aumenta di 2 fino al termine del turno successivo dell'unicorno. L'unicorno non può ripetere quest'azione fino all'inizio del proprio turno successivo.

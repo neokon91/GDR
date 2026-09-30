@@ -1,0 +1,7 @@
+id: dnd.oggetto.nutrimento-al-giorno
+nome: Nutrimento al giorno
+categoria: finimenti-e-veicoli
+costo: {valore: 5, valuta: moneta-rame}
+peso: {valore: 5, unita: kg}
+descrizione: |
+  Razione standard tipicamente consumata da una cavalcatura al giorno.

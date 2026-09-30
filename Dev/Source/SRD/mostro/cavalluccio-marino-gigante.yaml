@@ -1,0 +1,45 @@
+id: dnd.mostro.cavalluccio-marino-gigante
+nome: Cavalluccio marino gigante
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 5, nuoto: 12}
+percezione_passiva: 11
+lingue: [nessuna]
+gs: 1/2
+
+tratti:
+  - nome: Respirare sott'acqua
+    descrizione: |
+      Il cavalluccio marino può respirare solo sott'acqua.
+azioni:
+  - nome: Sfondamento
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 9 (2d6 + 2) danni contundenti, o 11 (2d8 + 2) danni contundenti se il cavalluccio marino si è mosso di 6 metri o più in linea retta verso il bersaglio subito prima del colpo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Scatto acquatico
+    descrizione: |
+      Finché è sott'acqua, il cavalluccio marino può muoversi fino alla metà della sua velocità di nuoto senza provocare attacchi di opportunità.

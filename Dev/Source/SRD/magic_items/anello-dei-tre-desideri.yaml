@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.anello-dei-tre-desideri
+nome: Anello dei tre desideri
+categoria: anello
+rarita: leggendaria
+richiede_sintonia: false
+descrizione: |
+  Finché indossa questo anello, il personaggio può  consumare 1 delle sue 3 cariche per lanciare  desiderio. L'anello smette di essere magico quando esaurisce le cariche.

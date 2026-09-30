@@ -1,0 +1,65 @@
+id: dnd.mostro.golem-di-pietra
+nome: Golem di pietra
+taglia: grande
+tipo: costrutto
+allineamento: senza allineamento
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 22, competenza: false}
+  destrezza: {valore: 9, competenza: false}
+  costituzione: {valore: 20, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 1, competenza: false}
+iniziativa: competenza
+dadi_vita: 21
+velocita: {camminata: 9}
+sensi: {scurovisione: 36}
+percezione_passiva: 10
+immunita_danni: [psichico, veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, paralizzato, pietrificato, spaventato]
+lingue: [capisce il Comune più altre due lingue ma non le parla]
+gs: 10
+
+tratti:
+  - nome: Forma immutabile
+    descrizione: |
+      Il golem non può mutare forma.
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il golem effettua due attacchi, usando Schianto o Dardo vigoroso in qualsiasi combinazione.
+  - nome: Schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 15 (2d8 + 6) danni contundenti più 9 (2d8) danni da forza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Dardo vigoroso
+    descrizione: |
+      *Tiro per colpire a distanza:* +9, gittata 36 m. *Colpito:* 22 (4d10) danni da forza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: costituzione, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno: {numero_dadi: 4, dado: d10, tipo_danno: forza}
+azioni_bonus:
+  - nome: "Lentezza (ricarica 5-6)"
+    descrizione: |
+      Il golem lancia l'incantesimo lentezza, senza bisogno di componenti e utilizzando Costituzione come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17).

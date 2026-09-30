@@ -1,0 +1,291 @@
+id: dnd.classe.monaco
+nome: Monaco
+caratteristica_primaria: [destrezza, saggezza]
+dado_vita: 8
+tiri_salvezza: [forza, destrezza]
+competenze_abilita:
+  quantita: 2
+  scelte: [acrobazia, atletica, furtivita, intuizione, religione, storia]
+competenze_armi: [armi-semplici, {categoria: armi-da-guerra, proprieta: [leggera]}]
+# Preso come classe secondaria (multiclasse): armi semplici (le spade corte del
+# manuale non sono modellabili per singola arma, si concede la categoria semplice).
+competenze_multiclasse:
+  armi: [armi-semplici]
+competenze_armature: []
+competenze_strumenti: {quantita: 1, scelte: [attrezzatura-da-artigiano, dnd.strumento.strumento-musicale]}
+equipaggiamento_iniziale: 
+  - nome: A
+    oggetti:
+      - articolo: dnd.arma.lancia
+      - articolo: dnd.arma.pugnale
+        quantita: 5
+      - articolo: [attrezzatura-da-artigiano, dnd.strumento.strumento-musicale]
+      - articolo: dnd.oggetto.dotazione-da-esploratore
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 11
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 50
+descrizione: |
+  Il monaco è un combattente agile basato su Destrezza e Saggezza, Arti marziali e punti concentrazione. La sottoclasse SRD è il Guerriero della Mano Aperta.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [arti-marziali, difesa-senza-armatura]
+    arti_marziali: 1d6
+    concentrazione: 
+    movimento_senza_armatura: 
+  - livello: 2
+    privilegi: [concentrazione-del-monaco, metabolismo-prodigioso, movimento-senza-armatura]
+    arti_marziali: 1d6
+    concentrazione: 2
+    movimento_senza_armatura: "+3 m"
+  - livello: 3
+    privilegi: [deviare-attacchi, sottoclasse-del-monaco]
+    arti_marziali: 1d6
+    concentrazione: 3
+    movimento_senza_armatura: "+3 m"
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica, caduta-lenta]
+    arti_marziali: 1d6
+    concentrazione: 4
+    movimento_senza_armatura: "+3 m"
+  - livello: 5
+    privilegi: [attacco-extra, colpo-stordente]
+    arti_marziali: 1d8
+    concentrazione: 5
+    movimento_senza_armatura: "+3 m"
+  - livello: 6
+    privilegi: [colpi-potenziati, privilegio-della-sottoclasse]
+    arti_marziali: 1d8
+    concentrazione: 6
+    movimento_senza_armatura: "+4,5 m"
+  - livello: 7
+    privilegi: [elusione]
+    arti_marziali: 1d8
+    concentrazione: 7
+    movimento_senza_armatura: "+4,5 m"
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    arti_marziali: 1d8
+    concentrazione: 8
+    movimento_senza_armatura: "+4,5 m"
+  - livello: 9
+    privilegi: [movimento-acrobatico]
+    arti_marziali: 1d8
+    concentrazione: 10
+    movimento_senza_armatura: "+6 m"
+  - livello: 10
+    privilegi: [autorigenerazione, concentrazione-intensificata]
+    arti_marziali: 1d8
+    concentrazione: 10
+    movimento_senza_armatura: "+6 m"
+  - livello: 11
+    privilegi: [privilegio-della-sottoclasse]
+    arti_marziali: 1d10
+    concentrazione: 11
+    movimento_senza_armatura: "+6 m"
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    arti_marziali: 1d10
+    concentrazione: 12
+    movimento_senza_armatura: "+6 m"
+  - livello: 13
+    privilegi: [deviazione-dell-energia]
+    arti_marziali: 1d10
+    concentrazione: 13
+    movimento_senza_armatura: "+6 m"
+  - livello: 14
+    privilegi: [sopravvissuto-disciplinato]
+    arti_marziali: 1d10
+    concentrazione: 14
+    movimento_senza_armatura: "+7,5 m"
+  - livello: 15
+    privilegi: [concentrazione-perfetta]
+    arti_marziali: 1d10
+    concentrazione: 15
+    movimento_senza_armatura: "+7,5 m"
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    arti_marziali: 1d10
+    concentrazione: 16
+    movimento_senza_armatura: "+7,5 m"
+  - livello: 17
+    privilegi: [privilegio-della-sottoclasse]
+    arti_marziali: 1d12
+    concentrazione: 17
+    movimento_senza_armatura: "+7,5 m"
+  - livello: 18
+    privilegi: [difesa-superiore]
+    arti_marziali: 1d12
+    concentrazione: 18
+    movimento_senza_armatura: "+9 m"
+  - livello: 19
+    privilegi: [dono-epico]
+    arti_marziali: 1d12
+    concentrazione: 19
+    movimento_senza_armatura: "+9 m"
+  - livello: 20
+    privilegi: [corpo-e-mente]
+    arti_marziali: 1d12
+    concentrazione: 20
+    movimento_senza_armatura: "+9 m"
+privilegi:
+- id: arti-marziali
+  nome: "Arti Marziali"
+  descrizione: |
+    La tua pratica delle arti marziali ti conferisce padronanza di stili di combattimento che utilizzano il tuo Colpo Senza Armi e le tue armi da monaco, ovvero:
+    - Armi da mischia semplici
+    - Armi da mischia da guerra dotate della proprietà Leggera
+
+    Ottieni i seguenti benefici quando sei disarmato o impugni solo armi da monaco e non indossi armature né impugni uno scudo.
+
+    **Colpo Senza Armi Bonus.** Puoi effettuare un Colpo Senza Armi come Azione Bonus.
+
+    **Dado Arti Marziali.** Puoi tirare 1d6 al posto del normale danno del tuo Colpo Senza Armi o delle tue armi da monaco. Questo dado cambia man mano che acquisisci livelli da monaco, come indicato nella colonna Arti Marziali della tabella Capacità del Monaco.
+
+    **Attacchi Agili.** Puoi usare il tuo modificatore di Destrezza invece di quello di Forza per i tiri per colpire e per i danni dei tuoi Colpi Senza Armi e delle tue armi da monaco. Inoltre, quando utilizzi l'opzione Afferrare o Spingere del tuo Colpo Senza Armi, puoi usare il tuo modificatore di Destrezza invece di quello di Forza per determinare la CD del tiro salvezza.
+- id: difesa-senza-armatura
+  nome: "Difesa Senza Armatura"
+  descrizione: |
+    Quando non indossi armature né impugni uno scudo, la tua Classe Armatura base è pari a 10 più i tuoi modificatori di Destrezza e Saggezza.
+  attivita:
+    - tipo: passivo
+      condizione: no-armatura-no-scudo
+      effetti:
+        - {bersaglio: ca, operazione: aumento, formula: {base: 10, caratteristiche: [destrezza, saggezza]}}
+- id: concentrazione-del-monaco
+  nome: "Concentrazione del Monaco"
+  descrizione: |
+    La tua concentrazione e il tuo addestramento marziale ti permettono di attingere a una riserva di energia straordinaria dentro di te. Questa energia è rappresentata dai Punti Concentrazione. Il tuo livello da Monaco determina il numero di punti a tua disposizione, come indicato nella colonna Punti Concentrazione della tabella Capacità del Monaco.
+
+    Puoi spendere questi punti per potenziare o alimentare alcune capacità del Monaco. Inizi conoscendone tre: Raffica di Colpi, Difesa Paziente e Passo del Vento, ognuna delle quali è descritta nel dettaglio qui sotto.
+
+    Quando spendi un Punto Concentrazione, questo non è più disponibile finché non completi un Riposo Breve o Lungo, al termine del quale recuperi tutti i punti spesi.
+
+    Alcune capacità che utilizzano Punti Concentrazione richiedono che il bersaglio effettui un tiro salvezza. La CD del tiro salvezza è pari a 8 più il tuo modificatore di Saggezza e il tuo Bonus di Competenza.
+
+    **Raffica di Colpi.** Puoi spendere 1 Punto Concentrazione per effettuare due Colpi Senza Armi come Azione Bonus.
+
+    **Difesa Paziente.** Puoi effettuare l'azione Disimpegnarsi come Azione Bonus. In alternativa, puoi spendere 1 Punto Concentrazione per effettuare sia l'azione Disimpegnarsi che quella Schivare come Azione Bonus.
+
+    **Passo del Vento.** Puoi effettuare l'azione Scattare come Azione Bonus. In alternativa, puoi spendere 1 Punto Concentrazione per effettuare sia l'azione Disimpegnarsi che quella Scattare come Azione Bonus; inoltre, la tua distanza di salto raddoppia per il turno.
+- id: movimento-senza-armatura
+  nome: "Movimento Senza Armatura"
+  descrizione: |
+    La tua velocità aumenta di 3 metri (10 piedi) quando non indossi armature o non impugni uno scudo. Questo bonus aumenta quando raggiungi determinati livelli da Monaco, come indicato nella tabella Capacità del Monaco.
+  attivita:
+    # +3 di livello 1 fisso; la progressione resta in prosa finché la colonna
+    # movimento_senza_armatura non è numerica (ora "+3 m").
+    - {tipo: passivo, condizione: no-armatura-no-scudo, effetti: [{bersaglio: velocita.camminata, operazione: somma, valore: {da_tabella: movimento_senza_armatura}}]}
+- id: metabolismo-prodigioso
+  nome: "Metabolismo Prodigioso"
+  descrizione: |
+    Quando tiri per l'Iniziativa, puoi recuperare tutti i Punti Concentrazione spesi. Quando lo fai, tira il tuo dado di Arti Marziali e recupera un numero di Punti Ferita pari al tuo livello da Monaco più il risultato del tiro.
+
+    Una volta utilizzata questa capacità, non puoi usarla di nuovo finché non completi un Riposo Lungo.
+- id: deviare-attacchi
+  nome: "Deviare Attacchi"
+  descrizione: |
+    Quando un tiro per colpire ti colpisce e il danno inflitto include danni contundenti, perforanti o taglienti, puoi usare una Reazione per ridurre il danno totale dell'attacco subito. La riduzione è pari a 1d10 più il tuo modificatore di Destrezza e il tuo livello da Monaco. Se riduci il danno a 0, puoi spendere 1 Punto Focalizzazione per reindirizzare parte della forza dell'attacco. Se lo fai, scegli una creatura che puoi vedere entro 1,5 metri da te (se l'attacco era in mischia) oppure una creatura che puoi vedere entro 18 metri da te e che non si trovi dietro una copertura totale (se l'attacco era a distanza). Tale creatura deve superare un tiro salvezza su Destrezza o subire danni pari a due tiri del tuo dado di Arti Marziali più il tuo modificatore di Destrezza. Il tipo di danno è lo stesso inflitto dall'attacco.
+- id: sottoclasse-del-monaco
+  nome: "Sottoclasse del Monaco"
+  descrizione: |
+    Ottieni una sottoclasse da Monaco a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Monaco. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Monaco o a un livello inferiore.
+- id: aumento-punteggi-caratteristica
+  nome: "Aumento del Punteggio di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento del Punteggio di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da Monaco 8, 12 e 16.
+- id: caduta-lenta
+  nome: "Caduta Lenta"
+  descrizione: |
+    Puoi usare una Reazione quando cadi per ridurre i danni subiti dalla caduta di un ammontare pari a cinque volte il tuo livello da Monaco.
+- id: attacco-extra
+  nome: "Attacco Extra"
+  descrizione: |
+    Puoi attaccare due volte invece di una ogni volta che effettui l'azione Attaccare durante il tuo turno.
+  attivita:
+    - {tipo: passivo, effetti: [{bersaglio: attacchi-per-azione, operazione: aumento, valore: 2}]}
+- id: colpo-stordente
+  nome: "Colpo Stordente"
+  descrizione: |
+    Una volta per turno, quando colpisci una creatura con un'arma da Monaco o con un Colpo Senza Armi, puoi spendere 1 Punto Focus per tentare un colpo stordente. Il bersaglio deve effettuare un tiro salvezza su Costituzione. Se fallisce il tiro salvezza, il bersaglio subisce la condizione Stordito fino all'inizio del tuo turno successivo. Se supera il tiro salvezza, la Velocità del bersaglio viene dimezzata fino all'inizio del tuo turno successivo e il prossimo tiro per colpire effettuato contro di esso prima di quel momento gode di Vantaggio.
+  attivita:
+    # Il costo (1 Punto Focus), l'"una volta per turno" e l'esito sul successo restano runtime/prosa.
+    - tipo: tiro-salvezza
+      tiro_salvezza: {caratteristica: costituzione, cd: {base: 8, caratteristica: saggezza, competenza: true}}
+      fallimento:
+        - {concede: stordito, termina_se: [inizio-turno-successivo]}
+- id: colpi-potenziati
+  nome: "Colpi Potenziati"
+  descrizione: |
+    Ogni volta che infliggi danni con il tuo Colpo Senza Armi, puoi scegliere se infliggere danni da Forza o il suo normale tipo di danno.
+- id: elusione
+  nome: "Elusione"
+  descrizione: |
+    Quando sei soggetto a un effetto che ti permette di effettuare un tiro salvezza su Destrezza per subire solo metà dei danni, non ne subisci affatto se superi il tiro salvezza e ne subisci solo la metà se lo fallisci.
+
+    Non puoi beneficiare di questa capacità se sei soggetto alla condizione Incapace di Agire.
+- id: movimento-acrobatico
+  nome: "Movimento Acrobatico"
+  descrizione: |
+    Finché non indossi un'armatura o non impugni uno scudo, ottieni la capacità di muoverti lungo superfici verticali e su superfici liquide durante il tuo turno senza cadere durante il movimento.
+- id: concentrazione-intensificata
+  nome: "Concentrazione Intensificata"
+  descrizione: |
+    Le tue capacità Raffica di Colpi, Difesa Paziente e Passo del Vento ottengono i seguenti benefici.
+
+    **Raffica di Colpi.** Puoi spendere 1 Punto Ki per usare Raffica di Colpi ed effettuare tre Attacchi senz'Armi invece di due.
+
+    **Difesa Paziente.** Quando spendi un Punto Ki per usare Difesa Paziente, ottieni un numero di Punti Ferita Temporanei pari a due tiri del tuo dado di Arti Marziali.
+
+    **Passo del Vento.** Quando spendi un Punto Ki per usare Passo del Vento, puoi scegliere una creatura consenziente entro 1,5 metri (5 piedi) da te che sia di taglia Grande o inferiore. Sposti la creatura insieme a te fino alla fine del tuo turno. Il movimento della creatura non provoca Attacchi di Opportunità.
+- id: autorigenerazione
+  nome: "Autorigenerazione"
+  descrizione: |
+    Grazie alla pura forza di volontà, puoi rimuovere una delle seguenti condizioni da te stesso alla fine di ogni tuo turno: Affascinato, Spaventato o Avvelenato.
+
+    Inoltre, rinunciare a cibo e bevande non ti conferisce livelli di Affaticamento.
+- id: deviazione-dell-energia
+  nome: "Deviazione dell'Energia"
+  descrizione: |
+    Ora puoi usare la tua capacità Deviare Attacchi contro attacchi che infliggono qualsiasi tipo di danno, non solo danni Contundenti, Perforanti o Taglienti.
+- id: sopravvissuto-disciplinato
+  nome: "Sopravvissuto Disciplinato"
+  descrizione: |
+    La tua disciplina fisica e mentale ti conferisce competenza in tutti i tiri salvezza.
+
+    Inoltre, ogni volta che effettui un tiro salvezza e fallisci, puoi spendere 1 Punto Ki per ritirarlo, e devi utilizzare il nuovo risultato.
+  attivita:
+    # Il ritiro del TS (costo Ki) resta prosa; qui la competenza in tutti i TS.
+    - tipo: passivo
+      effetti:
+        - {bersaglio: tiri_salvezza.forza, operazione: concedi}
+        - {bersaglio: tiri_salvezza.destrezza, operazione: concedi}
+        - {bersaglio: tiri_salvezza.costituzione, operazione: concedi}
+        - {bersaglio: tiri_salvezza.intelligenza, operazione: concedi}
+        - {bersaglio: tiri_salvezza.saggezza, operazione: concedi}
+        - {bersaglio: tiri_salvezza.carisma, operazione: concedi}
+- id: concentrazione-perfetta
+  nome: "Concentrazione Perfetta"
+  descrizione: |
+    Quando tiri per l'Iniziativa e non usi Metabolismo Prodigioso, recuperi Punti Ki spesi fino ad averne 4, se ne possiedi 3 o meno.
+- id: difesa-superiore
+  nome: "Difesa Superiore"
+  descrizione: |
+    All'inizio del tuo turno, puoi spendere 3 Punti Ki per rafforzarti contro i danni per 1 minuto o finché non subisci la condizione Incapace. Durante questo periodo, possiedi Resistenza a tutti i danni, eccetto i danni da Forza.
+- id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni un talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- id: corpo-e-mente
+  nome: "Corpo e Mente"
+  descrizione: |
+    Hai portato il tuo corpo e la tua mente a nuovi livelli di eccellenza. I tuoi punteggi di Destrezza e Saggezza aumentano di 4, fino a un massimo di 25.
+  attivita:
+    # Il tetto a 25 resta prosa (nessun campo per il massimo caratteristica).
+    - tipo: passivo
+      effetti:
+        - {bersaglio: caratteristiche.destrezza.valore, operazione: somma, valore: 4}
+        - {bersaglio: caratteristiche.saggezza.valore, operazione: somma, valore: 4}

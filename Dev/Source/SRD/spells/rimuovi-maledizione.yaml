@@ -1,0 +1,17 @@
+id: dnd.incantesimo.rimuovi-maledizione
+nome: Rimuovi maledizione
+livello: 3
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.mago
+  - dnd.classe.paladino
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Al tocco dell'incantatore, tutte le maledizioni che affliggono una creatura o un oggetto terminano. Nel caso di un oggetto magico maledetto, la sua maledizione permane, ma l'incantesimo spezza la sintonia del suo proprietario, consentendogli di rimuoverlo o di liberarsene.

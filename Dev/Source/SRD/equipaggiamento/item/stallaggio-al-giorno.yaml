@@ -1,0 +1,4 @@
+id: dnd.oggetto.stallaggio-al-giorno
+nome: Stallaggio al giorno
+categoria: finimenti-e-veicoli
+costo: {valore: 5, valuta: moneta-argento}

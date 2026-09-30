@@ -29,9 +29,10 @@ from pathlib import Path
 from typing import Any
 
 from archivio_io import leggi, voci
+from common import SRD_DIR
 
 ROOT = Path(__file__).resolve().parents[2]
-SRD = ROOT / "archivio" / "srd"
+SRD = SRD_DIR
 OUT = ROOT / "plugin" / "data" / "srd_catalogo.json"
 
 
@@ -404,7 +405,7 @@ def costruisci_catalogo() -> dict:
 
 def main() -> None:
     if not SRD.is_dir():
-        raise SystemExit(f"archivio/srd non trovato ({SRD}). Manca il symlink/submodule 'archivio'?")
+        raise SystemExit(f"SRD non trovata ({SRD}): la copia vendorizzata manca (git checkout Dev/Source/SRD).")
     cat = costruisci_catalogo()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(cat, ensure_ascii=False), encoding="utf-8")

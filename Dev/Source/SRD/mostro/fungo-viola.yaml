@@ -1,0 +1,45 @@
+id: dnd.mostro.fungo-viola
+nome: Fungo viola
+taglia: media
+tipo: vegetale
+gruppo: Funghi
+allineamento: senza allineamento
+ca: {valore: 5}
+caratteristiche:
+  forza: {valore: 3, competenza: false}
+  destrezza: {valore: 1, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 3, competenza: false}
+  carisma: {valore: 1, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 5}
+sensi: {vista_cieca: 9}
+percezione_passiva: 6
+immunita_condizioni: [accecato, affascinato, assordato, spaventato]
+lingue: [nessuna]
+gs: 1/4
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: tocco-marcescente, ripetizioni: 2}
+    descrizione: |
+      Il fungo effettua due attacchi Tocco marcescente.
+  - nome: Tocco marcescente
+    id: tocco-marcescente
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 3 m. *Colpito:* 4 (1d8) danni necrotici.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: costituzione, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno: {numero_dadi: 1, dado: d8, tipo_danno: necrotico}

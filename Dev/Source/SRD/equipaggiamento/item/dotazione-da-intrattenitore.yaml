@@ -1,0 +1,5 @@
+id: dnd.oggetto.dotazione-da-intrattenitore
+nome: Dotazione da intrattenitore
+categoria: equipaggiamento-avventura
+costo: {valore: 40, valuta: moneta-oro}
+peso: {valore: 29, unita: kg}

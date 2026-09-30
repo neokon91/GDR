@@ -1,0 +1,23 @@
+id: dnd.incantesimo.individuazione-del-magico
+nome: Individuazione del magico
+livello: 1
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.paladino
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S]
+concentrazione: true
+rituale: true
+durata: fino a 10 minuti
+descrizione: |
+  Per la durata dell'incantesimo, l'incantatore percepisce la presenza di effetti magici entro 9 metri da sé. Se percepisce tali effetti, può eseguire un azione di Magia per vedere una debole aura attorno a ogni creatura o oggetto visibile nell'area che contenga magia e apprende di che scuola di magia si tratta, se ne esiste una.
+
+  L'incantesimo viene bloccato da 30 cm di pietra, terriccio o legno, 2,5 centimetri di metallo o una sottile lamina di piombo.

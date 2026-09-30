@@ -1,0 +1,9 @@
+id: dnd.veicolo.dirigibile
+nome: Dirigibile
+tipo: veicolo
+costo: {valore: 40, valuta: moneta-oro}
+classe_armatura: 13
+velocita: {viaggio: 12}  # km/h — i veicoli viaggiano, non camminano
+equipaggio: 10
+passeggeri: 20
+carico: 1 t

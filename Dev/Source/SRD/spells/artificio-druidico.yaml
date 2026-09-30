@@ -1,0 +1,26 @@
+id: dnd.incantesimo.artificio-druidico
+nome: Artificio druidico
+livello: 0
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Sussurrando agli spiriti della natura, l'incantatore crea uno degli effetti seguenti entro gittata.
+
+  **Sensore atmosferico**
+  L'incantatore crea un Minuscolo e innocuo effetto sensoriale che predice il tempo atmosferico nel luogo in cui si trova per le successive 24 ore. L'effetto potrebbe manifestarsi come una sfera dorata in caso di cieli tersi, una nuvola in caso di pioggia, fiocchi di neve in caso di nevicate e così via. Questo effetto permane per 1 round.
+
+  **Fioritura**
+  L'incantatore fa istantaneamente sbocciare un fiore, aprire un baccello o schiudere un germoglio.
+
+  **Effetto sensoriale**
+  L'incantatore crea un effetto sensoriale innocuo, come la caduta di foglie, delle fate spettrali danzanti, una brezza leggera, il rumore di un piccolo animale o il debole odore di una puzzola. L'effetto deve poter essere contenuto in un cubo con spigolo di 1,5 metri.
+
+  **Trucchetto col fuoco**
+  L'incantatore accende o spegne una candela, una torcia o un fuoco da campo.

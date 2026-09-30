@@ -1,0 +1,24 @@
+id: dnd.incantesimo.ristorare-superiore
+nome: Ristorare superiore
+livello: 5
+scuola: abiurazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.paladino
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (polvere di diamante del valore di 100 mo o più, che l'incantesimo consuma)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore tocca una creatura e rimuove magicamente da essa uno dei seguenti effetti:
+
+  - 1 livello di indebolimento
+  - La condizione affascinato o pietrificato
+  - Una maledizione, inclusa la sintonia del bersaglio con un oggetto magico maledetto
+  - Qualsiasi riduzione di un punteggio di caratteristica del bersaglio
+  - Qualsiasi riduzione dei punti ferita massimi del bersaglio

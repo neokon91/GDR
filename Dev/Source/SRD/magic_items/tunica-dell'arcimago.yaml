@@ -1,0 +1,27 @@
+id: dnd.oggetto-magico.tunica-dell'arcimago
+nome: Tunica dell'arcimago
+categoria: oggetto-meraviglioso
+rarita: leggendaria
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    condizione: no-armatura
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 15, caratteristiche: [destrezza]}}
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_salvezza.incantesimi, operazione: vantaggio}
+      - {bersaglio: cd_incantesimi, operazione: somma, valore: 2}
+      - {bersaglio: tiri_colpire.incantesimo, operazione: somma, valore: 2}
+descrizione: |
+  Questa elegante tunica è realizzata con un tessuto pregiato ricoperto di rune.
+  Finché il personaggio indossa la tunica, ottiene i benefici seguenti:
+
+  **Armatura**
+  Se il personaggio non indossa alcuna armatura, la sua Classe Armatura base è pari a 15 più il suo modificatore di Destrezza.
+
+  **Mago da guerra**
+  La CD del tiro salvezza  sull'incantesimo e il bonus di attacco dell'incante-simo del personaggio aumentano entrambi di 2.
+
+  **Resistenza alla magia**
+  Il personaggio dispone di vantaggio ai tiri salvezza contro gli incantesimi e gli altri effetti magici.

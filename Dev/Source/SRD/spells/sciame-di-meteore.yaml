@@ -1,0 +1,24 @@
+id: dnd.incantesimo.sciame-di-meteore
+nome: Sciame di meteore
+livello: 9
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 1500
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: {caratteristica: destrezza, cd: incantesimo}
+    fallimento:
+      - danno: {numero_dadi: 20, dado: d6, tipo_danno: fuoco}
+      - danno: {numero_dadi: 20, dado: d6, tipo_danno: contundente}
+    successo: danno-dimezzato
+descrizione: |
+  Globi infuocati precipitano sul terreno in quattro punti differenti entro gittata che l'incantatore è in grado di vedere. Ogni creatura situata in una sfera del raggio di 12 metri centrata su ognuno di quei punti effettua un tiro salvezza su Destrezza. Una creatura subisce 20d6 danni da fuoco e 20d6 danni contundenti in caso di fallimento, o la metà dei danni in caso di successo. Una creatura in un'area con più sfere infuocate subisce l'effetto soltanto una volta.
+
+  Anche un oggetto non magico che non sia indossato o trasportato subisce i danni se si trova entro l'area dell'incantesimo, e inizia a bruciare se è infiammabile.

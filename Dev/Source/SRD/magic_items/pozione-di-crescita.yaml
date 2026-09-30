@@ -1,0 +1,13 @@
+id: dnd.oggetto-magico.pozione-di-crescita
+nome: Pozione di crescita
+categoria: pozione
+rarita: non-comune
+richiede_sintonia: false
+consumabile: true
+attivita:
+  - tipo: potenziamento
+    bersaglio: se-stesso
+    concede: ingrandito
+    durata: {valore: 10, unita: minuti}
+descrizione: |
+  Quando il personaggio beve questa pozione, ottiene l'effetto "ingrandire" dell'incantesimo ingrandire/ridurre per 10 minuti (non è richiesta la concentrazione).All'interno della pozione è visibile un piccolo nucleo rosso che si espande progressivamente fino a tingere tutto il liquido trasparente intorno a esso per poi contrarsi fino a diventare un granello minuscolo. Agitare la bottiglia non interrompe il processo.

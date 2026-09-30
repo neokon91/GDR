@@ -1,0 +1,41 @@
+id: dnd.incantesimo.santificare
+nome: Santificare
+livello: 5
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+tempo_lancio: 24 ore
+gittata: contatto
+componenti: [V, S, "M (incenso del valore di 1.000 mo o più, che l'incantesimo consuma)"]
+concentrazione: false
+rituale: false
+durata: finché non viene dissolto
+descrizione: |
+  L'incantatore tocca un punto e infonde un potere sacro o sacrilego in un'area del raggio massimo di 18 metri intorno a esso. L'incantesimo tuttavia fallisce se il raggio comprende un'area già sotto l'effetto di santificare. L'area influenzata è soggetta ai seguenti effetti:
+
+  **Protezione consacrata**
+  L'incantatore sceglie uno dei seguenti tipi di creature: aberrazione, celestiale, elementale, folletto, immondo o non morto. Le creature del tipo scelto non possono entrare volontariamente nell'area, e qualsiasi creatura affascinata, spaventata o posseduta da tali creature non viene affascinata, spaventata o posseduta fintantoché si trova nell'area.
+
+  **Effetto aggiuntivo**
+  L'incantatore vincola un effetto aggiuntivo all'area, scegliendolo dalla lista sottostante:
+
+  **Coraggio**
+  Le creature di qualsiasi tipo scelto dall'incantatore non possono essere spaventate finché si trovano nell'area.
+
+  **Interferenza extradimensionale**
+  Le creature di qualsiasi tipo scelte dall'incantatore non possono entrare o uscire dall'area utilizzando il teletrasporto o i viaggi interplanari. 
+
+  **Linguaggi**
+  Le creature di qualsiasi tipo scelto dall'incantatore possono comunicare con qualsiasi creatura all'interno dell'area, anche se non condividono la stessa lingua. 
+
+  **Luce diurna**
+  L'area è pervasa di luce intensa. L'oscurità magica creata dagli incantesimi di livello inferiore rispetto a questo incantesimo non può sopprimere la luce. Oscurità. L'area si riempie di oscurità. La luce normale, nonché la luce magica creata dagli incantesimi di livello inferiore rispetto a questo incantesimo, non possono illuminare l'area. Paura. Le creature di qualsiasi tipo scelto dall'incantatore non possono essere spaventate finché si trovano nell'area. 
+
+  **Resistenza**
+  Le creature di qualsiasi tipo scelto dall'incantatore sono resistenti a un tipo di danno scelto dall'incantatore finché si trovano nell'area.
+
+  **Sereno riposo**
+  I cadaveri sepolti nell'area non possono diventare non morti. Silenzio. L'area è insonorizzata, nessun suono può fuoriuscire o penetrare al suo interno.
+
+  **Vulnerabilità**
+  Le creature di qualsiasi tipo scelto dall'incantatore sono vulnerabili a un tipo di danno scelto dall'incantatore finché si trovano nell'area.

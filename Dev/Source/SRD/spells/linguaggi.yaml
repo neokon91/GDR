@@ -1,0 +1,18 @@
+id: dnd.incantesimo.linguaggi
+nome: Linguaggi
+livello: 3
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, "M (una ziggurat in miniatura)"]
+concentrazione: false
+rituale: false
+durata: 1 ora
+descrizione: |
+  Questo incantesimo concede alla creatura toccata dall'incantatore l'abilità di comprendere qualsiasi lingua (parlata o non) che sente o vede. Inoltre, quando comunica con parole o gesti, qualsiasi creatura che conosce almeno una lingua può comprenderla se è in grado di sentire ciò che dice o vedere i suoi gesti.

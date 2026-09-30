@@ -1,0 +1,14 @@
+id: dnd.strumento.cornamusa
+nome: Cornamusa
+categoria: strumenti-musicali
+famiglia: strumento-musicale
+costo: {valore: 30, valuta: moneta-oro}
+peso: {valore: 3, unita: kg}
+caratteristica: carisma
+utilizzo:
+  - azione: Suonare una melodia nota
+    cd: 10
+  - azione: Improvvisare un brano
+    cd: 15
+creazione: 
+descrizione: |

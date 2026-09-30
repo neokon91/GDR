@@ -1,0 +1,48 @@
+id: dnd.mostro.grifone
+nome: Grifone
+taglia: grande
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 9, volo: 24}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 15
+lingue: [nessuna]
+gs: 2
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 2}
+    descrizione: |
+      Il grifone effettua due attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 8 (1d8 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 14 per sfuggire) da entrambi gli artigli frontali del grifone.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

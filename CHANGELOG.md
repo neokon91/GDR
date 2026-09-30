@@ -6,6 +6,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **GDR si costruisce senza l'archivio privato**: i dati vengono dalla copia vendorizzata
+  dell'SRD in `Dev/Source/SRD/` (1395 file, CC-BY-4.0), non più da `../archivio`.
+  `npm run sync-srd` la aggiorna dall'archivio accanto (specchio di `srd/` e basta: nessun
+  altro percorso può entrare nel repo); `npm run sync-srd:check`, il job CI `deriva-srd` e
+  `tests/test_sync_srd.py` segnalano la deriva. La CI principale non clona più l'archivio.
 - **Tavolo virtuale Atlas VTT** (plugin di terze parti, AGPL-3.0 con eccezione Obsidian,
   pinnato alla 0.4.2, solo desktop): mappe con griglia, token, nebbia di guerra e vista
   giocatori su un secondo schermo. Non critico: combattimento e regole restano alla Board.

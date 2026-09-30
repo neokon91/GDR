@@ -1,0 +1,59 @@
+id: dnd.mostro.gigante-del-fuoco
+nome: Gigante del fuoco
+taglia: enorme
+tipo: gigante
+gruppo: Giganti
+allineamento: legale malvagio
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 25, competenza: false}
+  destrezza: {valore: 9, competenza: true}
+  costituzione: {valore: 23, competenza: true}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 13, competenza: true}
+iniziativa: competenza
+dadi_vita: 13
+velocita: {camminata: 9}
+abilita: [atletica: competenza, percezione: competenza]
+percezione_passiva: 16
+immunita_danni: [fuoco]
+lingue: [Gigante]
+gs: 9
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il gigante effettua due attacchi, usando Spada di fiamme o Lancio di martello in qualsiasi combinazione.
+  - nome: Spada di fiamme
+    descrizione: |
+      *Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 21 (4d6 + 7) danni taglienti più 10 (3d6) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Lancio di martello
+    descrizione: |
+      *Tiro per colpire a distanza:* +11, portata 18/72 m. *Colpito:* 23 (3d10 + 7) danni contundenti più 4 (1d8) danni da fuoco, il bersaglio viene spinto in linea retta fino a un massimo di 4,5 metri di distanza dal gigante, e subisce svantaggio al tiro per colpire successivo che effettua prima del termine del proprio turno successivo.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

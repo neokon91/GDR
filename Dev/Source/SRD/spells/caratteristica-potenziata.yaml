@@ -1,0 +1,22 @@
+id: dnd.incantesimo.caratteristica-potenziata
+nome: Caratteristica potenziata
+livello: 2
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (un ciuffo di peli o una piuma)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore tocca una creatura e sceglie Forza, Destrezza, Intelligenza, Saggezza o Carisma. Per la durata dell'incantesimo, il bersaglio dispone di vantaggio sulle prove di caratteristica effettuate utilizzando l'abilità scelta.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 2º. L'incantatore può scegliere una caratteristica differente per ogni bersaglio.

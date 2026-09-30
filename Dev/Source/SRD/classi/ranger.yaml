@@ -1,0 +1,285 @@
+id: dnd.classe.ranger
+nome: Ranger
+caratteristica_primaria: [destrezza, saggezza]
+dado_vita: 10
+tiri_salvezza: [forza, destrezza]
+competenze_abilita:
+  quantita: 3
+  scelte: [addestrare-animali, atletica, furtivita, indagare, intuizione, natura, percezione, sopravvivenza]
+competenze_armi: [armi-semplici, armi-da-guerra]
+competenze_armature: [armature-leggere, armature-medie, scudi]
+# Preso come classe secondaria (multiclasse): sottoinsieme delle competenze
+# (+ una abilità a scelta dalla lista del ranger).
+competenze_multiclasse:
+  armi: [armi-semplici, armi-da-guerra]
+  armature: [armature-leggere, armature-medie, scudi]
+  abilita: {quantita: 1, scelte: [addestrare-animali, atletica, furtivita, indagare, intuizione, natura, percezione, sopravvivenza]}
+equipaggiamento_iniziale:
+  - nome: A
+    oggetti:
+      - articolo: dnd.armatura.armatura-di-cuoio-borchiato
+      - articolo: dnd.arma.scimitarra
+      - articolo: dnd.arma.spada-corta
+      - articolo: dnd.arma.arco-lungo
+      - articolo: frecce
+        quantita: 20
+      - articolo: dnd.oggetto.faretra
+      - articolo: dnd.oggetto.focus-druidico
+      - articolo: dnd.oggetto.dotazione-da-esploratore
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 7
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 150
+descrizione: |
+  Il ranger è un esploratore marziale e primordiale basato su Destrezza e Saggezza, magia naturale e mobilita. La sottoclasse SRD è il Cacciatore.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [nemico-prescelto, lancio-incantesimi, maestria-armi]
+    nemico_prescelto: 2
+    incantesimi_preparati: 2
+    slot_incantesimo: {livello1: 2, livello2: 0, livello3: 0, livello4: 0, livello5: 0}
+  - livello: 2
+    privilegi: [esploratore-esperto, stile-combattimento]
+    nemico_prescelto: 2
+    incantesimi_preparati: 3
+    slot_incantesimo: {livello1: 2, livello2: 0, livello3: 0, livello4: 0, livello5: 0}
+  - livello: 3
+    privilegi: [sottoclasse-del-ranger]
+    nemico_prescelto: 2
+    incantesimi_preparati: 4
+    slot_incantesimo: {livello1: 3, livello2: 0, livello3: 0, livello4: 0, livello5: 0}
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    nemico_prescelto: 2
+    incantesimi_preparati: 5
+    slot_incantesimo: {livello1: 3, livello2: 0, livello3: 0, livello4: 0, livello5: 0}
+  - livello: 5
+    privilegi: [attacco-extra]
+    nemico_prescelto: 3
+    incantesimi_preparati: 6
+    slot_incantesimo: {livello1: 4, livello2: 2, livello3: 0, livello4: 0, livello5: 0}
+  - livello: 6
+    privilegi: [girovago]
+    nemico_prescelto: 3
+    incantesimi_preparati: 6
+    slot_incantesimo: {livello1: 4, livello2: 2, livello3: 0, livello4: 0, livello5: 0}
+  - livello: 7
+    privilegi: [privilegio-della-sottoclasse]
+    nemico_prescelto: 3
+    incantesimi_preparati: 7
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 0, livello4: 0, livello5: 0}
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    nemico_prescelto: 3
+    incantesimi_preparati: 7
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 0, livello4: 0, livello5: 0}
+  - livello: 9
+    privilegi: [maestria]
+    nemico_prescelto: 4
+    incantesimi_preparati: 9
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 2, livello4: 0, livello5: 0}
+  - livello: 10
+    privilegi: [instancabile]
+    nemico_prescelto: 4
+    incantesimi_preparati: 9
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 2, livello4: 0, livello5: 0}
+  - livello: 11
+    privilegi: [privilegio-della-sottoclasse]
+    nemico_prescelto: 4
+    incantesimi_preparati: 10
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 0, livello5: 0}
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    nemico_prescelto: 4
+    incantesimi_preparati: 10
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 0, livello5: 0}
+  - livello: 13
+    privilegi: [cacciatore-implacabile]
+    nemico_prescelto: 5
+    incantesimi_preparati: 11
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 1, livello5: 0}
+  - livello: 14
+    privilegi: [velo-della-natura]
+    nemico_prescelto: 5
+    incantesimi_preparati: 11
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 1, livello5: 0}
+  - livello: 15
+    privilegi: [privilegio-della-sottoclasse]
+    nemico_prescelto: 5
+    incantesimi_preparati: 12
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 2, livello5: 0}
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    nemico_prescelto: 5
+    incantesimi_preparati: 12
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 2, livello5: 0}
+  - livello: 17
+    privilegi: [precisione-del-cacciatore]
+    nemico_prescelto: 6
+    incantesimi_preparati: 14
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 1}
+  - livello: 18
+    privilegi: [sensi-ferini]
+    nemico_prescelto: 6
+    incantesimi_preparati: 14
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 1}
+  - livello: 19
+    privilegi: [dono-epico]
+    nemico_prescelto: 6
+    incantesimi_preparati: 15
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2}
+  - livello: 20
+    privilegi: [flagello-dei-nemici]
+    nemico_prescelto: 6
+    incantesimi_preparati: 15
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2}
+privilegi:
+- id: lancio-incantesimi
+  nome: "Lancio di Incantesimi"
+  attivita:
+    - tipo: incantatore
+      caratteristica: saggezza
+      # Mezzo incantatore: in multiclasse i suoi livelli contano per metà nel
+      # livello da incantatore combinato.
+      avanzamento: mezzo
+  livello: 1
+  descrizione: |
+    Hai imparato a incanalare l'essenza magica della natura per lanciare incantesimi.
+
+    **Slot Incantesimo.** La tabella delle Capacità del Ranger indica quanti slot incantesimo possiedi per lanciare i tuoi incantesimi di livello 1 o superiore.
+    Recuperi tutti gli slot consumati al termine di un Riposo Lungo.
+
+    **Incantesimi Preparati di Livello 1 o Superiore.** Prepari l'elenco degli incantesimi di livello 1 o superiore che puoi lanciare grazie a questa capacità.
+    Per iniziare, scegli due incantesimi da Ranger di livello 1.
+
+    Il numero di incantesimi nel tuo elenco aumenta man mano che acquisisci livelli da Ranger, come indicato nella colonna Incantesimi Preparati della tabella delle Capacità del Ranger. Ogni volta che tale numero aumenta, scegli ulteriori incantesimi da Ranger finché il numero di incantesimi nel tuo elenco non corrisponde a quello indicato nella tabella.
+    Gli incantesimi scelti devono essere di un livello per il quale disponi di slot incantesimo.
+    Per esempio, se sei un Ranger di livello 5, il tuo elenco di incantesimi preparati può includere sei incantesimi da Ranger di livello 1 o 2, in qualsiasi combinazione.
+
+    Se un'altra capacità da Ranger ti conferisce incantesimi che hai sempre preparati, tali incantesimi non contano ai fini del numero di incantesimi che puoi preparare con questa capacità, ma per te sono comunque considerati incantesimi da Ranger.
+
+    **Cambiare gli Incantesimi Preparati.** Al termine di un Riposo Lungo, puoi sostituire un incantesimo del tuo elenco con un altro incantesimo da Ranger per il quale disponi di slot incantesimo.
+
+    **Caratteristica da Incantatore.** La Saggezza è la tua caratteristica da incantatore per gli incantesimi da Ranger.
+
+    **Focus di Incantamento.** Puoi usare un Focus Druidico come focus di incantamento per i tuoi incantesimi da Ranger.
+- id: nemico-prescelto
+  nome: "Nemico Prescelto"
+  livello: 1
+  descrizione: |
+    Hai sempre preparato l'incantesimo *Marchio del Cacciatore*.
+    Puoi lanciarlo due volte senza consumare uno slot incantesimo e recuperi tutti gli utilizzi consumati di questa capacità al termine di un Riposo Lungo.
+
+    Il numero di volte in cui puoi lanciare l'incantesimo senza consumare uno slot aumenta quando raggiungi determinati livelli da Ranger.
+- id: maestria-armi
+  nome: "Maestria nelle Armi"
+  livello: 1
+  descrizione: |
+    Il tuo addestramento con le armi ti consente di utilizzare le proprietà di maestria di due tipi di armi a tua scelta con cui possiedi competenza, come archi lunghi e spade corte.
+
+    Al termine di un Riposo Lungo, puoi cambiare i tipi di armi scelti.
+    Per esempio, potresti passare a utilizzare le proprietà di maestria di scimitarre e spade lunghe.
+  attivita:
+    - {tipo: scelta, scelta: maestria-arma, quantita: 2, recupero: riposo-lungo}
+- id: esploratore-esperto
+  nome: "Esploratore Esperto"
+  livello: 2
+  descrizione: |
+    Grazie ai tuoi viaggi, ottieni i seguenti benefici.
+
+    **Maestria.** Scegli una delle abilità in cui possiedi competenza ma non Maestria.
+    Ottieni Maestria in quell'abilità.
+
+    **Linguaggi.** Conosci due linguaggi a tua scelta.
+  attivita:
+    - {tipo: scelta, scelta: maestria-abilita, quantita: 1}
+- id: stile-combattimento
+  nome: "Stile di Combattimento"
+  livello: 2
+  descrizione: |
+    Ottieni un talento di Stile di Combattimento a tua scelta.
+    Invece di scegliere uno di quei talenti, puoi scegliere l'opzione qui sotto.
+
+    **Guerriero Druidico.**
+    Impari due trucchetti da druido a tua scelta.
+    I trucchetti scelti contano come incantesimi da ranger per te e la Saggezza è la tua caratteristica da incantatore per essi.
+    Ogni volta che ottieni un livello da ranger, puoi sostituire uno di questi trucchetti con un altro trucchetto da druido.
+- id: sottoclasse-del-ranger
+  nome: "Sottoclasse del Ranger"
+  livello: 3
+  descrizione: |
+    Ottieni una sottoclasse da ranger a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da ranger. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da ranger o a un livello inferiore.
+- id: aumento-punteggi-caratteristica
+  nome: "Aumento dei Punteggi di Caratteristica"
+  livello: 4
+  descrizione: |
+    Ottieni il talento Incremento dei Punteggi di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da ranger 8, 12 e 16.
+- id: attacco-extra
+  nome: "Attacco Extra"
+  livello: 5
+  descrizione: |
+    Puoi attaccare due volte invece di una ogni volta che effettui l'azione di Attacco durante il tuo turno.
+  attivita:
+    - {tipo: passivo, effetti: [{bersaglio: attacchi-per-azione, operazione: aumento, valore: 2}]}
+- id: girovago
+  nome: "Girovago"
+  livello: 6
+  descrizione: |
+    La tua velocità aumenta di 3 metri (10 piedi) quando non indossi un'armatura pesante. Inoltre, possiedi una velocità di scalata e una velocità di nuoto pari alla tua velocità.
+  attivita:
+    # La scalata/nuoto = velocità resta in PROSA (serve un valore-riferimento).
+    - {tipo: passivo, condizione: no-armatura-pesante, effetti: [{bersaglio: velocita.camminata, operazione: somma, valore: 3}]}
+- id: maestria
+  nome: "Maestria"
+  livello: 9
+  descrizione: |
+    Scegli due delle tue competenze nelle abilità per le quali non possiedi la Competenza Specialistica. Ottieni la Competenza Specialistica in tali abilità.
+  attivita:
+    - {tipo: scelta, scelta: maestria-abilita, quantita: 2}
+- id: instancabile
+  nome: "Instancabile"
+  livello: 10
+  descrizione: |
+    Le forze primordiali ora alimentano i tuoi viaggi, conferendoti i seguenti benefici.
+
+    **Punti Ferita Temporanei.** Come azione Magica, puoi ottenere un numero di Punti Ferita Temporanei pari a 1d8 più il tuo modificatore di Saggezza (minimo 1).
+    Puoi usare questa azione un numero di volte pari al tuo modificatore di Saggezza (minimo una volta) e recuperi tutti gli usi spesi al termine di un Riposo Lungo.
+
+    **Riduzione della Sfinimento.** Ogni volta che termini un Riposo Breve, il tuo livello di Sfinimento, se presente, diminuisce di 1.
+- id: cacciatore-implacabile
+  nome: "Cacciatore Implacabile"
+  livello: 13
+  descrizione: |
+    Subire danni non interrompe la tua Concentrazione sull'incantesimo *Marchio del Cacciatore*.
+- id: velo-della-natura
+  nome: "Velo della Natura"
+  livello: 14
+  descrizione: |
+    Invochi gli spiriti della natura per celarti magicamente. Come Azione Bonus, puoi ottenere la condizione Invisibile fino alla fine del tuo prossimo turno.
+
+    Puoi usare questa capacità un numero di volte pari al tuo modificatore di Saggezza (minimo una volta) e recuperi tutti gli usi spesi al termine di un Riposo Lungo.
+- id: precisione-del-cacciatore
+  nome: "Precisione del Cacciatore"
+  livello: 17
+  descrizione: |
+    Ottieni Vantaggio ai tiri per colpire contro la creatura attualmente bersaglio del tuo *Marchio del Cacciatore*.
+- id: sensi-ferini
+  nome: "Sensi Ferini"
+  livello: 18
+  descrizione: |
+    Il tuo legame con le forze della natura ti conferisce Vista Cieca con una gittata di 9 metri (30 piedi).
+  attivita:
+    - {tipo: passivo, effetti: [{bersaglio: sensi.vista-cieca, operazione: imposta, valore: 9}]}
+- id: dono-epico
+  nome: "Dono Epico"
+  livello: 19
+  descrizione: |
+    Ottieni un talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- id: flagello-dei-nemici
+  nome: "Flagello dei Nemici"
+  livello: 20
+  descrizione: |
+    Il dado del danno del tuo *Marchio del Cacciatore* è un d10 anziché un d6.

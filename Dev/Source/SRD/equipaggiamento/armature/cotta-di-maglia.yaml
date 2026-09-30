@@ -1,0 +1,12 @@
+id: dnd.armatura.cotta-di-maglia
+nome: Cotta di Maglia
+tipo: armatura-pesante
+categoria: armature
+costo: {valore: 75, valuta: moneta-oro}
+peso: {valore: 27.5, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 16}}
+requisito_forza: 13
+svantaggio_furtivita: true

@@ -1,0 +1,48 @@
+id: dnd.mostro.anchilosauro
+nome: Anchilosauro
+taglia: enorme
+tipo: bestia
+sottotipo: dinosauro
+gruppo: Bestie
+allineamento: senza allineamento
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 19, competenza: true}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 9}
+lingue: [nessuna]
+gs: 3
+habitat: [prateria]
+azioni:
+  - id: anchilosauro.multiattacco
+    nome: Multiattacco
+    descrizione: |
+      L'anchilosauro effettua due attacchi Coda.
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: anchilosauro.coda, ripetizioni: 2}
+  - id: anchilosauro.coda
+    nome: Coda
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +6, portata 3 m.
+      *Colpito:* 9 (1d10 + 4) danni Contundenti.
+      Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra Prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

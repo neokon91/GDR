@@ -1,0 +1,70 @@
+id: dnd.mostro.diavolo-barbuto
+nome: Diavolo barbuto
+taglia: media
+tipo: immondo
+sottotipo: diavolo
+allineamento: legale malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 16, competenza: true}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 15, competenza: true}
+  intelligenza: {valore: 9, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 14, competenza: true}
+dadi_vita: 9
+velocita: {camminata: 9}
+sensi: {scurovisione: 36, telepatia: 36}
+scurovisione_magica: true
+percezione_passiva: 10
+resistenze: [freddo]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [avvelenato, spaventato]
+lingue: [Infernale]
+gs: 3
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il diavolo effettua un attacco Barba e un attacco Falcione infernale.
+  - nome: Barba
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti, e il bersaglio è avvelenato fino all'inizio del turno successivo del diavolo. Finché è avvelenato, il bersaglio non può recuperare punti ferita.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Falcione infernale
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 3 m. *Colpito:* 8 (1d10 + 3) danni taglienti. Se il bersaglio è una creatura e non ha già una ferita infernale, subisce il seguente effetto.
+
+      *Tiro salvezza su Costituzione:* CD 12.
+
+      *Fallimento:* il bersaglio subisce una ferita infernale. Finché è ferito, il bersaglio perde 5 (1d10) punti ferita all'inizio di ogni suo turno. La ferita si rimargina dopo 1 minuto, dopo che un incantesimo ripristina i punti ferita del bersaglio, o dopo che il bersaglio o una creatura entro 1,5 metri effettua un'azione per tamponare la ferita superando una prova di Saggezza (Medicina) con CD 12.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}

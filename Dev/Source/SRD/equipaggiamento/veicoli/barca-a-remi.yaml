@@ -1,0 +1,9 @@
+id: dnd.veicolo.barca-a-remi
+nome: Barca a remi
+tipo: veicolo
+costo: {valore: 50, valuta: moneta-oro}
+classe_armatura: 11
+velocita: {viaggio: 2.25}  # km/h — i veicoli viaggiano, non camminano
+equipaggio: 1
+passeggeri: 3
+carico: "-"

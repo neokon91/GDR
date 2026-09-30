@@ -1,0 +1,58 @@
+id: dnd.mostro.viverna
+nome: Viverna
+taglia: grande
+tipo: drago
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 15
+velocita: {camminata: 9, volo: 24}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 36}
+percezione_passiva: 14
+lingue: [nessuna]
+gs: 6
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      La viverna effettua un attacco Morso e un attacco Pungiglione.
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Pungiglione
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni perforanti più 24 (7d6) danni da veleno, e il bersaglio è avvelenato fino all'inizio del turno successivo della viverna.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

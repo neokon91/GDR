@@ -1,0 +1,40 @@
+id: dnd.mostro.daino
+nome: Daino
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 15}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 14
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Agile
+    descrizione: |
+      Il daino non provoca attacchi di opportunità quando esce dalla portata di un nemico.
+azioni:
+  - nome: Sfondamento
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni contundenti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno: {numero_dadi: 1, dado: d4, tipo_danno: contundente}

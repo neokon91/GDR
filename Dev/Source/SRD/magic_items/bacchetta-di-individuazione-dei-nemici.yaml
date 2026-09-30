@@ -1,0 +1,10 @@
+id: dnd.oggetto-magico.bacchetta-di-individuazione-dei-nemici
+nome: Bacchetta di individuazione dei nemici
+categoria: bacchetta
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Questa bacchetta ha 7 cariche. Mentre il personaggio la impugna, può effettuare un'azione di Magia per consumare 1 carica. Per 1 minuto il personaggio conosce la direzione della creatura ostile a lui più vicina e situata entro 18 metri da sé, ma non la sua distanza precisa. La bacchetta può percepire la presenza di creature ostili invisibili, eteree, camuffate o nascoste, oltre a quelle in piena vista. L'effetto termina se il personaggio smette di impugnare la bacchetta.
+
+  **Ripristinare le cariche**
+  All'alba di ogni giorno, la bacchetta recupera 1d6 + 1 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, la bacchetta va in cenere ed è distrutta.

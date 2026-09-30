@@ -1,0 +1,62 @@
+id: dnd.mostro.scheletro
+nome: Scheletro
+taglia: media
+tipo: non-morto
+gruppo: Scheletri
+allineamento: legale malvagio
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 9
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, indebolimento]
+vulnerabilita: [contundente]
+equipaggiamento:
+  - {articolo: dnd.arma.arco-corto}
+  - {articolo: dnd.arma.spada-corta}
+lingue: [capisce il Comune più un'altra lingua ma non le parla]
+gs: 1/4
+
+azioni:
+  - nome: Spada corta
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.spada-corta
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Arco corto
+    descrizione: |
+      *Tiro per colpire a distanza:* +5, portata 24/96 m *Colpito:* 6 (1d6 + 3) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.arco-corto
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

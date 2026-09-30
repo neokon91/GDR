@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.cappello-del-camuffamento
+nome: Cappello del camuffamento
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+descrizione: |
+  Mentre il personaggio indossa questo cappello, può lanciare l'incantesimo camuffare se stesso. L'incantesimo termina se il cappello viene rimosso.

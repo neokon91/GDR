@@ -1,0 +1,9 @@
+id: dnd.arma.tridente
+nome: Tridente
+categoria: mischia-da-guerra
+costo: {valore: 5, valuta: moneta-oro}
+peso: {valore: 2, unita: kg}
+danno: {dado: d8, tipo_danno: perforante}
+gittata: {normale: 6, lunga: 18}
+proprieta: [lancio, versatile-1d10]
+padronanza: rovesciamento

@@ -1,0 +1,5 @@
+id: dnd.oggetto.munizioni
+nome: Munizioni
+categoria: equipaggiamento-avventura
+costo: {variabile: true}
+peso: {variabile: true}

@@ -1,0 +1,117 @@
+id: dnd.mostro.drago-verde-antico
+nome: Drago verde antico
+taglia: mastodontica
+tipo: drago
+sottotipo: cromatico
+gruppo: Draghi verdi
+allineamento: legale malvagio
+ca: {valore: 21}
+caratteristiche:
+  forza: {valore: 27, competenza: false}
+  destrezza: {valore: 12, competenza: true}
+  costituzione: {valore: 25, competenza: false}
+  intelligenza: {valore: 20, competenza: false}
+  saggezza: {valore: 17, competenza: true}
+  carisma: {valore: 22, competenza: false}
+iniziativa: maestria
+dadi_vita: 23
+velocita: {camminata: 12, nuoto: 12, volo: 24}
+abilita: [furtivita: competenza, inganno: competenza, persuasione: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 18}
+percezione_passiva: 27
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Comune, Draconico]
+gs: 22
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il drago può respirare in aria e in acqua.
+  - nome: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+    descrizione: |
+      Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare aculeo mentale (di 5º livello).
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +15, portata 4,5 m. *Colpito:* 17 (2d6 + 8) danni taglienti più 10 (3d6) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 4.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 21):
+
+      *1/giorno ciascuno:*
+      - costrizione
+      - modificare memoria
+
+      *A volontà:*
+      - aculeo mentale (di 5º livello)
+      - individuazione del magico
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 21
+        a_volonta:
+          - id: dnd.incantesimo.aculeo-mentale
+            livello: 5
+          - dnd.incantesimo.individuazione-del-magico
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.costrizione
+              - dnd.incantesimo.modificare-memoria
+  - nome: "Soffio di veleno (ricarica 5-6)"
+    id: soffio-di-veleno-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 22, tutte le creature in un cono di 27 metri. *Fallimento:* 77 (22d6) danni da veleno. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 22, dado: d6, tipo_danno: veleno}
+        successo: danno-dimezzato
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Balzo
+    descrizione: |
+      Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+  - nome: Invasione mentale
+    descrizione: |
+      Il drago usa Incantesimi per lanciare aculeo mentale (di 5º livello).
+  - nome: Miasma nocivo
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 21, tutte le creature in una sfera di 9 metri di raggio centrata su un punto che il drago è in grado di vedere entro 27 metri. *Fallimento:* 17 (5d6) danni da veleno, e il bersaglio subisce una penalità di -2 alla CA fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 5, dado: d6, tipo_danno: veleno}

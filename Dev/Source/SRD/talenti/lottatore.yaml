@@ -1,0 +1,14 @@
+id: dnd.talento.lottatore
+nome: Lottatore
+categoria: talento-generale
+prerequisito: "4º livello o superiore, Forza o Destrezza 13+"
+ripetibile: false
+parametri:
+  - id: caratteristica
+    tipo: caratteristica
+    quantita: 1
+    scelte: [forza, destrezza]
+    valore: 1
+    massimo: 20
+descrizione: |
+  Dal 4º livello con Forza o Destrezza 13; aumenta Forza o Destrezza, migliora colpi senz'armi, attacchi contro creature afferrate e movimento in lotta.

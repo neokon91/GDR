@@ -1,0 +1,90 @@
+id: dnd.mostro.diavolo-delle-catene
+nome: Diavolo delle catene
+taglia: media
+tipo: immondo
+sottotipo: diavolo
+allineamento: legale malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 18, competenza: true}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 14, competenza: false}
+iniziativa: competenza
+dadi_vita: 10
+velocita: {camminata: 9}
+sensi: {scurovisione: 36, telepatia: 36}
+scurovisione_magica: true
+percezione_passiva: 11
+resistenze: [contundente, freddo, perforante, tagliente]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Infernale]
+gs: 8
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro diabolico
+    descrizione: |
+      Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: catena, ripetizioni: 2}
+    descrizione: |
+      Il diavolo effettua due attacchi Catena e utilizza Evoca catena infernale.
+  - nome: Catena
+    id: catena
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da una delle due catene, e resta trattenuto finché la presa perdura.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Evoca catena infernale
+    id: evoca-catena-infernale
+    descrizione: |
+      Il diavolo evoca una catena di fuoco per legare una creatura.
+
+      *Tiro salvezza su Destrezza:* CD 15, una creatura che il diavolo è in grado di vedere entro 18 metri.
+
+      *Fallimento:* 9 (2d4 + 4) danni da fuoco, e il bersaglio è trattenuto fino alla fine del turno successivo del diavolo; a quel punto la catena scompare. Se il bersaglio è di taglia Grande o inferiore, il diavolo lo trascina in linea retta verso di sé fino a un massimo di 9 metri.
+
+      *Successo:* la catena svanisce.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+reazioni:
+  - nome: Sguardo snervante
+    descrizione: |
+      **Attivazione:** una creatura che il diavolo è in grado di vedere inizia il suo turno entro 9 metri da quest'ultimo e può vedere il diavolo.
+
+      *Tiro salvezza su Saggezza:* CD 15, la creatura che ha provocato la reazione.
+
+      *Fallimento:* il bersaglio è spaventato fino al termine del proprio turno successivo.
+
+      *Successo:* il bersaglio è immune allo Sguardo snervante di questo diavolo per 24 ore.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: forza, base: 8, competenza: true}

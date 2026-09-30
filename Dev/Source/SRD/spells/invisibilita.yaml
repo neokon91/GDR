@@ -1,0 +1,20 @@
+id: dnd.incantesimo.invisibilita
+nome: Invisibilità
+livello: 2
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (un ciglio in uno strato di resina)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  Una creatura toccata dall'incantatore diventa invisibile fino al termine dell'incantesimo. L'incantesimo termina immediatamente quando il bersaglio effettua un tiro per colpire, infligge danni o lancia un incantesimo.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 2º.

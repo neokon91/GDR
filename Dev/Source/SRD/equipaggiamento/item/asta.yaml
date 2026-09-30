@@ -1,0 +1,5 @@
+id: dnd.oggetto.asta
+nome: Asta
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-rame}
+peso: {valore: 3.5, unita: kg}

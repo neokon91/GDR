@@ -1,0 +1,10 @@
+id: dnd.oggetto.campanella
+nome: Campanella
+categoria: equipaggiamento-avventura
+costo: 
+  valore: 1
+  unita: moneta-oro
+peso:
+  valore: null
+descrizione: |
+  Quando viene suonata come azione di Utilizzo, una campana produce un suono udibile fino a 18 metri di distanza.

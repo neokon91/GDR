@@ -1,0 +1,47 @@
+id: dnd.oggetto-magico.corazza-di-scaglie-di-drago
+nome: Corazza di scaglie di drago
+categoria: armatura
+sottotipo: corazza a scaglie
+rarita: molto-rara
+richiede_sintonia: true
+base: dnd.armatura.corazza-a-scaglie
+versioni:
+  - nome: "Argento"
+    valore: freddo
+  - nome: "Bianco"
+    valore: freddo
+  - nome: "Blu"
+    valore: fulmine
+  - nome: "Bronzo"
+    valore: fulmine
+  - nome: "Nero"
+    valore: acido
+  - nome: "Oro"
+    valore: fuoco
+  - nome: "Ottone"
+    valore: fuoco
+  - nome: "Rame"
+    valore: acido
+  - nome: "Rosso"
+    valore: fuoco
+  - nome: "Verde"
+    valore: veleno
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: somma, valore: 1}
+      - {bersaglio: resistenze, operazione: concedi, valore: versione}
+descrizione: |
+  La corazza di scaglie di drago è ricavata dalle scaglie di un tipo di drago. A volte i draghi raccolgono le loro scaglie cadute e ne fanno dono a qualcuno. Altre volte i cacciatori conservano le pelli dei draghi uccisi. In entrambi i casi, la corazza di scaglie di drago è un oggetto estremamente pregiato.Quando indossa quest'armatura, il personaggio ottiene un bonus di +1 alla Classe Armatura, vantaggio ai tiri salvezza contro il soffio dei draghi e resistenza a un tipo di danno determinato dal tipo di scaglie da cui è composta l'armatura (vedi la relativa tabella).
+  Con un'azione, il personaggio può inoltre concen-trare i suoi sensi come azione di Magia e percepire la distanza e la direzione del drago più vicino dello stesso tipo dell'armatura, entro un raggio di 45 chi-lometri. Questa azione non può essere riutilizzata fino all'alba successiva.
+  **Drago Resistenza**
+  **Argento** Freddo 
+  **Bianco** Freddo
+  **Blu** Fulmine
+  **Bronzo** Fulmine
+  **Nero** Acido
+  **Oro** Fuoco
+  **Ottone** Fuoco
+  **Rame** Acido
+  **Rosso** Fuoco
+  **Verde** Veleno

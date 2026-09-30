@@ -1,0 +1,16 @@
+id: dnd.oggetto-magico.bacchetta-del-mago-da-guerra-+1,-+2-o-+3
+nome: "Bacchetta del mago da guerra +1, +2 o +3"
+categoria: bacchetta
+rarita: variabile
+nota_rarita: non comune (+1), rara (+2) o molto rara (+3)
+richiede_sintonia: true
+versioni:
+  - {nome: "+1", rarita: non-comune, valore: 1}
+  - {nome: "+2", rarita: rara, valore: 2}
+  - {nome: "+3", rarita: molto-rara, valore: 3}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_colpire.incantesimo, operazione: somma, valore: versione}
+descrizione: |
+  Mentre il personaggio impugna questa bacchetta, riceve un bonus ai tiri per colpire con incantesimo determinato dalla rarità della bacchetta. Inoltre, ignora la mezza copertura quando effettua un tiro per colpire con incantesimo.

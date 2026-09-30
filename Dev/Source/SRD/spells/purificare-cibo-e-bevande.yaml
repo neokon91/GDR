@@ -1,0 +1,16 @@
+id: dnd.incantesimo.purificare-cibo-e-bevande
+nome: Purificare cibo e bevande
+livello: 1
+scuola: trasmutazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.paladino
+tempo_lancio: azione
+gittata: 3
+componenti: [V, S]
+concentrazione: false
+rituale: true
+durata: istantanea
+descrizione: |
+  L'incantatore rimuove veleno e marciume da cibi e bevande non magici situati in una sfera del raggio di 1,5 metri centrata su un punto entro gittata.

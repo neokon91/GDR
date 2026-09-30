@@ -1,0 +1,20 @@
+id: dnd.incantesimo.carne-in-pietra
+nome: Carne in pietra
+livello: 6
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S, "M (una piuma di coccatrice)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore tenta di tramutare in pietra una creatura entro gittata che egli è in grado di vedere. Il bersaglio effettua un tiro salvezza su Costituzione. In caso di fallimento, è trattenuto per la durata dell'incantesimo. In caso di successo, la sua velocità è pari a 0 fino all'inizio del turno successivo dell'incantatore. I costrutti superano automaticamente il tiro salvezza.
+
+  Un bersaglio trattenuto effettua un altro tiro salvezza su Costituzione al termine di ogni suo turno. L'incantesimo termina se il bersaglio supera per tre volte il tiro salvezza contro questo incantesimo. Mentre se lo fallisce per tre volte, viene tramutato in pietra e diventa pietrificato per la durata dell'incantesimo. Non è necessario che i tiri superati o falliti siano consecutivi: si tiene semplicemente il conto di entrambi finché il bersaglio non ne accumula tre di un certo tipo.
+
+  Se l'incantatore mantiene la concentrazione su questo incantesimo per l'intera durata possibile, il bersaglio è pietrificato fino a quando non viene posta fine alla condizione con ristorare superiore o un'altra magia simile.

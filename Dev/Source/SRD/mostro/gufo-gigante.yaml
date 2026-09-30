@@ -1,0 +1,57 @@
+id: dnd.mostro.gufo-gigante
+nome: Gufo gigante
+taglia: grande
+tipo: celestiale
+gruppo: Animali
+allineamento: neutrale
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 14, competenza: true}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 5, volo: 18}
+abilita: [furtivita: maestria, percezione: maestria]
+sensi: {scurovisione: 36}
+percezione_passiva: 16
+resistenze: [necrotico, radioso]
+lingue: [Celestiale, "capisce il Comune, l'Elfico e il Silvano ma non li parla"]
+gs: 1/4
+
+tratti:
+  - nome: Volo sfuggente
+    descrizione: |
+      Il gufo non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+azioni:
+  - nome: Speroni
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: Incantesimi
+    descrizione: |
+      Il gufo lancia uno dei seguenti incantesimi, senza bisogno di componenti, utilizzando Saggezza come caratteristica da incantatore: 1/giorno: Chiaroveggenza A volontà: Individuazione del bene e del male, individuazione del magico
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        a_volonta:
+          - dnd.incantesimo.individuazione-del-bene-e-del-male
+          - dnd.incantesimo.individuazione-del-magico
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.chiaroveggenza

@@ -1,0 +1,45 @@
+id: dnd.mostro.nobile
+nome: Nobile
+taglia: [media, piccola]
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 16, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9}
+abilita: [inganno: competenza, intuizione: competenza, persuasione: competenza]
+percezione_passiva: 12
+equipaggiamento:
+  - {articolo: dnd.armatura.corazza-di-piastre}
+  - {articolo: dnd.arma.stocco}
+lingue: [Comune più altre due lingue]
+gs: 1/8
+
+azioni:
+  - nome: Stocco
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d8 + 1) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.stocco
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+reazioni:
+  - nome: Parata
+    descrizione: |
+      Attivazione: il nobile viene colpito da un tiro per colpire in mischia mentre tiene in mano un'arma. Esito: il nobile aggiunge 2 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno.

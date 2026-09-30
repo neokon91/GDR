@@ -1,0 +1,53 @@
+id: dnd.mostro.imp
+nome: Imp
+taglia: minuscola
+tipo: immondo
+sottotipo: diavolo
+allineamento: legale malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 11, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 14, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 6, volo: 12}
+abilita: [inganno: competenza, intuizione: competenza, furtivita: competenza]
+sensi: {scurovisione: 36}
+scurovisione_magica: true
+percezione_passiva: 11
+resistenze: [freddo]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Comune, Infernale]
+gs: 1
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      L'imp dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Pungiglione
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti più 7 (2d6) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Invisibilità
+    descrizione: |
+      L'imp può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore.
+  - nome: Mutaforma
+    descrizione: |
+      L'imp può assumere la forma bestiale di un topo (velocità 6 m), un corvo (6 m, volo 18 m) o un ragno (6 m, scalata 6 m), o tornare alla sua vera forma. Le sue statistiche di gioco restano le stesse in ogni forma, a eccezione della velocità. Nessun oggetto che indossa o trasporta viene trasformato.

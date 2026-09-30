@@ -1,0 +1,45 @@
+id: dnd.mostro.alce
+nome: Alce
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 15}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 1/4
+habitat: [foresta, collina, prateria]
+azioni:
+  - id: alce.sfondamento
+    nome: Sfondamento
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m.
+      *Colpito:* 6 (1d6 + 3) danni Contundenti.
+      Se il bersaglio è una creatura di taglia Grande o inferiore
+      e l'alce si è mosso di 6 metri o più in linea retta verso di esso
+      subito prima del colpo,
+      il bersaglio subisce 3 (1d6) danni Contundenti extra e cade a terra Prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

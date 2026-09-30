@@ -1,0 +1,98 @@
+id: dnd.mostro.rakshasa
+nome: Rakshasa
+taglia: media
+tipo: immondo
+allineamento: legale malvagio
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 14, competenza: false}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 13, competenza: false}
+  saggezza: {valore: 16, competenza: false}
+  carisma: {valore: 20, competenza: false}
+iniziativa: competenza
+dadi_vita: 26
+velocita: {camminata: 12}
+abilita: [inganno: competenza, intuizione: competenza, percezione: competenza]
+sensi: {vista_pura: 36}
+percezione_passiva: 18
+immunita_condizioni: [affascinato, spaventato]
+vulnerabilita:
+  - tipo: perforante
+    condizione: da armi brandite da creature sotto l'effetto di benedizione
+lingue: [Comune, Infernale]
+gs: 13
+
+tratti:
+  - nome: Resistenza maggiore alla magia
+    descrizione: |
+      Il rakshasa supera automaticamente i tiri salvezza contro incantesimi e altri effetti magici, e i tiri per colpire degli incantesimi lo mancano automaticamente.
+      Senza il consenso del rakshasa, nessun incantesimo può osservare il rakshasa a distanza o individuarne i pensieri, il tipo di creatura o l'allineamento.
+  - nome: Ristoro immondo
+    descrizione: |
+      Se il rakshasa muore al di fuori dei Nove Inferi, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: tocco-maledetto, ripetizioni: 3}
+    descrizione: |
+      Il rakshasa effettua tre attacchi Tocco maledetto.
+  - nome: Tocco maledetto
+    id: tocco-maledetto
+    descrizione: |
+      *Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 12 (2d6 + 5) danni taglienti più 19 (3d12) danni necrotici. Se il bersaglio è una creatura, viene maledetto.
+      Finché è maledetto, il bersaglio non ottiene alcun beneficio dal Riposo Breve o Lungo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: carisma, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: carisma}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il rakshasa lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 18):
+      
+      **1/Giorno Ciascuno:** [[incantesimi/immagine-maggiore]], [[incantesimi/invisibilita]], [[incantesimi/spostamento-planare]], [[incantesimi/volare]]
+      
+      **A Volontà:** [[incantesimi/camuffare-se-stesso]], [[incantesimi/illusione-minore]], [[incantesimi/individuazione-dei-pensieri]], [[incantesimi/individuazione-del-magico]], [[incantesimi/mano-magica]]
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 18
+        a_volonta:
+          - dnd.incantesimo.camuffare-se-stesso
+          - dnd.incantesimo.illusione-minore
+          - dnd.incantesimo.individuazione-dei-pensieri
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.mano-magica
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.immagine-maggiore
+              - dnd.incantesimo.invisibilita
+              - dnd.incantesimo.spostamento-planare
+              - dnd.incantesimo.volare
+  - nome: "Ordine funesto (ricarica 5-6)"
+    id: ordine-funesto-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 18, tutti i nemici in un'Emanazione di 9 metri di cui il rakshasa è il punto di origine.
+      *Fallimento:* 28 (8d6) danni Psichici, e il bersaglio è [[condizioni/spaventato]] e [[condizioni/incapacitato]] fino all'inizio del turno successivo del rakshasa.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 8, dado: d6, tipo_danno: psichico}

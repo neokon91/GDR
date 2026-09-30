@@ -1,0 +1,18 @@
+id: dnd.talento.dono-della-vista-pura
+nome: Dono della vista pura
+categoria: dono-epico
+prerequisito: 19º livello o superiore
+ripetibile: false
+parametri:
+  - id: caratteristica
+    tipo: caratteristica
+    quantita: 1
+    scelte: [tutte]
+    valore: 1
+    massimo: 30
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: sensi.vista-pura, operazione: aumento, valore: 18}
+descrizione: |
+  +1 a una caratteristica, massimo 30; vista pura 18 m.

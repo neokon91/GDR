@@ -1,0 +1,15 @@
+id: dnd.incantesimo.armatura-magica
+nome: Armatura magica
+livello: 1
+scuola: abiurazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S, "M (un pezzo di cuoio trattato)"]
+concentrazione: false
+rituale: false
+durata: 8 ore
+descrizione: |
+  L'incantatore tocca una creatura consenziente che non indossa un'armatura. Fino al termine dell'incantesimo, la CA base del bersaglio diventa 13 più il suo modificatore di Destrezza. L'incantesimo termina in anticipo se il bersaglio indossa un'armatura.

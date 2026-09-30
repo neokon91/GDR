@@ -1,0 +1,41 @@
+id: dnd.mostro.azer-sentinella
+nome: Azer Sentinella
+taglia: media
+tipo: elementale
+gruppo: Azer
+allineamento: legale neutrale
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 15, competenza: true}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 9}
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [avvelenato]
+lingue: ["Primordiale (Ignan)"]
+gs: 2
+tratti:
+  - id: azer-sentinella.aura-di-fuoco
+    nome: Aura di fuoco
+    descrizione: |
+      Al termine di ogni turno dell'azer, tutte le creature a scelta dell'azer che si trovano in un'Emanazione di 1,5 metri
+      di cui l'azer è il punto di origine subiscono 5 (1d10) danni da Fuoco, a meno che l'azer non sia Incapacitato.
+  - id: azer-sentinella.illuminazione
+    nome: Illuminazione
+    descrizione: |
+      L'azer emana Luce Intensa in un raggio di 3 metri e Luce Fioca per altri 3 metri.
+azioni:
+  - id: azer-sentinella.martello-ardente
+    nome: Martello Ardente
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m.
+      *Colpito:* 8 (1d10 + 3) danni Contundenti più 3 (1d6) danni da Fuoco.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 1.5 }
+        colpito:
+          - danno: {numero_dadi: 1, dado: d10, tipo_danno: contundente, bonus: { caratteristica: forza } }

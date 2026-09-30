@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.colla-meravigliosa
+nome: Colla meravigliosa
+categoria: oggetto-meraviglioso
+rarita: leggendaria
+richiede_sintonia: false
+descrizione: |
+  Questa sostanza viscosa e lattiginosa può creare un legame adesivo permanente tra due oggetti qualsiasi. Deve essere custodita in un barattolo o in un'ampolla al cui interno sia stato spalmato dell'olio della scivolosità. Quando viene trovato, il contenitore contiene (1d6 + 1) x 30 grammi di colla.
+  Una quantità di colla pari a 30 grammi può coprire una superficie quadrata con lato di 30 centimetri. Per applicare 30 grammi di colla meravigliosa è necessaria un'azione di Utilizzo; la colla avrà effetto dopo 1 minuto. Il legame così creatosi può essere spezzato solamente con un'applicazione di solvente universale o di olio della forma eterea, o tramite un incantesimo desiderio.

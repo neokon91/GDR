@@ -1,0 +1,4 @@
+id: dnd.oggetto.lente-d-ingrandimento
+nome: Lente d'ingrandimento
+categoria: equipaggiamento-avventura
+costo: {valore: 100, valuta: moneta-oro}

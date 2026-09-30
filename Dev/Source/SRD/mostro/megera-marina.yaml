@@ -1,0 +1,59 @@
+id: dnd.mostro.megera-marina
+nome: Megera marina
+taglia: media
+tipo: folletto
+allineamento: caotico malvagio
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 13, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 9, nuoto: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 11
+lingue: [Comune, Gigante, "Primordiale (Aquan)"]
+gs: 2
+
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      La megera può respirare in aria e in acqua.
+  - nome: Magia della congrega
+    descrizione: |
+      Finché si trova entro 9 metri da almeno due megere alleate, la megera può lanciare uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando il normale tempo di lancio dell'incantesimo e Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 11): identificare, localizza oggetto, presagio, scrutare, servitore inosservato o trova famiglio. La megera deve terminare un riposo lungo prima di utilizzare questo tratto per lanciare di nuovo l'incantesimo.
+  - nome: Aspetto orripilante
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 11, qualsiasi bestia o umanoide inizi il proprio turno nel campo visivo della megera, entro un raggio di 9 metri da lei e può vederne la vera forma. *Fallimento:* il bersaglio è spaventato fino all'inizio del proprio turno successivo. *Successo:* il bersaglio è immune all'Aspetto orripilante di questa megera per 24 ore.
+azioni:
+  - nome: Artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Aspetto illusorio
+    descrizione: |
+      La megera lancia camuffare se stesso, utilizzando Costituzione come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13). L'incantesimo dura 24 ore.
+  - nome: "Sguardo mortale (ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 11, una creatura spaventata che la megera è in grado di vedere entro 9 metri. *Fallimento:* se il bersaglio ha 20 punti ferita o meno, scende a 0 punti ferita. Altrimenti, il bersaglio subisce 13 (3d8) danni psichici.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: destrezza, base: 8, competenza: true}

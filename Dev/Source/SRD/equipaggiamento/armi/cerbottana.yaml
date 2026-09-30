@@ -1,0 +1,9 @@
+id: dnd.arma.cerbottana
+nome: Cerbottana
+categoria: distanza-da-guerra
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 0.5, unita: kg}
+danno: {dado: 1, tipo_danno: perforante}
+gittata: {normale: 7, lunga: 30}
+proprieta: [munizioni, ricarica]
+padronanza: vessazione

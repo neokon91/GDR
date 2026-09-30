@@ -1,0 +1,16 @@
+id: dnd.strumento.attrezzatura-da-tessitore
+nome: Attrezzatura da Tessitore
+categoria: strumenti
+famiglia: attrezzatura-da-artigiano
+costo: {valore: 1, valuta: moneta-oro}
+peso: {valore: 2.5, unita: kg}
+caratteristica: destrezza
+utilizzo:
+  - azione: Riparare uno strappo in un indumento
+    cd: 10
+  - azione: Ricamare un motivo minuscolo
+    cd: 10
+creazione: [armatura-imbottita, dnd.oggetto.cesto, sacco-a-pelo, dnd.oggetto.coperta, dnd.oggetto.abiti-eleganti, dnd.oggetto.rete, dnd.oggetto.veste, dnd.oggetto.corda, dnd.oggetto.sacco, dnd.oggetto.spago, dnd.oggetto.tenda, dnd.oggetto.abiti-da-viaggiatore]
+descrizione: |
+  Se possiedi la competenza in uno strumento, aggiungi il tuo Bonus di Competenza a qualsiasi prova di caratteristica che richieda l'uso di tale strumento.
+  Se possiedi anche la competenza in un'abilità utilizzata per quella prova, ottieni Vantaggio alla prova stessa.

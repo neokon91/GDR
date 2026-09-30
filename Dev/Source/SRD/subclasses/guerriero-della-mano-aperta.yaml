@@ -1,0 +1,24 @@
+id: dnd.sottoclasse.guerriero-della-mano-aperta
+nome: Guerriero della Mano Aperta
+classe: dnd.classe.monaco
+citazione: "Padroneggia le tecniche di combattimento senz'armi"
+privilegi:
+- livello: 3
+  nome: "Tecnica della Mano Aperta"
+  descrizione: |
+    Con Raffica di colpi puo impedire reazioni, spingere o rendere prono il bersaglio.
+
+- livello: 6
+  nome: "Integrita del Corpo"
+  descrizione: |
+    Come azione bonus tira il dado di Arti marziali e recupera Punti Ferita.
+
+- livello: 11
+  nome: "Passo Lesto"
+  descrizione: |
+    Dopo un azione bonus diversa da Passo del vento puo usare anche Passo del vento.
+
+- livello: 17
+  nome: "Palmo Tremante"
+  descrizione: |
+    Spende 4 punti concentrazione per vibrazioni che poi infliggono 10d12 danni da forza o meta con tiri salvezza.

@@ -1,0 +1,20 @@
+id: dnd.incantesimo.lentezza
+nome: Lentezza
+livello: 3
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S, "M (una goccia di melassa)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore altera il tempo intorno a un massimo di sei creature a sua scelta all'interno in un cubo con spigolo di 12 metri entro gittata. Ogni bersaglio deve superare un tiro salvezza su Saggezza, altrimenti è influenzato da questo incantesimo per tutta la sua durata.
+
+  Un bersaglio influenzato subisce una penalità di -2 alla CA e ai tiri salvezza su Destrezza, non può effettuare reazioni e la sua velocità è dimezzata. Quando è il suo turno, può effettuare un'azione o un'azione bonus, non entrambe. Inoltre, se sceglie di eseguire l'azione di Attacco, può sferrare un solo attacco. Se lancia un incantesimo con una componente somatica, ha una probabilità di fallimento del 25%, poiché l'incantatore effettua troppo lentamente i movimenti necessari al lancio.
+
+  Inoltre, ripeterà il tiro salvezza alla fine di ogni suo turno. Se lo supera, l'incantesimo svanisce.

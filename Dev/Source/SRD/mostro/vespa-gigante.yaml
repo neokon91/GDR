@@ -1,0 +1,42 @@
+id: dnd.mostro.vespa-gigante
+nome: Vespa gigante
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 3, volo: 15}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1/2
+
+tratti:
+  - nome: Volo sfuggente
+    descrizione: |
+      La vespa non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+azioni:
+  - nome: Pungiglione
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 +2) danni perforanti più 5 (2d4) danni da veleno.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

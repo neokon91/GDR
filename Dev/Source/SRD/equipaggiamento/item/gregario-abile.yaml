@@ -1,0 +1,4 @@
+id: dnd.oggetto.gregario-abile
+nome: Gregario abile
+categoria: gregari
+costo: {valore: 2, valuta: moneta-oro, per: giorno}

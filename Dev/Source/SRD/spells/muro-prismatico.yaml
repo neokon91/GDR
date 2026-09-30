@@ -1,0 +1,33 @@
+id: dnd.incantesimo.muro-prismatico
+nome: Muro prismatico
+livello: 9
+scuola: abiurazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 10 minuti
+descrizione: |
+  Un piano scintillante di luce multicolore forma un muro opaco verticale (che può misurare fino a 27 metri di lunghezza, 9 metri di altezza e 2,5 centimetri di spessore), centrato su un punto entro gittata. In alternativa, l'incantatore modella il muro in un globo del diametro massimo di 9 metri centrato su un punto entro gittata. Il muro permane per tutta la durata dell'incantesimo. Se l'incantatore posiziona il muro in uno spazio occupato da una creatura, l'incantesimo termina immediatamente, senza alcun effetto.
+
+  Il muro emana luce intensa entro 30 metri e luce fioca per ulteriori 30 metri. L'incantatore e le creature da lui scelte al momento del lancio dell'incantesimo possono passare attraverso il muro o rimanervi accanto senza subire danni. Se un'altra creatura in grado di vedere il muro giunge entro 6 metri da esso o comincia lì il proprio turno, deve superare un tiro salvezza su Costituzione, altrimenti è accecata per 1 minuto.
+
+  Il muro è composto da sette strati, ognuno di un colore diverso. Quando una creatura si protende oltre il muro o ci passa attraverso, lo fa attraversando uno strato alla volta. Ogni strato costringe la creatura a effettuare un tiro salvezza su Destrezza, altrimenti viene influenzata dalle proprietà di quello strato, come descritto nella tabella degli strati prismatici.
+
+  Il muro, che ha una CA pari a 10, può essere distrutto uno strato alla volta e in ordine dal rosso al viola, in un modo specifico per ogni strato. Se uno strato viene distrutto, resta distrutto per la durata dell'incantesimo. L'incantesimo campo anti-magia non ha alcun effetto sul muro e l'incantesimo dissolvi magie può influenzare solo lo strato viola.
+
+  ### Strati prismatici
+
+  | Ordine | Effetti |
+  | --- | --- |
+  | 1 Rosso | Tiro salvezza fallito: 12d6 danni da fuoco. Tiro salvezza superato: la metà dei danni. Effetti aggiuntivi: gli attacchi a distanza non magici non possono attraversare questo strato, che viene distrutto se subisce almeno 25 danni da freddo. |
+  | 2 Arancione | Tiro salvezza fallito: 12d6 danni da acido. Tiro salvezza superato: la metà dei danni. Effetti aggiuntivi: gli attacchi a distanza magici non possono attraversare questo strato, che viene distrutto da un vento forte (come quello creato da folata di vento). |
+  | 3 Giallo | Tiro salvezza fallito: 12d6 danni da fulmine. Tiro salvezza superato: la metà dei danni. Effetti aggiuntivi: questo strato viene distrutto se subisce almeno 60 danni da forza. |
+  | 4 Verde | Tiro salvezza fallito: 12d6 danni da veleno. Tiro salvezza superato: la metà dei danni. Effetti aggiuntivi: un incantesimo passapareti o un altro incantesimo di livello pari o superiore che è in grado di aprire un portale su una superficie solida, distrugge questo strato. |
+  | 5 Blu | Tiro salvezza fallito: 12d6 danni da freddo. Tiro salvezza superato: la metà dei danni. Effetti aggiuntivi: questo strato viene distrutto se subisce almeno 25 danni da fuoco. |
+  | 6 Indaco | Tiro salvezza fallito: il bersaglio è trattenuto ed effettua un tiro salvezza su Costituzione alla fine di ogni suo turno. Se lo supera per tre volte, pone fine alla condizione. Se fallisce per tre volte, resta pietrificato finché non viene liberato da un effetto come quello dell'incantesimo ristorare superiore. Non è necessario che i tiri superati o falliti siano consecutivi: si tiene semplicemente il conto di entrambi finché il bersaglio non ne accumula tre di un certo tipo. Effetti aggiuntivi: non è possibile lanciare incantesimi attraverso questo strato, che viene distrutto dalla luce intensa emanata dall'incantesimo luce diurna. |
+  | 7 Viola | Tiro salvezza fallito: il bersaglio è accecato ed effettua un tiro salvezza su Saggezza all'inizio del turno successivo dell'incantatore. Se lo supera, non è più accecato. Se lo fallisce, non è più accecato e viene teletrasportato su un altro piano di esistenza (a scelta del GM). Effetti aggiuntivi: questo strato viene distrutto da dissolvi magie. |

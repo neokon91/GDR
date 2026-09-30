@@ -1,0 +1,32 @@
+id: dnd.incantesimo.confusione
+nome: Confusione
+livello: 4
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 27
+componenti: [V, S, "M (tre gusci di noce)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Ogni creatura all'interno di una sfera del raggio di 3 metri centrata su un punto entro gittata a scelta dell'incantatore deve superare un tiro salvezza su Saggezza, altrimenti non può effettuare azioni bonus o reazioni e deve tirare 1d10 all'inizio di ogni suo turno per determinare il suo comportamento durante quel turno, consultando la tabella sottostante.
+
+  **1d10** Comportamento per il turno
+
+  **1** Il bersaglio non effettua alcuna azione e usa tutto il suo movimento per muoversi, tirando 1d4 per la direzione: 1, nord; 2, est; 3, sud; o 4, ovest.
+
+  **2-6** Il bersaglio non si muove e non effettua azioni.
+
+  **7-8** Il bersaglio non si muove ed effettua l'azione di Attacco per eseguire un attacco in mischia contro una creatura casuale entro portata. Se nessuna creatura si trova entro la sua portata, il bersaglio non effettua azioni.
+
+  **9-10** Il bersaglio sceglie il comportamento.
+
+  Alla fine di ogni suo turno, un bersaglio influenzato ripete il tiro salvezza e, se lo supera, termina l'incantesimo su di sé.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  Il raggio della sfera aumenta di 1,5 metri per ogni slot di livello superiore al 4º.

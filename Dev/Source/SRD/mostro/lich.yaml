@@ -1,0 +1,126 @@
+id: dnd.mostro.lich
+nome: Lich
+taglia: media
+tipo: non-morto
+sottotipo: mago
+allineamento: neutrale malvagio
+ca: {valore: 20}
+caratteristiche:
+  forza: {valore: 11, competenza: false}
+  destrezza: {valore: 16, competenza: true}
+  costituzione: {valore: 16, competenza: true}
+  intelligenza: {valore: 21, competenza: true}
+  saggezza: {valore: 14, competenza: true}
+  carisma: {valore: 16, competenza: false}
+iniziativa: maestria
+dadi_vita: 42
+velocita: {camminata: 9}
+abilita: [intuizione: competenza, percezione: competenza, storia: competenza, arcano: maestria]
+sensi: {vista_pura: 36}
+percezione_passiva: 19
+resistenze: [freddo, fulmine]
+immunita_danni: [necrotico, veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, paralizzato, spaventato]
+equipaggiamento:
+  - {articolo: dnd.oggetto.borsa-per-componenti}
+lingue: [tutte]
+gs: 21
+
+tratti:
+  - nome: Filatterio
+    descrizione: |
+      Se annientato, il lich si riforma dopo 1d10 giorni se possiede un filatterio, tornando in vita con tutti i suoi punti ferita. Il nuovo corpo appare in uno spazio libero all'interno della tana della lich.
+  - nome: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+    descrizione: |
+      Se il lich fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il lich effettua tre attacchi, usando Esplosione occulta o Tocco paralizzante in qualsiasi combinazione.
+  - nome: Esplosione occulta
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +12, portata 1,5 m o gittata 36 m. *Colpito:* 31 (4d12 + 5) danni da forza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: intelligenza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d12
+              tipo_danno: forza
+              bonus: {caratteristica: intelligenza}
+  - nome: Tocco paralizzante
+    descrizione: |
+      *Tiro per colpire in mischia:* +12, portata 1,5 m. *Colpito:* 15 (3d6 + 5) danni da freddo, e il bersaglio è paralizzato fino all'inizio del turno successivo del lich.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: intelligenza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: freddo
+              bonus: {caratteristica: intelligenza}
+  - nome: Incantesimi
+    descrizione: |
+      Il lich lancia uno dei seguenti incantesimi, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20):1/giorno ciascuno: catena di fulmini, dito della morte, parola del potere uccidere, scrutare 2/giorno ciascuno: animare morti, porta dimensionale, spostamento planare A volontà: Dissolvi magie, fulmine (di 5º livello), individuazione dei pensieri, individuazione del magico, invisibilità, mano magica, palla di fuoco (di 5º livello), prestidigitazione
+    attivita:
+      - tipo: incantatore
+        caratteristica: intelligenza
+        cd: 20
+        a_volonta:
+          - dnd.incantesimo.dissolvi-magie
+          - id: dnd.incantesimo.fulmine
+            livello: 5
+          - dnd.incantesimo.individuazione-dei-pensieri
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.invisibilita
+          - dnd.incantesimo.mano-magica
+          - id: dnd.incantesimo.palla-di-fuoco
+            livello: 5
+          - dnd.incantesimo.prestidigitazione
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.catena-di-fulmini
+              - dnd.incantesimo.dito-della-morte
+              - dnd.incantesimo.parola-del-potere-uccidere
+              - dnd.incantesimo.scrutare
+          - usi: 2
+            incantesimi:
+              - dnd.incantesimo.animare-morti
+              - dnd.incantesimo.porta-dimensionale
+              - dnd.incantesimo.spostamento-planare
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie: 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il lich può consumare un utilizzo per effettuare una delle seguenti azioni. Il lich recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Distruggere vita
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 20, tutte le creature diverse da un non morto in un'emanazione di 6 metri di cui il lich è il punto di origine. *Fallimento:* 31 (9d6) danni necrotici. *Successo:* danni dimezzati. *Fallimento o successo:* il lich non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: intelligenza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 9, dado: d6, tipo_danno: necrotico}
+        successo: danno-dimezzato
+  - nome: Sguardo spaventoso
+    descrizione: |
+      Il lich lancia paura, utilizzando la stessa caratteristica da incantatore di Incantesimi. il lich non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+  - nome: Teletrasporto mortale
+    descrizione: |
+      Il lich si teletrasporta fino a 18 metri in uno spazio libero che è in grado di vedere, e ogni creatura entro 3 metri dallo spazio che ha lasciato subisce 11 (2d10) danni necrotici.
+reazioni:
+  - nome: Magia di protezione
+    descrizione: |
+      Il lich lancia controincantesimo o scudo come risposta all'innesco dell'incantesimo, utilizzando la stessa caratteristica da incantatore di Incantesimi.

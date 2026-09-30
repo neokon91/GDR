@@ -1,0 +1,37 @@
+id: dnd.specie.dragonide
+nome: Dragonide
+tipo: umanoide
+taglia: media
+velocita: {camminata: 9}
+tratti_sintesi: discendenza-draconica, soffio, resistenza-al-danno-scelto, scurovisione e volo-draconico (dal 5º livello)
+antenati_draconici:
+- id: dragonide.discendenza-draconica.argento
+  nome: Argento
+  tipo_danno: freddo
+- id: dragonide.discendenza-draconica.bianco
+  nome: Bianco
+  tipo_danno: freddo
+- id: dragonide.discendenza-draconica.blu
+  nome: Blu
+  tipo_danno: fulmine
+- id: dragonide.discendenza-draconica.bronzo
+  nome: Bronzo
+  tipo_danno: fulmine
+- id: dragonide.discendenza-draconica.nero
+  nome: Nero
+  tipo_danno: acido
+- id: dragonide.discendenza-draconica.oro
+  nome: Oro
+  tipo_danno: fuoco
+- id: dragonide.discendenza-draconica.ottone
+  nome: Ottone
+  tipo_danno: fuoco
+- id: dragonide.discendenza-draconica.rame
+  nome: Rame
+  tipo_danno: acido
+- id: dragonide.discendenza-draconica.rosso
+  nome: Rosso
+  tipo_danno: fuoco
+- id: dragonide.discendenza-draconica.verde
+  nome: Verde
+  tipo_danno: veleno

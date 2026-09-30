@@ -1,0 +1,65 @@
+id: dnd.mostro.leone
+nome: Leone
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 15}
+abilita: [furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 1
+
+tratti:
+  - nome: Balzo in corsa
+    descrizione: |
+      Dopo una rincorsa di 3 metri, il leone può effettuare un salto in lungo di un massimo di 7,5 metri.
+  - nome: Tattiche del branco
+    descrizione: |
+      Il leone dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno degli alleati dell'animale si trova entro 1,5 metri dalla creatura e non ha la condizione incapacitato.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 2}
+    descrizione: |
+      Il leone effettua due attacchi Squarcio. Può sostituire un attacco con un utilizzo di Ruggito.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Ruggito
+    id: ruggito
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 11, una creatura entro 4,5 metri. *Fallimento:* il bersaglio è spaventato fino all'inizio del turno successivo del leone.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: saggezza, base: 8, competenza: true}

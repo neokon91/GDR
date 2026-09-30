@@ -1,0 +1,6 @@
+id: dnd.specie.gnomo
+nome: Gnomo
+tipo: umanoide
+taglia: piccola
+velocita: {camminata: 9}
+tratti_sintesi: astuzia gnomesca, lignaggio delle foreste o delle rocce e scurovisione

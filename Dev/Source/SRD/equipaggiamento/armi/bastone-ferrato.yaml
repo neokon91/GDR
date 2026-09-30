@@ -1,0 +1,9 @@
+id: dnd.arma.bastone-ferrato
+nome: Bastone ferrato
+categoria: mischia-semplice
+costo: {valore: 2, valuta: moneta-argento}
+peso: {valore: 2, unita: kg}
+danno: {dado: d6, tipo_danno: contundente}
+proprieta:
+- versatile-1d8
+padronanza: rovesciamento

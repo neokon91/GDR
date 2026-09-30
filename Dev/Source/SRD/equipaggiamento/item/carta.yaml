@@ -1,0 +1,10 @@
+id: dnd.oggetto.carta
+nome: Carta
+categoria: equipaggiamento-avventura
+costo:
+  valore: 2
+  unita: moneta-argento
+peso:
+  valore: null
+descrizione: |
+  Un foglio di carta può contenere circa 250 parole scritte a mano.

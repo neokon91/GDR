@@ -1,0 +1,40 @@
+id: dnd.mostro.armatura-animata
+nome: Armatura Animata
+taglia: media
+tipo: costrutto
+gruppo: Oggetti animati
+allineamento: senza allineamento
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 14, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 3, competenza: false}
+  carisma: {valore: 1, competenza: false}
+iniziativa: competenza
+dadi_vita: 6
+velocita: {camminata: 5}
+sensi: {vista_cieca: 18}
+immunita_danni: [psichico, veleno]
+immunita_condizioni: [affascinato, assordato, avvelenato, indebolimento, paralizzato, pietrificato, spaventato]
+lingue: [nessuna]
+gs: 1
+azioni:
+  - id: armatura-animata.multiattacco
+    nome: Multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: schianto, ripetizioni: 2}
+    descrizione: L'armatura effettua due attacchi Schianto.
+  - id: armatura-animata.schianto
+    nome: Schianto
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +4, portata 1,5 m.
+      *Colpito:* 5 (1d6 + 2) danni Contundenti.
+    attivita:
+      - tipo: attacco
+        attacco: {categoria: attacco-naturale, bonus: {caratteristica: forza, competenza: true}, bersagli: 1, portata: 1.5}
+        colpito:
+          - danno: {numero_dadi: 1, dado: d6, tipo_danno: contundente, bonus: {caratteristica: forza}}

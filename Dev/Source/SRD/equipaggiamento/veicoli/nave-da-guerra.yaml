@@ -1,0 +1,9 @@
+id: dnd.veicolo.nave-da-guerra
+nome: Nave da guerra
+tipo: veicolo
+costo: {valore: 25, valuta: moneta-oro}
+classe_armatura: 15
+velocita: {viaggio: 3.75}  # km/h — i veicoli viaggiano, non camminano
+equipaggio: 60
+passeggeri: 60
+carico: 200 t

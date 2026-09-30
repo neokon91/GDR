@@ -1,0 +1,18 @@
+id: dnd.incantesimo.faro-di-speranza
+nome: Faro di speranza
+livello: 3
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+attivita:
+  - tipo: potenziamento
+    concede: speranzoso
+    durata: {valore: 1, unita: minuti}
+descrizione: |
+  L'incantatore sceglie un qualsiasi numero di creature entro gittata. Per la durata dell'incantesimo, ogni bersaglio dispone di vantaggio ai tiri salvezza su Saggezza, ai tiri salvezza contro morte e recupera il numero massimo di punti ferita possibile da qualsiasi guarigione.

@@ -1,0 +1,50 @@
+id: dnd.incantesimo.scrutare
+nome: Scrutare
+livello: 5
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.warlock
+tempo_lancio: 10 minuti
+gittata: incantatore
+componenti: [V, S, "M (un focus del valore di 1.000 mo o più, come una sfera di cristallo, uno specchio o una fonte d'acqua)"]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore può vedere e udire una creatura a sua scelta situata sul suo stesso piano di esistenza. Il bersaglio effettua un tiro salvezza su Saggezza, modificato (vedi le tabelle di seguito) dalla conoscenza e dal tipo di legame fisico che l'incantatore ha nei confronti della creatura. Il bersaglio non sa contro cosa sta effettuando il tiro salvezza, avverte solo una sensazione di disagio.
+
+  L'incantatore conosce il bersaglio in maniera...
+
+  Modificatore al tiro salvezza
+
+  Indiretta (ha sentito parlare del bersaglio)
+
+  +5
+
+  Diretta (ha incontrato il bersaglio) +0
+
+  Approfondita (conosce bene il bersaglio)
+
+  -5
+
+  L'oggetto del bersaglio che l'incantatore possiede è...
+
+  Modificatore al tiro salvezza
+
+  Immagine o altra raffigurazione -2
+
+  Abito o altro oggetto personale -4
+
+  Parte del corpo, ciocca di capelli o pezzo di unghia
+
+  -10
+
+  In caso di tiro salvezza superato, il bersaglio non viene influenzato dall'incantesimo, che l'incantatore non può lanciare su di esso per 24 ore.
+
+  In caso di fallimento, l'incantesimo crea un sensore invisibile e intangibile entro 3 metri dal bersaglio, attraverso cui l'incantatore può vedere e sentire come se si trovasse sul posto. Il sensore si muove insieme al bersaglio, rimanendo entro 3 metri da esso per la durata dell'incantesimo. Se qualcosa è in grado di vedere il sensore, esso appare come un globo luminoso grande all'incirca quanto un pugno umano.
+
+  Invece di bersagliare una creatura, l'incantatore può bersagliare un luogo che ha già visto. Quando lo fa, il sensore appare in quel luogo e non si muove.

@@ -1,0 +1,28 @@
+id: dnd.incantesimo.frantumare
+nome: Frantumare
+livello: 2
+scuola: invocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S, "M (un frammento di mica)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Un rumore assordante esplode da un punto a scelta dell'incantatore entro gittata. Ogni creatura all'interno di una sfera di 3 metri di raggio centrata su quel punto effettua un tiro salvezza su Costituzione. In caso di fallimento, subisce 3d8 danni da tuono o la metà dei danni in caso di successo. Un costrutto subisce svantaggio al tiro salvezza.
+
+  Anche un oggetto non magico che non sia indossato o trasportato subisce i danni se si trova entro l'area dell'incantesimo.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d8 per ogni slot di livello superiore al 2º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 3, dado: d8, tipo_danno: tuono }
+    successo: danno-dimezzato
+    scaling: { quando: slot, danno: { numero_dadi: 1, dado: d8, tipo_danno: tuono } }

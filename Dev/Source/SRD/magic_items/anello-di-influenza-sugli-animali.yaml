@@ -1,0 +1,10 @@
+id: dnd.oggetto-magico.anello-di-influenza-sugli-animali
+nome: Anello di influenza sugli animali
+categoria: anello
+rarita: rara
+richiede_sintonia: false
+descrizione: |
+  Questo anello ha 3 cariche e recupera 1d3 cariche consumate all'alba di ogni giorno. Finché il  personaggio indossa l'anello, può usare un'azione e  consumare 1 carica per lanciare uno degli incantesimi seguenti (CD del tiro salvezza 13):
+  - Amicizia con gli animali
+  - Paura (ha effetto solo sulle bestie)
+  - Parlare con gli animali

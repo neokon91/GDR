@@ -1,0 +1,22 @@
+id: dnd.incantesimo.parola-guaritrice-di-massa
+nome: Parola guaritrice di massa
+livello: 3
+scuola: abiurazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+tempo_lancio: azione bonus
+gittata: 18
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Fino a sei creature a scelta dall'incantatore entro gittata e che egli è in grado di vedere recuperano un ammontare di punti ferita pari a 2d4 più il modificatore di caratteristica da incantatore dell'incantatore.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  La guarigione aumenta di 1d4 per ogni slot di livello superiore al 3º.
+attivita:
+  - tipo: cura
+    bersagli: { numero: 6 }
+    cura: { numero_dadi: 2, dado: d4, bonus: { caratteristica: incantesimo } }

@@ -1,0 +1,4 @@
+id: dnd.oggetto.gregario-inesperto
+nome: Gregario inesperto
+categoria: gregari
+costo: {valore: 2, valuta: moneta-oro, per: giorno}

@@ -1,0 +1,29 @@
+id: dnd.incantesimo.bagliore-solare
+nome: Bagliore solare
+livello: 6
+scuola: invocazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (una lente d'ingrandimento)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  L'incantatore lancia un bagliore solare in una linea larga 1,5 metri e lunga 18 metri. Ogni creatura nella sua traiettoria effettua un tiro salvezza su Costituzione e, se lo fallisce, subisce 6d8 danni radiosi e rimane accecata fino all'inizio del turno successivo dell'incantatore. Se lo supera, invece, subisce solo la metà dei danni.
+
+  Fino al termine dell'incantesimo, l'incantatore può effettuare un'azione di Magia per creare una nuova linea radiosa.
+
+  Per la durata dell'incantesimo, una scintilla di luce radiosa risplende nella sua mano ed emana luce intensa in un raggio di 9 metri e luce fioca per ulteriori 9 metri. Questa luce è considerata luce solare.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+    fallimento:
+      - danno: { numero_dadi: 6, dado: d8, tipo_danno: radioso }
+      - concede: accecato
+        durata: { valore: 1, unita: round }
+    successo: danno-dimezzato

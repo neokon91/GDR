@@ -1,0 +1,42 @@
+id: dnd.mostro.mantoscuro
+nome: Mantoscuro
+taglia: piccola
+tipo: aberrazione
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+iniziativa: competenza
+dadi_vita: 5
+velocita: {camminata: 3, volo: 9}
+abilita: [furtivita: competenza]
+sensi: {vista_cieca: 18}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1/2
+
+azioni:
+  - nome: Schiacciare
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni contundenti, e il mantoscuro si avvinghia al bersaglio. Se il bersaglio è una creatura di taglia Media o inferiore e il mantoscuro dispone di vantaggio al tiro per colpire, copre il bersaglio, il quale è accecato e soffoca mentre il mostro è avvinghiato a lui in questo modo. Finché è avvinghiato a un bersaglio, il mantoscuro può attaccare solamente il bersaglio, ma dispone di vantaggio ai suoi tiri per colpire. Inoltre, il mantoscuro si muove insieme al bersaglio, la sua velocità diventa 0 e non può beneficiare di alcun bonus alla velocità. Una creatura può effettuare un'azione per staccarsi il mantoscuro di dosso, riuscendoci con una prova di Forza (Atletica) con CD 13 superata. Nel suo turno, il mantoscuro può staccarsi spontaneamente dal bersaglio usando 1,5 metri di movimento.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: "Aura di oscurità (1/giorno)"
+    descrizione: |
+      L'oscurità magica riempie un'emanazione di 4,5 metri di cui il mantoscuro è il punto di origine. Questo effetto dura finché il mantoscuro mantiene la concentrazione su di esso, fino a 10 minuti. La scurovisione non può penetrare in quest'area e nessuna luce può illuminarla.

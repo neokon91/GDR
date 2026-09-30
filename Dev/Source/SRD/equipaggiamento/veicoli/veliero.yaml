@@ -1,0 +1,9 @@
+id: dnd.veicolo.veliero
+nome: Veliero
+tipo: veicolo
+costo: {valore: 10, valuta: moneta-oro}
+classe_armatura: 15
+velocita: {viaggio: 3}  # km/h — i veicoli viaggiano, non camminano
+equipaggio: 20
+passeggeri: 20
+carico: 100 t

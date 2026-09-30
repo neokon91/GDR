@@ -1,0 +1,10 @@
+id: dnd.oggetto.lanterna-schermata
+nome: Lanterna Schermata
+categoria: equipaggiamento-avventura
+costo:
+  valore: 5
+  unita: moneta-oro
+peso: {valore: 1, unita: kg}
+descrizione: |
+  Una lanterna schermata brucia olio come combustibile per emettere [[luce-intensa]] in un raggio di 9 metri e [[luce-fioca]] per ulteriori 9 metri.
+  Come Azione Bonus, puoi abbassare lo schermo, riducendo la luce a Luce Fioca in un raggio di 1,5 metri, oppure rialzarlo.

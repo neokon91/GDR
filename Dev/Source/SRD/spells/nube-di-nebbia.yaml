@@ -1,0 +1,20 @@
+id: dnd.incantesimo.nube-di-nebbia
+nome: Nube di nebbia
+livello: 1
+scuola: evocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  L'incantatore genera una sfera di nebbia del raggio di 6 metri centrata su un punto entro gittata. La sfera è pesantemente oscurata e permane la durata dell'incantesimo o finché un vento forte (come quello creato da folata di vento) non la disperde.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  Il raggio della sfera di nebbia aumenta di 6 metri per ogni slot di livello superiore al 1º.

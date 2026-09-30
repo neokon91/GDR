@@ -1,0 +1,23 @@
+id: dnd.incantesimo.localizza-oggetto
+nome: Localizza oggetto
+livello: 2
+scuola: divinazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.paladino
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (un ramoscello biforcuto)"]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore descrive o nomina un oggetto a lui familiare, percependo la direzione della sua ubicazione se l'oggetto si trova entro 300 metri da lui. Se l'oggetto è in movimento, l'incantatore apprende verso quale direzione si sta dirigendo.
+
+  L'incantesimo può localizzare un oggetto specifico noto all'incantatore, purché l'abbia visto da vicino (entro 9 metri) almeno una volta. In alternativa, può localizzare l'oggetto di un tipo particolare più vicino, come per esempio un certo tipo di veste, gioiello, mobile, strumento o arma.
+
+  Questo incantesimo non può localizzare un oggetto se uno strato di piombo blocca il percorso diretto tra esso e l'incantatore.

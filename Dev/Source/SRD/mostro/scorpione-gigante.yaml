@@ -1,0 +1,65 @@
+id: dnd.mostro.scorpione-gigante
+nome: Scorpione gigante
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 9, competenza: false}
+  carisma: {valore: 3, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 12}
+sensi: {vista_cieca: 18}
+percezione_passiva: 9
+lingue: [nessuna]
+gs: 3
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+    descrizione: |
+      Lo scorpione effettua due attacchi Artiglio e un attacco Pungiglione.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire) da una delle due chele.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Pungiglione
+    id: pungiglione
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni perforanti più 11 (2d10) danni da veleno.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

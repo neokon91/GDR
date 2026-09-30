@@ -1,0 +1,16 @@
+id: dnd.incantesimo.clone
+nome: Clone
+livello: 8
+scuola: necromanzia
+classi:
+  - dnd.classe.mago
+tempo_lancio: 1 ora
+gittata: contatto
+componenti: [V, S, "M (un diamante del valore di 1.000 mo o più, che l'incantesimo consuma, e un contenitore sigillabile del valore di 2.000 mo o più, abbastanza grande da contenere la creatura da clonare)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore tocca una creatura o un cubo della sua carne di almeno 2,5 cm per lato. Un duplicato inerme di quella creatura si sviluppa all'interno del contenitore utilizzato per lanciare l'incantesimo e finisce di crescere dopo 120 giorni; l'incantatore sceglie se il clone sviluppato ha la stessa età della creatura o è più giovane. Il clone rimane inerte e permane per un tempo indeterminato, fintantoché il suo involucro rimane indisturbato.
+
+  Dopo che il clone ha raggiunto la maturazione, se la creatura originale muore, la sua anima viene trasferita al clone, purché essa sia libera e disposta a tornare. Il clone è fisicamente identico all'originale e possiede la sua personalità, i suoi ricordi e le sue abilità, ma non il suo equipaggiamento. I resti della creatura originale, se ancora esistono, diventano inerti e non possono più essere riportati in vita, in quanto l'anima della creatura è altrove.

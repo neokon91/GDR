@@ -1,0 +1,43 @@
+id: dnd.mostro.coccodrillo
+nome: Coccodrillo
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 13, competenza: true}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 6, nuoto: 9}
+abilita: [furtivita: competenza]
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1/2
+
+tratti:
+  - nome: Apnea
+    descrizione: |
+      Il coccodrillo può trattenere il respiro per 1 ora.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire). Mentre è afferrato, il bersaglio è anche trattenuto.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

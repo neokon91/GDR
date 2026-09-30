@@ -1,0 +1,4 @@
+id: dnd.oggetto.locanda-aristocratico
+nome: Locanda Aristocratico
+categoria: vitto-e-alloggio
+costo: {valore: 4, valuta: moneta-oro}

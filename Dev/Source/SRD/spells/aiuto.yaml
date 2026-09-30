@@ -1,0 +1,22 @@
+id: dnd.incantesimo.aiuto
+nome: "Aiuto"
+livello: 2
+scuola: abiurazione
+classi: 
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.paladino
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (una striscia di tessuto bianco)"]
+concentrazione: false
+rituale: false
+durata: "8 ore"
+descrizione: |
+  L'incantatore sceglie fino a tre creature entro gittata. I Punti Ferita Massimi e i punti ferita attuali
+  di ogni bersaglio aumentano di 5 per la durata dell'incantesimo.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I punti ferita di ciascun bersaglio aumentano di 5 per ogni slot incantesimo di livello superiore al 2º.

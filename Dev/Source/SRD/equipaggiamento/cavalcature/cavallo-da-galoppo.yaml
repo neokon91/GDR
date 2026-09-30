@@ -1,0 +1,6 @@
+id: dnd.cavalcatura.cavallo-da-galoppo
+nome: Cavallo da galoppo
+costo: {valore: 75, valuta: moneta-oro}
+capacita_trasporto: {valore: 240, unita: kg}
+descrizione: |
+  Una buona cavalcatura può aiutarti a spostarti più rapidamente attraverso le terre selvagge, ma il suo scopo principale è trasportare l'equipaggiamento che altrimenti ti rallenterebbe.

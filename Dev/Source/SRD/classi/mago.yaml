@@ -1,0 +1,212 @@
+id: dnd.classe.mago
+nome: Mago
+caratteristica_primaria: [intelligenza]
+dado_vita: 6
+tiri_salvezza: [intelligenza, saggezza]
+competenze_abilita:
+  quantita: 2
+  scelte: [arcano, indagare, intuizione, medicina, natura, religione, storia]
+competenze_armi: [armi-semplici]
+competenze_armature: []
+equipaggiamento_iniziale: 
+  - nome: A
+    oggetti:
+      - articolo: dnd.arma.pugnale
+        quantita: 2
+      - articolo: dnd.oggetto.focus-arcano
+      - articolo: dnd.oggetto.veste
+      - articolo: dnd.oggetto.grimorio
+      - articolo: dnd.oggetto.dotazione-da-studioso
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 5
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 55
+descrizione: |
+  Il mago è un incantatore arcano basato su Intelligenza, libro degli incantesimi e preparazione flessibile. La sottoclasse SRD è l'Invocatore.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [lancio-incantesimi, adepto-dei-rituali, recupero-arcano]
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 4
+    slot_incantesimo: {livello1: 2, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 2
+    privilegi: [studioso]
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 5
+    slot_incantesimo: {livello1: 3, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 3
+    privilegi: [sottoclasse-del-mago]
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 6
+    slot_incantesimo: {livello1: 4, livello2: 2, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 7
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 5
+    privilegi: [memorizzare-incantesimo]
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 9
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 2, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 6
+    privilegi: [privilegio-della-sottoclasse]
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 10
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 7
+    privilegi: []
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 11
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 1, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 12
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 2, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 9
+    privilegi: []
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 14
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 1, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 10
+    privilegi: [privilegio-della-sottoclasse]
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 15
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 11
+    privilegi: []
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 13
+    privilegi: []
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 14
+    privilegi: [privilegio-della-sottoclasse]
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 15
+    privilegi: []
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 19
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 21
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 17
+    privilegi: []
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 22
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 18
+    privilegi: [maestria-negli-incantesimi]
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 23
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 19
+    privilegi: [dono-epico]
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 24
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 20
+    privilegi: [incantesimi-distintivi]
+    trucchetti_conosciuti: 5
+    incantesimi_preparati: 25
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 2, livello8: 1, livello9: 1}
+privilegi:
+- id: lancio-incantesimi
+  nome: "Lancio di Incantesimi"
+  attivita:
+    - tipo: incantatore
+      caratteristica: intelligenza
+  descrizione: |
+    Come studioso di magia arcana, hai imparato a lanciare incantesimi.
+
+    **Trucchetti.** Conosci tre trucchetti da Mago a tua scelta. Ogni volta che termini un Riposo Lungo, puoi sostituire uno dei trucchetti ottenuti con questa capacità con un altro trucchetto da Mago a tua scelta.
+
+    Quando raggiungi il 4° e il 10° livello da Mago, impari un altro trucchetto da Mago a tua scelta, come indicato nella colonna Trucchetti della tabella Capacità del Mago.
+
+    **Grimorio.** Il tuo apprendistato magico è culminato nella creazione di un libro unico: il tuo grimorio. È un oggetto di taglia Minuscola che pesa 3 libbre (circa 1,3 kg), contiene 100 pagine e può essere letto solo da te o da qualcuno che lanci l'incantesimo *Identificare*.
+    Puoi decidere l'aspetto e i materiali del libro, come ad esempio un tomo con i bordi dorati o una raccolta di fogli di pergamena rilegati con dello spago.
+
+    Il libro contiene gli incantesimi di 1° livello o superiore che conosci. Inizia con sei incantesimi da Mago di 1° livello a tua scelta.
+
+    Ogni volta che ottieni un livello da Mago oltre al primo, aggiungi al tuo grimorio due incantesimi da Mago a tua scelta. Ciascuno di questi incantesimi deve essere di un livello per il quale disponi di slot incantesimo, come indicato nella tabella Capacità del Mago. Tali incantesimi sono il frutto della ricerca arcana che svolgi regolarmente.
+
+    **Slot Incantesimo.** La tabella Capacità del Mago indica quanti slot incantesimo possiedi per lanciare i tuoi incantesimi di 1° livello o superiore. Recuperi tutti gli slot consumati quando termini un Riposo Lungo.
+
+    **Incantesimi Preparati di 1° Livello o Superiore.** Prepari l'elenco degli incantesimi di 1° livello o superiore che puoi lanciare grazie a questa capacità. Per farlo, scegli quattro incantesimi dal tuo grimorio. Gli incantesimi scelti devono essere di un livello per il quale disponi di slot incantesimo.
+
+    Il numero di incantesimi nel tuo elenco aumenta man mano che acquisisci livelli da Mago, come indicato nella colonna Incantesimi Preparati della tabella Capacità del Mago. Ogni volta che tale numero aumenta, scegli ulteriori incantesimi da Mago finché il numero di incantesimi nel tuo elenco non corrisponde a quello indicato nella tabella. Gli incantesimi scelti devono essere di un livello per il quale disponi di slot incantesimo. Per esempio, se sei un Mago di 3° livello, il tuo elenco di incantesimi preparati può includere sei incantesimi di 1° e 2° livello in qualsiasi combinazione, scelti dal tuo grimorio. Se un'altra capacità da Mago ti fornisce incantesimi che hai sempre preparati, tali incantesimi non contano ai fini del numero di incantesimi che puoi preparare con questa capacità, ma per il resto sono considerati incantesimi da Mago per te.
+
+    **Cambiare gli Incantesimi Preparati.** Ogni volta che termini un Riposo Lungo, puoi modificare il tuo elenco di incantesimi preparati, sostituendo qualsiasi incantesimo presente con incantesimi tratti dal tuo grimorio.
+
+    **Caratteristica da Incantatore.** L'Intelligenza è la tua caratteristica da incantatore per i tuoi incantesimi da Mago.
+
+    **Focus di Incantamento.** Puoi utilizzare un focus arcano o il tuo grimorio come focus di incantamento per i tuoi incantesimi da Mago.
+
+    >Espandere e sostituire il libro degli incantesimi
+
+    >Gli incantesimi che aggiungi al tuo libro man mano che sali di livello riflettono la tua continua ricerca magica, ma durante le avventure potresti trovarne altri da aggiungere al volume. Potresti, per esempio, scoprire un incantesimo da mago su una pergamena e copiarlo nel tuo libro.
+
+    >Copiare un incantesimo nel libro. Quando trovi un incantesimo da mago di livello 1 o superiore, puoi copiarlo nel tuo libro se è di un livello che sei in grado di preparare e se disponi del tempo necessario per la trascrizione. Per ogni livello dell'incantesimo, la trascrizione richiede 2 ore e un costo di 50 mo. In seguito, potrai preparare l'incantesimo proprio come gli altri presenti nel tuo libro.
+
+    >Copiare il libro. Puoi copiare un incantesimo dal tuo libro in un altro volume. Questa operazione è simile a quella di copiare un nuovo incantesimo nel tuo libro, ma più rapida, dato che sai già come lanciarlo. Devi impiegare solo 1 ora e spendere 10 mo per ogni livello dell'incantesimo copiato.
+
+    >Se perdi il tuo libro degli incantesimi, puoi utilizzare la stessa procedura per trascrivere in un nuovo volume gli incantesimi da mago che hai preparato. Per riempire la parte restante del nuovo libro, dovrai trovare nuovi incantesimi. Per questo motivo, molti maghi conservano un libro degli incantesimi di riserva.
+- id: adepto-dei-rituali
+  nome: "Adepto dei Rituali"
+  descrizione: |
+    Puoi lanciare qualsiasi incantesimo come rituale, a condizione che esso possieda la dicitura "Rituale" e sia presente nel tuo libro degli incantesimi. Non è necessario che l'incantesimo sia preparato, ma devi leggere dal libro per lanciarlo in questo modo.
+- id: recupero-arcano
+  nome: "Recupero Arcano"
+  descrizione: |
+    Puoi recuperare parte della tua energia magica studiando il tuo libro degli incantesimi. Al termine di un riposo breve, puoi scegliere quali slot incantesimo consumati recuperare. La somma dei livelli degli slot recuperati non deve superare la metà del tuo livello da mago (arrotondata per eccesso), e nessuno degli slot può essere di livello 6 o superiore. Per esempio, se sei un mago di livello 4, puoi recuperare slot per un totale di due livelli, ripristinando uno slot di livello 2 oppure due slot di livello 1.
+
+    Una volta utilizzata questa capacità, non potrai farlo di nuovo finché non avrai completato un riposo lungo.
+- id: studioso
+  nome: "Studioso"
+  descrizione: |
+    Mentre studiavi la magia, ti sei specializzato anche in un altro campo di studi. Scegli una delle seguenti abilità in cui possiedi competenza: Arcano, Storia, Indagare, Medicina, Natura o Religione. Ottieni Maestria nell'abilità scelta.
+  attivita:
+    - {tipo: scelta, scelta: maestria-abilita, quantita: 1, opzioni: [arcano, storia, indagare, medicina, natura, religione]}
+- id: sottoclasse-del-mago
+  nome: "Sottoclasse del Mago"
+  descrizione: |
+    Ottieni una sottoclasse da Mago a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Mago. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Mago o a un livello inferiore.
+- id: aumento-punteggi-caratteristica
+  nome: "Aumento dei Punteggi di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento del Punteggio di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da Mago 8, 12 e 16.
+- id: memorizzare-incantesimo
+  nome: "Memorizzare Incantesimo"
+  descrizione: |
+    Ogni volta che termini un Riposo Breve, puoi studiare il tuo libro degli incantesimi e sostituire uno degli incantesimi da Mago di livello 1 o superiore che hai preparato per la tua capacità Incantesimi con un altro incantesimo di livello 1 o superiore presente nel libro.
+- id: maestria-negli-incantesimi
+  nome: "Maestria negli Incantesimi"
+  descrizione: |
+    Hai raggiunto una tale maestria in certi incantesimi da poterli lanciare a volontà. Scegli un incantesimo di 1° livello e uno di 2° livello presenti nel tuo grimorio che abbiano un tempo di lancio pari a un'azione. Hai sempre questi incantesimi preparati e puoi lanciarli al loro livello base senza consumare uno slot incantesimo. Per lanciare uno di questi incantesimi a un livello superiore, devi consumare uno slot incantesimo.
+
+    Ogni volta che termini un riposo lungo, puoi studiare il tuo grimorio e sostituire uno di questi incantesimi con un altro incantesimo idoneo dello stesso livello presente nel libro.
+- id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni il talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- id: incantesimi-distintivi
+  nome: "Incantesimi Distintivi"
+  descrizione: |
+    Scegli due incantesimi di 3° livello presenti nel tuo grimorio come tuoi incantesimi distintivi. Hai sempre questi incantesimi preparati e puoi lanciare ciascuno di essi una volta al 3° livello senza consumare uno slot incantesimo. Una volta fatto ciò, non puoi lanciarli nuovamente in questo modo finché non termini un riposo breve o lungo. Per lanciare uno di questi incantesimi a un livello superiore, devi consumare uno slot incantesimo.

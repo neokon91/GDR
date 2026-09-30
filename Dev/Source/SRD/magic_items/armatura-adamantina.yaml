@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.armatura-adamantina
+nome: Armatura adamantina
+categoria: armatura
+sottotipo: media, pesante, ma non di pelle
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Quest'armatura include dei rinforzi di adamantio, uno dei materiali più duri in assoluto. Tutti i colpi critici che un personaggio subisce mentre indossa questa armatura diventano colpi normali.

@@ -1,0 +1,58 @@
+id: dnd.mostro.spiritello
+nome: Spiritello
+taglia: minuscola
+tipo: folletto
+allineamento: neutrale buono
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 3, competenza: false}
+  destrezza: {valore: 18, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 14, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 3, volo: 12}
+abilita: [percezione: competenza, furtivita: maestria]
+percezione_passiva: 13
+lingue: [Comune, Elfico, Silvano]
+gs: 1/4
+
+azioni:
+  - nome: Ago da battaglia
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 6 (1d4 + 4) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Arco ammaliante
+    descrizione: |
+      *Tiro per colpire a distanza:* +6, portata 12/48 m *Colpito:* 1 danno perforante e il bersaglio è affascinato fino all'inizio del turno successivo dello spiritello.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+  - nome: Invisibilità
+    descrizione: |
+      Lo spiritello può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore.
+  - nome: Vista del cuore
+    descrizione: |
+      *Tiro salvezza su Carisma:* CD 10, una creatura entro 1,5 metri che lo spiritello è in grado di vedere (celestiali, immondi e non morti falliscono in automatico la prova). *Fallimento:* lo spiritello conosce le emozioni e l'allineamento del bersaglio. Succube
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: carisma
+          cd: {caratteristica: costituzione, base: 8, competenza: true}

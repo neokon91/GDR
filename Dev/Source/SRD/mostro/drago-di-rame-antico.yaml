@@ -1,0 +1,127 @@
+id: dnd.mostro.drago-di-rame-antico
+nome: Drago di rame antico
+taglia: mastodontica
+tipo: drago
+sottotipo: metallico
+gruppo: Draghi di rame
+allineamento: caotico buono
+ca: {valore: 21}
+caratteristiche:
+  forza: {valore: 27, competenza: false}
+  destrezza: {valore: 12, competenza: true}
+  costituzione: {valore: 25, competenza: false}
+  intelligenza: {valore: 20, competenza: false}
+  saggezza: {valore: 17, competenza: true}
+  carisma: {valore: 22, competenza: false}
+iniziativa: maestria
+dadi_vita: 21
+velocita: {camminata: 12, scalata: 12, volo: 24}
+abilita: [furtivita: competenza, inganno: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 18}
+percezione_passiva: 27
+immunita_danni: [acido]
+lingue: [Comune, Draconico]
+gs: 21
+
+tratti:
+  - nome: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+    descrizione: |
+      Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio rallentante o (B) Incantesimi per lanciare aculeo mentale (di 5º livello).
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +15, portata 4,5 m. *Colpito:* 19 (2d10 + 8) danni taglienti più 9 (2d8) danni da acido.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 4.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 21):
+
+      *1/giorno ciascuno:*
+      - immagine maggiore
+      - immagine proiettata
+      - ristorare superiore
+
+      *A volontà:*
+      - aculeo mentale (di 5º livello)
+      - illusione minore
+      - individuazione del magico
+      - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 21
+        a_volonta:
+          - id: dnd.incantesimo.aculeo-mentale
+            livello: 5
+          - dnd.incantesimo.illusione-minore
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.trasformazione
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.immagine-maggiore
+              - dnd.incantesimo.immagine-proiettata
+              - dnd.incantesimo.ristorare-superiore
+  - nome: "Soffio di acido (ricarica 5-6)"
+    id: soffio-di-acido-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 22, tutte le creature in una linea lunga 27 metri e larga 3 metri. *Fallimento:* 63 (14d8) danni da acido. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 14, dado: d8, tipo_danno: acido}
+        successo: danno-dimezzato
+  - nome: Soffio rallentante
+    id: soffio-rallentante
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 22, tutte le creature in un cono di 27 metri. *Fallimento:* il bersaglio non può effettuare reazioni, la sua velocità è dimezzata e nel suo turno può effettuare un'azione o un'azione bonus, non entrambe. L'effetto dura fino al termine del proprio turno successivo.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Balzo
+    descrizione: |
+      Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+  - nome: Magia ridacchiante
+    descrizione: |
+      *Tiro salvezza su Carisma:* CD 21, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 31 (9d6) danni psichici. Fino al termine del proprio turno successivo, il bersaglio tira 1d8 ogni volta che effettua una prova di caratteristica o un tiro per colpire e sottrae il risultato dalla prova con d20. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: carisma
+          cd: {caratteristica: carisma, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 9, dado: d6, tipo_danno: psichico}
+  - nome: Scossa mentale
+    descrizione: |
+      Il drago usa Incantesimi per lanciare aculeo mentale (di 5º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.

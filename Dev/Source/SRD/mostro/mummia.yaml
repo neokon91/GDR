@@ -1,0 +1,60 @@
+id: dnd.mostro.mummia
+nome: Mummia
+taglia: [media, piccola]
+tipo: non-morto
+gruppo: Mummie
+allineamento: legale malvagio
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 12, competenza: false}
+dadi_vita: 9
+velocita: {camminata: 6}
+sensi: {scurovisione: 18}
+percezione_passiva: 11
+immunita_danni: [necrotico, veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, paralizzato, spaventato]
+vulnerabilita: [fuoco]
+lingue: [Comune più altre due lingue]
+gs: 3
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: pugno-di-putrefazione, ripetizioni: 2}
+    descrizione: |
+      La mummia effettua due attacchi Pugno di putrefazione e usa Sguardo funesto.
+  - nome: Pugno di putrefazione
+    id: pugno-di-putrefazione
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (1d10 + 3) danni contundenti più 10 (3d6) danni necrotici. Se il bersaglio è una creatura, viene maledetto. Finché è maledetto, il bersaglio non può recuperare punti ferita, i suoi punti ferita massimi non tornano alla normalità al termine di un riposo lungo e sono ridotti di 10 (3d6) ogni 24 ore trascorse. Una creatura muore e si disintegra in polvere se viene ridotta a 0 punti ferita da questo attacco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Sguardo funesto
+    id: sguardo-funesto
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 11, una creatura che la mummia è in grado di vedere entro 18 metri. *Fallimento:* il bersaglio è spaventato fino al termine del turno successivo della mummia. *Successo:* il bersaglio è immune allo Sguardo funesto di questa mummia per 24 ore.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: saggezza, base: 8, competenza: true}

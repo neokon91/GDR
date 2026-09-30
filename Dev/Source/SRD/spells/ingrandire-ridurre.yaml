@@ -1,0 +1,38 @@
+id: dnd.incantesimo.ingrandire-ridurre
+nome: "Ingrandire/Ridurre"
+livello: 2
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (un pizzico di polvere di ferro)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+attivita:
+  - nome: Ingrandire
+    tipo: potenziamento
+    bersaglio: alleato
+    concede: ingrandito
+    durata: {valore: 1, unita: minuti}
+    concentrazione: true
+  - nome: Ridurre
+    tipo: tiro-salvezza
+    tiro_salvezza: {caratteristica: costituzione, cd: incantesimo}
+    fallimento:
+      - concede: ridotto
+        durata: {valore: 1, unita: minuti}
+descrizione: |
+  Per la durata dell'incantesimo, l'incantatore ingrandisce o riduce una creatura o un oggetto entro gittata che egli è in grado di vedere (vedi di seguito l'effetto scelto). L'oggetto bersaglio non deve essere né indossato né trasportato. Se il bersaglio è una creatura non consenziente, può effettuare un tiro salvezza su Costituzione. Se lo supera, l'incantesimo non sortisce alcun effetto.
+
+  Tutto ciò che la creatura indossa o trasporta cambia di taglia insieme a lei. Se un oggetto cade a terra, torna immediatamente alle sue dimensioni normali. Le armi da lancio e le munizioni tornano alle loro dimensioni normali subito dopo aver colpito o mancato un bersaglio.
+
+  **Ingrandire**
+  La taglia del bersaglio aumenta di una categoria (da Media a Grande, per esempio). Il bersaglio dispone anche di vantaggio alle prove di Forza e ai tiri salvezza su Forza. Gli attacchi effettuati dal bersaglio con armi ingrandite o con colpi senz'armi infliggono 1d4 danni extra se il colpo va a segno.
+
+  **Ridurre**
+  La taglia del bersaglio diminuisce di una categoria (da Media a Piccola, per esempio). Il bersaglio dispone anche di svantaggio alle prove di Forza e ai tiri salvezza su Forza. Gli attacchi effettuati dal bersaglio con armi ridotte o con colpi senz'armi infliggono 1d4 danni in meno se il colpo va a segno (i danni non possono scendere a meno di 1).

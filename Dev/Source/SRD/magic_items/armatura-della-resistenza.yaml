@@ -1,0 +1,45 @@
+id: dnd.oggetto-magico.armatura-della-resistenza
+nome: Armatura della resistenza
+categoria: armatura
+sottotipo: leggera, media o pesante
+rarita: rara
+richiede_sintonia: true
+versioni:
+  - nome: "Acido"
+    valore: acido
+  - nome: "Forza"
+    valore: forza
+  - nome: "Freddo"
+    valore: freddo
+  - nome: "Fulmine"
+    valore: fulmine
+  - nome: "Fuoco"
+    valore: fuoco
+  - nome: "Necrotico"
+    valore: necrotico
+  - nome: "Psichico"
+    valore: psichico
+  - nome: "Radioso"
+    valore: radioso
+  - nome: "Tuono"
+    valore: tuono
+  - nome: "Veleno"
+    valore: veleno
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: resistenze, operazione: concedi, valore: versione}
+descrizione: |
+  Il personaggio che indossa questa armatura ottiene resistenza a un tipo di danno a scelta del GM o determinato in modo casuale tirando sulla seguente tabella.
+
+  ### 1d10 Tipo di danno 1d10 Tipo di danno
+  **1** Acido
+  **2** Forza
+  **3** Freddo
+  **4** Fulmine
+  **5** Fuoco
+  **6** Necrotico
+  **7** Psichico
+  **8** Radioso
+  **9** Tuono
+  **10** Veleno

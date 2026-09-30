@@ -1,0 +1,38 @@
+id: dnd.mostro.uccello-stigeo
+nome: Uccello stigeo
+taglia: minuscola
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 4, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 3, volo: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 9
+lingue: [nessuna]
+gs: 1/8
+
+azioni:
+  - nome: Proboscide
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti, e l'uccello stigeo si avvinghia al bersaglio. Finché l'uccello stigeo è attaccato in questo modo non può effettuare attacchi Proboscide, e il bersaglio subisce 5 (2d4) danni necrotici all'inizio di ogni turno dell'uccello stigeo. L'uccello stigeo può staccarsi da solo utilizzando 1,5 metri del suo movimento. Il bersaglio o una creatura entro 1,5 metri da esso può staccare l'uccello stigeo con un'azione.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

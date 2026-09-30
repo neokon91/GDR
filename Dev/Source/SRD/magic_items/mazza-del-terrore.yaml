@@ -1,0 +1,12 @@
+id: dnd.oggetto-magico.mazza-del-terrore
+nome: Mazza del terrore
+categoria: arma
+sottotipo: mazza
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Quest'arma magica ha 3 cariche e recupera 1d3 cariche consumate all'alba di ogni giorno. Mentre il personaggio la impugna, può effettuare un'azione 
+  di Magia e consumare 1 carica affinché venga sprigionata un'ondata di terrore. Ogni creatura a scelta del personaggio situata entro 9 metri da sé 
+  deve superare un tiro salvezza su Saggezza con CD 15, altrimenti sarà spaventata per 1 minuto. 
+  Finché è spaventata in questo modo, una creatura deve usare i suoi turni per spostarsi il più lontano possibile dall'arma e non può effettuare attacchi di opportunità. Come azione, può usare solo l'azione di Scatto o tentare di fuggire da un effetto che le impedisce di muoversi. Se non può muoversi in alcuno 
+  spazio, può usare l'azione di Schivata. Alla fine di ogni suo turno, la creatura ripete il tiro salvezza e, se lo supera, l'effetto svanisce.

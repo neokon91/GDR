@@ -1,0 +1,5 @@
+id: dnd.oggetto.razione
+nome: Razione
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-argento}
+peso: {valore: 1, unita: kg}

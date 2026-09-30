@@ -1,0 +1,71 @@
+id: dnd.mostro.diavolo-del-ghiaccio
+nome: Diavolo del ghiaccio
+taglia: grande
+tipo: immondo
+sottotipo: diavolo
+allineamento: legale malvagio
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 21, competenza: false}
+  destrezza: {valore: 14, competenza: true}
+  costituzione: {valore: 18, competenza: true}
+  intelligenza: {valore: 18, competenza: false}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 18, competenza: true}
+iniziativa: competenza
+dadi_vita: 24
+velocita: {camminata: 12}
+abilita: [intuizione: competenza, percezione: competenza, persuasione: competenza]
+sensi: {vista_cieca: 36, telepatia: 36}
+percezione_passiva: 17
+immunita_danni: [freddo, fuoco, veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Infernale]
+gs: 14
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro diabolico
+    descrizione: |
+      Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il diavolo effettua tre attacchi Lancia di ghiaccio. Può sostituire un attacco con un attacco Coda.
+  - nome: Coda
+    descrizione: |
+      *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 15 (3d6 + 5) danni contundenti più 18 (4d8) danni da freddo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Lancia di ghiaccio
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +10, portata 1,5 m o gittata 9/36 m. *Colpito:* 14 (2d8 + 5) danni perforanti più 10 (3d6) danni da freddo. Fino al termine del proprio turno successivo, il bersaglio non può effettuare un'azione bonus o una reazione, la sua velocità è ridotta di 3 metri e durante il suo turno può muoversi o effettuare un'azione, ma non entrambe le cose. Colpito o mancato: la lancia fa magicamente ritorno nella mano del diavolo subito dopo un attacco a distanza.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 9, lunga: 36}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Muro di ghiaccio (ricarica 6)"
+    descrizione: |
+      Il diavolo lancia muro di ghiaccio (di 8º livello), senza bisogno di componenti e utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17).

@@ -1,0 +1,38 @@
+id: dnd.incantesimo.reincarnazione
+nome: Reincarnazione
+livello: 5
+scuola: necromanzia
+classi:
+  - dnd.classe.druido
+tempo_lancio: 1 ora
+gittata: contatto
+componenti: [V, S, "M (oli rari del valore di 1.000 mo o più, che l'incantesimo consuma)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore tocca un umanoide defunto o una parte di umanoide defunto. Se la creatura non è morta da più di 10 giorni, l'incantesimo le forma un nuovo corpo e richiama la sua anima all'interno di quel corpo. Si tira 1d10 e si consulta la tabella di seguito per determinare la specie del nuovo corpo, oppure il GM sceglie un'altra specie giocabile.
+
+  **1d10 Specie**
+
+  **1** Il personaggio tira di nuovo
+
+  **2** Dragonide
+
+  **3** Elfo
+
+  **4** Gnomo
+
+  **5** Goliath
+
+  **6** Halfling
+
+  **7** Nano
+
+  **8** Orchesco
+
+  **9** Tiefling
+
+  **10** Umano
+
+  La creatura reincarnata compie le scelte indicate nella descrizione della specie scelta e ricorda la sua vita precedente. Conserva le capacità che possedeva nella sua forma originale, ad eccezione del fatto che i tratti della sua specie originaria vengono sostituiti dai tratti della nuova specie.

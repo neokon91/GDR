@@ -1,0 +1,58 @@
+id: dnd.mostro.mephit-del-magma
+nome: Mephit del magma
+taglia: piccola
+tipo: elementale
+gruppo: Mephit
+allineamento: neutrale malvagio
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 8, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 10, competenza: false}
+dadi_vita: 4
+velocita: {camminata: 9, volo: 9}
+abilita: [furtivita: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [avvelenato, indebolimento]
+vulnerabilita: [freddo]
+lingue: ["Primordiale (Ignan, Terran)"]
+gs: 1/2
+
+tratti:
+  - nome: Esplosione mortale
+    descrizione: |
+      Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati.
+azioni:
+  - nome: Artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni taglienti più 3 (1d6) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: "Soffio di fuoco (ricarica 6)"
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: destrezza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 2, dado: d6, tipo_danno: fuoco}
+        successo: danno-dimezzato

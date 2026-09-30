@@ -1,0 +1,19 @@
+id: dnd.incantesimo.messaggio
+nome: Messaggio
+livello: 0
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 36
+componenti: [S, "M (un filo di rame)"]
+concentrazione: false
+rituale: false
+durata: 1 round
+descrizione: |
+  L'incantatore indica una creatura entro gittata e sussurra un messaggio. Solo il bersaglio sente il messaggio e può sussurrare una risposta che unicamente l'incantatore può sentire.
+
+  L'incantatore può lanciare questo incantesimo attraverso oggetti solidi se il bersaglio gli è noto e sa che si trova oltre la barriera. Tuttavia, l'incantesimo viene bloccato da silenzio magico, una sottile lamina di piombo o 30 centimetri di pietra, metallo o legno.

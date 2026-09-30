@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.armatura-a-piastre-della-forma-eterea
+nome: Armatura a piastre della forma eterea
+categoria: armatura
+sottotipo: armatura a piastre o mezza armatura
+rarita: leggendaria
+richiede_sintonia: true
+descrizione: |
+  Mentre il personaggio indossa quest'armatura, può effettuare un'azione di Magia e usare una parola d'ordine per ottenere l'effetto dell'incantesimo forma eterea. L'effetto svanisce immediatamente se il personaggio si toglie l'armatura o effettua un'azione di Magia per ripetere la parola d'ordine. Questa proprietà dell'armatura non può essere riutilizzata fino all'alba successiva.

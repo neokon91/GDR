@@ -1,0 +1,29 @@
+id: dnd.incantesimo.esilio
+nome: Esilio
+livello: 4
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.mago
+  - dnd.classe.paladino
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (un pentacolo)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Una creatura entro gittata che l'incantatore è in grado di vedere deve superare un tiro salvezza su Carisma o essere trasportata in un semipiano sicuro per la durata dell'incantesimo. Mentre si trova lì, il bersaglio è incapacitato. Al termine dell'incantesimo, il bersaglio riappare nello spazio in cui si trovava prima del lancio o, se è occupato, nello spazio libero più vicino.
+
+  Se l'incantesimo sul bersaglio dura 1 minuto, il bersaglio non fa ritorno se è un'aberrazione, un celestiale, un elementale, un folletto o un immondo. In questo caso, viene trasportato in un luogo casuale di un piano (a scelta del GM) associato al tipo di creatura di cui fa parte.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 4º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: carisma, cd: incantesimo }
+    fallimento:
+      - concede: incapacitato
+        durata: { valore: 1, unita: minuti }

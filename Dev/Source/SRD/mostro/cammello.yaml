@@ -1,0 +1,39 @@
+id: dnd.mostro.cammello
+nome: Cammello
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 17, competenza: true}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 15}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1/8
+azioni:
+  - id: cammello.morso
+    nome: Morso
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +4, portata 1,5 m.
+      *Colpito:* 4 (1d4 + 2) danni Contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

@@ -1,0 +1,92 @@
+id: dnd.mostro.diavolo-uncinato
+nome: Diavolo uncinato
+taglia: media
+tipo: immondo
+sottotipo: diavolo
+allineamento: legale malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 16, competenza: true}
+  destrezza: {valore: 17, competenza: false}
+  costituzione: {valore: 18, competenza: true}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 14, competenza: true}
+  carisma: {valore: 14, competenza: true}
+dadi_vita: 13
+velocita: {camminata: 9, scalata: 9}
+abilita: [inganno: competenza, intuizione: competenza, percezione: maestria]
+sensi: {scurovisione: 36, telepatia: 36}
+scurovisione_magica: true
+percezione_passiva: 18
+resistenze: [freddo]
+immunita_danni: [fuoco, veleno]
+immunita_condizioni: [avvelenato]
+lingue: [Infernale]
+gs: 5
+
+tratti:
+  - nome: Pelle uncinata
+    descrizione: |
+      All'inizio di ogni suo turno, il diavolo infligge 5 (1d10) danni perforanti a tutte le creature che afferra o a qualsiasi creatura lo afferri.
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro diabolico
+    descrizione: |
+      Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: scagliare-fiamma, ripetizioni: 2}
+    descrizione: |
+      Il diavolo effettua un attacco Artigli e un attacco Coda, o effettua due attacchi Scagliare fiamma.
+  - nome: Artigli
+    id: artigli
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire) da entrambi gli artigli.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Coda
+    id: coda
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 14 (2d10 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Scagliare fiamma
+    id: scagliare-fiamma
+    descrizione: |
+      *Tiro per colpire a distanza:* +5, gittata 45 m. *Colpito:* 17 (5d6) danni da fuoco. Se il bersaglio è un oggetto infiammabile che non è indossato o trasportato, inizia a bruciare.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: saggezza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno: {numero_dadi: 5, dado: d6, tipo_danno: fuoco}

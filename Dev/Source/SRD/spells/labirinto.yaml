@@ -1,0 +1,18 @@
+id: dnd.incantesimo.labirinto
+nome: Labirinto
+livello: 8
+scuola: evocazione
+classi:
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore bandisce una creatura entro gittata che egli è in grado di vedere in un semipiano labirintico. Il bersaglio rimane laggiù per la durata dell'incantesimo o finché non fugge dal labirinto.
+
+  Il bersaglio può effettuare un'azione di Studio per provare a fuggire. Quando questo avviene, effettua una prova di Intelligenza (Indagare) con CD 20. In caso di successo, il bersaglio fugge e l'incantesimo termina.
+
+  Al termine dell'incantesimo, il bersaglio riappare nello spazio in cui si trovava prima del lancio o, se è occupato, nello spazio libero più vicino.

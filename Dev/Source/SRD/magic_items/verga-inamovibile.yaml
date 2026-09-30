@@ -1,0 +1,7 @@
+id: dnd.oggetto-magico.verga-inamovibile
+nome: Verga inamovibile
+categoria: verga
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Questa verga di ferro è dotata di un tasto su  un'estremità. Il personaggio può effettuare  un'azione di Utilizzo per premere il tasto e fare in modo che la verga si fissi magicamente nel luogo in cui si trova. Finché il personaggio o un'altra crea-tura non effettua un'azione di Utilizzo per premere nuovamente il tasto, la verga non si sposta, sfidando anche la forza di gravità. La verga può sostenere un peso massimo di 4 tonnellate; un peso superiore fa sì che la verga si disattivi e cada. Una creatura può compiere un'azione di Utilizzo per effettuare una prova di Forza (Atletica) con CD 30, spostando la verga per un massimo di 3 metri in caso di successo.

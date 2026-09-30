@@ -1,0 +1,127 @@
+id: dnd.mostro.sfinge-del-valore
+nome: Sfinge del valore
+taglia: grande
+tipo: celestiale
+gruppo: Sfingi
+allineamento: legale neutrale
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 22, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 20, competenza: true}
+  intelligenza: {valore: 16, competenza: true}
+  saggezza: {valore: 23, competenza: true}
+  carisma: {valore: 18, competenza: false}
+iniziativa: maestria
+dadi_vita: 19
+velocita: {camminata: 12, volo: 18}
+abilita: [arcano: competenza, percezione: competenza, religione: maestria]
+sensi: {vista_pura: 36}
+percezione_passiva: 22
+resistenze: [necrotico, radioso]
+immunita_danni: [psichico]
+immunita_condizioni: [affascinato, spaventato]
+lingue: [Celestiale, Comune]
+gs: 17
+tratti:
+  - nome: Imperscrutabile
+    descrizione: |
+      Nessuna magia può consentire di osservare la sfinge da lontano o individuarne i pensieri senza il suo permesso. Le prove di Saggezza (Intuizione) effettuate per accertare le sue intenzioni o la sua sincerità subiscono svantaggio.
+  - nome: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+    descrizione: |
+      Se la sfinge fallisce un tiro salvezza, può scegliere di superarlo comunque.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+    descrizione: |
+      La sfinge effettua due attacchi Artiglio e utilizza Ruggito.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +12, portata 1,5 m. *Colpito:* 20 (4d6 + 6) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      La sfinge lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20): 1/giorno ciascuno: banchetto degli eroi, dissolvi magie, individuazione del magico, ristorare superiore, zona di verità A volontà: Individuazione del bene e del male, taumaturgia
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        cd: 20
+        a_volonta:
+          - dnd.incantesimo.individuazione-del-bene-e-del-male
+          - dnd.incantesimo.taumaturgia
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.banchetto-degli-eroi
+              - dnd.incantesimo.dissolvi-magie
+              - dnd.incantesimo.individuazione-del-magico
+              - dnd.incantesimo.ristorare-superiore
+              - dnd.incantesimo.zona-di-verita
+  - nome: Primo ruggito
+    id: primo-ruggito
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 20, tutti i nemici in un'emanazione di 150 metri di cui la sfinge è il punto di origine. *Fallimento:* il bersaglio è spaventato per 1 minuto.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+  - nome: "Ruggito (3/giorno)"
+    id: ruggito-3-giorno
+    descrizione: |
+      La sfinge emette un ruggito magico. Ogni suo ruggito sortisce un effetto diverso come descritto sotto (la sequenza si ripristina dopo aver completato un riposo lungo):
+  - nome: Secondo ruggito
+    id: secondo-ruggito
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 20, tutti i nemici in un'emanazione di 150 metri di cui la sfinge è il punto di origine. *Fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+  - nome: Terzo ruggito
+    id: terzo-ruggito
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 20, tutti i nemici in un'emanazione di 150 metri di cui la sfinge è il punto di origine. *Fallimento:* 44 (8d10) danni da tuono, e il bersaglio cade a terra prono. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 8, dado: d10, tipo_danno: tuono}
+        successo: danno-dimezzato
+azioni_leggendarie:
+  - nome: "Utilizzi di azioni leggendarie: 3 (4 nella tana)"
+    descrizione: |
+      Subito dopo il turno di un'altra creatura, la sfinge può consumare un utilizzo per effettuare una delle seguenti azioni. La sfinge recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
+  - nome: Agguato arcano
+    descrizione: |
+      La sfinge può teletrasportarsi fino a 9 metri in uno spazio libero che è in grado di vedere, effettuando un attacco Artiglio.
+  - nome: Peso degli anni
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 16, una creatura che la sfinge è in grado di vedere entro 36 metri. *Fallimento:* il bersaglio ottiene 1 livello di indebolimento. Finché il bersaglio ha uno o più livelli di indebolimento, apparirà più vecchio di 3d10 anni. *Fallimento o successo:* la sfinge non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {valore: 16, fisso: true}

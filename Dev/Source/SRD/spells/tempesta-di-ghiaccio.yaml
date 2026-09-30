@@ -1,0 +1,28 @@
+id: dnd.incantesimo.tempesta-di-ghiaccio
+nome: Tempesta di ghiaccio
+livello: 4
+scuola: invocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 90
+componenti: [V, S, "M (una muffola)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Chicchi di grandine cadono in un cilindro del raggio di 6 metri e alto 12 metri, centrato su un punto entro gittata. Ogni creatura presente nel cilindro effettua un tiro salvezza su Destrezza, subendo 2d10 danni contundenti e 4d6 danni da freddo in caso di fallimento, o la metà dei danni in caso di successo.
+
+  La grandine trasforma l'area all'interno del cilindro in terreno difficile fino al termine del turno successivo dell'incantatore.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni contundenti aumentano di 1d10 per ogni slot di livello superiore al 4º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento:
+      - danno: { numero_dadi: 2, dado: d10, tipo_danno: contundente }
+      - danno: { numero_dadi: 4, dado: d6, tipo_danno: freddo }
+    successo: danno-dimezzato

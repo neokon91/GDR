@@ -1,0 +1,42 @@
+id: dnd.mostro.arpia
+nome: Arpia
+taglia: media
+tipo: mostruosita
+allineamento: caotico malvagio
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 12, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 13, competenza: false}
+dadi_vita: 7
+velocita: {camminata: 6, volo: 12}
+lingue: [Comune]
+gs: 1
+azioni:
+  - id: arpia.artiglio
+    nome: Artiglio
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +3, portata 1,5 m.
+      *Colpito:* 6 (2d4 + 1) danni Taglienti
+    attivita:
+      - tipo: attacco
+        attacco:
+          { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 2, dado: d4, tipo_danno: tagliente, bonus: { caratteristica: forza } }
+  - id: arpia.canto-seducente
+    nome: Canto Seducente
+    descrizione: |
+      L'arpia intona un canto melodioso, che dura finché non termina la sua concentrazione su di esso.
+      *Tiro salvezza su Saggezza:* CD 11, ogni umanoide e gigante in un'Emanazione di 90 metri di cui l'arpia è il punto d'origine quando comincia la canzone.
+      *Fallimento:* il bersaglio è affascinato finché la canzone non finisce e ripete il tiro salvezza al termine di ogni suo turno.
+      Mentre è Affascinato, il bersaglio è Incapacitato e ignora il Canto seducente delle altre arpie.
+      Se si trova a più di 1,5 metri di distanza dall'arpia, deve muoversi nel proprio turno verso di essa seguendo il percorso più diretto e cercando di giungere entro 1,5 metri.
+      Il bersaglio non evita gli attacchi di opportunità, ma prima di muoversi su un terreno pericoloso (come per esempio un lago di lava o una fossa) e qualora subisca danni da una fonte diversa dall'arpia, ripete il tiro salvezza.
+      *Successo:* il bersaglio è Immune al Canto seducente di questa arpia per 24 ore.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza: { caratteristica: saggezza, cd: { caratteristica: forza, base: 8, competenza: true } }

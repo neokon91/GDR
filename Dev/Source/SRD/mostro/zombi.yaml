@@ -1,0 +1,44 @@
+id: dnd.mostro.zombi
+nome: Zombi
+taglia: media
+tipo: non-morto
+allineamento: neutrale malvagio
+ca: {valore: 8}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 6, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 6, competenza: true}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 6}
+sensi: {scurovisione: 18}
+percezione_passiva: 8
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, indebolimento]
+lingue: [capisce il Comune più un'altra lingua ma non le parla]
+gs: 1/4
+
+tratti:
+  - nome: Tempra dei non morti
+    descrizione: |
+      Se i danni riducono lo zombi a 0 punti ferita, esso effettua un tiro salvezza su Costituzione (CD pari a 5 più i danni subiti), a meno che non si tratti di danni radiosi o di un colpo critico. In caso di successo, scende invece a 1 punto ferita.
+azioni:
+  - nome: Schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d8 + 1) danni contundenti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

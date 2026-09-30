@@ -1,0 +1,86 @@
+id: dnd.mostro.druido
+nome: Druido
+taglia: [media, piccola]
+tipo: umanoide
+allineamento: neutrale
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 16, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 9}
+abilita: [medicina: competenza, natura: competenza, percezione: competenza]
+percezione_passiva: 15
+equipaggiamento:
+  - {articolo: dnd.armatura.armatura-di-cuoio-borchiato}
+lingue: [Comune, Druidico, Silvano]
+gs: 2
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il druido effettua due attacchi, usando Bastone di rampicanti o Bagliore verdeggiante in qualsiasi combinazione.
+  - nome: Bastone di rampicanti
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni contundenti più 2 (1d4) danni da veleno.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: saggezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: saggezza}
+  - nome: Bagliore verdeggiante
+    descrizione: |
+      *Tiro per colpire a distanza:* +5, gittata 27 m. *Colpito:* 10 (3d6) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: saggezza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno: {numero_dadi: 3, dado: d6, tipo_danno: radioso}
+  - nome: Incantesimi
+    descrizione: |
+      Il druido lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13):
+
+      *1/giorno ciascuno:*
+      - animale messaggero
+      - bagliore lunare
+      - passo veloce
+
+      *2/giorno ciascuno:*
+      - intralciare
+      - onda tonante
+
+      *A volontà:*
+      - artificio druidico
+      - parlare con gli animali
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        cd: 13
+        a_volonta:
+          - dnd.incantesimo.artificio-druidico
+          - dnd.incantesimo.parlare-con-gli-animali
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.animale-messaggero
+              - dnd.incantesimo.bagliore-lunare
+              - dnd.incantesimo.passo-veloce
+          - usi: 2
+            incantesimi:
+              - dnd.incantesimo.intralciare
+              - dnd.incantesimo.onda-tonante

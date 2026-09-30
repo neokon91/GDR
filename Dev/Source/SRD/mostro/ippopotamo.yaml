@@ -1,0 +1,52 @@
+id: dnd.mostro.ippopotamo
+nome: Ippopotamo
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 21, competenza: true}
+  destrezza: {valore: 7, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 11
+velocita: {camminata: 9, nuoto: 9}
+abilita: [percezione: competenza]
+percezione_passiva: 13
+lingue: [nessuna]
+gs: 4
+
+tratti:
+  - nome: Apnea
+    descrizione: |
+      L'ippopotamo può trattenere il respiro per 10 minuti.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+    descrizione: |
+      L'ippopotamo effettua due attacchi Morso.
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 16 (2d10 + 5) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

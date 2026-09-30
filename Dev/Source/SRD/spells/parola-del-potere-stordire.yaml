@@ -1,0 +1,19 @@
+id: dnd.incantesimo.parola-del-potere-stordire
+nome: Parola del potere stordire
+livello: 8
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 18
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore sconvolge la mente di una creatura situata entro gittata che egli è in grado di vedere. Se il bersaglio possiede 150 punti ferita o meno, è stordito. Altrimenti, la sua velocità è pari a 0 fino all'inizio del turno successivo dell'incantatore.
+
+  Il bersaglio stordito effettua un tiro salvezza su Costituzione alla fine di ogni suo turno e, se lo supera, pone fine alla condizione.

@@ -1,0 +1,31 @@
+id: dnd.incantesimo.elementalismo
+nome: Elementalismo
+livello: 0
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore esercita il suo controllo sugli elementi, creando uno dei seguenti effetti entro gittata.
+
+  **Richiamo del fuoco**
+  Nell'area di un cubo con spigolo di 1,5 metri, l'incantatore crea una piccola nube di braci non incandescenti, colorate e che emettono fumo e un odore particolare. L'incantatore sceglie il colore e l'odore delle braci, che si possono usare per accendere candele, torce o lampade in quell'area. L'odore del fumo permane per 1 minuto.
+
+  **Richiamo dell'acqua**
+  L'incantatore crea uno spruzzo d'acqua fresca nebulizzata che inumidisce leggermente le creature e gli oggetti all'interno di un cubo con spigolo di 1,5 metri. In alternativa, crea 1 coppa di acqua pulita da riversare all'interno di un contenitore aperto o su una superficie; l'acqua evapora dopo 1 minuto.
+
+  **Richiamo dell'aria**
+  Nell'area di un cubo con spigolo di 1,5 metri, l'incantatore crea una brezza in grado di far svolazzare i tessuti, sollevare la polvere, far oscillare le foglie e chiudere porte e persiane aperte. Se le porte e le persiane sono tenute aperte da qualcuno, l'incantesimo non ha effetto su di esse.
+
+  **Richiamo della terra**
+  L'incantatore crea un sottile velo di polvere o sabbia che ricopre le superfici di un'area di 1,5 metri per lato, oppure fa comparire una singola parola scritta nella sua calligrafia su un lembo di terra o un letto di sabbia.
+
+  **Scolpire elementi**
+  L'incantatore fa in modo che un elemento a sua scelta tra terra, sabbia, fuoco, fumo, nebbia o acqua (in una quantità tale da poter essere contenuto in un cubo con spigolo di 30 centimetri) assuma una forma rozza (come quella di una creatura) per 1 ora.

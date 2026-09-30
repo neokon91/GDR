@@ -1,0 +1,18 @@
+id: dnd.incantesimo.protezione-dall-energia
+nome: Protezione dall'energia
+livello: 3
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 ora
+descrizione: |
+  Per la durata dell'incantesimo, una creatura consenziente toccata dall'incantatore dispone di resistenza a un tipo di danni a scelta di quest'ultimo: acido, freddo, fulmine, fuoco o tuono.

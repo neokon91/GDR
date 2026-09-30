@@ -1,0 +1,73 @@
+id: dnd.mostro.centauro-combattente
+nome: Centauro combattente
+taglia: grande
+tipo: folletto
+gruppo: Centauro
+allineamento: neutrale buono
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 9, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 15}
+abilita: [atletica: competenza, percezione: competenza]
+percezione_passiva: 13
+equipaggiamento:
+  - {articolo: dnd.arma.arco-lungo}
+  - {articolo: dnd.armatura.corazza-di-piastre}
+  - {articolo: dnd.arma.picca}
+lingue: [Elfico, Silvano]
+gs: 2
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il centauro effettua due attacchi, utilizzando Picca o Arco lungo in qualsiasi combinazione.
+  - nome: Picca
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 9 (1d10 + 4) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.picca
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Arco lungo
+    descrizione: |
+      *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.arco-lungo
+          gittata: {normale: 45, lunga: 180}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: "Carica travolgente (Ricarica 5-6)"
+    descrizione: |
+      Il centauro si muove fino alla sua velocità massima senza provocare attacchi di opportunità e può attraversare gli spazi di qualsiasi creatura di taglia Media o inferiore. Ogni creatura il cui spazio viene invaso dal centauro viene bersagliata una volta dal seguente effetto. *Tiro salvezza su Forza:* CD 14 *Fallimento:* 7 (1d6 + 4) danni contundenti, e il bersaglio è prono.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: forza, base: 8, competenza: true}

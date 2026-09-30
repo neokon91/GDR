@@ -1,0 +1,16 @@
+id: dnd.armatura.armatura-a-piastre
+nome: Armatura a Piastre
+tipo: armatura-pesante
+categoria: armature
+costo: {valore: 1.5, valuta: moneta-oro}
+peso: {valore: 32.5, unita: kg}
+requisito_forza: 15
+svantaggio_furtivita: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 18}}
+descrizione: |
+  L'armatura a piastre è costituita da elementi metallici sagomati e interconnessi, progettati per ricoprire l'intero corpo.
+  Il completo comprende guanti d'arme, stivali in cuoio robusto, un elmo con visiera e spessi strati di imbottitura da indossare sotto l'armatura;
+  fibbie e cinghie distribuiscono il peso su tutto il corpo.

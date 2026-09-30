@@ -1,0 +1,63 @@
+id: dnd.mostro.ettin
+nome: Ettin
+taglia: grande
+tipo: gigante
+allineamento: caotico malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 21, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 10
+velocita: {camminata: 12}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 14
+immunita_condizioni: [accecato, affascinato, assordato, privo-di-sensi, spaventato, stordito]
+equipaggiamento:
+  - {articolo: dnd.arma.ascia-da-battaglia}
+  - {articolo: dnd.arma.mazza-chiodata}
+lingue: [Gigante]
+gs: 4
+
+azioni:
+  - nome: Ascia da battaglia
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.ascia-da-battaglia
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Mazza chiodata
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni perforanti, e il bersaglio subisce svantaggio al tiro per colpire successivo che effettua prima del termine del proprio turno successivo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.mazza-chiodata
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Multiattacco
+    descrizione: |
+      L'ettin effettua un attacco Ascia da battaglia e un attacco Mazza chiodata.

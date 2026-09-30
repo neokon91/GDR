@@ -1,0 +1,23 @@
+id: dnd.incantesimo.reggia-meravigliosa
+nome: Reggia meravigliosa
+livello: 7
+scuola: evocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+tempo_lancio: 1 minuto
+gittata: 90
+componenti: [V, S, "M (una miniatura di una porta del valore di 15 mo o più)"]
+concentrazione: false
+rituale: false
+durata: 24 ore
+descrizione: |
+  L'incantatore evoca una porta scintillante entro gittata che permane per la durata dell'incantesimo. La porta, larga 1,5 metri e alta 3 metri, conduce a una dimora extradimensionale. L'incantatore e una qualsiasi creatura da lui scelta al momento del lancio possono entrare nella dimora extradimensionale fintantoché la porta rimane aperta. L'incantatore può aprire o chiudere la porta (nessuna azione richiesta) se si trova entro 9 metri da essa; quando è chiusa, la porta è impercettibile.
+
+  Oltre la porta si trova un atrio sfarzoso su cui si aprono numerose stanze. L'atmosfera della dimora è pulita, fresca e accogliente.
+
+  L'incantatore può definire la planimetria della dimora come preferisce, ma le sue dimensioni non devono superare quelle di 50 cubi contigui con spigolo di 3 metri. Inoltre, la dimora è ammobiliata e decorata come l'incantatore preferisce e contiene cibo a sufficienza per servire un banchetto di nove portate per un massimo di 100 persone. Arredi e altri oggetti creati da questo incantesimo si dissolvono in fumo quando vengono rimossi dalla dimora.
+
+  A provvedere a ogni bisogno degli ospiti è presente una schiera di 100 servitori semitrasparenti. L'incantatore decide l'aspetto e la tenuta di questi servitori, che sono invulnerabili e obbediscono ai suoi ordini. Ogni servitore può eseguire qualsiasi compito che un umano sarebbe in grado di eseguire, ma non può attaccare o effettuare azioni che ferirebbero in modo diretto un'altra creatura. I servitori possono perciò trasportare oggetti, pulire, riparare, piegare abiti, accendere fuochi, servire cibo, versare vino e così via. Tuttavia, non possono lasciare la dimora.
+
+  Al termine dell'incantesimo, tutte le creature e gli oggetti rimasti all'interno dello spazio extradimensionale vengono espulsi negli spazi liberi più vicini all'entrata.

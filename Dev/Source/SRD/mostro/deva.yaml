@@ -1,0 +1,85 @@
+id: dnd.mostro.deva
+nome: Deva
+taglia: media
+tipo: celestiale
+sottotipo: angelo
+allineamento: legale buono
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 18, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 17, competenza: false}
+  saggezza: {valore: 20, competenza: true}
+  carisma: {valore: 20, competenza: true}
+dadi_vita: 27
+velocita: {camminata: 9, volo: 27}
+abilita: [intuizione: competenza, percezione: competenza]
+sensi: {scurovisione: 36, telepatia: 36}
+percezione_passiva: 19
+resistenze: [radioso]
+immunita_condizioni: [affascinato, indebolimento, spaventato]
+lingue: [tutte]
+gs: 10
+
+tratti:
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il deva dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+  - nome: Ristoro glorioso
+    descrizione: |
+      Se il deva muore al di fuori di Monte Celestia, il suo corpo scompare ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte a Monte Celestia.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: mazza-divina, ripetizioni: 2}
+    descrizione: |
+      Il deva effettua due attacchi Mazza divina.
+  - nome: Mazza divina
+    id: mazza-divina
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni contundenti più 18 (4d8) danni radiosi.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    id: incantesimi
+    descrizione: |
+      Il deva lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17):
+
+      *1/giorno ciascuno:*
+      - comunione
+      - rianimare morti
+
+      *A volontà:*
+      - individuazione del bene e del male
+      - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+    attivita:
+      - tipo: incantatore
+        caratteristica: carisma
+        cd: 17
+        a_volonta:
+          - dnd.incantesimo.individuazione-del-bene-e-del-male
+          - dnd.incantesimo.trasformazione
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.comunione
+              - dnd.incantesimo.rianimare-morti
+azioni_bonus:
+  - nome: "Aiuto divino (2/giorno)"
+    descrizione: |
+      Il deva lancia cura ferite, rimuovi maledizione o ristorare inferiore, utilizzando la stessa caratteristica da incantatore di Incantesimi.

@@ -1,0 +1,72 @@
+id: dnd.mostro.treant
+nome: Treant
+taglia: enorme
+tipo: vegetale
+allineamento: caotico buono
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 23, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 21, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 16, competenza: false}
+  carisma: {valore: 12, competenza: false}
+iniziativa: competenza
+dadi_vita: 12
+velocita: {camminata: 9}
+percezione_passiva: 13
+resistenze: [contundente, perforante]
+vulnerabilita: [fuoco]
+lingue: [Comune, Druidico, Elfico, Silvano]
+gs: 9
+
+tratti:
+  - nome: Mostro da assedio
+    descrizione: |
+      Il treant infligge danni doppi a oggetti e strutture.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: schianto, ripetizioni: 2}
+    descrizione: |
+      Il treant effettua due attacchi Schianto.
+  - nome: Schianto
+    id: schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 16 (3d6 + 6) danni contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Proiettili di corteccia
+    id: proiettili-di-corteccia
+    descrizione: |
+      *Tiro per colpire a distanza:* +10, gittata 54 m. *Colpito:* 28 (4d10 + 6) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Animare alberi (1/giorno)"
+    id: animare-alberi-1-giorno
+    descrizione: |
+      Il treant anima magicamente fino a due alberi nel suo campo visivo in un raggio di 18 metri. Gli alberi usano la scheda delle statistiche del treant, fatta eccezione per i punteggi di Intelligenza e Carisma pari a 1; inoltre, non possono parlare e non possiedono quest'azione. L'albero svolge il suo turno subito dopo il treant, condivide lo stesso punteggio di iniziativa e gli obbedisce. Un albero resta animato per 1 giorno o fino alla morte, finché non muore il treant o finché non si trova a più di 36 metri da esso. Dopodiché, qualora possibile, l'albero mette radici.

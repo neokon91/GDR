@@ -1,0 +1,18 @@
+id: dnd.oggetto-magico.ascia-del-berserker
+nome: Ascia del berserker
+categoria: arma
+sottotipo: alabarda, ascia bipenne o ascia da battaglia
+rarita: rara
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_colpire, operazione: somma, valore: {piatto: 1}}
+      - {bersaglio: danni, operazione: somma, valore: {piatto: 1}}
+      - {bersaglio: punti_ferita.massimi, operazione: somma, formula: {per_livello: 1}}
+descrizione: |
+  Il personaggio ottiene un bonus di +1 ai tiri per colpire e ai tiri per i danni effettuati con quest'arma magica. Inoltre, una volta entrato in sintonia con l'arma, i suoi punti ferita massimi aumentano di 1 per ogni livello acquisito.
+
+  **Maledizione**
+  Quest'arma è maledetta e la sua maledizione si trasmette al personaggio quando entra in sintonia con essa. Finché è maledetto, il personaggio non vuole separarsene e non la perde mai di vista. Inoltre, subisce svantaggio ai tiri per colpire con armi diverse da questa. Ogni volta che un'altra creatura infligge danni al personaggio mentre quest'ultimo è in possesso dell'arma, il personaggio deve superare un tiro salvezza su Saggezza con CD 15, altrimenti entra in stato di berserk. Questo stato termina quando il personaggio inizia il proprio turno e non ci sono creature entro 18 metri da lui che è in grado di vedere o sentire.
+  Mentre è in stato di berserk, il personaggio considera nemica la creatura più vicina che è in grado di vedere o sentire. Se ci sono più creature, ne sceglie una a caso. In ogni turno, il personaggio deve avvicinarsi il più possibile alla creatura ed effettuare l'azione di Attacco, mirando alla crea-tura. Se non riesce ad avvicinarsi alla creatura per attaccarla con l'arma, il suo turno termina dopo aver utilizzato tutto il movimento disponibile. Se la creatura muore o non può più essere vista o udita, la creatura più vicina che il personaggio è in grado di vedere o sentire diventa il nuovo bersaglio.

@@ -1,0 +1,16 @@
+id: dnd.strumento.attrezzatura-da-alchimista
+nome: Attrezzatura da alchimista
+categoria: strumenti
+famiglia: attrezzatura-da-artigiano
+costo: {valore: 50, valuta: moneta-oro}
+peso: {valore: 4, unita: kg}
+caratteristica: intelligenza
+utilizzo:
+  - azione: Identificare una sostanza
+    cd: 15
+  - azione: Appiccare un incendio
+    cd: 15
+creazione: [dnd.oggetto.acido, dnd.oggetto.fuoco-dell-alchimista, borsa-delle-componenti, dnd.oggetto.olio, dnd.oggetto.carta, dnd.oggetto.profumo]
+descrizione: |
+  Se possiedi la competenza in uno strumento, aggiungi il tuo Bonus di Competenza a qualsiasi prova di caratteristica che richieda l'uso di tale strumento.
+  Se possiedi la competenza in un'abilità utilizzata per quella prova, ottieni anche Vantaggio alla prova stessa.

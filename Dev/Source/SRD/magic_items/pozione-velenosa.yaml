@@ -1,0 +1,8 @@
+id: dnd.oggetto-magico.pozione-velenosa
+nome: Pozione velenosa
+categoria: pozione
+rarita: non-comune
+richiede_sintonia: false
+descrizione: |
+  Questa mistura ha l'aspetto, l'odore e il sapore di una pozione di guarigione o altre pozioni benefiche. 
+  In realtà, si tratta di un veleno mascherato da  un'illusione magica. L'incantesimo identificare rivela la sua vera natura.Se il personaggio la beve, subisce 4d6 danni da veleno e deve superare un tiro salvezza su Costi-tuzione con CD 13, altrimenti sarà avvelenato per 1 ora.

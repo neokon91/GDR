@@ -1,0 +1,50 @@
+id: dnd.mostro.wraith
+nome: Wraith
+taglia: [media, piccola]
+tipo: non-morto
+allineamento: neutrale malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 16, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 15, competenza: false}
+dadi_vita: 9
+velocita: {camminata: 5, volo: 18}
+sensi: {scurovisione: 18}
+percezione_passiva: 12
+resistenze: [acido, contundente, freddo, fuoco, perforante, tagliente]
+immunita_danni: [necrotico, veleno]
+immunita_condizioni: [affascinato, afferrato, avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi, prono, trattenuto]
+lingue: [Comune più altre due lingue]
+gs: 5
+
+tratti:
+  - nome: Movimento incorporeo
+    descrizione: |
+      Il wraith può muoversi attraverso altre creature e oggetti come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza.
+  - nome: Sensibilità al sole
+    descrizione: |
+      Finché è esposto alla luce del sole, il wraith subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+azioni:
+  - nome: Risucchio di vita
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 21 (4d8 + 3) danni necrotici. Se il bersaglio è una creatura, i suoi punti ferita massimi sono ridotti di una quantità pari ai danni subiti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d8
+              tipo_danno: necrotico
+              bonus: {caratteristica: destrezza}
+  - nome: Creare spettro
+    descrizione: |
+      Il wraith bersaglia il cadavere di un umanoide situato entro 3 metri da sé che non abbia perso la vita da più di 1 minuto. Lo spirito del bersaglio si anima come spettro nello spazio del suo cadavere o nello spazio libero più vicino. Lo spettro è sotto il controllo del wraith. Il wraith non può controllare più di sette spettri simultaneamente.

@@ -1,0 +1,226 @@
+id: dnd.classe.ladro
+nome: Ladro
+caratteristica_primaria: [destrezza]
+dado_vita: 8
+tiri_salvezza: [destrezza, intelligenza]
+competenze_abilita:
+  quantita: 4
+  scelte: [acrobazia, atletica, furtivita, indagare, inganno, intimidire, intuizione, percezione, persuasione, rapidita-di-mano]
+competenze_armi: [armi-semplici, {categoria: armi-da-guerra, proprieta: [accurata, leggera]}]
+competenze_armature: [armature-leggere]
+competenze_strumenti: {quantita: 1, scelte: [dnd.strumento.attrezzi-da-scasso]}
+# Preso come classe secondaria (multiclasse): armatura leggera, attrezzi da
+# scasso e una abilità a scelta dalla lista del ladro.
+competenze_multiclasse:
+  armature: [armature-leggere]
+  strumenti: [dnd.strumento.attrezzi-da-scasso]
+  abilita: {quantita: 1, scelte: [acrobazia, atletica, furtivita, indagare, inganno, intimidire, intuizione, percezione, persuasione, rapidita-di-mano]}
+equipaggiamento_iniziale:
+  - nome: A
+    oggetti:
+      - articolo: dnd.armatura.armatura-di-cuoio
+      - articolo: dnd.arma.pugnale
+        quantita: 2
+      - articolo: dnd.arma.spada-corta
+      - articolo: dnd.arma.arco-corto
+      - articolo: frecce
+        quantita: 20
+      - articolo: dnd.oggetto.faretra
+      - articolo: dnd.strumento.attrezzi-da-scasso
+      - articolo: dnd.oggetto.dotazione-da-scassinatore
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 8
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 100
+descrizione: |
+  Il ladro e un esperto di precisione, furtivita e competenze, basato soprattutto su Destrezza. La sottoclasse SRD è il Furfante.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [maestria, attacco-furtivo, gergo-dei-ladri, maestria-nelle-armi]
+    attacco_furtivo: 1d6
+  - livello: 2
+    privilegi: [azione-scaltra]
+    attacco_furtivo: 1d6
+  - livello: 3
+    privilegi: [sottoclasse-del-ladro, mira-precisa]
+    attacco_furtivo: 2d6
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    attacco_furtivo: 2d6
+  - livello: 5
+    privilegi: [colpo-astuto, schivata-prodigiosa]
+    attacco_furtivo: 3d6
+  - livello: 6
+    privilegi: [maestria]
+    attacco_furtivo: 3d6
+  - livello: 7
+    privilegi: [elusione, talento-affidabile]
+    attacco_furtivo: 4d6
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    attacco_furtivo: 4d6
+  - livello: 9
+    privilegi: [privilegio-della-sottoclasse]
+    attacco_furtivo: 5d6
+  - livello: 10
+    privilegi: [aumento-punteggi-caratteristica]
+    attacco_furtivo: 5d6
+  - livello: 11
+    privilegi: [colpo-astuto-migliorato]
+    attacco_furtivo: 6d6
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    attacco_furtivo: 6d6
+  - livello: 13
+    privilegi: [privilegio-della-sottoclasse]
+    attacco_furtivo: 7d6
+  - livello: 14
+    privilegi: [colpi-insidiosi]
+    attacco_furtivo: 7d6
+  - livello: 15
+    privilegi: [mente-sfuggente]
+    attacco_furtivo: 8d6
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    attacco_furtivo: 8d6
+  - livello: 17
+    privilegi: [privilegio-della-sottoclasse]
+    attacco_furtivo: 9d6
+  - livello: 18
+    privilegi: [elusivo]
+    attacco_furtivo: 9d6
+  - livello: 19
+    privilegi: [dono-epico]
+    attacco_furtivo: 10d6
+  - livello: 20
+    privilegi: [colpo-di-fortuna]
+    attacco_furtivo: 10d6
+privilegi:
+- livello: 1
+  id: maestria
+  nome: "Maestria"
+  descrizione: |
+    Ottieni Maestria in due delle tue abilità a tua scelta.
+
+    Al livello 6 da Ladro, ottieni Maestria in altre due delle tue abilità a tua scelta.
+  attivita:
+    - {tipo: scelta, scelta: maestria-abilita, quantita: 2}
+- livello: 1
+  id: attacco-furtivo
+  nome: "Attacco Furtivo"
+  descrizione: |
+    Sai come colpire con discrezione e sfruttare la distrazione di un nemico. Una volta per turno, puoi infliggere 1d6 danni extra a una creatura che colpisci con un tiro per colpire, se hai Vantaggio al tiro e l'attacco utilizza un'arma con la proprietà Accurata o un'arma a distanza. Il tipo di danno extra è lo stesso del tipo di danno dell'arma.
+
+    Non hai bisogno di Vantaggio al tiro per colpire se almeno uno dei tuoi alleati si trova entro 1,5 metri (5 piedi) dal bersaglio, l'alleato non è Incapace e tu non hai Svantaggio al tiro per colpire.
+
+    Il danno extra aumenta man mano che acquisisci livelli da Ladro, come indicato nella colonna Attacco Furtivo della tabella delle Capacità del Ladro.
+- livello: 1
+  id: gergo-dei-ladri
+  nome: "Gergo dei Ladri"
+  descrizione: |
+    Hai appreso diverse lingue nelle comunità in cui hai esercitato i tuoi talenti da ladro. Conosci il Gergo dei Ladri e un'altra lingua a tua scelta.
+- livello: 1
+  id: maestria-nelle-armi
+  nome: "Maestria nelle Armi"
+  descrizione: |
+    Il tuo addestramento con le armi ti permette di utilizzare le proprietà di maestria di due tipi di armi a tua scelta con cui hai competenza, come pugnali e archi corti.
+
+    Ogni volta che termini un Riposo Lungo, puoi cambiare i tipi di armi scelti. Per esempio, potresti passare a utilizzare le proprietà di maestria di scimitarre e spade corte.
+  attivita:
+    - {tipo: scelta, scelta: maestria-arma, quantita: 2, recupero: riposo-lungo}
+- livello: 2
+  id: azione-scaltra
+  nome: "Azione Scaltra"
+  descrizione: |
+    La tua prontezza di riflessi e la tua agilità ti permettono di muoverti e agire rapidamente. Nel tuo turno, puoi compiere una delle seguenti azioni come Azione Bonus: Scatto, Disimpegno o Nascondersi.
+- livello: 3
+  id: sottoclasse-del-ladro
+  nome: "Sottoclasse del Ladro"
+  descrizione: |
+    Ottieni una sottoclasse del Ladro a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Ladro. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Ladro o a un livello inferiore.
+- livello: 3
+  id: mira-precisa
+  nome: "Mira Precisa"
+  descrizione: |
+    Come Azione Bonus, ottieni Vantaggio al tuo prossimo tiro per colpire nel turno corrente. Puoi usare questa capacità solo se non ti sei mosso durante questo turno; inoltre, dopo averla usata, la tua Velocità è pari a 0 fino alla fine del turno in corso.
+- livello: 4
+  id: aumento-punteggi-caratteristica
+  nome: "Incremento dei Punteggi di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento dei Punteggi di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli 8, 10, 12 e 16 da Ladro.
+- Livello: 5
+  id: colpo-astuto
+  nome: "Colpo Astuto"
+  descrizione: |
+    Hai sviluppato metodi ingegnosi per utilizzare il tuo Attacco Furtivo. Quando infliggi danni con un Attacco Furtivo, puoi aggiungere uno dei seguenti effetti di Colpo Astuto. Ogni effetto ha un costo in dadi, ovvero il numero di dadi di danno dell'Attacco Furtivo a cui devi rinunciare per applicare l'effetto. Rimuovi il dado prima di tirare e l'effetto si verifica immediatamente dopo che sono stati inflitti i danni dell'attacco. Per esempio, se aggiungi l'effetto Veleno, rimuovi 1d6 dai danni dell'Attacco Furtivo prima di tirare.
+
+    Se un effetto di Colpo Astuto richiede un tiro salvezza, la CD è pari a 8 più il tuo modificatore di Destrezza e il tuo Bonus di Competenza.
+
+    **Veleno (Costo: 1d6).** Aggiungi una tossina al tuo colpo, costringendo il bersaglio a effettuare un tiro salvezza su Costituzione. Se fallisce il tiro salvezza, il bersaglio subisce la condizione Avvelenato per 1 minuto. Alla fine di ogni suo turno, il bersaglio avvelenato ripete il tiro salvezza; se ha successo, l'effetto termina.
+
+    Per utilizzare questo effetto, devi avere con te un Kit da Avvelenatore.
+
+    **Atterramento (Costo: 1d6).** Se il bersaglio è di taglia Grande o inferiore, deve superare un tiro salvezza su Destrezza o subire la condizione Prono.
+
+    **Ritirata (Costo: 1d6).** Immediatamente dopo l'attacco, ti muovi fino a metà della tua Velocità senza provocare attacchi di opportunità.
+- livello: 5
+  id: schivata-prodigiosa
+  nome: "Schivata Prodigiosa"
+  descrizione: |
+    Quando un attaccante che puoi vedere ti colpisce con un tiro per colpire, puoi usare la tua reazione per dimezzare i danni dell'attacco subiti (arrotondando per difetto).
+- livello: 7
+  id: elusione
+  nome: "Elusione"
+  descrizione: |
+    Sai schivare agilmente certi pericoli. Quando sei soggetto a un effetto che ti permette di effettuare un tiro salvezza su Destrezza per subire solo metà dei danni, non ne subisci affatto se superi il tiro salvezza e ne subisci solo la metà se lo fallisci. Non puoi usare questa capacità se sei incapacitato.
+- livello: 7
+  id: talento-affidabile
+  nome: "Talento Affidabile"
+  descrizione: |
+    Ogni volta che effettui una prova di caratteristica che utilizza una delle tue competenze in abilità o strumenti, puoi considerare un risultato di 9 o inferiore sul d20 come un 10.
+- livello: 11
+  id: colpo-astuto-migliorato
+  nome: "Colpo Astuto Migliorato"
+  descrizione: |
+    Puoi utilizzare fino a due effetti di Colpo Astuto quando infliggi danni da Attacco Furtivo, pagando il costo in dadi per ciascun effetto.
+- livello: 14
+  id: colpi-insidiosi
+  nome: "Colpi Insidiosi"
+  descrizione: |
+    Hai appreso nuovi modi per utilizzare il tuo Attacco Furtivo in modo insidioso. I seguenti effetti sono ora tra le tue opzioni di Colpo Astuto.
+
+    **Stordire (Costo: 2d6).** Il bersaglio deve superare un tiro salvezza su Costituzione; in caso contrario, nel suo turno successivo potrà compiere solo una delle seguenti azioni: muoversi, effettuare un'azione o effettuare un'azione bonus.
+
+    **Mandare KO (Costo: 6d6).** Il bersaglio deve superare un tiro salvezza su Costituzione; in caso contrario, diventa privo di sensi per 1 minuto o finché non subisce danni. Il bersaglio privo di sensi ripete il tiro salvezza alla fine di ogni suo turno, ponendo fine all'effetto su di sé in caso di successo.
+
+    **Oscurare (Costo: 3d6).** Il bersaglio deve superare un tiro salvezza su Destrezza; in caso contrario, diventa accecato fino alla fine del suo turno successivo.
+- livello: 15
+  id: mente-sfuggente
+  nome: "Mente Sfuggente"
+  descrizione: |
+    La tua mente astuta è eccezionalmente difficile da controllare. Ottieni competenza nei tiri salvezza su Saggezza e Carisma.
+  attivita:
+    - tipo: passivo
+      effetti:
+        - {bersaglio: tiri_salvezza.saggezza, operazione: concedi}
+        - {bersaglio: tiri_salvezza.carisma, operazione: concedi}
+- livello: 18
+  id: elusivo
+  nome: "Elusivo"
+  descrizione: |
+    Sei così sfuggente che gli attaccanti raramente riescono ad avere la meglio su di te. Nessun tiro per colpire può avere Vantaggio contro di te, a meno che tu non sia Incapace.
+- livello: 19
+  id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni un talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- livello: 20
+  id: colpo-di-fortuna
+  nome: "Colpo di Fortuna"
+  descrizione: |
+    Possiedi una straordinaria capacità di riuscire nelle imprese quando è necessario. Se fallisci una prova su d20, puoi trasformare il risultato del tiro in un 20.
+
+    Una volta utilizzata questa capacità, non puoi più usarla finché non completi un riposo breve o lungo.

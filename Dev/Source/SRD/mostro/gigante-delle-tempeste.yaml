@@ -1,0 +1,93 @@
+id: dnd.mostro.gigante-delle-tempeste
+nome: Gigante delle tempeste
+taglia: enorme
+tipo: gigante
+gruppo: Giganti
+allineamento: caotico buono
+ca: {valore: 16}
+caratteristiche:
+  forza: {valore: 29, competenza: true}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 20, competenza: true}
+  intelligenza: {valore: 16, competenza: false}
+  saggezza: {valore: 20, competenza: true}
+  carisma: {valore: 18, competenza: true}
+iniziativa: competenza
+dadi_vita: 20
+velocita: {camminata: 5, nuoto: 15, volo: 7}
+abilita: [arcano: competenza, atletica: competenza, percezione: competenza, storia: competenza]
+sensi: {scurovisione: 36, vista_pura: 9}
+percezione_passiva: 20
+resistenze: [freddo]
+immunita_danni: [fulmine, tuono]
+lingue: [Comune, Gigante]
+gs: 13
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il gigante effettua due attacchi, usando Spada tempestosa o Saetta in qualsiasi combinazione.
+  - nome: Spada tempestosa
+    descrizione: |
+      *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 23 (4d6 + 9) danni taglienti più 13 (3d8) danni da fulmine.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 4
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Saetta
+    descrizione: |
+      *Tiro per colpire a distanza:* +14, gittata 150 m. *Colpito:* 22 (2d12 + 9) danni da fulmine, e il bersaglio è accecato e assordato fino all'inizio del turno successivo del gigante.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d12
+              tipo_danno: fulmine
+              bonus: {caratteristica: forza}
+  - nome: Incantesimi
+    descrizione: |
+      Il gigante lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 18):
+
+      *1/giorno:*
+      - controllare tempo atmosferico
+
+      *A volontà:*
+      - individuazione del magico
+      - luce
+    attivita:
+      - tipo: incantatore
+        caratteristica: saggezza
+        cd: 18
+        a_volonta:
+          - dnd.incantesimo.individuazione-del-magico
+          - dnd.incantesimo.luce
+        al_giorno:
+          - usi: 1
+            incantesimi:
+              - dnd.incantesimo.controllare-tempo-atmosferico
+  - nome: "Tempesta di fulmini (ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 18, ogni creatura in un cilindro di 3 metri di raggio e 12 metri d'altezza in un punto che il gigante è in grado di vedere entro 150 metri. *Fallimento:* 55 (10d10) danni da fulmine. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 10, dado: d10, tipo_danno: fulmine}
+        successo: danno-dimezzato

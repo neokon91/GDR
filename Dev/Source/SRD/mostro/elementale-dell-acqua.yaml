@@ -1,0 +1,67 @@
+id: dnd.mostro.elementale-dell-acqua
+nome: Elementale dell'acqua
+taglia: grande
+tipo: elementale
+allineamento: neutrale
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 9, nuoto: 27}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+resistenze: [acido, fuoco]
+immunita_danni: [veleno]
+immunita_condizioni: [afferrato, avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi, prono, trattenuto]
+lingue: ["Primordiale (Aquan)"]
+gs: 5
+
+tratti:
+  - nome: Congelamento
+    descrizione: |
+      Se l'elementale subisce danni da freddo, la sua velocità è ridotta di 6 metri fino al termine del suo turno successivo.
+  - nome: Forma d'acqua
+    descrizione: |
+      L'elementale può entrare nello spazio di un nemico e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: schianto, ripetizioni: 2}
+    descrizione: |
+      L'elementale effettua due attacchi Schianto.
+  - nome: Schianto
+    id: schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: "Sommergere (ricarica 4-6)"
+    id: sommergere-ricarica-4-6
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 15, ogni creatura nello spazio dell'elementale. *Fallimento:* 22 (4d8 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire). Finché la presa perdura, il bersaglio è trattenuto e soffoca (a meno che non sia in grado di respirare sott'acqua) e subisce 9 (2d8) danni contundenti all'inizio di ogni turno dell'elementale. Tramite Sommergere, l'elementale può afferrare una creatura di taglia Grande o un massimo di due creature di taglia Media o inferiore contemporaneamente. Con un'azione, una creatura entro 1,5 metri dall'elementale può tirare una creatura fuori da esso superando una prova di Forza (Atletica) con CD 14. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        successo: danno-dimezzato

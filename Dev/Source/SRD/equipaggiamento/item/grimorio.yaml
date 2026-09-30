@@ -1,0 +1,9 @@
+id: dnd.oggetto.grimorio
+nome: Grimorio
+categoria: equipaggiamento-avventura
+costo:
+  valore: 50
+  unita: moneta-oro
+peso: {valore: 1.5, unita: kg}
+descrizione: |
+  Essenziale per i maghi, un grimorio è un tomo rilegato in pelle contenente 100 pagine di pergamena bianca, adatto a trascrivere incantesimi.

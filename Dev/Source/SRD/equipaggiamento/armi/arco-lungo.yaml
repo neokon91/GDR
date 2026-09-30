@@ -1,0 +1,11 @@
+id: dnd.arma.arco-lungo
+nome: Arco lungo
+categoria: distanza-da-guerra
+costo: {valore: 50, valuta: moneta-oro}
+peso: {valore: 1, unita: kg}
+danno: {dado: d8, tipo_danno: perforante}
+gittata:
+  normale: 45
+  lunga: 180
+proprieta: [due-mani, munizioni, pesante]
+padronanza: lentezza

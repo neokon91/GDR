@@ -1,0 +1,38 @@
+id: dnd.sottoclasse.circolo-della-terra
+nome: Circolo della Terra
+classe: dnd.classe.druido
+citazione: "Celebra la connessione con il mondo naturale"
+privilegi:
+- livello: 3
+  nome: "Incantesimi del Circolo della Terra"
+  descrizione: |
+    Dopo un riposo lungo sceglie una terra; gli incantesimi corrispondenti sono sempre preparati.
+
+- livello: 3
+  nome: "Ausilio dalla Terra"
+  descrizione: |
+    Spende Forma selvatica per danni necrotici e cura in una sfera; scala a 10º e 14º livello.
+
+- livello: 6
+  nome: "Recupero Naturale"
+  descrizione: |
+    Lancia gratis un incantesimo del Circolo e recupera slot durante un riposo breve.
+
+- livello: 10
+  nome: "Interdizione della Natura"
+  descrizione: |
+    Immunita ad avvelenato e resistenza in base alla terra scelta.
+  scelte: 
+    - terra: "Arida"
+      resistenza: fuoco
+    - terra: "Polare"
+      resistenza: freddo
+    - terra: "Temperata"
+      resistenza: fulmine
+    - terra: "Tropicale"
+      resistenza: veleno
+
+- livello: 14
+  nome: "Rifugio della Natura"
+  descrizione: |
+    Spende Forma selvatica per creare un area che concede mezza copertura e la resistenza agli alleati.

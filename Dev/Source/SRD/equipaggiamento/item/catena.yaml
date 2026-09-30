@@ -1,0 +1,5 @@
+id: dnd.oggetto.catena
+nome: Catena
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-oro}
+peso: {valore: 5, unita: kg}

@@ -1,0 +1,58 @@
+id: dnd.mostro.grick
+nome: Grick
+taglia: media
+tipo: aberrazione
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 14, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 12
+velocita: {camminata: 9, scalata: 9}
+abilita: [furtivita: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 2
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il grick effettua un attacco Becco e un attacco Tentacoli.
+  - nome: Becco
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m.*Colpito:* 9 (2d6 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Tentacoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire) da tutti e quattro i tentacoli.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}

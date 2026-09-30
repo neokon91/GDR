@@ -1,0 +1,39 @@
+id: dnd.mostro.avvoltoio-gigante
+nome: Avvoltoio Gigante
+taglia: grande
+tipo: mostruosita
+gruppo: Animali
+allineamento: neutrale malvagio
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 3, volo: 18}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 13
+resistenze: [necrotico]
+lingue: [capisce il Comune ma non lo parla]
+gs: 1
+tratti:
+  - id: avvoltoio-gigante.tattiche-del-branco
+    nome: Tattiche del Branco
+    descrizione: |
+      L'avvoltoio dispone di Vantaggio a un tiro per colpire contro una creatura
+      se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è Incapacitato.
+azioni:
+  - id: avvoltoio-gigante.cavare
+    nome: Cavare
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +4, portata 1,5 m.
+      *Colpito:* 9 (2d6 + 2) danni Perforanti, e il bersaglio è Avvelenato fino al termine del proprio turno successivo.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 2, dado: d6, tipo_danno: perforante, bonus: { caratteristica: forza } }

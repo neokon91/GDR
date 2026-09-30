@@ -1,0 +1,24 @@
+id: dnd.sottoclasse.collegio-della-sapienza
+nome: Collegio della Sapienza
+classe: dnd.classe.bardo
+citazione: "Scandaglia le profondita della conoscenza magica"
+privilegi:
+- livello: 3
+  nome: "Competenze Bonus"
+  descrizione: |
+    Ottiene competenza in tre abilita a scelta.
+
+- livello: 3
+  nome: "Parole Taglienti"
+  descrizione: |
+    Usa reazione e Ispirazione bardica per sottrarre il dado a danni, prove o tiri per colpire riusciti. |
+
+- livello: 6
+  nome: "Scoperte Magiche"
+  descrizione: |
+    Apprende due incantesimi da chierico, druido o mago, sempre preparati e sostituibili salendo di livello. |
+
+- livello: 14
+  nome: "Abilita Impareggiabile"
+  descrizione: |
+    Dopo un fallimento puo spendere Ispirazione bardica e aggiungerla al d20; se fallisce resta non consumata. |

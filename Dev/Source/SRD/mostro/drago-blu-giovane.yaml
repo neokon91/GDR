@@ -1,0 +1,64 @@
+id: dnd.mostro.drago-blu-giovane
+nome: Drago blu giovane
+taglia: grande
+tipo: drago
+sottotipo: cromatico
+gruppo: Draghi blu
+allineamento: legale malvagio
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 21, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 19, competenza: false}
+  intelligenza: {valore: 14, competenza: false}
+  saggezza: {valore: 13, competenza: true}
+  carisma: {valore: 17, competenza: false}
+iniziativa: competenza
+dadi_vita: 16
+velocita: {scavo: 6, volo: 24}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 36, vista_cieca: 9}
+percezione_passiva: 19
+immunita_danni: [fulmine]
+lingue: [Comune, Draconico]
+gs: 9
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il drago effettua tre attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 12 (2d6 + 5) danni taglienti più 5 (1d10) danni da fulmine.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di fulmini (ricarica 5-6)"
+    id: soffio-di-fulmini-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 16, tutte le creature in una linea lunga 18 metri e larga 1,5 metri. *Fallimento:* 55 (10d10) danni da fulmine. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 10, dado: d10, tipo_danno: fulmine}
+        successo: danno-dimezzato

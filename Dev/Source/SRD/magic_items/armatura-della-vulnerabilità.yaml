@@ -1,0 +1,11 @@
+id: dnd.oggetto-magico.armatura-della-vulnerabilità
+nome: Armatura della vulnerabilità
+categoria: armatura
+sottotipo: leggera, media o pesante
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Il personaggio che indossa quest'armatura ottiene resistenza a uno dei seguenti tipi di danno: con-tundenti, perforanti o taglienti. Il GM sceglie il tipo o lo determina casualmente.
+
+  **Maledizione**
+  Quest'armatura è maledetta, fatto che viene rivelato solo quando su di essa viene lanciato l'incantesimo identificare o quando il personaggio entra in sintonia con essa. Entrando in sintonia con l'armatura, il personaggio diventa soggetto alla maledizione finché su di lui non viene lanciato l'incantesimo rimuovi maledizione o un'altra magia simile; rimuovere l'armatura non pone fine alla maledizione. Finché è maledetto, il personaggio acquisisce vulnerabilità a due dei tre tipi di danno associati all'armatura (escludendo quello a cui concede resistenza).

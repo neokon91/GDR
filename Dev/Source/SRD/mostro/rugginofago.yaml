@@ -1,0 +1,59 @@
+id: dnd.mostro.rugginofago
+nome: Rugginofago
+taglia: media
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 11
+lingue: [nessuna]
+gs: 1/2
+
+tratti:
+  - nome: Fiutare il ferro
+    descrizione: |
+      Il rugginofago può individuare la precisa ubicazione di qualsiasi metallo ferroso situato entro 9 metri da esso.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il rugginofago effettua un attacco Morso e usa Antenne due volte.
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d8 + 1) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Antenne
+    descrizione: |
+      Il rugginofago prende di mira un oggetto in metallo non magico (armatura o arma) indossato o trasportato da una creatura entro 1,5 metri da sé. *Tiro salvezza su Destrezza:* CD 11, la creatura che possiede l'oggetto. *Fallimento:* l'oggetto subisce una penalità di -1 alla CA che fornisce (armatura) o ai suoi tiri per colpire (arma). L'armatura viene distrutta se la penalità riduce la sua CA a 10; l'arma viene distrutta se la sua penalità arriva a -5. La penalità può essere rimossa lanciando l'incantesimo riparare sull'armatura o sull'arma.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+  - nome: Distruggere metallo
+    descrizione: |
+      Il rugginofago tocca un oggetto in metallo non magico entro 1,5 metri da sé che non è indossato o trasportato. Il tocco distrugge una porzione di oggetto pari a un cubo con spigolo di 30 centimetri.
+reazioni:
+  - nome: Antenne riflesse
+    descrizione: |
+      Attivazione: Un tiro per colpire colpisce il rugginofago. Esito: il rugginofago usa Antenne.

@@ -1,0 +1,4 @@
+id: dnd.oggetto.pasto-ricco
+nome: Pasto Ricco
+categoria: vitto-e-alloggio
+costo: {valore: 3, valuta: moneta-argento}

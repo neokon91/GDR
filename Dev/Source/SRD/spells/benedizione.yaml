@@ -1,0 +1,24 @@
+id: dnd.incantesimo.benedizione
+nome: Benedizione
+livello: 1
+scuola: ammaliamento
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.paladino
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (un simbolo sacro del valore di 5 mo o più)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+attivita:
+  - tipo: potenziamento
+    bersaglio: alleato
+    concede: benedetto
+    durata: {valore: 1, unita: minuti}
+    concentrazione: true
+descrizione: |
+  L'incantatore benedice fino a tre creature entro gittata. Se un bersaglio effettua un tiro per colpire o un tiro salvezza prima del termine dell'incantesimo, il bersaglio aggiunge a essi 1d4.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 1º.

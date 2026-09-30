@@ -1,0 +1,14 @@
+id: dnd.arma.balestra-leggera
+nome: Balestra leggera
+categoria: distanza-semplice
+costo: {valore: 25, valuta: moneta-oro}
+peso: {valore: 2.5, unita: kg}
+danno: {dado: d8, tipo_danno: perforante}
+gittata:
+  normale: 24
+  lunga: 96
+proprieta:
+- due-mani
+- munizioni
+- ricarica
+padronanza: lentezza

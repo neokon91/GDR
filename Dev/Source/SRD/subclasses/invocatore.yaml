@@ -1,0 +1,25 @@
+id: dnd.sottoclasse.invocatore
+nome: Invocatore
+classe: dnd.classe.mago
+citazione: "Crea effetti elementali esplosivi"
+descrizione: |
+privilegi:
+- livello: 3
+  nome: "Sapiente Invocatore"
+  descrizione: |
+    Riduce tempo e costo per copiare incantesimi di Invocazione nel libro.
+
+- livello: 3
+  nome: "Scolpire Incantesimi"
+  descrizione: |
+    Protegge creature scelte dagli effetti degli incantesimi di Invocazione.
+
+- livello: 10
+  nome: "Invocazione Potente"
+  descrizione: |
+    Aggiunge Intelligenza a un tiro per i danni di un incantesimo di Invocazione.
+
+- livello: 14
+  nome: "Saturazione Magica"
+  descrizione: |
+    Massimizza i danni di un incantesimo con slot 1-5, con rischio di danni necrotici se ripetuto prima del riposo lungo. |

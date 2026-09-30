@@ -1,0 +1,44 @@
+id: dnd.mostro.squalo-cacciatore
+nome: Squalo cacciatore
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 5, nuoto: 12}
+abilita: [percezione: competenza]
+sensi: {vista_cieca: 18}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 2
+
+tratti:
+  - nome: Respirare sott'acqua
+    descrizione: |
+      Lo squalo può respirare soltanto sott'acqua.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6 (con vantaggio se il bersaglio non ha tutti i punti ferita), portata 1,5 m. *Colpito:* 14 (3d6 + 4) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

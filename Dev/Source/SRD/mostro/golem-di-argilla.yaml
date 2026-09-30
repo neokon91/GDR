@@ -1,0 +1,61 @@
+id: dnd.mostro.golem-di-argilla
+nome: Golem di argilla
+taglia: grande
+tipo: costrutto
+allineamento: senza allineamento
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 20, competenza: false}
+  destrezza: {valore: 9, competenza: false}
+  costituzione: {valore: 18, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 8, competenza: false}
+  carisma: {valore: 1, competenza: false}
+iniziativa: competenza
+dadi_vita: 13
+velocita: {camminata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 9
+resistenze: [contundente, perforante, tagliente]
+immunita_danni: [acido, psichico, veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento, paralizzato, pietrificato, spaventato]
+lingue: [Comune più un'altra lingua]
+gs: 9
+
+tratti:
+  - nome: Assorbimento dell'acido
+    descrizione: |
+      Ogni volta che il golem riceve danni da acido, non subisce danni, recuperando un numero di punti ferita pari ai danni da acido a lui inflitti.
+  - nome: Berserk
+    descrizione: |
+      Ogni volta che il golem inizia il suo turno sanguinante, tira 1d6. Se esce 6, il golem entra in uno stato di berserk. A ogni suo turno, finché è in stato di berserk, il golem attacca la creatura più vicina che è in grado di vedere. Se nessuna creatura è abbastanza vicina per essere attaccata, il golem si scaglia contro un oggetto. Una volta che il golem entra in stato di berserk, rimane in questo stato finché non viene distrutto o non è più sanguinante.
+  - nome: Forma immutabile
+    descrizione: |
+      Il golem non può mutare forma.
+  - nome: Resistenza alla magia
+    descrizione: |
+      Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il golem effettua due attacchi Schianto, o effettua tre attacchi Schianto se ha usato Fretta nello stesso turno.
+  - nome: Schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +9, portata 1,5 m. *Colpito:* 10 (1d10 + 5) danni contundenti più 6 (1d12) danni da acido, e i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni da acido subiti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: "Fretta (ricarica 5-6)"
+    descrizione: |
+      Il golem effettua le azioni di Disimpegno e Scatto.

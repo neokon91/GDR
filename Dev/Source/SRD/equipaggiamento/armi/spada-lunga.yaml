@@ -1,0 +1,8 @@
+id: dnd.arma.spada-lunga
+nome: Spada lunga
+categoria: mischia-da-guerra
+costo: {valore: 15, valuta: moneta-oro}
+peso: {valore: 1.5, unita: kg}
+danno: {dado: d8, tipo_danno: tagliente}
+proprieta: [versatile-1d10]
+padronanza: fiaccare

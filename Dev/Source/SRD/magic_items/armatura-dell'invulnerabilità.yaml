@@ -1,0 +1,16 @@
+id: dnd.oggetto-magico.armatura-dell'invulnerabilità
+nome: Armatura dell'invulnerabilità
+categoria: armatura
+sottotipo: armatura a piastre
+rarita: leggendaria
+richiede_sintonia: true
+base: dnd.armatura.armatura-a-piastre
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: resistenze, operazione: concedi, valore: [contundente, perforante, tagliente]}
+descrizione: |
+  Un personaggio che la indossa dispone di resistenza ai danni contundenti, perforanti e taglienti.
+
+  **Guscio in metallo**
+  Come azione di Magia il  personaggio può ottenere immunità ai danni contundenti, perforanti e taglienti per 10 minuti o finché non indossa più l'armatura. Una volta usata, questa proprietà non può essere riutilizzata fino all'alba successiva.

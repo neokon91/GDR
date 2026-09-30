@@ -1,0 +1,9 @@
+id: dnd.oggetto.abiti-da-viaggiatore
+nome: Abiti da viaggiatore
+categoria: equipaggiamento-avventura
+costo:
+  valore: 2
+  unita: moneta-oro
+peso: {valore: 2, unita: kg}
+descrizione: |
+  Gli abiti da viaggiatore sono capi resistenti progettati per viaggiare in ambienti diversi.

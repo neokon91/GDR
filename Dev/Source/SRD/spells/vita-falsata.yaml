@@ -1,0 +1,23 @@
+id: dnd.incantesimo.vita-falsata
+nome: Vita falsata
+livello: 1
+scuola: necromanzia
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (una goccia di alcol)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+attivita:
+  - tipo: potenziamento
+    bersaglio: se-stesso
+    pf_temporanei: {numero_dadi: 2, dado: d4, bonus: 4}
+    scaling: {quando: slot, danno: {bonus: 5}}
+descrizione: |
+  L'incantatore ottiene 2d4 + 4 punti ferita temporanei.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore ottiene 5 punti ferita temporanei aggiuntivi per ogni slot di livello superiore al 1º.

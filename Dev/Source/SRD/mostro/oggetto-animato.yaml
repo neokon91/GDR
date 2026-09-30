@@ -1,0 +1,36 @@
+id: dnd.mostro.oggetto-animato
+nome: Oggetto animato
+gruppo: Oggetti animati
+taglia: [minuscola, piccola, media, grande, enorme]
+tipo: costrutto
+allineamento: senza allineamento
+ca: {valore: 15, origine: ""}
+velocita: {camminata: 9}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 3, competenza: false}
+  carisma: {valore: 1, competenza: false}
+immunita_danni:
+- psichico
+- veleno
+immunita_condizioni:
+- affascinato
+- avvelenato
+- indebolimento
+- paralizzato
+- spaventato
+sensi: {vista_cieca: 9}
+lingue: ["Comprende le lingue parlate dal personaggio"]
+gs: nessuno
+nota_gs: "Nessuno (PE 0; BC pari al bonus di competenza del personaggio)"
+
+azioni:
+  - nome: Schianto
+    descrizione: |
+      *Tiro per Colpire in Mischia:* + il modificatore di attacco con incantesimo del personaggio, portata 1,5 m.
+      *Colpito:* danni da forza pari a 1d4 + 3 (taglia Media o inferiore),
+      2d6 + 3 + il modificatore di caratteristica da incantatore dell'incantatore (taglia Grande)
+      o 2d12 + 3 + il modificatore di caratteristica da incantatore dell'incantatore (taglia Enorme).

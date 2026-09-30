@@ -1,0 +1,24 @@
+id: dnd.incantesimo.tocco-gelido
+nome: Tocco gelido
+livello: 0
+scuola: necromanzia
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Incanalando un flusso di gelo sepolcrale, l'incantatore effettua un attacco con incantesimo in mischia contro un bersaglio a portata. Se il colpo va a segno, il bersaglio subisce 1d10 danni necrotici e non può recuperare punti ferita fino al termine del turno successivo dell'incantatore.
+scaling: |
+  **Trucchetto potenziato**
+  I danni aumentano di 1d10 quando l'incantatore raggiunge il 5º livello (2d10), l'11º livello (3d10) e il 17º livello (4d10).
+attivita:
+  - tipo: attacco
+    attacco: { categoria: mischia, caratteristica: incantesimo }
+    colpito:
+      danno: { numero_dadi: 1, dado: d10, tipo_danno: necrotico }

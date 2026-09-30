@@ -1,0 +1,13 @@
+id: dnd.background.soldato
+nome: Soldato
+punteggi_caratteristica: [forza, destrezza, costituzione]
+talento_origine: dnd.talento.aggressore-selvaggio
+competenze:
+  abilita: [atletica, intimidire]
+  strumenti: [set-da-gioco]
+equipaggiamento_alternativo:
+  scelte:
+    - nome: B
+      oggetti:
+        - articolo: dnd.valuta.moneta-oro
+          quantita: 50

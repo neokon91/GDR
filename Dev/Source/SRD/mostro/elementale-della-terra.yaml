@@ -1,0 +1,66 @@
+id: dnd.mostro.elementale-della-terra
+nome: Elementale della terra
+taglia: grande
+tipo: elementale
+allineamento: neutrale
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 20, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 20, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 14
+velocita: {scavo: 9}
+sensi: {percezione_tellurica: 18, scurovisione: 18}
+percezione_passiva: 10
+immunita_danni: [veleno]
+immunita_condizioni: [avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi]
+vulnerabilita: [tuono]
+lingue: ["Primordiale (Terran)"]
+gs: 5
+
+tratti:
+  - nome: Mostro da assedio
+    descrizione: |
+      L'elementale infligge danni doppi a oggetti e strutture.
+  - nome: Scivolare nella terra
+    descrizione: |
+      L'elementale può scavare attraverso la terra e la pietra non magiche e non lavorate, senza disturbare il materiale attraverso cui si muove.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      L'elementale effettua due attacchi, usando Schianto o Lancio di roccia in qualsiasi combinazione.
+  - nome: Schianto
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 14 (2d8 + 5) danni contundenti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Lancio di roccia
+    descrizione: |
+      *Tiro per colpire a distanza:* +8, gittata 18 m. *Colpito:* 8 (1d6 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

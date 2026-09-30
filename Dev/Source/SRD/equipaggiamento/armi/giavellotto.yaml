@@ -1,0 +1,9 @@
+id: dnd.arma.giavellotto
+nome: Giavellotto
+categoria: mischia-semplice
+costo: {valore: 5, valuta: moneta-argento}
+peso: {valore: 1, unita: kg}
+danno: {dado: d6, tipo_danno: perforante}
+gittata: {normale: 9, lunga: 36}
+proprieta: [lancio]
+padronanza: lentezza

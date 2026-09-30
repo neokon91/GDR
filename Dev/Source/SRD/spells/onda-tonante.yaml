@@ -1,0 +1,29 @@
+id: dnd.incantesimo.onda-tonante
+nome: Onda tonante
+livello: 1
+scuola: invocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore sprigiona un'ondata di energia tonante. Ogni creatura entro un cubo con spigolo di 4,5 metri originato dall'incantatore effettua un tiro salvezza su Costituzione. Se lo fallisce, subisce 2d8 danni da tuono e viene spinta a una distanza di 3 metri dall'incantatore. In caso di successo, subisce soltanto la metà di quei danni.
+
+  Inoltre, gli oggetti non fissati e situati interamente nel cubo vengono spinti a 3 metri dall'incantatore, con un boato tonante entro 90 metri.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d8 per ogni slot di livello superiore al 1º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+    fallimento:
+      - danno: { numero_dadi: 2, dado: d8, tipo_danno: tuono }
+      - sposta: { valore: 3, unita: metri, verso: lontano }
+    successo: danno-dimezzato

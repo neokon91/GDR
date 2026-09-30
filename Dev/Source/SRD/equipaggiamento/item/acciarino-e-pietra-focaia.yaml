@@ -1,0 +1,5 @@
+id: dnd.oggetto.acciarino-e-pietra-focaia
+nome: Acciarino e pietra focaia
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-argento}
+peso: {valore: 0.5, unita: kg}

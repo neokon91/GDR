@@ -1,0 +1,18 @@
+id: dnd.incantesimo.sonno
+nome: Sonno
+livello: 1
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S, "M (un pizzico di sabbia o dei petali di rosa)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Ogni creatura a scelta dell'incantatore in una sfera dal raggio di 1,5 metri in una posizione entro gittata deve superare un tiro salvezza su Saggezza, altrimenti sarà incapacitata fino al termine del proprio turno successivo. A questo punto, dovrà ripetere la prova e, in caso di fallimento, cadrà priva di sensi per la durata dell'incantesimo. L'effetto svanisce se il bersaglio subisce danni o se qualcuno entro 1,5 metri da esso effettua un'azione per scuoterlo e farlo tornare in sé.
+
+  Le creature che non dormono, come gli elfi, o che sono immuni all'indebolimento superano automaticamente i tiri salvezza contro l'incantesimo.

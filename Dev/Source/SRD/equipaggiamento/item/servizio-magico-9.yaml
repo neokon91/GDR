@@ -1,0 +1,4 @@
+id: dnd.oggetto.servizio-magico-9
+nome: Servizio magico 9
+categoria: servizi-magici
+costo: {valore: 100, valuta: moneta-oro}

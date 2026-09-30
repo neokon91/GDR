@@ -1,0 +1,23 @@
+id: dnd.incantesimo.telecinesi
+nome: Telecinesi
+livello: 5
+scuola: trasmutazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 18
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore ottiene la capacità di spostare o manipolare creature e oggetti con la forza del pensiero. Al lancio e come sua azione di Magia ogni turno successivo prima del termine dell'incantesimo, l'incantatore può esercitare la propria volontà su una creatura o un oggetto entro gittata che egli è in grado di vedere, provocando l'effetto appropriato descritto di seguito. L'incantatore può influenzare lo stesso bersaglio in ogni round o sceglierne uno nuovo in ogni momento. Se cambia bersaglio, quello precedente non risentirà più degli effetti dell'incantesimo.
+
+  **Creatura**
+  L'incantatore può provare a spostare una creatura di taglia Enorme o inferiore. Il bersaglio deve superare un tiro salvezza su Forza, altrimenti verrà spostato dall'incantatore di massimo 9 metri in una direzione entro la gittata dell'incantesimo. Fino alla fine del suo turno successivo, la creatura è trattenuta e, se alzata a mezz'aria, rimarrà sospesa lì. Cadrà al termine del turno successivo dell'incantatore, a meno che non utilizzi di nuovo questa opzione su di essa e fallisca il tiro salvezza.
+
+  **Oggetto**
+  L'incantatore può provare a spostare un oggetto di taglia Enorme o inferiore. Se esso non è indossato o trasportato, lo sposta automaticamente fino a 9 metri in qualsiasi direzione entro la gittata dell'incantesimo.
+  Se l'oggetto è indossato o trasportato da una creatura, quest'ultima deve superare un tiro salvezza su Forza, altrimenti l'incantatore lo tirerà via e lo sposterà fino a 9 metri in qualsiasi direzione entro la gittata dell'incantesimo.
+  Con la sua presa telecinetica, l'incantatore può esercitare un controllo più preciso sugli oggetti, come manipolare uno strumento semplice.

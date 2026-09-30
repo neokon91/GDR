@@ -1,0 +1,10 @@
+id: dnd.oggetto.abiti-eleganti
+nome: Abiti eleganti
+categoria: equipaggiamento-avventura
+costo:
+  valore: 15
+  unita: moneta-oro
+peso: {valore: 3, unita: kg}
+descrizione:
+  Gli abiti pregiati sono realizzati con tessuti costosi e impreziositi da dettagli di pregevole fattura.
+  Alcuni eventi e luoghi consentono l'accesso solo a chi indossa tali capi.

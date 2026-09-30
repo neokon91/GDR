@@ -1,0 +1,4 @@
+id: dnd.oggetto.pergamena
+nome: Pergamena
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-argento}

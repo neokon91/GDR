@@ -1,0 +1,9 @@
+id: dnd.veicolo.barcone
+nome: Barcone
+tipo: veicolo
+costo: {valore: 3, valuta: moneta-oro}
+classe_armatura: 15
+velocita: {viaggio: 1.5}  # km/h — i veicoli viaggiano, non camminano
+equipaggio: 1
+passeggeri: 6
+carico: 1/2 t

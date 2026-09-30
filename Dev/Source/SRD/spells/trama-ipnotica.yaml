@@ -1,0 +1,19 @@
+id: dnd.incantesimo.trama-ipnotica
+nome: Trama ipnotica
+livello: 3
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 36
+componenti: [S, "M (una manciata di coriandoli)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  All'interno di un cubo con spigolo di 9 metri entro gittata, l'incantatore crea un intreccio di colori serpeggianti che appare per qualche secondo prima di svanire. Ogni creatura all'interno dell'area in grado di vedere l'intreccio deve superare un tiro salvezza su Saggezza, altrimenti rimane affascinata per la durata dell'incantesimo. Finché è affascinata, la creatura è incapacitata e la sua velocità è pari a 0.
+
+  L'incantesimo su una creatura influenzata termina se questa subisce danni o se qualcuno usa un'azione per scuoterla, destandola dal suo stato confusionale.

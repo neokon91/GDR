@@ -1,0 +1,11 @@
+id: dnd.oggetto-magico.anello-del-nuotare
+nome: Anello del nuotare
+categoria: anello
+rarita: non-comune
+richiede_sintonia: false
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: velocita.nuoto, operazione: aumento, valore: 12}
+descrizione: |
+  Finché il personaggio indossa questo anello, la sua velocità di nuoto è pari a 12 metri.

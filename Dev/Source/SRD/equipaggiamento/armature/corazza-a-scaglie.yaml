@@ -1,0 +1,11 @@
+id: dnd.armatura.corazza-a-scaglie
+nome: Corazza a Scaglie
+tipo: armatura-media
+categoria: armature
+costo: {valore: 50, valuta: moneta-oro}
+peso: {valore: 22.5, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 14, caratteristiche: [destrezza], max_modificatore: 2}}
+svantaggio_furtivita: true

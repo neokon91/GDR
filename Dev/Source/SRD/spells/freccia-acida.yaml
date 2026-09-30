@@ -1,0 +1,25 @@
+id: dnd.incantesimo.freccia-acida
+nome: Freccia acida
+livello: 2
+scuola: invocazione
+classi:
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: 27
+componenti: [V, S, "M (foglia di rabarbaro in polvere)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Una freccia verde scintillante sfreccia verso un bersaglio entro gittata ed esplode in uno spruzzo di acido. L'incantatore effettua un attacco a distanza con incantesimo contro il bersaglio. Se il colpo va a segno, il bersaglio subisce 4d4 danni da acido e 2d4 danni da acido alla fine del suo turno successivo. Se il colpo manca, la freccia schizza acido sul bersaglio, infliggendo solo la metà dei danni iniziali.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni (sia iniziali che successivi) aumentano di 1d4 per ogni slot di livello superiore al 2º.
+attivita:
+  - tipo: attacco
+    attacco: { categoria: distanza, caratteristica: incantesimo }
+    colpito:
+      - danno: { numero_dadi: 4, dado: d4, tipo_danno: acido }
+      - danno: { numero_dadi: 2, dado: d4, tipo_danno: acido }
+        innesco: fine-turno-successivo
+    mancato: danno-dimezzato

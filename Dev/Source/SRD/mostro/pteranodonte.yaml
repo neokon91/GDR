@@ -1,0 +1,44 @@
+id: dnd.mostro.pteranodonte
+nome: Pteranodonte
+taglia: media
+tipo: bestia
+sottotipo: dinosauro
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 12, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 9, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 3, volo: 18}
+abilita: [percezione: competenza]
+percezione_passiva: 11
+lingue: [nessuna]
+gs: 1/4
+
+tratti:
+  - nome: Volo sfuggente
+    descrizione: |
+      Lo pteranodonte non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

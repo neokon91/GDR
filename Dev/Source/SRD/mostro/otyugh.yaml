@@ -1,0 +1,74 @@
+id: dnd.mostro.otyugh
+nome: Otyugh
+taglia: grande
+tipo: aberrazione
+allineamento: neutrale
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 19, competenza: true}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 11
+velocita: {camminata: 9}
+sensi: {scurovisione: 36}
+percezione_passiva: 11
+lingue: [Otyugh, "telepatia 36 m (non consente alla creatura interlocutrice di rispondere telepaticamente)"]
+gs: 5
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: tentacolo, ripetizioni: 2}
+    descrizione: |
+      L'otyugh effettua un attacco Morso e due attacchi Tentacolo.
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 12 (2d8 + 3) danni perforanti, e il bersaglio è avvelenato. Ogni volta che il bersaglio avvelenato termina un riposo lungo, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 15. *Fallimento:* i punti ferita massimi del bersaglio sono ridotti di 5 (1d10), e la riduzione permane finché la condizione avvelenato del bersaglio non termina. *Successo:* la condizione avvelenato termina.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Tentacolo
+    id: tentacolo
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 12 (2d8 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 13 per sfuggire) da uno dei due tentacoli.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Schianto con tentacolo
+    id: schianto-con-tentacolo
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 14, tutte le creature afferrate dall'otyugh. *Fallimento:* 16 (3d8 + 3) danni contundenti, e il bersaglio è stordito fino all'inizio del turno successivo dell'otyugh. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        successo: danno-dimezzato

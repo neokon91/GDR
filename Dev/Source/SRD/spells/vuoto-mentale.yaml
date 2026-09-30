@@ -1,0 +1,15 @@
+id: dnd.incantesimo.vuoto-mentale
+nome: Vuoto mentale
+livello: 8
+scuola: abiurazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 24 ore
+descrizione: |
+  Fino al termine dell'incantesimo, l'incantatore tocca una creatura consenziente rendendola immune ai danni psichici e alla condizione affascinato. Inoltre, il bersaglio non è influenzato da nulla che sia in grado di percepire le sue emozioni o allineamento, leggere i suoi pensieri o individuare magicamente la sua posizione. Nessun incantesimo, nemmeno l'incantesimo desiderio, può raccogliere informazioni sul bersaglio, osservarlo a distanza, o controllarne la mente.

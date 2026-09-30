@@ -1,0 +1,11 @@
+id: dnd.arma.arco-corto
+nome: Arco Corto
+categoria: distanza-semplice
+costo: {valore: 25, valuta: moneta-oro}
+peso: {valore: 1, unita: kg}
+danno: {dado: d6, tipo_danno: perforante}
+gittata:
+  normale: 24
+  lunga: 96
+proprieta: [due-mani, munizioni]
+padronanza: vessazione

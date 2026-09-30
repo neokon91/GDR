@@ -33,10 +33,11 @@ from typing import Any
 
 import yaml
 
+from common import SRD_DIR
 from srd_links import norm_ref, risolvi_wikilink
 
 ROOT = Path(__file__).resolve().parents[2]
-SRD_MONSTERS = ROOT / "archivio" / "srd" / "mostro"
+SRD_MONSTERS = SRD_DIR / "mostro"
 OUT = ROOT / "plugin" / "data" / "srd_bestiario.json"
 
 
@@ -115,7 +116,7 @@ def _risolvi_prosa(obj: Any, idx: dict[str, str]) -> Any:
 def main() -> None:
     if not SRD_MONSTERS.is_dir():
         raise SystemExit(
-            f"archivio/srd/mostro non trovato ({SRD_MONSTERS}). Manca il symlink/submodule 'archivio'?"
+            f"SRD non trovata ({SRD_MONSTERS}): la copia vendorizzata manca (git checkout Dev/Source/SRD)."
         )
     mostri = carica_mostri(SRD_MONSTERS)
     # Risolvi i wikilink della prosa (id/slug/path → Nome) contro l'indice dell'archivio SRD,

@@ -1,0 +1,292 @@
+id: dnd.classe.druido
+nome: Druido
+caratteristica_primaria: [saggezza]
+dado_vita: 8
+tiri_salvezza: [intelligenza, saggezza]
+competenze_abilita:
+  quantita: 2
+  scelte: [addestrare-animali, arcano, intuizione, medicina, natura, percezione, religione, sopravvivenza]
+competenze_armi: [armi-semplici]
+competenze_armature: [armature-leggere, scudi]
+competenze_strumenti: {quantita: 1, scelte: [dnd.strumento.kit-da-erborista]}
+# Preso come classe secondaria (multiclasse): sottoinsieme delle competenze
+# (il druido di questo schema ha solo armature leggere e scudi).
+competenze_multiclasse:
+  armature: [armature-leggere, scudi]
+equipaggiamento_iniziale:
+  - nome: A
+    oggetti:
+      - articolo: dnd.armatura.armatura-di-cuoio
+      - articolo: dnd.armatura.scudo
+      - articolo: dnd.arma.falcetto
+      - articolo: dnd.oggetto.focus-druidico
+      - articolo: dnd.oggetto.dotazione-da-esploratore
+      - articolo: dnd.strumento.kit-da-erborista
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 9
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 50
+descrizione: |
+  Il druido è un incantatore primordiale basato su Saggezza, legato alla natura e alla Forma selvatica.
+  La sottoclasse SRD è il Circolo della Terra.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [druidico, lancio-incantesimi, ordine-primordiale]
+    forma_selvatica: 
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 4
+    slot_incantesimo: {livello1: 2, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 2
+    privilegi: [forma-selvatica, compagno-selvatico]
+    forma_selvatica: 2
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 5
+    slot_incantesimo: {livello1: 3, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 3
+    privilegi: [sottoclasse-del-druido]
+    forma_selvatica: 2
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 6
+    slot_incantesimo: {livello1: 4, livello2: 2, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    forma_selvatica: 2
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 7
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 5
+    privilegi: [rinascita-selvaggia]
+    forma_selvatica: 2
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 9
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 2, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 6
+    privilegi: [privilegio-della-sottoclasse]
+    forma_selvatica: 3
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 10
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 7
+    privilegi: [furia-elementale]
+    forma_selvatica: 3
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 11
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 1, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    forma_selvatica: 3
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 12
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 2, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 9
+    privilegi: []
+    forma_selvatica: 3
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 14
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 1, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 10
+    privilegi: [privilegio-della-sottoclasse]
+    forma_selvatica: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 15
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 11
+    privilegi: []
+    forma_selvatica: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    forma_selvatica: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 13
+    privilegi: []
+    forma_selvatica: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 14
+    privilegi: [privilegio-della-sottoclasse]
+    forma_selvatica: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 15
+    privilegi: [furia-elementale-migliorata]
+    forma_selvatica: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    forma_selvatica: 3
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 17
+    privilegi: []
+    forma_selvatica: 4
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 19
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 18
+    privilegi: [incantesimi-bestiali]
+    forma_selvatica: 4
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 20
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 19
+    privilegi: [dono-epico]
+    forma_selvatica: 4
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 21
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 20
+    privilegi: [arcidruido]
+    forma_selvatica: 4
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 22
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 2, livello8: 1, livello9: 1}
+forme_bestiali:
+- livello: 2
+  forme_conosciute: 4
+  gs_massimo: "1/4"
+  velocita_di_volo: false
+- livello: 4
+  forme_conosciute: 6
+  gs_massimo: "1/2"
+  velocita_di_volo: false
+- livello: 8
+  forme_conosciute: 8
+  gs_massimo: "1"
+  velocita_di_volo: true
+privilegi:
+- id: lancio-incantesimi
+  nome: "Lancio di Incantesimi"
+  attivita:
+    - tipo: incantatore
+      caratteristica: saggezza
+  descrizione: |
+    Hai imparato a lanciare incantesimi studiando le forze mistiche della natura. Consulta il capitolo 7 per le regole sul lancio di incantesimi. Le informazioni seguenti descrivono come applicare tali regole agli incantesimi da druido, presenti nell'elenco degli incantesimi da druido riportato più avanti nella descrizione della classe.
+
+    **Trucchetti.** Conosci due trucchetti a tua scelta tratti dall'elenco degli incantesimi da druido.
+
+    Ogni volta che ottieni un livello da druido, puoi sostituire uno dei tuoi trucchetti con un altro trucchetto a tua scelta tratto dall'elenco degli incantesimi da druido.
+
+    Quando raggiungi il 4° e il 10° livello da druido, impari un altro trucchetto a tua scelta tratto dall'elenco degli incantesimi da druido, come indicato nella colonna Trucchetti della tabella "Caratteristiche del Druido".
+
+    **Slot Incantesimo.** La tabella "Caratteristiche del Druido" indica quanti slot incantesimo possiedi per lanciare i tuoi incantesimi di 1° livello o superiore. Recuperi tutti gli slot consumati al termine di un Riposo Lungo.
+
+    **Incantesimi Preparati di 1° Livello o Superiore.** Prepari l'elenco degli incantesimi di 1° livello o superiore che puoi lanciare grazie a questa caratteristica. Per iniziare, scegli quattro incantesimi di 1° livello dall'elenco degli incantesimi da druido.
+
+    Il numero di incantesimi nel tuo elenco aumenta man mano che acquisisci livelli da druido, come indicato nella colonna Incantesimi Preparati della tabella "Caratteristiche del Druido". Ogni volta che tale numero aumenta, scegli ulteriori incantesimi dall'elenco degli incantesimi da druido finché il numero di incantesimi nel tuo elenco non corrisponde a quello indicato nella tabella. Gli incantesimi scelti devono essere di un livello per il quale disponi di slot incantesimo. Per esempio, se sei un druido di 3° livello, il tuo elenco di incantesimi preparati può includere sei incantesimi di 1° e 2° livello in qualsiasi combinazione.
+
+    Se un'altra caratteristica da druido ti conferisce incantesimi che hai sempre preparati, tali incantesimi non contano ai fini del numero di incantesimi che puoi preparare con questa caratteristica, ma per te sono comunque considerati incantesimi da druido.
+
+    **Cambiare gli Incantesimi Preparati.** Al termine di un Riposo Lungo, puoi modificare il tuo elenco di incantesimi preparati, sostituendo uno qualsiasi degli incantesimi con altri incantesimi da druido per i quali disponi di slot incantesimo.
+
+    **Caratteristica da Incantatore.** La Saggezza è la tua caratteristica da incantatore per gli incantesimi da druido.
+
+    **Focus di Incantamento.** Puoi utilizzare un focus druidico come focus di incantamento per i tuoi incantesimi da druido.
+- id: druidico
+  nome: "Druidico"
+  descrizione: |
+    Conosci il Druidico, il linguaggio segreto dei druidi. Imparando questa lingua antica, hai anche sbloccato la magia per comunicare con gli animali; hai sempre preparato l'incantesimo *Parlare con gli animali*.
+
+    Puoi usare il Druidico per lasciare messaggi nascosti. Tu e gli altri che conoscono il Druidico individuate automaticamente tali messaggi. Gli altri ne notano la presenza superando una prova di Intelligenza (Indagare) con CD 15, ma non possono decifrarli senza l'uso della magia.
+- id: ordine-primordiale
+  nome: "Ordine Primordiale"
+  descrizione: |
+    Ti sei dedicato a uno dei seguenti ruoli sacri a tua scelta.
+
+    **Mago**
+    Conosci un trucchetto aggiuntivo tratto dalla lista degli incantesimi da druido. Inoltre, il tuo legame mistico con la natura ti conferisce un bonus alle prove di Intelligenza (Arcani o Natura). Il bonus è pari al tuo modificatore di Saggezza (bonus minimo di +1).
+
+    **Custode**
+    Addestrato al combattimento, ottieni competenza nelle armi da guerra e nell'uso delle armature medie.
+- id: forma-selvatica
+  nome: "Forma Selvatica"
+  descrizione: |
+    Il potere della natura ti permette di assumere la forma di un animale. Come azione bonus, ti trasformi in una forma animale che hai appreso per questa capacità (vedi "Forme Conosciute" di seguito). Mantieni tale forma per un numero di ore pari alla metà del tuo livello da druido o finché non utilizzi nuovamente Forma Selvatica, cadi in condizione di incapacità o muori. Puoi anche abbandonare la forma in anticipo come azione bonus.
+
+    **Numero di Utilizzi.** Puoi utilizzare Forma Selvatica due volte. Recuperi un utilizzo speso al termine di un riposo breve e tutti gli utilizzi spesi al termine di un riposo lungo.
+
+    Ottieni utilizzi aggiuntivi quando raggiungi determinati livelli da druido, come indicato nella colonna Forma Selvatica della tabella Capacità del Druido.
+
+    **Forme Conosciute.** Conosci quattro forme animali per questa capacità, scelte tra i blocchi statistiche di animali con un Grado di Sfida massimo di 1/4 e privi di velocità di volare. Al termine di ogni riposo lungo, puoi sostituire una delle tue forme conosciute con un'altra forma idonea.
+
+    Quando raggiungi determinati livelli da druido, il numero di forme conosciute e il Grado di Sfida massimo per tali forme aumentano, come indicato nella tabella Forme Animali. Inoltre, a partire dal livello 8, puoi assumere una forma dotata di velocità di volare.
+
+    Quando scegli le forme conosciute, puoi consultare il *Manuale dei Mostri* o altre fonti alla ricerca di animali idonei, se il Dungeon Master te lo consente.
+
+    **Regole durante il mutamento di forma.** Mentre assumi una forma, mantieni la tua personalità, i tuoi ricordi e la capacità di parlare; si applicano inoltre le seguenti regole:
+
+    **Punti Ferita Temporanei.** Quando assumi una forma tramite Forma Selvatica, ottieni un numero di Punti Ferita Temporanei pari al tuo livello da druido.
+
+    **Statistiche di gioco.** Le tue statistiche di gioco vengono sostituite dalla scheda della Bestia, ma mantieni il tuo tipo di creatura, i Punti Ferita, i Dadi Vita, i punteggi di Intelligenza, Saggezza e Carisma, le capacità di classe, i linguaggi e i talenti. Mantieni inoltre le tue competenze nelle abilità e nei tiri salvezza, usando il tuo Bonus di Competenza per essi, oltre a ottenere le competenze della creatura. Se il modificatore di un'abilità o di un tiro salvezza nella scheda della Bestia è superiore al tuo, usa quello della scheda.
+
+    **Nessun lancio di incantesimi.** Non puoi lanciare incantesimi, ma il mutamento di forma non interrompe la tua Concentrazione né interferisce in altro modo con un incantesimo che hai già lanciato.
+
+    **Oggetti.** La tua capacità di maneggiare oggetti è determinata dagli arti della forma assunta, anziché dai tuoi. Inoltre, puoi scegliere se il tuo equipaggiamento cade nel tuo spazio, si fonde con la nuova forma o viene indossato da essa. L'equipaggiamento indossato funziona normalmente, ma il DM decide se sia pratico per la nuova forma indossare un determinato oggetto, in base alla taglia e alla conformazione della creatura. Il tuo equipaggiamento non cambia taglia o forma per adattarsi alla nuova forma; qualsiasi oggetto che la nuova forma non può indossare deve cadere a terra o fondersi con la forma stessa. L'equipaggiamento che si fonde con la forma non ha alcun effetto finché mantieni quella forma.
+- id: compagno-selvatico
+  nome: "Compagno Selvatico"
+  descrizione: |
+    Puoi evocare uno spirito della natura che assume le sembianze di un animale per aiutarti. Come azione Magica, puoi consumare uno slot incantesimo o un utilizzo di Forma Selvatica per lanciare l'incantesimo *Trovare Famiglio* senza componenti materiali.
+
+    Quando lanci l'incantesimo in questo modo, il famiglio è una Fata e scompare al termine di un Riposo Lungo.
+- id: sottoclasse-del-druido
+  nome: "Sottoclasse del Druido"
+  descrizione: |
+    Ottieni una sottoclasse da druido a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da druido. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da druido o a livelli inferiori.
+- id: aumento-punteggi-caratteristica
+  nome: "Aumento dei Punteggi di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento dei Punteggi di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da druido 8, 12 e 16.
+- id: rinascita-selvaggia
+  nome: "Rinascita Selvaggia"
+  descrizione: |
+    Una volta per turno, se non ti sono rimasti utilizzi di Forma Selvatica, puoi ottenerne uno consumando uno slot incantesimo (non richiede alcuna azione).
+
+    Inoltre, puoi consumare un utilizzo di Forma Selvatica (non richiede alcuna azione) per ottenere uno slot incantesimo di 1° livello, ma non puoi farlo di nuovo finché non completi un Riposo Lungo.
+- id: furia-elementale
+  nome: "Furia Elementale"
+  descrizione: |
+    La potenza degli elementi scorre in te. Ottieni una delle seguenti opzioni a tua scelta.
+
+    **Incantamento Potente**
+    Aggiungi il tuo modificatore di Saggezza ai danni inflitti con qualsiasi trucchetto da druido.
+
+    **Colpo Primordiale**
+    Una volta per turno, quando colpisci una creatura con un tiro per colpire usando un'arma o l'attacco di una forma animale assunta tramite Forma Selvatica, puoi far subire al bersaglio danni extra pari a 1d8 da Freddo, Fuoco, Fulmine o Tuono (scegli il tipo quando colpisci).
+- id: furia-elementale-migliorata
+  nome: "Furia Elementale Migliorata"
+  descrizione: |
+    L'opzione scelta per Furia Elementale diventa più potente, come descritto di seguito.
+
+    **Incantamento Potente.** Quando lanci un trucchetto da druido con una gittata di 3 metri (10 piedi) o superiore, la gittata dell'incantesimo aumenta di 90 metri (300 piedi).
+
+    **Colpo Primordiale.** I danni extra di Colpo Primordiale aumentano a 2d8.
+- id: incantesimi-bestiali
+  nome: "Incantesimi Bestiali"
+  descrizione: |
+    Mentre utilizzi Forma Selvatica, puoi lanciare incantesimi anche sotto forma di animale, a eccezione di quelli che richiedono una componente materiale con un costo specificato o che consumano la componente materiale stessa.
+- id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni un talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- id: arcidruido
+  nome: "Arcidruido"
+  descrizione: |
+    La vitalità della natura fiorisce costantemente in te, conferendoti i seguenti benefici.
+
+    **Forma Selvatica Perenne.** Ogni volta che tiri per l'iniziativa e non hai più utilizzi di Forma Selvatica a disposizione, ne recuperi uno precedentemente consumato.
+
+    **Magia della Natura.** Puoi convertire gli utilizzi di Forma Selvatica in uno slot incantesimo (senza richiedere alcuna azione). Scegli un certo numero di utilizzi di Forma Selvatica non ancora spesi e convertili in un singolo slot incantesimo; ogni utilizzo contribuisce per 2 livelli di incantesimo. Per esempio, se converti due utilizzi di Forma Selvatica, ottieni uno slot incantesimo di 4° livello. Una volta utilizzato questo beneficio, non puoi farlo di nuovo finché non completi un riposo lungo.
+
+    **Longevità.** La magia primordiale che padroneggi fa sì che tu invecchi più lentamente. Per ogni dieci anni che trascorrono, il tuo corpo invecchia di un solo anno.

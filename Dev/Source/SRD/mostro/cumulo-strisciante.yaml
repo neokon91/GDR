@@ -1,0 +1,57 @@
+id: dnd.mostro.cumulo-strisciante
+nome: Cumulo strisciante
+taglia: grande
+tipo: vegetale
+allineamento: senza allineamento
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 13
+velocita: {camminata: 9, nuoto: 6}
+abilita: [furtivita: competenza]
+sensi: {vista_cieca: 18}
+percezione_passiva: 10
+resistenze: [freddo, fuoco]
+immunita_danni: [fulmine]
+immunita_condizioni: [assordato, indebolimento]
+lingue: [nessuna]
+gs: 5
+
+tratti:
+  - nome: Assorbimento del fulmine
+    descrizione: |
+      Ogni volta che il cumulo strisciante subisce danni da fulmine, recupera un numero di punti ferita pari ai danni da fulmine inflitti.
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il cumulo strisciante effettua tre attacchi. Può sostituire un attacco con un utilizzo di Avviluppare.
+  - nome: Radice elettrificata
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 7 (1d6 + 4) danni contundenti più 5 (2d4) danni da fulmine. Se il bersaglio è una creatura di taglia Media o inferiore, il cumulo strisciante lo tira in linea retta verso di sé per 1,5 metri.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Avviluppare
+    descrizione: |
+      *Tiro salvezza su Forza:* CD 15, una creatura di taglia Media o inferiore entro 1,5 metri. *Fallimento:* il bersaglio viene attirato nello spazio del cumulo strisciante ed è afferrato (CD 14 per sfuggire). Finché la presa perdura il bersaglio è accecato e trattenuto, e subisce 10 (3d6) danni da fulmine all'inizio di ogni suo turno. Quando il cumulo strisciante si muove, il bersaglio afferrato si muove con esso senza fargli consumare movimento extra. Il cumulo strisciante può afferrare una sola creatura per volta con questa azione.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: forza
+          cd: {caratteristica: forza, base: 8, competenza: true}

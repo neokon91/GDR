@@ -1,0 +1,339 @@
+id: dnd.classe.barbaro
+nome: Barbaro
+caratteristica_primaria: [forza]
+dado_vita: 12
+tiri_salvezza: [forza, costituzione]
+competenze_abilita:
+  quantita: 2
+  scelte: [addestrare-animali, atletica, intimidire, natura, percezione, sopravvivenza]
+competenze_armi: [armi-semplici, armi-da-guerra]
+competenze_armature: [armature-leggere, armature-medie, scudi]
+# Preso come classe secondaria (multiclasse): sottoinsieme delle competenze.
+competenze_multiclasse:
+  armi: [armi-da-guerra]
+  armature: [scudi]
+equipaggiamento_iniziale:
+  - nome: A
+    oggetti:
+      - articolo: dnd.arma.ascia-bipenne
+      - articolo: dnd.arma.ascia
+        quantita: 4
+      - articolo: dnd.oggetto.dotazione-da-esploratore
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 15
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 75
+descrizione: |
+  Il barbaro è un combattente primordiale basato su Forza, ira e resistenza fisica.
+  La sottoclasse SRD è il Cammino del Berserker.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [difesa-senza-armatura, ira, maestria-armi]
+    numero_ira: 2
+    danni_ira: 2
+    padronanza_armi: 2
+  - livello: 2
+    privilegi: [attacco-irruento, percezione-pericolo]
+    numero_ira: 2
+    danni_ira: 2
+    padronanza_armi: 2
+  - livello: 3
+    privilegi: [conoscenza-primordiale, sottoclasse-del-barbaro]
+    numero_ira: 3
+    danni_ira: 2
+    padronanza_armi: 2
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    numero_ira: 3
+    danni_ira: 2
+    padronanza_armi: 3
+  - livello: 5
+    privilegi: [attacco-extra, movimento-rapido]
+    numero_ira: 3
+    danni_ira: 2
+    padronanza_armi: 3
+  - livello: 6
+    privilegi: [privilegio-della-sottoclasse]
+    numero_ira: 4
+    danni_ira: 2
+    padronanza_armi: 3
+  - livello: 7
+    privilegi: [balzo-istintivo, istinto-ferino]
+    numero_ira: 4
+    danni_ira: 2
+    padronanza_armi: 3
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    numero_ira: 4
+    danni_ira: 2
+    padronanza_armi: 3
+  - livello: 9
+    privilegi: [colpo-brutale]
+    numero_ira: 4
+    danni_ira: 3
+    padronanza_armi: 3
+  - livello: 10
+    privilegi: [privilegio-della-sottoclasse]
+    numero_ira: 4
+    danni_ira: 3
+    padronanza_armi: 4
+  - livello: 11
+    privilegi: [ira-implacabile]
+    numero_ira: 4
+    danni_ira: 3
+    padronanza_armi: 4
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    numero_ira: 5
+    danni_ira: 3
+    padronanza_armi: 4
+  - livello: 13
+    privilegi: [colpo-brutale-migliorato]
+    numero_ira: 5
+    danni_ira: 3
+    padronanza_armi: 4
+  - livello: 14
+    privilegi: [privilegio-della-sottoclasse]
+    numero_ira: 5
+    danni_ira: 3
+    padronanza_armi: 4
+  - livello: 15
+    privilegi: [ira-persistente]
+    numero_ira: 5
+    danni_ira: 3
+    padronanza_armi: 4
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    numero_ira: 5
+    danni_ira: 4
+    padronanza_armi: 4
+  - livello: 17
+    privilegi: [colpo-brutale-migliorato-2]
+    numero_ira: 6
+    danni_ira: 4
+    padronanza_armi: 4
+  - livello: 18
+    privilegi: [potenza-indomabile]
+    numero_ira: 6
+    danni_ira: 4
+    padronanza_armi: 4
+  - livello: 19
+    privilegi: [dono-epico]
+    numero_ira: 6
+    danni_ira: 4
+    padronanza_armi: 4
+  - livello: 20
+    privilegi: [campione-primordiale]
+    numero_ira: 6
+    danni_ira: 4
+    padronanza_armi: 4
+privilegi:
+- id: ira
+  nome: "Ira"
+  descrizione: |
+    Puoi infonderti di un potere primordiale chiamato Ira, una forza che ti conferisce potenza e resistenza straordinarie. Puoi entrarvi come Azione Bonus se non indossi un'armatura pesante.
+
+    Puoi entrare in Ira un numero di volte indicato per il tuo livello da Barbaro nella colonna "Ire" della tabella delle Capacità del Barbaro. Recuperi un utilizzo speso al termine di un Riposo Breve e tutti gli utilizzi spesi al termine di un Riposo Lungo.
+
+    Mentre è attiva, la tua Ira segue le regole riportate di seguito.
+
+    **Resistenza ai Danni.** Ottieni Resistenza ai danni Contundenti, Perforanti e Taglienti.
+
+    **Danni dell'Ira.** Quando effettui un attacco usando la Forza — con un'arma o un Colpo Senza Armi — e infliggi danni al bersaglio, ottieni un bonus ai danni che aumenta man mano che sali di livello come Barbaro, come indicato nella colonna "Danni dell'Ira" della tabella delle Capacità del Barbaro.
+
+    **Vantaggio di Forza.** Ottieni Vantaggio alle prove di caratteristica e ai tiri salvezza basati sulla Forza.
+
+    **Niente Concentrazione o Incantesimi.** Non puoi mantenere la Concentrazione né lanciare incantesimi.
+
+    **Durata.** L'Ira dura fino alla fine del tuo turno successivo e termina anticipatamente se indossi un'armatura pesante o se subisci la condizione Incapace. Se la tua Ira è ancora attiva nel tuo turno successivo, puoi prolungarla per un altro round effettuando una delle seguenti azioni:
+
+    - Effettuare un tiro per colpire contro un nemico.
+    - Costringere un nemico a effettuare un tiro salvezza.
+    - Usare un'Azione Bonus per prolungare la tua Ira.
+
+    Ogni volta che l'Ira viene prolungata, dura fino alla fine del tuo turno successivo. Puoi mantenere l'Ira per un massimo di 10 minuti.
+  attivita:
+    - tipo: attivabile
+      azione: azione-bonus
+      usi: {da_tabella: numero_ira, ricarica: {riposo-breve: 1, riposo-lungo: tutti}}
+      condizione: no-armatura-pesante
+      durata: {valore: 1, unita: turno, prolungabile: true, massimo: {valore: 10, unita: minuti}}
+      termina_se: [indossa-armatura-pesante, incapacitato]
+      effetti:
+        - {bersaglio: resistenza, operazione: concedi, valore: [contundente, perforante, tagliente]}
+        - {bersaglio: prove.forza, operazione: vantaggio}
+        - {bersaglio: tiri_salvezza.forza, operazione: vantaggio}
+        - {bersaglio: danni.mischia-forza, operazione: somma, valore: {da_tabella: danni_ira}}
+        - {bersaglio: concentrazione, operazione: vieta}
+        - {bersaglio: incantesimi, operazione: vieta}
+- id: difesa-senza-armatura
+  nome: "Difesa Senza Armatura"
+  descrizione: |
+    Mentre non indossi alcuna armatura, la tua Classe Armatura base è pari a 10 più i tuoi modificatori di Destrezza e Costituzione.
+    Puoi usare uno Scudo e continuare a beneficiare di questo vantaggio.
+  attivita:
+  - tipo: passivo
+    condizione: no-armatura
+    effetti:
+      - bersaglio: ca
+        operazione: aumento
+        formula: {base: 10, caratteristiche: [destrezza, costituzione]}
+- id: maestria-armi
+  nome: "Maestria nelle Armi"
+  descrizione: |
+    Il tuo addestramento con le armi ti consente di utilizzare le proprietà di maestria di due tipi di armi da mischia semplici o da guerra a tua scelta.
+    Ogni volta che termini un Riposo Lungo, puoi esercitarti con le armi e cambiare una di quelle scelte.
+    Quando raggiungi determinati livelli da Barbaro, ottieni la capacità di utilizzare le proprietà di maestria di un maggior numero di tipi di armi, come indicato nella colonna Maestria nelle Armi della tabella delle Capacità del Barbaro.
+  attivita:
+  - tipo: scelta
+    scelta: maestria-arma
+    quantita_da_tabella: padronanza_armi
+    opzioni: [mischia-semplice, mischia-da-guerra]
+    recupero: riposo-lungo
+- id: percezione-pericolo
+  nome: "Percezione del Pericolo"
+  descrizione: |
+    Ottieni una percezione straordinaria di quando qualcosa non va come dovrebbe, il che ti conferisce un vantaggio quando eviti i pericoli
+     Hai Vantaggio ai tiri salvezza su Destrezza, a meno che tu non sia Incapacitato.
+  attivita:
+    - tipo: passivo
+      condizione: no-incapacitato
+      effetti:
+        - {bersaglio: tiri_salvezza.destrezza, operazione: vantaggio}
+- id: attacco-irruento
+  nome: "Attacco Irruento"
+  descrizione: |
+    Puoi mettere da parte ogni preoccupazione per la difesa per attaccare con maggiore ferocia. Quando effettui il tuo primo tiro per colpire durante il tuo turno, puoi decidere di attaccare in modo temerario. Così facendo, ottieni Vantaggio ai tiri per colpire basati sulla Forza fino all'inizio del tuo turno successivo, ma nello stesso lasso di tempo gli attacchi contro di te vengono effettuati con Vantaggio.
+  attivita:
+    - tipo: attivabile
+      azione: nessuna
+      termina_se: [inizio-turno-successivo]
+      effetti:
+        # Il rovescio (chi ti attacca ha Vantaggio) resta in prosa: runtime.
+        - {bersaglio: tiri_colpire.forza, operazione: vantaggio}
+- id: sottoclasse-del-barbaro
+  nome: "Sottoclasse del Barbaro"
+  descrizione: |
+    Ottieni una sottoclasse del Barbaro a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Barbaro. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Barbaro o a un livello inferiore.
+- id: conoscenza-primordiale
+  nome: "Conoscenza Primordiale"
+  descrizione: |
+    Ottieni competenza in un'altra abilità a tua scelta tra quelle disponibili per i Barbari al livello 1.
+
+    Inoltre, mentre la tua Ira è attiva, puoi incanalare il potere primordiale quando tenti determinate azioni; ogni volta che effettui una prova di caratteristica usando una delle seguenti abilità, puoi effettuarla come prova di Forza anche se normalmente richiederebbe una caratteristica diversa: Acrobazia, Intimidire, Percezione, Furtività o Sopravvivenza. Quando usi questa capacità, la tua Forza rappresenta il potere primordiale che scorre in te, affinando la tua agilità, la tua presenza e i tuoi sensi.
+  attivita:
+    - tipo: scelta
+      scelta: competenza_abilita
+      quantita: 1
+      opzioni: [addestrare-animali, atletica, intimidire, natura, percezione, sopravvivenza]
+    # (Mentre l'Ira è attiva quelle prove usano Forza: resta in PROSA —
+    #  la "sostituzione di caratteristica" non è ancora nel vocabolario.)
+- id: aumento-punteggi-caratteristica
+  nome: "Aumento dei Punteggi di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento dei Punteggi di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli da Barbaro 8, 12 e 16.
+- id: attacco-extra
+  nome: "Attacco Extra"
+  descrizione: |
+    Puoi attaccare due volte invece di una ogni volta che effettui l'azione di Attacco durante il tuo turno.
+  attivita:
+    - tipo: passivo
+      effetti:
+        - {bersaglio: attacchi-per-azione, operazione: aumento, valore: 2}
+- id: movimento-rapido
+  nome: "Movimento Rapido"
+  descrizione: |
+    La tua Velocità aumenta di 3 metri quando non indossi armature pesanti.
+  attivita:
+  - tipo: passivo
+    condizione: no-armatura-pesante
+    effetti:
+    - {bersaglio: velocita.camminata, operazione: somma, valore: 3}
+- id: istinto-ferino
+  nome: "Istinto Ferino"
+  descrizione: |
+    I tuoi istinti sono così affinati che ottieni Vantaggio alle prove di Iniziativa.
+  attivita:
+    - tipo: passivo
+      effetti:
+        - {bersaglio: iniziativa, operazione: vantaggio}
+- id: balzo-istintivo
+  nome: "Balzo Istintivo"
+  descrizione: |
+    Come parte dell'Azione Bonus che usi per entrare in Ira, puoi muoverti fino a metà della tua velocità.
+  # Il movimento concesso è runtime: resta in PROSA, senza attività.
+- id: colpo-brutale
+  nome: "Colpo Brutale"
+  descrizione: |
+    Se usi Attacco Temerario, puoi rinunciare a qualsiasi Vantaggio su un tiro per colpire basato sulla Forza a tua scelta durante il tuo turno.
+    Il tiro per colpire scelto non deve subire Svantaggio.
+    Se il tiro per colpire scelto va a segno, il bersaglio subisce 1d10 danni extra dello stesso tipo inflitto dall'arma o dall'Attacco senz'armi, e puoi applicare un effetto di Colpo Brutale a tua scelta.
+    Hai a disposizione le seguenti opzioni di effetto.
+
+    **Colpo Potente.** Il bersaglio viene spinto di 4,5 metri direttamente lontano da te.
+    Puoi quindi muoverti fino a metà della tua Velocità direttamente verso il bersaglio senza provocare Attacchi di Opportunità.
+    
+    **Colpo ai Tendini.** La Velocità del bersaglio è ridotta di 4,5 metri fino all'inizio del tuo prossimo turno.
+    Un bersaglio può subire gli effetti di un solo Colpo ai Tendini alla volta: quello più recente.
+  attivita:
+      - tipo: potenziamento-attacco
+        innesco: attacco-irruento-attivo
+        costo: rinuncia-vantaggio
+        colpito:
+          - danno: {numero_dadi: 1, dado: d10, tipo_danno: come-arma}
+          - scelta: effetto-colpo-brutale
+            quantita: 1
+            opzioni:
+              # Gli effetti dentro `colpito` colpiscono il bersaglio (niente prefisso).
+              - id: colpo-potente
+                nome: Colpo Potente
+                effetti:
+                  - {sposta: {valore: 4.5, unita: metri, verso: lontano}}
+              - id: colpo-tendini
+                nome: Colpo ai Tendini
+                effetti:
+                  - {bersaglio: velocita.camminata, operazione: somma, valore: -4.5, termina_se: [inizio-turno-successivo]}
+- id: ira-implacabile
+  nome: "Ira Implacabile"
+  descrizione: |
+    La tua Furia ti permette di continuare a combattere nonostante ferite gravi. Se scendi a 0 Punti Ferita mentre la tua Furia è attiva e non muori istantaneamente, puoi effettuare un tiro salvezza su Costituzione con CD 10. Se hai successo, i tuoi Punti Ferita diventano pari al doppio del tuo livello da Barbaro.
+
+    Ogni volta che utilizzi questa capacità dopo la prima, la CD aumenta di 5. Quando termini un Riposo Breve o Lungo, la CD torna a 10.
+- id: colpo-brutale-migliorato
+  nome: "Colpo Brutale Migliorato"
+  descrizione: |
+    Hai affinato nuovi modi per attaccare furiosamente. I seguenti effetti sono ora tra le opzioni del tuo Colpo Brutale.
+
+    **Colpo Stordente.** Il bersaglio subisce Svantaggio al prossimo tiro salvezza che effettua e non può compiere Attacchi di Opportunità fino all'inizio del tuo prossimo turno.
+
+    **Colpo Devastante.** Prima dell'inizio del tuo prossimo turno, il prossimo tiro per colpire effettuato da un'altra creatura contro il bersaglio ottiene un bonus di +5 al tiro. Un tiro per colpire può beneficiare di un solo bonus da Colpo Devastante.
+- id: ira-persistente
+  nome: "Ira Persistente"
+  descrizione: |
+    Quando tiri per l'Iniziativa, puoi recuperare tutti gli utilizzi di Furia consumati. Dopo aver recuperato utilizzi di Furia in questo modo, non puoi farlo di nuovo finché non termini un Riposo Lungo.
+
+    Inoltre, la tua Furia è così intensa che ora dura 10 minuti senza che tu debba fare nulla per prolungarla di round in round. La tua Furia termina prematuramente se subisci la condizione Privo di Sensi (non solo la condizione Incapace di Agire) o se indossi un'armatura pesante.
+- id: colpo-brutale-migliorato-2
+  nome: "Colpo Brutale Migliorato"
+  descrizione: |
+    Il danno extra del tuo Colpo Brutale aumenta a 2d10. Inoltre, puoi utilizzare due diversi effetti di Colpo Brutale ogni volta che impieghi la capacità Colpo Brutale.
+- id: potenza-indomabile
+  nome: "Potenza Indomabile"
+  descrizione: |
+    Se il totale di una prova di Forza o di un tiro salvezza su Forza è inferiore al tuo punteggio di Forza, puoi usare quel punteggio al posto del totale.
+- id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni un talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- id: campione-primordiale
+  nome: "Campione Primordiale"
+  descrizione: |
+    Incarni il potere primordiale. I tuoi punteggi di Forza e Costituzione aumentano di 4 e il loro massimo è ora 25.
+  attivita:
+  - tipo: passivo
+    effetti:
+    - {bersaglio: caratteristiche.forza.valore, operazione: somma, valore: 4}
+    - {bersaglio: caratteristiche.costituzione.valore, operazione: somma, valore: 4}

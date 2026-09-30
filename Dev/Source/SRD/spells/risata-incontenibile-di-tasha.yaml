@@ -1,0 +1,29 @@
+id: dnd.incantesimo.risata-incontenibile-di-tasha
+nome: Risata Incontenibile di Tasha
+livello: 1
+scuola: ammaliamento
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (una crostata e una piuma)"]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Una creatura a scelta entro gittata che l'incantatore è in grado di vedere effettua un tiro salvezza su Saggezza. Se lo fallisce, cade a terra prona ed è incapacitata per la durata dell'incantesimo. Durante quel periodo di tempo, ride incontrollabilmente (se è in grado di ridere) e non può porre fine alla condizione prono.
+
+  Il bersaglio effettua un altro tiro salvezza su Saggezza alla fine di ogni suo turno e ogni volta che subisce danni; in quest'ultimo caso, lo effettua con vantaggio. In caso di successo, l'incantesimo termina.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 1º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: saggezza, cd: incantesimo }
+    fallimento:
+      - concede: prono
+        durata: { valore: 1, unita: minuti }
+      - concede: incapacitato
+        durata: { valore: 1, unita: minuti }

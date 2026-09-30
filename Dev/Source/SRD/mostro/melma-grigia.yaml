@@ -1,0 +1,48 @@
+id: dnd.mostro.melma-grigia
+nome: Melma Grigia
+taglia: media
+tipo: melma
+allineamento: senza allineamento
+ca: {valore: 9}
+caratteristiche:
+  forza: {valore: 12, competenza: false}
+  destrezza: {valore: 6, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 6, competenza: false}
+  carisma: {valore: 2, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 3, scalata: 3}
+abilita: [furtivita: maestria]
+sensi: {vista_cieca: 18}
+percezione_passiva: 8
+resistenze: [acido, freddo, fuoco]
+immunita_condizioni: [accecato, affascinato, afferrato, assordato, indebolimento, prono, spaventato, trattenuto]
+lingue: [nessuna]
+gs: 1/2
+
+tratti:
+  - nome: Amorfo
+    descrizione: |
+      La melma può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+  - nome: Forma corrosiva
+    descrizione: |
+      Le munizioni non magiche che colpiscono la melma e infliggono danni sono distrutte. Qualsiasi arma non magica subisce una penalità cumulativa di -1 ai tiri per colpire subito dopo aver inflitto danni alla melma ed essere entrata in contatto con essa. Se la penalità arriva a -5, l'arma è distrutta. La penalità può essere rimossa lanciando l'incantesimo riparare sull'arma. La melma può corrodere fino a 5 centimetri di metallo o legno non magico in 1 round.
+azioni:
+  - nome: Pseudopode
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 10 (2d8 + 1) danni da acido. L'armatura non magica indossata dal bersaglio subisce una penalità di -1 alla CA che fornisce. Se la penalità riduce la sua CA a 10, l'armatura si distrugge. La penalità può essere rimossa lanciando l'incantesimo riparare sull'armatura.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: acido
+              bonus: {caratteristica: forza}

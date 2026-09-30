@@ -1,0 +1,61 @@
+id: dnd.mostro.pirata
+nome: Pirata
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Pirati
+allineamento: neutrale
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 16, competenza: true}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 8, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 14, competenza: true}
+iniziativa: competenza
+dadi_vita: 6
+velocita: {camminata: 9}
+percezione_passiva: 11
+equipaggiamento:
+  - {articolo: dnd.armatura.armatura-di-cuoio}
+  - {articolo: dnd.arma.pugnale, quantita: 6}
+lingue: [Comune più un'altra lingua]
+gs: 1
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: pugnale, ripetizioni: 2}
+    descrizione: |
+      Il pirata effettua due attacchi Pugnale. Può sostituire un attacco con un utilizzo di Baldanza irresistibile.
+  - nome: Pugnale
+    id: pugnale
+    descrizione: |
+      *Tiro per colpire in mischia o a distanza:* +5, portata 1,5 m o gittata 6/18 m *Colpito:* 5 (1d4 + 3) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.pugnale
+          gittata: {normale: 6, lunga: 18}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - nome: Baldanza irresistibile
+    id: baldanza-irresistibile
+    descrizione: |
+      *Tiro salvezza su Saggezza:* CD 12, una creatura che il pirata è in grado di vedere entro 9 metri. *Fallimento:* il bersaglio è affascinato fino all'inizio del turno successivo del pirata.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: saggezza
+          cd: {caratteristica: carisma, base: 8, competenza: true}

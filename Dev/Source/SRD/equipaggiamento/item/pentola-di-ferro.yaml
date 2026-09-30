@@ -1,0 +1,5 @@
+id: dnd.oggetto.pentola-di-ferro
+nome: Pentola di ferro
+categoria: equipaggiamento-avventura
+costo: {valore: 2, valuta: moneta-oro}
+peso: {valore: 5, unita: kg}

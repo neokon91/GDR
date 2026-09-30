@@ -1,0 +1,50 @@
+id: dnd.mostro.orso-polare
+nome: Orso polare
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 20, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 12, nuoto: 12}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 15
+resistenze: [freddo]
+lingue: [nessuna]
+gs: 2
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 2}
+    descrizione: |
+      L'orso effettua due attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 9 (1d8 + 5) danni taglienti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}

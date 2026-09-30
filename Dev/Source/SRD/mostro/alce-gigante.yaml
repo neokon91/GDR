@@ -1,0 +1,46 @@
+id: dnd.mostro.alce-gigante
+nome: Alce gigante
+taglia: enorme
+tipo: celestiale
+gruppo: Bestie
+allineamento: neutrale buono
+ca: {valore: 14}
+caratteristiche:
+  forza: {valore: 19, competenza: true}
+  destrezza: {valore: 18, competenza: true}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 14, competenza: false}
+  carisma: {valore: 10, competenza: false}
+iniziativa: competenza
+dadi_vita: 5
+velocita: {camminata: 18}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 27}
+resistenze: [necrotico, radioso]
+lingue: [celestiale, "capisce il Comune, l'Elfico e il Silvano ma non li parla"]
+gs: 2
+habitat: [foresta, collina, prateria]
+azioni:
+  - id: alce-gigante.sfondamento
+    nome: Sfondamento
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 3 m.
+      *Colpito:* 11 (2d6 + 4) danni contundenti più 5 (2d4) danni radiosi.
+      Se il bersaglio è una creatura di taglia Enorme o inferiore
+      e l'alce si è mosso di 6 metri o più in linea retta verso di esso
+      subito prima del colpo,
+      il bersaglio subisce 5 (2d4) danni contundenti extra e cade a terra Prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

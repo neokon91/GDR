@@ -1,0 +1,25 @@
+id: dnd.sottoclasse.cammino-del-berserker
+nome: Cammino del Berserker
+classe: dnd.classe.barbaro
+citazione: "Incanala l'ira in furia violenta"
+privilegi:
+- id: frenesia
+  nome: "Frenesia"
+  livello: 3
+  descrizione: |
+    Con Attacco irruento durante l'ira infligge d6 extra pari al bonus Danni dell'ira al primo bersaglio colpito.
+- id: ira-incontenibile
+  nome: "Ira Incontenibile"
+  livello: 6
+  descrizione: |
+    Durante l'ira non puo essere affascinato o spaventato; se lo era, la condizione termina.
+- id: ritorsione
+  nome: "Ritorsione"
+  livello: 10
+  descrizione: |
+    Quando subisce danni da una creatura entro 1,5 m puo reagire con un attacco in mischia.
+- id: presenza-intimidatoria
+  nome: "Presenza Intimidatoria"
+  livello: 14
+  descrizione: |
+    Come azione bonus puo spaventare creature scelte entro 9 m con TS Saggezza.

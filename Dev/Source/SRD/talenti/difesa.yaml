@@ -1,0 +1,12 @@
+id: dnd.talento.difesa
+nome: Difesa
+categoria: stile-di-combattimento
+prerequisito: Privilegio Stile di combattimento
+ripetibile: false
+attivita:
+  - tipo: passivo
+    condizione: con-armatura
+    effetti:
+      - {bersaglio: ca, operazione: somma, valore: 1}
+descrizione: |
+  Con armatura leggera, media o pesante ottieni +1 alla Classe Armatura.

@@ -1,0 +1,24 @@
+id: dnd.oggetto-magico.pozioni-di-guarigione
+nome: Pozioni di guarigione
+categoria: pozione
+rarita: variabile
+richiede_sintonia: false
+consumabile: true
+versioni:
+  - {nome: "Guarigione", rarita: comune, valore: {numero_dadi: 2, dado: d4, bonus: 2}}
+  - {nome: "Maggiore", rarita: non-comune, valore: {numero_dadi: 4, dado: d4, bonus: 4}}
+  - {nome: "Superiore", rarita: rara, valore: {numero_dadi: 8, dado: d4, bonus: 8}}
+  - {nome: "Suprema", rarita: molto-rara, valore: {numero_dadi: 10, dado: d4, bonus: 20}}
+attivita:
+  - tipo: cura
+    cura: versione
+descrizione: |
+  Quando il personaggio beve questa pozione, recupera punti ferita. L'ammontare di punti ferita dipende dalla rarità della pozione, come indicato nella tabella sottostante.
+  A prescindere dalla sua potenza, il liquido rosso della pozione brilla quando viene agitato.
+
+  ### Pozione PF recuperati Rarità
+
+  **Pozione di guarigione** 2d4 + 2 Comune
+  **Pozione di guarigione (maggiore)** 4d4 + 4 Non comune
+  **Pozione di guarigione (superiore)** 8d4 + 8 Rara
+  **Pozione di guarigione (suprema)** 10d4 + 20 Molto rara

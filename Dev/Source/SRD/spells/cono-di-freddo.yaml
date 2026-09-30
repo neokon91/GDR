@@ -1,0 +1,25 @@
+id: dnd.incantesimo.cono-di-freddo
+nome: Cono di freddo
+livello: 5
+scuola: invocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (un piccolo cono di cristallo o vetro)"]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  Un getto d'aria gelida si propaga dall'incantatore. Ogni creatura entro un cono di 18 metri che ha origine dall'incantatore effettua un tiro salvezza su Costituzione, subendo 8d8 danni da freddo in caso di fallimento, o la metà dei danni in caso di successo. Una creatura uccisa da questo incantesimo si tramuta in una statua di ghiaccio finché non si scioglie.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  I danni aumentano di 1d8 per ogni slot di livello superiore al 5º.
+attivita:
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: costituzione, cd: incantesimo }
+    fallimento:
+      danno: { numero_dadi: 8, dado: d8, tipo_danno: freddo }
+    successo: danno-dimezzato

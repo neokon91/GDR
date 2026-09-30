@@ -1,0 +1,16 @@
+id: dnd.incantesimo.ritirata-rapida
+nome: Ritirata rapida
+livello: 1
+scuola: trasmutazione
+classi:
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione bonus
+gittata: incantatore
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore effettua un'azione di Scatto e, fino al termine dell'incantesimo, può effettuarla di nuovo come azione bonus.

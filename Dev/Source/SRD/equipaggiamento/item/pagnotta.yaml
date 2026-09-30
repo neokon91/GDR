@@ -1,0 +1,4 @@
+id: dnd.oggetto.pagnotta
+nome: Pagnotta
+categoria: vitto-e-alloggio
+costo: {valore: 2, valuta: moneta-rame}

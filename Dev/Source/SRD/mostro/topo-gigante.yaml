@@ -1,0 +1,44 @@
+id: dnd.mostro.topo-gigante
+nome: Topo gigante
+taglia: piccola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 7, competenza: false}
+  destrezza: {valore: 16, competenza: true}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 2
+velocita: {camminata: 9, scalata: 9}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 1/8
+
+tratti:
+  - nome: Tattiche del branco
+    descrizione: |
+      Il topo dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno degli alleati del topo si trova entro 1,5 metri dalla creatura e non è incapacitato.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

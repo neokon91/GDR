@@ -1,0 +1,39 @@
+id: dnd.sottoclasse.patrono-immondo
+nome: Patrono Immondo
+classe: dnd.classe.warlock
+citazione: "Stringi un patto con i Piani Inferiori"
+privilegi:
+- livello: 3
+  nome: "Benedizione dell'Oscuro"
+  descrizione: |
+    Quando riduce un nemico a 0 PF ottiene PF temporanei.
+
+- livello: 3
+  nome: "Incantesimi Immondi"
+  descrizione: |
+    Gli incantesimi della tabella sono sempre preparati.
+
+- livello: 6
+  nome: "Fortuna dell'Oscuro"
+  descrizione: |
+    Aggiunge 1d10 a una prova di caratteristica o TS dopo il tiro ma prima dell esito.
+
+- livello: 10
+  nome: "Resilienza Immonda"
+  descrizione: |
+    Dopo riposo sceglie una resistenza ai danni tranne forza.
+
+- livello: 14
+  nome: "Scagliare all'Inferno"
+  descrizione: |
+    Una volta per turno puo tentare di mandare un bersaglio colpito nei Piani Inferiori.
+
+incantesimi:
+- livello: 3
+  incantesimi_preparati: [dnd.incantesimo.comando, dnd.incantesimo.mani-brucianti, dnd.incantesimo.raggio-rovente, dnd.incantesimo.suggestione]
+- livello: 5
+  incantesimi_preparati: [dnd.incantesimo.nube-maleodorante, dnd.incantesimo.palla-di-fuoco]
+- livello: 7
+  incantesimi_preparati: [dnd.incantesimo.muro-di-fuoco, dnd.incantesimo.scudo-di-fuoco]
+- livello: 9
+  incantesimi_preparati: [dnd.incantesimo.costrizione, dnd.incantesimo.piaga-degli-insetti]

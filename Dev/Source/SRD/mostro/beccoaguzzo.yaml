@@ -1,0 +1,28 @@
+id: dnd.mostro.beccoaguzzo
+nome: Beccoaguzzo
+taglia: grande
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 14, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 15}
+lingue: [nessuna]
+gs: 1/4
+azioni:
+  - id: beccoaguzzo.becco
+    nome: Becco
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +4, portata 1,5 m.
+      *Colpito:* 6 (1d8 + 2) danni Taglienti.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: { caratteristica: forza, competenza: true }, bersagli: 1, portata: 1.5 }
+        colpito:
+          - danno: { numero_dadi: 1, dado: d8, tipo_danno: tagliente, bonus: { caratteristica: forza } }

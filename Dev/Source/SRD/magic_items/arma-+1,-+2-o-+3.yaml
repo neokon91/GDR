@@ -1,0 +1,24 @@
+id: dnd.oggetto-magico.arma-+1,-+2-o-+3
+nome: "Arma +1, +2 o +3"
+categoria: arma
+sottotipo: qualsiasi semplice o da guerra
+rarita: variabile
+nota_rarita: non comune (+1), rara (+2) o molto rara (+3)
+richiede_sintonia: false
+versioni:
+  - nome: "+1"
+    rarita: non-comune
+    valore: {piatto: 1}
+  - nome: "+2"
+    rarita: rara
+    valore: {piatto: 2}
+  - nome: "+3"
+    rarita: molto-rara
+    valore: {piatto: 3}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: tiri_colpire, operazione: somma, valore: versione}
+      - {bersaglio: danni, operazione: somma, valore: versione}
+descrizione: |
+  Il personaggio ottiene un bonus ai tiri per colpire e ai tiri per i danni effettuati con quest'arma magica. Il bonus è determinato dalla rarità dell'arma.

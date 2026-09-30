@@ -1,0 +1,59 @@
+id: dnd.mostro.gigante-delle-colline
+nome: Gigante delle colline
+taglia: enorme
+tipo: gigante
+gruppo: Giganti
+allineamento: caotico malvagio
+ca: {valore: 13}
+caratteristiche:
+  forza: {valore: 21, competenza: false}
+  destrezza: {valore: 8, competenza: false}
+  costituzione: {valore: 19, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 9, competenza: false}
+  carisma: {valore: 6, competenza: false}
+iniziativa: competenza
+dadi_vita: 10
+velocita: {camminata: 12}
+abilita: [percezione: competenza]
+percezione_passiva: 12
+lingue: [Gigante]
+gs: 5
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il gigante effettua due attacchi, utilizzando Tronco d'albero o Lancio di rifiuti in qualsiasi combinazione.
+  - nome: Tronco d'albero
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 18 (3d8 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Lancio di rifiuti
+    descrizione: |
+      *Tiro per colpire a distanza:* +8, gittata 18/72 m. *Colpito:* 16 (2d10 + 5) danni contundenti, e il bersaglio è avvelenato fino al termine del proprio turno successivo.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 18, lunga: 72}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

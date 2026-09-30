@@ -1,0 +1,44 @@
+id: dnd.mostro.piovra
+nome: Piovra
+taglia: piccola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 4, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 5, nuoto: 9}
+abilita: [percezione: competenza, furtivita: maestria]
+sensi: {scurovisione: 9}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Compressione
+    descrizione: |
+      La piovra può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+  - nome: Respirare sott'acqua
+    descrizione: |
+      La piovra può respirare soltanto sott'acqua.
+azioni:
+  - nome: Tentacoli
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno contundente.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+reazioni:
+  - nome: "Nube di inchiostro (1/Giorno)"
+    descrizione: |
+      Attivazione: una creatura termina il suo turno entro 1,5 metri dalla piovra sott'acqua. Esito: la piovra rilascia abbastanza inchiostro da riempire un cubo con spigolo di 1,5 metri intorno a sé e può muoversi fino alla sua velocità di nuoto massima. Il cubo è pesantemente oscurato per 1 minuto, o finché una corrente forte o un altro effetto simile non disperde l'inchiostro.

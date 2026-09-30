@@ -1,0 +1,81 @@
+id: dnd.mostro.testuggine-dragona
+nome: Testuggine dragona
+taglia: mastodontica
+tipo: drago
+allineamento: neutrale
+ca: {valore: 20}
+caratteristiche:
+  forza: {valore: 25, competenza: false}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 20, competenza: true}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 12, competenza: true}
+  carisma: {valore: 12, competenza: false}
+iniziativa: competenza
+dadi_vita: 23
+velocita: {camminata: 6, nuoto: 15}
+sensi: {scurovisione: 36}
+percezione_passiva: 11
+resistenze: [fuoco]
+lingue: [Draconico, "Primordiale (Aquan)"]
+gs: 17
+tratti:
+  - nome: Anfibio
+    descrizione: |
+      Il drago può respirare in aria e in acqua.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 3}
+    descrizione: |
+      La testuggine dragona effettua tre attacchi Morso. Può sostituire un attacco con un attacco Coda.
+  - nome: Coda
+    id: coda
+    descrizione: |
+      *Tiro per colpire in mischia:* +13, portata 4,5 m. *Colpito:* 18 (2d10 + 7) danni contundenti. Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 4.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +13, portata 4,5 m. *Colpito:* 23 (3d10 + 7) danni perforanti più 7 (2d6) danni da fuoco. Trovarsi sott'acqua non conferisce alcuna resistenza contro questi danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 4.5
+        colpito:
+          - danno:
+              numero_dadi: 3
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di vapore (ricarica 5-6)"
+    id: soffio-di-vapore-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 19, tutte le creature in un cono di 18 metri. *Fallimento:* 56 (16d6) danni da fuoco. *Successo:* danni dimezzati. *Fallimento o successo:* trovarsi sott'acqua non conferisce alcuna resistenza contro questi danni da fuoco.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 16, dado: d6, tipo_danno: fuoco}
+        successo: danno-dimezzato

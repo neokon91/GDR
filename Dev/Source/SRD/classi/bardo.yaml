@@ -1,0 +1,251 @@
+id: dnd.classe.bardo
+nome: Bardo
+caratteristica_primaria: [carisma]
+dado_vita: 8
+tiri_salvezza: [destrezza, carisma]
+competenze_abilita:
+  quantita: 3
+  scelte: [tutte]
+competenze_armi: [armi-semplici]
+competenze_armature: [armature-leggere]
+# Preso come classe secondaria (multiclasse): armatura leggera + una abilità a
+# scelta (il bardo la sceglie fra tutte). Lo strumento musicale non è modellato.
+competenze_multiclasse:
+  armature: [armature-leggere]
+  abilita: {quantita: 1, scelte: [tutte]}
+competenze_strumenti: {quantita: 3, scelte: [dnd.strumento.strumento-musicale]}
+equipaggiamento_iniziale:
+  - nome: A
+    oggetti:
+      - articolo: dnd.armatura.armatura-di-cuoio
+      - articolo: dnd.arma.pugnale
+        quantita: 2
+      - articolo: dnd.strumento.strumento-musicale
+      - articolo: dnd.oggetto.dotazione-da-intrattenitore
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 19
+  - nome: B
+    oggetti:
+      - articolo: dnd.valuta.moneta-oro
+        quantita: 90
+descrizione: |
+  Il bardo è un incantatore carismatico che sostiene il gruppo con Ispirazione bardica, competenze ampie e magia.
+  La sottoclasse SRD è il Collegio della Sapienza.
+tabella_progressione:
+  benefici:
+  - livello: 1
+    privilegi: [lancio-incantesimi, ispirazione-bardica]
+    dado_bardico: d6
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 4
+    slot_incantesimo: {livello1: 2, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 2
+    privilegi: [maestria, tuttofare]
+    dado_bardico: d6
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 5
+    slot_incantesimo: {livello1: 3, livello2: 0, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 3
+    privilegi: [sottoclasse-del-bardo]
+    dado_bardico: d6
+    trucchetti_conosciuti: 2
+    incantesimi_preparati: 6
+    slot_incantesimo: {livello1: 4, livello2: 2, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 4
+    privilegi: [aumento-punteggi-caratteristica]
+    dado_bardico: d6
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 7
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 0, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 5
+    privilegi: [fonte-di-ispirazione]
+    dado_bardico: d8
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 9
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 2, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 6
+    privilegi: [privilegio-della-sottoclasse]
+    dado_bardico: d8
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 10
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 0, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 7
+    privilegi: [controfascino]
+    dado_bardico: d8
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 11
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 1, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 8
+    privilegi: [aumento-punteggi-caratteristica]
+    dado_bardico: d8
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 12
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 2, livello5: 0, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 9
+    privilegi: [maestria]
+    dado_bardico: d8
+    trucchetti_conosciuti: 3
+    incantesimi_preparati: 14
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 1, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 10
+    privilegi: [segreti-magici]
+    dado_bardico: d10
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 15
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 0, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 11
+    privilegi: []
+    dado_bardico: d10
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 12
+    privilegi: [aumento-punteggi-caratteristica]
+    dado_bardico: d10
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 16
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 0, livello8: 0, livello9: 0}
+  - livello: 13
+    privilegi: []
+    dado_bardico: d10
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 14
+    privilegi: [privilegio-della-sottoclasse]
+    dado_bardico: d10
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 17
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 0, livello9: 0}
+  - livello: 15
+    privilegi: []
+    dado_bardico: d12
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 16
+    privilegi: [aumento-punteggi-caratteristica]
+    dado_bardico: d12
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 18
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 0}
+  - livello: 17
+    privilegi: []
+    dado_bardico: d12
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 19
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 2, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 18
+    privilegi: [ispirazione-superiore]
+    dado_bardico: d12
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 20
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 1, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 19
+    privilegi: [dono-epico]
+    dado_bardico: d12
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 21
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 1, livello8: 1, livello9: 1}
+  - livello: 20
+    privilegi: [parole-della-creazione]
+    dado_bardico: d12
+    trucchetti_conosciuti: 4
+    incantesimi_preparati: 22
+    slot_incantesimo: {livello1: 4, livello2: 3, livello3: 3, livello4: 3, livello5: 3, livello6: 2, livello7: 2, livello8: 1, livello9: 1}
+privilegi:
+- id: ispirazione-bardica
+  nome: "Ispirazione Bardica"
+  descrizione: |
+    Puoi ispirare soprannaturalmente gli altri tramite parole, musica o danza. Questa ispirazione è rappresentata dal tuo dado di Ispirazione Bardica, che è un d6.
+
+    **Usare l'Ispirazione Bardica.** Come Azione Bonus, puoi ispirare un'altra creatura entro 18 metri da te che sia in grado di vederti o sentirti.
+    Quella creatura ottiene uno dei tuoi dadi di Ispirazione Bardica.
+    Una creatura può possedere un solo dado di Ispirazione Bardica alla volta.
+
+    Entro la successiva ora, quando la creatura fallisce una Prova su d20, può tirare il dado di Ispirazione Bardica e aggiungere il risultato ottenuto al d20, trasformando potenzialmente il fallimento in un successo.
+    Il dado di Ispirazione Bardica viene consumato una volta tirato.
+
+    **Numero di utilizzi.** Puoi conferire un dado di Ispirazione Bardica un numero di volte pari al tuo modificatore di Carisma (minimo una volta) e recuperi tutti gli utilizzi consumati al termine di un Riposo Lungo.
+
+    **Ai livelli superiori.** Il tuo dado di Ispirazione Bardica cambia quando raggiungi determinati livelli da Bardo, come indicato nella colonna "Dado Bardico" della tabella delle Capacità del Bardo.
+    Il dado diventa un d8 al livello 5, un d10 al livello 10 e un d12 al livello 15.
+  attivita:
+    # Il contenitore (Azione Bonus, usi = mod Carisma). Il dado dato a un'altra
+    # creatura e il suo effetto sulla prova restano PROSA (buff su un altro attore).
+    - {tipo: attivabile, azione: azione-bonus, usi: {da_caratteristica: carisma, minimo: 1, ricarica: {riposo-lungo: tutti}}}
+- id: lancio-incantesimi
+  nome: "Lancio di Incantesimi"
+  attivita:
+    - tipo: incantatore
+      caratteristica: carisma
+  descrizione: |
+    Hai imparato a lanciare incantesimi attraverso le tue arti bardiche.
+
+    **Trucchetti.** Conosci due trucchetti a tua scelta dalla lista degli incantesimi del bardo.
+
+    Ogni volta che ottieni un livello da bardo, puoi sostituire uno dei tuoi trucchetti con un altro trucchetto a tua scelta dalla lista degli incantesimi del bardo.
+
+    Quando raggiungi il 4° e il 10° livello da bardo, impari un altro trucchetto a tua scelta dalla lista degli incantesimi del bardo, come indicato nella colonna Trucchetti della tabella Capacità del Bardo.
+
+    **Slot Incantesimo.** La tabella Capacità del Bardo indica quanti slot incantesimo possiedi per lanciare i tuoi incantesimi di 1° livello o superiore. Recuperi tutti gli slot consumati al termine di un Riposo Lungo.
+
+    **Incantesimi Preparati di 1° Livello o Superiore.** Prepari l'elenco degli incantesimi di 1° livello o superiore che puoi lanciare grazie a questa capacità. Per iniziare, scegli quattro incantesimi di 1° livello dalla lista degli incantesimi del bardo.
+
+    Il numero di incantesimi nel tuo elenco aumenta man mano che ottieni livelli da bardo, come indicato nella colonna Incantesimi Preparati della tabella Capacità del Bardo. Ogni volta che tale numero aumenta, scegli ulteriori incantesimi dalla lista degli incantesimi del bardo finché il numero di incantesimi nel tuo elenco non corrisponde a quello indicato nella tabella. Gli incantesimi scelti devono essere di un livello per il quale disponi di slot incantesimo. Per esempio, se sei un bardo di 3° livello, il tuo elenco di incantesimi preparati può includere sei incantesimi di 1° e 2° livello in qualsiasi combinazione.
+
+    Se un'altra capacità da bardo ti conferisce incantesimi che hai sempre preparati, tali incantesimi non contano ai fini del numero di incantesimi che puoi preparare con questa capacità, ma per te contano comunque come incantesimi da bardo.
+
+    **Cambiare gli Incantesimi Preparati.** Ogni volta che ottieni un livello da bardo, puoi sostituire un incantesimo del tuo elenco con un altro incantesimo da bardo per il quale disponi di slot incantesimo.
+
+    **Caratteristica da Incantatore.** Il Carisma è la tua caratteristica da incantatore per i tuoi incantesimi da bardo.
+
+    **Focus di Incantesimo.** Puoi utilizzare uno strumento musicale come focus di incantesimo per i tuoi incantesimi da bardo.
+- id: maestria
+  nome: "Maestria"
+  descrizione: |
+    Ottieni Maestri in due delle tue competenze nelle abilità a tua scelta.
+
+    Al livello 9 da Bardo, ottieni Competenza Specialistica in altre due delle tue competenze nelle abilità a tua scelta.
+  attivita:
+    - {tipo: scelta, scelta: maestria-abilita, quantita: 2}
+- id: tuttofare
+  nome: "Tuttofare"
+  descrizione: |
+    Puoi aggiungere metà del tuo Bonus di Competenza (arrotondato per difetto) a qualsiasi prova di caratteristica che utilizzi una competenza nelle abilità che non possiedi e che non utilizzi già il tuo Bonus di Competenza.
+
+    Per esempio, se effettui una prova di Forza (Atletica) e non possiedi la competenza in Atletica, puoi aggiungere metà del tuo Bonus di Competenza alla prova.
+- id: sottoclasse-del-bardo
+  nome: "Sottoclasse del Bardo"
+  descrizione: |
+    Ottieni una sottoclasse da Bardo a tua scelta. Una sottoclasse è una specializzazione che ti conferisce capacità a determinati livelli da Bardo. Per il resto della tua carriera, ottieni tutte le capacità della tua sottoclasse corrispondenti al tuo livello da Bardo o a livelli inferiori.
+- id: aumento-punteggi-caratteristica
+  nome: "Aumento del Punteggio di Caratteristica"
+  descrizione: |
+    Ottieni il talento Incremento del Punteggio di Caratteristica o un altro talento a tua scelta per il quale soddisfi i prerequisiti. Ottieni nuovamente questa capacità ai livelli 8, 12 e 16 da Bardo.
+- id: fonte-di-ispirazione
+  nome: "Fonte di Ispirazione"
+  descrizione: |
+    Ora recuperi tutti gli utilizzi consumati di Ispirazione Bardica quando termini un Riposo Breve o Lungo.
+
+    Inoltre, puoi consumare uno slot incantesimo (senza richiedere alcuna azione) per recuperare un utilizzo consumato di Ispirazione Bardica.
+- id: controfascino
+  nome: "Controfascino"
+  descrizione: |
+    Puoi usare note musicali o parole di potere per contrastare effetti che influenzano la mente. Se tu o una creatura entro 9 metri (30 piedi) da te fallite un tiro salvezza contro un effetto che impone la condizione Affascinato o Spaventato, puoi usare una Reazione per far ritirare il tiro salvezza; il nuovo tiro beneficia di Vantaggio.
+- id: segreti-magici
+  nome: "Segreti Magici"
+  descrizione: |
+    Hai appreso segreti da varie tradizioni magiche. Ogni volta che raggiungi un livello da Bardo (incluso questo livello) e il numero di incantesimi preparati indicato nella tabella delle caratteristiche del Bardo aumenta, puoi scegliere i tuoi nuovi incantesimi preparati dalle liste degli incantesimi di Bardo, Chierico, Druido e Mago; gli incantesimi scelti contano come incantesimi da Bardo per te. Inoltre, ogni volta che sostituisci un incantesimo preparato per questa classe, puoi sostituirlo con un incantesimo proveniente da quelle liste.
+- id: ispirazione-superiore
+  nome: "Ispirazione Superiore"
+  descrizione: |
+    Quando tiri per l'iniziativa, recuperi utilizzi consumati di Ispirazione Bardica fino ad averne due, se ne possiedi meno.
+- id: dono-epico
+  nome: "Dono Epico"
+  descrizione: |
+    Ottieni un talento Dono Epico o un altro talento a tua scelta per il quale soddisfi i prerequisiti.
+- id: parole-della-creazione
+  nome: "Parole della Creazione"
+  descrizione: |
+    Hai padroneggiato due delle Parole della Creazione: le parole della vita e della morte. Di conseguenza, hai sempre preparati gli incantesimi *Parola del Potere: Guarigione* e *Parola del Potere: Uccidere*. Quando lanci uno di questi incantesimi, puoi bersagliare anche una seconda creatura, a condizione che essa si trovi entro 3 metri (10 piedi) dal primo bersaglio.

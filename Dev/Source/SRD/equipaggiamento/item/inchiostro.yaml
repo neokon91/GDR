@@ -1,0 +1,4 @@
+id: dnd.oggetto.inchiostro
+nome: Inchiostro
+categoria: equipaggiamento-avventura
+costo: {valore: 10, valuta: moneta-oro}

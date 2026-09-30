@@ -1,0 +1,64 @@
+id: dnd.mostro.drago-d-ottone-cucciolo
+nome: Drago d'ottone cucciolo
+taglia: media
+tipo: drago
+sottotipo: metallico
+gruppo: Draghi d'ottone
+allineamento: caotico buono
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 11, competenza: true}
+  carisma: {valore: 13, competenza: false}
+iniziativa: competenza
+dadi_vita: 4
+velocita: {camminata: 5, volo: 18}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18, vista_cieca: 3}
+percezione_passiva: 14
+immunita_danni: [fuoco]
+lingue: [Draconico]
+gs: 1
+
+azioni:
+  - nome: Squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di fuoco (ricarica 5-6)"
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 11, tutte le creature in una linea lunga 6 metri e larga 1,5 metri. *Fallimento:* 14 (4d6) danni da fuoco. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 4, dado: d6, tipo_danno: fuoco}
+        successo: danno-dimezzato
+  - nome: Soffio di sonno
+    descrizione: |
+      *Tiro salvezza su Costituzione:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
+
+      *Secondo fallimento:* il bersaglio cade privo di sensi per 1 minuto. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: costituzione
+          cd: {caratteristica: costituzione, base: 8, competenza: true}

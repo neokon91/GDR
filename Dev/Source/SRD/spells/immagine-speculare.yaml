@@ -1,0 +1,21 @@
+id: dnd.incantesimo.immagine-speculare
+nome: Immagine speculare
+livello: 2
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S]
+concentrazione: false
+rituale: false
+durata: 1 minuto
+descrizione: |
+  Tre duplicati illusori dell'incantatore appaiono nel suo spazio. Fino al termine dell'incantesimo, i duplicati si muovono con l'incantatore e imitano le sue azioni, cambiando posizione in modo che sia impossibile individuare quale sia l'immagine reale.
+
+  Ogni volta che una creatura colpisce l'incantatore con tiro per colpire nel corso della durata dell'incantesimo, l'incantatore tira un d6 per ognuno dei duplicati rimasti. Se uno qualsiasi dei risultati che ottiene è pari o superiore a 3, uno dei duplicati subisce il colpo al posto dell'incantatore, e poi viene distrutto. Altrimenti, i duplicati ignorano tutti gli altri danni o effetti. L'incantesimo termina quando tutti e i tre duplicati vengono distrutti.
+
+  Una creatura non è influenzata da questo incantesimo se è accecata o se ha vista cieca o vista pura.

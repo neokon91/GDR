@@ -1,0 +1,34 @@
+id: dnd.mostro.capra
+nome: Capra
+taglia: media
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 11, competenza: true}
+  destrezza: {valore: 10, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 12, scalata: 9}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 18}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 0
+
+azioni:
+  - nome: Sfondamento
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 1 danno contundente, o 2 (1d4) danni contundenti se la capra si è mossa di 6 metri o più in linea retta verso il bersaglio subito prima del colpo.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5

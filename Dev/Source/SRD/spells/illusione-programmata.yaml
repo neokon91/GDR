@@ -1,0 +1,21 @@
+id: dnd.incantesimo.illusione-programmata
+nome: Illusione programmata
+livello: 6
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S, "M (polvere di giada del valore di 25 mo o più)"]
+concentrazione: false
+rituale: false
+durata: finché non viene dissolto
+descrizione: |
+  L'incantatore crea un'illusione di un oggetto, una creatura o qualche altro fenomeno visibile entro gittata che si attiva al verificarsi di un innesco specifico. Fino ad allora, l'illusione è impercettibile. Inoltre, essa non può essere più grande di un cubo con spigolo di 9 metri ed è l'incantatore, al momento del lancio, a decidere come si comporta e quali suoni emette. Questa esibizione programmata può durare un massimo di 5 minuti.
+
+  Quando l'innesco specificato si verifica, l'illusione si materializza e si comporta nella maniera descritta dall'incantatore. Al termine della sua esibizione, l'illusione scompare e rimane latente per 10 minuti, dopo i quali può essere attivata nuovamente.
+
+  L'innesco può essere sia generale che dettagliato, ma deve essere basato su fenomeni visibili o udibili che si verificano entro 9 metri dall'area. Per esempio, l'incantatore potrebbe creare un'illusione di se stesso per avvertire coloro che tentano di aprire una porta protetta da una trappola.
+
+  L'illusione può essere rivelata da un'interazione fisica, poiché gli oggetti possono attraversarla. Una creatura che effettua l'azione di Studio per esaminare l'immagine può determinare che si tratta di un'illusione superando una prova di Intelligenza (Indagare) contro la CD del tiro salvezza sull'incantesimo. Se una creatura riconosce l'illusione per ciò che è, riesce a vedere attraverso l'immagine e gli eventuali suoni che emette si attenuano alle sue orecchie.

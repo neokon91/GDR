@@ -1,0 +1,42 @@
+id: dnd.mostro.capra-gigante
+nome: Capra Gigante
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 17, competenza: true}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 12, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 12, scalata: 9}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 18}
+lingue: [nessuna]
+gs: 1/2
+azioni:
+  - id: capra-gigante.sfondamento
+    nome: Sfondamento
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m.
+      *Colpito:* 6 (1d6 + 3) danni Contundenti.
+      Se il bersaglio è una creatura di taglia Grande o inferiore
+      e la capra si è mossa di 6 metri o più in linea retta verso di esso subito prima del colpo,
+      il bersaglio subisce 5 (2d4) danni Contundenti extra e cade a terra Prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}

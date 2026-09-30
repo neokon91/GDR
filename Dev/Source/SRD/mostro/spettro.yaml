@@ -1,0 +1,44 @@
+id: dnd.mostro.spettro
+nome: Spettro
+taglia: media
+tipo: non-morto
+allineamento: caotico malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 1, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 11, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 9, volo: 15}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+resistenze: [acido, contundente, freddo, fulmine, fuoco, perforante, tagliente, tuono]
+immunita_danni: [necrotico, veleno]
+immunita_condizioni: [affascinato, afferrato, avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi, prono, trattenuto]
+lingue: [capisce il Comune più un'altra lingua ma non le parla]
+gs: 1
+
+tratti:
+  - nome: Movimento incorporeo
+    descrizione: |
+      Lo spettro può muoversi attraverso altre creature e oggetti come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza.
+  - nome: Sensibilità al sole
+    descrizione: |
+      Finché è esposto alla luce del sole, lo spettro subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+azioni:
+  - nome: Risucchio di vita
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 7 (2d6) danni necrotici. Se il bersaglio è una creatura, i suoi punti ferita massimi sono ridotti di una quantità pari ai danni subiti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno: {numero_dadi: 2, dado: d6, tipo_danno: necrotico}

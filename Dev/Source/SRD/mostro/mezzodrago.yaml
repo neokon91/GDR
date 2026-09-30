@@ -1,0 +1,75 @@
+id: dnd.mostro.mezzodrago
+nome: Mezzodrago
+taglia: media
+tipo: drago
+allineamento: neutrale
+ca: {valore: 18}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 14, competenza: true}
+  costituzione: {valore: 16, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 14, competenza: false}
+iniziativa: competenza
+dadi_vita: 14
+velocita: {camminata: 12}
+abilita: [atletica: competenza, furtivita: competenza, percezione: competenza]
+sensi: {scurovisione: 18, vista_cieca: 3}
+percezione_passiva: 15
+resistenze: [{scelta: origine-draconica}]
+lingue: [Comune, Draconico]
+gs: 5
+
+tratti:
+  - nome: Origine draconica
+    descrizione: |
+      Il mezzodrago è legato al tipo di drago associato con uno dei seguenti tipi di danno (a scelta del GM): acido, freddo, fulmine, fuoco o veleno. Questa scelta influenza gli altri aspetti della scheda delle statistiche.
+    attivita:
+      - tipo: passivo
+        scelta:
+          id: origine-draconica
+          opzioni: [acido, freddo, fulmine, fuoco, veleno]
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: artiglio, ripetizioni: 2}
+    descrizione: |
+      Il mezzodrago effettua due attacchi Artiglio.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 6 (1d4 + 4) danni taglienti più 7 (2d6) danni del tipo scelto per il tratto Origine draconica.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+          - danno: {numero_dadi: 2, dado: d6, tipo_danno: {scelta: origine-draconica}}
+  - nome: "Soffio del drago (ricarica 5-6)"
+    id: soffio-del-drago-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* 28 (8d6) danni del tipo scelto per il tratto Origine draconica. *Successo:* danni dimezzati.
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 8, dado: d6, tipo_danno: {scelta: origine-draconica}}
+        successo: danno-dimezzato
+azioni_bonus:
+  - nome: Balzo
+    descrizione: |
+      Il mezzodrago salta fino a 9 metri usando 3 metri di movimento.

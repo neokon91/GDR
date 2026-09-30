@@ -1,0 +1,8 @@
+id: dnd.arma.maglio
+nome: Maglio
+categoria: mischia-da-guerra
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 5, unita: kg}
+danno: {dado: 2d6, tipo_danno: contundente}
+proprieta: [due-mani, pesante]
+padronanza: rovesciamento

@@ -1,0 +1,5 @@
+id: dnd.oggetto.dotazione-da-studioso
+nome: Dotazione da studioso
+categoria: equipaggiamento-avventura
+costo: {valore: 40, valuta: moneta-oro}
+peso: {valore: 11, unita: kg}

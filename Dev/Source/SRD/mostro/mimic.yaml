@@ -1,0 +1,65 @@
+id: dnd.mostro.mimic
+nome: Mimic
+taglia: media
+tipo: mostruosita
+allineamento: neutrale
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 17, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 15, competenza: false}
+  intelligenza: {valore: 5, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 8, competenza: false}
+iniziativa: competenza
+dadi_vita: 9
+velocita: {camminata: 6}
+abilita: [furtivita: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 11
+immunita_danni: [acido]
+immunita_condizioni: [prono]
+lingue: [nessuna]
+gs: 2
+
+tratti:
+  - nome: "Adesivo (solo in forma di oggetto)"
+    descrizione: |
+      Il mimic aderisce a qualsiasi cosa tocchi. Una creatura di taglia Enorme oinferiore attaccata al mimic è afferrata (CD 13 per sfuggire). Le prove di caratteristica effettuate per sfuggire a questa presa subiscono svantaggio.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +5 (con vantaggio se il bersaglio è afferrato dal mimic), portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti, o 12 (2d8 + 3) danni perforanti se il bersaglio è afferrato dal mimic, più 4 (1d8) danni da acido.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Pseudopode
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni contundenti più 4 (1d8) danni da acido. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire). Le prove di caratteristica effettuate per sfuggire a questa presa subiscono svantaggio.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: contundente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Mutaforma
+    descrizione: |
+      Il mimic assume la forma di un oggetto Medio o Piccolo, mantenendo le proprie statistiche di gioco, o ritorna alla sua forma autentica. Nessun oggetto che indossa o trasporta viene trasformato.

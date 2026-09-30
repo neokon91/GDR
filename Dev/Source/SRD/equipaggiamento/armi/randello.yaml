@@ -1,0 +1,8 @@
+id: dnd.arma.randello
+nome: Randello
+categoria: mischia-semplice
+costo: {valore: 1, valuta: moneta-argento}
+peso: {valore: 1, unita: kg}
+danno: {dado: d4, tipo_danno: contundente}
+proprieta: [leggera]
+padronanza: lentezza

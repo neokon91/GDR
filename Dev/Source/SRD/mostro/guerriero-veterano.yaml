@@ -1,0 +1,68 @@
+id: dnd.mostro.guerriero-veterano
+nome: Guerriero veterano
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Guerrieri
+allineamento: neutrale
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 16, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 10, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 10, competenza: false}
+iniziativa: competenza
+dadi_vita: 10
+velocita: {camminata: 9}
+abilita: [atletica: competenza, percezione: competenza]
+percezione_passiva: 12
+equipaggiamento:
+  - {articolo: dnd.arma.balestra-pesante}
+  - {articolo: dnd.armatura.corazza-a-strisce}
+  - {articolo: dnd.arma.spadone}
+lingue: [Comune più un'altra lingua]
+gs: 3
+
+azioni:
+  - nome: Multiattacco
+    descrizione: |
+      Il guerriero effettua due attacchi Spadone o Balestra pesante.
+  - nome: Spadone
+    descrizione: |
+      *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.spadone
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: Balestra pesante
+    descrizione: |
+      *Tiro per colpire a distanza:* +3, gittata 30/120 m. *Colpito:* 12 (2d10 + 1) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.balestra-pesante
+          gittata: {normale: 30, lunga: 120}
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+reazioni:
+  - nome: Parata
+    descrizione: |
+      Attivazione: il guerriero viene colpito da un tiro per colpire in mischia mentre tiene in mano un'arma. Esito: il guerriero aggiunge 2 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno.

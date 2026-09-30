@@ -1,0 +1,4 @@
+id: dnd.oggetto.mappa
+nome: Mappa
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-oro}

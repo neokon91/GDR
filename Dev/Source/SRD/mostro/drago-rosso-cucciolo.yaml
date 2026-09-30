@@ -1,0 +1,64 @@
+id: dnd.mostro.drago-rosso-cucciolo
+nome: Drago rosso cucciolo
+taglia: media
+tipo: drago
+sottotipo: cromatico
+gruppo: Draghi rossi
+allineamento: caotico malvagio
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 19, competenza: false}
+  destrezza: {valore: 10, competenza: true}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 12, competenza: false}
+  saggezza: {valore: 11, competenza: true}
+  carisma: {valore: 15, competenza: false}
+iniziativa: competenza
+dadi_vita: 10
+velocita: {camminata: 9, scalata: 9, volo: 18}
+abilita: [furtivita: competenza, percezione: maestria]
+sensi: {scurovisione: 18, vista_cieca: 3}
+percezione_passiva: 14
+immunita_danni: [fuoco]
+lingue: [Draconico]
+gs: 4
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 2}
+    descrizione: |
+      Il drago effettua due attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 9 (1d10 + 4) danni taglienti più 3 (1d6) danni da fuoco.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+  - nome: "Soffio di fuoco (ricarica 5-6)"
+    id: soffio-di-fuoco-ricarica-5-6
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 13, tutte le creature in un cono di 4,5 metri. *Fallimento:* 24 (7d6) danni da fuoco. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: costituzione, base: 8, competenza: true}
+        fallimento:
+          - danno: {numero_dadi: 7, dado: d6, tipo_danno: fuoco}
+        successo: danno-dimezzato

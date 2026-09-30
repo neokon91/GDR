@@ -1,0 +1,16 @@
+id: dnd.incantesimo.invisibilita-superiore
+nome: Invisibilità Superiore
+livello: 4
+scuola: illusione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: contatto
+componenti: [V, S]
+concentrazione: true
+rituale: false
+durata: fino a 1 minuto
+descrizione: |
+  Una creatura toccata dall'incantatore diventa invisibile fino al termine dell'incantesimo.

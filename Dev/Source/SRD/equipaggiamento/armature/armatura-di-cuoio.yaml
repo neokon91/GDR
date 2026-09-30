@@ -1,0 +1,10 @@
+id: dnd.armatura.armatura-di-cuoio
+nome: Armatura di Cuoio
+tipo: armatura-leggera
+categoria: armature
+costo: {valore: 10, valuta: moneta-oro}
+peso: {valore: 5, unita: kg}
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: aumento, formula: {base: 11, caratteristiche: [destrezza]}}

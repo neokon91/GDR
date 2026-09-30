@@ -1,0 +1,58 @@
+id: dnd.mostro.troll
+nome: Troll
+taglia: grande
+tipo: gigante
+allineamento: caotico malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 18, competenza: false}
+  destrezza: {valore: 13, competenza: false}
+  costituzione: {valore: 20, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 9, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 9
+velocita: {camminata: 9}
+abilita: [percezione: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 15
+lingue: [Gigante]
+gs: 5
+
+tratti:
+  - nome: "Arti abominevoli (4/giorno)"
+    descrizione: |
+      Se il troll termina qualsiasi turno sanguinante e subisce più di 15 danni taglienti durante tale turno, uno dei suoi arti viene reciso, cade nello spazio del troll e diventa un arto di troll. L'arto svolge il suo turno subito dopo quello del troll. Il troll ha 1 livello di indebolimento per ogni arto mancante e fa ricrescere gli arti la prossima volta che recupera punti ferita.
+  - nome: Rigenerazione
+    descrizione: |
+      Il troll recupera 15 punti ferita all'inizio di ogni suo turno. Se il troll subisce danni da acido o fuoco, questo tratto non funziona all'inizio del suo turno successivo. Il troll muore solo se inizia il turno con 0 punti ferita e non si rigenera.
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: squarcio, ripetizioni: 3}
+    descrizione: |
+      Il troll effettua tre attacchi Squarcio.
+  - nome: Squarcio
+    id: squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 3
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Carica
+    descrizione: |
+      Il troll si muove fino a metà della sua velocità in linea retta verso un nemico che è in grado di vedere.

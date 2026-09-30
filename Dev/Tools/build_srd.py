@@ -51,7 +51,7 @@ def srd_slug(name: str) -> str:
 # Fonte UNICA = archivio (audit A1, COMPLETO): la chiave storica (nome json) è mappata
 # alla cartella `archivio/srd/`. `load_srd` legge SOLO l'archivio (i JSON vendorizzati sono
 # stati ritirati). PAGINE + strutture derivate (id-index, autolink, pool) leggono da qui.
-ARCHIVIO_SRD = gen_bestiario.SRD_MONSTERS.parent  # ROOT/archivio/srd
+SRD = gen_bestiario.SRD_MONSTERS.parent  # Dev/Source/SRD, copia vendorizzata di archivio/srd
 _ARCHIVIO_SUBDIR: dict[str, str] = {
     "srd_5_2_1_spells.json": "spells",
     "srd_5_2_1_magic_items.json": "magic_items",
@@ -108,7 +108,7 @@ def _leggi_archivio(subdir: str) -> list[dict[str, Any]]:
     """Carica una categoria SRD dagli YAML dell'archivio (ricorsivo). Dedup per nome;
     id dal frontmatter o dallo slug del file. Forma-dato specifica dell'archivio: i
     consumatori (srd_note/id-index/autolink) leggono gli stessi nomi-campo del JSON."""
-    d = ARCHIVIO_SRD / subdir
+    d = SRD / subdir
     if not d.is_dir():
         return []
     per_slug: dict[str, dict[str, Any]] = {}
@@ -1001,8 +1001,8 @@ def gs_baselines() -> dict[str, dict[str, Any]]:
 def build_srd(core: dict[str, Any]) -> int:
     """Genera l'albero SRD/ (sola lettura) dall'ARCHIVIO. Ritorna il numero di note
     scritte. Archivio assente -> 0 (SRD opzionale)."""
-    if not ARCHIVIO_SRD.is_dir():
-        return 0
+    if not (SRD / "mostro").is_dir():
+        raise SystemExit(f"SRD non trovata ({SRD}): la copia vendorizzata manca (git checkout Dev/Source/SRD).")
     write_text(VAULT / "SRD" / "LICENZA.md", f"# Licenza SRD\n\n{SRD_ATTRIBUTION}\n")
     # Indice id->nome su tutte le voci, per risolvere i link 'vedi_anche'/evocate.
     links = srd_id_index()

@@ -1,0 +1,17 @@
+id: dnd.incantesimo.bacche-benefiche
+nome: Bacche benefiche
+livello: 1
+scuola: evocazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V, S, "M (un rametto di vischio)"]
+concentrazione: false
+rituale: false
+durata: 24 ore
+descrizione: |
+  Per la durata dell'incantesimo, nella mano dell'incantatore appaiono dieci bacche infuse di magia. Una creatura può effettuare un'azione bonus per mangiare una bacca, recuperando così 1 punto ferita e ottenendo nutrimento sufficiente per una giornata intera.
+
+  Le bacche non mangiate scompaiono al termine dell'incantesimo.

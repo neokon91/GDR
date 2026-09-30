@@ -1,0 +1,15 @@
+id: dnd.oggetto-magico.lama-del-sole
+nome: Lama del sole
+categoria: arma
+sottotipo: spada lunga
+rarita: rara
+richiede_sintonia: true
+descrizione: |
+  Quest'oggetto sembra l'elsa di una spada.
+  **Lama radiosa**
+  Mentre il personaggio impugna l'elsa, può far comparire (o scomparire) una lama di pura energia radiosa usando un'azione bonus. 
+  Finché la lama è presente, questa spada magica funziona come una spada lunga con la proprietà accurata. Se il personaggio è competente nelle spade corte o lunghe, lo è anche nell'uso della lama del sole.
+  Il personaggio ottiene un bonus di +2 ai tiri per colpire e ai tiri per i danni effettuati con  quest'arma, che infligge danni radiosi anziché taglienti. Quando l'arma colpisce un non morto, il bersaglio subisce 1d8 danni radiosi extra.
+
+  **Luce del sole**
+  La lama luminosa di questa spada proietta luce intensa in un raggio di 4,5 metri e luce fioca per altri 4,5 metri. La luce è considerata luce solare. Finché la lama permane, il personaggio può effettuare un'azione di Magia per ampliare o ridurre il raggio della luce intensa e fioca di 1,5 metri per ognuna, fino a un massimo di 9 metri o un minimo di 3 metri per ognuna.

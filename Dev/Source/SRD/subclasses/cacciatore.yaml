@@ -1,0 +1,46 @@
+id: dnd.sottoclasse.cacciatore
+nome: Cacciatore
+classe: dnd.classe.ranger
+citazione: "Proteggi la natura e le persone dalla distruzione"
+descrizione: Dai la caccia alle prede nella natura selvaggia e altrove, impiegando le tue abilità di Cacciatore per proteggere la natura e le persone ovunque dalle forze che vorrebbero distruggerle.
+privilegi:
+- livello: 3
+  nome: "Sapienza del Cacciatore"
+  descrizione: |
+    Puoi invocare le forze della natura per rivelare determinati punti di forza e di debolezza della tua preda.
+    Mentre una creatura è contrassegnata dal tuo Marchio del Cacciatore, sai se essa possiede immunità,
+    resistenze o vulnerabilità e, in tal caso, quali esse siano.
+- livello: 3
+  nome: "Preda del Cacciatore"
+  descrizione: |
+    Ottieni una delle seguenti opzioni di capacità a tua scelta. Ogni volta che termini un riposo breve o lungo, puoi sostituire l'opzione scelta con l'altra.
+
+    **Uccisore di Colossi**
+    La tua tenacia può logorare anche i nemici più resistenti. Quando colpisci una creatura con un'arma, quest'ultima infligge 1d8 danni extra al bersaglio se esso ha subito dei danni (ovvero se non ha tutti i suoi Punti Ferita). Puoi infliggere questi danni extra solo una volta per turno.
+
+    **Distruttore di Orde**
+    Una volta per turno, quando effettui un attacco con un'arma, puoi compiere un altro attacco con la stessa arma contro una creatura diversa che si trovi entro 1,5 metri (5 piedi) dal bersaglio originale, entro la gittata dell'arma e che tu non abbia ancora attaccato in questo turno.
+- livello: 7
+  nome: "Tattiche Difensive"
+  descrizione: |
+    Ottieni una delle seguenti opzioni di capacità a tua scelta. Ogni volta che termini un riposo breve o lungo, puoi sostituire l'opzione scelta con l'altra.
+
+    **Fuga dall'Orda**
+    Gli attacchi di opportunità contro di te vengono effettuati con svantaggio.
+
+    **Difesa contro Attacchi Multipli**
+    Quando una creatura ti colpisce con un tiro per colpire,
+    quella creatura subisce Svantaggio su tutti gli altri tiri per colpire contro di te in quel turno.
+
+- livello: 11
+  nome: "Preda del Cacciatore Superiore"
+  descrizione: |
+    Una volta per turno, quando infliggi danni a una creatura contrassegnata dal tuo Marchio del Cacciatore,
+    puoi anche infliggere i danni extra di quell'incantesimo a una creatura diversa
+    che puoi vedere entro 9 metri dalla prima creatura.
+
+- livello: 15
+  nome: "Difesa del Cacciatore Superiore"
+  descrizione: |
+    Quando subisci danni, puoi usare la tua reazione per ottenere resistenza a quei danni
+    e a qualsiasi altro danno dello stesso tipo fino alla fine del turno corrente.

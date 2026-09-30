@@ -1,0 +1,68 @@
+id: dnd.mostro.ghoul
+nome: Ghoul
+taglia: media
+tipo: non-morto
+allineamento: caotico malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 13, competenza: false}
+  destrezza: {valore: 15, competenza: false}
+  costituzione: {valore: 10, competenza: false}
+  intelligenza: {valore: 7, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+immunita_danni: [veleno]
+immunita_condizioni: [affascinato, avvelenato, indebolimento]
+lingue: [Comune]
+gs: 1
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: morso, ripetizioni: 2}
+    descrizione: |
+      Il ghoul effettua due attacchi Morso.
+  - nome: Artiglio
+    id: artiglio
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni taglienti. Se il bersaglio è una creatura diversa da un non morto o da un elfo, subisce il seguente effetto.
+
+      *Tiro salvezza su Costituzione:* CD 10. *Fallimento:* il bersaglio è paralizzato fino al termine del proprio turno successivo.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+  - nome: Morso
+    id: morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti più 3 (1d6) danni necrotici.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

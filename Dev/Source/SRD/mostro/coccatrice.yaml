@@ -1,0 +1,39 @@
+id: dnd.mostro.coccatrice
+nome: Coccatrice
+taglia: piccola
+tipo: mostruosita
+allineamento: senza allineamento
+ca: {valore: 11}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 13, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 6, volo: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 11
+immunita_condizioni: [pietrificato]
+lingue: [nessuna]
+gs: 1/2
+
+azioni:
+  - nome: Morso pietrificante
+    descrizione: |
+      *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni perforanti. Se il bersaglio è una creatura, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 11. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza alla fine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto per 24 ore.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d4
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}

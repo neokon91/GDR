@@ -1,0 +1,4 @@
+id: dnd.oggetto.messaggero
+nome: Messaggero
+categoria: gregari
+costo: {valore: 2, valuta: moneta-rame, per: "1,5 km"}

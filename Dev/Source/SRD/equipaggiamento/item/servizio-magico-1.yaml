@@ -1,0 +1,4 @@
+id: dnd.oggetto.servizio-magico-1
+nome: Servizio magico 1
+categoria: servizi-magici
+costo: {valore: 50, valuta: moneta-oro}

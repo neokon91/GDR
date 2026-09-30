@@ -1,0 +1,4 @@
+id: dnd.oggetto.locanda-povero
+nome: Locanda Povero
+categoria: vitto-e-alloggio
+costo: {valore: 1, valuta: moneta-argento}

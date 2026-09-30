@@ -1,0 +1,73 @@
+id: dnd.mostro.arcimago
+nome: Arcimago
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Maghi
+allineamento: neutrale
+ca: {valore: 17}
+caratteristiche:
+  forza: {valore: 10, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 12, competenza: false}
+  intelligenza: {valore: 20, competenza: true}
+  saggezza: {valore: 15, competenza: true}
+  carisma: {valore: 16, competenza: false}
+dadi_vita: 31
+velocita: {camminata: 9}
+abilita: [percezione: competenza, storia: competenza, arcano: maestria]
+immunita_danni: [psichico]
+immunita_condizioni: [affascinato]  # con vuoto mentale (Vuoto Mentale attivo)
+equipaggiamento: [bacchetta]
+lingue: [Comune più altre cinque lingue]
+gs: 12
+tratti:
+  - id: arcimago.resistenza-alla-magia
+    nome: Resistenza alla Magia
+    descrizione: L'arcimago dispone di Vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+azioni:
+  - id: arcimago.multiattacco
+    nome: Multiattacco
+    descrizione: L'arcimago effettua quattro attacchi Esplosione arcana.
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: esplosione-arcana, ripetizioni: 4}
+  - id: arcimago.esplosione-arcana
+    nome: Esplosione arcana
+    descrizione: |
+      *Tiro per Colpire in Mischia o a Distanza:* +9, portata 1,5 m o gittata 45 m.
+      *Colpito:* 27 (4d10 + 5) danni da Forza.
+    attivita:
+      - tipo: attacco
+        attacco: { categoria: attacco-naturale, bonus: {caratteristica: intelligenza, competenza: true}, bersagli: 1, portata: 1.5}
+        colpito:
+          - danno: {numero_dadi: 4, dado: d10, tipo_danno: forza, bonus: {caratteristica: intelligenza}}
+  - id: arcimago.incantesimi
+    nome: Incantesimi
+    descrizione: |
+      L'arcimago lancia uno dei seguenti incantesimi, utilizzando Intelligenza come caratteristica da incantatore
+      (CD del tiro salvezza sull'incantesimo 17):
+      
+      **1/Giorno Ciascuno:** Cono di freddo (di 9º livello), scrutare, teletrasporto, vuoto mentale (lanciato prima del combattimento)
+      
+      **2/Giorno Ciascuno:* Fulmine (di 7º livello), volare
+      
+      **A volontà:** Armatura magica (inclusa nella CA), camuffare se stesso, individuazione dei pensieri, individuazione del magico, invisibilità, luce, mano magica, prestidigitazione
+    attivita:
+      - tipo: incantatore
+        caratteristica: intelligenza
+        cd: 17
+        a_volonta: [dnd.incantesimo.armatura-magica, dnd.incantesimo.camuffare-se-stesso, dnd.incantesimo.individuazione-dei-pensieri, dnd.incantesimo.individuazione-del-magico, dnd.incantesimo.invisibilita, dnd.incantesimo.luce, dnd.incantesimo.mano-magica, dnd.incantesimo.prestidigitazione]
+        al_giorno:
+          - usi: 1
+            incantesimi: [{id: dnd.incantesimo.cono-di-freddo, livello: 9}, dnd.incantesimo.scrutare, dnd.glossario.teletrasporto, dnd.incantesimo.vuoto-mentale]
+          - usi: 2
+            incantesimi: [{id: dnd.incantesimo.fulmine, livello: 7}, dnd.glossario.volare]
+azioni_bonus:
+  - id: arcimago.passo-velato
+    nome: "Passo Velato (3/giorno)"
+    descrizione: Il mago lancia passo velato, utilizzando la stessa caratteristica da incantatore di Incantesimi.
+reazioni:
+  - id: arcimago.magia-di-protezione
+    nome: "Magia di Protezione (3/giorno)"
+    descrizione: L'arcimago lancia controincantesimo o scudo come risposta all'innesco dell'incantesimo, utilizzando la stessa caratteristica da incantatore di Incantesimi.

@@ -1,0 +1,41 @@
+id: dnd.sottoclasse.giuramento-di-devozione
+nome: Giuramento di Devozione
+classe: dnd.classe.paladino
+citazione: "Tieni fede agli ideali di giustizia e ordine"
+privilegi:
+- livello: 3
+  nome: "Incantesimi del Giuramento di Devozione"
+  descrizione: |
+    Gli incantesimi della tabella sono sempre preparati.
+
+- livello: 3
+  nome: "Arma Consacrata"
+  descrizione: |
+    Spende Incanalare divinita per aggiungere Carisma ai tiri per colpire e rendere radiosi i danni.
+
+- livello: 7
+  nome: "Aura di Devozione"
+  descrizione: |
+    Il paladino è gli alleati nell'Aura di protezione non possono essere affascinati.
+
+- livello: 15
+  nome: "Punizione Protettiva"
+  descrizione: |
+    Dopo punizione divina, il paladino e gli alleati nell'Aura ottengono mezza copertura.
+
+- livello: 20
+  nome: "Nube Sacra"
+  descrizione: |
+    Potenzia l'Aura con danni radiosi, luce solare e vantaggio contro immondi e non morti.
+
+incantesimi:
+- livello: 3
+  incantesimi_preparati: [dnd.incantesimo.protezione-dal-bene-e-dal-male, dnd.incantesimo.scudo-della-fede]
+- livello: 5
+  incantesimi_preparati: [dnd.incantesimo.aiuto, dnd.incantesimo.zona-di-verita]
+- livello: 9
+  incantesimi_preparati: [dnd.incantesimo.faro-di-speranza, dnd.incantesimo.dissolvi-magie]
+- livello: 13
+  incantesimi_preparati: [dnd.incantesimo.liberta-di-movimento, dnd.incantesimo.guardiano-della-fede]
+- livello: 17
+  incantesimi_preparati: [dnd.incantesimo.comunione, dnd.incantesimo.colpo-infuocato]

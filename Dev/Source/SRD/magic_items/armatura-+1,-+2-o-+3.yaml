@@ -1,0 +1,23 @@
+id: dnd.oggetto-magico.armatura-+1,-+2-o-+3
+nome: "Armatura +1, +2 o +3"
+categoria: armatura
+sottotipo: leggera, media o pesante
+rarita: variabile
+nota_rarita: rara (+1), molto rara (+2) o leggendaria (+3)
+richiede_sintonia: false
+versioni:
+  - nome: "+1"
+    rarita: rara
+    valore: 1
+  - nome: "+2"
+    rarita: molto-rara
+    valore: 2
+  - nome: "+3"
+    rarita: leggendaria
+    valore: 3
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: ca, operazione: somma, valore: versione}
+descrizione: |
+  Il personaggio che indossa quest'armatura ottiene un bonus alla Classe Armatura determinato dalla sua rarità.

@@ -1,0 +1,11 @@
+id: dnd.oggetto-magico.guanti-del-potere-orchesco
+nome: Guanti del potere orchesco
+categoria: oggetto-meraviglioso
+rarita: non-comune
+richiede_sintonia: true
+attivita:
+  - tipo: passivo
+    effetti:
+      - {bersaglio: caratteristiche.forza.valore, operazione: aumento, valore: 19}
+descrizione: |
+  Finché il personaggio indossa questi guanti, il suo punteggio di Forza è pari a 19. I guanti non hanno alcun effetto se il suo punteggio di Forza è già pari o superiore a 19.

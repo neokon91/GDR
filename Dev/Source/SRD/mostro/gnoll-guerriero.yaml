@@ -1,0 +1,58 @@
+id: dnd.mostro.gnoll-guerriero
+nome: Gnoll guerriero
+taglia: media
+tipo: immondo
+gruppo: Gnoll
+allineamento: caotico malvagio
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 14, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 11, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 7, competenza: false}
+dadi_vita: 6
+velocita: {camminata: 9}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+lingue: [Gnoll]
+gs: 1/2
+
+azioni:
+  - nome: Squarcio
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+  - nome: Arco d'ossa
+    descrizione: |
+      *Tiro per colpire a distanza:* +3, gittata 45/180 m. *Colpito:* 6 (1d10 + 1) danni perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          gittata: {normale: 45, lunga: 180}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: "Furia (1/giorno)"
+    descrizione: |
+      Subito dopo aver inflitto danni a una creatura già sanguinante, lo gnoll si muove fino a metà della sua velocità ed effettua un attacco Squarcio.

@@ -1,0 +1,53 @@
+id: dnd.mostro.ombra
+nome: Ombra
+taglia: media
+tipo: non-morto
+allineamento: caotico malvagio
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 6, competenza: false}
+  destrezza: {valore: 14, competenza: false}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 6, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 8, competenza: false}
+dadi_vita: 5
+velocita: {camminata: 12}
+abilita: [furtivita: maestria]
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+resistenze: [acido, freddo, fulmine, fuoco, tuono]
+immunita_danni: [necrotico, veleno]
+immunita_condizioni: [afferrato, avvelenato, indebolimento, paralizzato, pietrificato, privo-di-sensi, prono, spaventato, trattenuto]
+vulnerabilita: [radioso]
+lingue: [nessuna]
+gs: 1/2
+
+tratti:
+  - nome: Amorfo
+    descrizione: |
+      L'ombra può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+  - nome: Debolezza al sole
+    descrizione: |
+      Finché è esposta alla luce del sole, l'ombra subisce svantaggio alle prove con d20.
+azioni:
+  - nome: Colpo prosciugante
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni necrotici, e il punteggio di Forza del bersaglio diminuisce di 1d4. Se tale punteggio arriva a 0, il bersaglio muore. Se un umanoide viene ucciso da questo attacco, sorgerà un'ombra dal suo cadavere dopo 1d4 ore.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: necrotico
+              bonus: {caratteristica: destrezza}
+azioni_bonus:
+  - nome: Furtività d'ombra
+    descrizione: |
+      Finché si trova in condizioni di luce fioca o oscurità, l'ombra effettua l'azione di Nascondersi.

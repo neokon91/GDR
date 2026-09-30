@@ -1,0 +1,9 @@
+id: dnd.oggetto-magico.anello-di-scudo-mentale
+nome: Anello di scudo mentale
+categoria: anello
+rarita: non-comune
+richiede_sintonia: true
+descrizione: |
+  Mentre il personaggio indossa questo anello, è immune alla magia che permette alle altre creature di leggere i suoi pensieri, scoprire se sta mentendo, conoscere il suo allineamento o determinare il suo tipo di creatura. Le creature possono comunicare telepaticamente con il personaggio solamente se egli lo consente.
+  Inoltre, può effettuare un'azione di Magia per rendere l'anello impercettibile finché non decide di renderlo nuovamente percettibile con un'altra azione di Magia, non se lo toglie o muore.
+  Se il personaggio muore mentre indossa l'anello, la sua anima entra dentro quest'ultimo, a meno che esso non ospiti già un'altra anima. Il personaggio può rimanere nell'anello o raggiungere l'aldilà. Finché l'anima del personaggio si trova nell'anello, può comunicare telepaticamente con qualsiasi creatura che lo indossi. La creatura che indossa l'anello non può impedire questa comunicazione telepatica.

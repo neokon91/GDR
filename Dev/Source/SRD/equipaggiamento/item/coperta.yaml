@@ -1,0 +1,5 @@
+id: dnd.oggetto.coperta
+nome: Coperta
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-argento}
+peso: {valore: 1.5, unita: kg}

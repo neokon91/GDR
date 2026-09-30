@@ -1,0 +1,38 @@
+id: dnd.mostro.topo
+nome: Topo
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 10}
+caratteristiche:
+  forza: {valore: 2, competenza: false}
+  destrezza: {valore: 11, competenza: false}
+  costituzione: {valore: 9, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 4, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 6, scalata: 6}
+abilita: [percezione: competenza]
+sensi: {scurovisione: 9}
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Agile
+    descrizione: |
+      Il topo non provoca attacchi di opportunità quando esce dalla portata di un nemico.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 1 danno perforante.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          portata: 1.5

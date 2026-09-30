@@ -1,0 +1,33 @@
+id: dnd.incantesimo.muro-di-spine
+nome: Muro di spine
+livello: 6
+scuola: evocazione
+classi:
+  - dnd.classe.druido
+tempo_lancio: azione
+gittata: 36
+componenti: [V, S, "M (una manciata di spine)"]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore crea un muro di rovi irto di spine affilate. Il muro appare entro gittata su una superficie solida e permane per tutta la durata dell'incantesimo. L'incantatore può scegliere se creare un muro lungo fino a 18 metri, alto 3 metri e spesso 1,5 metri, oppure un muro circolare del diametro massimo di 6 metri, alto fino a 6 metri e spesso 1,5 metri. Il muro blocca la visuale.
+
+  Quando compare, ogni creatura al suo interno effettua un tiro salvezza su Destrezza, subendo 7d8 danni perforanti in caso di fallimento, o la metà dei danni in caso di successo.
+
+  Una creatura può muoversi attraverso il muro, seppur con fatica e dolore: per ogni 30 centimetri di muro che attraversa, deve usare 1,2 metri di movimento. Inoltre, la prima volta che una creatura entra in uno spazio nel muro in un turno o vi termina il proprio turno, effettua un tiro salvezza su Destrezza subendo 7d8 danni taglienti in caso di fallimento, o la metà dei danni in caso di successo. Una creatura effettua questo tiro salvezza solo una volta per turno.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore**
+  Entrambi i tipi di danno aumentano di 1d8 per ogni slot incantesimo di livello superiore al 6º.
+attivita:
+  # colpo iniziale (quando compare): perforante
+  - tipo: tiro-salvezza
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento: { danno: { numero_dadi: 7, dado: d8, tipo_danno: perforante } }
+    successo: danno-dimezzato
+  # ricorrente (entra nel muro): tagliente
+  - tipo: tiro-salvezza
+    innesco: entra-nell-area
+    tiro_salvezza: { caratteristica: destrezza, cd: incantesimo }
+    fallimento: { danno: { numero_dadi: 7, dado: d8, tipo_danno: tagliente } }
+    successo: danno-dimezzato

@@ -1,0 +1,5 @@
+id: dnd.oggetto.sfere-metalliche
+nome: Sfere metalliche
+categoria: equipaggiamento-avventura
+costo: {valore: 1, valuta: moneta-oro}
+peso: {valore: 1, unita: kg}

@@ -1,0 +1,29 @@
+id: dnd.mostro.cavalluccio-marino
+nome: Cavalluccio marino
+taglia: minuscola
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 1, competenza: false}
+  destrezza: {valore: 12, competenza: false}
+  costituzione: {valore: 8, competenza: false}
+  intelligenza: {valore: 1, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 2, competenza: false}
+dadi_vita: 1
+velocita: {camminata: 5, nuoto: 6}
+abilita: [percezione: competenza, furtivita: maestria]
+percezione_passiva: 12
+lingue: [nessuna]
+gs: 0
+
+tratti:
+  - nome: Respirare sott'acqua
+    descrizione: |
+      Il cavalluccio marino può respirare solo sott'acqua.
+azioni:
+  - nome: Scatto acquatico
+    descrizione: |
+      Finché è sott'acqua, il cavalluccio marino può muoversi fino alla sua velocità di nuoto massima senza provocare attacchi di opportunità.

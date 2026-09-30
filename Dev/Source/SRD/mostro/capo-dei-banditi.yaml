@@ -1,0 +1,68 @@
+id: dnd.mostro.capo-dei-banditi
+nome: Capo dei Banditi
+taglia: [media, piccola]
+tipo: umanoide
+gruppo: Banditi
+allineamento: neutrale
+ca: {valore: 15}
+caratteristiche:
+  forza: {valore: 15, competenza: true}
+  destrezza: {valore: 16, competenza: true}
+  costituzione: {valore: 14, competenza: false}
+  intelligenza: {valore: 14, competenza: false}
+  saggezza: {valore: 11, competenza: true}
+  carisma: {valore: 14, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 9}
+abilita: [atletica: competenza, inganno: competenza]
+equipaggiamento: [armatura di cuoio borchiato, pistola, scimitarra]
+lingue: [Comune, Gergo ladresco]
+gs: 2
+azioni:
+  - id: capo-dei-banditi.multiattacco
+    nome: Multiattacco
+    descrizione: Il bandito effettua due attacchi, usando Scimitarra e Pistola in qualsiasi combinazione
+  - id: capo-dei-banditi.pistola
+    nome: Pistola
+    descrizione: |
+      *Tiro per Colpire a Distanza:* +5, gittata 9/27 m.
+      *Colpito:* 8 (1d10 + 3) danni Perforanti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-distanza
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.pistola
+          gittata: {normale: 9, lunga: 27}
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d10
+              tipo_danno: perforante
+              bonus: {caratteristica: destrezza}
+  - id: capo-dei-banditi.scimitarra
+    nome: Scimitarra
+    descrizione: |
+      *Tiro per Colpire in Mischia:* +5, portata 1,5 m.
+      *Colpito:* 6 (1d6 + 3) danni Taglienti.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: arma-mischia
+          bonus: {caratteristica: destrezza, competenza: true}
+          bersagli: 1
+          usa: dnd.arma.scimitarra
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d6
+              tipo_danno: tagliente
+              bonus: {caratteristica: destrezza}
+reazioni:
+  - id: capo-dei-banditi.parata
+    nome: Parata
+    descrizione: |
+      *Attivazione:* il bandito viene colpito da un tiro per colpire in mischia mentre tiene in mano un'arma.
+      *Esito:* il bandito aggiunge 2 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno.

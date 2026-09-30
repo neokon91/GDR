@@ -1,0 +1,17 @@
+id: dnd.incantesimo.respirare-sott-acqua
+nome: Respirare sott'acqua
+livello: 3
+scuola: trasmutazione
+classi:
+  - dnd.classe.druido
+  - dnd.classe.mago
+  - dnd.classe.ranger
+  - dnd.classe.stregone
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (un piccolo giunco)"]
+concentrazione: false
+rituale: true
+durata: 24 ore
+descrizione: |
+  Questo incantesimo concede a un massimo di dieci creature consenzienti entro gittata (a scelta dell'incantatore) la capacità di respirare sott'acqua per tutta la sua durata. Le creature influenzate conservano inoltre la loro normale modalità di respirazione.

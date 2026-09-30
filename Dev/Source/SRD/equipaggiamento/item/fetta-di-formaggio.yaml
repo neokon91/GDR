@@ -1,0 +1,4 @@
+id: dnd.oggetto.fetta-di-formaggio
+nome: Fetta di formaggio
+categoria: vitto-e-alloggio
+costo: {valore: 1, valuta: moneta-argento}

@@ -1,0 +1,17 @@
+id: dnd.incantesimo.aura-di-vita
+nome: Aura di vita
+livello: 4
+scuola: abiurazione
+classi:
+  - dnd.classe.chierico
+  - dnd.classe.paladino
+tempo_lancio: azione
+gittata: incantatore
+componenti: [V]
+concentrazione: true
+rituale: false
+durata: fino a 10 minuti
+descrizione: |
+  L'incantatore irradia un'aura in un'[[emanazione]] di 9 metri da sé che permane per la durata dell'incantesimo.
+  Mentre sono nell'aura, l'incantatore e i suoi alleati ottengono Resistenza ai danni Necrotici e i loro Punti Ferita Massimi non possono essere ridotti.
+  Se un alleato con 0 Punti Ferita inizia il suo turno nell'aura, ne recupera 1.

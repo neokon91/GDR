@@ -1,0 +1,4 @@
+id: dnd.oggetto.profumo
+nome: Profumo
+categoria: equipaggiamento-avventura
+costo: {valore: 5, valuta: moneta-oro}

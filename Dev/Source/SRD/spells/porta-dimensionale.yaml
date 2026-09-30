@@ -1,0 +1,21 @@
+id: dnd.incantesimo.porta-dimensionale
+nome: Porta Dimensionale
+livello: 4
+scuola: evocazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.mago
+  - dnd.classe.stregone
+  - dnd.classe.warlock
+tempo_lancio: azione
+gittata: 150
+componenti: [V]
+concentrazione: false
+rituale: false
+durata: istantanea
+descrizione: |
+  L'incantatore si teletrasporta in un punto entro gittata arrivando precisamente nel luogo desiderato, che può essere un punto che è in grado di vedere, che riesce a visualizzare o che è in grado di descrivere dichiarandone la distanza e la direzione, come per esempio "60 metri in linea retta verso il basso" o "90 metri verso nord-ovest, a un'angolazione ascendente di 45 gradi".
+
+  L'incantatore può anche teletrasportare una creatura consenziente. Prima che si teletrasporti, la creatura deve trovarsi entro 1,5 metri dall'incantatore, per poi teletrasportarsi in uno spazio entro 1,5 metri dalla destinazione dell'incantatore.
+
+  Se l'incantatore, l'altra creatura o entrambi arrivano in uno spazio occupato da una creatura o riempito completamente da uno o più oggetti, l'incantatore e qualsiasi creatura che viaggia con lui subiscono 4d6 danni da forza e il teletrasporto fallisce.

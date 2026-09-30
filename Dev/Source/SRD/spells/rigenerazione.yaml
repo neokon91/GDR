@@ -1,0 +1,19 @@
+id: dnd.incantesimo.rigenerazione
+nome: Rigenerazione
+livello: 7
+scuola: trasmutazione
+classi:
+  - dnd.classe.bardo
+  - dnd.classe.chierico
+  - dnd.classe.druido
+tempo_lancio: 1 minuto
+gittata: contatto
+componenti: [V, S, "M (un ruota della preghiera)"]
+concentrazione: false
+rituale: false
+durata: 1 ora
+descrizione: |
+  Una creatura toccata dall'incantatore recupera 4d8 + 15 punti ferita. Per la durata dell'incantesimo, il bersaglio recupera 1 punto ferita all'inizio di ogni suo turno e qualsiasi parte del corpo sia stata recisa, ricresce dopo 2 minuti.
+attivita:
+  - tipo: cura
+    cura: { numero_dadi: 4, dado: d8, bonus: 15 }

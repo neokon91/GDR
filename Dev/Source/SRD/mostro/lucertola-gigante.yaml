@@ -1,0 +1,43 @@
+id: dnd.mostro.lucertola-gigante
+nome: Lucertola gigante
+taglia: grande
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 15, competenza: false}
+  destrezza: {valore: 12, competenza: true}
+  costituzione: {valore: 13, competenza: false}
+  intelligenza: {valore: 2, competenza: false}
+  saggezza: {valore: 10, competenza: false}
+  carisma: {valore: 5, competenza: false}
+dadi_vita: 3
+velocita: {camminata: 12, scalata: 12}
+sensi: {scurovisione: 18}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 1/4
+
+tratti:
+  - nome: Movimenti del ragno
+    descrizione: |
+      La lucertola può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+azioni:
+  - nome: Morso
+    descrizione: |
+      *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 1
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}

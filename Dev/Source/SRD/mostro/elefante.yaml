@@ -1,0 +1,57 @@
+id: dnd.mostro.elefante
+nome: Elefante
+taglia: enorme
+tipo: bestia
+gruppo: Animali
+allineamento: senza allineamento
+ca: {valore: 12}
+caratteristiche:
+  forza: {valore: 22, competenza: false}
+  destrezza: {valore: 9, competenza: false}
+  costituzione: {valore: 17, competenza: false}
+  intelligenza: {valore: 3, competenza: false}
+  saggezza: {valore: 11, competenza: false}
+  carisma: {valore: 6, competenza: false}
+dadi_vita: 8
+velocita: {camminata: 12}
+percezione_passiva: 10
+lingue: [nessuna]
+gs: 4
+
+azioni:
+  - nome: Multiattacco
+    id: multiattacco
+    attivita:
+      - tipo: multiattacco
+        sequenza:
+          - {azione: trafiggere, ripetizioni: 2}
+    descrizione: |
+      L'elefante effettua due attacchi Trafiggere.
+  - nome: Trafiggere
+    id: trafiggere
+    descrizione: |
+      *Tiro per colpire in mischia:* +8, portata 1,5 m *Colpito:* 15 (2d8 + 6) danni perforanti. Se il bersaglio è una creatura di taglia Enorme o inferiore e l'elefante si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono.
+    attivita:
+      - tipo: attacco
+        attacco:
+          categoria: attacco-naturale
+          bonus: {caratteristica: forza, competenza: true}
+          bersagli: 1
+          portata: 1.5
+        colpito:
+          - danno:
+              numero_dadi: 2
+              dado: d8
+              tipo_danno: perforante
+              bonus: {caratteristica: forza}
+azioni_bonus:
+  - nome: Calpestare
+    descrizione: |
+      *Tiro salvezza su Destrezza:* CD 16, una creatura prona entro 1,5 metri. *Fallimento:* 17 (2d10 + 6) danni contundenti. *Successo:* danni dimezzati.
+
+    attivita:
+      - tipo: tiro-salvezza
+        tiro_salvezza:
+          caratteristica: destrezza
+          cd: {caratteristica: forza, base: 8, competenza: true}
+        successo: danno-dimezzato

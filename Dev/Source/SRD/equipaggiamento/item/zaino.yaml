@@ -1,0 +1,5 @@
+id: dnd.oggetto.zaino
+nome: Zaino
+categoria: equipaggiamento-avventura
+costo: {valore: 2, valuta: moneta-oro}
+peso: {valore: 2.5, unita: kg}

@@ -1,0 +1,21 @@
+id: dnd.incantesimo.amicizia-con-gli-animali
+nome: Amicizia con gli Animali
+livello: 1
+scuola: ammaliamento
+classi: 
+  - dnd.classe.bardo
+  - dnd.classe.druido
+  - dnd.classe.ranger
+tempo_lancio: azione
+gittata: 9
+componenti: [V, S, "M (un boccone di cibo)"]
+concentrazione: false
+rituale: false
+durata: 24 ore
+descrizione: |
+  L'incantatore sceglie come bersaglio una bestia entro gittata che egli è in grado di vedere.
+  Il bersaglio deve superare un tiro salvezza su Saggezza, altrimenti rimane [[affascinato]] per la durata dell'incantesimo.
+  Se l'incantatore o uno dei suoi alleati infligge danni al bersaglio, l'incantesimo termina.
+scaling: |
+  **Utilizzo di uno slot incantesimo di livello superiore.** L'incantatore può scegliere come bersaglio
+  una bestia aggiuntiva per ogni slot di livello superiore al 1º.
