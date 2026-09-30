@@ -170,7 +170,7 @@ SRD (archivio) + pg_rules.yaml + system.yaml
 - **Presentazione** (`scheda_pg_rules()`): caratteristiche/abilità con tiri Dice Roller col bonus
   reale, risorse di classe a barre (`renderRisorsePG`), slot, riposi (loop di sessione 2024),
   incantesimi con CD/attacco.
-- **Kernel condiviso (Tier 3, SOSPESO: GDR è in manutenzione da set 2026)**: il builder del PG (`assembla`: scelte + catalogo →
+- **Kernel condiviso (Tier 3, da riprendere: GDR è di nuovo in sviluppo da fine set 2026)**: il builder del PG (`assembla`: scelte + catalogo →
   Attore) è **canonico in `regole/src/creatore`** (motore/catalogo/fonti/personaggio/attore/
   risolutore); Compendio lo **symlinka** (fonte unica). Fase A fatta. Resta: bundlare il catalogo
   per il plugin (`gen_catalogo.py`) e ritirare `crea_pg.js` a favore del kernel condiviso, così le

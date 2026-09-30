@@ -142,6 +142,18 @@ plugins:
     author: Obsidian TTRPG Community
     repo: obsidian-ttrpg-community/Made-Up-Words
     license: MIT
+  # Tavolo virtuale: mappe con griglia, token, nebbia di guerra e una finestra per i
+  # giocatori su un secondo schermo. Il COMBATTIMENTO resta alla Board del plugin gdr
+  # (le regole vere); Atlas dà la mappa. Solo desktop (Obsidian ≥ 1.8.7). AGPL-3.0 con
+  # eccezione per Obsidian: incluso non modificato. I suoni ambientali predefiniti non
+  # viaggiano nella release (nemmeno dall'installazione community): si usano i propri
+  # in `.atlas/sounds`.
+  - id: atlas-vtt
+    name: Atlas VTT
+    author: Fabian Urbanek
+    repo: ByteMirror/atlas-vtt
+    version: 0.4.2
+    license: AGPL-3.0
   - id: better-export-pdf
     name: Better Export PDF
     author: l1xnan
@@ -402,3 +414,7 @@ buttons:
   - id: inserisci-data
     label: Inserisci data
     command: calendarium:insert-calendarium-current-date
+  # Il tavolo virtuale di Atlas VTT (mappe, token, nebbia, vista giocatori).
+  - id: apri-tavolo
+    label: Apri il tavolo (mappe)
+    command: atlas-vtt:open-dashboard

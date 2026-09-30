@@ -12,7 +12,7 @@ passi del [[LEGGIMI]]). Se qualcosa non si rende, apri *Impostazioni → Plugin 
 assicurati che **Restricted mode** sia OFF e che questi siano **abilitati**:
 {% for p in plugins.plugins if not p.get('autoriale') %}
 - **{{ p.name }}** (`{{ p.id }}`)
-{%- endfor %}
+{% endfor %}
 
 Più il **plugin GDR** (`gdr`, già incluso e abilitato): è il motore del vault — rende i
 pannelli ```gdr, i pulsanti-azione, la creazione delle note e il Cruscotto DM.

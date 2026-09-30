@@ -5,7 +5,17 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 
 ## [Non rilasciato]
 
+### Aggiunto
+- **Tavolo virtuale Atlas VTT** (plugin di terze parti, AGPL-3.0 con eccezione Obsidian,
+  pinnato alla 0.4.2, solo desktop): mappe con griglia, token, nebbia di guerra e vista
+  giocatori su un secondo schermo. Non critico: combattimento e regole restano alla Board.
+  Bottone `apri-tavolo` nel tab *Combattimento* dell'Incontro e nella Guida al combattimento.
+  Limite noto: i suoni predefiniti di Atlas non sono nelle sue release (i suoni personali
+  vanno in `.atlas/sounds`).
+
 ### Corretto
+- **Elenco dei plugin nel Manuale**: finiva su una riga sola (`{%- endfor %}` mangiava
+  l'a capo); ora una voce per riga.
 - **PF retroattivi su ASI/`concede` di Costituzione** (`sali_pg.js`, `crea_pg.js`): alzare il
   modificatore di Costituzione ora aggiunge +1 PF **per ogni livello** (RAW 5.5e), non solo sul
   livello nuovo — prima `pf_max` era fissato col mod COS pre-ASI. Anche a creazione i PF di L1 si

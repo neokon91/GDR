@@ -3,7 +3,8 @@
 Come si gioca uno scontro con la **Board di combattimento** nativa del plugin GDR: il motore
 event-sourced di *regole* fa iniziativa, turni, PF, tiri (colpire / salvezza / danno) e le
 **condizioni con i loro effetti**. Nessun plugin di terze parti. *Non* è una mappa tattica con
-token: per il posizionamento si usa il *theatre-of-the-mind* o una mappa di scena (tab *Mappa*).
+token: per il posizionamento c'è il *theatre-of-the-mind*, una mappa di scena (tab *Mappa*)
+o il tavolo virtuale (§3).
 
 ## 0. Preparazione (una volta sola)
 Crea i tuoi **PG** (comando **«GDR: Crea PG»**). La Board li riconosce come il tuo
@@ -32,8 +33,10 @@ calcolati dalla scheda.
    successivi — non sono solo etichette.
 
 ## 3. Cosa resta al DM
-- **Posizione e distanze**: non c'è griglia né token — *theatre-of-the-mind* o una mappa di
-  scena come sfondo, distanze a voce.
+- **Posizione e distanze**: la Board non ha griglia né token. Per una mappa di battaglia
+  c'è il **tavolo virtuale** (Atlas VTT, solo desktop: `BUTTON[apri-tavolo]`): griglia,
+  token, nebbia di guerra e una finestra per i giocatori su un secondo schermo. I tiri e
+  le condizioni restano alla Board; sulla mappa tieni posizioni e distanze.
 - **Durate narrative** e le scelte di trama (quando finisce un effetto «a scelta del GM»).
 
 ## 4. Creature homebrew giocabili

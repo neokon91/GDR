@@ -30,6 +30,7 @@ la sorgente corrispondente, con il testo completo della licenza, è al rispettiv
 | Second Window | Jeremy Valentine | MIT | [javalent/second-window](https://github.com/javalent/second-window) |
 | Heraldry Weaver | Obsidian TTRPG Community | MIT | [Obsidian-TTRPG-Community/heraldry-weaver](https://github.com/Obsidian-TTRPG-Community/heraldry-weaver) |
 | Made Up Words | Obsidian TTRPG Community | MIT | [obsidian-ttrpg-community/Made-Up-Words](https://github.com/obsidian-ttrpg-community/Made-Up-Words) |
+| Atlas VTT | Fabian Urbanek | AGPL-3.0 | [ByteMirror/atlas-vtt](https://github.com/ByteMirror/atlas-vtt) |
 | Better Export PDF | l1xnan | MIT | [l1xnan/obsidian-better-export-pdf](https://github.com/l1xnan/obsidian-better-export-pdf) |
 
 > **Per chi ridistribuisce questo vault**: mantieni i plugin non modificati e conserva

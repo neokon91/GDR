@@ -38,10 +38,11 @@ guida completa è nel **LEGGIMI** dentro il vault.
 
 > Il resto di questo README è per chi vuole **costruire da sorgente** o contribuire.
 
-> **Stato: manutenzione** (decisione di set 2026). Niente sviluppo nuovo: la suite resta
-> verde e GDR si riallinea quando cambiano `archivio` o `regole` (la CI gira anche ogni
-> notte per accorgersene). Il Tier 3 — un solo creatore di PG, `crea_pg.js` ritirato per il
-> kernel — è sospeso, non abbandonato.
+> **Stato: sviluppo attivo** (ripreso a fine set 2026, dopo la manutenzione decisa a
+> inizio mese). Obiettivo corrente: un vault **distribuibile** che si costruisca solo da
+> contenuti condivisibili (SRD 5.2.1 CC-BY-4.0 e il codice del motore), senza il
+> repo privato `archivio`. La CI gira anche ogni notte per accorgersi quando cambiano
+> `archivio` o `regole`.
 >
 > **Il mondo del DM non passa da qui** (confermato set 2026): l'archivio è il modello
 > canonico del mondo e la sua superficie è il Compendio (i mondi di
