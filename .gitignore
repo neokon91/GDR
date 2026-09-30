@@ -11,8 +11,8 @@ __pycache__/
 # Il vault Obsidian generato vive interamente in dist/ (output, non sorgente).
 dist/
 Dev/Build/
-archivio
-regole
+/archivio
+/regole
 # Bestiario del motore: artefatto GENERATO da archivio (Dev/Tools/gen_bestiario.py,
 # rigenerato dalla build del plugin). Sorgente = archivio + generatore, non questo file.
 plugin/data/

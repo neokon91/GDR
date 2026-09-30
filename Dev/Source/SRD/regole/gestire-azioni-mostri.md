@@ -1,0 +1,32 @@
+---
+id: dnd.regola.gestire-azioni-mostri
+nome: Gestire azioni e attacchi dei mostri
+categoria: Mostri
+---
+Per far agire un mostro in linea con il suo grado di sfida, il GM dovrebbe usare spesso capacita speciali, Multiattacco, azioni bonus, reazioni e azioni leggendarie quando disponibili.
+
+## Gestione in Combattimento
+| Voce | Riepilogo |
+| --- | --- |
+| Capacita speciali | Se infliggono molti danni e hanno usi limitati, usale rapidamente e spesso. |
+| Multiattacco | Usalo ogni turno in cui il mostro non impiega una delle sue abilita piu potenti. |
+| Azioni bonus, reazioni, leggendarie | Se presenti nella scheda, usale il piu spesso possibile. |
+
+## Informazioni sugli Attacchi
+| Voce | Riepilogo |
+| --- | --- |
+| Attacco | Indica tipo, bonus al tiro per colpire, portata o gittata e conseguenze se colpisce. |
+| Colpito | Danni o effetti che si verificano quando l'attacco colpisce. |
+| Mancato | Effetti che si verificano quando l'attacco manca. |
+| Colpito o mancato | Effetti che avvengono indipendentemente dall'esito del tiro. |
+| Danni | La scheda fornisce numero e formula; si usa il numero o si tira la formula, non entrambi. |
+| Tiro salvezza | L'effetto indica caratteristica, CD, bersagli e conseguenze di successo o fallimento; danni dimezzati significa arrotondati per difetto. |
+
+## Incantesimi dei Mostri
+| Voce | Riepilogo |
+| --- | --- |
+| Dati | La scheda indica caratteristica da incantatore, CD e bonus di attacco se necessari. |
+| Livello | Salvo diversa indicazione, un incantesimo di 1º livello o superiore e lanciato al livello piu basso possibile. |
+| Restrizioni | La scheda puo imporre restrizioni speciali, come un incantesimo che funziona solo sul mostro stesso. |
+| Componenti | Il tratto Incantesimo indica se il mostro ignora componenti; se servono, il mostro possiede quelle materiali richieste. |
+| Tempi lunghi | Per tempi di lancio di 1 minuto o piu, il mostro deve usare l'azione di Magia ogni turno e mantenere concentrazione, salvo diversa indicazione. |

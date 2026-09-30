@@ -47,3 +47,17 @@ def test_la_copia_porta_solo_dati_srd_e_la_licenza():
 def test_la_copia_e_allineata_all_archivio():
     nuovi, cambiati, spariti = sync_srd.differenze()
     assert (nuovi, cambiati, spariti) == ([], [], []), "copia SRD indietro: `npm run sync-srd`"
+
+
+def test_ogni_file_della_copia_e_nel_repo():
+    """Un pattern del .gitignore non ancorato (`regole`) escludeva in silenzio
+    `Dev/Source/SRD/regole/`: su disco c'era, nel clone pubblico no."""
+    import shutil
+    import subprocess
+    radice = SRD_DIR.parents[2]
+    if not shutil.which("git") or not (radice / ".git").exists():
+        pytest.skip("non è un checkout git")
+    tracciati = set(subprocess.run(["git", "ls-files", "-z", "--", str(SRD_DIR)], cwd=radice,
+                                   capture_output=True, text=True, check=True).stdout.split("\0")) - {""}
+    su_disco = {p.relative_to(radice).as_posix() for p in SRD_DIR.rglob("*") if p.is_file()}
+    assert sorted(su_disco - tracciati) == []
