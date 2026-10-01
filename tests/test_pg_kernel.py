@@ -1,0 +1,66 @@
+"""Il PG col LIBRETTO (Tier 3) e il catalogo del kernel, headless.
+
+Due script TypeScript del plugin, impacchettati con esbuild e lanciati con node:
+`gen_catalogo.ts` costruisce il catalogo con `catalogoDa` del kernel dalla copia SRD, e
+`smoke_pg.ts` crea e fa salire un PG per ogni classe con la guida del kernel, ne scrive la
+nota, lo monta per la Board e fa andare e tornare le risorse. Senza node o senza esbuild
+(dipendenza del plugin) i test si saltano da soli.
+"""
+
+import json
+import os
+import shutil
+import subprocess
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parents[1]
+PLUGIN = ROOT / "plugin"
+ESBUILD = PLUGIN / "node_modules" / ".bin" / "esbuild"
+
+pytestmark = pytest.mark.skipif(
+    not shutil.which("node") or not ESBUILD.exists() or not (ROOT / "regole").exists(),
+    reason="node, esbuild del plugin o regole assenti",
+)
+
+
+def _lancia(script: str, tmp_path: Path, *args: str) -> str:
+    out = tmp_path / f"{Path(script).stem}.cjs"
+    env = {**os.environ, "NODE_PATH": str(PLUGIN / "node_modules")}
+    subprocess.run([str(ESBUILD), str(ROOT / "Dev" / "Tools" / script), "--bundle", "--platform=node",
+                    "--format=cjs", "--log-level=warning", f"--outfile={out}"],
+                   cwd=PLUGIN, env=env, check=True, capture_output=True, text=True)
+    res = subprocess.run(["node", str(out), *args], cwd=PLUGIN, capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr or res.stdout
+    return res.stdout
+
+
+@pytest.fixture(scope="module")
+def catalogo(tmp_path_factory) -> Path:
+    tmp = tmp_path_factory.mktemp("catalogo")
+    dest = tmp / "srd_catalogo.json"
+    _lancia("gen_catalogo.ts", tmp, str(ROOT / "Dev" / "Source" / "SRD"), str(dest))
+    return dest
+
+
+def test_il_catalogo_del_kernel_ha_tutto_lsrd(catalogo):
+    cat = json.loads(catalogo.read_text(encoding="utf-8"))
+    conta = {k: len(v) for k, v in cat.items()}
+    assert conta["classi"] == 12 and conta["sottoclassi"] == 12 and conta["specie"] == 9
+    # Anche i talenti scritti come NOTA (.md: Abile, Allerta…): il vecchio costruttore li perdeva.
+    ids = {t["id"] for t in cat["talenti"]}
+    assert {"dnd.talento.abile", "dnd.talento.allerta", "dnd.talento.aggressore-selvaggio"} <= ids
+    assert conta["talenti"] == 17
+    # Le varianti e i parametri dei talenti, e le lingue con id corto come nel Compendio.
+    iniziato = next(t for t in cat["talenti"] if t["id"] == "dnd.talento.iniziato-alla-magia")
+    assert iniziato.get("scelte")
+    assert "comune" in {l["id"] for l in cat["lingue"]}
+    # Il prerequisito di multiclasse viene dai dati della classe.
+    assert all(c.get("caratteristica_primaria") for c in cat["classi"])
+
+
+def test_il_pg_col_libretto_regge_tutta_la_catena(catalogo, tmp_path):
+    out = _lancia("smoke_pg.ts", tmp_path, str(catalogo))
+    assert "12 classi create e salite al 5º senza mancanze" in out
+    assert "multiclasse: guerriero 2 / mago 1" in out

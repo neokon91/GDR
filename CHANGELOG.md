@@ -6,6 +6,13 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Creatore di PG sul kernel, col libretto**: la nota del PG custodisce il libretto (le scelte
+  livello per livello) e i numeri della scheda ne derivano. Comandi «Crea PG (kernel condiviso)» e
+  «Sali di livello» (il bottone esistente, sulle note col libretto): le domande le decide la guida
+  del kernel, la stessa del creatore del Compendio, con multiclasse, talenti (varianti e parametri),
+  scelte di classe, maestrie e incantesimi. La Board monta questi PG completi (attivabili, aure,
+  incantatore, oggetti magici) e a fine scontro riporta sulla nota PF, slot e usi spesi. I PG creati
+  con `crea_pg.js` funzionano come prima.
 - **GDR si costruisce senza l'archivio privato**: i dati vengono dalla copia vendorizzata
   dell'SRD in `Dev/Source/SRD/` (1395 file, CC-BY-4.0), non più da `../archivio`.
   `npm run sync-srd` la aggiorna dall'archivio accanto (specchio di `srd/` e basta: nessun
@@ -24,6 +31,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   con un clic. La Guida al combattimento dice chi fa cosa fra Board e Atlas.
 
 ### Corretto
+- **Catalogo del creatore**: lo costruisce `gen_catalogo.ts` col costruttore del kernel (lo stesso
+  del Compendio) invece di `gen_catalogo.py`, che perdeva i talenti scritti come nota (Abile, Allerta,
+  Aggressore selvaggio, Combattere con armi possenti, Aumento dei punteggi: 12 su 17), le varianti e i
+  parametri dei talenti, le caratteristiche primarie e le competenze di multiclasse (il prerequisito di
+  multiclasse non poteva valere), e dava alle lingue id puntati.
 - **Elenco dei plugin nel Manuale**: finiva su una riga sola (`{%- endfor %}` mangiava
   l'a capo); ora una voce per riga.
 - **PF retroattivi su ASI/`concede` di Costituzione** (`sali_pg.js`, `crea_pg.js`): alzare il

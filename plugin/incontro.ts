@@ -4,7 +4,8 @@
 // bestiario per nome/slug (via trovaMostro), tollerante alla migrazione degli id.
 import { daMostro, type Combattente, type RisolviIncantesimo } from "../regole/src/motore/combattente";
 import type { Evento, InPlancia } from "../regole/src/motore/motore";
-import { daPgGdr } from "./adapters";
+import { combattenteDiPg, risorseDaNota } from "./pg";
+import type { Catalogo } from "../regole/src/creatore/catalogo";
 import { trovaMostro } from "./statblock";
 
 type Override = { hp?: number; ca?: number };
@@ -55,6 +56,7 @@ export function eventiDaIncontro(
   party: { f: any; fm: any }[],
   risolvi?: RisolviIncantesimo, // catalogo incantesimi SRD+homebrew → creature schierate lanciano
   armi?: Record<string, any>, // catalogo armi → i PG schierati hanno i bottoni d'attacco
+  catalogo?: Catalogo, // catalogo del kernel → i PG col libretto entrano completi
 ): { eventi: Evento[]; saltati: string[] } {
   const conteggi: Record<string, number> = {};
   const saltati: string[] = [];
@@ -63,7 +65,7 @@ export function eventiDaIncontro(
 
   // Avvolge un Combattente in InPlancia con key unica (`id#n`), nome disambiguato dal 2º
   // doppione, PF pieni, applicando l'eventuale override varianti (per nome).
-  const schiera = (base: Combattente, lato: "alleato" | "nemico") => {
+  const schiera = (base: Combattente, lato: "alleato" | "nemico"): InPlancia => {
     const ov = varianti[String(base.nome).toLowerCase()];
     const ca = ov?.ca ?? base.ca;
     const pfMax = ov?.hp ?? base.pf_max;
@@ -71,6 +73,7 @@ export function eventiDaIncontro(
     const nome = n > 1 ? `${base.nome} (${n})` : base.nome;
     const c: InPlancia = { ...base, ca, pf_max: pfMax, key: `${base.id}#${n}`, nome, pf_attuali: pfMax, iniziativa: null, schieramento: lato };
     eventi.push({ tipo: "aggiunto", combattente: c });
+    return c;
   };
 
   // Nemici: le creature collegate (i duplicati nella lista = più copie).
@@ -89,8 +92,15 @@ export function eventiDaIncontro(
     else if (nome && !saltati.includes(nome)) saltati.push(nome);
   }
 
-  // Il gruppo: i PG del vault entrano come alleati.
-  for (const pg of party) schiera(daPgGdr(pg.fm, armi), "alleato");
+  // Il gruppo: i PG del vault entrano come alleati; col libretto, completi e con lo stato di
+  // gioco della nota (PF, slot e usi spesi fino a un riposo).
+  const vuoto: Catalogo = { classi: [], specie: [], background: [], sottoclassi: [], talenti: [], lingue: [], incantesimi: [], oggetti: [] };
+  for (const pg of party) {
+    const base = combattenteDiPg(pg.fm, catalogo ?? vuoto, armi);
+    const c = schiera(base, "alleato");
+    const risorse = risorseDaNota(pg.fm, base);
+    if (risorse) eventi.push({ tipo: "risorse", key: c.key, risorse });
+  }
 
   return { eventi, saltati };
 }

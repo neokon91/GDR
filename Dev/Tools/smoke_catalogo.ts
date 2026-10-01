@@ -1,7 +1,7 @@
 /**
  * SMOKE TEST del catalogo del creatore (Tier 3 Fase B) — headless.
  *
- * Prova che `plugin/data/srd_catalogo.json` (generato da `gen_catalogo.py`) è un `Catalogo`
+ * Prova che `plugin/data/srd_catalogo.json` (generato da `gen_catalogo.ts` col costruttore del kernel) è un `Catalogo`
  * valido che guida il kernel condiviso: costruisce un PG di esempio, chiama `caricaFonti` +
  * `assembla` (gli STESSI di `regole` che userà il plugin) e verifica l'`Attore` risultante.
  * Se la forma del catalogo è sbagliata, `caricaFonti`/`assembla` sollevano e il test fallisce.

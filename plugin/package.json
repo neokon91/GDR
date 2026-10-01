@@ -10,16 +10,18 @@
     "gen:incantesimi": "python3 ../Dev/Tools/gen_incantesimi.py",
     "gen:oggetti": "python3 ../Dev/Tools/gen_oggetti.py",
     "gen:armi": "python3 ../Dev/Tools/gen_armi.py",
-    "gen:catalogo": "python3 ../Dev/Tools/gen_catalogo.py",
+    "gen:catalogo": "NODE_PATH=node_modules esbuild ../Dev/Tools/gen_catalogo.ts --bundle --platform=node --format=cjs --log-level=warning --outfile=node_modules/.cache/gen_catalogo.cjs && node node_modules/.cache/gen_catalogo.cjs",
     "smoke:catalogo": "esbuild ../Dev/Tools/smoke_catalogo.ts --bundle --platform=node --format=cjs --outfile=node_modules/.cache/smoke_catalogo.cjs && node node_modules/.cache/smoke_catalogo.cjs",
     "typecheck": "tsc --noEmit",
     "build": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && npm run gen:catalogo && npm run typecheck && node esbuild.config.mjs --prod",
-    "dev": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && npm run gen:catalogo && node esbuild.config.mjs"
+    "dev": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && npm run gen:catalogo && node esbuild.config.mjs",
+    "smoke:pg": "NODE_PATH=node_modules esbuild ../Dev/Tools/smoke_pg.ts --bundle --platform=node --format=cjs --log-level=warning --outfile=node_modules/.cache/smoke_pg.cjs && node node_modules/.cache/smoke_pg.cjs"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
     "esbuild": "^0.23.0",
     "obsidian": "^1.5.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "js-yaml": "^4.1.0"
   }
 }

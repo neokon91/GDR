@@ -175,11 +175,18 @@ SRD (archivio) + pg_rules.yaml + system.yaml
 - **Presentazione** (`scheda_pg_rules()`): caratteristiche/abilità con tiri Dice Roller col bonus
   reale, risorse di classe a barre (`renderRisorsePG`), slot, riposi (loop di sessione 2024),
   incantesimi con CD/attacco.
-- **Kernel condiviso (Tier 3, da riprendere: GDR è di nuovo in sviluppo da fine set 2026)**: il builder del PG (`assembla`: scelte + catalogo →
-  Attore) è **canonico in `regole/src/creatore`** (motore/catalogo/fonti/personaggio/attore/
-  risolutore); Compendio lo **symlinka** (fonte unica). Fase A fatta. Resta: bundlare il catalogo
-  per il plugin (`gen_catalogo.py`) e ritirare `crea_pg.js` a favore del kernel condiviso, così le
-  tre impl. di creazione PG (crea_pg.js · Compendio · regole) diventano UNA.
+- **Kernel condiviso (Tier 3, IN CORSO)**: il PG è un **libretto** (`regole/src/creatore/libretto.ts`:
+  la base del 1º livello + un passo per livello), salvato nella nota in `libretto`. Le domande del
+  creatore le decide la **guida** del kernel (`creatore/guida.ts`, la stessa del creatore del
+  Compendio): `plugin/creatore.ts` le pone coi modali (comandi «Crea PG (kernel condiviso)» e
+  «Sali di livello» sulle note col libretto). `plugin/pg.ts` ne deriva i campi piatti della scheda
+  (`scriviPg`: PF, CA, caratteristiche, slot, `risorse_pg`…; lo stato di gioco resta), monta il PG
+  completo per la Board (`combattenteDiPg`: attivabili, aure, incantatore, oggetti magici) e
+  traduce le risorse spese fra nota e motore (`risorseDaNota`/`notaDaRisorse`). Il catalogo lo
+  costruisce `gen_catalogo.ts` con `catalogoDa` del kernel (lo stesso costruttore del Compendio).
+  I PG senza libretto (creati da `crea_pg.js`) entrano nella Board come prima (`daPgGdr`).
+  Resta: l'homebrew del vault nel catalogo del kernel, poi il ritiro di `crea_pg.js`/`sali_pg.js`.
+  Prova headless: `npm run smoke:pg` (anche in `tests/test_pg_kernel.py`).
 
 ---
 

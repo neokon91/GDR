@@ -7,12 +7,13 @@ import {
   ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
   comandoIniziativa, comandoAttacco, comandoSalvezza, comandoMultiattacco, comandoCura,
   comandoLeggendaria, leggendarieRestanti, comandoLancia, slotRestanti, usiRestanti,
-  comandoSostituisciEsito, sostituzioniDisponibili, sostituzioniRestanti,
+  comandoSostituisciEsito, sostituzioniDisponibili, sostituzioniRestanti, risorseDi,
   type Evento, type Dado, type InPlancia, type Stato, type DefinizioniCondizioni,
 } from "../regole/src/motore/motore";
 import { daMostro, type Combattente, type Azione, type RisolviIncantesimo, type IncantesimoLanciabile } from "../regole/src/motore/combattente";
 import { StatblockModal, trovaMostro } from "./statblock";
-import { daPgGdr } from "./adapters";
+import { combattenteDiPg, idPg, risorseDaNota, notaDaRisorse, librettoDi } from "./pg";
+import type { Catalogo } from "../regole/src/creatore/catalogo";
 import { suggester, multiSuggester } from "./modali";
 import type GdrPlugin from "./main";
 
@@ -41,6 +42,7 @@ export class BoardView extends ItemView {
   private condLista: any[] = [];
   private oggetti: any[] = []; // oggetti-effetto homebrew, per il picker «🎒 Equipaggia»
   private armiCat: Record<string, any> = {}; // catalogo armi (nome→arma), per l'offensiva PG
+  private catalogo: Catalogo | null = null; // catalogo del kernel: monta i PG col libretto
   private nomiEffetti: Record<string, string> = {}; // id → nome, per i chip (condizioni + oggetti)
   private defs: DefinizioniCondizioni = {};
   private risolvi: RisolviIncantesimo = () => undefined; // catalogo incantesimi SRD+homebrew → attività eseguibile
@@ -58,6 +60,7 @@ export class BoardView extends ItemView {
     this.condLista = await this.plugin.condizioniComplete(); // SRD + homebrew, per il picker manuale
     this.oggetti = await this.plugin.oggettiComplete(); // oggetti-effetto homebrew, per «🎒 Equipaggia»
     this.armiCat = await this.plugin.armiCatalogo(); // armi SRD+homebrew, per gli attacchi dei PG
+    this.catalogo = await this.plugin.loadCatalogo(); // i PG col libretto entrano completi
     this.defs = await this.plugin.loadDefsCondizioni(); // effetti condizioni+oggetti automatici sui tiri
     this.risolvi = await this.plugin.risolviIncantesimo(); // incantesimi SRD+homebrew, per il lancio
     // Mappa id→nome per i chip (invece del crudo id): condizioni + oggetti.
@@ -94,12 +97,17 @@ export class BoardView extends ItemView {
     if (raw) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(raw, this.risolvi), lato) });
   }
 
-  // Picker sui PG del vault → aggiunge un personaggio come alleato (via daPgGdr).
+  // Picker sui PG del vault → aggiunge un personaggio come alleato. Un PG col libretto entra
+  // completo e con lo stato di gioco della sua nota (PF, slot e usi spesi); uno vecchio, pieno.
   private async aggiungiPg() {
     const pgs = this.plugin.partyPgs();
     if (!pgs.length) { new Notice("Nessun PG nel vault (categoria=personaggio, tipo=pg)."); return; }
     const scelto = await suggester(this.app, (e: any) => String(e.fm.nome || e.f.basename), pgs, false, "Aggiungi un PG");
-    if (scelto) this.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daPgGdr(scelto.fm, this.armiCat), "alleato") });
+    if (!scelto) return;
+    const base = combattenteDiPg(scelto.fm, this.catalogo ?? await this.plugin.loadCatalogo(), this.armiCat);
+    const c = this.schieraDaBase(base, "alleato");
+    const risorse = risorseDaNota(scelto.fm, base);
+    this.push({ tipo: "aggiunto", combattente: c }, ...(risorse ? [{ tipo: "risorse", key: c.key, risorse } as Evento] : []));
   }
 
   // Applica una condizione a mano (il GM la impone spesso da effetti non meccanizzati).
@@ -128,7 +136,7 @@ export class BoardView extends ItemView {
   // PG → apre la sua nota (che ha già la scheda completa nel vault).
   private apriStatblock(c: InPlancia) {
     if (c.id.startsWith("pg:")) {
-      const pg = this.plugin.partyPgs().find((e) => `pg:${String(e.fm.nome ?? "").toLowerCase().replace(/\s+/g, "-")}` === c.id);
+      const pg = this.plugin.partyPgs().find((e) => idPg(e.fm) === c.id);
       if (pg) void this.app.workspace.getLeaf(false).openFile(pg.f);
       else new Notice("Nota del PG non trovata.");
       return;
@@ -280,11 +288,14 @@ export class BoardView extends ItemView {
     const pgInPlancia = s.combattenti.filter((c) => c.id.startsWith("pg:"));
     let scritti = 0;
     for (const c of pgInPlancia) {
-      const pg = pgs.find((e) => `pg:${String(e.fm.nome ?? "").toLowerCase().replace(/\s+/g, "-")}` === c.id);
+      const pg = pgs.find((e) => idPg(e.fm) === c.id);
       if (!pg) continue;
+      // Un PG col libretto riporta anche slot e usi spesi (la scheda e i riposi del vault li leggono).
+      const spese = librettoDi(pg.fm) ? notaDaRisorse(risorseDi(s, c.key), c) : {};
       await this.app.fileManager.processFrontMatter(pg.f, (fm: any) => {
         fm.pf = c.pf_attuali;
         if (c.pf_temporanei) fm.pf_temp = c.pf_temporanei; else delete fm.pf_temp;
+        Object.assign(fm, spese);
       });
       scritti++;
     }

@@ -14,7 +14,7 @@
  * ../docs/architecture.md.
  */
 import {
-  App, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, PluginSettingTab, Setting, parseYaml,
+  App, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, PluginSettingTab, Setting, TFile, parseYaml,
 } from "obsidian";
 // @ts-ignore — .mjs JS del vault, senza tipi; esbuild lo risolve e tree-shaka al solo PANELS.
 import { PANELS } from "../Dev/Source/JS/_panels.mjs";
@@ -28,18 +28,19 @@ import {
 } from "../regole/src/motore/motore";
 import { risolviCondizioni, type RisolviIncantesimo } from "../regole/src/motore/combattente";
 // CREATORE PG dal repo condiviso `regole` (Tier 3): il `Catalogo` magro guida `assembla`.
-// Il dato arriva da `data/srd_catalogo.json` (gen_catalogo.py); `caricaFonti`+`assembla` derivano l'Attore.
+// Il dato arriva da `data/srd_catalogo.json` (gen_catalogo.ts, costruttore del kernel); `caricaFonti`+`assembla` derivano l'Attore.
 import { caricaFonti, type Catalogo } from "../regole/src/creatore/catalogo";
 import { assembla } from "../regole/src/creatore/motore";
-import type { Personaggio } from "../regole/src/creatore/personaggio";
-import type { Caratteristica } from "../regole/src/creatore/attore";
 import { evalCjs } from "./util";
-import { suggester, promptModal, multiSuggester, tpShim } from "./modali";
+import { suggester, tpShim } from "./modali";
 import { renderStatblock, trovaMostro, validaRawMostro, validaDef } from "./statblock";
-import { type ArmaCat, canonizzaMostroScritto, personaggioAFrontmatter } from "./adapters";
+import { type ArmaCat, canonizzaMostroScritto } from "./adapters";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
 import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
+import { creaLibretto, saliLibretto } from "./creatore";
+import { librettoDi, scriviPg } from "./pg";
+import type { Libretto } from "../regole/src/creatore/libretto";
 
 // --- Impostazioni del plugin (persistite via loadData/saveData) ---------------------------
 interface GdrSettings {
@@ -112,7 +113,6 @@ export default class GdrPlugin extends Plugin {
   private oggetti: any[] | null = null;
   private armi: any[] | null = null;
   private catalogo: Catalogo | null = null;
-  private abilita: Record<string, { label: string; caratteristica?: string }> | null = null;
   private condDefs: DefinizioniCondizioni | null = null;
   settings: GdrSettings = DEFAULT_SETTINGS;
   private statusBar: HTMLElement | null = null;
@@ -276,7 +276,7 @@ export default class GdrPlugin extends Plugin {
       },
     });
     this.addCommand({ id: "motore-smoke", name: "DEV: Smoke del motore di combattimento", callback: () => this.motoreSmoke() });
-    this.addCommand({ id: "crea-pg-kernel", name: "Crea PG (kernel condiviso · beta)", callback: () => void this.creaPgKernel() });
+    this.addCommand({ id: "crea-pg-kernel", name: "Crea PG (kernel condiviso)", callback: () => void this.creaPgKernel() });
     this.addRibbonIcon("swords", "GDR: Board di combattimento", () => this.activateBoard());
     this.addRibbonIcon("layout-dashboard", "GDR: Cruscotto DM", () => this.activateCruscotto());
     this.addRibbonIcon("moon", "GDR: Riposo lungo (PG attivo)", () => {
@@ -335,7 +335,7 @@ export default class GdrPlugin extends Plugin {
     try { bestiario = await this.bestiarioCompleto(); }
     catch (e: any) { new Notice(`Bestiario non caricato: ${e?.message ?? e}`); return; }
     const fm = this.frontmatterOf(file.path);
-    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs(), await this.risolviIncantesimo(), await this.armiCatalogo());
+    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs(), await this.risolviIncantesimo(), await this.armiCatalogo(), await this.loadCatalogo());
     if (!eventi.length) { new Notice("Incontro vuoto: nessuna creatura/PG risolti."); return; }
     // Traccia la nota d'origine: il pannello Conseguenze potrà marcarla «risolto» senza chiedere.
     this.settings.boardOrigine = file.path;
@@ -440,6 +440,12 @@ export default class GdrPlugin extends Plugin {
   }
 
   async dispatch(action: string) {
+    // Un PG col libretto sale di livello col kernel; gli altri restano su sali_pg.js.
+    const attivo = this.app.workspace.getActiveFile();
+    if (action === "sali_di_livello" && attivo && librettoDi(this.frontmatterOf(attivo.path))) {
+      await this.saliDiLivelloKernel(attivo);
+      return;
+    }
     const meta = await this.loadMeta();
     if (typeof meta !== "function") { new Notice("Dispatcher meta_actions non trovato."); return; }
     // Il dispatcher pretende un file attivo anche per le azioni GLOBALI (giro_del_mondo lo
@@ -661,7 +667,7 @@ export default class GdrPlugin extends Plugin {
     return this.armi;
   }
 
-  // Il CATALOGO magro del creatore PG (sidecar gen_catalogo.py): classi/specie/background/
+  // Il CATALOGO magro del creatore PG (sidecar gen_catalogo.ts, `catalogoDa` del kernel): classi/specie/background/
   // sottoclassi/talenti/lingue/incantesimi/oggetti SRD, la forma che il kernel condiviso
   // (`regole/creatore`, `caricaFonti` + `assembla`) sa risolvere in un `Attore`. Tier 3 Fase B:
   // qui c'è solo il caricamento; chi lo consuma (creazione PG col kernel) è la Fase C. Letto una
@@ -679,18 +685,6 @@ export default class GdrPlugin extends Plugin {
     return this.catalogo;
   }
 
-  // Il vocabolario delle abilità (slug → {label, caratteristica}) dal `personaggio.json` del vault:
-  // serve al wizard kernel per etichette leggibili e per il caso «scegli fra TUTTE le abilità».
-  // Fonte-dati del vault (la stessa di crea_pg); on-demand, tollerante (mappa vuota se assente).
-  async loadAbilita(): Promise<Record<string, { label: string; caratteristica?: string }>> {
-    if (!this.abilita) {
-      try {
-        const d = JSON.parse(await this.app.vault.adapter.read("z.automazioni/data/personaggio.json"));
-        this.abilita = (d && typeof d.abilita === "object") ? d.abilita : {};
-      } catch { this.abilita = {}; }
-    }
-    return this.abilita;
-  }
 
   // Il catalogo armi (nome-minuscolo → arma) per l'offensiva dei PG nella Board: SRD bundlate +
   // homebrew del vault (note `oggetto` con tipo=arma; parità di campi danno/proprieta). Passato a
@@ -880,151 +874,52 @@ export default class GdrPlugin extends Plugin {
     app.workspace.getLeaf(false).openFile(created as any);
   }
 
-  // TIER 3 FASE C (beta, ADDITIVO — non ritira crea_pg.js): crea un PG col KERNEL condiviso.
-  // Wizard nativo (classe/specie/background dal catalogo + caratteristiche) → Personaggio →
-  // `assembla` → Attore → `personaggioAFrontmatter` → nota PG (stesso corpo del template pg, così
-  // rende come scheda). Prova che il kernel guida la creazione reale nel plugin, senza toccare il
-  // flusso Templater esistente. Ogni passo annullabile (suggester/prompt con throwOnCancel).
+  // Crea un PG col KERNEL condiviso: la guida del kernel decide le domande (`creatore.ts`), il
+  // libretto risultante va nella nota e i numeri della scheda ne derivano (`pg.ts`).
   async creaPgKernel() {
-    const app = this.app;
     const cat = await this.loadCatalogo();
     if (!cat.classi.length) { new Notice("Catalogo vuoto: lancia la build del plugin (`npm run build`)."); return; }
-
-    const byNome = <T extends { nome: string }>(xs: T[]) => [...xs].sort((a, b) => a.nome.localeCompare(b.nome));
-    const classi = byNome(cat.classi), specie = byNome(cat.specie), background = byNome(cat.background);
-
-    try {
-      const classe = await suggester(app, classi.map((c) => c.nome), classi, true, "Classe?");
-      const spec = await suggester(app, specie.map((s) => s.nome), specie, true, "Specie?");
-      const bg = await suggester(app, background.map((b) => b.nome), background, true, "Background?");
-      const nome = ((await promptModal(app, "Nome del PG?", "Nuovo PG", true)) ?? "").trim() || "Nuovo PG";
-      const livello = Math.max(1, Number.parseInt((await promptModal(app, "Livello?", "1", true)) || "1", 10) || 1);
-
-      // Caratteristiche: array standard 5.5 come default, una per una (l'utente ritocca al volo).
-      const ORDINE: Caratteristica[] = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
-      const STD = [15, 14, 13, 12, 10, 8];
-      const caratteristiche_base = {} as Record<Caratteristica, number>;
-      for (let i = 0; i < ORDINE.length; i++) {
-        const v = await promptModal(app, `${ORDINE[i]} (standard ${STD[i]})`, String(STD[i]), true);
-        caratteristiche_base[ORDINE[i]] = Number.parseInt(v || String(STD[i]), 10) || STD[i];
-      }
-      const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-      // ASI del background (2024): +2 a una caratteristica fra quelle offerte, +1 a un'altra.
-      const bonus_background: Partial<Record<Caratteristica, number>> = {};
-      const offerte = (bg.punteggi_caratteristica ?? []) as Caratteristica[];
-      if (offerte.length >= 2) {
-        const due = await suggester(app, offerte.map(cap), offerte, false, "Background: +2 a quale caratteristica?");
-        if (due) {
-          bonus_background[due] = 2;
-          const resto = offerte.filter((c) => c !== due);
-          const uno = await suggester(app, resto.map(cap), resto, false, "Background: +1 a quale caratteristica?");
-          if (uno) bonus_background[uno] = 1;
-        }
-      }
-
-      // Abilità di classe: scegline `quantita` fra le `scelte` (o fra TUTTE se la classe lo permette).
-      const ca = classe.competenze_abilita;
-      let abilita_classe: string[] = [];
-      if (ca && ca.quantita > 0) {
-        const vocab = await this.loadAbilita();
-        const pool = ca.scelte.includes("tutte") ? Object.keys(vocab) : ca.scelte;
-        const label = (slug: string) => vocab[slug]?.label ?? cap(slug);
-        const scelti = await multiSuggester<string>(app, pool.map(label), pool, `Scegli ${ca.quantita} abilità di classe`);
-        abilita_classe = (scelti ?? []).slice(0, ca.quantita);
-      }
-
-      // Sottoclasse: le sottoclassi della classe scelta (in 2024 dal 3º livello). Il campo `classe`
-      // delle sottoclassi è lo slug corto → confronto sullo slug finale dell'id classe.
-      const corto = (id: string) => id.split(".").pop() ?? id;
-      let sottoclasseId: string | undefined;
-      const sottoclassi = cat.sottoclassi.filter((s) => corto(String(s.classe ?? "")) === corto(classe.id));
-      if (livello >= 3 && sottoclassi.length) {
-        const SENZA: any = { id: undefined, nome: "(nessuna)" };
-        const opts = [SENZA, ...[...sottoclassi].sort((a, b) => a.nome.localeCompare(b.nome))];
-        const scelta = await suggester(app, opts.map((s) => s.nome), opts, false, "Sottoclasse?");
-        if (scelta && scelta.id) sottoclasseId = scelta.id;
-      }
-
-      // Equipaggiamento iniziale: scegli l'opzione (A/B…) di classe e di background; il motore la
-      // risolve in inventario. (Salta in silenzio se una fonte non offre opzioni.)
-      const opzione = async (opts: any[] | undefined, titolo: string) =>
-        opts?.length ? (await suggester(app, opts.map((o) => o.nome), opts, false, titolo))?.nome : undefined;
-      const equipClasse = await opzione(classe.equipaggiamento, "Equipaggiamento di classe?");
-      const equipBackground = await opzione(bg.equipaggiamento, "Equipaggiamento del background?");
-
-      // Incantesimi (se la classe lancia): trucchetti + incantesimi noti, coi conteggi della
-      // progressione al livello scelto; il pool sono gli incantesimi di classe (join sullo slug corto).
-      let trucchetti: string[] = [];
-      let incantesimi: string[] = [];
-      if (classe.incantesimi) {
-        const shortCls = corto(classe.id);
-        const riga = (classe.progressione ?? []).find((p) => p.livello === livello);
-        const maxLiv = (riga?.slot ?? []).reduce((m, s, i) => (s > 0 ? i + 1 : m), 0);
-        const pool = (liv0: boolean) => cat.incantesimi
-          .filter((s) => s.classi.includes(shortCls) && (liv0 ? s.livello === 0 : s.livello >= 1 && s.livello <= maxLiv))
-          .sort((a, b) => a.livello - b.livello || a.nome.localeCompare(b.nome));
-        const nTruc = riga?.trucchetti ?? 0;
-        const nSpell = riga?.preparati ?? 0;
-        if (nTruc > 0) {
-          const p = pool(true);
-          const sel = await multiSuggester<any>(app, p.map((s) => s.nome), p, `Scegli ${nTruc} trucchetti`);
-          trucchetti = (sel ?? []).slice(0, nTruc).map((s) => s.id);
-        }
-        if (nSpell > 0 && maxLiv > 0) {
-          const p = pool(false);
-          const sel = await multiSuggester<any>(app, p.map((s) => `[${s.livello}] ${s.nome}`), p, `Scegli ${nSpell} incantesimi`);
-          incantesimi = (sel ?? []).slice(0, nSpell).map((s) => s.id);
-        }
-      }
-
-      const pg: Personaggio = {
-        nome, livello, caratteristiche_base,
-        specieId: spec.id, classeId: classe.id, backgroundId: bg.id,
-        ...(sottoclasseId ? { sottoclasseId } : {}),
-        ...(equipClasse ? { equipClasse } : {}),
-        ...(equipBackground ? { equipBackground } : {}),
-        ...(trucchetti.length ? { trucchetti } : {}),
-        ...(incantesimi.length ? { incantesimi } : {}),
-        bonus_background, abilita_classe, talenti: [],
-      };
-
-      let fm: Record<string, any>;
-      try {
-        const attore = assembla(pg, caricaFonti(cat, pg));
-        fm = personaggioAFrontmatter(attore);
-      } catch (e: any) { new Notice(`Kernel — assemblaggio fallito: ${e?.message ?? e}`); return; }
-
-      // Provenienza (slug corti, come le note del vault) + blocco classi.
-      fm.classe = corto(classe.id); fm.specie = corto(spec.id); fm.background = corto(bg.id);
-      fm.classi = [{ id: corto(classe.id), livello, sottoclasse: sottoclasseId ? corto(sottoclasseId) : "" }];
-      // Campi che il level-up (sali_pg) e la scheda leggono: il dado vita della classe e quanti se
-      // ne sono spesi (1 per livello). NB: equipaggiamento/incantesimi/slot NON sono ancora coperti
-      // dal wizard kernel → il flusso PG standard resta su crea_pg.js finché non c'è parità piena.
-      fm.dado_vita = classe.dado_vita;
-      fm.dadi_vita_max = livello;
-
-      await this.scriviNotaPg(fm, nome);
-    } catch { new Notice("Creazione PG annullata."); }
+    const lib = await creaLibretto(this.app, cat, (m) => new Notice(m));
+    if (!lib) return;
+    await this.scriviNotaPg(lib, cat);
   }
 
-  // Scrive la nota PG: serializza il frontmatter e lo inietta nel corpo del template pg (le viste
-  // meta-bind leggono i campi). Cartella e template dal core; ripiego prudente se mancano.
-  private async scriviNotaPg(fm: Record<string, any>, nome: string) {
+  // Sali di livello col kernel sul PG della nota attiva (solo i PG col libretto: gli altri
+  // restano su sali_pg.js). Riscrive libretto e derivati; lo stato di gioco resta.
+  async saliDiLivelloKernel(file: TFile) {
+    const cat = await this.loadCatalogo();
+    const lib = librettoDi(this.frontmatterOf(file.path));
+    if (!lib) return;
+    const nuovo = await saliLibretto(this.app, cat, lib, (m) => new Notice(m));
+    if (!nuovo) return;
+    try {
+      await this.app.fileManager.processFrontMatter(file, (fm: any) => scriviPg(fm, nuovo, cat));
+      new Notice(`${lib.base.nome} sale al ${nuovo.passi.length}º livello.`);
+    } catch (e: any) { new Notice(`Kernel — salita fallita: ${e?.message ?? e}`); }
+  }
+
+  // La nota di un PG nuovo: il corpo del template `pg` (così rende come scheda), poi il
+  // frontmatter scritto da `scriviPg` (libretto + derivati) con processFrontMatter, che sa
+  // serializzare il libretto annidato.
+  private async scriviNotaPg(lib: Libretto, cat: Catalogo) {
     const app = this.app;
+    const nome = lib.base.nome;
     let core: any; try { core = await this.loadCore(); } catch { core = {}; }
     const tpl = (core.templates || []).find((t: any) => t.id === "pg");
     const folder = core.folders?.personaggio ?? "Mondi/Personaggi";
     let body: string;
     try { body = await app.vault.adapter.read(tpl?.target ?? "z.modelli/PG.md"); }
     catch { body = "<% await tp.user.crea_pg(tp) %>\n# `=this.nome`\n"; }
-    let content = body.replace(/^<%\s*await\s+tp\.user\.[^%]*%>\s*\n?/m, toFrontmatter(fm));
+    let content = body.replace(/^<%\s*await\s+tp\.user\.[^%]*%>\s*\n?/m, toFrontmatter({ nome, categoria: "personaggio", tipo: "pg" }));
     const base = nome.replace(/[\\/:]+/g, "-");
     content = content.split("<% tp.config.target_file.basename %>").join(base);
     let dest = `${folder}/${base}.md`;
     for (let n = 2; app.vault.getAbstractFileByPath(dest); n++) dest = `${folder}/${base} ${n}.md`;
     await this.ensureParent(dest);
     const created = await app.vault.create(dest, content);
+    try {
+      await app.fileManager.processFrontMatter(created, (fm: any) => scriviPg(fm, lib, cat, true));
+    } catch (e: any) { new Notice(`Kernel — assemblaggio fallito: ${e?.message ?? e}`); }
     app.workspace.getLeaf(false).openFile(created as any);
     new Notice(`PG creato col kernel condiviso → ${dest}`);
   }
