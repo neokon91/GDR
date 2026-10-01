@@ -40,6 +40,8 @@ export type RisorsaPg = {
   label: string;
   max: number;
   ric: "breve" | "lungo";
+  /** Quanti usi tornano col riposo breve, se non tutti (l'Ira: uno). Assente = tutti. */
+  breve?: number;
   /** Da dove la legge il motore: un attivabile, un incantesimo X/giorno, il pozzo di un oggetto. */
   fonte: "attivabile" | "giornaliero" | "cariche";
   chiave: string;
@@ -54,9 +56,11 @@ export function risorseDi(c: Combattente): RisorsaPg[] {
   for (const a of c.attivabili ?? []) {
     if (!a.usi) continue;
     // Il kernel scrive la ricarica per riposo (`{riposo-breve: 1, riposo-lungo: tutti}`): torna
-    // (anche in parte) col breve → la scheda la segna «breve».
-    const ric = a.usi.ricarica && typeof a.usi.ricarica === "object" && "riposo-breve" in a.usi.ricarica ? "breve" : "lungo";
-    out.push({ id: chiaveNota(a.id), label: a.nome, max: a.usi.massimo, ric, fonte: "attivabile", chiave: a.id });
+    // (anche in parte) col breve → la scheda la segna «breve», e `breve` dice quanti usi.
+    const r = a.usi.ricarica && typeof a.usi.ricarica === "object" ? a.usi.ricarica : null;
+    const ric = r && "riposo-breve" in r ? "breve" : "lungo";
+    const breve = typeof r?.["riposo-breve"] === "number" ? r["riposo-breve"] : undefined;
+    out.push({ id: chiaveNota(a.id), label: a.nome, max: a.usi.massimo, ric, ...(breve != null ? { breve } : {}), fonte: "attivabile", chiave: a.id });
   }
   for (const s of c.incantatore?.lanciabili ?? []) {
     if (s.usiGiornalieri) out.push({ id: chiaveNota(s.id), label: `${s.nome} (al giorno)`, max: s.usiGiornalieri, ric: "lungo", fonte: "giornaliero", chiave: s.id });

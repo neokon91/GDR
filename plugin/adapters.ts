@@ -81,7 +81,7 @@ export function personaggioAFrontmatter(attore: Attore): Record<string, any> {
   const armi = (attore.azioni ?? []).map((a) => a.nome).filter(Boolean);
   if (armi.length) fm.padronanze_armi = armi;
 
-  // --- Campi che la SCHEDA e il level-up (sali_pg) leggono, dai dati che l'Attore già porta ---
+  // --- Campi che la SCHEDA legge, dai dati che l'Attore già porta ---
   // L'inventario iniziale (nomi leggibili, con la quantità se > 1), come lista di stringhe.
   const inv = (attore.equipaggiamento ?? []).map((v) => (v.quantita > 1 ? `${v.quantita} ${v.nome}` : v.nome));
   if (inv.length) fm.inventario = inv;
@@ -91,18 +91,19 @@ export function personaggioAFrontmatter(attore: Attore): Record<string, any> {
   if (attore.lingue?.length) fm.lingue = attore.lingue;
   if (attore.competenza_strumenti?.length) fm.competenze_strumenti = attore.competenza_strumenti;
   // Il blocco incantatore: flag + gli incantesimi scelti (trucchetti = livello 0, gli altri = incantesimi),
-  // come id. Gli slot li ricalcola il level-up dalle tabelle di classe, non serve scriverli qui.
+  // per NOME: la scheda li rende come link alle note (`[[Palla di fuoco]]`), che si chiamano così.
+  // Gli slot li ricalcola il level-up dalle tabelle di classe, non serve scriverli qui.
   fm.incantatore = !!attore.incantatore;
   if (attore.incantatore?.noti?.length) {
-    fm.trucchetti = attore.incantatore.noti.filter((s) => s.livello === 0).map((s) => s.id);
-    fm.incantesimi = attore.incantatore.noti.filter((s) => s.livello > 0).map((s) => s.id);
+    fm.trucchetti = attore.incantatore.noti.filter((s) => s.livello === 0).map((s) => s.nome);
+    fm.incantesimi = attore.incantatore.noti.filter((s) => s.livello > 0).map((s) => s.nome);
   }
   return fm;
 }
 
 // --- L'OFFENSIVA DEL PG: arma → azione d'attacco (2024) --------------------
 // La forma-arma normalizzata (srd_armi.json + armi homebrew): il plugin la passa qui.
-export type ArmaCat = { nome: string; dado: string; tipo_danno?: string; proprieta?: string[]; distanza?: boolean };
+export type ArmaCat = { nome: string; dado: string; tipo_danno?: string; proprieta?: string[]; distanza?: boolean; padronanza?: string };
 
 // Il nome-arma nudo da una voce `padronanze_armi` ("Ascia — Vessazione" → "ascia").
 const nomeArma = (v: any) => String(v ?? "").split("—")[0].trim().toLowerCase();

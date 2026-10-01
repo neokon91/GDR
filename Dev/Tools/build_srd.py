@@ -206,7 +206,7 @@ def _pulisci(s: Any) -> str:
 
 def _id_nudo(idv: Any) -> str:
     """Id nudo (ultimo segmento) da un id qualificato archivio `dnd.<tipo>.<slug>`:
-    downstream (build_personaggio, viste, frontmatter PG) chiavizza per slug, non per id
+    downstream (viste, frontmatter PG) chiavizza per slug, non per id
     qualificato. La forma qualificata resta la sorgente; qui la si proietta per compat."""
     return str(idv or "").split(".")[-1]
 
@@ -261,7 +261,7 @@ def _adatta_background(d: dict[str, Any]) -> None:
 
 def _adatta_specie(d: dict[str, Any]) -> None:
     # Riproduce la forma JSON delle specie (velocita stringa, tratti de-slugati, sezioni
-    # Tratti+Antenati) → build_species e renderSpecieTratti restano invariati.
+    # Tratti+Antenati) → la nota SRD della specie (che la scheda del PG incorpora).
     d["id"] = _id_nudo(d.get("id"))
     if isinstance(d.get("taglia"), list):  # specie bi-taglia (umano/tiefling) → stringa
         d["taglia"] = " o ".join(str(x).capitalize() for x in d["taglia"])

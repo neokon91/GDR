@@ -210,7 +210,8 @@ export default class GdrPlugin extends Plugin {
         try {
           const views = await this.loadViews();
           const d = this.pageFor(ctx.sourcePath);
-          const out = await views[name](...spec.args(this.app, d, el));
+          const kernel = spec.kernel ? { catalogo: await this.catalogoCompleto(), armi: await this.armiCatalogo() } : undefined;
+          const out = await views[name](...spec.args(this.app, d, el, kernel));
           if (spec.mode === "md" && typeof out === "string") {
             await MarkdownRenderer.render(this.app, out, el, ctx.sourcePath, child);
           }
@@ -440,10 +441,12 @@ export default class GdrPlugin extends Plugin {
   }
 
   async dispatch(action: string) {
-    // Un PG col libretto sale di livello col kernel; gli altri restano su sali_pg.js.
+    // Si sale di livello col kernel, dal libretto della nota. Un PG senza libretto (creato prima
+    // del creatore del kernel) resta giocabile così com'è, ma per salire va ricreato.
     const attivo = this.app.workspace.getActiveFile();
-    if (action === "sali_di_livello" && attivo && librettoDi(this.frontmatterOf(attivo.path))) {
-      await this.saliDiLivelloKernel(attivo);
+    if (action === "sali_di_livello") {
+      if (attivo && librettoDi(this.frontmatterOf(attivo.path))) await this.saliDiLivelloKernel(attivo);
+      else new Notice("Questo PG non ha il libretto (è stato creato prima del creatore del kernel): per farlo salire di livello ricrealo con «Crea PG».", 9000);
       return;
     }
     const meta = await this.loadMeta();
@@ -700,9 +703,10 @@ export default class GdrPlugin extends Plugin {
   }
 
 
-  // Il catalogo armi (nome-minuscolo → arma) per l'offensiva dei PG nella Board: SRD bundlate +
-  // homebrew del vault (note `oggetto` con tipo=arma; parità di campi danno/proprieta). Passato a
-  // `daPgGdr`, trasforma le `padronanze_armi` del PG in bottoni d'attacco.
+  // Il catalogo armi (nome-minuscolo → arma) per l'offensiva dei PG nella Board e gli attacchi con
+  // maestria della scheda: SRD bundlate + homebrew del vault (note `oggetto` con tipo=arma; parità
+  // di campi danno/proprieta/padronanza). Passato a `daPgGdr`, trasforma le `padronanze_armi` del
+  // PG in bottoni d'attacco.
   async armiCatalogo(): Promise<Record<string, ArmaCat>> {
     const cat: Record<string, ArmaCat> = {};
     for (const a of await this.loadArmi()) if (a?.nome) cat[String(a.nome).toLowerCase()] = a;
@@ -718,6 +722,7 @@ export default class GdrPlugin extends Plugin {
         dado: String((fm as any).danni ?? (fm as any).dado ?? ""),
         proprieta,
         distanza: /distanza/i.test(String((fm as any).categoria_arma ?? (fm as any).tipo_arma ?? "")),
+        ...((fm as any).padronanza ? { padronanza: String((fm as any).padronanza) } : {}),
       };
     }
     return cat;
@@ -895,8 +900,8 @@ export default class GdrPlugin extends Plugin {
     await this.scriviNotaPg(lib, cat);
   }
 
-  // Sali di livello col kernel sul PG della nota attiva (solo i PG col libretto: gli altri
-  // restano su sali_pg.js). Riscrive libretto e derivati; lo stato di gioco resta.
+  // Sali di livello col kernel sul PG della nota attiva (col libretto). Riscrive libretto e
+  // derivati; lo stato di gioco resta.
   async saliDiLivelloKernel(file: TFile) {
     const cat = await this.catalogoCompleto();
     const lib = librettoDi(this.frontmatterOf(file.path));

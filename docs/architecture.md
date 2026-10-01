@@ -15,7 +15,7 @@ Dev/Source/                 Dev/Tools/                       dist/GDR-vault/
   Jinja/ (template)   ├─▶  render.py (orchestratore)  ─▶     z.modelli/      (template)
   JS/    (runtime)    │      ├─ common.py (modello+IO)        z.automazioni/  (JS + *.json)
   SiteJinja/ (HTML)  ─┘      ├─ build_srd.py                  z.classi/       (fileClass)
-                            ├─ build_personaggio/            SRD/            (sola lettura)
+                            ├─ gen_catalogo.ts (kernel)      SRD/            (sola lettura)
                             ├─ gen_bestiario/condizioni.py   Home/Indici/…
                             ├─ render_config/  validate.py   Mondi/          (i tuoi)
 ```
@@ -52,15 +52,15 @@ moduli, tutti importano `common` (nessun ciclo):
 |---|---|
 | `common.py` | Percorsi, IO, e il **modello**: `deep_merge`, `load_core`, `load_templates`, `load_pages`, `apply_entities`. |
 | `build_srd.py` | Genera l'albero `SRD/` (sola lettura) dalla copia vendorizzata `Dev/Source/SRD/`. Al confine (`_load_archivio`) i riferimenti puntati `dnd.<tipo>.<slug>` si proiettano sullo slug, la chiave di tutto GDR; l'`id` della voce resta qualificato per l'id-index. `srd_note` rende il contenuto (infobox, sezioni, potenziamento, evocazioni inline, footer *Vedi anche*). Le pagine mostro emettono `` ```gdr statblock <id> ``. Fonte UNICA = la copia di `archivio/srd`. |
-| `build_personaggio/` | Converter del rules-engine PG: SRD (da archivio) + `pg_rules.yaml` → `personaggio.json`. |
+| `gen_catalogo.ts` | Il catalogo del creatore del PG (`plugin/data/srd_catalogo.json`) dalla copia SRD, con `catalogoDa` del kernel (lo stesso costruttore del Compendio). |
 | `gen_bestiario.py` / `gen_condizioni.py` | Sidecar del motore (`plugin/data/srd_bestiario.json`, `srd_condizioni.json`) dalla copia SRD. |
 | `sync_srd.py` | Aggiorna la copia vendorizzata `Dev/Source/SRD/` da `archivio/srd` (solo quella cartella); `--check` per la deriva. |
 | `archivio_io.py` | **Lettura unica dei file in formato archivio** (la copia SRD) per i generatori: `.yaml` (entità) e `.md` (note con prosa, corpo → `descrizione`), tipo riconosciuto dall'id `dnd.<tipo>.…`, mai dal nome-file. Nato dopo che i vecchi glob a suffisso (`*.spell.yaml`…) leggevano 0 file e il plugin usciva vuoto con la build verde (set 2026); `tests/test_generatori_plugin.py` ne tiene le soglie. |
 | `render_config/` | Config `.obsidian` (merge non distruttivo, un writer per plugin), bottoni/fileClass dal modello, viste **Bases**, CSS colore-categoria. |
 | `validate.py` | `check()`: confine core/system, dup-ID, snake_case, shape, schema wizard, inversi reciproci, uguaglianza byte delle sorgenti `_*.js`. |
 
-Fasi di `build()`: (1) carica il modello; (2) `write_engine_data()` scrive `core.json`/
-`personaggio.json` + copia i JS runtime + bundla `views.js`/`meta_actions.js`; (3)
+Fasi di `build()`: (1) carica il modello; (2) `write_engine_data()` scrive `core.json`
++ copia i JS runtime + bundla `views.js`/`meta_actions.js`; (3)
 `render_notes()` rende i template Jinja + le note fisse (Home/Manuale/Indici…) e `write_bases()`;
 (4) `build_srd()`; (5) `write_obsidian_config()`; (6) `scaffold_folders()`. `clean()` (prima di
 ogni build) rimuove ESATTAMENTE ciò che si genera (`generated_note_names()` da `ROOT_NOTES`),
@@ -86,7 +86,7 @@ avere un Clock), allowlist `tappe_/coerenza_/ritratto_categorie`, `spunti`.
 **`entities/<id>.yaml`** = schema per-entità: `folder`, `gruppo`, `templates`, `subtypes` (lista
 di nomi **o** oggetti-profilo), `famiglie`, `fields`, `scheda`, `guida`, `relazioni` (con
 `reciprocal` per l'inverso), `creation` (scaffold del corpo). Assi & archetipi in
-`YAML/assi/<id>.yaml`. Overlay: `pg_rules.yaml`, `templates.yaml` (solo `actions`), `pages.yaml`
+`YAML/assi/<id>.yaml`. Overlay: `templates.yaml` (solo `actions`), `pages.yaml`
 (hub), `plugins.yaml`, `astrologia.yaml`, `generatori.yaml`.
 
 ### Tassonomia a 3 strati
@@ -146,7 +146,7 @@ configurati (uso a mano, aggancio = campo `mappa`): **Excalidraw**, **zoom-map**
 ### La "trinità" per-entità + sorgenti condivise
 Ogni entità ≈ 3 file: **YAML** (schema) + **Jinja** (corpo, macro `_macros.j2` su
 `_entity_base.j2`) + **JS di creazione** (wizard). I file `_*.js` (`_comparators`/
-`_homebrew_bridge`/`_relations`) sono **sorgenti canoniche condivise**: gli script autonomi ne
+`_relations`) sono **sorgenti canoniche condivise**: gli script autonomi ne
 tengono una COPIA fra marker, e `check()` impone che sia **byte-identica** (la deriva è un errore
 di build, non un bug latente).
 
@@ -154,41 +154,38 @@ di build, non un bug latente).
 
 ## Rules-engine PG (5.5e)
 
-Il PG è un **libretto del kernel** (vedi «Kernel condiviso» qui sotto): creazione e salita le
-guida `creatore/guida.ts`, i numeri li deriva `assembla`. Il percorso VECCHIO resta per i PG
-senza libretto e per la presentazione della scheda:
+Il PG è un **libretto del kernel**: la base del 1º livello + un passo per livello
+(`regole/src/creatore/libretto.ts`), salvato nella nota in `libretto`. Una catena sola, dalla
+creazione al tavolo:
 ```
-SRD + pg_rules.yaml + system.yaml
-  │ build_personaggio (converter, parsa la prosa dove serve)
-  ▼ personaggio.json  (classi con progressione 1-20, specie, background, armature, slot)
-  │ letto dalla scheda (views) e da sali_pg.js (level-up dei PG senza libretto)
-  ▼ pg.md.j2 / scheda_pg_rules() (presentazione)
+copia SRD ──gen_catalogo.ts (catalogoDa del kernel)──▶ srd_catalogo.json
+                       + homebrew del vault (plugin/homebrew.ts) = catalogoCompleto()
+                                   │
+   creatore.ts (guida del kernel) ─┼─▶ libretto nella nota ──scriviPg──▶ campi della scheda
+                                   ├─▶ Board: combattenteDiPg (assembla → daAttore)
+                                   └─▶ viste della scheda (kernel = {catalogo, armi})
 ```
-- **Frontmatter** (PG col libretto: scritto da `scriviPg`): id stabili + flag 0/1
-  `ts_<car>`/`prof_<abilita>` (matematica Meta Bind) + `mod_<car>` per i tiri Dice Roller.
-- **Level-up 2-20 dei PG senza libretto** (`sali_pg.js`): PF media fissa della classe che sale, ASI/talenti (filtrati
-  per categoria 2024), sottoclasse, **multiclasse** (prereq RAW bloccanti, tabella slot
-  combinata, Patto del Warlock separato). ASI-COS → PF ricalcolati su tutti i livelli (RAW).
-- **Homebrew `concede`**: un talento/privilegio con blocco `concede` strutturato
-  (caratteristica/abilità/competenze) è **applicato** a creazione e al livello giusto
-  (`applyConcede`, sorgente condivisa `_homebrew_bridge.js`); i freeform restano prosa.
-- **Presentazione** (`scheda_pg_rules()`): caratteristiche/abilità con tiri Dice Roller col bonus
-  reale, risorse di classe a barre (`renderRisorsePG`), slot, riposi (loop di sessione 2024),
-  incantesimi con CD/attacco.
-- **Kernel condiviso (Tier 3, IN CORSO)**: il PG è un **libretto** (`regole/src/creatore/libretto.ts`:
-  la base del 1º livello + un passo per livello), salvato nella nota in `libretto`. Le domande del
-  creatore le decide la **guida** del kernel (`creatore/guida.ts`, la stessa del creatore del
-  Compendio): `plugin/creatore.ts` le pone coi modali (comandi «Crea PG» e
-  «Sali di livello» sulle note col libretto). `plugin/pg.ts` ne deriva i campi piatti della scheda
-  (`scriviPg`: PF, CA, caratteristiche, slot, `risorse_pg`…; lo stato di gioco resta), monta il PG
-  completo per la Board (`combattenteDiPg`: attivabili, aure, incantatore, oggetti magici) e
-  traduce le risorse spese fra nota e motore (`risorseDaNota`/`notaDaRisorse`). Il catalogo lo
-  costruisce `gen_catalogo.ts` con `catalogoDa` del kernel (lo stesso costruttore del Compendio).
-  L'homebrew del vault entra nel catalogo del kernel (`plugin/homebrew.ts`: classi, specie,
-  background, talenti, sottoclassi, incantesimi, `concede` tradotto in effetti). `crea_pg.js` è
-  ritirato; i PG senza libretto (creati da lui) entrano nella Board come prima (`daPgGdr`) e
-  salgono con `sali_pg.js`. Resta: la scheda sui dati del kernel, poi il ritiro di
-  `build_personaggio.py`, `personaggio.json` e `sali_pg.js`.
+- **Creazione e salita**: le domande le decide la **guida** del kernel (`creatore/guida.ts`, la
+  stessa del creatore del Compendio); `plugin/creatore.ts` le pone coi modali (comandi «Crea PG»
+  e «Sali di livello»). Multiclasse, sottoclassi, talenti e incantesimi passano da lì.
+- **Frontmatter** (`plugin/pg.ts`, `scriviPg`): i campi derivati li riscrive il codice dal
+  libretto (PF, CA, caratteristiche, flag `ts_<car>`/`prof_<abilita>` per la matematica Meta
+  Bind, `mod_<car>` per i tiri Dice Roller, slot, `risorse_pg`, incantesimi per NOME). Lo stato
+  di gioco (PF attuali, slot e usi spesi) resta e la Board lo riporta (`risorseDaNota`/
+  `notaDaRisorse`). Una risorsa che torna in parte col riposo breve (l'Ira: un uso) porta
+  `breve: N`, e il riposo breve del vault ne rende N.
+- **Homebrew**: classi, specie, background, talenti, sottoclassi e incantesimi del vault entrano
+  nel catalogo del kernel (`plugin/homebrew.ts`, `concede` tradotto in effetti).
+- **Presentazione** (`scheda_pg_rules()` + viste): caratteristiche/abilità con tiri Dice Roller
+  col bonus reale, risorse a barre (`renderRisorsePG`), riposi (loop di sessione 2024). Le viste
+  con dati di regola li ricevono dal plugin (`_panels.mjs`, `kernel: true`): progressione coi
+  privilegi di classe e sottoclasse (`renderProgressione`), incantesimi per livello con CD e
+  attacco dalla caratteristica della classe (`renderIncantesimi`), la nota della specie
+  incorporata (`renderSpecieTratti`), attacchi con maestria dalle armi SRD + homebrew
+  (`renderAttacchi`). Nessun dato di regola scritto dalla build per la scheda.
+- **PG senza libretto** (creati prima del kernel): restano giocabili (scheda, Board via
+  `daPgGdr`), ma per salire di livello si ricreano. `build_personaggio`, `personaggio.json`,
+  `pg_rules.yaml`, `crea_pg.js` e `sali_pg.js` sono ritirati.
   Prova headless: `npm run smoke:pg` (anche in `tests/test_pg_kernel.py`).
 
 ---

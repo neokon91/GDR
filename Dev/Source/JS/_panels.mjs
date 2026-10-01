@@ -3,7 +3,10 @@
 // l'output:
 //   mode "md"  -> ritorna markdown (il plugin lo rende con MarkdownRenderer)
 //   mode "dom" -> disegna direttamente nel container (nessun valore di ritorno)
-//   args(app, {dv, page}, container) -> array di argomenti per la funzione.
+//   args(app, {dv, page}, container, kernel) -> array di argomenti per la funzione.
+//   kernel: true -> il plugin passa anche `kernel` = {catalogo, armi}: il catalogo del creatore
+//   del kernel (SRD + homebrew del vault) e le armi (SRD + homebrew). Le viste della scheda del
+//   PG leggono i dati di regola da qui, non da un file loro.
 //
 // Importato (via esbuild, tree-shaken) dal plugin `gdr`, che è l'UNICO runtime dei
 // blocchi ```gdr. Il prefisso `_` lo tiene fuori dal vault (non è uno script runtime:
@@ -18,12 +21,12 @@ export const PANELS = {
   renderSessionPanel: { mode: "md", args: (a, d) => [d.dv, d.page] },
   renderProfilo: { mode: "md", args: (a, d) => [a, d.page] },
   renderTemaNatale: { mode: "md", args: (a, d) => [a, d.page] },
-  renderProgressione: { mode: "md", args: (a, d) => [a, d.page] },
+  renderProgressione: { mode: "md", kernel: true, args: (a, d, c, k) => [a, d.page, k] },
   renderFiloAvventura: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderTabella: { mode: "md", args: (a, d) => [a, d.page] },
   renderRisorsePG: { mode: "md", args: (a, d) => [d.page] },
-  renderSpecieTratti: { mode: "md", args: (a, d) => [a, d.page] },
-  renderIncantesimi: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
+  renderSpecieTratti: { mode: "md", kernel: true, args: (a, d, c, k) => [a, d.page, k] },
+  renderIncantesimi: { mode: "md", kernel: true, args: (a, d, c, k) => [a, d.dv, d.page, k] },
   renderConnessioni: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderEncounter: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderVerificaGS: { mode: "md", args: (a, d) => [a, d.page] },
@@ -35,7 +38,7 @@ export const PANELS = {
   renderCausalita: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderCondizioni: { mode: "md", args: (a) => [a] },
   renderMaestrie: { mode: "md", args: (a) => [a] },
-  renderAttacchi: { mode: "md", args: (a, d) => [a, d.page] },
+  renderAttacchi: { mode: "md", kernel: true, args: (a, d, c, k) => [a, d.page, k] },
   renderAlbero: { mode: "md", args: (a, d) => [a, d.page] },
   renderCoerenza: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderTappe: { mode: "md", args: (a, d) => [a, d.page] },

@@ -227,9 +227,10 @@ def test_verifica_gs(tmp_path):
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_attacco_arma(tmp_path):
-    """views.attaccoArma: caratteristica d'attacco (mischia→Forza, distanza→Destrezza,
-    accurata/finesse→la migliore fra Forza e Destrezza del PG), dado di danno e effetto
-    della padronanza (tiri Dice Roller che leggono mod_<car> + competenza dal frontmatter)."""
+    """views.attaccoArma sulla forma-arma del plugin (srd_armi.json + homebrew): caratteristica
+    d'attacco (mischia→Forza, distanza→Destrezza, accurata/finesse→la migliore fra Forza e
+    Destrezza del PG), dado di danno ("d6"→"1d6"; l'homebrew porta la stringa intera) e
+    effetto della padronanza, legata per slug (tiri Dice Roller con mod_<car> + competenza)."""
     harness = tmp_path / "att.js"
     harness.write_text(
         'const fs=require("fs");'
@@ -237,53 +238,25 @@ def test_attacco_arma(tmp_path):
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const A=m.exports.attaccoArma;'
         'const page={mod_forza:1, mod_destrezza:3, competenza:2};'
-        'const mae={vessazione:{effetto:"VEX"}, fiaccare:{effetto:"SAP"}, lentezza:{effetto:"SLOW"}};'
-        'const ascia={nome:"Ascia",danni:"1d6 taglienti",categoria:"Mischia semplice",proprieta:["leggera"],padronanza:"Vessazione"};'
-        'const stocco={nome:"Stocco",danni:"1d8 perforanti",categoria:"Mischia da guerra",proprieta:["accurata"],padronanza:"Fiaccare"};'
-        'const arco={nome:"Arco lungo",danni:"1d8 perforanti",categoria:"Distanza da guerra",proprieta:["munizioni"],padronanza:"Lentezza"};'
-        'process.stdout.write(JSON.stringify({a:A(ascia,page,mae), s:A(stocco,page,mae), r:A(arco,page,mae)}));',
+        'const mae={vessazione:{nome:"Vessazione",effetto:"VEX"}, fiaccare:{nome:"Fiaccare",effetto:"SAP"}, lentezza:{nome:"Lentezza",effetto:"SLOW"}};'
+        'const ascia={nome:"Ascia",dado:"d6",tipo_danno:"tagliente",proprieta:["leggera"],distanza:false,padronanza:"vessazione"};'
+        'const stocco={nome:"Stocco",dado:"d8",tipo_danno:"perforante",proprieta:["accurata"],distanza:false,padronanza:"fiaccare"};'
+        'const arco={nome:"Arco lungo",dado:"d8",tipo_danno:"perforante",proprieta:["munizioni"],distanza:true,padronanza:"lentezza"};'
+        'const spadone={nome:"Spadone",dado:"2d6",tipo_danno:"tagliente",proprieta:["pesante"],distanza:false};'
+        'const lama={nome:"Lama del vento",dado:"1d10 taglienti",proprieta:[],distanza:false};'
+        'process.stdout.write(JSON.stringify({a:A(ascia,page,mae), s:A(stocco,page,mae), r:A(arco,page,mae), g:A(spadone,page,mae), h:A(lama,page,mae)}));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
     assert out["a"]["colpire"] == "1d20 + mod_forza + competenza"   # mischia → Forza
     assert out["a"]["danni"] == "1d6 + mod_forza" and out["a"]["effetto"] == "VEX"
+    assert out["a"]["tipo"] == "tagliente" and out["a"]["padronanza"] == "Vessazione"
     assert "mod_destrezza" in out["s"]["colpire"]                   # finesse → mod migliore (DES 3 > FOR 1)
     assert "mod_destrezza" in out["r"]["colpire"]                   # distanza → Destrezza
     assert out["r"]["effetto"] == "SLOW"
-
-
-@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_armi_homebrew(tmp_path):
-    """views.armiHomebrew: legge le note `oggetto` con tipo=arma dal vault e le porta
-    nello stesso shape del catalogo SRD (parità di campi) → un'arma homebrew gioca in
-    attaccoArma come quelle ufficiali (qui: accurata → mod migliore, danni, maestria).
-    Le note non-arma (pozione) sono escluse. App headless senza vault → {} (no crash)."""
-    harness = tmp_path / "hw.js"
-    harness.write_text(
-        'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
-        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
-        'const {armiHomebrew,attaccoArma}=m.exports;'
-        'const fmOf={Fiammacupa:{categoria:"oggetto",tipo:"arma",danni:"1d8 taglienti",proprieta:"accurata, leggera",padronanza:"Affondo"},'
-        '  Pozione:{categoria:"oggetto",tipo:"oggetto magico"}};'
-        'const app={vault:{getMarkdownFiles:()=>[{basename:"Fiammacupa"},{basename:"Pozione"}]},'
-        '  metadataCache:{getFileCache:(f)=>({frontmatter:fmOf[f.basename]})}};'
-        'const H=armiHomebrew(app);'
-        'const att=H.Fiammacupa?attaccoArma(H.Fiammacupa,{mod_forza:1,mod_destrezza:3},{affondo:{effetto:"LUNGE"}}):null;'
-        'const safe=armiHomebrew({});'  # app senza vault → {} (try/catch)
-        'process.stdout.write(JSON.stringify({H,att,safeKeys:Object.keys(safe).length}));',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    out = json.loads(res.stdout)
-    assert "Fiammacupa" in out["H"] and "Pozione" not in out["H"]          # solo le armi
-    arma = out["H"]["Fiammacupa"]
-    assert arma["danni"] == "1d8 taglienti" and arma["padronanza"] == "Affondo"
-    assert arma["proprieta"] == ["accurata", "leggera"]                     # text → lista
-    assert "mod_destrezza" in out["att"]["colpire"]                         # accurata: DES 3 > FOR 1
-    assert out["att"]["danni"] == "1d8 + mod_destrezza" and out["att"]["effetto"] == "LUNGE"
-    assert out["safeKeys"] == 0                                             # headless → {} senza crash
+    assert out["g"]["danni"] == "2d6 + mod_forza"                     # dadi multipli
+    assert out["h"]["danni"] == "1d10 + mod_forza" and out["h"]["tipo"] == "taglienti"  # homebrew
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -311,31 +284,27 @@ def test_parse_nodo(tmp_path):
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_specie_tratti(tmp_path):
-    """views.renderSpecieTratti: dalle sezioni SRD della specie del PG rende un
-    callout pieghevole con descrizioni + tabelle (soffio/antenati draconici), così
-    la scheda mostra i dettagli giocabili senza saltare alla nota SRD."""
-    import build_personaggio
-    data = build_personaggio.build_personaggio_options(CORE)
-    assert (data.get("specie") or {}).get("dragonide", {}).get("sezioni"), "dragonide senza sezioni in personaggio.json"
+    """views.renderSpecieTratti: incorpora la nota della specie del PG (SRD o homebrew) in un
+    callout pieghevole. Il nome lo dà il catalogo del kernel (slug `dragonide` → «Dragonide»,
+    homebrew per nome della nota); una specie senza nota nel vault non dà niente."""
     harness = tmp_path / "spt.js"
     harness.write_text(
         'const fs=require("fs");'
         f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
-        f'const data={json.dumps(data, ensure_ascii=False)};'
-        'const app={vault:{adapter:{read:async()=>JSON.stringify(data)}}};'
-        'Promise.all(['
-        '  m.exports.renderSpecieTratti(app,{specie:"dragonide"}),'
-        '  m.exports.renderSpecieTratti(app,{}),'
-        '  m.exports.renderSpecieTratti(app,null),'
-        ']).then(([a,b,c])=>process.stdout.write(JSON.stringify({a,b,c})));',
+        'const kernel={catalogo:{specie:[{id:"dnd.specie.dragonide",nome:"Dragonide"},{id:"homebrew.specie.silfide",nome:"Silfide"}]}};'
+        'const note=new Set(["Dragonide","Silfide"]);'
+        'const app={metadataCache:{getFirstLinkpathDest:(n)=>note.has(n)?{path:n+".md"}:null}};'
+        'const R=(p)=>m.exports.renderSpecieTratti(app,p,kernel);'
+        'Promise.all([R({specie:"dragonide"}),R({specie:"Silfide"}),R({specie:"elfo"}),R({}),R(null)])'
+        '.then(([a,h,x,b,c])=>process.stdout.write(JSON.stringify({a,h,x,b,c})));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
-    assert out["a"].startswith("> [!note]- Tratti di Dragonide")
-    assert "Antenati draconici" in out["a"]                  # titolo della tabella
-    assert "| Argento |" in out["a"] and "Freddo" in out["a"]  # riga tabella (antenato/danno)
+    assert out["a"] == "> [!note]- Tratti di Dragonide\n> ![[Dragonide]]"
+    assert out["h"].endswith("![[Silfide]]")                  # homebrew: la sua nota
+    assert out["x"] == ""                                       # nessuna nota della specie
     assert out["b"] == "" and out["c"] == ""                  # senza specie / senza page -> niente
 
 
@@ -374,19 +343,19 @@ def test_render_risorse_pg(tmp_path):
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_incantesimi_cd(tmp_path):
     """views.renderIncantesimi: testata con CD incantesimo (8+PB+mod) e bonus d'attacco
-    (PB+mod). La caratteristica da incantatore = prima MENTALE fra le primarie della
-    classe (Mago→Intelligenza); il mod si calcola dal punteggio nel frontmatter."""
+    (PB+mod). La caratteristica da incantatore è quella della classe nel catalogo del kernel
+    (`incantesimi.caratteristica`); il mod si calcola dal punteggio nel frontmatter."""
     harness = tmp_path / "inc.js"
     harness.write_text(
         'const fs=require("fs");'
         f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
-        'const data={classi:{mago:{incantatore:true,caratteristica_primaria:["intelligenza"],'
-        ' incantesimi_pool:{"0":["Mano magica"],"1":["Dardo incantato"]}}}};'
-        'const app={vault:{adapter:{read:async()=>JSON.stringify(data)}}};'
+        'const kernel={catalogo:{classi:[{id:"dnd.classe.mago",nome:"Mago",incantesimi:{caratteristica:"intelligenza"}}],'
+        ' incantesimi:[{id:"dnd.incantesimo.mano-magica",nome:"Mano magica",livello:0},'
+        '  {id:"dnd.incantesimo.dardo-incantato",nome:"Dardo incantato",livello:1}]}};'
         'const page={classe:"mago",intelligenza:16,competenza:2,'
         ' trucchetti:["Mano magica"],incantesimi:["Dardo incantato"]};'
-        'm.exports.renderIncantesimi(app,null,page).then(o=>process.stdout.write(o));',
+        'm.exports.renderIncantesimi({},null,page,kernel).then(o=>process.stdout.write(o));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
@@ -450,12 +419,13 @@ def test_riposo_breve_e2e(tmp_path):
 
     # COS 14 (+2), d10: cura fra 1+2=3 e 10+2=12, pf 5→[8..17] cappato a 20.
     fm = run('{ pf:5, pf_max:20, dado_vita:10, costituzione:14, dadi_vita_max:3, dadi_vita_spesi:0,'
-             ' risorse_pg:[{id:"disciplina",ric:"breve"},{id:"ira",ric:"lungo"}], usi_disciplina:2, usi_ira:2,'
-             ' slot_ricarica:"breve", slot_uso_1:1 }')
+             ' risorse_pg:[{id:"disciplina",ric:"breve"},{id:"ira",ric:"lungo"},{id:"energie",ric:"breve",breve:1}],'
+             ' usi_disciplina:2, usi_ira:2, usi_energie:2, slot_ricarica:"breve", slot_uso_1:1 }')
     assert fm["dadi_vita_spesi"] == 1
     assert 8 <= fm["pf"] <= 17
     assert fm["usi_disciplina"] == 0   # risorsa a riposo breve: ricaricata
     assert fm["usi_ira"] == 2          # risorsa a riposo lungo: il breve non la tocca
+    assert fm["usi_energie"] == 1      # ricarica parziale (`breve: 1`): torna un uso solo
     assert fm["slot_uso_1"] == 0       # slot del Patto (Warlock 2024): ricaricati al breve
     # Nessun Dado Vita rimasto: PF/Dadi Vita invariati, ma le risorse breve SI ricaricano.
     fm2 = run('{ pf:5, pf_max:20, dado_vita:10, costituzione:14, dadi_vita_max:1, dadi_vita_spesi:1,'

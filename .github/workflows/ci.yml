@@ -4,8 +4,8 @@ name: ci
 # i dati vengono dalla copia vendorizzata dell'SRD (Dev/Source/SRD, CC-BY-4.0). Il plugin
 # bundla il kernel `regole`, clonato accanto in ROOT/regole (dove lo cerca l'import
 # `../regole`): col repo pubblico basta il token del workflow, finché è privato serve
-# `secrets.ECOSYSTEM_TOKEN` (PAT in lettura). Node serve ai test che invocano crea_pg.js;
-# esbuild (devDep del plugin) alla parità _pg_shared.
+# `secrets.ECOSYSTEM_TOKEN` (PAT in lettura). Node ed esbuild (devDep del plugin) servono ai
+# test che girano le viste, il creatore del kernel e la Board (smoke headless con jsdom).
 #
 # Il job `deriva-srd` confronta la copia con archivio/srd (privato: serve ECOSYSTEM_TOKEN;
 # senza, il job lo dice e non prova niente).
@@ -37,7 +37,7 @@ jobs:
         with:
           node-version: "20"
       - run: pip install -r requirements-dev.txt
-      - name: Dipendenze del plugin (esbuild per la parità _pg_shared)
+      - name: Dipendenze del plugin (esbuild e jsdom per gli smoke)
         run: npm ci
         working-directory: plugin
       - run: python3 -m pytest -q

@@ -57,9 +57,8 @@ Dev/Source/{YAML,Jinja,JS}  ──►  Dev/Tools/render.py  ──►  dist/GDR-
 ```
 
 - `render.py` è un **orchestratore sottile** (modello+IO in `common.py`, SRD in
-  `build_srd.py`, rules-engine PG in `build_personaggio/`, validazione in
-  `validate.py`). Fonde `core.yaml` + `system.yaml` + `entities/*.yaml` in un unico
-  modello, rende i template **Jinja → Markdown**, copia i **JS** runtime e fa un
+  `build_srd.py`, validazione in `validate.py`; il PG lo costruisce il kernel `regole`).
+  Fonde `core.yaml` + `system.yaml` + `entities/*.yaml` in un unico modello, rende i template **Jinja → Markdown**, copia i **JS** runtime e fa un
   **merge non distruttivo** della config `.obsidian` (non tocca `Mondi/` né i plugin).
 - I JS sono **autonomi** (niente bundling): leggono i dati a runtime da
   `z.automazioni/data/*.json` via `app.vault.adapter.read`.
@@ -118,13 +117,13 @@ Tre doc di sviluppo in [`docs/`](docs/):
 ## Struttura
 
 ```
-Dev/Source/YAML/      core.yaml · system.yaml · entities/*.yaml · pg_rules.yaml
+Dev/Source/YAML/      core.yaml · system.yaml · entities/*.yaml
                       plugins.yaml · templates.yaml · pages.yaml
 Dev/Source/Jinja/     _macros.j2 · _entity_base.j2 + un template per entità
 Dev/Source/SiteJinja/ page.html.j2 · index.html.j2 · site.css (sito dei giocatori)
-Dev/Source/JS/        create_entity.js · sali_pg.js (PG senza libretto) · meta_actions.js · views.js
-                      genera.js · _panels.mjs (mappa pannelli → plugin) · _comparators.js/_homebrew_bridge.js (sorgenti canoniche)
-Dev/Tools/            common.py · render.py · build_srd.py · build_personaggio/ · gen_bestiario.py · fetch_plugins.py · validate.py
+Dev/Source/JS/        create_entity.js · meta_actions.js · views.js
+                      genera.js · _panels.mjs (mappa pannelli → plugin) · _comparators.js/_relations.js (sorgenti canoniche)
+Dev/Tools/            common.py · render.py · build_srd.py · gen_catalogo.ts · gen_bestiario.py · fetch_plugins.py · validate.py
 docs/                 architecture · schema_homebrew · releasing
 ```
 (`Dev/Source/SRD/` è la copia vendorizzata di `archivio/srd`; il motore vive in `regole`, symlink gitignorato.)
@@ -141,7 +140,6 @@ docs/                 architecture · schema_homebrew · releasing
 - **`entities/<id>.yaml`** — schema **per-entità**: `folder`, `order`, `templates`,
   `subtypes`, `fields`, `scheda`, `assi`, `relazioni`, `creation` (wizard).
 
-**`pg_rules.yaml`** — overlay del rules-engine PG (generazione caratteristiche).
 **`plugins.yaml`** — plugin + `metabind_inputs` + bottoni-azione.
 **`templates.yaml`** — solo le `actions` (i template di creazione sono nei file-entità).
 **`pages.yaml`** — pagine-indice per dominio → `index.md.j2`.

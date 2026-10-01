@@ -36,8 +36,13 @@ async function riposo_breve(file) {
   const ric = [];
   await updateFrontmatter(file, fm => {
     // Ricarica BREVE: risorse di classe con ric:breve + slot del Patto (slot_ricarica:breve).
+    // `breve` = quanti usi tornano (l'Ira: uno); assente = tutti.
     for (const r of (Array.isArray(fm.risorse_pg) ? fm.risorse_pg : [])) {
-      if (r && r.ric === "breve" && (Number(fm["usi_" + r.id]) || 0) > 0) { fm["usi_" + r.id] = 0; ric.push(r.label); }
+      const spesi = Number(fm["usi_" + (r && r.id)]) || 0;
+      if (!r || r.ric !== "breve" || spesi <= 0) continue;
+      const torna = Number(r.breve) > 0 ? Math.min(spesi, Number(r.breve)) : spesi;
+      fm["usi_" + r.id] = spesi - torna;
+      ric.push(torna < spesi ? `${r.label} (+${torna})` : r.label);
     }
     if (fm.slot_ricarica === "breve") {
       let any = false;

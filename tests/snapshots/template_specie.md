@@ -34,8 +34,8 @@
 > **sintetica** — Creata artificialmente tramite magia, alchimia o tecnologia.
 
 > [!info]- ℹ️ Guida — Specie
-> **Cos'è** · Una specie è un popolo giocabile: ne fissi i tratti meccanici (taglia, velocità) perché crea_pg li offra, e la sua natura aliena.
-> **Campi chiave** · **Tipo** (rarità) + **famiglia** (origine); **Taglia** e **Velocità** la rendono giocabile in crea_pg; scrivi i **Tratti** (includi "scurovisione" se la concede).
+> **Cos'è** · Una specie è un popolo giocabile: ne fissi i tratti meccanici (taglia, velocità) perché il creatore del PG li offra, e la sua natura aliena.
+> **Campi chiave** · **Tipo** (rarità) + **famiglia** (origine); **Taglia** e **Velocità** la rendono giocabile nel creatore del PG; scrivi i **Tratti** (includi "scurovisione" se la concede).
 > **Spunti** · Cosa la rende davvero ALIENA o memorabile (non «umani con le orecchie a punta»)? Qual è il suo rapporto con le altre genti? Un dono e una maledizione della sua natura.
 
 ````tabs

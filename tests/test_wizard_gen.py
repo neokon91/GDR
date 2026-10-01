@@ -17,27 +17,6 @@ from _common import (
 )
 
 
-@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_talento_ammesso(tmp_path):
-    """sali_pg.talentoAmmesso: gating talenti 2024 a un ASI — solo GENERALE; i DONI
-    EPICI dal livello 19; ORIGINE/STILE esclusi; categoria ignota (homebrew non
-    marcato) = permesso (non blocca)."""
-    harness = tmp_path / "ta.js"
-    harness.write_text(
-        f'const s=require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});'
-        'const f=(cat,liv)=>s.talentoAmmesso({categoria:cat},liv);'
-        'process.stdout.write(JSON.stringify({'
-        'gen:f("Generale",4), ori:f("Origini",4), stile:f("Stile di combattimento",4),'
-        'epic8:f("Dono epico",8), epic19:f("Dono epico",19),'
-        'hb:f("generale",8), vuoto:f("",4)}));',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    assert json.loads(res.stdout) == {
-        "gen": True, "ori": False, "stile": False,
-        "epic8": False, "epic19": True, "hb": True, "vuoto": True}
-
-
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 def test_srd_counts():
     """Conteggi attesi delle categorie SRD (incantesimi, mostri, condizioni)."""
@@ -240,7 +219,7 @@ def test_genera_tesoro_e2e(tmp_path):
 
 def test_validate_aux_yaml_real_files_pass():
     """Regressione: il validatore degli YAML ausiliari concorda con i file spediti
-    (astrologia/generatori/pg_rules)."""
+    (astrologia/generatori/componenti)."""
     assert render.validate_aux_yaml() == []
 
 
@@ -254,7 +233,7 @@ def test_validate_aux_yaml_catches_breakage(monkeypatch):
         if name == "astrologia.yaml":
             return {"segni": [{"nome": "Ariete", "elemento": "Fuoco"}],  # manca archetipo
                     "elementi": [{"nome": "Fuoco"}], "arcani": [{"nome": "Il Matto"}]}
-        if name in ("generatori.yaml", "pg_rules.yaml"):
+        if name in ("generatori.yaml", "componenti.yaml"):
             raise FileNotFoundError(name)  # opzionali: assenti -> saltati
         return real(name)
 
@@ -623,74 +602,6 @@ def test_validate_field_coverage():
     assert render.validate_field_coverage(
         {"fields": {"stato": {"label": "S", "widget": "text"}},
          "creation": {"luogo": {"fields": [{"field": "stato", "prompt": "p"}]}}}) == []
-
-
-@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_homebrew_bridge(tmp_path):
-    """Ponte homebrew→motore di sali_pg.js (i PG senza libretto; la creazione homebrew è
-    `plugin/homebrew.ts`, provata in tests/test_pg_kernel.py): incantesimiHomebrew filtra le note
-    categoria=incantesimo per classe (classi cita la classe, o vuote = tutti),
-    raggruppa per livello (mancante→1), esclude archiviate; fondiPool unisce SRD+
-    homebrew senza duplicati; talentiHomebrew raccoglie le note categoria=talento.
-    Degrada a vuoto senza app.vault.getMarkdownFiles (verificato dai test PG e2e)."""
-    import build_personaggio
-    full = build_personaggio.build_personaggio_options(CORE)
-    opt = {"caratteristiche": full["caratteristiche"],
-           "abilita": {k: {"label": v.get("label", k)} for k, v in full["abilita"].items()},
-           "slot_incantatore": full["slot_incantatore"]}
-    harness = tmp_path / "hb.js"
-    harness.write_text(
-        f'const sali=require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});'
-        f'const opt={json.dumps(opt, ensure_ascii=False)};'
-        'const F=(basename,fm)=>({f:{basename,path:basename+".md"},fm});'
-        'const files=[F("Dardo arcano",{categoria:"incantesimo",livello:1,classi:"Mago, Stregone"}),'
-        ' F("Tocco gelido",{categoria:"incantesimo",livello:0,classi:"Mago"}),'
-        ' F("Cura ferite",{categoria:"incantesimo",livello:1,classi:"Chierico"}),'
-        ' F("Eco senza scuola",{categoria:"incantesimo",livello:2}),'              # niente classi = a tutti
-        ' F("Spell vecchio",{categoria:"incantesimo",livello:1,classi:"Mago",stato:"archiviata"}),'  # esclusa
-        ' F("Maestro ombre",{categoria:"talento"}),'
-        ' F("Talento vecchio",{categoria:"talento",stato:"archiviata"}),'          # esclusa
-        ' F("Cenerino",{categoria:"background",car_background:"Forza, Costituzione, Saggezza",'
-        '   abilita_background:"Atletica, Sopravvivenza",talento_origine:"Robusto",strumento:"Strumenti da fabbro"}),'
-        ' F("Ceneride",{categoria:"specie",taglia:"Media",velocita:"9 m",tratti:"Vedono al buio: scurovisione a 18 m."}),'
-        ' F("Lama del Vuoto",{categoria:"classe",dado_vita:"d10",ts_competenze:"Forza, Costituzione",'
-        '   tipo_incantatore:"mezzo",competenze_armature:"Armature leggere e medie; scudi",abilita_numero:2,'
-        '   privilegi_l1:"Colpo del vuoto; Lama spettrale",livello_sottoclasse:3}),'
-        ' F("Bruto",{categoria:"classe",dado_vita:"d12",ts_competenze:"Forza, Costituzione",tipo_incantatore:"nessuno"}),'
-        ' F("Setta del Nulla",{categoria:"sottoclasse",classe:"[[Lama del Vuoto]]"}),'  # sottoclasse homebrew
-        ' F("Un luogo",{categoria:"luogo"})];'                                     # esclusa
-        'global.app={vault:{getMarkdownFiles:()=>files.map(x=>x.f)},'
-        ' metadataCache:{getFileCache:(f)=>({frontmatter:(files.find(x=>x.f===f)||{}).fm})}};'
-        'const out={'
-        ' mago:sali.incantesimiHomebrew("mago","Mago"),'
-        ' chierico:sali.incantesimiHomebrew("chierico","Chierico"),'
-        ' fusione:sali.fondiPool({"1":["Palla di fuoco"]},{"1":["Dardo arcano"],"0":["Tocco gelido"]}),'
-        ' talenti:Object.keys(sali.talentiHomebrew()),'
-        ' cl:sali.classeHomebrew(opt)["Lama del Vuoto"],'
-        ' clMartial:sali.classeHomebrew(opt).Bruto,'
-        ' sub:Object.keys(sali.sottoclasseHomebrew("Lama del Vuoto","Lama del Vuoto"))};'
-        'process.stdout.write(JSON.stringify(out));',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    out = json.loads(res.stdout)
-    assert out["mago"] == {"0": ["Tocco gelido"], "1": ["Dardo arcano"], "2": ["Eco senza scuola"]}  # Mago + senza-classi, no Chierico/archiviata
-    assert out["chierico"] == {"1": ["Cura ferite"], "2": ["Eco senza scuola"]}
-    assert out["fusione"]["1"] == ["Palla di fuoco", "Dardo arcano"] and out["fusione"]["0"] == ["Tocco gelido"]
-    assert out["talenti"] == ["Maestro ombre"]                                     # talento attivo, no archiviata/luogo
-    # Classe homebrew CASTER (mezzo): dado vita, TS→id, categorie armatura, slot L1 dalla tabella SRD.
-    cl = out["cl"]
-    assert cl["dado_vita"] == 10 and cl["tiri_salvezza"] == ["forza", "costituzione"]
-    assert cl["incantatore"] is True and cl["tipo_incantatore"] == "mezzo"
-    assert cl["competenze_armature_cat"] == ["leggera", "media", "scudo"]
-    assert cl["slot_l1"] == {"1": 2} and cl["abilita"]["scelte"] == 2 and len(cl["abilita"]["opzioni"]) == 18
-    # Privilegi di 1º livello (lista, split su ";") + livello sottoclasse (default 3).
-    assert cl["privilegi_l1"] == ["Colpo del vuoto", "Lama spettrale"] and cl["livello_sottoclasse"] == 3
-    assert out["clMartial"]["incantatore"] is False and out["clMartial"]["slot_l1"] == {}  # marziale: niente slot
-    assert out["clMartial"]["livello_sottoclasse"] == 3 and out["clMartial"]["privilegi_l1"] == []  # default/vuoto
-    assert out["sub"] == ["Setta del Nulla"]  # sottoclasse homebrew legata alla classe (sali_pg)
-
-
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

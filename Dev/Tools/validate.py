@@ -351,7 +351,7 @@ def validate_field_coverage(core: dict[str, Any]) -> list[str]:
 def validate_aux_yaml() -> list[str]:
     """Shape degli YAML AUSILIARI letti a runtime dai JS/plugin ma non fusi nel
     modello core/system: astrologia (views.renderTemaNatale), generatori (genera.js),
-    pg_rules (build_personaggio). Senza questo un refuso qui passa tutto il resto di
+    componenti (render.write_componenti). Senza questo un refuso qui passa tutto il resto di
     check() e rompe SOLO in-app. Ogni file è opzionale (la pipeline degrada se
     assente): se manca, si salta."""
     errors: list[str] = []
@@ -417,30 +417,6 @@ def validate_aux_yaml() -> list[str]:
             if missing:
                 errors.append(f"generatori: {sec} usa placeholder senza lista: {sorted(missing)}")
 
-    # pg_rules.yaml -> build_personaggio (rules-engine PG: metodi car., ASI bg, CA, lingue).
-    pg = load("pg_rules.yaml")
-    if pg:
-        metodi = (pg.get("generazione_caratteristiche") or {}).get("metodi") or {}
-        if not metodi:
-            errors.append("pg_rules: generazione_caratteristiche.metodi assente")
-        # Chiavi aritmetico-critiche lette dai wizard (pointBuy/assegnaArray): un
-        # refuso qui non lancia, dà point-buy "gratis" o array vuoto, in silenzio.
-        pb = metodi.get("point_buy") or {}
-        if pb and not isinstance(pb.get("costi"), dict):
-            errors.append("pg_rules: point_buy.costi assente o non è una mappa")
-        arr = metodi.get("array_standard") or {}
-        if arr and not isinstance(arr.get("valori"), list):
-            errors.append("pg_rules: array_standard.valori assente o non è una lista")
-        if not (pg.get("aumento_background") or {}).get("schemi"):
-            errors.append("pg_rules: aumento_background.schemi assente")
-        for aid, arm in (pg.get("armature") or {}).items():
-            if not (isinstance(arm, dict) and arm.get("label") and arm.get("categoria")
-                    and "ca_base" in arm and "dex_max" in arm):
-                errors.append(f"pg_rules: armatura '{aid}' senza label/categoria/ca_base/dex_max")
-        lingue = pg.get("lingue") or {}
-        if not (lingue.get("standard") and lingue.get("numero_a_scelta") is not None):
-            errors.append("pg_rules: lingue senza standard/numero_a_scelta")
-
     # componenti.yaml -> render.write_componenti (catalogo dei componenti a richiesta,
     # bottone «＋ Componenti»). Ogni voce DEVE nominare una macro reale di _macros.j2
     # (un refuso qui darebbe un componente vuoto/rotto in-app, in silenzio) e un
@@ -467,7 +443,7 @@ def validate_aux_yaml() -> list[str]:
 
 
 def validate_runtime_payloads(core: dict[str, Any], templates: list[dict[str, Any]]) -> list[str]:
-    """Valida la SHAPE dei payload runtime (core.json, personaggio.json) contro i loro
+    """Valida la SHAPE del payload runtime (core.json) contro il suo
     JSON Schema (schemas/): è il contratto Python→JS reso ESPLICITO. Un drift di shape
     — chiave rinominata/rimossa o tipo cambiato dal lato Python che il JS legge — si ferma
     al build invece di rompere muto in-app. Costruisce i payload IN-MEMORY (non scrive file)."""
@@ -477,13 +453,11 @@ def validate_runtime_payloads(core: dict[str, Any], templates: list[dict[str, An
         # Utente che ha fatto `npm install` ma non le dev-dep Python: messaggio
         # azionabile invece di un ModuleNotFoundError grezzo.
         return ["jsonschema non installato — esegui `pip install -r requirements-dev.txt` per validare i payload runtime."]
-    from build_personaggio import build_personaggio_options
     from render import engine_payload  # differito: render importa validate al load (no ciclo a runtime)
 
     errors: list[str] = []
     casi = [
         ("core.json", engine_payload(core, templates), "core.schema.json"),
-        ("personaggio.json", build_personaggio_options(core), "personaggio.schema.json"),
     ]
     for name, data, schema_file in casi:
         schema = json.loads((SCHEMA_DIR / schema_file).read_text(encoding="utf-8"))
@@ -647,24 +621,6 @@ def check() -> int:
                 elif block != canonical:
                     errors.append(f"{js_name}: matchesCond diverge da _comparators.js (sorgente unica) — risincronizza")
 
-    # JS — anti-drift del PONTE HOMEBREW: le funzioni condivise (note del vault →
-    # opzioni SRD) hanno UNA sorgente canonica (_homebrew_bridge.js); sali_pg.js (i PG senza
-    # libretto: autonomo, niente require) ne tiene una COPIA fra i marker
-    # >>>homebrew-bridge/<<<homebrew-bridge. Impongo l'uguaglianza così creazione e
-    # level-up non possono usare regole homebrew divergenti (es. lavorando su sottoclasse).
-    bridge_path = JS_DIR / "_homebrew_bridge.js"
-    if bridge_path.is_file():
-        bridge = marked_block(bridge_path.read_text(encoding="utf-8"), "homebrew-bridge")
-        if bridge is None:
-            errors.append("_homebrew_bridge.js: blocco homebrew-bridge fra i marker mancante")
-        else:
-            for js_name in ("sali_pg.js",):
-                block = marked_block(js_source(js_name),"homebrew-bridge")
-                if block is None:
-                    errors.append(f"{js_name}: blocco homebrew-bridge fra i marker // >>>homebrew-bridge/<<<homebrew-bridge mancante")
-                elif block != bridge:
-                    errors.append(f"{js_name}: ponte homebrew diverge da _homebrew_bridge.js (sorgente unica) — risincronizza")
-
     # JS — anti-drift della DERIVAZIONE DEGLI INVERSI: reciprocalField/inverseRelation
     # hanno UNA sorgente canonica (_relations.js); meta_actions.js (Collega) e
     # create_entity.js (inversi nel wizard di creazione) ne tengono una COPIA fra i
@@ -682,24 +638,6 @@ def check() -> int:
                     errors.append(f"{js_name}: blocco relations fra i marker // >>>relations/<<<relations mancante")
                 elif block != canonical_rel:
                     errors.append(f"{js_name}: inverseRelation/reciprocalField diverge da _relations.js (sorgente unica) — risincronizza")
-
-    # JS — anti-drift degli HELPER PG CONDIVISI: mod/sigla/maxAtLevel/risorseAtLevel/
-    # scegliMulti hanno UNA sorgente canonica (_pg_shared.js); sali_pg.js
-    # (autonomi, niente require) ne tengono una COPIA fra i marker >>>pg-shared/<<<pg-shared.
-    # Impongo l'uguaglianza così creazione e level-up calcolano risorse/competenze identiche
-    # (prima erano scritti in due stili → drift silenzioso se se ne toccava uno solo).
-    pg_shared_path = JS_DIR / "_pg_shared.js"
-    if pg_shared_path.is_file():
-        pg_shared = marked_block(pg_shared_path.read_text(encoding="utf-8"), "pg-shared")
-        if pg_shared is None:
-            errors.append("_pg_shared.js: blocco pg-shared fra i marker mancante")
-        else:
-            for js_name in ("sali_pg.js",):
-                block = marked_block(js_source(js_name), "pg-shared")
-                if block is None:
-                    errors.append(f"{js_name}: blocco pg-shared fra i marker // >>>pg-shared/<<<pg-shared mancante")
-                elif block != pg_shared:
-                    errors.append(f"{js_name}: helper PG condivisi divergono da _pg_shared.js (sorgente unica) — risincronizza")
 
     # Ogni field('<id>') usato nei Jinja deve esistere nel registro core.fields.
     # I partial (_*.j2) definiscono le macro, non le usano: vanno esclusi.

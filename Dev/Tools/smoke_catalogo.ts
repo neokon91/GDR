@@ -85,7 +85,7 @@ console.log('✓ round-trip Attore→frontmatter→Attore OK — nota PG coerent
 // --- Parità: un INCANTATORE con incantesimi + equipaggiamento produce la nota completa ----------
 // Sceglie dinamicamente id validi dal catalogo (niente hardcoding): un bardo liv3 con 2 trucchetti,
 // 3 incantesimi e l'opzione di equipaggiamento di classe → la nota deve avere incantatore/trucchetti/
-// incantesimi/inventario, così il ritiro di crea_pg non perde né spell né equip.
+// incantesimi/inventario, così la nota del kernel non perde né spell né equip.
 const bardo = cat.classi.find((c) => c.id === 'dnd.classe.bardo')
 if (bardo) {
   const trucco = cat.incantesimi.filter((s) => s.classi.includes('dnd.classe.bardo') && s.livello === 0).slice(0, 2)

@@ -619,24 +619,25 @@ def test_render_causalita(tmp_path):
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_incantesimi(tmp_path):
     """views.renderIncantesimi: trucchetti (liv 0) + incantesimi noti raggruppati per
-    LIVELLO dal pool della classe, link SRD `[[..]]`, slot residui (max−uso) per livello;
-    un non incantatore (nessuno spell, classe non incantatore) → "" (niente callout)."""
+    LIVELLO dal catalogo del kernel, link `[[..]]`, slot residui (max−uso) per livello,
+    🌀 sulla concentrazione; un non incantatore (nessuno spell, classe senza incantesimi
+    nel catalogo) → "" (niente callout)."""
     harness = tmp_path / "inc.js"
     harness.write_text(
         'const fs=require("fs");'
         f'const src=fs.readFileSync({json.dumps(VIEWS_JS)},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
-        # personaggio.json: mago incantatore con pool per livello; ladra non incantatore.
-        'const data={classi:{mago:{incantatore:true,incantesimi_pool:{'
-        '"0":["Luce","Mano magica"],"1":["Dardo incantato","Scudo"],"3":["Palla di fuoco"]}},'
-        ' ladra:{incantatore:false,incantesimi_pool:{}}}};'
-        'global.app={vault:{adapter:{read:async()=>JSON.stringify(data)}}};'
+        # Il catalogo del kernel: mago incantatore, ladro no; gli incantesimi col loro livello.
+        'const I=(nome,livello,c)=>({id:"dnd.incantesimo."+nome,nome,livello,concentrazione:!!c});'
+        'const kernel={catalogo:{classi:[{id:"dnd.classe.mago",nome:"Mago",incantesimi:{caratteristica:"intelligenza"}},'
+        ' {id:"dnd.classe.ladro",nome:"Ladro"}],'
+        ' incantesimi:[I("Luce",0),I("Mano magica",0),I("Dardo incantato",1),I("Scudo",1),I("Palla di fuoco",3),I("Volare",3,1)]}};'
         # PG mago liv 5: 2 trucchetti, 3 incantesimi (1º+3º), slot 3 di 1º (1 usato), 2 di 3º.
         'const mago={classe:"mago",trucchetti:["Luce","Mano magica"],'
-        ' incantesimi:["Scudo","Dardo incantato","Palla di fuoco"],'
+        ' incantesimi:["Scudo","Dardo incantato","Palla di fuoco","Volare"],'
         ' slot_1:3,slot_uso_1:1,slot_3:2,slot_uso_3:0};'
-        'const ladra={classe:"ladra"};'
-        'Promise.all([m.exports.renderIncantesimi(app,null,mago),m.exports.renderIncantesimi(app,null,ladra)])'
+        'const ladra={classe:"ladro"};'
+        'Promise.all([m.exports.renderIncantesimi({},null,mago,kernel),m.exports.renderIncantesimi({},null,ladra,kernel)])'
         '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -647,7 +648,8 @@ def test_render_incantesimi(tmp_path):
     assert "**Trucchetti** (2)" in a and "[[Luce]]" in a            # liv 0
     assert "**1º livello** · slot 2/3 (2)" in a                     # max3−uso1=2 residui; 2 spell
     assert "[[Dardo incantato]]" in a and "[[Scudo]]" in a          # ordinati, linkati SRD
-    assert "**3º livello** · slot 2/2 (1)" in a and "[[Palla di fuoco]]" in a
+    assert "**3º livello** · slot 2/2 (2)" in a and "[[Palla di fuoco]]" in a
+    assert "🌀 [[Volare]]" in a                                     # concentrazione dal catalogo
     assert a.index("Trucchetti") < a.index("1º livello") < a.index("3º livello")  # per livello
     assert out["b"] == ""                                           # non incantatore -> niente callout
 

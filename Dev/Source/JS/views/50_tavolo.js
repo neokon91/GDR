@@ -32,6 +32,10 @@ async function renderMaestrie(app) {
 }
 
 // --- Attacchi con maestria (scheda PG) --------------------------------------
+// Le armi arrivano dal plugin nella forma della Board (`ArmaCat`: srd_armi.json + armi
+// homebrew del vault): {nome, dado, tipo_danno?, proprieta, distanza, padronanza?}, con
+// proprietà e padronanza in slug (`accurata`, `doppio-fendente`).
+//
 // Caratteristica d'attacco di un'arma (2024): a distanza → Destrezza; accurata
 // (finesse) → la migliore fra Forza e Destrezza del PG; mischia → Forza.
 function abilitaArma(arma, page) {
@@ -41,15 +45,21 @@ function abilitaArma(arma, page) {
     const d = Number(page && page.mod_destrezza) || 0;
     return d > f ? "destrezza" : "forza";
   }
-  return /distanza/i.test((arma && arma.categoria) || "") ? "destrezza" : "forza";
+  return arma && arma.distanza ? "destrezza" : "forza";
 }
 
-// Dado di danno dalla stringa SRD "1d6 taglienti" → { dado:"1d6", tipo:"taglienti" }.
-function danniArma(danni) {
-  const s = String(danni || "");
-  const m = s.match(/(\d+d\d+)/i);
-  return { dado: m ? m[1] : "", tipo: s.replace(/\d+d\d+/i, "").trim() };
+// Dado e tipo di danno: `dado` è "d8"/"2d6"/"1" (srd_armi) o, per l'homebrew, la stringa
+// intera "1d8 tagliente"; il tipo da `tipo_danno` o dal resto della stringa.
+function danniArma(arma) {
+  const s = String((arma && arma.dado) || "").trim();
+  const m = s.match(/^(\d*)d(\d+)/i);
+  const dado = m ? `${m[1] || 1}d${m[2]}` : (/^\d+$/.test(s) ? s : "");
+  const tipo = text(arma && arma.tipo_danno) || s.replace(/^\d*d\d+|^\d+/i, "").trim();
+  return { dado, tipo };
 }
+
+// Slug di un nome di maestria ("Doppio fendente" → "doppio-fendente"), per legarla all'arma.
+const slugMaestria = (s) => String(s || "").trim().toLowerCase().replace(/\s+/g, "-");
 
 // Nome-arma da una voce padronanze_armi del PG ("Ascia — Vessazione" → "Ascia").
 function nomeArma(voce) {
@@ -58,12 +68,13 @@ function nomeArma(voce) {
 
 // Riga d'attacco per un'arma con maestria: tiro per colpire (mod arma + competenza,
 // sintassi Dice Roller che legge il frontmatter), danni (dado + mod) ed effetto della
-// padronanza. maestrieByName: mappa nome-padronanza(minuscolo)→voce maestrie. Esposto.
-function attaccoArma(arma, page, maestrieByName) {
+// padronanza. maestrie: mappa slug-padronanza → voce maestrie (core.maestrie). Esposto.
+function attaccoArma(arma, page, maestrie) {
   const abil = abilitaArma(arma, page);
-  const { dado, tipo } = danniArma(arma && arma.danni);
-  const mast = String((arma && arma.padronanza) || "");
-  const eff = ((maestrieByName || {})[mast.toLowerCase()] || {}).effetto || "";
+  const { dado, tipo } = danniArma(arma);
+  const voce = (maestrie || {})[slugMaestria(arma && arma.padronanza)] || {};
+  const mast = text(voce.nome) || String((arma && arma.padronanza) || "");
+  const eff = voce.effetto || "";
   return {
     nome: (arma && arma.nome) || "",
     sigla: abil.slice(0, 3).toUpperCase(),
@@ -77,8 +88,8 @@ function attaccoArma(arma, page, maestrieByName) {
 
 // Pannello "Attacchi con maestria" della scheda PG: per ogni arma di cui il PG ha
 // padronanza (frontmatter padronanze_armi) emette tiro per colpire + danni + effetto
-// della maestria. Le armi vengono dal catalogo di personaggio.json (opt.armi). I
-// `dice:` restano coerenti con la Scheda (Dice Roller legge mod_<car> e competenza).
+// della maestria. Le armi vengono dal plugin (`kernel.armi`: SRD + homebrew, chiave = nome
+// minuscolo). I `dice:` restano coerenti con la Scheda (Dice Roller legge mod_<car> e competenza).
 // --- Albero evolutivo (progressione ramificata, lore) -----------------------
 // Parsing di un nodo "grado | nome | prerequisito | effetto" → {grado, nome, prereq,
 // effetto}. Campi mancanti = vuoti; grado non numerico → 0 ("Senza grado"). Esposto.
@@ -116,44 +127,20 @@ async function renderAlbero(app, page) {
   return `> [!tip]- 🌳 Albero evolutivo\n${blocchi.join("\n>\n")}`;
 }
 
-// Armi HOMEBREW dal vault (note `oggetto` con tipo=arma): stesso shape del catalogo
-// SRD {nome:{nome,danni,proprieta,categoria,padronanza}}, grazie alla parità di campi
-// (system.yaml usa gli stessi nomi dell'equip SRD). Così un'arma homebrew, se il PG
-// ne ha padronanza, è giocabile in renderAttacchi come quelle ufficiali. Best-effort:
-// se l'app non espone il vault (test headless), torna {} e si usa solo il catalogo SRD.
-function armiHomebrew(app) {
-  const out = {};
-  try {
-    for (const f of app.vault.getMarkdownFiles()) {
-      const fm = app.metadataCache.getFileCache(f) && app.metadataCache.getFileCache(f).frontmatter;
-      if (!fm || fm.categoria !== "oggetto" || String(fm.tipo || "").toLowerCase() !== "arma") continue;
-      const nome = (fm.nome || f.basename || "").toString();
-      if (!nome) continue;
-      const proprieta = Array.isArray(fm.proprieta)
-        ? fm.proprieta
-        : String(fm.proprieta || "").split(",").map((s) => s.trim()).filter(Boolean);
-      out[nome] = { nome, danni: fm.danni || "", proprieta, categoria: fm.categoria_arma || "", padronanza: fm.padronanza || "" };
-    }
-  } catch (e) { /* vault non disponibile (headless): solo catalogo SRD */ }
-  return out;
-}
-
-async function renderAttacchi(app, page) {
+async function renderAttacchi(app, page, kernel) {
   if (!page) return "*Apri la scheda PG.*";
   const scelte = asArray(page.padronanze_armi).map(nomeArma).filter(Boolean);
   if (!scelte.length) {
     return "> [!tip]- ⚔️ Attacchi con maestria\n> Nessuna padronanza d'arma: la tua classe non la concede. Le 8 proprietà di maestria sono nel quick-ref sotto.";
   }
-  const opt = await loadPersonaggio(app);
-  // Catalogo SRD + armi homebrew dal vault (parità di campi → stesse colonne).
-  const armi = { ...armiHomebrew(app), ...(opt.armi || {}) };
+  const armi = (kernel && kernel.armi) || {};
   const core = await loadCoreData(app);
-  const maestrieByName = {};
-  for (const mm of core.maestrie || []) maestrieByName[String(mm.nome || "").toLowerCase()] = mm;
+  const maestrie = {};
+  for (const mm of core.maestrie || []) maestrie[slugMaestria(mm.nome)] = mm;
   const righe = scelte.map((nome) => {
-    const arma = armi[nome];
+    const arma = armi[nome.toLowerCase()];
     if (!arma) return `> **${nome}** — *(non nel catalogo SRD; tira con il d20 della Scheda)*`;
-    const a = attaccoArma(arma, page, maestrieByName);
+    const a = attaccoArma(arma, page, maestrie);
     const danni = a.danni ? ` · danni \`dice: ${a.danni}\`${a.tipo ? " " + a.tipo : ""}` : "";
     return `> **${a.nome}** (${a.sigla}) — colpire \`dice: ${a.colpire}\`${danni}\n>\n> ⚔️ *${a.padronanza}* — ${a.effetto}`;
   });

@@ -1,72 +1,52 @@
-// --- Tratti di specie (rules-engine): dettagli SRD strutturati nella scheda PG -
-// Dal campo `specie` del PG rende le sezioni SRD della specie (descrizioni +
-// tabelle, es. soffio / antenati draconici) in un callout pieghevole, così la
-// scheda espone i dettagli giocabili senza saltare alla nota SRD. Usa
-// personaggio.json (build_personaggio porta le `sezioni` complete). Vuoto -> "".
-function sezioniMarkdown(sezioni) {
-  const parti = [];
-  for (const sez of sezioni || []) {
-    const titolo = String((sez && sez.titolo) || "").trim();
-    const righe = Array.isArray(sez && sez.righe) ? sez.righe : null;
-    if (righe && righe.length) {
-      const cols = Object.keys(righe[0]);
-      const tabella = [`| ${cols.join(" | ")} |`, `| ${cols.map(() => "---").join(" | ")} |`,
-        ...righe.map((r) => `| ${cols.map((c) => r[c] != null ? r[c] : "").join(" | ")} |`)];
-      parti.push((titolo ? `**${titolo}**\n\n` : "") + tabella.join("\n"));
-    } else if (sez && sez.descrizione) {
-      parti.push((titolo ? `**${titolo}** — ` : "") + String(sez.descrizione).trim());
-    }
-  }
-  return parti;
-}
-
-async function renderSpecieTratti(app, page) {
+// --- Tratti di specie: la nota della specie, dentro la scheda del PG ---------------
+// Dal campo `specie` del PG incorpora la nota della specie (SRD o homebrew del vault: tratti,
+// tabelle come gli antenati draconici) in un callout pieghevole, così la scheda espone i
+// dettagli giocabili senza saltare alla nota. Il nome lo dà il catalogo del kernel (lo slug
+// `dragonide` → «Dragonide»). Specie senza nota nel vault → "".
+async function renderSpecieTratti(app, page, kernel) {
   if (!page) return "";
-  const id = String(page.specie != null ? page.specie : "").trim();
+  const id = text(page.specie).trim();
   if (!id) return "";
-  const data = await loadPersonaggio(app);
-  const sp = (data.specie || {})[id];
-  if (!sp) return "";
-  const parti = sezioniMarkdown(sp.sezioni);
-  if (!parti.length) return "";
-  const body = parti.map((p) => "> " + p.replace(/\n/g, "\n> ")).join("\n>\n");
-  return `> [!note]- Tratti di ${sp.label || id}\n${body}`;
+  const sp = voceCatalogo(catalogoDi(kernel).specie, id);
+  const nome = sp ? text(sp.nome) : id;
+  const mc = app && app.metadataCache;
+  if (mc && typeof mc.getFirstLinkpathDest === "function" && !mc.getFirstLinkpathDest(nome, "")) return "";
+  return `> [!note]- Tratti di ${nome}\n> ![[${nome}]]`;
 }
 
 // --- Incantesimi del PG (gestione inline, scala 1-20) ------------------------
 // Raggruppa i trucchetti (liv 0) + gli incantesimi noti/preparati del PG per
-// LIVELLO, leggendo il livello di ciascuno dal pool della classe (personaggio.json:
-// classi[c].incantesimi_pool = {livello:[nomi]}, stessi nomi delle note SRD →
-// `[[..]]` risolve). Ogni intestazione di livello mostra gli slot residui
+// LIVELLO, leggendo il livello di ciascuno dal catalogo del kernel (SRD + homebrew, stessi
+// nomi delle note → `[[..]]` risolve). Ogni intestazione di livello mostra gli slot residui
 // (slot_N − slot_uso_N). Sostituisce il vecchio callout inchiodato al "1º livello":
 // per un caster di livello alto vedi l'intero spellbook, non solo il 1º. Non
-// incantatore / nessun incantesimo → "" (niente callout). Pure-ish (usa loadPersonaggio).
-async function renderIncantesimi(app, dv, page) {
+// incantatore / nessun incantesimo → "" (niente callout).
+async function renderIncantesimi(app, dv, page, kernel) {
   if (!page) return "*Apri una scheda PG.*";
   const trucchetti = asArray(page.trucchetti), incantesimi = asArray(page.incantesimi);
-  const data = await loadPersonaggio(app);
-  const classiOpt = data.classi || {};
-  // Classi del PG (breakdown multiclasse, o la classe piatta). Le incantatrici (incluso
-  // il Patto del Warlock) forniscono i pool e le CD; con più caster i pool si UNISCONO.
+  const cat = catalogoDi(kernel);
+  // Classi del PG (breakdown multiclasse, o la classe piatta). Le incantatrici (Patto del
+  // Warlock compreso) sono quelle con `incantesimi.caratteristica` nel catalogo.
   const bd = Array.isArray(page.classi) && page.classi.length
     ? page.classi.map((c) => text(c.id))
     : [text(page.classe)];
-  const casterClasses = bd.map((id) => classiOpt[id]).filter((cl) => cl && (cl.incantatore || cl.tipo_incantatore === "patto"));
+  const casterClasses = bd.map((id) => voceCatalogo(cat.classi, id)).filter((cl) => cl && cl.incantesimi && cl.incantesimi.caratteristica);
   if (!casterClasses.length && !trucchetti.length && !incantesimi.length) return "";  // non caster
-  // nome → livello, unendo i pool di TUTTE le classi incantatrici (SRD).
+  // nome → livello e concentrazione 🌀, dagli incantesimi del catalogo (SRD + homebrew).
   const levelOf = new Map();
-  for (const cl of casterClasses)
-    for (const [L, names] of Object.entries(cl.incantesimi_pool || {}))
-      for (const n of names || []) if (!levelOf.has(n)) levelOf.set(n, Number(L));
-  // Homebrew: il livello dalla nota stessa (categoria incantesimo) se non nel pool
-  // della classe — così gli incantesimi homebrew si raggruppano bene, non sotto "ignoto".
-  // Stessa passata raccoglie chi richiede CONCENTRAZIONE (durata SRD) → 🌀.
   const concentra = new Set();
+  for (const sp of cat.incantesimi || []) {
+    const n = text(sp.nome), L = Number(sp.livello);
+    if (n && Number.isFinite(L) && !levelOf.has(n)) levelOf.set(n, L);
+    if (n && sp.concentrazione) concentra.add(n);
+  }
+  // Le note del vault completano: un incantesimo homebrew fuori catalogo e il RITUALE 📿 (che
+  // il catalogo del creatore non porta).
   const rituali = new Set();
   if (dv) {
     try {
-      const cat = (p) => p && p.file && (text(p.categoria) === "incantesimo" || text(p.categoria) === "srd-incantesimo");
-      for (const sp of dv.pages().where(cat).array()) {
+      const eIncantesimo = (p) => p && p.file && (text(p.categoria) === "incantesimo" || text(p.categoria) === "srd-incantesimo");
+      for (const sp of dv.pages().where(eIncantesimo).array()) {
         const L = Number(sp.livello);
         if (!levelOf.has(sp.file.name) && Number.isFinite(L)) levelOf.set(sp.file.name, L);
         if (sp.durata && /concentr/i.test(text(sp.durata))) concentra.add(sp.file.name);
@@ -92,22 +72,17 @@ async function renderIncantesimi(app, dv, page) {
     out.push(`> **${titolo}**${L > 0 ? slotInfo(L) : ""} (${names.length})\n> ${names.join(" · ")}`);
   }
   // Testata: CD incantesimo (8 + competenza + mod) e bonus d'attacco (competenza +
-  // mod). La caratteristica da incantatore = la prima MENTALE fra le primarie della
-  // classe (Mago→INT, Chierico→SAG, Paladino [FOR,CAR]→CAR, Ranger [DES,SAG]→SAG…),
-  // così SRD e homebrew funzionano senza un campo dedicato. Il mod si calcola dal
-  // punteggio nel frontmatter → corretto a ogni ri-render (non serve mod_<car>).
-  const MENTALE = ["intelligenza", "saggezza", "carisma"];
+  // mod), con la caratteristica da incantatore della classe nel catalogo. Il mod si calcola
+  // dal punteggio nel frontmatter → corretto a ogni ri-render (non serve mod_<car>).
   const pb = Number(page.competenza) || 0;
   const teste = [];
-  for (const id of bd) {
-    const cl = classiOpt[id];
-    if (!cl || !(cl.incantatore || cl.tipo_incantatore === "patto")) continue;
-    const carInc = cl.caratteristica_incantesimi || asArray(cl.caratteristica_primaria).map(text).find((c) => MENTALE.includes(c));
+  for (const cl of casterClasses) {
+    const carInc = text(cl.incantesimi.caratteristica);
     if (!carInc || page[carInc] == null) continue;
     const m = Math.floor((Number(page[carInc]) - 10) / 2);
     const cd = 8 + pb + m, atk = pb + m;
     const lab = carInc.charAt(0).toUpperCase() + carInc.slice(1);
-    const pre = casterClasses.length > 1 ? `${cl.label}: ` : "";
+    const pre = casterClasses.length > 1 ? `${cl.nome}: ` : "";
     // Attacco da incantatore TIRABILE (come gli attacchi con arma e i TS): clic → 1d20+atk.
     // La CD resta testo: è la soglia del TS del bersaglio, non un tiro del PG.
     const atkDice = atk >= 0 ? `1d20 + ${atk}` : `1d20 - ${Math.abs(atk)}`;
@@ -120,8 +95,10 @@ async function renderIncantesimi(app, dv, page) {
     testa += `> 🩸 **Patto** — ${rem}/${Number(page.slot_patto)} slot di ${page.slot_patto_liv}º livello (ricarica a riposo breve)\n>\n`;
   }
   const leg = [];
-  if (concentra.size) leg.push("🌀 = concentrazione");
-  if (rituali.size) leg.push("📿 = rituale");
+  // La legenda solo per i segni che compaiono fra gli incantesimi del PG.
+  const mostrati = [...trucchetti, ...incantesimi].map(text);
+  if (mostrati.some((n) => concentra.has(n))) leg.push("🌀 = concentrazione");
+  if (mostrati.some((n) => rituali.has(n))) leg.push("📿 = rituale");
   const legenda = leg.length ? "\n>\n> " + leg.join(" · ") : "";
   return "> [!note]- 🪄 Incantesimi\n" + testa + out.join("\n>\n") + legenda;
 }

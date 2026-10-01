@@ -106,7 +106,7 @@ export function multiSuggester<T>(app: App, textItems: ((x: T) => string) | stri
 
 // tp compatibile per il dispatcher: `date.now`, le modali native (suggester/prompt) e un
 // proxy `user` che carica lazy gli script `tp.user.<name>` da z.automazioni (usati da alcune
-// azioni: sali_pg, genera, importa_*, genera_sito, world_board). NIENTE multi_suggester: il
+// azioni: genera, importa_*, genera_sito, world_board). NIENTE multi_suggester: il
 // runtime lo tratta come opzionale e degrada a suggester singoli.
 export function tpShim(app: App): any {
   const m = (window as any).moment;

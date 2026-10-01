@@ -4,11 +4,12 @@
  * Fa le domande che farebbe il creatore (`plugin/creatore.ts`) scegliendo da solo le prime
  * opzioni che la GUIDA del kernel offre, e prova la catena intera: il libretto si chiude
  * senza mancanze, `scriviPg` ne deriva la nota, la salita non perde i PF spesi, la Board
- * monta il PG completo (`combattenteDiPg`) e le risorse vanno e tornano fra nota e motore.
+ * monta il PG completo (`combattenteDiPg`), le risorse vanno e tornano fra nota e motore, e
+ * le viste della scheda (views.js vero) leggono la nota col catalogo del kernel.
  *
  * Uso (da `plugin/`): `npm run smoke:pg` (lo lancia anche pytest, `tests/test_pg_kernel.py`).
  */
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import type { Catalogo } from '../../regole/src/creatore/catalogo'
 import { type Libretto, aggiungiLivello, librettoIniziale } from '../../regole/src/creatore/libretto'
@@ -41,7 +42,7 @@ scriviPg(nota, guerriero, cat, true)
 const risorsa = (nota.risorse_pg ?? [])[0]
 assert(risorsa, 'il guerriero ha una risorsa a usi (risorse_pg)')
 // Recuperare le Energie torna (una) col riposo breve: la scheda la segna «breve».
-assert(risorsa.ric === 'breve', `ricarica di ${risorsa.label}: ${risorsa.ric}`)
+assert(risorsa.ric === 'breve' && risorsa.breve === 1, `ricarica di ${risorsa.label}: ${risorsa.ric} (+${risorsa.breve})`)
 nota.pf = nota.pf_max - 5
 nota[`usi_${risorsa.id}`] = 1
 const prima = nota.pf_max
@@ -116,6 +117,30 @@ Object.assign(cat, hb)
   assert(fm.destrezza === 14 + 2 + 1, `homebrew: Destrezza 14 + background 2 + Passo del Vento 1 (${fm.destrezza})`)
   assert(fm.scurovisione === 18 && fm.prof_acrobazia === 1 && fm.prof_furtivita === 1, 'homebrew: scurovisione, Acrobazia dal talento, Furtività dal background')
   assert(lib.passi[2].sottoclasseId === 'homebrew.sottoclasse.via-della-tempesta', 'homebrew: la sottoclasse legata per link si sceglie al 3º')
-  assert((fm.trucchetti ?? []).includes('homebrew.incantesimo.brezza') && fm.slot_1 > 0, 'homebrew: incantatore pieno con gli incantesimi della sua classe')
+  assert((fm.trucchetti ?? []).includes('Brezza') && fm.slot_1 > 0, 'homebrew: incantatore pieno con gli incantesimi della sua classe')
   console.log(`✓ homebrew: Lama del Vento 4, Des ${fm.destrezza}, slot ${fm.slot_1}/${fm.slot_2}, sottoclasse e talento del vault`)
 }
+
+// Le viste sono asincrone: l'ultima sezione gira in una funzione async (un'eccezione fa uscire con errore).
+;(async () => {
+  // 7. La SCHEDA: le viste vere (views.js, come le carica il plugin) sulla nota scritta dal kernel,
+  // col catalogo del kernel. Nomi, non id: privilegi, incantesimi come link alle note.
+  const dirViste = resolve('../Dev/Source/JS/views')
+  const sorgente = readdirSync(dirViste).filter((f) => f.endsWith('.js')).sort().map((f) => readFileSync(`${dirViste}/${f}`, 'utf8')).join('')
+  const mod: { exports: any } = { exports: {} }
+  new Function('module', 'exports', sorgente)(mod, mod.exports)
+  const viste = mod.exports
+  const kernel = { catalogo: cat, armi: {} }
+  const prog: string = await viste.renderProgressione({}, nota, kernel)
+  assert(prog.includes('Guerriero') && prog.includes('livello 3') && prog.includes('Recuperare le Energie'),
+    `progressione del guerriero al 3º coi nomi dei privilegi:\n${prog}`)
+  assert(prog.includes('Al livello 4'), 'progressione: anteprima del livello dopo')
+  const inc: string = await viste.renderIncantesimi({}, null, nm, kernel)
+  assert(inc.includes('CD ') && inc.includes('**Trucchetti**') && inc.includes('**1º livello**') && !inc.includes('[[dnd.'),
+    `incantesimi del mago per livello, link per nome:\n${inc}`)
+  const specie: string = await viste.renderSpecieTratti({}, nm, kernel)
+  const nomeSpecie = cat.specie.find((s) => s.id === mago.base.specieId)!.nome
+  assert(specie.includes(`![[${nomeSpecie}]]`), `tratti di specie: la nota «${nomeSpecie}» (${specie})`)
+  if (process.env.MOSTRA) console.log(`${prog}\n${inc}\n${specie}`)
+  console.log(`✓ scheda: progressione, incantesimi (${(nm.trucchetti ?? []).length + (nm.incantesimi ?? []).length}) e tratti di ${nomeSpecie} dal catalogo del kernel`)
+})().catch((e) => { console.error(e); process.exit(1) })

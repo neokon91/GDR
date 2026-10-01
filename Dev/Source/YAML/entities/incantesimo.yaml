@@ -52,8 +52,8 @@ creation:
     category: mondo
     link: true
     optional: true
-  # Dati che rendono l'incantesimo GIOCABILE dal motore (crea_pg/sali_pg lo
-  # fondono nel pool selezionabile del PG): livello + classi che lo lanciano.
+  # Dati che rendono l'incantesimo GIOCABILE dal motore (il catalogo homebrew del
+  # kernel lo offre al creatore del PG): livello + classi che lo lanciano.
   - field: livello
     prompt: 'Livello (0 = trucchetto, 1-9)'
     from: number

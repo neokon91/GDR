@@ -24,7 +24,7 @@ def test_check_passes():
 
 
 def test_runtime_payloads_schema():
-    """I payload runtime (core.json/personaggio.json) conformano ai loro JSON Schema —
+    """Il payload runtime (core.json) conforma al suo JSON Schema —
     il contratto Python→JS reso esplicito. E lo schema RIFIUTA un payload malformato
     (testa la guardia, non solo i dati buoni → un drift di shape si fermerebbe al build)."""
     import validate

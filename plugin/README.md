@@ -12,9 +12,9 @@ CommonJS) e importa la mappa pannelli da `../Dev/Source/JS/_panels.mjs`.
    (`metadataCache 'changed'`) e sull'index-ready di Dataview.
 2. **Azioni del dispatcher come comandi nativi** `gdr:<azione>` (hotkey + ribbon), con
    modali native (`SuggestModal`/`Modal`) al posto di `tp.system.suggester`/`prompt`.
-3. **Creazione senza Templater**: il mini-motore `createFromTemplate` esegue `crea_pg.js`
-   (PG) o `create_entity.js` (entità) col `tpShim`, poi compone frontmatter + corpo del
-   template. Un comando `gdr:crea-<id>` per template + un picker generico.
+3. **Creazione senza Templater**: il PG lo crea il creatore del kernel (`creatore.ts`, il
+   libretto nella nota); le entità il mini-motore `createFromTemplate` con `create_entity.js`
+   e il `tpShim`, che poi compone frontmatter + corpo del template. Un comando `gdr:crea-<id>` per template + un picker generico.
 4. **Cruscotto DM (`ItemView`)**: dashboard a piena pagina (Party, Combattimento, Tiri
    rapidi, Data del mondo via Calendarium, Stato del mondo) + tab Impostazioni + status bar.
    Apri col comando «Apri il Cruscotto DM» o l'icona ribbon.

@@ -6,6 +6,13 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Scheda del PG sui dati del kernel**: progressione (privilegi di classe e di sottoclasse),
+  incantesimi per livello con CD e attacco dalla caratteristica della classe, tratti di specie e
+  attacchi con maestria leggono il catalogo del kernel e le armi che il plugin passa alle viste
+  (SRD + homebrew del vault). I tratti di specie incorporano la nota della specie, anche homebrew.
+  La prova headless (`npm run smoke:pg`) gira le viste vere sulle note scritte dal kernel.
+- **Ricarica parziale nel riposo breve**: una risorsa che torna in parte (l'Ira, Recuperare le
+  Energie: un uso) ne rende quanti dice il kernel, non tutti.
 - **Board alla pari con la plancia del Compendio**: attivabili (Ira, pozioni, aure a zona) con gli
   usi fino al riposo, riposo breve e lungo del gruppo, parate (Scudo) e reazioni d'oggetto (anello
   di eludere), relazioni (mischia, attacco d'opportunità, copertura), varianti al lancio (Ingrandire
@@ -19,7 +26,7 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   del kernel, la stessa del creatore del Compendio, con multiclasse, talenti (varianti e parametri),
   scelte di classe, maestrie e incantesimi. La Board monta questi PG completi (attivabili, aure,
   incantatore, oggetti magici) e a fine scontro riporta sulla nota PF, slot e usi spesi. I PG creati
-  con `crea_pg.js` funzionano come prima.
+  con `crea_pg.js` restano giocabili; per salire di livello si ricreano (vedi Rimosso).
 - **Homebrew del vault nel creatore del kernel** (`plugin/homebrew.ts`): classi, specie, background,
   talenti, sottoclassi e incantesimi del vault, con `concede` tradotto in effetti (punteggi fino a
   20, competenze in abilità, armi, armature, strumenti).
@@ -41,6 +48,9 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   con un clic. La Guida al combattimento dice chi fa cosa fra Board e Atlas.
 
 ### Corretto
+- **Incantesimi del PG nella scheda**: il creatore del kernel scriveva nella nota gli id puntati
+  (`dnd.incantesimo.…`), che la scheda rendeva come link rotti; ora i nomi, come le note.
+- **Legenda degli incantesimi**: 🌀 e 📿 compaiono solo se un incantesimo del PG li porta.
 - **Ricarica delle risorse dei PG col libretto**: la scheda segnava a riposo lungo anche ciò che
   torna col breve (Recuperare le Energie, l'Ira), perché leggeva la chiave sbagliata.
 - **Catalogo del creatore**: lo costruisce `gen_catalogo.ts` col costruttore del kernel (lo stesso
@@ -63,6 +73,9 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   → allineato; `tira-tabella` corretto. Aggiunti check anti-drift a copertura.
 
 ### Rimosso
+- **Pipeline del PG pre-kernel**: `build_personaggio/`, `personaggio.json` (e il suo schema),
+  `pg_rules.yaml`, `sali_pg.js`, `_pg_shared.js`, `_homebrew_bridge.js` e i loro test. Un PG senza
+  libretto non sale più di livello: «Sali di livello» lo dice e rimanda a «Crea PG».
 - **`crea_pg.js`** (800 righe): il PG lo crea il kernel (comando «Crea PG» e template PG). I suoi
   test (creazione, annullamento, omonimi, padronanze, risorse) li coprono ora i test del kernel in
   `regole` e `tests/test_pg_kernel.py`. `sali_pg.js` resta per i PG senza libretto.

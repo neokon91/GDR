@@ -1,7 +1,18 @@
-// --- Progressione PG: riepilogo del livello + anteprima del prossimo ----------
-async function loadPersonaggio(app) {
-  try { return JSON.parse(await app.vault.adapter.read("z.automazioni/data/personaggio.json")); }
-  catch (e) { return {}; }
+// --- I dati di regola della scheda: dal KERNEL --------------------------------
+// Le viste della scheda del PG ricevono dal plugin `kernel` = {catalogo, armi}: il catalogo del
+// creatore del kernel (SRD + homebrew del vault, `regole/src/creatore/catalogo.ts`) e le armi
+// (SRD + homebrew). Un dato solo per creatore, Board e scheda.
+//
+// La nota nomina classi/specie/sottoclassi con lo slug per l'SRD (`mago`) e col nome della nota
+// per l'homebrew: la voce del catalogo si trova per l'uno o per l'altro.
+function voceCatalogo(lista, chiave) {
+  const k = text(chiave).trim().toLowerCase();
+  if (!k) return null;
+  return (lista || []).find((v) => v && (String(v.id || "").split(".").pop() === k || text(v.nome).toLowerCase() === k)) || null;
+}
+
+function catalogoDi(kernel) {
+  return (kernel && kernel.catalogo) || {};
 }
 
 // --- Risorse del PG (colpo d'occhio): barre proporzionali dal frontmatter --------
@@ -36,7 +47,7 @@ async function renderRisorsePG(page) {
   if (dvMax) rows.push(barRow("Dadi Vita", dvMax - num(page.dadi_vita_spesi), dvMax, "blue"));
   rows.push(barRow("Esaurimento", esa, 6, esa >= 5 ? "red" : (esa >= 3 ? "orange" : "purple")));
   // Risorse di classe a ricarica (Ki/Ira/Incanalare/...): barra rimasti/max + icona della
-  // ricarica (🌙 riposo breve · ☀ riposo lungo). Da risorse_pg (scritto dal creatore del kernel o da sali_pg)
+  // ricarica (🌙 riposo breve · ☀ riposo lungo). Da risorse_pg (scritto dal creatore del kernel)
   // e dal contatore usi_<id> (spesi). I riposi le azzerano (meta_actions); «Usa risorsa» ne spende.
   for (const r of (Array.isArray(page.risorse_pg) ? page.risorse_pg : [])) {
     const max = num(r && r.max);
@@ -48,13 +59,12 @@ async function renderRisorsePG(page) {
   return `**🩸 Risorse**\n\n<div class="gdr-bars">${rows.join("")}</div>`;
 }
 
-// Pannello (markdown) per la scheda PG: privilegi acquisiti fino al livello +
-// anteprima del livello successivo (privilegi/slot). La tabella 1-20 completa è
-// nella nota SRD della classe. Usa personaggio.json (progressione per classe).
-async function renderProgressione(app, page) {
+// Pannello (markdown) per la scheda PG: privilegi acquisiti fino al livello (di classe e di
+// sottoclasse) + anteprima del livello successivo (privilegi/slot). La tabella 1-20 completa è
+// nella nota SRD della classe. Dal catalogo del kernel (progressione per classe).
+async function renderProgressione(app, page, kernel) {
   if (!page) return "*Apri la scheda PG.*";
-  const opt = await loadPersonaggio(app);
-  const classiOpt = opt.classi || {};
+  const cat = catalogoDi(kernel);
   const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
   // Ripartizione per classe (multiclasse) o classe piatta. `livello` = totale personaggio.
   const bd = Array.isArray(page.classi) && page.classi.length
@@ -63,11 +73,12 @@ async function renderProgressione(app, page) {
   const totale = bd.reduce((s, c) => s + c.livello, 0) || 1;
 
   // Multiclasse: riepilogo della ripartizione + privilegi acquisiti (dal frontmatter, già
-  // etichettati per classe da sali_pg). Le tabelle 1-20 complete restano nelle note SRD.
+  // etichettati per classe dal creatore). Le tabelle 1-20 complete restano nelle note SRD.
   if (bd.length > 1) {
     const parti = bd.map((c) => {
-      const cl = classiOpt[c.id] || {};
-      return `${cl.label || c.id} ${c.livello}${c.sottoclasse ? ` (${c.sottoclasse})` : ""}`;
+      const cl = voceCatalogo(cat.classi, c.id);
+      const sc = voceCatalogo(cat.sottoclassi, c.sottoclasse);
+      return `${cl ? cl.nome : c.id} ${c.livello}${c.sottoclasse ? ` (${sc ? sc.nome : c.sottoclasse})` : ""}`;
     });
     const priv = asArray(page.privilegi_classe).map(text).filter(Boolean);
     let out = `> [!abstract] Progressione — ${parti.join(" / ")} · personaggio ${totale}\n`;
@@ -76,22 +87,28 @@ async function renderProgressione(app, page) {
     return out;
   }
 
-  const classe = classiOpt[bd[0].id];
+  const classe = voceCatalogo(cat.classi, bd[0].id);
   if (!classe || !Array.isArray(classe.progressione)) return "*Classe senza progressione.*";
+  const sotto = voceCatalogo(cat.sottoclassi, bd[0].sottoclasse);
   const liv = Math.max(1, Math.min(20, Math.floor(totale)));
-  const rows = classe.progressione;
-  const noASI = (p) => !/aumento dei punteggi/i.test(p);
-  const acquisiti = rows.slice(0, liv).flatMap((r) => r.privilegi || []).filter(noASI);
-  let out = `> [!abstract] Progressione — ${classe.label} · livello ${liv}\n`;
+  const defs = classe.definizioni_privilegi || {};
+  const riga = (L) => classe.progressione.find((r) => Number(r.livello) === L) || {};
+  // I privilegi di un livello: della classe (id → nome) e della sottoclasse scelta. L'aumento
+  // dei punteggi resta fuori (è una scelta, non un privilegio da ricordare).
+  const privilegiAl = (L) => [
+    ...(riga(L).privilegi || []).filter((id) => id !== "aumento-punteggi-caratteristica").map((id) => text((defs[id] || {}).nome) || id),
+    ...((sotto && sotto.privilegi) || []).filter((p) => Number(p.livello) === L).map((p) => text(p.nome)),
+  ];
+  const acquisiti = [];
+  for (let L = 1; L <= liv; L++) acquisiti.push(...privilegiAl(L));
+  let out = `> [!abstract] Progressione — ${classe.nome}${sotto ? ` (${sotto.nome})` : ""} · livello ${liv}\n`;
   out += `> **Privilegi**: ${acquisiti.length ? acquisiti.join(", ") : "—"}\n`;
   if (liv < 20) {
-    const next = rows[liv] || {};
-    const np = (next.privilegi || []).join(", ") || "—";
-    const sl = Object.entries(next.slot || {}).map(([n, q]) => `${n}º×${q}`).join(" ");
+    const np = privilegiAl(liv + 1).join(", ") || "—";
+    const sl = (riga(liv + 1).slot || []).map((q, i) => (q ? `${i + 1}º×${q}` : "")).filter(Boolean).join(" ");
     out += `>\n> **Al livello ${liv + 1}**: ${np}${sl ? ` · slot ${sl}` : ""}\n`;
   } else {
     out += `>\n> Livello massimo raggiunto.\n`;
   }
   return out;
 }
-

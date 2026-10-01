@@ -22,10 +22,10 @@ templates:
   target: z.modelli/Oggetto Magico.md
   jinja: reference.md.j2
 # SOTTOTIPI con PROFILO: il `tipo` instrada i campi MECCANICI giusti (già esistenti,
-# letti da renderAttacchi/crea_pg) verso l'item giusto — un'arma mostra danni/padronanza,
+# letti da renderAttacchi e dalla Board) verso l'item giusto — un'arma mostra danni/padronanza,
 # un'armatura la CA. Non ridefinisce nulla: i `campi` puntano a campi registrati.
 subtypes:
-- { nome: arma,                  descrizione: "Da mischia o a distanza: ciò con cui si combatte. Diventa giocabile in crea_pg.", campi: [danni, proprieta, padronanza, costo, peso] }
+- { nome: arma,                  descrizione: "Da mischia o a distanza: ciò con cui si combatte. Diventa giocabile nella scheda del PG e nella Board.", campi: [danni, proprieta, padronanza, costo, peso] }
 - { nome: armatura,              descrizione: "Protezione indossata: dà Classe Armatura, a volte con requisiti o svantaggi.", campi: [classe_armatura, proprieta, costo, peso] }
 - { nome: scudo,                 descrizione: "Difesa impugnata: bonus alla CA.", campi: [classe_armatura, costo, peso] }
 - { nome: oggetto meraviglioso,  descrizione: "Oggetto magico non-arma/armatura: anelli, mantelli, bacchette, amuleti.", campi: [rarita, sintonia, cariche, ricarica] }

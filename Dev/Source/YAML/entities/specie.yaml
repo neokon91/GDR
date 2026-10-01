@@ -14,7 +14,7 @@ templates:
   jinja: reference.md.j2
 # SOTTOTIPI: la RARITÀ/posizione della specie nel mondo (profilo solo descrittivo: i
 # dati GIOCABILI — taglia, velocità, tipo creatura, tratti — restano in scheda/Tratti e
-# li legge crea_pg; qui niente campi meccanici, solo orientamento).
+# li legge il creatore del PG; qui niente campi meccanici, solo orientamento).
 subtypes:
 - { nome: comune,    descrizione: "Diffusa e familiare: si incontra ovunque nel mondo, integrata o quantomeno accettata." }
 - { nome: esotica,   descrizione: "Rara o straniera: vive ai margini, in terre lontane o in pochi enclavi; desta curiosità o diffidenza." }
@@ -76,7 +76,7 @@ creation:
     prompt: Tipo di specie
     from: subtypes
     required: true
-  # Dati che rendono la specie GIOCABILE (crea_pg li fonde nelle opzioni PG):
+  # Dati che rendono la specie GIOCABILE (il catalogo homebrew del kernel li porta al creatore del PG):
   # taglia e velocità. Scurovisione e altri tratti si deducono dal testo Tratti.
   - field: taglia
     prompt: Taglia
@@ -100,5 +100,5 @@ creation:
     heading: Tratti
 
 guida:
-  scopo: 'Una specie è un popolo giocabile: ne fissi i tratti meccanici (taglia, velocità) perché crea_pg li offra, e la sua natura aliena.'
-  campi_chiave: '**Tipo** (rarità) + **famiglia** (origine); **Taglia** e **Velocità** la rendono giocabile in crea_pg; scrivi i **Tratti** (includi "scurovisione" se la concede).'
+  scopo: 'Una specie è un popolo giocabile: ne fissi i tratti meccanici (taglia, velocità) perché il creatore del PG li offra, e la sua natura aliena.'
+  campi_chiave: '**Tipo** (rarità) + **famiglia** (origine); **Taglia** e **Velocità** la rendono giocabile nel creatore del PG; scrivi i **Tratti** (includi "scurovisione" se la concede).'
