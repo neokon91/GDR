@@ -50,7 +50,8 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ### Corretto
 - **Incantesimi del PG nella scheda**: il creatore del kernel scriveva nella nota gli id puntati
   (`dnd.incantesimo.…`), che la scheda rendeva come link rotti; ora i nomi, come le note.
-- **Legenda degli incantesimi**: 🌀 e 📿 compaiono solo se un incantesimo del PG li porta.
+- **Legenda degli incantesimi**: i segni di concentrazione e di rituale compaiono solo se un
+  incantesimo del PG li porta.
 - **Ricarica delle risorse dei PG col libretto**: la scheda segnava a riposo lungo anche ciò che
   torna col breve (Recuperare le Energie, l'Ira), perché leggeva la chiave sbagliata.
 - **Catalogo del creatore**: lo costruisce `gen_catalogo.ts` col costruttore del kernel (lo stesso
