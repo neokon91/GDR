@@ -1,12 +1,12 @@
 // SORGENTE CANONICA del ponte HOMEBREW→motore: le note del vault (incantesimi,
 // classi, specie, background, talenti) lette a runtime e fuse nelle opzioni SRD.
-// crea_pg.js e sali_pg.js sono script autonomi (niente require/bundling a runtime)
+// sali_pg.js (i PG senza libretto) è uno script autonomo (niente require/bundling a runtime)
 // e ne tengono una COPIA fra i marker `// >>>homebrew-bridge` / `// <<<homebrew-bridge`;
 // validate.check() impone che le due copie siano IDENTICHE a questa. Così la deriva
 // (modificarne una sola, es. nel lavoro su "sottoclasse homebrew") è un errore di
 // `npm run check`, non un bug latente in cui creazione e level-up usano regole diverse.
 // Modifica QUI e risincronizza le copie (stesso testo). Le funzioni file-specifiche
-// (backgroundHomebrew/specieHomebrew in crea_pg; talentiHomebrew in sali_pg) restano
+// (talentiHomebrew in sali_pg) restano
 // FUORI dal blocco nei rispettivi file. Questo `_*.js` NON è copiato nel vault.
 // >>>homebrew-bridge
 // noteVault: note del vault per categoria → [{f, fm}]. Vuoto fuori da Obsidian
@@ -62,7 +62,7 @@ function parseEquip(prose) {
 }
 // Classe homebrew → opzione nella forma del motore. I caster (tipo_incantatore
 // pieno/mezzo) ricevono gli slot dalle tabelle SRD (opt.slot_incantatore) e il pool
-// dagli incantesimi homebrew. crea_pg usa tutto; sali_pg usa dado_vita/tipo_incantatore/
+// dagli incantesimi homebrew. sali_pg usa dado_vita/tipo_incantatore/
 // incantesimi_pool (competenza/ASI standard, niente progressione SRD).
 function classeHomebrew(opt) {
   const statMap = {}; for (const id of opt.caratteristiche || []) statMap[normTxt(id)] = id;
@@ -101,7 +101,7 @@ function classeHomebrew(opt) {
 
 // Privilegi di classe homebrew per livello: la lista frontmatter `privilegi`
 // ([{livello, nome, descrizione, concede}]) → {N: [{nome, desc, concede}]}, fusa col legacy
-// `privilegi_l1` (stringa → feature di livello 1 senza effetti). Letta da crea_pg (L1) e
+// `privilegi_l1` (stringa → feature di livello 1 senza effetti). Letta da
 // sali_pg (a ogni livello): mostra la feature e ne applica il `concede`.
 function privilegiPerLivello(fm) {
   const out = {};

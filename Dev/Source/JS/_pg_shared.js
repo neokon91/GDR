@@ -1,4 +1,5 @@
-// Sorgente CANONICA degli helper puri condivisi fra crea_pg.js e sali_pg.js.
+// Sorgente CANONICA degli helper puri di sali_pg.js (i PG senza libretto; i PG nuovi li
+// crea e fa salire il kernel, plugin/creatore.ts).
 //
 // I due wizard sono script Templater AUTONOMI (niente require a runtime), quindi ne
 // tengono una COPIA byte-identica fra i marker `// >>>pg-shared` / `// <<<pg-shared`.
@@ -14,7 +15,8 @@
 // (formato/UI, non regole) restano solo JS.
 
 // >>>pg-shared
-// Helper puri CONDIVISI fra crea_pg.js e sali_pg.js (creazione ↔ level-up): così le
+// Helper puri di sali_pg.js (level-up dei PG senza libretto), con la sorgente canonica in
+// _pg_shared.js e la regola nel kernel (creatore/risorse.ts): così le
 // risorse/competenze calcolate coincidono. Sorgente canonica: Dev/Source/JS/_pg_shared.js
 // — le copie fra i marker devono restare byte-identiche (imposto da validate.check).
 function mod(v) { const n = Number.parseInt(v, 10); return Math.floor(((Number.isFinite(n) ? n : 10) - 10) / 2); }

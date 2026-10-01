@@ -648,8 +648,8 @@ def check() -> int:
                     errors.append(f"{js_name}: matchesCond diverge da _comparators.js (sorgente unica) — risincronizza")
 
     # JS — anti-drift del PONTE HOMEBREW: le funzioni condivise (note del vault →
-    # opzioni SRD) hanno UNA sorgente canonica (_homebrew_bridge.js); crea_pg.js e
-    # sali_pg.js (autonomi, niente require) ne tengono una COPIA fra i marker
+    # opzioni SRD) hanno UNA sorgente canonica (_homebrew_bridge.js); sali_pg.js (i PG senza
+    # libretto: autonomo, niente require) ne tiene una COPIA fra i marker
     # >>>homebrew-bridge/<<<homebrew-bridge. Impongo l'uguaglianza così creazione e
     # level-up non possono usare regole homebrew divergenti (es. lavorando su sottoclasse).
     bridge_path = JS_DIR / "_homebrew_bridge.js"
@@ -658,7 +658,7 @@ def check() -> int:
         if bridge is None:
             errors.append("_homebrew_bridge.js: blocco homebrew-bridge fra i marker mancante")
         else:
-            for js_name in ("crea_pg.js", "sali_pg.js"):
+            for js_name in ("sali_pg.js",):
                 block = marked_block(js_source(js_name),"homebrew-bridge")
                 if block is None:
                     errors.append(f"{js_name}: blocco homebrew-bridge fra i marker // >>>homebrew-bridge/<<<homebrew-bridge mancante")
@@ -684,7 +684,7 @@ def check() -> int:
                     errors.append(f"{js_name}: inverseRelation/reciprocalField diverge da _relations.js (sorgente unica) — risincronizza")
 
     # JS — anti-drift degli HELPER PG CONDIVISI: mod/sigla/maxAtLevel/risorseAtLevel/
-    # scegliMulti hanno UNA sorgente canonica (_pg_shared.js); crea_pg.js e sali_pg.js
+    # scegliMulti hanno UNA sorgente canonica (_pg_shared.js); sali_pg.js
     # (autonomi, niente require) ne tengono una COPIA fra i marker >>>pg-shared/<<<pg-shared.
     # Impongo l'uguaglianza così creazione e level-up calcolano risorse/competenze identiche
     # (prima erano scritti in due stili → drift silenzioso se se ne toccava uno solo).
@@ -694,7 +694,7 @@ def check() -> int:
         if pg_shared is None:
             errors.append("_pg_shared.js: blocco pg-shared fra i marker mancante")
         else:
-            for js_name in ("crea_pg.js", "sali_pg.js"):
+            for js_name in ("sali_pg.js",):
                 block = marked_block(js_source(js_name), "pg-shared")
                 if block is None:
                     errors.append(f"{js_name}: blocco pg-shared fra i marker // >>>pg-shared/<<<pg-shared mancante")

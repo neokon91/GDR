@@ -7,12 +7,15 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 
 ### Aggiunto
 - **Creatore di PG sul kernel, col libretto**: la nota del PG custodisce il libretto (le scelte
-  livello per livello) e i numeri della scheda ne derivano. Comandi «Crea PG (kernel condiviso)» e
+  livello per livello) e i numeri della scheda ne derivano. Comandi «Crea PG» e
   «Sali di livello» (il bottone esistente, sulle note col libretto): le domande le decide la guida
   del kernel, la stessa del creatore del Compendio, con multiclasse, talenti (varianti e parametri),
   scelte di classe, maestrie e incantesimi. La Board monta questi PG completi (attivabili, aure,
   incantatore, oggetti magici) e a fine scontro riporta sulla nota PF, slot e usi spesi. I PG creati
   con `crea_pg.js` funzionano come prima.
+- **Homebrew del vault nel creatore del kernel** (`plugin/homebrew.ts`): classi, specie, background,
+  talenti, sottoclassi e incantesimi del vault, con `concede` tradotto in effetti (punteggi fino a
+  20, competenze in abilità, armi, armature, strumenti).
 - **GDR si costruisce senza l'archivio privato**: i dati vengono dalla copia vendorizzata
   dell'SRD in `Dev/Source/SRD/` (1395 file, CC-BY-4.0), non più da `../archivio`.
   `npm run sync-srd` la aggiorna dall'archivio accanto (specchio di `srd/` e basta: nessun
@@ -51,6 +54,9 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   → allineato; `tira-tabella` corretto. Aggiunti check anti-drift a copertura.
 
 ### Rimosso
+- **`crea_pg.js`** (800 righe): il PG lo crea il kernel (comando «Crea PG» e template PG). I suoi
+  test (creazione, annullamento, omonimi, padronanze, risorse) li coprono ora i test del kernel in
+  `regole` e `tests/test_pg_kernel.py`. `sali_pg.js` resta per i PG senza libretto.
 - **Via Python del sito ritirata**: `build_site.py` (~560 righe, seconda implementazione tenuta
   in parità a mano) e `SiteJinja/{index,page}.html.j2`. Il sito dei giocatori si genera **solo
   in-app** da `genera_sito.js` (unico esportatore); sfilati i riferimenti da `render.py` (`--site`),

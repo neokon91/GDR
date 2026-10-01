@@ -207,8 +207,8 @@ metabind_inputs:
   tipo_creatura: INPUT[inlineSelect(option(Aberrazione), option(Bestia), option(Celestiale), option(Costrutto), option(Drago), option(Elementale), option(Folletto), option(Gigante), option(Immondo), option(Melma), option(Mostruosità), option(Non morto), option(Pianta), option(Umanoide))]
   car_primaria: INPUT[suggester(option(Forza), option(Destrezza), option(Costituzione), option(Intelligenza), option(Saggezza), option(Carisma), allowOther)]
   # classi (incantesimo): chi può lanciarlo. Multi-pick dei 12 nomi-classe SRD + allowOther
-  # (homebrew). VALORI in chiaro (NON link): l'import SRD scrive così e crea_pg/sali_pg li
-  # leggono per sottostringa (lo spell-pool si romperebbe coi [[wikilink]]).
+  # (homebrew). VALORI in chiaro (NON link): l'import SRD scrive così, sali_pg li legge per
+  # sottostringa e il catalogo homebrew del kernel (plugin/homebrew.ts) per nome (lo spell-pool si romperebbe coi [[wikilink]]).
   classi: INPUT[inlineListSuggester(option(Barbaro), option(Bardo), option(Chierico), option(Druido), option(Guerriero), option(Ladro), option(Mago), option(Monaco), option(Paladino), option(Ranger), option(Stregone), option(Warlock), allowOther)]
   taglia: INPUT[inlineSelect(option(minuscola), option(piccola), option(media), option(grande), option(enorme), option(mastodontica))]
   dieta: INPUT[inlineSelect(option(carnivoro), option(erbivoro), option(onnivoro), option(spazzino), option(si nutre di magia), option(non si nutre))]

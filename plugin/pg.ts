@@ -18,6 +18,10 @@ import type { RisorseSpese } from "../regole/src/motore/motore";
 import { personaggioAFrontmatter, daPgGdr, type ArmaCat } from "./adapters";
 
 const corto = (id: string) => String(id ?? "").split(".").pop() ?? "";
+// Come la nota del PG nomina una classe/specie/background: lo slug per l'SRD (`barbaro`), il
+// NOME della nota per l'homebrew del vault (la scheda «chi la usa» confronta col nome del file).
+const nomina = (id: string, voci: readonly { id: string; nome: string }[]) =>
+  id.startsWith("homebrew.") ? (voci.find((v) => v.id === id)?.nome ?? corto(id)) : corto(id);
 
 /** Il libretto della nota, se c'è e ha la forma minima (base + passi). */
 export function librettoDi(fm: any): Libretto | null {
@@ -79,12 +83,13 @@ export function derivatiPg(lib: Libretto, attore: Attore, cat: Catalogo): Record
   // Le classi in ordine d'ingresso, coi livelli e la sottoclasse scelta in ciascuna.
   const classi = [...new Set(passi.map((p) => p.classeId ?? classeBase))].map((id) => {
     const suoi = passi.filter((p) => (p.classeId ?? classeBase) === id);
-    return { id: corto(id), livello: suoi.length, sottoclasse: corto(suoi.filter((p) => p.sottoclasseId).at(-1)?.sottoclasseId ?? "") };
+    const sotto = suoi.filter((p) => p.sottoclasseId).at(-1)?.sottoclasseId ?? "";
+    return { id: nomina(id, cat.classi), livello: suoi.length, sottoclasse: sotto ? nomina(sotto, cat.sottoclassi) : "" };
   });
   const classe = cat.classi.find((c) => c.id === classeBase);
-  fm.classe = corto(classeBase);
-  fm.specie = corto(lib.base.specieId);
-  fm.background = corto(lib.base.backgroundId);
+  fm.classe = nomina(classeBase, cat.classi);
+  fm.specie = nomina(lib.base.specieId, cat.specie);
+  fm.background = nomina(lib.base.backgroundId, cat.background);
   fm.classi = classi;
   fm.livello = passi.length;
   if (classe?.dado_vita) fm.dado_vita = classe.dado_vita;

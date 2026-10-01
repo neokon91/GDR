@@ -279,16 +279,17 @@ def write_componenti(env: Environment, core: dict[str, Any], plugins: dict[str, 
 def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> None:
     """Dati e script che il plugin `gdr` legge a runtime: il payload core.json
     (modello distillato per views.js), le opzioni del rules-engine PG e gli script
-    runtime (copia 1:1: views/meta_actions bundle, create_entity.js, crea_pg.js,
-    genera.js, importa_*, …). La creazione la istanzia il mini-motore del plugin
-    (create_entity.js per le entità, crea_pg.js per il PG); niente wrapper per-template."""
+    runtime (copia 1:1: views/meta_actions bundle, create_entity.js, sali_pg.js,
+    genera.js, importa_*, …). La creazione la istanzia il plugin (create_entity.js per
+    le entità; il PG col creatore del kernel, plugin/creatore.ts)."""
     # YAML -> JSON che gli script JS leggono a runtime via app.vault.adapter.read.
     write_json(VAULT / "z.automazioni" / "data" / "core.json", engine_payload(core, templates))
-    # Opzioni del rules-engine PG (SRD + pg_rules.yaml) per crea_personaggio.js.
+    # Opzioni del rules-engine PG (SRD + pg_rules.yaml): le leggono la scheda del PG e
+    # sali_pg.js (i PG senza libretto).
     write_json(VAULT / "z.automazioni" / "data" / "personaggio.json", build_personaggio_options(core))
     # Gli script runtime (.js CommonJS) sono autonomi (niente require/bundling): copia
     # 1:1. Li carica il plugin `gdr` con `new Function`/evalCjs (views.js, meta_actions.js,
-    # create_entity.js, crea_pg.js, genera.js, importa_*, …). I `_*.js` sono sorgenti di
+    # create_entity.js, sali_pg.js, genera.js, importa_*, …). I `_*.js` sono sorgenti di
     # riferimento condivise (es. _comparators.js, sincronizzato via check) — non runtime:
     # non si copiano nel vault, come i partial Jinja `_*.j2`.
     for source in sorted(JS_DIR.glob("*.js")):

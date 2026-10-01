@@ -8,7 +8,8 @@ async function loadOpzioni() {
   return JSON.parse(await app.vault.adapter.read("z.automazioni/data/personaggio.json"));
 }
 // >>>pg-shared
-// Helper puri CONDIVISI fra crea_pg.js e sali_pg.js (creazione ↔ level-up): così le
+// Helper puri di sali_pg.js (level-up dei PG senza libretto), con la sorgente canonica in
+// _pg_shared.js e la regola nel kernel (creatore/risorse.ts): così le
 // risorse/competenze calcolate coincidono. Sorgente canonica: Dev/Source/JS/_pg_shared.js
 // — le copie fra i marker devono restare byte-identiche (imposto da validate.check).
 function mod(v) { const n = Number.parseInt(v, 10); return Math.floor(((Number.isFinite(n) ? n : 10) - 10) / 2); }
@@ -102,7 +103,7 @@ function parseEquip(prose) {
 }
 // Classe homebrew → opzione nella forma del motore. I caster (tipo_incantatore
 // pieno/mezzo) ricevono gli slot dalle tabelle SRD (opt.slot_incantatore) e il pool
-// dagli incantesimi homebrew. crea_pg usa tutto; sali_pg usa dado_vita/tipo_incantatore/
+// dagli incantesimi homebrew. sali_pg usa dado_vita/tipo_incantatore/
 // incantesimi_pool (competenza/ASI standard, niente progressione SRD).
 function classeHomebrew(opt) {
   const statMap = {}; for (const id of opt.caratteristiche || []) statMap[normTxt(id)] = id;
@@ -141,7 +142,7 @@ function classeHomebrew(opt) {
 
 // Privilegi di classe homebrew per livello: la lista frontmatter `privilegi`
 // ([{livello, nome, descrizione, concede}]) → {N: [{nome, desc, concede}]}, fusa col legacy
-// `privilegi_l1` (stringa → feature di livello 1 senza effetti). Letta da crea_pg (L1) e
+// `privilegi_l1` (stringa → feature di livello 1 senza effetti). Letta da
 // sali_pg (a ogni livello): mostra la feature e ne applica il `concede`.
 function privilegiPerLivello(fm) {
   const out = {};
@@ -534,6 +535,7 @@ module.exports.casterClasses = casterClasses;
 module.exports.leveledSlots = leveledSlots;
 module.exports.pactSlots = pactSlots;
 module.exports.risorseBreakdown = risorseBreakdown;
+module.exports.risorseAtLevel = risorseAtLevel;
 // Esposti per i test del ponte homebrew→motore.
 module.exports.incantesimiHomebrew = incantesimiHomebrew;
 module.exports.talentiHomebrew = talentiHomebrew;

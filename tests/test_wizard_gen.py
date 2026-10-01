@@ -13,7 +13,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 import render
 from _common import (
     CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC, META_ACTIONS_JS,
-    _snapshot, _env, _PG_HARNESS, _run_crea_pg,
+    _snapshot, _env,
 )
 
 
@@ -627,7 +627,8 @@ def test_validate_field_coverage():
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_homebrew_bridge(tmp_path):
-    """Ponte homebrew→motore (crea_pg/sali_pg): incantesimiHomebrew filtra le note
+    """Ponte homebrew→motore di sali_pg.js (i PG senza libretto; la creazione homebrew è
+    `plugin/homebrew.ts`, provata in tests/test_pg_kernel.py): incantesimiHomebrew filtra le note
     categoria=incantesimo per classe (classi cita la classe, o vuote = tutti),
     raggruppa per livello (mancante→1), esclude archiviate; fondiPool unisce SRD+
     homebrew senza duplicati; talentiHomebrew raccoglie le note categoria=talento.
@@ -639,7 +640,6 @@ def test_homebrew_bridge(tmp_path):
            "slot_incantatore": full["slot_incantatore"]}
     harness = tmp_path / "hb.js"
     harness.write_text(
-        f'const crea=require({json.dumps(str(render.JS_DIR / "crea_pg.js"))});'
         f'const sali=require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});'
         f'const opt={json.dumps(opt, ensure_ascii=False)};'
         'const F=(basename,fm)=>({f:{basename,path:basename+".md"},fm});'
@@ -662,15 +662,12 @@ def test_homebrew_bridge(tmp_path):
         'global.app={vault:{getMarkdownFiles:()=>files.map(x=>x.f)},'
         ' metadataCache:{getFileCache:(f)=>({frontmatter:(files.find(x=>x.f===f)||{}).fm})}};'
         'const out={'
-        ' mago:crea.incantesimiHomebrew("mago","Mago"),'
-        ' chierico:crea.incantesimiHomebrew("chierico","Chierico"),'
-        ' fusione:crea.fondiPool({"1":["Palla di fuoco"]},{"1":["Dardo arcano"],"0":["Tocco gelido"]}),'
+        ' mago:sali.incantesimiHomebrew("mago","Mago"),'
+        ' chierico:sali.incantesimiHomebrew("chierico","Chierico"),'
+        ' fusione:sali.fondiPool({"1":["Palla di fuoco"]},{"1":["Dardo arcano"],"0":["Tocco gelido"]}),'
         ' talenti:Object.keys(sali.talentiHomebrew()),'
-        ' bg:crea.backgroundHomebrew(opt).Cenerino,'
-        ' sp:crea.specieHomebrew().Ceneride,'
-        ' cl:crea.classeHomebrew(opt)["Lama del Vuoto"],'
-        ' clMartial:crea.classeHomebrew(opt).Bruto,'
-        ' clSali:sali.classeHomebrew(opt)["Lama del Vuoto"],'
+        ' cl:sali.classeHomebrew(opt)["Lama del Vuoto"],'
+        ' clMartial:sali.classeHomebrew(opt).Bruto,'
         ' sub:Object.keys(sali.sottoclasseHomebrew("Lama del Vuoto","Lama del Vuoto"))};'
         'process.stdout.write(JSON.stringify(out));',
         encoding="utf-8")
@@ -681,12 +678,6 @@ def test_homebrew_bridge(tmp_path):
     assert out["chierico"] == {"1": ["Cura ferite"], "2": ["Eco senza scuola"]}
     assert out["fusione"]["1"] == ["Palla di fuoco", "Dardo arcano"] and out["fusione"]["0"] == ["Tocco gelido"]
     assert out["talenti"] == ["Maestro ombre"]                                     # talento attivo, no archiviata/luogo
-    # Background homebrew: label umane → id del motore (tollerante).
-    assert out["bg"]["punteggi_caratteristica"] == ["forza", "costituzione", "saggezza"]
-    assert out["bg"]["competenze_abilita"] == ["atletica", "sopravvivenza"]
-    assert out["bg"]["talento_origine"] == "Robusto" and out["bg"]["strumenti"] == "Strumenti da fabbro"
-    # Specie homebrew: taglia/velocità parsate, scurovisione dedotta dai tratti.
-    assert out["sp"]["taglia"] == "Media" and out["sp"]["velocita"] == 9 and out["sp"]["scurovisione"] is True
     # Classe homebrew CASTER (mezzo): dado vita, TS→id, categorie armatura, slot L1 dalla tabella SRD.
     cl = out["cl"]
     assert cl["dado_vita"] == 10 and cl["tiri_salvezza"] == ["forza", "costituzione"]
@@ -697,7 +688,6 @@ def test_homebrew_bridge(tmp_path):
     assert cl["privilegi_l1"] == ["Colpo del vuoto", "Lama spettrale"] and cl["livello_sottoclasse"] == 3
     assert out["clMartial"]["incantatore"] is False and out["clMartial"]["slot_l1"] == {}  # marziale: niente slot
     assert out["clMartial"]["livello_sottoclasse"] == 3 and out["clMartial"]["privilegi_l1"] == []  # default/vuoto
-    assert out["clSali"]["dado_vita"] == 10 and out["clSali"]["tipo_incantatore"] == "mezzo"  # twin crea/sali coerenti
     assert out["sub"] == ["Setta del Nulla"]  # sottoclasse homebrew legata alla classe (sali_pg)
 
 

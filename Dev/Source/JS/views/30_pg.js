@@ -36,7 +36,7 @@ async function renderRisorsePG(page) {
   if (dvMax) rows.push(barRow("Dadi Vita", dvMax - num(page.dadi_vita_spesi), dvMax, "blue"));
   rows.push(barRow("Esaurimento", esa, 6, esa >= 5 ? "red" : (esa >= 3 ? "orange" : "purple")));
   // Risorse di classe a ricarica (Ki/Ira/Incanalare/...): barra rimasti/max + icona della
-  // ricarica (🌙 riposo breve · ☀ riposo lungo). Da risorse_pg (scritto da crea_pg/sali_pg)
+  // ricarica (🌙 riposo breve · ☀ riposo lungo). Da risorse_pg (scritto dal creatore del kernel o da sali_pg)
   // e dal contatore usi_<id> (spesi). I riposi le azzerano (meta_actions); «Usa risorsa» ne spende.
   for (const r of (Array.isArray(page.risorse_pg) ? page.risorse_pg : [])) {
     const max = num(r && r.max);

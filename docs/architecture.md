@@ -126,9 +126,9 @@ Fa:
 - **Azioni** — `meta_actions.js` esposto come **comandi nativi** `gdr:<azione>` (hotkey/ribbon,
   modali native).
 - **Creazione** — istanzia i template col mini-motore `createFromTemplate` (`tpShim`):
-  `create_entity.js` (entità uniformi, schema da `core.json`) e `crea_pg.js` (l'unico wizard
-  hand-authored). Il template Jinja porta un marcatore `<% await tp.user.crea_<id>(tp) %>` che
-  il plugin **sostituisce** col frontmatter del wizard.
+  `create_entity.js` (entità uniformi, schema da `core.json`); il **PG** lo crea il kernel
+  (`plugin/creatore.ts`, sotto). Il template Jinja porta un marcatore `<% await tp.user.crea_<id>(tp) %>`
+  che il plugin **sostituisce** col frontmatter.
 - **Cruscotto DM**, e il **runtime di combattimento** (sotto).
 
 ### Config injection ai plugin terzi (non distruttiva)
@@ -154,19 +154,19 @@ di build, non un bug latente).
 
 ## Rules-engine PG (5.5e)
 
-Il PG è un **creatore con regole applicate**:
+Il PG è un **libretto del kernel** (vedi «Kernel condiviso» qui sotto): creazione e salita le
+guida `creatore/guida.ts`, i numeri li deriva `assembla`. Il percorso VECCHIO resta per i PG
+senza libretto e per la presentazione della scheda:
 ```
-SRD (archivio) + pg_rules.yaml + system.yaml
+SRD + pg_rules.yaml + system.yaml
   │ build_personaggio (converter, parsa la prosa dove serve)
-  ▼ personaggio.json  (opzioni: classi con progressione 1-20, specie, background, armature, slot)
-  │ crea_pg.js (wizard eseguito dal plugin)
-  ▼ frontmatter con ID stabili  →  pg.md.j2 / scheda_pg_rules() (presentazione)
+  ▼ personaggio.json  (classi con progressione 1-20, specie, background, armature, slot)
+  │ letto dalla scheda (views) e da sali_pg.js (level-up dei PG senza libretto)
+  ▼ pg.md.j2 / scheda_pg_rules() (presentazione)
 ```
-- **Creazione** (PG di 1º livello SRD-completo): PF=`dado_vita+mod(COS)`, CA dall'armatura,
-  competenze/lingue/equipaggiamento/privilegi L1, incantatore (trucchetti+preparati+slot),
-  talento d'origine. Frontmatter con id stabili + flag 0/1 `ts_<car>`/`prof_<abilita>`
-  (matematica Meta Bind) + `mod_<car>` pre-seedato per i tiri Dice Roller.
-- **Level-up 2-20** (`sali_pg.js`): PF media fissa della classe che sale, ASI/talenti (filtrati
+- **Frontmatter** (PG col libretto: scritto da `scriviPg`): id stabili + flag 0/1
+  `ts_<car>`/`prof_<abilita>` (matematica Meta Bind) + `mod_<car>` per i tiri Dice Roller.
+- **Level-up 2-20 dei PG senza libretto** (`sali_pg.js`): PF media fissa della classe che sale, ASI/talenti (filtrati
   per categoria 2024), sottoclasse, **multiclasse** (prereq RAW bloccanti, tabella slot
   combinata, Patto del Warlock separato). ASI-COS → PF ricalcolati su tutti i livelli (RAW).
 - **Homebrew `concede`**: un talento/privilegio con blocco `concede` strutturato
@@ -178,14 +178,17 @@ SRD (archivio) + pg_rules.yaml + system.yaml
 - **Kernel condiviso (Tier 3, IN CORSO)**: il PG è un **libretto** (`regole/src/creatore/libretto.ts`:
   la base del 1º livello + un passo per livello), salvato nella nota in `libretto`. Le domande del
   creatore le decide la **guida** del kernel (`creatore/guida.ts`, la stessa del creatore del
-  Compendio): `plugin/creatore.ts` le pone coi modali (comandi «Crea PG (kernel condiviso)» e
+  Compendio): `plugin/creatore.ts` le pone coi modali (comandi «Crea PG» e
   «Sali di livello» sulle note col libretto). `plugin/pg.ts` ne deriva i campi piatti della scheda
   (`scriviPg`: PF, CA, caratteristiche, slot, `risorse_pg`…; lo stato di gioco resta), monta il PG
   completo per la Board (`combattenteDiPg`: attivabili, aure, incantatore, oggetti magici) e
   traduce le risorse spese fra nota e motore (`risorseDaNota`/`notaDaRisorse`). Il catalogo lo
   costruisce `gen_catalogo.ts` con `catalogoDa` del kernel (lo stesso costruttore del Compendio).
-  I PG senza libretto (creati da `crea_pg.js`) entrano nella Board come prima (`daPgGdr`).
-  Resta: l'homebrew del vault nel catalogo del kernel, poi il ritiro di `crea_pg.js`/`sali_pg.js`.
+  L'homebrew del vault entra nel catalogo del kernel (`plugin/homebrew.ts`: classi, specie,
+  background, talenti, sottoclassi, incantesimi, `concede` tradotto in effetti). `crea_pg.js` è
+  ritirato; i PG senza libretto (creati da lui) entrano nella Board come prima (`daPgGdr`) e
+  salgono con `sali_pg.js`. Resta: la scheda sui dati del kernel, poi il ritiro di
+  `build_personaggio.py`, `personaggio.json` e `sali_pg.js`.
   Prova headless: `npm run smoke:pg` (anche in `tests/test_pg_kernel.py`).
 
 ---

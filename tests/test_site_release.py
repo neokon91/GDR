@@ -15,7 +15,7 @@ import publish_itch
 import release
 from _common import (
     CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, META_ACTIONS_JS,
-    _snapshot, _env, _PG_HARNESS, _run_crea_pg,
+    _snapshot, _env,
 )
 
 # Sito dei giocatori: l'UNICO esportatore è genera_sito.js (bottone in-app; la via

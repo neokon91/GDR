@@ -1,7 +1,7 @@
-{# PG — rules-engine. Alla creazione invoca crea_pg (legge le opzioni
-   da z.automazioni/data/personaggio.json, applica le regole 5.5e e scrive un
-   frontmatter strutturato con ID stabili). Il pannello "Sistema" mostra le
-   scelte applicate; la scheda numerica è editabile (scheda_pg). #}
+{# PG — il corpo della scheda. Il PG lo crea il kernel (plugin/creatore.ts): la riga
+   `<% … %>` qui sotto è il segnaposto che il plugin sostituisce col frontmatter (il
+   libretto e i campi derivati da `assembla`, plugin/pg.ts). Il pannello "Sistema"
+   mostra le scelte applicate; la scheda numerica è editabile (scheda_pg). #}
 {% import '_macros.j2' as m with context -%}
 <% await tp.user.crea_pg(tp) %>
 # `=this.nome`

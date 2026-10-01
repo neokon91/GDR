@@ -277,7 +277,6 @@ export default class GdrPlugin extends Plugin {
       },
     });
     this.addCommand({ id: "motore-smoke", name: "DEV: Smoke del motore di combattimento", callback: () => this.motoreSmoke() });
-    this.addCommand({ id: "crea-pg-kernel", name: "Crea PG (kernel condiviso)", callback: () => void this.creaPgKernel() });
     this.addRibbonIcon("swords", "GDR: Board di combattimento", () => this.activateBoard());
     this.addRibbonIcon("layout-dashboard", "GDR: Cruscotto DM", () => this.activateCruscotto());
     this.addRibbonIcon("moon", "GDR: Riposo lungo (PG attivo)", () => {
@@ -840,9 +839,11 @@ export default class GdrPlugin extends Plugin {
     });
   }
 
-  // Istanzia un template SENZA Templater: esegue il wizard (crea_pg o create_entity) col
+  // Istanzia un template SENZA Templater: esegue il wizard (create_entity; il PG va al kernel) col
   // tpShim esteso (tp.file.move REGISTRA la destinazione), poi compone frontmatter + corpo.
   async createFromTemplate(templateId: string) {
+    // Il PG lo crea il kernel (libretto + derivati), non un wizard del vault.
+    if (templateId === "pg") { await this.creaPgKernel(); return; }
     const app = this.app;
     let core: any;
     try { core = await this.loadCore(); } catch { new Notice("core.json non leggibile."); return; }
@@ -864,13 +865,8 @@ export default class GdrPlugin extends Plugin {
     // Esegui il wizard → stringa frontmatter (o bozza se annullato).
     let fm: string;
     try {
-      if (templateId === "pg") {
-        const crea = evalCjs(await app.vault.adapter.read("z.automazioni/crea_pg.js"), app);
-        fm = await crea(tp);
-      } else {
-        const ce = evalCjs(await app.vault.adapter.read("z.automazioni/create_entity.js"), app);
-        fm = await ce(tp, templateId);
-      }
+      const ce = evalCjs(await app.vault.adapter.read("z.automazioni/create_entity.js"), app);
+      fm = await ce(tp, templateId);
     } catch (e: any) { new Notice(`Creazione interrotta: ${e?.message ?? e}`); return; }
 
     // Destinazione: quella scelta dal wizard (tp.file.move) o un ripiego in cartella.
@@ -924,7 +920,7 @@ export default class GdrPlugin extends Plugin {
     const folder = core.folders?.personaggio ?? "Mondi/Personaggi";
     let body: string;
     try { body = await app.vault.adapter.read(tpl?.target ?? "z.modelli/PG.md"); }
-    catch { body = "<% await tp.user.crea_pg(tp) %>\n# `=this.nome`\n"; }
+    catch { body = "# `=this.nome`\n"; }
     let content = body.replace(/^<%\s*await\s+tp\.user\.[^%]*%>\s*\n?/m, toFrontmatter({ nome, categoria: "personaggio", tipo: "pg" }));
     const base = nome.replace(/[\\/:]+/g, "-");
     content = content.split("<% tp.config.target_file.basename %>").join(base);

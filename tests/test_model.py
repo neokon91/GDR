@@ -14,7 +14,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 import render
 from _common import (
     CORE, PLUGINS, TEMPLATES, PAGES, SNAP_DIR, VIEWS_JS, VIEWS_SRC,
-    _snapshot, _env, _PG_HARNESS, _run_crea_pg,
+    _snapshot, _env,
 )
 
 
@@ -67,7 +67,7 @@ def test_creation_marker_present(tpl):
     `<% await tp.user.<x>(tp) %>` che il mini-motore createFromTemplate rimpiazza col
     frontmatter del wizard (regex in plugin/main.ts). Senza quel marcatore, «Crea …»
     creerebbe la nota senza frontmatter. (Non ci sono più wrapper crea_<id>.js: la
-    creazione la fa create_entity.js — crea_pg.js per il PG — direttamente dal plugin.)"""
+    creazione la fa create_entity.js — il creatore del kernel per il PG — direttamente dal plugin.)"""
     out = _env().get_template(tpl["jinja"]).render(core=CORE, plugins=PLUGINS, template=tpl)
     markers = re.findall(r"^<%\s*await\s+tp\.user\.[^%]*%>\s*$", out, re.M)
     assert len(markers) == 1, f"template {tpl['id']}: attesa 1 riga-marcatore di creazione, trovate {len(markers)}"
