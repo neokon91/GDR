@@ -70,8 +70,9 @@ export function promptModal(app: App, message: string, def = "", throwOnCancel =
 class GdrMultiModal<T> extends Modal {
   private done = false;
   private sel = new Set<number>();
-  constructor(app: App, private labels: string[], private items: T[], private titolo: string, private onDone: (v: T[] | null) => void) {
+  constructor(app: App, private labels: string[], private items: T[], private titolo: string, private onDone: (v: T[] | null) => void, spuntati: number[] = []) {
     super(app);
+    for (const i of spuntati) this.sel.add(i);
   }
   onOpen() {
     const { contentEl } = this;
@@ -81,6 +82,7 @@ class GdrMultiModal<T> extends Modal {
     this.labels.forEach((l, i) => {
       const riga = lista.createEl("label", { cls: "gdr-multi-riga" });
       const cb = riga.createEl("input", { type: "checkbox" }) as HTMLInputElement;
+      cb.checked = this.sel.has(i);
       cb.onchange = () => { cb.checked ? this.sel.add(i) : this.sel.delete(i); };
       riga.createSpan({ text: ` ${l}` });
     });
@@ -93,10 +95,12 @@ class GdrMultiModal<T> extends Modal {
 }
 
 // Come `suggester` ma a selezione multipla; ritorna l'array degli scelti (o null se annullato).
-export function multiSuggester<T>(app: App, textItems: ((x: T) => string) | string[], items: T[], titolo = ""): Promise<T[] | null> {
+// `spuntati`: le voci già spuntate all'apertura (la zona di un'aura parte dagli alleati).
+export function multiSuggester<T>(app: App, textItems: ((x: T) => string) | string[], items: T[], titolo = "", spuntati: (x: T) => boolean = () => false): Promise<T[] | null> {
   const labels = (typeof textItems === "function" ? (items || []).map(textItems) : (textItems || [])).map(String);
+  const iniziali = (items || []).flatMap((x, i) => (spuntati(x) ? [i] : []));
   return new Promise((resolve) => {
-    new GdrMultiModal<T>(app, labels, items, titolo, (v) => resolve(v)).open();
+    new GdrMultiModal<T>(app, labels, items, titolo, (v) => resolve(v), iniziali).open();
   });
 }
 

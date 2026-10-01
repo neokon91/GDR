@@ -5,12 +5,15 @@
 import { ItemView, Notice, TFile, WorkspaceLeaf } from "obsidian";
 import {
   ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
-  comandoIniziativa, comandoAttacco, comandoSalvezza, comandoMultiattacco, comandoCura,
-  comandoLeggendaria, leggendarieRestanti, comandoLancia, slotRestanti, usiRestanti,
-  comandoSostituisciEsito, sostituzioniDisponibili, sostituzioniRestanti, risorseDi,
-  type Evento, type Dado, type InPlancia, type Stato, type DefinizioniCondizioni,
+  comandoIniziativa, comandoAzione, comandoAttacco, comandoLeggendaria, leggendarieRestanti, comandoLancia,
+  slotRestanti, comandoSostituisciEsito, sostituzioniDisponibili, sostituzioniRestanti, risorseDi,
+  comandoTiroMorte, comandoRiposo, comandoPara, pareDisponibili, comandoCommuta,
+  comandoIngaggio, comandoDisingaggio, comandoOpportunita, comandoCopertura, eventiConcentrazione,
+  staConcentrando, condizioniAttive, eMorto, eStabile, sonoIngaggiati, gradoCopertura,
+  opzioniLancio, motivoAzioneBloccata, statoAttivabile, caricheRestanti,
+  type Evento, type Dado, type InPlancia, type Stato, type DefinizioniCondizioni, type CoperturaGrado,
 } from "../regole/src/motore/motore";
-import { daMostro, type Combattente, type Azione, type RisolviIncantesimo, type IncantesimoLanciabile } from "../regole/src/motore/combattente";
+import { daMostro, variantiDi, type Combattente, type Azione, type RisolviIncantesimo, type IncantesimoLanciabile } from "../regole/src/motore/combattente";
 import { StatblockModal, trovaMostro } from "./statblock";
 import { combattenteDiPg, idPg, risorseDaNota, notaDaRisorse, librettoDi } from "./pg";
 import type { Catalogo } from "../regole/src/creatore/catalogo";
@@ -18,6 +21,10 @@ import { suggester, multiSuggester } from "./modali";
 import type GdrPlugin from "./main";
 
 export const VIEW_TYPE_BOARD = "gdr-board";
+
+// Perché un lancio o un'azione non parte, a parole (i motivi li dà il motore).
+const MOTIVO_LANCIO = { slot: "nessuno slot disponibile", usi: "usi del giorno finiti", cariche: "cariche insufficienti", economia: "azione del turno già spesa" } as const;
+const MOTIVO_AZIONE = { economia: "già spesa questo turno", cariche: "cariche finite" } as const;
 
 // Etichetta breve per un bottone-azione, per tipo (attacco/salvezza/multiattacco/cura).
 function etichettaAzione(az: Azione): string {
@@ -153,26 +160,18 @@ export class BoardView extends ItemView {
     return suggester(this.app, (c: InPlancia) => `${c.nome} — ${c.pf_attuali}/${c.pf_max} PF`, cands, false, titolo);
   }
 
-  // Esegue l'azione dell'attivo instradandola al comando giusto (col bersaglio scelto).
+  // Esegue l'azione dell'attivo col comando del motore (`comandoAzione`, lo stesso della plancia
+  // del Compendio). Il bersaglio: un nemico per attacchi e TS; per una cura o un potenziamento
+  // chiunque del proprio lato, sé compreso (bere una pozione).
   private async agisci(attore: InPlancia, az: Azione) {
     const s = this.stato();
-    const nemici = ordine(s).filter((c) => c.schieramento !== attore.schieramento && inPiedi(c));
-    const alleati = ordine(s).filter((c) => c.schieramento === attore.schieramento && inPiedi(c));
-    if (az.tipo === "attacco") {
-      const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
-      if (t) this.push(...comandoAttacco(s, attore.key, t.key, dadoVero, az, this.defs));
-    } else if (az.tipo === "salvezza") {
-      const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
-      if (t) this.push(...comandoSalvezza(s, attore.key, t.key, az, dadoVero, this.defs));
-    } else if (az.tipo === "multiattacco") {
-      const t = await this.pickBersaglio(nemici, `${az.nome} → bersaglio`);
-      if (t) this.push(...comandoMultiattacco(s, attore.key, t.key, az, dadoVero, this.defs));
-    } else if (az.tipo === "cura") {
-      const t = await this.pickBersaglio(alleati, `${az.nome} → chi curare`);
-      if (t) this.push(...comandoCura(s, t.key, az, dadoVero));
-    } else {
-      new Notice(`Azione «${az.nome}» (${az.tipo}) non ancora gestita dalla board.`);
-    }
+    const perSe = az.tipo === "cura" || az.tipo === "potenziamento";
+    const cands = ordine(s).filter((c) => (perSe ? c.schieramento === attore.schieramento : c.schieramento !== attore.schieramento && inPiedi(c)));
+    const t = await this.pickBersaglio(cands, perSe ? `${az.nome} → su chi` : `${az.nome} → bersaglio`);
+    if (!t) return;
+    const ev = comandoAzione(s, attore.key, t.key, az, dadoVero, this.defs);
+    if (!ev.length) { new Notice(`«${az.nome}» non si può eseguire adesso.`); return; }
+    this.push(...ev);
   }
 
   // Lancia un incantesimo: sceglie il livello di slot (upcast, se serve), poi i BERSAGLI (uno o
@@ -181,31 +180,32 @@ export class BoardView extends ItemView {
   // esegue le attività coi numeri del lanciatore o LOGGA narrato se non meccanizzato.
   private async lancia(attore: InPlancia, spell: IncantesimoLanciabile) {
     const s = this.stato();
-    // Il livello di lancio. `livelloLancio` = livello FISSO (mostri: "Cono di freddo di 9º").
-    // Un trucchetto (livello 0) o un "X/giorno" non scelgono lo slot; un incantesimo di livello
-    // con slot lascia scegliere il livello (≥ suo) fra quelli con slot residui (upcasting).
-    const livelloBase = spell.livelloLancio ?? spell.livello;
-    let livelloSlot = livelloBase;
-    if (spell.usiGiornalieri == null && spell.livello > 0) {
-      const maxLiv = attore.incantatore?.slot.length ?? 0;
-      const scelte: number[] = [];
-      for (let L = spell.livello; L <= maxLiv; L++) if (slotRestanti(s, attore.key, L) > 0) scelte.push(L);
-      if (!scelte.length) { new Notice(`Nessuno slot disponibile per ${spell.nome}.`); return; }
-      if (scelte.length === 1) livelloSlot = scelte[0];
-      else {
-        const L = await suggester(this.app, (n: number) => `Livello ${n} (${slotRestanti(s, attore.key, n)} slot)`, scelte, false, `Lancia ${spell.nome} a che livello?`);
-        if (L == null) return;
-        livelloSlot = L;
-      }
+    // A che livelli si può lanciare (slot residui o cariche dell'oggetto) e perché no: dal motore
+    // (`opzioniLancio`, lo stesso del dialog della plancia del Compendio).
+    const opz = opzioniLancio(s, attore.key, spell);
+    if (opz.motivo) { new Notice(`${spell.nome}: ${MOTIVO_LANCIO[opz.motivo]}.`); return; }
+    let livello = spell.livelloLancio ?? spell.livello;
+    if (opz.livelli.length === 1) livello = opz.livelli[0];
+    else if (opz.livelli.length > 1) {
+      const etich = (n: number) => opz.cariche ? `Livello ${n} (${opz.cariche[n]} cariche su ${opz.restano})` : `Livello ${n} (${slotRestanti(s, attore.key, n)} slot)`;
+      const L = await suggester(this.app, etich, opz.livelli, false, `Lancia ${spell.nome} a che livello?`);
+      if (L == null) return;
+      livello = L;
+    }
+    // Una variante (Ingrandire o Ridurre): l'effetto si sceglie al lancio.
+    const varianti = variantiDi(spell);
+    let variante: string | undefined;
+    if (varianti.length > 1) {
+      variante = await suggester(this.app, (v: string) => v, varianti, false, `${spell.nome}: quale effetto?`);
+      if (variante == null) return;
     }
     // I bersagli: tutti i combattenti in piedi (anche alleati — buff/cura; anche sé). Il GM
     // spunta chi è preso. Nessun bersaglio = lancio "a vuoto"/su di sé narrato (il motore regge []).
     const cands = ordine(s).filter((c) => inPiedi(c));
     const scelti = await multiSuggester(this.app, (c: InPlancia) => `${c.nome} — ${c.pf_attuali}/${c.pf_max} PF`, cands, `${spell.nome} → bersagli (spunta chi è colpito)`);
     if (scelti == null) return; // annullato
-    const bersagli = scelti.map((c) => c.key);
-    const ev = comandoLancia(s, attore.key, bersagli, spell.id, livelloSlot, dadoVero, this.defs);
-    if (!ev.length) { new Notice(`Impossibile lanciare ${spell.nome} (slot/uso esauriti o azione già spesa).`); return; }
+    const ev = comandoLancia(s, attore.key, scelti.map((c) => c.key), spell.id, livello, dadoVero, this.defs, variante);
+    if (!ev.length) { new Notice(`Impossibile lanciare ${spell.nome} adesso.`); return; }
     this.push(...ev);
   }
 
@@ -248,16 +248,26 @@ export class BoardView extends ItemView {
   // dopo il tiro; la Board le mostra come banner d'interruzione, il GM decide se spenderle.
   private renderReazioni(root: HTMLElement, s: Stato) {
     const offerte = sostituzioniDisponibili(this.eventi, s);
-    if (!offerte.length) return;
+    // Le PARATE (lo Scudo): un colpo di questo turno che chi l'ha subito può ancora deviare.
+    const pare = pareDisponibili(this.eventi, s);
+    if (!offerte.length && !pare.length) return;
     const pan = root.createDiv({ cls: "gdr-board-reazioni" });
+    for (const p of pare) {
+      const c = s.combattenti.find((x) => x.key === p.key);
+      const box = pan.createDiv({ cls: "gdr-board-reaz-box" });
+      box.createSpan({ cls: "gdr-board-reaz-txt", text: `${c?.nome ?? p.key}: lanciare ${p.nome} come reazione? Se il bonus alla CA basta, il colpo manca.` });
+      box.createEl("button", { text: `Para con ${p.nome}` }).onclick = () =>
+        this.push(...comandoPara(this.eventi, p.key, p.indice, p.interno, dadoVero, this.defs));
+    }
     for (const o of offerte) {
       const c = s.combattenti.find((x) => x.key === o.key);
-      const restanti = sostituzioniRestanti(s, o.key);
+      // Da un oggetto (l'anello di eludere) costa una carica; altrimenti un uso (Resistenza Leggendaria).
+      const resto = o.oggetto ? `${caricheRestanti(s, o.key, o.oggetto)} cariche` : `${sostituzioniRestanti(s, o.key)} rimaste`;
       const box = pan.createDiv({ cls: "gdr-board-reaz-box" });
       box.createSpan({ cls: "gdr-board-reaz-txt",
-        text: `⚡ ${c?.nome ?? o.key}: usa ${o.nome} (${restanti} rimaste) per superare il tiro salvezza fallito?` });
+        text: `${c?.nome ?? o.key}: usa ${o.nome} (${resto}) per superare il tiro salvezza fallito?` });
       const b = box.createEl("button", { text: `Usa ${o.nome}` });
-      b.onclick = () => this.push(...comandoSostituisciEsito(this.eventi, o.key, o.indice, o.interno));
+      b.onclick = () => this.push(...comandoSostituisciEsito(this.eventi, o.key, o.indice, o.interno, o.oggetto));
     }
   }
 
@@ -375,6 +385,130 @@ export class BoardView extends ItemView {
     b(orig ? `✅ Marca «${this.nomeNota(orig)}» risolto` : "✅ Marca Incontro risolto", () => void this.marcaIncontroRisolto());
   }
 
+  // Il TURNO dell'attivo: l'economia (azione ● · bonus ◆ · reazione ▲, tenue = spesa), le azioni
+  // (bloccate dal motore se l'economia è spesa o il pozzo vuoto), gli attivabili, le relazioni e
+  // gli incantesimi. Le regole stanno nel motore; qui solo i pulsanti.
+  private renderTurno(root: HTMLElement, s: Stato, a: InPlancia) {
+    const pan = root.createDiv({ cls: "gdr-board-azioni" });
+    const head = pan.createEl("h4", { text: `Turno di ${a.nome} ` });
+    const spesa = s.economia_spesa[a.key] ?? [];
+    for (const [slot, simbolo, nome] of [["azione", "●", "Azione"], ["azione-bonus", "◆", "Bonus"], ["reazione", "▲", "Reazione"]] as const) {
+      const x = head.createSpan({ cls: `gdr-board-econ${spesa.includes(slot) ? " is-spesa" : ""}`, text: simbolo });
+      x.setAttribute("aria-label", `${nome}${spesa.includes(slot) ? " (spesa)" : ""}`);
+    }
+
+    const disponibili: Azione[] = (a.azioni && a.azioni.length)
+      ? a.azioni
+      : (a.attacco ? [{ nome: a.attacco.nome, tipo: "attacco", colpire: a.attacco.colpire, danno: a.attacco.danno } as Azione] : []);
+    const gruppo = (voci: Azione[], etich?: string) => {
+      if (!voci.length) return;
+      if (etich) pan.createEl("div", { cls: "gdr-board-azioni-sub", text: etich });
+      const box = pan.createDiv({ cls: "gdr-board-azioni-box" });
+      for (const az of voci) {
+        const car = (az as { cariche?: { oggetto: string } }).cariche;
+        const resto = car ? ` · ${caricheRestanti(s, a.key, car.oggetto)} cariche` : "";
+        const b = box.createEl("button", { text: `${etichettaAzione(az)}${resto}` });
+        const motivo = motivoAzioneBloccata(s, a.key, az);
+        if (motivo) { b.disabled = true; b.setAttribute("aria-label", MOTIVO_AZIONE[motivo]); }
+        else b.onclick = () => void this.agisci(a, az);
+      }
+    };
+    const principali = disponibili.filter((x) => x.economia !== "azione-bonus");
+    const bonus = disponibili.filter((x) => x.economia === "azione-bonus");
+    if (principali.length || bonus.length) { gruppo(principali); gruppo(bonus, "Azioni bonus"); }
+    else pan.createDiv({ cls: "gdr-board-azioni-box" }).createSpan({ cls: "gdr-board-vuoto", text: "(nessuna azione eseguibile — passa il turno)" });
+
+    // Gli ATTIVABILI (l'Ira, una pozione di resistenza, un'aura): si accendono e si spengono.
+    // Un'aura a ZONA chiede chi c'è dentro (di partenza gli alleati della fonte).
+    if (a.attivabili?.length) {
+      pan.createEl("div", { cls: "gdr-board-azioni-sub", text: "Da attivare" });
+      const box = pan.createDiv({ cls: "gdr-board-azioni-box" });
+      for (const att of a.attivabili) {
+        const st = statoAttivabile(s, a.key, att);
+        const extra = [
+          att.durata ? att.durata : "",
+          st.restano != null ? `${st.restano} cariche` : "",
+          st.usi != null && att.usi ? `usi ${st.usi}/${att.usi.massimo}` : "",
+          st.acceso && att.numeri?.nota ? att.numeri.nota : "",
+        ].filter(Boolean).join(" · ");
+        const b = box.createEl("button", { text: `${st.acceso ? "● " : "○ "}${att.nome}${extra ? ` (${extra})` : ""}` });
+        if (st.acceso) b.addClass("is-acceso");
+        if (st.finito) { b.disabled = true; continue; }
+        b.onclick = async () => {
+          let zona: string[] | undefined;
+          if (att.aura?.ambito === "zona" && !st.acceso) {
+            const tutti = this.stato().combattenti;
+            const dentro = await multiSuggester(this.app, (c: InPlancia) => c.nome, tutti, `${att.nome}: chi è nell'aura`, (c) => c.schieramento === a.schieramento);
+            if (dentro == null) return;
+            zona = dentro.map((c) => c.key);
+          }
+          this.push(...comandoCommuta(this.stato(), a.key, att.id, zona));
+        };
+      }
+    }
+
+    // Le RELAZIONI (la mappa senza mappa): il GM dichiara mischia e copertura, il motore ne fa
+    // le regole (attacco d'opportunità, bonus alla CA).
+    const altri = s.combattenti.filter((c) => c.key !== a.key && inPiedi(c));
+    if (altri.length) {
+      pan.createEl("div", { cls: "gdr-board-azioni-sub", text: "Relazioni" });
+      const box = pan.createDiv({ cls: "gdr-board-azioni-box" });
+      const conChi = (titolo: string, filtro: (c: InPlancia) => boolean) =>
+        this.pickBersaglio(this.stato().combattenti.filter((c) => c.key !== a.key && inPiedi(c) && filtro(c)), titolo);
+      box.createEl("button", { text: "Ingaggia in mischia…" }).onclick = async () => {
+        const c = await conChi(`${a.nome} ingaggia`, (x) => !sonoIngaggiati(this.stato(), a.key, x.key));
+        if (c) this.push(...comandoIngaggio(this.stato(), a.key, c.key));
+      };
+      if (altri.some((c) => sonoIngaggiati(s, a.key, c.key))) {
+        box.createEl("button", { text: "Disingaggia…" }).onclick = async () => {
+          const c = await conChi(`${a.nome} si disingaggia da`, (x) => sonoIngaggiati(this.stato(), a.key, x.key));
+          if (c) this.push(...comandoDisingaggio(this.stato(), a.key, c.key));
+        };
+        box.createEl("button", { text: "Attacco d'opportunità…" }).onclick = async () => {
+          const c = await conChi(`Attacco d'opportunità di ${a.nome} contro`, (x) => sonoIngaggiati(this.stato(), a.key, x.key));
+          if (c) this.push(...comandoOpportunita(this.stato(), a.key, c.key, dadoVero, this.defs));
+        };
+      }
+      box.createEl("button", { text: "Copertura…" }).onclick = async () => {
+        const da = await conChi(`Copertura di ${a.nome} rispetto a`, () => true);
+        if (!da) return;
+        const ora = gradoCopertura(this.stato(), a.key, da.key);
+        // «nessuna» è una scelta vera: non va confusa con l'annullamento del modale (null).
+        const gradi: (CoperturaGrado | "nessuna")[] = ["mezza", "tre-quarti", "nessuna"];
+        const g = await suggester(this.app, (x: CoperturaGrado | "nessuna") => (x === "mezza" ? "Mezza (+2 a CA e TS di Destrezza)" : x === "tre-quarti" ? "Tre quarti (+5)" : "Nessuna") + (x === (ora ?? "nessuna") ? " — attuale" : ""), gradi, false, "Che copertura?");
+        if (g != null) this.push(...comandoCopertura(this.stato(), a.key, da.key, g === "nessuna" ? null : g));
+      };
+    }
+
+    // Gli INCANTESIMI: un bottone per lancio, col costo e perché no se non si può (dal motore).
+    const inc = a.incantatore;
+    if (inc?.lanciabili.length) {
+      const panI = root.createDiv({ cls: "gdr-board-incantesimi" });
+      panI.createEl("h4", { text: `Incantesimi — ${a.nome}` });
+      const slotTxt = inc.slot
+        .map((max, i) => {
+          if (!max || max <= 0) return null;
+          const r = slotRestanti(s, a.key, i + 1);
+          return `${i + 1}º ${"●".repeat(r)}${"○".repeat(Math.max(0, max - r))}`;
+        })
+        .filter((x): x is string => x != null).join(" · ");
+      if (slotTxt) panI.createDiv({ cls: "gdr-board-slot", text: `Slot: ${slotTxt}` });
+      const boxI = panI.createDiv({ cls: "gdr-board-azioni-box" });
+      for (const spell of inc.lanciabili) {
+        const opz = opzioniLancio(s, a.key, spell);
+        const liv = spell.livelloLancio ? ` · ${spell.livelloLancio}º` : "";
+        const costo =
+          spell.cariche ? `${opz.restano} cariche${liv}`
+          : spell.usiGiornalieri != null ? `${opz.usi}/${spell.usiGiornalieri}/dì${liv}`
+          : spell.livello === 0 ? `a volontà${liv}`
+          : `Liv ${spell.livello}`;
+        const b = boxI.createEl("button", { text: etichettaIncantesimo(spell, costo) });
+        if (opz.motivo) { b.disabled = true; b.setAttribute("aria-label", MOTIVO_LANCIO[opz.motivo]); }
+        else b.onclick = () => void this.lancia(a, spell);
+      }
+    }
+  }
+
   private render() {
     const root = this.containerEl.children[1] as HTMLElement;
     root.empty();
@@ -406,6 +540,15 @@ export class BoardView extends ItemView {
     btn("🎭 PG", () => void this.aggiungiPg());
     if (!iniziato) btn("🎲 Iniziativa", () => this.push(...comandoIniziativa(this.stato()), { tipo: "cominciato" }), "primario");
     else if (!esito) btn("⏭️ Passa turno", () => this.push({ tipo: "turno-passato" }), "primario");
+    // I RIPOSI del gruppo: tutti i PG in plancia (il lungo tira le ricariche degli oggetti all'alba).
+    if (s.combattenti.some((c) => c.key.startsWith("pg:"))) {
+      const riposa = (lungo: boolean) => {
+        const st = this.stato();
+        this.push(...st.combattenti.filter((c) => c.key.startsWith("pg:")).flatMap((c) => comandoRiposo(st, c.key, lungo, dadoVero)));
+      };
+      btn("Riposo breve", () => riposa(false));
+      btn("Riposo lungo", () => riposa(true));
+    }
     btn("↩️ Annulla", () => { this.eventi = annullaUltimo(this.eventi); this.commit(); });
     btn("🗑️ Reset", () => { this.eventi = []; this.commit(); });
     btn("🎬 Demo", () => this.seedDemo());
@@ -430,6 +573,8 @@ export class BoardView extends ItemView {
       const nome = riga.createSpan({ cls: "gdr-board-nome is-click", text: c.nome });
       nome.setAttribute("aria-label", "Apri statblock");
       nome.onclick = () => this.apriStatblock(c);
+      const conc = staConcentrando(s, c.key);
+      if (conc) riga.createSpan({ cls: "gdr-board-conc", text: `conc.: ${conc}` });
       riga.createSpan({ cls: "gdr-board-ca", text: `CA ${c.ca}` });
       const pf = riga.createDiv({ cls: "gdr-board-pf" });
       const barra = pf.createDiv({ cls: "gdr-board-pf-fill" });
@@ -440,19 +585,42 @@ export class BoardView extends ItemView {
       pf.createSpan({ cls: "gdr-board-pf-txt", text: `${c.pf_attuali}/${c.pf_max}${pfTemp}` });
       // Coda: condizioni (chip cliccabili per toglierle) + controlli manuali del GM.
       const coda = riga.createDiv({ cls: "gdr-board-tail" });
+      // Le condizioni addosso; quelle annullate da un'immunità (l'Aura di Coraggio) restano
+      // visibili ma barrate, perché senza effetto.
+      const valgono = condizioniAttive(s, c.key, this.defs);
       for (const id of s.condizioni[c.key] ?? []) {
-        const chip = coda.createSpan({ cls: "gdr-board-cond-chip is-click", text: this.nomeEffetto(id) });
+        const grado = s.gradi?.[c.key]?.[id];
+        const chip = coda.createSpan({ cls: "gdr-board-cond-chip is-click", text: `${this.nomeEffetto(id)}${grado ? ` ${grado}` : ""}` });
         if (id.startsWith("oggetto:")) chip.addClass("is-oggetto");
-        chip.setAttribute("aria-label", `Togli «${this.nomeEffetto(id)}»`);
+        if (!valgono.includes(id)) chip.addClass("is-immune");
+        chip.setAttribute("aria-label", valgono.includes(id) ? `Togli «${this.nomeEffetto(id)}»` : `«${this.nomeEffetto(id)}»: senza effetto (immune). Clic per toglierla`);
         chip.onclick = () => this.push({ tipo: "condizione-finita", key: c.key, condizione: id });
       }
       const ctrl = coda.createDiv({ cls: "gdr-board-ctrl" });
       const amt = ctrl.createEl("input", { cls: "gdr-board-amt", attr: { type: "number", min: "1", value: "5", inputmode: "numeric" } });
       const quanti = () => Math.max(1, Math.round(Number(amt.value) || 0));
       const bDmg = ctrl.createEl("button", { text: "−", cls: "gdr-board-dmg" }); bDmg.setAttribute("aria-label", "Infliggi danno");
-      bDmg.onclick = () => this.push({ tipo: "danno", key: c.key, quanti: quanti() });
+      // Il danno a mano fa tirare la concentrazione a chi si concentra (come nei tiri del motore).
+      bDmg.onclick = () => {
+        const st = this.stato();
+        this.push({ tipo: "danno", key: c.key, quanti: quanti() }, ...eventiConcentrazione(st, c.key, quanti(), dadoVero, this.defs));
+      };
       const bHeal = ctrl.createEl("button", { text: "+", cls: "gdr-board-heal" }); bHeal.setAttribute("aria-label", "Cura");
       bHeal.onclick = () => this.push({ tipo: "cura", key: c.key, quanti: quanti() });
+      const bTemp = ctrl.createEl("button", { text: "PF t", cls: "gdr-board-temp" }); bTemp.setAttribute("aria-label", "Concedi PF temporanei (non si sommano: resta il più alto)");
+      bTemp.onclick = () => this.push({ tipo: "pf-temporanei", key: c.key, quanti: quanti() });
+      // Tiri contro morte: a 0 PF, pallini di successi e fallimenti e il tiro.
+      if (c.morte) {
+        const m = ctrl.createSpan({ cls: "gdr-board-morte" });
+        if (eMorto(c)) m.setText("morto");
+        else if (eStabile(c)) m.setText("stabile");
+        else {
+          m.setText(`${"●".repeat(c.morte.successi)}${"○".repeat(3 - c.morte.successi)} / ${"●".repeat(c.morte.fallimenti)}${"○".repeat(3 - c.morte.fallimenti)}`);
+          m.setAttribute("aria-label", `${c.morte.successi} successi · ${c.morte.fallimenti} fallimenti`);
+          const bTs = ctrl.createEl("button", { text: "TS morte", cls: "gdr-board-ts-morte" });
+          bTs.onclick = () => this.push(...comandoTiroMorte(this.stato(), c.key, dadoVero, this.defs));
+        }
+      }
       const bCond = ctrl.createEl("button", { text: "＋stato", cls: "gdr-board-cond-add" }); bCond.setAttribute("aria-label", "Applica una condizione");
       bCond.onclick = () => void this.applicaCondizione(c);
       const bEquip = ctrl.createEl("button", { text: "🎒", cls: "gdr-board-equip" }); bEquip.setAttribute("aria-label", "Equipaggia un oggetto");
@@ -468,72 +636,8 @@ export class BoardView extends ItemView {
     // Conseguenze: a scontro deciso, il pannello-ponte verso il mondo (PF ai PG, fronti, risolto).
     if (esito) this.renderConseguenze(root, s, esito);
 
-    // Azioni dell'attivo (a battaglia iniziata, se in piedi e non c'è ancora un esito).
-    // Divise per economia del turno: Azioni (principali) e Azioni bonus.
-    if (iniziato && !esito && attivoOra && inPiedi(attivoOra)) {
-      const disponibili: Azione[] = (attivoOra.azioni && attivoOra.azioni.length)
-        ? attivoOra.azioni
-        : (attivoOra.attacco ? [{ nome: attivoOra.attacco.nome, tipo: "attacco", colpire: attivoOra.attacco.colpire, danno: attivoOra.attacco.danno } as Azione] : []);
-      const principali = disponibili.filter((a) => a.economia !== "azione-bonus");
-      const bonus = disponibili.filter((a) => a.economia === "azione-bonus");
-      const pan = root.createDiv({ cls: "gdr-board-azioni" });
-      pan.createEl("h4", { text: `Azioni di turno — ${attivoOra.nome}` });
-      const gruppo = (voci: Azione[], etich?: string) => {
-        if (!voci.length) return;
-        if (etich) pan.createEl("div", { cls: "gdr-board-azioni-sub", text: etich });
-        const box = pan.createDiv({ cls: "gdr-board-azioni-box" });
-        for (const az of voci) {
-          const b = box.createEl("button", { text: etichettaAzione(az) });
-          b.onclick = () => void this.agisci(attivoOra, az);
-        }
-      };
-      if (principali.length || bonus.length) {
-        gruppo(principali);
-        gruppo(bonus, "⚡ Azioni bonus");
-      } else {
-        pan.createDiv({ cls: "gdr-board-azioni-box" })
-          .createSpan({ cls: "gdr-board-vuoto", text: "(nessuna azione eseguibile — passa il turno)" });
-      }
-
-      // 🔮 Incantesimi: se l'attivo è un incantatore, il pozzo di slot + un bottone per lancio.
-      // Un click apre la scelta del livello (upcast) e dei bersagli (§lancia).
-      const inc = attivoOra.incantatore;
-      if (inc?.lanciabili.length) {
-        const panI = root.createDiv({ cls: "gdr-board-incantesimi" });
-        panI.createEl("h4", { text: `🔮 Incantesimi — ${attivoOra.nome}` });
-        // Lettura degli slot: "Slot: 1º ●●○ · 2º ●○" (● residuo · ○ speso), solo i livelli col pozzo.
-        const slotTxt = inc.slot
-          .map((max, i) => {
-            if (!max || max <= 0) return null; // livello senza slot (array sparso) → salta
-            const r = slotRestanti(s, attivoOra.key, i + 1);
-            return `${i + 1}º ${"●".repeat(r)}${"○".repeat(Math.max(0, max - r))}`;
-          })
-          .filter((x): x is string => x != null).join(" · ");
-        if (slotTxt) panI.createDiv({ cls: "gdr-board-slot", text: `Slot: ${slotTxt}` });
-        const boxI = panI.createDiv({ cls: "gdr-board-azioni-box" });
-        for (const spell of inc.lanciabili) {
-          // Il livello fisso di lancio (mostri 2024: "Cono di freddo di 9º"), da appendere al costo.
-          const liv = spell.livelloLancio ? ` · ${spell.livelloLancio}º` : "";
-          let costo: string, esaurito = false;
-          if (spell.usiGiornalieri != null) {
-            // X/giorno (mostri 2024): costa un uso, non uno slot.
-            const rest = usiRestanti(s, attivoOra.key, spell.id);
-            costo = `${rest}/${spell.usiGiornalieri}/dì${liv}`;
-            esaurito = rest <= 0;
-          } else if (spell.livello === 0) {
-            // Livello 0 senza usi = a volontà (mostri 2024) / trucchetto (PG): illimitato.
-            costo = `a volontà${liv}`;
-          } else {
-            // Livello > 0 con slot: è il caso PG (upcasting); le creature 2024 non hanno slot.
-            costo = `Liv ${spell.livello}`;
-            esaurito = !inc.slot.some((_m, i) => i + 1 >= spell.livello && slotRestanti(s, attivoOra.key, i + 1) > 0);
-          }
-          const b = boxI.createEl("button", { text: etichettaIncantesimo(spell, costo) });
-          if (esaurito) b.disabled = true;
-          else b.onclick = () => void this.lancia(attivoOra, spell);
-        }
-      }
-    }
+    // Il turno dell'attivo (a battaglia iniziata, se in piedi e non c'è ancora un esito).
+    if (iniziato && !esito && attivoOra && inPiedi(attivoOra)) this.renderTurno(root, s, attivoOra);
 
     // Azioni leggendarie: i boss agiscono fra un turno e l'altro (pozzo che si ricarica ogni round).
     if (iniziato && !esito) this.renderLeggendarie(root, s);

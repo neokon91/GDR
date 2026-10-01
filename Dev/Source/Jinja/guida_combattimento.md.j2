@@ -26,11 +26,22 @@ calcolati dalla scheda.
    (attacchi, incantesimi, multiattacco): scegli il **bersaglio** e il motore **risolve il tiro
    per colpire contro la CA**, il **danno** e gli eventuali **tiri salvezza** (i PG li tirano da
    soli). Niente da calcolare a mano.
-4. **PF** — i pulsanti **−** / **+** sul combattente infliggono danno o curano; a **0 PF**
-   scatta *Privo di sensi* in automatico.
+4. **PF** — i pulsanti **−** / **+** sul combattente infliggono danno o curano (chi si
+   concentra tira per mantenerla); **PF t** concede PF temporanei. A **0 PF** il PG è
+   morente: compaiono i **tiri contro morte** (successi e fallimenti, **TS morte** per tirare).
 5. **Condizioni vere** — **＋stato** applica una condizione: i suoi effetti (vantaggio/
    svantaggio ai tiri, salvezza automaticamente fallita…) entrano **da soli** nei tiri
-   successivi — non sono solo etichette.
+   successivi — non sono solo etichette. Una condizione da cui il combattente è immune
+   (Aura di Coraggio) resta visibile ma barrata: non ha effetto.
+6. **Il turno** — l'economia (● azione · ◆ bonus · ▲ reazione, tenue se spesa); le azioni
+   bloccate dicono perché (già spesa, cariche finite). **Da attivare**: l'Ira, una pozione,
+   un'aura (a zona: spunti chi c'è dentro), con gli usi che restano fino al riposo.
+   **Relazioni**: mischia, attacco d'opportunità, copertura. Gli **incantesimi** chiedono il
+   livello (slot o cariche dell'oggetto) e, se ce l'hanno, l'effetto (Ingrandire o Ridurre).
+7. **Reazioni** — quando servono compaiono da sole: parare un colpo con Scudo, ribaltare un
+   tiro salvezza fallito (Resistenza Leggendaria, anello di eludere).
+8. **Riposi** — **Riposo breve** / **Riposo lungo** per tutti i PG in campo; a fine scontro
+   «Riporta PF ai PG» scrive sulla nota anche slot e usi spesi.
 
 ## 3. Cosa resta al DM
 - **Posizione e distanze**: la Board non ha griglia né token. Per una mappa di battaglia

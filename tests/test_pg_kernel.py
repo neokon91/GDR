@@ -1,4 +1,4 @@
-"""Il PG col LIBRETTO (Tier 3) e il catalogo del kernel, headless.
+"""Il PG col LIBRETTO (Tier 3), il catalogo del kernel e la Board, headless.
 
 Due script TypeScript del plugin, impacchettati con esbuild e lanciati con node:
 `gen_catalogo.ts` costruisce il catalogo con `catalogoDa` del kernel dalla copia SRD, e
@@ -25,12 +25,16 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-def _lancia(script: str, tmp_path: Path, *args: str) -> str:
-    out = tmp_path / f"{Path(script).stem}.cjs"
+def _lancia(script: str, tmp_path: Path, *args: str, esm: bool = False) -> str:
+    out = tmp_path / f"{Path(script).stem}.{'mjs' if esm else 'cjs'}"
     env = {**os.environ, "NODE_PATH": str(PLUGIN / "node_modules")}
+    # La Board importa `obsidian`: nella prova lo sostituisce il modulo finto (DOM con jsdom).
+    extra = ["--alias:obsidian=../Dev/Tools/obsidian-finto.ts", "--external:jsdom"] if esm else []
     subprocess.run([str(ESBUILD), str(ROOT / "Dev" / "Tools" / script), "--bundle", "--platform=node",
-                    "--format=cjs", "--log-level=warning", f"--outfile={out}"],
+                    f"--format={'esm' if esm else 'cjs'}", "--log-level=warning", f"--outfile={out}", *extra],
                    cwd=PLUGIN, env=env, check=True, capture_output=True, text=True)
+    if esm:  # jsdom si risolve dal plugin: il bundle sta in tmp, quindi un link ai suoi node_modules
+        (tmp_path / "node_modules").symlink_to(PLUGIN / "node_modules")
     res = subprocess.run(["node", str(out), *args], cwd=PLUGIN, capture_output=True, text=True)
     assert res.returncode == 0, res.stderr or res.stdout
     return res.stdout
@@ -67,3 +71,19 @@ def test_il_pg_col_libretto_regge_tutta_la_catena(catalogo, tmp_path):
     # L'homebrew del vault (classe, specie, background, talento, sottoclasse, incantesimi)
     # tradotto nel catalogo del kernel: si crea e sale come l'SRD.
     assert "homebrew: Lama del Vento 4, Des 17" in out
+
+
+def test_la_board_e_alla_pari_con_la_plancia(catalogo, tmp_path):
+    """La Board VERA del plugin (jsdom + `obsidian` finto) con un barbaro col libretto contro un
+    goblin: l'Ira si accende coi suoi usi, la mischia si dichiara e offre l'attacco
+    d'opportunità, a 0 PF compaiono i tiri contro morte, le risorse spese tornano sulla nota."""
+    subprocess.run(["python3", str(ROOT / "Dev" / "Tools" / "gen_bestiario.py")], check=True, capture_output=True)
+    dati = tmp_path / "dati"
+    dati.mkdir()
+    shutil.copy(catalogo, dati / "srd_catalogo.json")
+    shutil.copy(PLUGIN / "data" / "srd_bestiario.json", dati / "srd_bestiario.json")
+    out = _lancia("smoke_board.ts", tmp_path, str(dati), esm=True)
+    assert "Ira accesa" in out and "usi 1/2" in out
+    assert "attacco d'opportunità offerto" in out
+    assert "tiri contro morte" in out
+    assert '"usi_ira":1' in out

@@ -4,7 +4,7 @@
 // cosa hai scelto salendo, `regole/src/creatore/libretto.ts`). Tutto il resto si DERIVA: i
 // numeri della scheda li riscrive il codice da `assembla`, e la Board monta il PG completo
 // (attivabili, aure, incantatore, oggetti magici, reazioni) invece della ricostruzione minima
-// dai campi piatti. Un PG senza libretto (creato da crea_pg.js) entra come prima (`daPgGdr`).
+// dai campi piatti. Un PG senza libretto (creato prima del kernel) entra come prima (`daPgGdr`).
 //
 // Lo STATO DI GIOCO (PF attuali, slot e usi spesi) resta nei campi piatti che la scheda e le
 // azioni di riposo del vault già leggono (`pf`, `slot_uso_N`, `usi_<id>`): `risorseDaNota` e
@@ -53,7 +53,9 @@ export function risorseDi(c: Combattente): RisorsaPg[] {
   const out: RisorsaPg[] = [];
   for (const a of c.attivabili ?? []) {
     if (!a.usi) continue;
-    const ric = a.usi.ricarica && typeof a.usi.ricarica === "object" && "breve" in a.usi.ricarica ? "breve" : "lungo";
+    // Il kernel scrive la ricarica per riposo (`{riposo-breve: 1, riposo-lungo: tutti}`): torna
+    // (anche in parte) col breve → la scheda la segna «breve».
+    const ric = a.usi.ricarica && typeof a.usi.ricarica === "object" && "riposo-breve" in a.usi.ricarica ? "breve" : "lungo";
     out.push({ id: chiaveNota(a.id), label: a.nome, max: a.usi.massimo, ric, fonte: "attivabile", chiave: a.id });
   }
   for (const s of c.incantatore?.lanciabili ?? []) {

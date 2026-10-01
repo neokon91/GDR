@@ -308,3 +308,11 @@
 /* Statblock: prosa resa come markdown (paragrafi senza margini extra) */
 .gdr-sb-voce p { margin: 0; }
 .gdr-sb-voce p + p { margin-top: 4px; }
+
+/* Board alla pari con la plancia del Compendio: immunità, concentrazione, morte, economia, attivabili. */
+.gdr-board-cond-chip.is-immune { text-decoration: line-through; opacity: 0.55; }
+.gdr-board-conc { font-size: 0.8em; padding: 0 6px; border-radius: 999px; background: var(--background-modifier-hover); color: var(--text-accent); white-space: nowrap; }
+.gdr-board-morte { font-size: 0.85em; letter-spacing: 1px; white-space: nowrap; }
+.gdr-board-econ { margin-left: 4px; color: var(--text-accent); }
+.gdr-board-econ.is-spesa { color: var(--text-faint); }
+.gdr-board-azioni-box button.is-acceso { background: var(--interactive-accent); color: var(--text-on-accent); }

@@ -6,6 +6,13 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Board alla pari con la plancia del Compendio**: attivabili (Ira, pozioni, aure a zona) con gli
+  usi fino al riposo, riposo breve e lungo del gruppo, parate (Scudo) e reazioni d'oggetto (anello
+  di eludere), relazioni (mischia, attacco d'opportunità, copertura), varianti al lancio (Ingrandire
+  o Ridurre) e lanci da cariche, tiri contro morte, PF temporanei, tiro di concentrazione sul danno
+  a mano, condizioni barrate se il combattente è immune, economia del turno. Le azioni passano dal
+  comando generico del motore (anche i potenziamenti, su sé o sugli alleati). Prova headless della
+  Board con jsdom (`npm run smoke:board`, in pytest).
 - **Creatore di PG sul kernel, col libretto**: la nota del PG custodisce il libretto (le scelte
   livello per livello) e i numeri della scheda ne derivano. Comandi «Crea PG» e
   «Sali di livello» (il bottone esistente, sulle note col libretto): le domande le decide la guida
@@ -34,6 +41,8 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   con un clic. La Guida al combattimento dice chi fa cosa fra Board e Atlas.
 
 ### Corretto
+- **Ricarica delle risorse dei PG col libretto**: la scheda segnava a riposo lungo anche ciò che
+  torna col breve (Recuperare le Energie, l'Ira), perché leggeva la chiave sbagliata.
 - **Catalogo del creatore**: lo costruisce `gen_catalogo.ts` col costruttore del kernel (lo stesso
   del Compendio) invece di `gen_catalogo.py`, che perdeva i talenti scritti come nota (Abile, Allerta,
   Aggressore selvaggio, Combattere con armi possenti, Aumento dei punteggi: 12 su 17), le varianti e i

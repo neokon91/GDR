@@ -232,8 +232,14 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   tiri, concentrazione, **reazioni** (Resistenza Leggendaria ribalta un TS), **azioni
   leggendarie** (pozzo/round). Adapter d'ingresso: `daMostro(RawMostro)` e `daAttore(Attore)`.
 - **Board** (`plugin/board.ts`, `BoardView`): incontro dal roster (bestiario SRD + homebrew) +
-  PG del vault; iniziativa/turni; pannello azioni dell'attivo (principali + **bonus**);
-  **leggendarie** fra i turni; banner **reazioni**; controlli GM per riga (danno/cura/`＋stato`);
+  PG del vault; iniziativa/turni; pannello del turno (economia, azioni principali e **bonus**,
+  **attivabili** e aure a zona, **relazioni** mischia/opportunità/copertura, incantesimi con
+  livello di slot o cariche e **variante**); **leggendarie** fra i turni; banner **reazioni**
+  (Resistenza Leggendaria, reazioni d'oggetto, **parate**); controlli GM per riga (danno con tiro
+  di concentrazione, cura, PF temporanei, `＋stato`, tiri contro morte), condizioni barrate se
+  immuni; **riposi** del gruppo. Ciò che si mostra PRIMA di agire lo dice il motore
+  (`opzioniLancio`, `motivoAzioneBloccata`, `statoAttivabile`), lo stesso della plancia del
+  Compendio. Prova headless: `npm run smoke:board` (jsdom + `Dev/Tools/obsidian-finto.ts`);
   **F5 Conseguenze** a fine scontro (PF ai PG, avanza fronte, marca Incontro risolto — origine
   tracciata da F2); persistenza nel `data.json`.
 - **Statblock nativo** (`renderStatblock`): CA/Iniziativa/PF/Velocità, **caratteristiche in
