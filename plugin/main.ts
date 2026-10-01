@@ -40,6 +40,7 @@ import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
 import { creaLibretto, saliLibretto } from "./creatore";
 import { librettoDi, scriviPg } from "./pg";
+import { conHomebrew, type NoteHomebrew } from "./homebrew";
 import type { Libretto } from "../regole/src/creatore/libretto";
 
 // --- Impostazioni del plugin (persistite via loadData/saveData) ---------------------------
@@ -335,7 +336,7 @@ export default class GdrPlugin extends Plugin {
     try { bestiario = await this.bestiarioCompleto(); }
     catch (e: any) { new Notice(`Bestiario non caricato: ${e?.message ?? e}`); return; }
     const fm = this.frontmatterOf(file.path);
-    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs(), await this.risolviIncantesimo(), await this.armiCatalogo(), await this.loadCatalogo());
+    const { eventi, saltati } = eventiDaIncontro(fm, bestiario, this.partyPgs(), await this.risolviIncantesimo(), await this.armiCatalogo(), await this.catalogoCompleto());
     if (!eventi.length) { new Notice("Incontro vuoto: nessuna creatura/PG risolti."); return; }
     // Traccia la nota d'origine: il pannello Conseguenze potrà marcarla «risolto» senza chiedere.
     this.settings.boardOrigine = file.path;
@@ -673,6 +674,20 @@ export default class GdrPlugin extends Plugin {
   // qui c'è solo il caricamento; chi lo consuma (creazione PG col kernel) è la Fase C. Letto una
   // volta, on-demand. Su file mancante torna un catalogo VUOTO (mai crash): l'assenza dei dati non
   // deve rompere il plugin, si vede a valle come "nessuna classe disponibile".
+  // Il catalogo COMPLETO del creatore: l'SRD più l'homebrew del vault (classi, specie,
+  // background, talenti, sottoclassi, incantesimi), tradotto da `homebrew.ts` nella forma del
+  // kernel. Ricalcolato a ogni chiamata: l'homebrew cambia mentre il vault è aperto.
+  async catalogoCompleto(): Promise<Catalogo> {
+    const note: NoteHomebrew = {};
+    for (const f of this.app.vault.getMarkdownFiles()) {
+      const fm = this.app.metadataCache.getFileCache(f)?.frontmatter as Record<string, any> | undefined;
+      const cat = fm?.categoria as keyof NoteHomebrew | undefined;
+      if (!fm || fm.stato === "archiviata" || !cat || !["classe", "specie", "background", "talento", "sottoclasse", "incantesimo"].includes(cat)) continue;
+      (note[cat] ??= []).push({ nome: f.basename, fm });
+    }
+    return conHomebrew(await this.loadCatalogo(), note);
+  }
+
   async loadCatalogo(): Promise<Catalogo> {
     if (!this.catalogo) {
       const vuoto: Catalogo = {
@@ -877,7 +892,7 @@ export default class GdrPlugin extends Plugin {
   // Crea un PG col KERNEL condiviso: la guida del kernel decide le domande (`creatore.ts`), il
   // libretto risultante va nella nota e i numeri della scheda ne derivano (`pg.ts`).
   async creaPgKernel() {
-    const cat = await this.loadCatalogo();
+    const cat = await this.catalogoCompleto();
     if (!cat.classi.length) { new Notice("Catalogo vuoto: lancia la build del plugin (`npm run build`)."); return; }
     const lib = await creaLibretto(this.app, cat, (m) => new Notice(m));
     if (!lib) return;
@@ -887,7 +902,7 @@ export default class GdrPlugin extends Plugin {
   // Sali di livello col kernel sul PG della nota attiva (solo i PG col libretto: gli altri
   // restano su sali_pg.js). Riscrive libretto e derivati; lo stato di gioco resta.
   async saliDiLivelloKernel(file: TFile) {
-    const cat = await this.loadCatalogo();
+    const cat = await this.catalogoCompleto();
     const lib = librettoDi(this.frontmatterOf(file.path));
     if (!lib) return;
     const nuovo = await saliLibretto(this.app, cat, lib, (m) => new Notice(m));

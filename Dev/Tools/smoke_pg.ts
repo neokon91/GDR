@@ -19,6 +19,7 @@ import {
   mancano, opzioniIncantesimi, opzioniParametro, opzioniSceltaClasse, passoDaBozza, talentoOrigine,
 } from '../../regole/src/creatore/guida'
 import { combattenteDiPg, idPg, librettoDi, notaDaRisorse, risorseDaNota, scriviPg } from '../../plugin/pg'
+import { conHomebrew, type NoteHomebrew } from '../../plugin/homebrew'
 
 const cat = JSON.parse(readFileSync(resolve(process.argv[2] ?? 'data/srd_catalogo.json'), 'utf8')) as Catalogo
 
@@ -125,3 +126,47 @@ const nmc: Record<string, any> = {}
 scriviPg(nmc, multi, cat, true)
 assert(nmc.classi.length === 2 && nmc.classi[1].id === 'mago', `multiclasse: ${JSON.stringify(nmc.classi)}`)
 console.log(`✓ multiclasse: ${nmc.classi.map((x: any) => `${x.id} ${x.livello}`).join(' / ')}`)
+
+// 6. L'HOMEBREW del vault: tradotto nel catalogo del kernel, si crea e sale come l'SRD.
+const note: NoteHomebrew = {
+  classe: [{ nome: 'Lama del Vento', fm: {
+    dado_vita: 'd8', ts_competenze: 'Destrezza e Saggezza', car_primaria: 'Destrezza, Saggezza', tipo_incantatore: 'pieno',
+    competenze_armi: 'Armi semplici', competenze_armature: 'Armature leggere', abilita_numero: 2, livello_sottoclasse: 3,
+    privilegi: [{ livello: 1, nome: 'Passo del Vento', concede: { caratteristica: { destrezza: 1 } } }],
+  } }],
+  specie: [{ nome: 'Silfide', fm: { taglia: 'Media', velocita: '10,5 m', tratti: 'Leggiadria; scurovisione' } }],
+  background: [{ nome: 'Esiliato', fm: { car_background: 'Destrezza, Saggezza, Costituzione', abilita_background: 'Furtività, Sopravvivenza', talento_origine: 'Allerta' } }],
+  talento: [{ nome: 'Passo Leggero', fm: { tipo: 'generale', concede: { abilita: ['Acrobazia'] } } }],
+  sottoclasse: [{ nome: 'Via della Tempesta', fm: { classe: '[[Lama del Vento]]' } }],
+  incantesimo: [
+    { nome: 'Brezza', fm: { livello: 0, classi: 'Lama del Vento' } },
+    { nome: 'Raffica', fm: { livello: 1, classi: ['Lama del Vento'] } },
+  ],
+}
+const nSrd = cat.classi.length
+const hb = conHomebrew(cat, note)
+assert(hb.classi.length === nSrd + 1 && hb.background.find((b) => b.id === 'homebrew.background.esiliato')?.talento_origine === 'dnd.talento.allerta',
+  'homebrew: classe aggiunta, talento d\'origine risolto per nome')
+// Il creatore sul catalogo con l'homebrew: le stesse funzioni, il catalogo arricchito
+// (le sezioni precedenti hanno già girato sull'SRD puro).
+Object.assign(cat, hb)
+{
+  const base0 = base('homebrew.classe.lama-del-vento', 'homebrew.background.esiliato')
+  base0.specieId = 'homebrew.specie.silfide'
+  const vuoto: Libretto = { base: base0, passi: [] }
+  const b1 = livello(vuoto)
+  assert(mancano(cat, vuoto, b1).length === 0, `homebrew liv 1: manca ${mancano(cat, vuoto, b1).join(', ')}`)
+  let lib = librettoIniziale(base0, passoDaBozza(cat, vuoto, b1))
+  while (lib.passi.length < 3) lib = aggiungiLivello(lib, passoDaBozza(cat, lib, livello(lib)))
+  // Al 4º, il talento homebrew al posto dell'aumento.
+  const b4 = { ...livello(lib), talentoId: 'homebrew.talento.passo-leggero', bonusAsi: {} }
+  assert(mancano(cat, lib, b4).length === 0, `homebrew liv 4: manca ${mancano(cat, lib, b4).join(', ')}`)
+  lib = aggiungiLivello(lib, passoDaBozza(cat, lib, b4))
+  const fm: Record<string, any> = {}
+  scriviPg(fm, lib, cat, true)
+  assert(fm.destrezza === 14 + 2 + 1, `homebrew: Destrezza 14 + background 2 + Passo del Vento 1 (${fm.destrezza})`)
+  assert(fm.scurovisione === 18 && fm.prof_acrobazia === 1 && fm.prof_furtivita === 1, 'homebrew: scurovisione, Acrobazia dal talento, Furtività dal background')
+  assert(lib.passi[2].sottoclasseId === 'homebrew.sottoclasse.via-della-tempesta', 'homebrew: la sottoclasse legata per link si sceglie al 3º')
+  assert((fm.trucchetti ?? []).includes('homebrew.incantesimo.brezza') && fm.slot_1 > 0, 'homebrew: incantatore pieno con gli incantesimi della sua classe')
+  console.log(`✓ homebrew: Lama del Vento 4, Des ${fm.destrezza}, slot ${fm.slot_1}/${fm.slot_2}, sottoclasse e talento del vault`)
+}

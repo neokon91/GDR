@@ -3,7 +3,7 @@
 Due script TypeScript del plugin, impacchettati con esbuild e lanciati con node:
 `gen_catalogo.ts` costruisce il catalogo con `catalogoDa` del kernel dalla copia SRD, e
 `smoke_pg.ts` crea e fa salire un PG per ogni classe con la guida del kernel, ne scrive la
-nota, lo monta per la Board e fa andare e tornare le risorse. Senza node o senza esbuild
+nota, lo monta per la Board, fa andare e tornare le risorse, e fa lo stesso con l'homebrew. Senza node o senza esbuild
 (dipendenza del plugin) i test si saltano da soli.
 """
 
@@ -64,3 +64,6 @@ def test_il_pg_col_libretto_regge_tutta_la_catena(catalogo, tmp_path):
     out = _lancia("smoke_pg.ts", tmp_path, str(catalogo))
     assert "12 classi create e salite al 5º senza mancanze" in out
     assert "multiclasse: guerriero 2 / mago 1" in out
+    # L'homebrew del vault (classe, specie, background, talento, sottoclasse, incantesimi)
+    # tradotto nel catalogo del kernel: si crea e sale come l'SRD.
+    assert "homebrew: Lama del Vento 4, Des 17" in out

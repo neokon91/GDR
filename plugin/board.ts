@@ -60,7 +60,7 @@ export class BoardView extends ItemView {
     this.condLista = await this.plugin.condizioniComplete(); // SRD + homebrew, per il picker manuale
     this.oggetti = await this.plugin.oggettiComplete(); // oggetti-effetto homebrew, per «🎒 Equipaggia»
     this.armiCat = await this.plugin.armiCatalogo(); // armi SRD+homebrew, per gli attacchi dei PG
-    this.catalogo = await this.plugin.loadCatalogo(); // i PG col libretto entrano completi
+    this.catalogo = await this.plugin.catalogoCompleto(); // i PG col libretto entrano completi (SRD + homebrew)
     this.defs = await this.plugin.loadDefsCondizioni(); // effetti condizioni+oggetti automatici sui tiri
     this.risolvi = await this.plugin.risolviIncantesimo(); // incantesimi SRD+homebrew, per il lancio
     // Mappa id→nome per i chip (invece del crudo id): condizioni + oggetti.
@@ -104,7 +104,7 @@ export class BoardView extends ItemView {
     if (!pgs.length) { new Notice("Nessun PG nel vault (categoria=personaggio, tipo=pg)."); return; }
     const scelto = await suggester(this.app, (e: any) => String(e.fm.nome || e.f.basename), pgs, false, "Aggiungi un PG");
     if (!scelto) return;
-    const base = combattenteDiPg(scelto.fm, this.catalogo ?? await this.plugin.loadCatalogo(), this.armiCat);
+    const base = combattenteDiPg(scelto.fm, this.catalogo ?? await this.plugin.catalogoCompleto(), this.armiCat);
     const c = this.schieraDaBase(base, "alleato");
     const risorse = risorseDaNota(scelto.fm, base);
     this.push({ tipo: "aggiunto", combattente: c }, ...(risorse ? [{ tipo: "risorse", key: c.key, risorse } as Evento] : []));
