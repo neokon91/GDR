@@ -330,6 +330,29 @@ def test_critical_plugins_are_pinned():
     assert {p["id"] for p in fetchable_critical} <= bundled_ids
 
 
+def test_obsidian_minimo_coerente():
+    """La versione minima di Obsidian del vault sta in UN punto del codice
+    (`plugin/main.ts: OBSIDIAN_MINIMO`, che avvisa all'avvio) e README, LEGGIMI e
+    Diagnostica la ripetono. Se i plugin del vault di build sono scaricati, nessun plugin
+    fissato ne chiede una più alta: un aggiornamento che alza il minimo deve alzarla."""
+    import re
+    root = Path(__file__).resolve().parents[1]
+    minimo = re.search(r'OBSIDIAN_MINIMO = "([\d.]+)"', (root / "plugin" / "main.ts").read_text(encoding="utf-8")).group(1)
+    for rel in ("README.md", "Dev/Source/Jinja/leggimi.md.j2", "Dev/Source/JS/views/05_diagnostica.js"):
+        assert minimo in (root / rel).read_text(encoding="utf-8"), f"{rel} non cita Obsidian {minimo}"
+    ver = lambda s: tuple(int(x) for x in str(s).split("."))
+    import fetch_plugins
+    cartella = root / "dist" / "GDR-vault" / ".obsidian" / "plugins"
+    for pl in fetch_plugins.bundled(PLUGINS["plugins"]):
+        man = cartella / pl["id"] / "manifest.json"
+        if not man.exists():
+            continue
+        m = json.loads(man.read_text(encoding="utf-8"))
+        if str(m.get("version")) != str(pl["version"]):
+            continue  # vault di build non ancora allineato al pin: lo dice fetch_plugins
+        assert ver(m.get("minAppVersion", "0")) <= ver(minimo), f"{pl['id']} {pl['version']} chiede Obsidian {m['minAppVersion']} > {minimo}"
+
+
 def test_fetch_bundled_requires_repo_and_version():
     """bundled() seleziona SOLO i plugin con repo E version; senza version un plugin
     non è bundlato (si installa via BRAT/community al primo avvio)."""

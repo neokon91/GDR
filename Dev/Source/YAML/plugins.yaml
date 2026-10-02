@@ -28,6 +28,10 @@ plugins:
     autoriale: true
     critico: true
     rompe: "Il motore del vault: pannelli, pulsanti-azione, creazione note e Cruscotto DM non funzionano (le note appaiono come codice ```gdr)."
+  # Ferma a 0.5.68 (verificato 2026-10-02): le release 0.5.69/0.5.70 dichiarano ancora 0.5.68
+  # nel manifest (il pin le rifiuterebbe) e il manifest del branch principale, quello che il
+  # negozio di Obsidian distribuisce, è 0.5.68. Lo scarto è una sola correzione di resa dei
+  # campi inline in Live Preview.
   - id: dataview
     name: Dataview
     author: Michael Brenan
@@ -40,7 +44,7 @@ plugins:
     name: Meta Bind
     author: Moritz Jung
     repo: mProjectsCode/obsidian-meta-bind-plugin
-    version: 1.4.15
+    version: 1.5.1
     license: GPL-3.0
     critico: true
     rompe: "I campi da compilare (slider, menu, testo) restano come codice grezzo."
@@ -96,6 +100,10 @@ plugins:
     author: Zsolt Viczian
     repo: zsviczian/obsidian-excalidraw-plugin
     license: AGPL-3.0
+  # Ferma a 2.1.5 (verificato 2026-10-02): dalla 2.2 le icone predefinite (`pinRed`, quella
+  # dei pin degli import Watabou/Azgaar) hanno l'ancora 0,0 invece di 12,12. In un vault nuovo,
+  # senza impostazioni salvate, ogni pin compare 12 px a destra e 22 px sotto il luogo.
+  # Da riprovare a ogni release.
   - id: zoom-map
     name: "TTRPG Tools - Maps"
     author: Jareika
@@ -118,7 +126,7 @@ plugins:
     name: Homepage
     author: novov
     repo: mirnovov/obsidian-homepage
-    version: 4.4.4
+    version: 4.5.0
     license: MIT
   - id: folder-notes
     name: Folder Notes

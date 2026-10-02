@@ -52,6 +52,18 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   con un clic. La Guida al combattimento dice chi fa cosa fra Board e Atlas.
 
 ### Modificato
+- **Plugin aggiornati** (verificati sul sorgente, 2026-10-02): **Meta Bind 1.4.15 → 1.5.1**
+  (impostazioni sulla nuova API di Obsidian, messaggi d'errore dei bottoni, finestre staccate;
+  sintassi di campi e bottoni invariata) e **Homepage 4.4.4 → 4.5.0** (impostazioni per Obsidian
+  1.13; chiavi e valori che scriviamo invariati). I comandi chiamati dai bottoni esistono ancora
+  nelle ultime Excalidraw, Calendarium e TTRPG Tools - Maps.
+- **Il vault chiede Obsidian 1.13.1 o successivo** (Meta Bind 1.5). Il plugin `gdr` lo dice
+  all'avvio se la versione è più vecchia, la Diagnostica lo cita, README e LEGGIMI lo dicono; un
+  test lega i quattro punti al minimo dichiarato dai plugin fissati.
+- **Trattenuti, col motivo in `plugins.yaml`**: Dataview a 0.5.68 (le release 0.5.69 e 0.5.70
+  dichiarano 0.5.68 nel manifest, e il negozio distribuisce la 0.5.68); TTRPG Tools - Maps a
+  2.1.5 (dalla 2.2 i pin predefiniti hanno l'ancora a 0,0: in un vault nuovo i pin degli import
+  Watabou e Azgaar comparirebbero spostati di 12 px a destra e 22 px in basso).
 - **Atlas VTT 0.4.2 → 0.5.0** (luci dinamiche sperimentali, import di mappe con muri da
   Dungeondraft, DungeonFog e Dungeon Alchemist, risorse dei token, iniziativa da aggiungere a
   mano). Verificato sul sorgente: i comandi usati dai bottoni (`open-dashboard`) ci sono ancora,

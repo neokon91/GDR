@@ -168,6 +168,8 @@ schema dei file-entità e i riferimenti Jinja: un refuso si ferma prima del buil
 
 ## Requisiti
 
+- **Obsidian ≥ 1.13.1** per il vault: lo chiede Meta Bind 1.5 (critico); Homepage 4.5 chiede
+  la 1.13.0, Atlas VTT la 1.8.7 e solo desktop.
 - **Python 3** + `pip install -r requirements-dev.txt` (Jinja2, PyYAML).
 - **Node** (per `node --check` dentro `npm run check`).
 

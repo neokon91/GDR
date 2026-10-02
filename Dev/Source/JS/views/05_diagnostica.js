@@ -53,7 +53,9 @@ async function renderDiagnostica(app) {
       ? `⚠️ **Manca 1 plugin essenziale su ${critici.length}.** `
       : `⚠️ **Mancano ${mancanti.length} plugin essenziali su ${critici.length}.** `)
       + `Attiva${uno ? "lo" : "li"} in *Impostazioni → Plugin della community* `
-      + `(se la lista è bloccata, togli prima il *Restricted mode*), poi riapri le note.`,
+      + `(se la lista è bloccata, togli prima il *Restricted mode*), poi riapri le note. `
+      + `Se risulta già attivo ma non si carica, controlla la versione di Obsidian `
+      + `(*Impostazioni → Informazioni*): questo vault chiede la 1.13.1 o successiva.`,
     ``,
     `| Plugin da attivare | Cosa non si vede senza |`,
     `|:--|:--|`,

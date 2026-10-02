@@ -20,7 +20,8 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
 > cartelle che iniziano con `z.` sono "il motore": puoi ignorarle.
 
 ## ▶️ Per iniziare in 3 passi
-1. **Apri questo vault in Obsidian** (*Apri cartella come vault*). La prima volta
+1. **Apri questo vault in Obsidian 1.13.1 o successivo** (*Apri cartella come vault*;
+   la versione è in *Impostazioni → Informazioni*, e se è più vecchia aggiornala lì). La prima volta
    Obsidian chiede di **fidarti dell'autore e abilitare i plugin**: clicca
    **«Trust author and enable plugins»**. I plugin sono già inclusi nel vault — non
    devi installare niente. *(Se una scheda appare come testo grezzo, apri **[[Diagnostica]]**.)*

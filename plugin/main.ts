@@ -14,7 +14,7 @@
  * ../docs/architecture.md.
  */
 import {
-  App, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, PluginSettingTab, Setting, TFile, parseYaml,
+  App, MarkdownRenderer, MarkdownRenderChild, Modal, Notice, Plugin, PluginSettingTab, Setting, TFile, parseYaml, requireApiVersion, apiVersion,
 } from "obsidian";
 // @ts-ignore — .mjs JS del vault, senza tipi; esbuild lo risolve e tree-shaka al solo PANELS.
 import { PANELS } from "../Dev/Source/JS/_panels.mjs";
@@ -104,6 +104,10 @@ class ReportModal extends Modal {
   onClose() { this.contentEl.empty(); }
 }
 
+/** La versione minima di Obsidian del vault: la più alta fra quelle dei plugin critici
+ *  fissati in plugins.yaml (Meta Bind 1.5.1). README e LEGGIMI la ripetono. */
+export const OBSIDIAN_MINIMO = "1.13.1";
+
 export default class GdrPlugin extends Plugin {
   private views: any = null;
   private meta: any = null;
@@ -120,6 +124,12 @@ export default class GdrPlugin extends Plugin {
 
   async onload() {
     await this.loadSettings();
+
+    // Il vault chiede Obsidian ≥ 1.13.1 (lo impone Meta Bind 1.5, critico: plugins.yaml). Più
+    // vecchio, Meta Bind non si carica e le schede restano codice grezzo: lo si dice subito.
+    if (!requireApiVersion(OBSIDIAN_MINIMO)) {
+      new Notice(`GDR: Obsidian ${apiVersion} è troppo vecchio per questo vault, serve la ${OBSIDIAN_MINIMO} o successiva. Aggiornalo da Impostazioni → Informazioni: senza, i campi delle schede restano codice.`, 0);
+    }
 
     // 1. Blocco ```gdr <renderX> (o `radar <cat>` / `statblock <id>`) → monta la vista, con
     //    re-render reattivo sui cambi di frontmatter della nota-sorgente.
