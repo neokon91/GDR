@@ -8,7 +8,8 @@ sua `attivita` e l'incantesimo diventa ESEGUIBILE (attacco/TS coi numeri del lan
 solo narrato. È il gemello incantesimi di `gen_bestiario.py`/`gen_condizioni.py`.
 
 Si tengono i SOLI campi che servono al risolvi: `id`, `nome`, `livello`, `tempo_lancio`,
-`concentrazione`, `attivita`. La prosa (descrizione, scaling narrativo, gittata…) resta
+`concentrazione`, `attivita`, `gittata` (fin dove si lancia: la porta il combattente, per chi
+guida la Board da una mappa). La prosa (descrizione, scaling narrativo…) resta
 nell'archivio — qui conta la meccanica. Gli incantesimi senza `attivita` restano nel catalogo
 comunque (nome + concentrazione): si lanciano NARRATI (il motore li logga, spende lo slot).
 
@@ -31,7 +32,7 @@ SRD = SRD_DIR
 OUT = ROOT / "plugin" / "data" / "srd_incantesimi.json"
 
 # I campi che il risolvi consuma (vedi RisolviIncantesimo in regole/combattente.ts).
-CAMPI = ("nome", "livello", "tempo_lancio", "concentrazione", "attivita")
+CAMPI = ("nome", "livello", "tempo_lancio", "concentrazione", "attivita", "gittata")
 
 
 def main() -> None:

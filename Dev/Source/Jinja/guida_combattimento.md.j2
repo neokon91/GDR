@@ -50,9 +50,9 @@ calcolati dalla scheda.
   - **Una scena per luogo o incontro**: creala in Atlas dalla tua immagine, poi collegala
     dalla nota (Incontro, tab *Combattimento*; Luogo, tab *Mappa*) con
     `BUTTON[collega-tavolo]`. Il link riapre la scena con un clic.
-  - **Token**: nascono dalle tue immagini. Collegati a una pagina mostro dell'SRD
-    (`SRD/Mostri`) ne prendono nome e PF medi. L'importazione automatica di Atlas «da
-    statblock» richiede Fantasy Statblocks, che questo vault non usa.
+  - **Token**: nascono dalle tue immagini, col nome che dai loro. Atlas lega un token a una
+    nota solo attraverso Fantasy Statblocks, che questo vault non usa: i PF dei token non
+    servono, si segnano nella Board.
   - **Chi fa cosa**: tiri, PF, turni e condizioni restano alla Board; su Atlas tieni solo
     posizioni e distanze. Il suo tracker d'iniziativa e i suoi dadi non servono: con due
     segnapunti i PF si segnerebbero due volte.

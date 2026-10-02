@@ -30,6 +30,11 @@ export function baseDiProva(cat: Catalogo, classeId: string, bgId: string): Base
   const offerta = fonteClasse(cat, classeId)?.competenze_abilita
   if (offerta) b.abilita_classe = primi(offerta.scelte.includes('tutte') ? Object.keys(ABILITA) : offerta.scelte, offerta.quantita)
   b.lingue = primi(cat.lingue.filter((l) => l.id !== 'comune'), 2).map(id)
+  // L'equipaggiamento iniziale: la prima opzione, come la proporrebbe il creatore.
+  const ec = fonteClasse(cat, classeId)?.equipaggiamento?.[0]?.nome
+  const eb = fonteBackground(cat, bgId)?.equipaggiamento?.[0]?.nome
+  if (ec) b.equipClasse = ec
+  if (eb) b.equipBackground = eb
   for (const p of talentoOrigine(cat, b)?.parametri ?? [])
     b.talentoOrigineParametri = { ...(b.talentoOrigineParametri ?? {}), [p.id]: primi(opzioniParametro(p, cat), p.quantita).map(id) }
   return b

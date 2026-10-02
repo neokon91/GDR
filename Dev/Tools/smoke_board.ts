@@ -101,7 +101,8 @@ board.ricarica()
 assert(bottone('TS morte'), 'a 0 PF compaiono i tiri contro morte')
 await clic('TS morte')
 const m = stato().combattenti.find((x) => x.key === k)!
-assert(m.morte && (m.morte.successi + m.morte.fallimenti > 0 || m.pf_attuali === 1), 'il tiro contro morte è registrato')
+// Un 20 naturale riporta a 1 PF e chiude i tiri contro morte: anche quello è un tiro registrato.
+assert((m.morte && m.morte.successi + m.morte.fallimenti > 0) || m.pf_attuali === 1, 'il tiro contro morte è registrato')
 console.log(`✓ tiri contro morte: ${JSON.stringify(m.morte ?? { pf: m.pf_attuali })}`)
 
 // 4. Fine scontro: le risorse spese (l'Ira) tornano sulla nota del PG.

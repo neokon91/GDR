@@ -6,6 +6,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Lo spazio nel combattente** (dal kernel): taglia e velocità di chi combatte, portata e gittata
+  delle azioni d'attacco (mostri e armi dei PG) e degli incantesimi, anche homebrew (la
+  `gittata` scritta a mano, «9 m» o «contatto», si legge). La Board non li usa ancora: servono a
+  guidarla dalla mappa di Atlas. Gli attacchi naturali a distanza dei mostri (macigni, archi
+  d'ossa, aculei: 12 nell'SRD) ora contano come a distanza, non più come mischia.
 - **Scheda del PG sui dati del kernel**: progressione (privilegi di classe e di sottoclasse),
   incantesimi per livello con CD e attacco dalla caratteristica della classe, tratti di specie e
   attacchi con maestria leggono il catalogo del kernel e le armi che il plugin passa alle viste
@@ -42,12 +47,15 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   Limite noto: i suoni predefiniti di Atlas non sono nelle sue release (i suoni personali
   vanno in `.atlas/sounds`).
 - **Atlas collegato al vault**: le pagine mostro SRD portano `name` e `hp` (PF medi dai dadi
-  vita, come il kernel), così un token collegato alla nota nasce col nome e i PF giusti (prima
-  10 PF). Nuovo bottone `collega-tavolo` (Luogo, tab *Mappa*; Incontro, tab *Combattimento*):
+  vita, come il kernel), nella forma che Atlas legge da una nota-statblock. Nuovo bottone `collega-tavolo` (Luogo, tab *Mappa*; Incontro, tab *Combattimento*):
   sceglie una scena di Atlas (`.atlasmap`) e la collega in `mappa_battaglia`, che la riapre
   con un clic. La Guida al combattimento dice chi fa cosa fra Board e Atlas.
 
 ### Corretto
+- **Atlas: il collegamento token-nota non funziona senza Fantasy Statblocks.** Le doc dicevano
+  che un token collegato a una pagina mostro ne prendeva nome e PF; ma Atlas 0.4.2 elenca da
+  collegare solo il bestiario di Fantasy Statblocks, che il vault non usa. Corrette Guida al
+  combattimento, Incontro, Luogo e architettura: i token sono immagini, i numeri restano alla Board.
 - **Incantesimi del PG nella scheda**: il creatore del kernel scriveva nella nota gli id puntati
   (`dnd.incantesimo.…`), che la scheda rendeva come link rotti; ora i nomi, come le note.
 - **Legenda degli incantesimi**: i segni di concentrazione e di rituale compaiono solo se un

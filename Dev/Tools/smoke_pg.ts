@@ -15,7 +15,7 @@ import type { Catalogo } from '../../regole/src/creatore/catalogo'
 import { type Libretto, aggiungiLivello, librettoIniziale } from '../../regole/src/creatore/libretto'
 import { mancano, passoDaBozza } from '../../regole/src/creatore/guida'
 import { combattenteDiPg, idPg, librettoDi, notaDaRisorse, risorseDaNota, scriviPg } from '../../plugin/pg'
-import { conHomebrew, type NoteHomebrew } from '../../plugin/homebrew'
+import { conHomebrew, gittataHomebrew, type NoteHomebrew } from '../../plugin/homebrew'
 import { assert, baseDiProva, creaDiProva, livelloDiProva } from './pg_di_prova'
 
 const cat = JSON.parse(readFileSync(resolve(process.argv[2] ?? 'data/srd_catalogo.json'), 'utf8')) as Catalogo
@@ -26,14 +26,21 @@ const crea = (classeId: string, bgId: string, finoA: number) => creaDiProva(cat,
 
 // 1. Ogni classe dell'SRD si crea al 1º livello e sale fino al 5º senza mancanze.
 const backgrounds = cat.background.map(id)
+let armi = 0
 for (const [i, c] of cat.classi.entries()) {
   const lib = crea(c.id, backgrounds[i % backgrounds.length], 5)
   const fm: Record<string, any> = {}
   scriviPg(fm, lib, cat, true)
   assert(fm.livello === 5 && fm.pf === fm.pf_max && fm.pf_max > 0, `${c.id}: nota al 5º con PF pieni (${fm.pf}/${fm.pf_max})`)
   assert(librettoDi(fm)?.passi.length === 5, `${c.id}: il libretto sta nella nota`)
+  // Lo spazio per la mappa: ogni arma impugnata dice fin dove arriva.
+  const attacchi = (combattenteDiPg(fm, cat).azioni ?? []).filter((a) => a.tipo === 'attacco' && !a.cariche)
+  const senza = attacchi.filter((a) => a.tipo === 'attacco' && !a.distanza).map((a) => a.nome)
+  assert(!senza.length, `${c.id}: armi senza portata né gittata: ${senza.join(', ')}`)
+  armi += attacchi.length
 }
-console.log(`✓ ${cat.classi.length} classi create e salite al 5º senza mancanze`)
+assert(armi > 0, 'almeno un PG di prova impugna un\'arma')
+console.log(`✓ ${cat.classi.length} classi create e salite al 5º senza mancanze; ${armi} armi con portata o gittata`)
 
 // 2. La salita: i PF spesi restano spesi, il massimo nuovo si aggiunge; gli usi restano.
 const guerriero = crea('dnd.classe.guerriero', 'dnd.background.soldato', 2)
@@ -60,7 +67,9 @@ assert(spese.pf_attuali === nota.pf, 'i PF della nota entrano in plancia')
 const ritorno = notaDaRisorse(spese, c)
 assert(ritorno[`usi_${risorsa.id}`] === 1, 'gli usi spesi tornano nella nota')
 assert(risorseDaNota({ nome: 'Vecchio', pf: 3 }, c) === null, 'un PG senza libretto entra pieno, come prima')
-console.log(`✓ Board: ${c.nome} con ${(c.attivabili ?? []).length} attivabili, ${(c.azioni ?? []).length} azioni; risorse andata e ritorno`)
+// Lo spazio per la mappa: taglia e velocità.
+assert(c.taglia && c.velocita?.camminata, `il PG porta taglia e velocità (${c.taglia}, ${JSON.stringify(c.velocita)})`)
+console.log(`✓ Board: ${c.nome} con ${(c.attivabili ?? []).length} attivabili, ${(c.azioni ?? []).length} azioni; risorse andata e ritorno; ${c.taglia}, ${c.velocita!.camminata} m`)
 
 // 4. Un incantatore: slot nella nota, incantesimi scelti.
 const mago = crea('dnd.classe.mago', 'dnd.background.sapiente', 3)
@@ -89,12 +98,16 @@ const note: NoteHomebrew = {
   talento: [{ nome: 'Passo Leggero', fm: { tipo: 'generale', concede: { abilita: ['Acrobazia'] } } }],
   sottoclasse: [{ nome: 'Via della Tempesta', fm: { classe: '[[Lama del Vento]]' } }],
   incantesimo: [
-    { nome: 'Brezza', fm: { livello: 0, classi: 'Lama del Vento' } },
-    { nome: 'Raffica', fm: { livello: 1, classi: ['Lama del Vento'] } },
+    { nome: 'Brezza', fm: { livello: 0, classi: 'Lama del Vento', gittata: '9 m' } },
+    { nome: 'Raffica', fm: { livello: 1, classi: ['Lama del Vento'], gittata: 'Contatto' } },
   ],
 }
 const nSrd = cat.classi.length
 const hb = conHomebrew(cat, note)
+// La gittata scritta a mano nel vault arriva al catalogo nella forma dell'archivio.
+const gitt = (nome: string) => hb.incantesimi.find((s) => s.nome === nome)?.gittata
+assert(gitt('Brezza') === 9 && gitt('Raffica') === 'contatto', `homebrew: gittata «9 m» e «Contatto» (${gitt('Brezza')}, ${gitt('Raffica')})`)
+assert(gittataHomebrew('Sé stesso') === 'incantatore' && gittataHomebrew('1,5 m') === 1.5 && gittataHomebrew('a vista') === undefined, 'homebrew: gittata personale, decimali, prosa ignota')
 assert(hb.classi.length === nSrd + 1 && hb.background.find((b) => b.id === 'homebrew.background.esiliato')?.talento_origine === 'dnd.talento.allerta',
   'homebrew: classe aggiunta, talento d\'origine risolto per nome')
 // Il creatore sul catalogo con l'homebrew: le stesse funzioni, il catalogo arricchito

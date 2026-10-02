@@ -40,7 +40,7 @@ import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
 import { creaLibretto, saliLibretto } from "./creatore";
 import { librettoDi, scriviPg } from "./pg";
-import { conHomebrew, type NoteHomebrew } from "./homebrew";
+import { conHomebrew, gittataHomebrew, type NoteHomebrew } from "./homebrew";
 import type { Libretto } from "../regole/src/creatore/libretto";
 
 // --- Impostazioni del plugin (persistite via loadData/saveData) ---------------------------
@@ -769,6 +769,7 @@ export default class GdrPlugin extends Plugin {
         tempo_lancio: (fm as any).tempo_lancio ?? def?.tempo_lancio,
         concentrazione: (fm as any).concentrazione === true || def?.concentrazione === true,
         attivita,
+        gittata: gittataHomebrew((fm as any).gittata ?? def?.gittata),
       });
     }
     return out;

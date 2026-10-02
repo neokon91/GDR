@@ -97,7 +97,7 @@ renderTipoProfilo
 > [!tip]- 🧭 Pin a mano, disegno e hexcrawl
 > - **Immagine caricata da te:** piazza i pin (*Shift+clic*), linkali ai `[[Luoghi]]`, poi `BUTTON[sincronizza-pin]` riscrive le **coordinate** delle note dai pin → distanze in linea d'aria e *Dintorni* si calcolano da sé.
 > - **Disegna tu:** `BUTTON[disegna-mappa]` (Excalidraw → `![[nome]]`) · `BUTTON[inserisci-mappa]` (blocco avanzato con livelli/overlay).
-> - **Mappa di battaglia** (Atlas VTT, solo desktop): `= this.mappa_battaglia` · `BUTTON[collega-tavolo]` · `BUTTON[apri-tavolo]`. Griglia, token e nebbia per gli scontri in questo luogo; un token collegato a una pagina mostro dell'SRD ne prende nome e PF.
+> - **Mappa di battaglia** (Atlas VTT, solo desktop): `= this.mappa_battaglia` · `BUTTON[collega-tavolo]` · `BUTTON[apri-tavolo]`. Griglia, token e nebbia per gli scontri in questo luogo; i numeri (PF, turni, condizioni) restano alla Board.
 > - **Hexcrawl giocabile:** apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, tiri incontri). Le cartelle sono già puntate alle tue note (Towns/Dungeons→`Mondi/Luoghi`, Factions→`Mondi/Fazioni`, Quests→`Mondi/Missioni`, Regions→`Mondi/Regni`). *Al 1° avvio del suo wizard scegli «Don't show again».*
 ```gdr
 renderMap

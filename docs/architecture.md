@@ -186,6 +186,10 @@ copia SRD ──gen_catalogo.ts (catalogoDa del kernel)──▶ srd_catalogo.js
 - **PG senza libretto** (creati prima del kernel): restano giocabili (scheda, Board via
   `daPgGdr`), ma per salire di livello si ricreano. `build_personaggio`, `personaggio.json`,
   `pg_rules.yaml`, `crea_pg.js` e `sali_pg.js` sono ritirati.
+- **Lo spazio**: il combattente del kernel porta `taglia`, `velocita` e la `distanza` (portata,
+  gittata) delle azioni d'attacco e degli incantesimi; `gen_incantesimi.py` tiene la `gittata`,
+  `homebrew.ts` legge quella scritta a mano (`gittataHomebrew`). Il motore resta relazionale:
+  questi dati servono a chi propone ingaggi e zone da una mappa.
   Prova headless: `npm run smoke:pg` (anche in `tests/test_pg_kernel.py`).
 
 ---
@@ -248,8 +252,12 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
 - **Tavolo virtuale (Atlas VTT, terzo, non critico, solo desktop)**: solo mappa, token, nebbia
   e vista giocatori; PF, turni e condizioni restano alla Board. Atlas non ha API pubblica: il
   contatto passa per i file. (1) Le pagine mostro SRD portano `name` e `hp` (PF medi,
-  `build_srd.pf_medi`, la regola di `puntiFeritaCalcolati` del kernel): un token collegato
-  alla nota li legge dal frontmatter. (2) Le scene sono file `.atlasmap`; l'azione
+  `build_srd.pf_medi`, la regola di `puntiFeritaCalcolati` del kernel), nella forma che Atlas
+  legge da una nota-statblock. Ma Atlas 0.4.2 offre da collegare ai token SOLO il bestiario di
+  Fantasy Statblocks (`useStatblockEntries`), che il vault non usa: senza quel plugin il
+  collegamento non è raggiungibile, e i campi restano pronti e inerti. (2) Le scene sono file
+  `.atlasmap` (JSON, schema `atlas-vtt` v4, riscritto da Atlas entro 0,5 s da ogni modifica);
+  l'azione
   `collega_mappa_battaglia` (bottone `collega-tavolo`, Luogo e Incontro) le elenca dal vault e
   scrive il link in `mappa_battaglia`. Non usati: il tracker d'iniziativa di Atlas (doppione
   della Board) e l'importazione «da statblock» (richiede Fantasy Statblocks).

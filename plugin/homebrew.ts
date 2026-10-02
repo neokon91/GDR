@@ -89,6 +89,21 @@ export function effettiDaConcede(concede: unknown, cat?: Catalogo): Effetto[] {
   return out;
 }
 
+/**
+ * La gittata di un incantesimo del vault, scritta a mano («9 m», «contatto», «sé stesso»),
+ * nella forma dell'archivio che il kernel legge (`distanzaDi`): metri, `contatto`,
+ * `incantatore`. Una prosa che non si riconosce resta fuori: niente limite inventato.
+ */
+export function gittataHomebrew(v: unknown): number | string | undefined {
+  if (typeof v === "number") return v > 0 ? v : undefined;
+  const s = String(v ?? "").trim().toLowerCase();
+  if (!s) return undefined;
+  if (/^contatto/.test(s)) return "contatto";
+  if (/^(incantatore|personale|s[eé] stess[oa])/.test(s)) return "incantatore";
+  const m = /^(\d+(?:[.,]\d+)?)\s*m\b/.exec(s);
+  return m ? Number(m[1]!.replace(",", ".")) : undefined;
+}
+
 function classe(n: NotaVault, cat: Catalogo): FonteClasse {
   const fm = n.fm;
   const id = idDi("classe", n.nome);
@@ -197,6 +212,7 @@ export function conHomebrew(cat: Catalogo, note: NoteHomebrew): Catalogo {
         livello: Number.isFinite(liv) && liv >= 0 ? liv : 1,
         // Nessuna classe citata = per tutte (come nel vecchio creatore del vault).
         classi: citate.length ? citate : classi.map((c) => c.id),
+        ...(gittataHomebrew(n.fm.gittata) != null ? { gittata: gittataHomebrew(n.fm.gittata) } : {}),
       };
     }),
   ];
