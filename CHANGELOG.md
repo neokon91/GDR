@@ -41,7 +41,7 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   altro percorso può entrare nel repo); `npm run sync-srd:check`, il job CI `deriva-srd` e
   `tests/test_sync_srd.py` segnalano la deriva. La CI principale non clona più l'archivio.
 - **Tavolo virtuale Atlas VTT** (plugin di terze parti, AGPL-3.0 con eccezione Obsidian,
-  pinnato alla 0.4.2, solo desktop): mappe con griglia, token, nebbia di guerra e vista
+  pinnato alla 0.5.0, solo desktop): mappe con griglia, token, nebbia di guerra e vista
   giocatori su un secondo schermo. Non critico: combattimento e regole restano alla Board.
   Bottone `apri-tavolo` nel tab *Combattimento* dell'Incontro e nella Guida al combattimento.
   Limite noto: i suoni predefiniti di Atlas non sono nelle sue release (i suoni personali
@@ -51,9 +51,18 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   sceglie una scena di Atlas (`.atlasmap`) e la collega in `mappa_battaglia`, che la riapre
   con un clic. La Guida al combattimento dice chi fa cosa fra Board e Atlas.
 
+### Modificato
+- **Atlas VTT 0.4.2 → 0.5.0** (luci dinamiche sperimentali, import di mappe con muri da
+  Dungeondraft, DungeonFog e Dungeon Alchemist, risorse dei token, iniziativa da aggiungere a
+  mano). Verificato sul sorgente: i comandi usati dai bottoni (`open-dashboard`) ci sono ancora,
+  il formato delle scene resta `atlas-vtt` v4, e il collegamento token-nota richiede ancora
+  Fantasy Statblocks. La Guida al combattimento cita import e luci.
+- **`fetch_plugins.py` rispetta `SSL_CERT_FILE`**: dietro un proxy con la sua CA il bundle di
+  `certifi` non bastava e lo scaricamento falliva.
+
 ### Corretto
 - **Atlas: il collegamento token-nota non funziona senza Fantasy Statblocks.** Le doc dicevano
-  che un token collegato a una pagina mostro ne prendeva nome e PF; ma Atlas 0.4.2 elenca da
+  che un token collegato a una pagina mostro ne prendeva nome e PF; ma Atlas (0.4.2 e 0.5.0) elenca da
   collegare solo il bestiario di Fantasy Statblocks, che il vault non usa. Corrette Guida al
   combattimento, Incontro, Luogo e architettura: i token sono immagini, i numeri restano alla Board.
 - **Incantesimi del PG nella scheda**: il creatore del kernel scriveva nella nota gli id puntati

@@ -46,7 +46,9 @@ calcolati dalla scheda.
 ## 3. Cosa resta al DM
 - **Posizione e distanze**: la Board non ha griglia né token. Per una mappa di battaglia
   c'è il **tavolo virtuale** (Atlas VTT, solo desktop: `BUTTON[apri-tavolo]`): griglia,
-  token, nebbia di guerra e una finestra per i giocatori su un secondo schermo.
+  token, nebbia di guerra e una finestra per i giocatori su un secondo schermo. Importa
+  anche le mappe di Dungeondraft, DungeonFog e Dungeon Alchemist coi loro muri; le luci
+  dinamiche sono sperimentali e vanno accese dalla sua tavolozza comandi.
   - **Una scena per luogo o incontro**: creala in Atlas dalla tua immagine, poi collegala
     dalla nota (Incontro, tab *Combattimento*; Luogo, tab *Mappa*) con
     `BUTTON[collega-tavolo]`. Il link riapre la scena con un clic.

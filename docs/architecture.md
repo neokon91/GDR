@@ -253,11 +253,13 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   e vista giocatori; PF, turni e condizioni restano alla Board. Atlas non ha API pubblica: il
   contatto passa per i file. (1) Le pagine mostro SRD portano `name` e `hp` (PF medi,
   `build_srd.pf_medi`, la regola di `puntiFeritaCalcolati` del kernel), nella forma che Atlas
-  legge da una nota-statblock. Ma Atlas 0.4.2 offre da collegare ai token SOLO il bestiario di
-  Fantasy Statblocks (`useStatblockEntries`), che il vault non usa: senza quel plugin il
-  collegamento non è raggiungibile, e i campi restano pronti e inerti. (2) Le scene sono file
-  `.atlasmap` (JSON, schema `atlas-vtt` v4, riscritto da Atlas entro 0,5 s da ogni modifica);
-  l'azione
+  legge da una nota-statblock. Ma Atlas (verificato sul sorgente della 0.5.0, la versione
+  fissata) offre da collegare ai token e da importare come token SOLO ciò che passa da Fantasy
+  Statblocks (`useStatblockEntries`, `requireResolvedBestiary`), che il vault non usa: senza
+  quel plugin il collegamento non è raggiungibile, e i campi restano pronti e inerti. (2) Le
+  scene sono file `.atlasmap` (JSON, schema `atlas-vtt` v4, riscritto da Atlas entro 0,5 s da
+  ogni modifica). Dalla 0.5.0 un token porta lo schieramento (`side`: `players`/`opponents`) e
+  le risorse in `resources` (i PF non stanno più in `hp`); l'azione
   `collega_mappa_battaglia` (bottone `collega-tavolo`, Luogo e Incontro) le elenca dal vault e
   scrive il link in `mappa_battaglia`. Non usati: il tracker d'iniziativa di Atlas (doppione
   della Board) e l'importazione «da statblock» (richiede Fantasy Statblocks).

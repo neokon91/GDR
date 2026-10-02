@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import ssl
 import sys
 import urllib.error
@@ -50,7 +51,12 @@ def _ssl_context() -> ssl.SSLContext:
     """Contesto TLS che verifica i certificati. Usa il bundle CA di `certifi` se
     presente: i build Python di python.org su macOS spesso non hanno lo store CA
     di sistema configurato (CERTIFICATE_VERIFY_FAILED) — certifi lo aggira SENZA
-    disabilitare la verifica. Altrove ricade sullo store di sistema (create_default)."""
+    disabilitare la verifica. Altrove ricade sullo store di sistema (create_default).
+    `SSL_CERT_FILE`, se impostata, vince: dietro un proxy con la sua CA (rete aziendale,
+    ambiente remoto) certifi non la conosce e la verifica fallirebbe."""
+    cafile = os.environ.get("SSL_CERT_FILE")
+    if cafile and os.path.isfile(cafile):
+        return ssl.create_default_context(cafile=cafile)
     try:
         import certifi
         return ssl.create_default_context(cafile=certifi.where())
