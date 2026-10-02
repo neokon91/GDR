@@ -9,7 +9,9 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 - **Lo spazio nel combattente** (dal kernel): taglia e velocità di chi combatte, portata e gittata
   delle azioni d'attacco (mostri e armi dei PG) e degli incantesimi, anche homebrew (la
   `gittata` scritta a mano, «9 m» o «contatto», si legge). La Board non li usa ancora: servono a
-  guidarla dalla mappa di Atlas. Gli attacchi naturali a distanza dei mostri (macigni, archi
+  guidarla dalla mappa di Atlas. Il tiro per colpire del kernel conosce anche le regole dello
+  spazio (oltre la portata o la gittata non si tira, gittata lunga e nemico vicino danno
+  svantaggio), quando gli si dice dove sono i combattenti. Gli attacchi naturali a distanza dei mostri (macigni, archi
   d'ossa, aculei: 12 nell'SRD) ora contano come a distanza, non più come mischia.
 - **Scheda del PG sui dati del kernel**: progressione (privilegi di classe e di sottoclasse),
   incantesimi per livello con CD e attacco dalla caratteristica della classe, tratti di specie e

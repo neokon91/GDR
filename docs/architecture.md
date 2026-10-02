@@ -189,7 +189,9 @@ copia SRD ──gen_catalogo.ts (catalogoDa del kernel)──▶ srd_catalogo.js
 - **Lo spazio**: il combattente del kernel porta `taglia`, `velocita` e la `distanza` (portata,
   gittata) delle azioni d'attacco e degli incantesimi; `gen_incantesimi.py` tiene la `gittata`,
   `homebrew.ts` legge quella scritta a mano (`gittataHomebrew`). Il motore resta relazionale:
-  questi dati servono a chi propone ingaggi e zone da una mappa.
+  questi dati servono a chi propone ingaggi e zone da una mappa. Il tiro per colpire del
+  kernel accetta un contesto di distanza (`distanzaDelTiro`: portata, gittata lunga, nemico
+  vicino); la Board non lo passa ancora, glielo darà il ponte con la mappa di Atlas.
   Prova headless: `npm run smoke:pg` (anche in `tests/test_pg_kernel.py`).
 
 ---
