@@ -265,6 +265,22 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   `collega_mappa_battaglia` (bottone `collega-tavolo`, Luogo e Incontro) le elenca dal vault e
   scrive il link in `mappa_battaglia`. Non usati: il tracker d'iniziativa di Atlas (doppione
   della Board) e l'importazione «da statblock» (richiede Fantasy Statblocks).
+  **Il ponte con la Board** (verificato sul sorgente di Atlas 0.5.0, provato su scene scritte dal
+  suo codice): (a) *lettura*. Atlas salva la scena nel `.atlasmap` stesso con l'API del vault
+  (`vault.create`, poi `vault.process`, 500 ms dopo l'ultima modifica), quindi il plugin la sente
+  con gli eventi `create`/`modify`. `plugin/atlas.ts` la legge (`leggiScenaAtlas`: rifiuta un
+  formato più nuovo del 4, come Atlas; metri per casella dalla griglia, 5 piedi = 1,5 m se non
+  dice niente; i token con nome, copia, taglia, `side`, nascosto) e abbina i token ai combattenti
+  per **nome** (`abbinaToken`: Atlas 0.5 non lega un token a una nota senza Fantasy Statblocks;
+  le copie in ordine, «Goblin (2)» è la copia 2). La geometria del kernel
+  (`regole/src/motore/geometria.ts`) ne fa i metri e i nemici vicini di un tiro
+  (`contestoDaPosizioni` → `distanzaDelTiro`). Prova: `npm run smoke:atlas` (in pytest), sulle
+  scene di `tests/fixtures/atlas/`, che si rigenerano col codice di Atlas
+  (`genera_scene_atlas.test.ts.txt`). (b) *dal vivo e in scrittura*: la vista di Atlas espone
+  `getStore()` (lo store della scena, con le sue azioni, che Atlas salva da sé) e
+  `reloadActiveScene(riscrivi)` (riscrive la scena aperta in sicurezza: salva il sospeso, ferma i
+  salvataggi, riscrive, ricarica). Sono interni di Atlas, non un'API promessa: il ponte poggia sul
+  file, e questi si useranno solo se presenti. La Board non usa ancora il ponte.
 
 ### Homebrew giocabile al tavolo (Rotta homebrew)
 Il **contratto** (RawMostro per le creature, `effetti`/`attivita` per le def) vale per SRD e

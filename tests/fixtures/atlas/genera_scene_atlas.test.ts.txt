@@ -1,0 +1,75 @@
+// GENERATORE delle scene di prova del ponte (`tests/fixtures/atlas/*.atlasmap`).
+// Non gira in GDR: gira DENTRO un checkout di Atlas VTT (licenza AGPL; qui non c'è codice
+// suo, solo le chiamate al suo store), così le scene le scrive il codice vero di Atlas e non
+// una nostra idea del formato. Per rigenerarle dopo un aggiornamento di Atlas:
+//   git clone https://github.com/ByteMirror/atlas-vtt && cd atlas-vtt && git checkout <versione>
+//   npm ci --ignore-scripts && cp <GDR>/tests/fixtures/atlas/genera_scene_atlas.test.ts.txt tests/unit/_gdr_scena.test.ts
+//   GDR_SCENA_OUT=<GDR>/tests/fixtures/atlas/Cripta.atlasmap \
+//   GDR_SCENA_PIEDI_OUT=<GDR>/tests/fixtures/atlas/Ponte.atlasmap npx vitest run --project unit tests/unit/_gdr_scena.test.ts
+// Generate con Atlas 0.5.0 (741494b), 2026-10-03.
+// PROVA DI FATTIBILITÀ del ponte GDR ↔ Atlas (file temporaneo, non di Atlas).
+// Fa scrivere una scena al CODICE VERO di Atlas 0.5.0: lo store (createViewAtlasStore), le sue
+// azioni (addCharacter, moveToken, updateToken, setGrid) e il suo salvataggio (createAtlasStorage
+// → SceneFileWriter → app.vault.process). Il file ottenuto è quello che il plugin GDR leggerà.
+import { describe, expect, it } from 'vitest';
+import { writeFileSync } from 'node:fs';
+import { createViewAtlasStore } from '../../src/app/storeFactory';
+import { createInMemoryApp } from '../mocks/inMemoryVault';
+
+const SCENA = 'atlas-vtt/collections/gdr/scenes/Cripta.atlasmap';
+const CELLA = 70;
+const centro = (col: number, riga: number) => ({ x: col * CELLA + CELLA / 2, y: riga * CELLA + CELLA / 2 });
+
+describe('scena per il ponte GDR', () => {
+  it('Atlas scrive la scena col suo codice di salvataggio', async () => {
+    const { app, files } = createInMemoryApp({ files: {} });
+    const scritture: string[] = [];
+    const scriviVero = app.vault.process.bind(app.vault);
+    app.vault.process = (async (f: never, fn: never) => { scritture.push((f as { path: string }).path); return scriviVero(f, fn); }) as never;
+    const store = createViewAtlasStore(app, 'gdr-ponte');
+    const s = () => store.getState();
+    s().setMapPath(SCENA);
+    s().setMapLoaded(true);
+    s().setGrid({ enabled: true, visible: true, snapToGrid: true, type: 'square', size: CELLA, offsetX: 0, offsetY: 0, opacity: 0.5, unitType: 'meters', unitDistance: 1.5 });
+    const kara = s().addCharacter({ ...centro(2, 2), imagePath: 'atlas-vtt/tokens/kara.png', name: 'Kara' });
+    const g1 = s().addCharacter({ ...centro(3, 2), imagePath: 'atlas-vtt/tokens/goblin.png', name: 'Goblin guerriero' });
+    const g2 = s().addCharacter({ ...centro(10, 2), imagePath: 'atlas-vtt/tokens/goblin.png', name: 'Goblin guerriero' });
+    const ogre = s().addCharacter({ x: 6 * CELLA, y: 6 * CELLA, imagePath: 'atlas-vtt/tokens/ogre.png', name: 'Ogre' });
+    s().updateToken(kara, { side: 'players' });
+    for (const id of [g1, g2, ogre]) s().updateToken(id, { side: 'opponents' });
+    s().updateToken(ogre, { size: 1.5, isHidden: true });
+    // Il GM sposta il secondo goblin: la scena si riscrive.
+    s().moveToken(g2, centro(9, 2).x, centro(9, 2).y);
+    await new Promise((r) => setTimeout(r, 0));
+    await store.flushStorage();
+
+    const creata = scritture.length === 0 && files.has(SCENA);
+    // Secondo spostamento: il file esiste, Atlas lo aggiorna con vault.process.
+    s().moveToken(g2, centro(8, 2).x, centro(8, 2).y);
+    await new Promise((r) => setTimeout(r, 0));
+    await store.flushStorage();
+    expect(creata, 'il primo salvataggio crea il file (vault.create)').toBe(true);
+
+    const testo = files.get(SCENA);
+    expect(testo, `scritture: ${JSON.stringify(scritture)}`).toBeTruthy();
+    writeFileSync(process.env.GDR_SCENA_OUT ?? '/tmp/scena.atlasmap', testo!);
+    const scena = JSON.parse(testo!);
+    expect(scena.state.schema).toBe('atlas-vtt');
+    expect(Object.keys(scena.state.objects.tokens)).toHaveLength(4);
+    expect(scritture.length).toBeGreaterThan(0);
+  });
+
+  it('una scena con la griglia predefinita (piedi presi dalla raccolta)', async () => {
+    const { app, files } = createInMemoryApp({ files: {} });
+    const store = createViewAtlasStore(app, 'gdr-ponte-piedi');
+    const s = () => store.getState();
+    const scena = 'atlas-vtt/collections/gdr/scenes/Ponte.atlasmap';
+    s().setMapPath(scena);
+    s().setMapLoaded(true);
+    s().addCharacter({ ...centro(1, 1), imagePath: 'atlas-vtt/tokens/kara.png', name: 'Kara' });
+    s().addCharacter({ ...centro(5, 4), imagePath: 'atlas-vtt/tokens/goblin.png', name: 'Goblin guerriero' });
+    await new Promise((r) => setTimeout(r, 0));
+    await store.flushStorage();
+    writeFileSync(process.env.GDR_SCENA_PIEDI_OUT ?? '/tmp/ponte.atlasmap', files.get(scena)!);
+  });
+});

@@ -25,11 +25,13 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-def _lancia(script: str, tmp_path: Path, *args: str, esm: bool = False) -> str:
+def _lancia(script: str, tmp_path: Path, *args: str, esm: bool = False, obsidian_finto: bool = False) -> str:
     out = tmp_path / f"{Path(script).stem}.{'mjs' if esm else 'cjs'}"
     env = {**os.environ, "NODE_PATH": str(PLUGIN / "node_modules")}
     # La Board importa `obsidian`: nella prova lo sostituisce il modulo finto (DOM con jsdom).
     extra = ["--alias:obsidian=../Dev/Tools/obsidian-finto.ts", "--external:jsdom"] if esm else []
+    if obsidian_finto and not esm:
+        extra = ["--alias:obsidian=../Dev/Tools/obsidian-finto.ts"]
     subprocess.run([str(ESBUILD), str(ROOT / "Dev" / "Tools" / script), "--bundle", "--platform=node",
                     f"--format={'esm' if esm else 'cjs'}", "--log-level=warning", f"--outfile={out}", *extra],
                    cwd=PLUGIN, env=env, check=True, capture_output=True, text=True)
@@ -87,3 +89,22 @@ def test_la_board_e_alla_pari_con_la_plancia(catalogo, tmp_path):
     assert "attacco d'opportunità offerto" in out
     assert "tiri contro morte" in out
     assert '"usi_ira":1' in out
+
+
+def test_il_ponte_con_atlas_porta_la_mappa_nel_tiro(catalogo, tmp_path):
+    """Il ponte con Atlas VTT, su scene scritte dal codice vero di Atlas 0.5.0 (store e
+    salvataggio suoi, `tests/fixtures/atlas/`): i token si abbinano ai combattenti per nome,
+    le posizioni diventano metri (anche dalla griglia in piedi che Atlas usa di default), il
+    contesto arriva al tiro: scimitarra oltre portata rifiutata, arco con un nemico addosso in
+    svantaggio. Un formato più nuovo si rifiuta come fa Atlas."""
+    subprocess.run(["python3", str(ROOT / "Dev" / "Tools" / "gen_bestiario.py")], check=True, capture_output=True)
+    dati = tmp_path / "dati"
+    dati.mkdir()
+    shutil.copy(catalogo, dati / "srd_catalogo.json")
+    shutil.copy(PLUGIN / "data" / "srd_bestiario.json", dati / "srd_bestiario.json")
+    out = _lancia("smoke_atlas.ts", tmp_path, str(dati), str(ROOT / "tests" / "fixtures" / "atlas"), esm=False, obsidian_finto=True)
+    assert "3 token abbinati per nome, da schierare: Ogre" in out
+    assert "goblin 1 a 1.5 m, goblin 2 a 9 m" in out
+    assert "svantaggio col nemico addosso" in out
+    assert "goblin a 6 m in diagonale" in out
+    assert "formati più nuovi e file estranei rifiutati" in out

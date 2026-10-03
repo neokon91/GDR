@@ -6,6 +6,12 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Il ponte con Atlas VTT, lato lettura, provato**: `plugin/atlas.ts` legge una scena `.atlasmap`
+  (griglia in metri o in piedi, token con nome, copia, taglia, schieramento, nascosto; rifiuta un
+  formato più nuovo come fa Atlas) e abbina i token ai combattenti della Board per nome; la
+  geometria del kernel ne ricava distanze e nemici vicini per le regole dello spazio nel tiro. La
+  prova (`npm run smoke:atlas`, in pytest) gira su scene scritte dal codice vero di Atlas 0.5.0. La
+  Board non lo usa ancora.
 - **Lo spazio nel combattente** (dal kernel): taglia e velocità di chi combatte, portata e gittata
   delle azioni d'attacco (mostri e armi dei PG) e degli incantesimi, anche homebrew (la
   `gittata` scritta a mano, «9 m» o «contatto», si legge). La Board non li usa ancora: servono a

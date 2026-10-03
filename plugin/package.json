@@ -16,7 +16,8 @@
     "build": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && npm run gen:catalogo && npm run typecheck && node esbuild.config.mjs --prod",
     "dev": "npm run gen:types && npm run gen:bestiario && npm run gen:condizioni && npm run gen:incantesimi && npm run gen:oggetti && npm run gen:armi && npm run gen:catalogo && node esbuild.config.mjs",
     "smoke:pg": "NODE_PATH=node_modules esbuild ../Dev/Tools/smoke_pg.ts --bundle --platform=node --format=cjs --log-level=warning --outfile=node_modules/.cache/smoke_pg.cjs && node node_modules/.cache/smoke_pg.cjs",
-    "smoke:board": "NODE_PATH=node_modules esbuild ../Dev/Tools/smoke_board.ts --bundle --platform=node --format=esm --log-level=warning --alias:obsidian=../Dev/Tools/obsidian-finto.ts --external:jsdom --outfile=node_modules/.cache/smoke_board.mjs && node node_modules/.cache/smoke_board.mjs"
+    "smoke:board": "NODE_PATH=node_modules esbuild ../Dev/Tools/smoke_board.ts --bundle --platform=node --format=esm --log-level=warning --alias:obsidian=../Dev/Tools/obsidian-finto.ts --external:jsdom --outfile=node_modules/.cache/smoke_board.mjs && node node_modules/.cache/smoke_board.mjs",
+    "smoke:atlas": "NODE_PATH=node_modules esbuild ../Dev/Tools/smoke_atlas.ts --bundle --platform=node --format=cjs --log-level=warning --alias:obsidian=../Dev/Tools/obsidian-finto.ts --outfile=node_modules/.cache/smoke_atlas.cjs && node node_modules/.cache/smoke_atlas.cjs"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
