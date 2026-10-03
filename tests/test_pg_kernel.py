@@ -107,4 +107,24 @@ def test_il_ponte_con_atlas_porta_la_mappa_nel_tiro(catalogo, tmp_path):
     assert "goblin 1 a 1.5 m, goblin 2 a 9 m" in out
     assert "svantaggio col nemico addosso" in out
     assert "goblin a 6 m in diagonale" in out
+    assert "Ogre riconosciuto nel bestiario" in out
     assert "formati più nuovi e file estranei rifiutati" in out
+
+
+def test_la_board_legge_la_scena_di_atlas_e_la_porta_nei_tiri(catalogo, tmp_path):
+    """La Board VERA collegata ad Atlas: la scena dell'Incontro d'origine (`mappa_battaglia`),
+    lo schieramento dei token che la Board non ha (il nascosto non spuntato), la scimitarra a
+    9 m rifiutata col motivo, il salvataggio di Atlas riletto (il goblin spostato colpisce), i
+    metri nel picker dei bersagli, la scena scelta a mano che vince sul link."""
+    subprocess.run(["python3", str(ROOT / "Dev" / "Tools" / "gen_bestiario.py")], check=True, capture_output=True)
+    dati = tmp_path / "dati"
+    dati.mkdir()
+    shutil.copy(catalogo, dati / "srd_catalogo.json")
+    shutil.copy(PLUGIN / "data" / "srd_bestiario.json", dati / "srd_bestiario.json")
+    out = _lancia("smoke_board_mappa.ts", tmp_path, str(dati), str(ROOT / "tests" / "fixtures" / "atlas"), esm=True)
+    assert "Mappa: Cripta · 2/2 in plancia sulla griglia" in out
+    assert "[x] Goblin guerriero 2" in out and "[ ] Ogre" in out
+    assert "«Scimitarra»: Kara è a 9 m, oltre la portata." in out
+    assert "salvataggio di Atlas riletto" in out
+    assert "bersagli coi metri" in out and "1,5 m" in out
+    assert "scena scelta a mano (Ponte)" in out

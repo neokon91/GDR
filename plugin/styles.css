@@ -147,6 +147,8 @@
 }
 .gdr-board-head button:hover { background: var(--background-modifier-hover); border-color: var(--interactive-accent); }
 .gdr-board-sub { color: var(--text-muted); font-size: var(--font-ui-small); margin: 2px 0 12px; }
+.gdr-board-mappa { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: -6px 0 12px; font-size: var(--font-ui-small); }
+.gdr-board-mappa-txt { color: var(--text-muted); flex: 1 1 auto; }
 
 .gdr-board-roster { display: flex; flex-direction: column; gap: 6px; }
 .gdr-board-riga {

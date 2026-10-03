@@ -1,8 +1,9 @@
 // Board di combattimento: tracker pilotato dal motore event-sourced di `regole`. Tiene
 // `eventi: Evento[]`, ogni comando li accoda e la board ridisegna `ricostruisci(eventi)`.
 // Incontro dal bestiario SRD bundlato + PG del vault; azioni di turno con scelta bersaglio;
-// controlli GM (danno/cura/condizioni); statblock nativo; persistenza tra reload.
-import { ItemView, Notice, TFile, WorkspaceLeaf } from "obsidian";
+// controlli GM (danno/cura/condizioni); statblock nativo; persistenza tra reload. Con una scena
+// di Atlas VTT collegata, le posizioni dei token danno le distanze ai tiri (`atlas.ts`).
+import { ItemView, Notice, TFile, WorkspaceLeaf, type TAbstractFile } from "obsidian";
 import {
   ricostruisci, registro, ordine, attivo, esitoScontro, inPiedi, dadoVero, annullaUltimo,
   comandoIniziativa, comandoAzione, comandoAttacco, comandoLeggendaria, leggendarieRestanti, comandoLancia,
@@ -10,9 +11,12 @@ import {
   comandoTiroMorte, comandoRiposo, comandoPara, pareDisponibili, comandoCommuta,
   comandoIngaggio, comandoDisingaggio, comandoOpportunita, comandoCopertura, eventiConcentrazione,
   staConcentrando, condizioniAttive, eMorto, eStabile, sonoIngaggiati, gradoCopertura,
-  opzioniLancio, motivoAzioneBloccata, statoAttivabile, caricheRestanti,
+  opzioniLancio, motivoAzioneBloccata, statoAttivabile, caricheRestanti, fuoriTiro,
   type Evento, type Dado, type InPlancia, type Stato, type DefinizioniCondizioni, type CoperturaGrado,
+  type ContestoDistanza, type EsitoDistanza,
 } from "../regole/src/motore/motore";
+import { contestoDaPosizioni } from "../regole/src/motore/geometria";
+import { abbinaToken, leggiScenaAtlas, metriLeggibili, riconosciToken, type ScenaAtlas, type TokenAtlas } from "./atlas";
 import { daMostro, variantiDi, type Combattente, type Azione, type RisolviIncantesimo, type IncantesimoLanciabile } from "../regole/src/motore/combattente";
 import { StatblockModal, trovaMostro } from "./statblock";
 import { combattenteDiPg, idPg, risorseDaNota, notaDaRisorse, librettoDi } from "./pg";
@@ -25,6 +29,8 @@ export const VIEW_TYPE_BOARD = "gdr-board";
 // Perché un lancio o un'azione non parte, a parole (i motivi li dà il motore).
 const MOTIVO_LANCIO = { slot: "nessuno slot disponibile", usi: "usi del giorno finiti", cariche: "cariche insufficienti", economia: "azione del turno già spesa" } as const;
 const MOTIVO_AZIONE = { economia: "già spesa questo turno", cariche: "cariche finite" } as const;
+// Perché un tiro non arriva al bersaglio sulla mappa (il motivo lo dà il motore, `fuoriTiro`).
+const MOTIVO_FUORI: Record<NonNullable<EsitoDistanza["motivo"]>, string> = { "oltre-portata": "oltre la portata", "oltre-gittata": "oltre la gittata" };
 
 // Etichetta breve per un bottone-azione, per tipo (attacco/salvezza/multiattacco/cura).
 function etichettaAzione(az: Azione): string {
@@ -54,6 +60,10 @@ export class BoardView extends ItemView {
   private defs: DefinizioniCondizioni = {};
   private risolvi: RisolviIncantesimo = () => undefined; // catalogo incantesimi SRD+homebrew → attività eseguibile
   private errore: string | null = null;
+  // La scena di Atlas collegata (letta dal file a ogni salvataggio di Atlas) e perché non si legge.
+  private scenaFile: TFile | null = null;
+  private scena: ScenaAtlas | null = null;
+  private scenaErrore: string | null = null;
 
   constructor(leaf: WorkspaceLeaf, private plugin: GdrPlugin) { super(leaf); }
 
@@ -74,12 +84,142 @@ export class BoardView extends ItemView {
     this.nomiEffetti = {};
     for (const x of [...this.condLista, ...this.oggetti]) if (x?.id) this.nomiEffetti[String(x.id)] = String(x.nome ?? x.id);
     this.eventi = this.plugin.loadBoard(); // ripristina il combattimento in corso
+    await this.leggiScena();
     this.render();
+    // Atlas salva la scena 500 ms dopo l'ultima modifica (la prima volta crea il file): la
+    // Board la rilegge e ridisegna. Un `.atlasmap` creato, rinominato o tolto può essere quello
+    // che il link indica; una modifica alla nota d'origine può cambiare il link.
+    const ridisegna = () => void this.leggiScena().then(() => this.render());
+    const eScena = (f: TAbstractFile) => f.path.endsWith(".atlasmap");
+    this.registerEvent(this.app.vault.on("modify", (f) => { if (f.path === this.scenaFile?.path) ridisegna(); }));
+    this.registerEvent(this.app.vault.on("create", (f) => { if (eScena(f)) ridisegna(); }));
+    this.registerEvent(this.app.vault.on("delete", (f) => { if (eScena(f)) ridisegna(); }));
+    this.registerEvent(this.app.vault.on("rename", (f) => { if (eScena(f)) ridisegna(); }));
+    this.registerEvent(this.app.metadataCache.on("changed", (f) => { if (f.path === this.plugin.loadBoardOrigine()) ridisegna(); }));
   }
 
   // Ricarica gli eventi persistiti e ridisegna (dopo che il plugin ha caricato un Incontro
-  // nella Board mentre questa era già aperta).
-  ricarica() { this.eventi = this.plugin.loadBoard(); this.render(); }
+  // nella Board mentre questa era già aperta): l'Incontro nuovo può avere un'altra mappa.
+  ricarica() { this.eventi = this.plugin.loadBoard(); this.render(); void this.leggiScena().then(() => this.render()); }
+
+  // --- La mappa di battaglia (Atlas VTT) -----------------------------------------
+  // La scena: quella scelta a mano nella Board, altrimenti la `mappa_battaglia` dell'Incontro
+  // d'origine o, se non ne ha una, quella del suo Luogo.
+  private scenaCollegata(): TFile | null {
+    const scelta = this.plugin.loadBoardScena();
+    if (scelta) {
+      const f = this.app.vault.getAbstractFileByPath(scelta);
+      if (f instanceof TFile) return f;
+    }
+    const orig = this.incontroOrigine();
+    if (!orig) return null;
+    const fm = (this.app.metadataCache.getFileCache(orig)?.frontmatter ?? {}) as any;
+    const diretta = this.fileDaLink(fm.mappa_battaglia, orig.path);
+    if (diretta) return diretta;
+    const luogo = this.fileDaLink(fm.luogo, orig.path);
+    return luogo ? this.fileDaLink(this.app.metadataCache.getFileCache(luogo)?.frontmatter?.mappa_battaglia, luogo.path) : null;
+  }
+  // Un link del frontmatter («[[percorso|alias]]», o il percorso nudo; di una lista il primo) → il file.
+  private fileDaLink(v: unknown, da: string): TFile | null {
+    const testo = String((Array.isArray(v) ? v[0] : v) ?? "").trim();
+    const percorso = (/^\[\[([^\]|#]+)/.exec(testo)?.[1] ?? testo).trim();
+    if (!percorso) return null;
+    const f = this.app.metadataCache.getFirstLinkpathDest(percorso, da);
+    return f instanceof TFile ? f : null;
+  }
+  // Le letture si accavallano (Atlas salva ogni mezzo secondo mentre un token si trascina):
+  // vale solo l'ultima iniziata, una più vecchia che finisce dopo non la sovrascrive.
+  private letture = 0;
+  private async leggiScena() {
+    const n = ++this.letture;
+    const f = this.scenaCollegata();
+    let scena: ScenaAtlas | null = null, errore: string | null = null;
+    if (f) {
+      try {
+        const r = leggiScenaAtlas(await this.app.vault.read(f));
+        if ("errore" in r) errore = r.errore; else scena = r;
+      } catch (e: any) { errore = e?.message ?? String(e); }
+    }
+    if (n !== this.letture) return;
+    this.scenaFile = f; this.scena = scena; this.scenaErrore = errore;
+  }
+  // Il contesto del tiro dalla mappa: i metri fra i due e chi è vicino a chi tira. Senza scena,
+  // su una griglia esagonale o senza il token di uno dei due: nessuno (il tiro resta com'era).
+  private contesto(s: Stato, daKey: string, aKey: string): ContestoDistanza | undefined {
+    if (!this.scena || this.scena.esagonale) return undefined;
+    return contestoDaPosizioni(s, abbinaToken(this.scena, s.combattenti).posizioni, daKey, aKey, this.scena.metriCasella);
+  }
+  // Il pezzo d'etichetta di un bersaglio: a quanti metri è e, per un'azione, se non ci arriva.
+  private dove(s: Stato, da: InPlancia, a: InPlancia, az?: Azione): string {
+    const ctx = this.contesto(s, da.key, a.key);
+    if (ctx?.metri == null) return "";
+    const motivo = az ? fuoriTiro(s, da.key, az, ctx, this.defs) : undefined;
+    return ` · ${metriLeggibili(ctx.metri)}${motivo ? ` · ${MOTIVO_FUORI[motivo]}` : ""}`;
+  }
+
+  // Sceglie a mano la scena della Board fra i `.atlasmap` del vault (o la stacca).
+  private async scegliScena() {
+    const scene = this.app.vault.getFiles().filter((f) => f.extension === "atlasmap").sort((a, b) => a.basename.localeCompare(b.basename));
+    // «stacca» (solo se c'è una scelta a mano) torna alla mappa dell'Incontro; annullare (null) non cambia niente.
+    const voci: (TFile | "stacca")[] = [...scene, ...(this.plugin.loadBoardScena() ? ["stacca" as const] : [])];
+    if (!voci.length) { new Notice("Nessuna scena di Atlas VTT nel vault: creala dal tavolo, poi collegala qui."); return; }
+    const scelta: TFile | "stacca" | null = await suggester(this.app, (f: TFile | "stacca") => (f === "stacca" ? "Nessuna scelta a mano (torna alla mappa dell'Incontro)" : `${f.basename}  ·  ${f.parent?.path ?? ""}`), voci, false, "Scena di Atlas VTT per la Board");
+    if (scelta == null) return;
+    await this.plugin.saveBoardScena(scelta === "stacca" ? null : scelta.path);
+    await this.leggiScena();
+    this.render();
+  }
+
+  // Schiera i token della scena che la Board non ha: i PG dal vault, le creature dal bestiario,
+  // per nome; il lato dal token (i PG alleati). I nascosti partono non spuntati (il GM li
+  // tiene per la sorpresa); i nomi che non corrispondono a niente si dicono.
+  private async schieraDallaMappa(token: TokenAtlas[]) {
+    const { riconosciuti, ignoti } = riconosciToken(token, this.bestiario, this.plugin.partyPgs());
+    const ignotiTxt = ignoti.length ? `Sulla mappa senza riscontro (rinomina il token in Atlas): ${ignoti.map((t) => t.nome || "senza nome").join(", ")}.` : "";
+    if (!riconosciuti.length) { new Notice(ignotiTxt || "Nessun token da schierare."); return; }
+    const etich = (r: (typeof riconosciuti)[number]) =>
+      `${r.token.nome}${r.token.istanza > 1 ? ` ${r.token.istanza}` : ""} — ${r.pg ? "PG" : r.token.schieramento}${r.token.nascosto ? " · nascosto" : ""}`;
+    const scelti = await multiSuggester(this.app, etich, riconosciuti, "Schiera dalla mappa", (r) => !r.token.nascosto);
+    if (scelti == null) return;
+    const catalogo = this.catalogo ?? await this.plugin.catalogoCompleto();
+    for (const r of scelti) {
+      if (r.pg) {
+        const base = combattenteDiPg(r.pg.fm, catalogo, this.armiCat);
+        const c = this.schieraDaBase(base, "alleato");
+        const risorse = risorseDaNota(r.pg.fm, base);
+        this.eventi.push({ tipo: "aggiunto", combattente: c }, ...(risorse ? [{ tipo: "risorse", key: c.key, risorse } as Evento] : []));
+      } else this.eventi.push({ tipo: "aggiunto", combattente: this.schieraDaBase(daMostro(r.mostro, this.risolvi), r.token.schieramento) });
+    }
+    this.commit();
+    if (ignotiTxt) new Notice(ignotiTxt, 9000);
+  }
+
+  // La riga della mappa: quale scena, quanti sono sulla griglia, chi manca, e i comandi.
+  private renderMappa(root: HTMLElement, s: Stato) {
+    const riga = root.createDiv({ cls: "gdr-board-mappa" });
+    const testo = riga.createSpan({ cls: "gdr-board-mappa-txt" });
+    const btn = (label: string, fn: () => void) => { riga.createEl("button", { text: label }).onclick = fn; };
+    if (!this.scenaFile) {
+      testo.setText("Nessuna mappa di battaglia: le distanze le decide il GM.");
+      btn("Collega una scena di Atlas…", () => void this.scegliScena());
+      return;
+    }
+    if (!this.scena) {
+      testo.setText(`Mappa «${this.scenaFile.basename}» non letta: ${this.scenaErrore ?? "?"}.`);
+      btn("Cambia scena…", () => void this.scegliScena());
+      return;
+    }
+    const { posizioni, senzaCombattente } = abbinaToken(this.scena, s.combattenti);
+    const senzaToken = s.combattenti.filter((c) => !posizioni[c.key]).map((c) => c.nome);
+    testo.setText([
+      `Mappa: ${this.scenaFile.basename}`,
+      `${Object.keys(posizioni).length}/${s.combattenti.length} in plancia sulla griglia`,
+      this.scena.esagonale ? "griglia esagonale: distanze non calcolate" : `casella ${metriLeggibili(this.scena.metriCasella)}`,
+      senzaToken.length ? `senza token: ${senzaToken.join(", ")}` : "",
+    ].filter(Boolean).join(" · "));
+    if (senzaCombattente.length) btn(`Schiera dalla mappa (${senzaCombattente.length})`, () => void this.schieraDallaMappa(senzaCombattente));
+    btn("Cambia scena…", () => void this.scegliScena());
+  }
 
   private stato(): Stato { return ricostruisci(this.eventi); }
   // Ridisegna E persiste: unico punto d'uscita dopo ogni mutazione degli eventi.
@@ -154,10 +294,19 @@ export class BoardView extends ItemView {
   }
 
   // Sceglie un bersaglio fra i candidati (auto se uno solo).
-  private pickBersaglio(cands: InPlancia[], titolo: string): Promise<InPlancia | null> {
+  // Con `extra` l'etichetta dice anche dove sta (i metri dalla mappa).
+  private pickBersaglio(cands: InPlancia[], titolo: string, extra: (c: InPlancia) => string = () => ""): Promise<InPlancia | null> {
     if (cands.length === 0) { new Notice("Nessun bersaglio valido."); return Promise.resolve(null); }
     if (cands.length === 1) return Promise.resolve(cands[0]);
-    return suggester(this.app, (c: InPlancia) => `${c.nome} — ${c.pf_attuali}/${c.pf_max} PF`, cands, false, titolo);
+    return suggester(this.app, (c: InPlancia) => `${c.nome} — ${c.pf_attuali}/${c.pf_max} PF${extra(c)}`, cands, false, titolo);
+  }
+
+  // Un attacco che sulla mappa non arriva al bersaglio non parte: lo si dice, coi metri.
+  private nonArriva(s: Stato, attore: InPlancia, t: InPlancia, az: Azione, ctx: ContestoDistanza | undefined): boolean {
+    const motivo = fuoriTiro(s, attore.key, az, ctx, this.defs);
+    if (!motivo) return false;
+    new Notice(`«${az.nome}»: ${t.nome} è a ${metriLeggibili(ctx!.metri!)}, ${MOTIVO_FUORI[motivo]}.`);
+    return true;
   }
 
   // Esegue l'azione dell'attivo col comando del motore (`comandoAzione`, lo stesso della plancia
@@ -167,9 +316,11 @@ export class BoardView extends ItemView {
     const s = this.stato();
     const perSe = az.tipo === "cura" || az.tipo === "potenziamento";
     const cands = ordine(s).filter((c) => (perSe ? c.schieramento === attore.schieramento : c.schieramento !== attore.schieramento && inPiedi(c)));
-    const t = await this.pickBersaglio(cands, perSe ? `${az.nome} → su chi` : `${az.nome} → bersaglio`);
+    const t = await this.pickBersaglio(cands, perSe ? `${az.nome} → su chi` : `${az.nome} → bersaglio`, (c) => this.dove(s, attore, c, perSe ? undefined : az));
     if (!t) return;
-    const ev = comandoAzione(s, attore.key, t.key, az, dadoVero, this.defs);
+    const ctx = perSe ? undefined : this.contesto(s, attore.key, t.key);
+    if (this.nonArriva(s, attore, t, az, ctx)) return;
+    const ev = comandoAzione(s, attore.key, t.key, az, dadoVero, this.defs, ctx);
     if (!ev.length) { new Notice(`«${az.nome}» non si può eseguire adesso.`); return; }
     this.push(...ev);
   }
@@ -201,10 +352,28 @@ export class BoardView extends ItemView {
     }
     // I bersagli: tutti i combattenti in piedi (anche alleati — buff/cura; anche sé). Il GM
     // spunta chi è preso. Nessun bersaglio = lancio "a vuoto"/su di sé narrato (il motore regge []).
+    // Con la mappa, accanto a ciascuno i metri e, se l'incantesimo ha un tiro per colpire, se ci
+    // arriva: un bersaglio fuori gittata ferma il lancio (lo slot non si spende). Un TS ad area
+    // no: dove cade l'area lo decide il GM, il motore non conosce l'area.
+    const scelta = variante ?? varianti[0];
+    const attacchi = spell.azioni.filter((x) => x.tipo === "attacco" && (!x.variante || x.variante === scelta));
+    const fuori = (c: InPlancia) => attacchi.map((x) => fuoriTiro(s, attore.key, x, this.contesto(s, attore.key, c.key), this.defs)).find(Boolean);
     const cands = ordine(s).filter((c) => inPiedi(c));
-    const scelti = await multiSuggester(this.app, (c: InPlancia) => `${c.nome} — ${c.pf_attuali}/${c.pf_max} PF`, cands, `${spell.nome} → bersagli (spunta chi è colpito)`);
+    const etich = (c: InPlancia) => {
+      const m = this.contesto(s, attore.key, c.key)?.metri;
+      const motivo = fuori(c);
+      return `${c.nome} — ${c.pf_attuali}/${c.pf_max} PF${m != null && c.key !== attore.key ? ` · ${metriLeggibili(m)}` : ""}${motivo ? ` · ${MOTIVO_FUORI[motivo]}` : ""}`;
+    };
+    const scelti = await multiSuggester(this.app, etich, cands, `${spell.nome} → bersagli (spunta chi è colpito)`);
     if (scelti == null) return; // annullato
-    const ev = comandoLancia(s, attore.key, scelti.map((c) => c.key), spell.id, livello, dadoVero, this.defs, variante);
+    const lontani = scelti.filter((c) => fuori(c));
+    if (lontani.length) {
+      new Notice(`${spell.nome}: ${lontani.map((c) => `${c.nome} (${metriLeggibili(this.contesto(s, attore.key, c.key)!.metri!)})`).join(", ")} ${MOTIVO_FUORI[fuori(lontani[0])!]}.`);
+      return;
+    }
+    const contesti: Record<string, ContestoDistanza> = {};
+    for (const c of scelti) { const ctx = this.contesto(s, attore.key, c.key); if (ctx) contesti[c.key] = ctx; }
+    const ev = comandoLancia(s, attore.key, scelti.map((c) => c.key), spell.id, livello, dadoVero, this.defs, variante, contesti);
     if (!ev.length) { new Notice(`Impossibile lanciare ${spell.nome} adesso.`); return; }
     this.push(...ev);
   }
@@ -215,8 +384,14 @@ export class BoardView extends ItemView {
     const s = this.stato();
     const nemici = ordine(s).filter((c) => c.schieramento !== attore.schieramento && inPiedi(c));
     if (!nemici.length) { new Notice("Nessun bersaglio in piedi."); return; }
-    const t = await this.pickBersaglio(nemici, `${leg.nome} (leggendaria) → bersaglio`);
-    if (t) this.push(...comandoLeggendaria(s, attore.key, t.key, leg.id, dadoVero, this.defs));
+    // L'azione della leggendaria (a rimando o propria), per dire se arriva al bersaglio.
+    const def = attore.leggendarie?.azioni.find((x) => x.id === leg.id);
+    const az = def?.azione ? attore.azioni?.find((x) => x.id === def.azione) : def?.esegui;
+    const t = await this.pickBersaglio(nemici, `${leg.nome} (leggendaria) → bersaglio`, (c) => this.dove(s, attore, c, az));
+    if (!t) return;
+    const ctx = this.contesto(s, attore.key, t.key);
+    if (az && this.nonArriva(s, attore, t, az, ctx)) return;
+    this.push(...comandoLeggendaria(s, attore.key, t.key, leg.id, dadoVero, this.defs, ctx));
   }
 
   // Pannello Azioni leggendarie: fra un turno e l'altro il boss spende utilizzi leggendari.
@@ -555,6 +730,7 @@ export class BoardView extends ItemView {
 
     const sub = root.createDiv({ cls: "gdr-board-sub" });
     sub.setText(!iniziato ? `${s.combattenti.length} combattenti — pre-battaglia` : esito ? `Round ${s.round} — ${esito}` : `Round ${s.round} — in corso`);
+    this.renderMappa(root, s);
 
     if (!s.combattenti.length) {
       root.createDiv({ cls: "gdr-board-vuoto", text: "Aggiungi creature col bestiario (➕ Nemico / ➕ Alleato) oppure carica la 🎬 Demo." });

@@ -45,6 +45,8 @@ export class ItemView {
     this.containerEl.appendChild(document.createElement('div'))
     this.containerEl.appendChild(document.createElement('div'))
   }
+  // Gli eventi del vault li tiene l'`app` finto della prova (che li fa scattare a mano).
+  registerEvent(_ref: unknown) {}
 }
 
 export class Modal {

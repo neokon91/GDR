@@ -100,9 +100,10 @@ export function improntaDi(scena: ScenaAtlas, t: TokenAtlas): Impronta {
   return { x: (t.x - scena.offsetX) * m, y: (t.y - scena.offsetY) * m, lato: t.caselle * scena.metriCasella };
 }
 
-// Il nome confrontabile: minuscolo, senza accenti né il numero di copia che la Board aggiunge («Goblin (2)»).
-const base = (nome: string) =>
-  nome.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s*\(\d+\)\s*$/, "").trim().toLowerCase();
+/** Il nome confrontabile: minuscolo, senza accenti né il numero di copia che la Board aggiunge («Goblin (2)»). */
+export const nomeConfrontabile = (nome: string) =>
+  nome.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s*\(\d+\)\s*$/, "").replace(/\s+/g, " ").trim().toLowerCase();
+const base = nomeConfrontabile;
 const copia = (key: string) => Number(/#(\d+)$/.exec(key)?.[1] ?? 1);
 
 /**
@@ -135,4 +136,39 @@ export function abbinaToken(
     }
   }
   return { posizioni, senzaCombattente };
+}
+
+/** I metri come si leggono al tavolo: «9 m», «1,5 m». */
+export const metriLeggibili = (m: number) => `${String(Math.round(m * 10) / 10).replace(".", ",")} m`;
+
+/** Un token da schierare, riconosciuto: un PG del vault o una creatura del bestiario, per nome. */
+export type TokenRiconosciuto<P> =
+  | { token: TokenAtlas; pg: P; mostro?: undefined }
+  | { token: TokenAtlas; mostro: any; pg?: undefined };
+
+/**
+ * Riconosce i token rimasti senza combattente: prima i PG del vault (`nome` della nota o il
+ * nome del file), poi il bestiario (nome, o id/slug come `trovaMostro`). I nomi che non
+ * corrispondono a niente tornano a parte: il GM rinomina il token in Atlas.
+ */
+export function riconosciToken<P extends { f: { basename: string }; fm: any }>(
+  token: readonly TokenAtlas[],
+  bestiario: readonly any[],
+  pgs: readonly P[],
+): { riconosciuti: TokenRiconosciuto<P>[]; ignoti: TokenAtlas[] } {
+  const riconosciuti: TokenRiconosciuto<P>[] = [];
+  const ignoti: TokenAtlas[] = [];
+  for (const t of token) {
+    const k = base(t.nome);
+    const pg = k ? pgs.find((p) => base(String(p.fm?.nome || p.f.basename)) === k) : undefined;
+    const mostro = pg || !k ? undefined
+      : bestiario.find((m) => base(String(m?.nome ?? "")) === k)
+        ?? bestiario.find((m) => m?.id === t.nome || String(m?.id ?? "").split(".").pop() === k.replace(/ /g, "-"));
+    if (pg) riconosciuti.push({ token: t, pg });
+    else if (mostro) riconosciuti.push({ token: t, mostro });
+    else ignoti.push(t);
+  }
+  // Le copie nell'ordine di Atlas: la copia 1 diventa la prima della Board, come in `abbinaToken`.
+  riconosciuti.sort((a, b) => base(a.token.nome).localeCompare(base(b.token.nome)) || a.token.istanza - b.token.istanza);
+  return { riconosciuti, ignoti };
 }

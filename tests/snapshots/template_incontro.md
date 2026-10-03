@@ -65,7 +65,7 @@ renderEncounter
 > applicano. Poi tiri l'iniziativa e giochi lì (motore nativo: PF, condizioni, statblock).
 > Serve una **mappa** con token e nebbia per i giocatori? Il tavolo virtuale è Atlas VTT
 > (solo desktop): la mappa è sua, le regole restano alla Board, quindi PF e turni si segnano
-> nella Board. Mappa di battaglia: `= this.mappa_battaglia` · `BUTTON[collega-tavolo]` ·
+> nella Board; la Board legge dalla scena collegata qui le distanze dei tiri. Mappa di battaglia: `= this.mappa_battaglia` · `BUTTON[collega-tavolo]` ·
 > `BUTTON[apri-tavolo]`.
 >
 > **Boss/gregari**: una proprietà `varianti` nel frontmatter, una riga per creatura — es.

@@ -191,7 +191,7 @@ copia SRD ──gen_catalogo.ts (catalogoDa del kernel)──▶ srd_catalogo.js
   `homebrew.ts` legge quella scritta a mano (`gittataHomebrew`). Il motore resta relazionale:
   questi dati servono a chi propone ingaggi e zone da una mappa. Il tiro per colpire del
   kernel accetta un contesto di distanza (`distanzaDelTiro`: portata, gittata lunga, nemico
-  vicino); la Board non lo passa ancora, glielo darà il ponte con la mappa di Atlas.
+  vicino); la Board glielo passa dalla scena di Atlas collegata (sotto, «Il ponte con la Board»).
   Prova headless: `npm run smoke:pg` (anche in `tests/test_pg_kernel.py`).
 
 ---
@@ -280,7 +280,21 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   `getStore()` (lo store della scena, con le sue azioni, che Atlas salva da sé) e
   `reloadActiveScene(riscrivi)` (riscrive la scena aperta in sicurezza: salva il sospeso, ferma i
   salvataggi, riscrive, ricarica). Sono interni di Atlas, non un'API promessa: il ponte poggia sul
-  file, e questi si useranno solo se presenti. La Board non usa ancora il ponte.
+  file, e questi si useranno solo se presenti. (c) *nella Board* (`board.ts`): la scena è quella
+  scelta a mano (**Cambia scena…**, `boardScena` nei dati del plugin, svuotata da Reset e da un
+  nuovo schieramento), altrimenti la `mappa_battaglia` dell'Incontro d'origine o del suo `luogo`.
+  La Board la rilegge sugli eventi del vault (`modify` del file, `create`/`delete`/`rename` di un
+  `.atlasmap`, `changed` della nota d'origine) e la riga **Mappa** dice quanti sono sulla griglia e
+  chi è senza token. Ogni tiro riceve il contesto (`contestoDaPosizioni`, casella della scena):
+  azioni, multiattacchi, leggendarie e attacchi degli incantesimi (`contesti` per bersaglio). I
+  picker dei bersagli dicono i metri; un attacco che non arriva (`fuoriTiro` del kernel: un
+  multiattacco solo se nessun colpo arriva) non parte e un avviso dice perché, senza spendere
+  azione, slot o pozzo. **Schiera dalla mappa** riconosce i token senza combattente
+  (`riconosciToken`: PG del vault, poi bestiario, per nome) e li schiera col lato del token (i PG
+  alleati; i nascosti non spuntati); i nomi senza riscontro si segnalano. Limiti: muri, linea di
+  vista e copertura restano dichiarazioni del GM, l'area di un incantesimo la decide il GM (un TS
+  non si rifiuta per distanza), su griglia esagonale nessuna distanza. Prova: `npm run
+  smoke:board-mappa` (in pytest), la Board vera sulle stesse scene.
 
 ### Homebrew giocabile al tavolo (Rotta homebrew)
 Il **contratto** (RawMostro per le creature, `effetti`/`attivita` per le def) vale per SRD e

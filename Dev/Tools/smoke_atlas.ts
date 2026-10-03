@@ -14,7 +14,7 @@ import type { Catalogo } from '../../regole/src/creatore/catalogo'
 import { daMostro } from '../../regole/src/motore/combattente'
 import { comandoAttacco, distanzaDelTiro, ricostruisci, type Dado, type Evento, type InPlancia } from '../../regole/src/motore/motore'
 import { contestoDaPosizioni } from '../../regole/src/motore/geometria'
-import { abbinaToken, leggiScenaAtlas, type ScenaAtlas } from '../../plugin/atlas'
+import { abbinaToken, leggiScenaAtlas, riconosciToken, type ScenaAtlas } from '../../plugin/atlas'
 import { trovaMostro } from '../../plugin/statblock'
 import { combattenteDiPg, scriviPg } from '../../plugin/pg'
 import { assert, creaDiProva } from './pg_di_prova'
@@ -54,6 +54,12 @@ assert(Object.keys(posizioni).sort().join() === [kara, 'gob#1', 'gob#2'].sort().
 assert(senzaCombattente.map((t) => t.nome).join() === 'Ogre' && senzaCombattente[0]!.nascosto && senzaCombattente[0]!.caselle === 2,
   'l’ogre (nascosto, 2×2) non è nella Board: resta da schierare')
 console.log(`✓ Cripta: ${Object.keys(posizioni).length} token abbinati per nome, da schierare: ${senzaCombattente.map((t) => t.nome)}`)
+// Da schierare: l'ogre si riconosce nel bestiario; un nome che non è niente si dice, non si inventa.
+const finto = { ...senzaCombattente[0]!, id: 'x', nome: 'Drago di cartone' }
+const r = riconosciToken([...senzaCombattente, finto], bestiario, [{ f: { basename: 'Kara' }, fm: { nome: 'Kara' } }])
+assert(r.riconosciuti.length === 1 && r.riconosciuti[0]!.mostro?.nome === 'Ogre' && r.ignoti.map((t) => t.nome).join() === 'Drago di cartone',
+  `riconosciuti: ${r.riconosciuti.map((x) => x.token.nome)}, ignoti: ${r.ignoti.map((t) => t.nome)}`)
+console.log('✓ da schierare: Ogre riconosciuto nel bestiario, «Drago di cartone» senza riscontro')
 
 const ctx1 = contestoDaPosizioni(s, posizioni, 'gob#1', kara)!
 const ctx2 = contestoDaPosizioni(s, posizioni, 'gob#2', kara)!

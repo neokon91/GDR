@@ -47,9 +47,10 @@ const plugin: any = {
   saveBoard: async (e: Evento[]) => { salvati = [...e] },
   partyPgs: () => [pg],
   loadBoardOrigine: () => undefined,
+  loadBoardScena: () => null,
   settings: {},
 }
-const app: any = { workspace: { getLeaf: () => ({ openFile: async () => {} }) }, fileManager: { processFrontMatter: async (_f: unknown, fn: (fm: any) => void) => fn(nota) }, vault: { getMarkdownFiles: () => [] }, metadataCache: { getFileCache: () => null } }
+const app: any = { workspace: { getLeaf: () => ({ openFile: async () => {} }) }, fileManager: { processFrontMatter: async (_f: unknown, fn: (fm: any) => void) => fn(nota) }, vault: { getMarkdownFiles: () => [], on: () => ({}) }, metadataCache: { getFileCache: () => null, on: () => ({}) } }
 const board = new BoardView({ app } as any, plugin)
 
 // In campo: il PG (completo, con lo stato della sua nota) e un goblin; il PG agisce per primo.

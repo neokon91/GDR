@@ -2,9 +2,9 @@
 
 Come si gioca uno scontro con la **Board di combattimento** nativa del plugin GDR: il motore
 event-sourced di *regole* fa iniziativa, turni, PF, tiri (colpire / salvezza / danno) e le
-**condizioni con i loro effetti**. Nessun plugin di terze parti. *Non* è una mappa tattica con
-token: per il posizionamento c'è il *theatre-of-the-mind*, una mappa di scena (tab *Mappa*)
-o il tavolo virtuale (§3).
+**condizioni con i loro effetti**. Nessun plugin di terze parti. La Board *non* disegna una
+mappa: per il posizionamento c'è il *theatre-of-the-mind*, una mappa di scena (tab *Mappa*)
+o il tavolo virtuale (§3), da cui la Board legge dove stanno i token e ne fa le distanze.
 
 ## 0. Preparazione (una volta sola)
 Crea i tuoi **PG** (comando **«GDR: Crea PG»**). La Board li riconosce come il tuo
@@ -44,7 +44,7 @@ calcolati dalla scheda.
    «Riporta PF ai PG» scrive sulla nota anche slot e usi spesi.
 
 ## 3. Cosa resta al DM
-- **Posizione e distanze**: la Board non ha griglia né token. Per una mappa di battaglia
+- **Posizione e distanze**: la Board non disegna griglia né token. Per una mappa di battaglia
   c'è il **tavolo virtuale** (Atlas VTT, solo desktop: `BUTTON[apri-tavolo]`): griglia,
   token, nebbia di guerra e una finestra per i giocatori su un secondo schermo. Importa
   anche le mappe di Dungeondraft, DungeonFog e Dungeon Alchemist coi loro muri; le luci
@@ -52,12 +52,23 @@ calcolati dalla scheda.
   - **Una scena per luogo o incontro**: creala in Atlas dalla tua immagine, poi collegala
     dalla nota (Incontro, tab *Combattimento*; Luogo, tab *Mappa*) con
     `BUTTON[collega-tavolo]`. Il link riapre la scena con un clic.
-  - **Token**: nascono dalle tue immagini, col nome che dai loro. Atlas lega un token a una
-    nota solo attraverso Fantasy Statblocks, che questo vault non usa: i PF dei token non
-    servono, si segnano nella Board.
-  - **Chi fa cosa**: tiri, PF, turni e condizioni restano alla Board; su Atlas tieni solo
-    posizioni e distanze. Il suo tracker d'iniziativa e i suoi dadi non servono: con due
-    segnapunti i PF si segnerebbero due volte.
+  - **La Board legge la scena**: schierato un Incontro, la Board usa la sua mappa di
+    battaglia (o, se non ne ha, quella del suo Luogo; **Cambia scena…** ne sceglie un'altra).
+    Ogni volta che sposti un token in Atlas la Board rilegge la scena: i bersagli mostrano i
+    **metri**, un attacco oltre la **portata** o la **gittata** non parte (e lo dice), la
+    gittata lunga e un nemico addosso a chi tira a distanza danno **svantaggio** da soli.
+  - **Token e combattenti si riconoscono per nome**: il token di un mostro col nome del
+    bestiario («Goblin guerriero»), quello di un PG col nome del PG; le copie in ordine (la
+    copia 2 di Atlas è «Goblin guerriero (2)» nella Board). **Schiera dalla mappa** porta
+    nella Board i token che non ci sono ancora (i nascosti partono non spuntati); un nome
+    che non corrisponde a niente si segnala: rinomina il token in Atlas (*Edit Token*).
+  - **Cosa la mappa non decide**: muri, linea di vista e copertura (si dichiarano nelle
+    **Relazioni**), dove cade l'area di un incantesimo (spunti chi è preso), le griglie
+    esagonali (nessuna distanza).
+  - **Chi fa cosa**: tiri, PF, turni e condizioni restano alla Board; su Atlas tieni le
+    posizioni. Il suo tracker d'iniziativa, i suoi dadi e i PF dei token non servono: con due
+    segnapunti i PF si segnerebbero due volte. Atlas lega un token a una nota solo attraverso
+    Fantasy Statblocks, che questo vault non usa: il legame è il nome.
 - **Durate narrative** e le scelte di trama (quando finisce un effetto «a scelta del GM»).
 
 ## 4. Creature homebrew giocabili

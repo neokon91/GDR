@@ -49,6 +49,7 @@ interface GdrSettings {
   dadi: string; // "etichetta:espressione" separati da virgola
   board?: Evento[]; // stato della Board di combattimento, persistito così sopravvive al reload
   boardOrigine?: string; // path della nota-Incontro che ha schierato la Board (F2), per «marca risolto»
+  boardScena?: string; // path della scena di Atlas scelta a mano per la Board (vince su `mappa_battaglia`)
 }
 const DEFAULT_SETTINGS: GdrSettings = {
   sezioni: { party: true, combattimento: true, dadi: true, data: true, mondo: true },
@@ -350,6 +351,7 @@ export default class GdrPlugin extends Plugin {
     if (!eventi.length) { new Notice("Incontro vuoto: nessuna creatura/PG risolti."); return; }
     // Traccia la nota d'origine: il pannello Conseguenze potrà marcarla «risolto» senza chiedere.
     this.settings.boardOrigine = file.path;
+    this.settings.boardScena = undefined; // la mappa è quella dell'Incontro (`mappa_battaglia`)
     await this.saveBoard(eventi);
     await this.activateBoard();
     this.refreshBoard();
@@ -813,11 +815,17 @@ export default class GdrPlugin extends Plugin {
   // sopravvive a un reload. Salvataggio "nudo" (niente refreshCruscotti/statusBar).
   async saveBoard(eventi: Evento[]) {
     this.settings.board = eventi;
-    if (!eventi.length) this.settings.boardOrigine = undefined; // board svuotata (Reset) → dimentica l'origine
+    // Board svuotata (Reset) → dimentica l'origine e la scena scelta a mano.
+    if (!eventi.length) { this.settings.boardOrigine = undefined; this.settings.boardScena = undefined; }
     await this.saveData(this.settings);
   }
   loadBoard(): Evento[] { return Array.isArray(this.settings.board) ? this.settings.board : []; }
   loadBoardOrigine(): string | null { return this.settings.boardOrigine ?? null; }
+  loadBoardScena(): string | null { return this.settings.boardScena ?? null; }
+  async saveBoardScena(path: string | null) {
+    this.settings.boardScena = path ?? undefined;
+    await this.saveData(this.settings);
+  }
 
   // Frontmatter FRESCO di una nota (da metadataCache, già aggiornato al 'changed').
   frontmatterOf(path: string): any {
