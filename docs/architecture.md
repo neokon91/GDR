@@ -263,7 +263,9 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   ogni modifica). Dalla 0.5.0 un token porta lo schieramento (`side`: `players`/`opponents`) e
   le risorse in `resources` (i PF non stanno più in `hp`); l'azione
   `collega_mappa_battaglia` (bottone `collega-tavolo`, Luogo e Incontro) le elenca dal vault e
-  scrive il link in `mappa_battaglia`. Non usati: il tracker d'iniziativa di Atlas (doppione
+  scrive il link in `mappa_battaglia`. **Perimetro** (deciso ott 2026): Atlas più la Board fanno
+  il tavolo dal vivo (GM al portatile, giocatori sulla finestra di Atlas su un secondo schermo);
+  il gioco online non è un obiettivo, Atlas non ha rete e non gliela si costruisce. Non usati: il tracker d'iniziativa di Atlas (doppione
   della Board) e l'importazione «da statblock» (richiede Fantasy Statblocks).
   **Il ponte con la Board** (verificato sul sorgente di Atlas 0.5.0, provato su scene scritte dal
   suo codice): (a) *lettura*. Atlas salva la scena nel `.atlasmap` stesso con l'API del vault
