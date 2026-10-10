@@ -259,9 +259,10 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   GS). Collegare un token a una nota («Link Statblock») gli dà nome e PF della nota, e la Board
   lo riconosce dalla nota (`statblockPath` nella scena) invece che dal nome. Atlas 0.7.0
   (verificato sul sorgente) legge un token collegato anche senza Fantasy Statblocks, ma la sua
-  finestra di collegamento elenca le note solo con quel plugin (`useStatblockEntries`): la
-  modifica che le elenca anche senza è proposta ad Atlas e non è ancora nella versione
-  fissata; fino ad allora si collega con Fantasy Statblocks installato. Le creature homebrew
+  finestra di collegamento elenca le note solo con quel plugin (`useStatblockEntries`): si
+  collega con Fantasy Statblocks installato. Una modifica ad Atlas che le elenca anche senza
+  (una dozzina di righe in `useStatblockEntries`) è scritta e provata ma non inviata né applicata
+  (deciso ott 2026, `Dev/Patches/atlas-vtt/`): il vault resta su Atlas non modificato. Le creature homebrew
   hanno lo statblock nel corpo (```` ```gdr statblock ````), non nel frontmatter: non sono
   collegabili. (2) Le
   scene sono file `.atlasmap` (JSON, schema `atlas-vtt` v4, riscritto da Atlas entro 0,5 s da

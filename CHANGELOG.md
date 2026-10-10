@@ -9,8 +9,8 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 - **Token di Atlas collegati alle pagine mostro**: le pagine dell'SRD sono note-statblock
   (`statblock: true`, `cr` accanto a `name` e `hp`), quindi Atlas le offre in *Link Statblock* e
   un token collegato ne prende nome e PF. La Board riconosce un token collegato dalla sua pagina,
-  qualunque nome abbia sulla mappa. Per ora Atlas elenca le note da collegare solo con Fantasy
-  Statblocks installato; la modifica che lo fa anche senza è proposta ad Atlas.
+  qualunque nome abbia sulla mappa. Atlas elenca le note da collegare solo con Fantasy
+  Statblocks installato.
 - **La scena di Atlas nella nota**: Incontro e Luogo mostrano la scheda della mappa di battaglia
   collegata (`mappa_battaglia`) sotto i suoi bottoni, come Atlas incorpora le scene; cambiato il
   link, la scheda segue. Senza link, con un link rotto o senza Atlas (solo desktop) la nota lo

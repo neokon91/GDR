@@ -1,0 +1,220 @@
+From a5d1180fd472d70cb973efc79e78c1ecd2749747 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Sat, 10 Oct 2026 12:32:08 +0000
+Subject: [PATCH] Link tokens to statblock notes without Fantasy Statblocks
+
+Link Statblock listed nothing without Fantasy Statblocks, although a link
+already works without it: resolveLinkedCreature reads a note's frontmatter
+or statblock fence, and linking gives the token the note's name and
+resources. Without the plugin the dialog now reads the vault's statblock
+notes, as it already did for the notes the plugin never parsed (marked
+statblock: true, or holding a statblock fence), and says how to mark a note
+when there is none. Previewing a statblock still needs the plugin, for its
+layouts.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01K9wyPQwuhPMx4HRpxKSXTq
+---
+ changelog/Unreleased.md                       |  1 +
+ src/app/changelog/releases.json               |  2 +-
+ src/app/i18n/locales/en/am.ts                 |  2 +-
+ src/app/i18n/locales/ru/am.ts                 |  2 +-
+ .../asset-manager/StatblockLinkModal.tsx      |  3 +-
+ .../statblock-link/useStatblockEntries.ts     |  8 +++-
+ tests/unit/statblockLinkModal.test.tsx        | 40 ++++++++++++++++++-
+ tests/unit/statblockResourceImport.test.ts    | 19 +++++++++
+ 8 files changed, 69 insertions(+), 8 deletions(-)
+
+diff --git a/changelog/Unreleased.md b/changelog/Unreleased.md
+index d44fba27..25d5d8ab 100644
+--- a/changelog/Unreleased.md
++++ b/changelog/Unreleased.md
+@@ -9,6 +9,7 @@
+ 
+ ## Improved
+ 
++- Tokens can be linked to statblock notes without Fantasy Statblocks: Link Statblock lists the notes marked with `statblock: true` in their frontmatter or holding a statblock code block, and a linked token takes the note's name and hit points. Previewing the statblock still needs Fantasy Statblocks
+ - Measuring a hex grid works with any two corners of a hex, and one measurement is enough on most maps
+ - Auto-detect finds grids under terrain icons, grids with thick lines, grids drawn only on a dungeon's floors and small cells on large maps
+ - A detected grid shows over the whole map and can be nudged with the arrow keys before it is applied
+diff --git a/src/app/changelog/releases.json b/src/app/changelog/releases.json
+index 7bf0c658..aeb6a051 100644
+--- a/src/app/changelog/releases.json
++++ b/src/app/changelog/releases.json
+@@ -4,7 +4,7 @@
+     {
+       "version": "0.7.1-beta.0",
+       "title": "Coming in 0.7.1",
+-      "markdown": "## New\n\n- Grids fit maps whose hexes or squares are printed a little stretched: Atlas draws such a map slightly wider or taller, so that its cells are regular\n- Scans of printed maps that lie a little askew are turned level, so that the grid fits them\n- Walls, tokens, lights, fog and everything else on a map stay on their place on it when an alignment stretches or turns the map\n- A grid you measure or place by hand is fitted exactly to the lines printed on the map\n- Grid alignment has its own choice of squares, pointy hexes or flat hexes\n- A new scene whose map shows no grid says so and offers to align it\n\n## Improved\n\n- Measuring a hex grid works with any two corners of a hex, and one measurement is enough on most maps\n- Auto-detect finds grids under terrain icons, grids with thick lines, grids drawn only on a dungeon's floors and small cells on large maps\n- A detected grid shows over the whole map and can be nudged with the arrow keys before it is applied\n\n## Fixed\n\n- Auto-detect finds the grid of hex maps with stretched hexes, where it reported no grid\n- Measuring a pointy hex grid no longer gives huge flat hexes when the corners to the left and right of a hex are clicked\n- Auto-detect no longer takes a grid for several times its cell size on some maps\n- Applying a grid alignment is one undo step\n- Grid alignment ends when another scene is opened, and no longer applies one scene's grid to another"
++      "markdown": "## New\n\n- Grids fit maps whose hexes or squares are printed a little stretched: Atlas draws such a map slightly wider or taller, so that its cells are regular\n- Scans of printed maps that lie a little askew are turned level, so that the grid fits them\n- Walls, tokens, lights, fog and everything else on a map stay on their place on it when an alignment stretches or turns the map\n- A grid you measure or place by hand is fitted exactly to the lines printed on the map\n- Grid alignment has its own choice of squares, pointy hexes or flat hexes\n- A new scene whose map shows no grid says so and offers to align it\n\n## Improved\n\n- Tokens can be linked to statblock notes without Fantasy Statblocks: Link Statblock lists the notes marked with `statblock: true` in their frontmatter or holding a statblock code block, and a linked token takes the note's name and hit points. Previewing the statblock still needs Fantasy Statblocks\n- Measuring a hex grid works with any two corners of a hex, and one measurement is enough on most maps\n- Auto-detect finds grids under terrain icons, grids with thick lines, grids drawn only on a dungeon's floors and small cells on large maps\n- A detected grid shows over the whole map and can be nudged with the arrow keys before it is applied\n\n## Fixed\n\n- Auto-detect finds the grid of hex maps with stretched hexes, where it reported no grid\n- Measuring a pointy hex grid no longer gives huge flat hexes when the corners to the left and right of a hex are clicked\n- Auto-detect no longer takes a grid for several times its cell size on some maps\n- Applying a grid alignment is one undo step\n- Grid alignment ends when another scene is opened, and no longer applies one scene's grid to another"
+     },
+     {
+       "version": "0.7.0",
+diff --git a/src/app/i18n/locales/en/am.ts b/src/app/i18n/locales/en/am.ts
+index f77aa4f4..3288b00a 100644
+--- a/src/app/i18n/locales/en/am.ts
++++ b/src/app/i18n/locales/en/am.ts
+@@ -88,7 +88,7 @@ export const am = {
+   'am.header.createToken': 'Create Token',
+   'am.header.addMap': 'Add Map',
+   'am.header.createCollection': 'Create Collection',
+-  'am.link.missing': 'Install and enable the Fantasy Statblocks plugin to link statblocks.',
++  'am.link.missing': 'No statblock notes found. Mark a note as one with statblock: true in its frontmatter, or install and enable the Fantasy Statblocks plugin to link its bestiary.',
+   'am.link.title': 'Link Statblock',
+   'am.link.search': 'Search statblocks',
+   'am.link.searchPlaceholder': 'Search by name, type or CR…',
+diff --git a/src/app/i18n/locales/ru/am.ts b/src/app/i18n/locales/ru/am.ts
+index 0273094d..1b9e6cd3 100644
+--- a/src/app/i18n/locales/ru/am.ts
++++ b/src/app/i18n/locales/ru/am.ts
+@@ -88,7 +88,7 @@ export const am: Translation = {
+   'am.header.createToken': 'Создать токен',
+   'am.header.addMap': 'Добавить карту',
+   'am.header.createCollection': 'Создать коллекцию',
+-  'am.link.missing': 'Установите и включите плагин Fantasy Statblocks, чтобы привязывать статблоки.',
++  'am.link.missing': 'Заметки со статблоками не найдены. Отметьте заметку как статблок, добавив statblock: true во frontmatter, или установите и включите плагин Fantasy Statblocks, чтобы привязывать его бестиарий.',
+   'am.link.title': 'Привязать статблок',
+   'am.link.search': 'Поиск статблоков',
+   'am.link.searchPlaceholder': 'Поиск по имени, типу или CR…',
+diff --git a/src/app/packages/components/asset-manager/StatblockLinkModal.tsx b/src/app/packages/components/asset-manager/StatblockLinkModal.tsx
+index c395259d..62f8f215 100644
+--- a/src/app/packages/components/asset-manager/StatblockLinkModal.tsx
++++ b/src/app/packages/components/asset-manager/StatblockLinkModal.tsx
+@@ -38,7 +38,8 @@ function emptyMessage(hasEntries: boolean, status: BestiaryStatus): React.ReactN
+ }
+ 
+ /**
+- * Links a token to a Fantasy Statblocks creature: search on the left, the
++ * Links a token to a statblock note (a Fantasy Statblocks creature, or a note
++ * marked as a statblock when the plugin is not there): search on the left, the
+  * selected creature's statblock on the right. Arrow keys move through the
+  * results, Enter or a double click links.
+  */
+diff --git a/src/app/packages/components/asset-manager/statblock-link/useStatblockEntries.ts b/src/app/packages/components/asset-manager/statblock-link/useStatblockEntries.ts
+index 34f38f3b..c08bbadb 100644
+--- a/src/app/packages/components/asset-manager/statblock-link/useStatblockEntries.ts
++++ b/src/app/packages/components/asset-manager/statblock-link/useStatblockEntries.ts
+@@ -18,6 +18,11 @@ export interface StatblockEntries {
+  * once, and the statblock notes it never parsed (```statblock fences) once the
+  * vault is read. Both are kept current while the bestiary (re)parses; the vault
+  * is read again once its updates settle, and a superseded read stops.
++ *
++ * Without Fantasy Statblocks the vault's statblock notes are all there is: a link
++ * reads a note's name and fields the way it reads an unparsed note
++ * (`resolveLinkedCreature`), so only the preview needs the plugin. `missing` then
++ * means that no note is marked as a statblock.
+  */
+ export function useStatblockEntries(app: App): StatblockEntries {
+   const revision = useBestiaryRevision(app, BESTIARY_SETTLE_MS);
+@@ -27,7 +32,6 @@ export function useStatblockEntries(app: App): StatblockEntries {
+   const [notes, setNotes] = useState<FantasyStatblocksCreature[] | null>(null);
+ 
+   useEffect(() => {
+-    if (!bestiary.api) return;
+     const controller = new AbortController();
+     void unparsedStatblockNotes(app, bestiary, controller.signal)
+       .then((creatures) => { if (!controller.signal.aborted) setNotes(creatures); })
+@@ -40,10 +44,10 @@ export function useStatblockEntries(app: App): StatblockEntries {
+ 
+   return useMemo((): StatblockEntries => {
+     const { api, byPath } = bestiary;
+-    if (!api) return { entries: [], status: 'missing' };
+     // A previous read may list a note the bestiary has parsed since.
+     const unparsed = (notes ?? []).filter((creature) => !creature.path || !byPath.has(creature.path));
+     const entries = statblockEntries([...byPath.values(), ...unparsed]);
++    if (!api) return { entries, status: notes === null ? 'loading' : entries.length > 0 ? 'ready' : 'missing' };
+     // The bestiary is parsed asynchronously at startup: empty and unresolved means "not ready yet".
+     const status = entries.length === 0 && (notes === null || !api.isResolved?.()) ? 'loading' : 'ready';
+     return { entries, status };
+diff --git a/tests/unit/statblockLinkModal.test.tsx b/tests/unit/statblockLinkModal.test.tsx
+index b62d9c78..63f198e8 100644
+--- a/tests/unit/statblockLinkModal.test.tsx
++++ b/tests/unit/statblockLinkModal.test.tsx
+@@ -166,9 +166,9 @@ describe('StatblockLinkModal', () => {
+     expect(onLink).toHaveBeenCalledWith(null);
+   });
+ 
+-  it('explains a missing Fantasy Statblocks plugin', () => {
++  it('without Fantasy Statblocks and without statblock notes, says how to mark a note', async () => {
+     open();
+-    expect(screen.getByText(/Install and enable the Fantasy Statblocks plugin/)).toBeTruthy();
++    expect(await screen.findByText(/Mark a note as one with statblock: true in its frontmatter/)).toBeTruthy();
+     expect(search().disabled).toBe(true);
+   });
+ 
+@@ -223,6 +223,42 @@ describe('StatblockLinkModal with statblock notes outside the bestiary', () => {
+   });
+ });
+ 
++describe('StatblockLinkModal without Fantasy Statblocks', () => {
++  it("lists the vault's statblock notes and links one", async () => {
++    const { TFile } = await import('obsidian');
++    const notes: Record<string, string> = {
++      'Notes/Vecna.md': ['```statblock', 'name: Vecna', 'size: Large', 'type: Undead', 'cr: 5', '```'].join('\n'),
++      'SRD/Goblin Warrior.md': ['---', 'statblock: true', 'name: Goblin Warrior', 'hp: 10', '---'].join('\n'),
++      'Notes/Goblins.md': '# Goblins\n\nA note about goblins, without a statblock.',
++    };
++    const files = Object.keys(notes).map((path) => new TFile(path));
++    const frontmatter: Record<string, Record<string, unknown>> = {
++      'SRD/Goblin Warrior.md': { statblock: true, name: 'Goblin Warrior', hp: 10 },
++    };
++    const app = {
++      workspace: { on: () => ({}), offref: () => undefined },
++      vault: {
++        getMarkdownFiles: () => files,
++        getAbstractFileByPath: (path: string) => files.find((file) => file.path === path) ?? null,
++        cachedRead: (file: { path: string }) => Promise.resolve(notes[file.path] ?? ''),
++      },
++      metadataCache: {
++        getFileCache: (file: { path: string }) => ({ frontmatter: frontmatter[file.path] }),
++        getFirstLinkpathDest: () => null,
++      },
++    } as never;
++    const onLink = vi.fn();
++
++    render(<StatblockLinkModal isOpen onClose={vi.fn()} asset={{ name: 'Token' }} onLink={onLink} app={app} />);
++
++    expect(await screen.findByText('Goblin Warrior')).toBeTruthy();
++    expect(optionNames()).toEqual(['Goblin Warrior', 'Vecna']);
++    expect(search().disabled).toBe(false);
++    fireEvent.keyDown(search(), { key: 'Enter' });
++    expect(onLink).toHaveBeenCalledWith('SRD/Goblin Warrior.md');
++  });
++});
++
+ describe('StatblockLinkModal while the bestiary parses', () => {
+   afterEach(() => { vi.useRealTimers(); });
+ 
+diff --git a/tests/unit/statblockResourceImport.test.ts b/tests/unit/statblockResourceImport.test.ts
+index 25efd3a6..2b423d59 100644
+--- a/tests/unit/statblockResourceImport.test.ts
++++ b/tests/unit/statblockResourceImport.test.ts
+@@ -36,6 +36,25 @@ it('uses inline resources when assigning a statblock link to existing tokens', a
+   expect(startingResources(data.record, DEFINITIONS)).toEqual({ hp: { current: 12, max: 27 }, stress: { current: 0, max: 3 } });
+ });
+ 
++it('takes name and hit points from a statblock note without Fantasy Statblocks', async () => {
++  const notePath = 'SRD/Goblin Warrior.md';
++  const mapPath = 'atlas-vtt/collections/Own/scenes/Cave.atlasmap';
++  const goblin = { id: 't1', kind: 'character', imagePath: 'goblin.webp', x: 0, y: 0, name: 'goblin' };
++  const scene = JSON.stringify({ version: 4, state: { version: 4, objects: { tokens: { t1: goblin } } } });
++  const { app, files } = createInMemoryApp({
++    files: { [notePath]: '---\nstatblock: true\nname: Goblin Warrior\nhp: 10\n---\n', [mapPath]: scene },
++  });
++  app.vault.cachedRead = app.vault.read;
++  // Obsidian's metadata cache, which the in-memory vault leaves empty.
++  const frontmatter = { statblock: true, name: 'Goblin Warrior', hp: 10 };
++  app.metadataCache.getFileCache = ((file: { path: string }) => (file.path === notePath ? { frontmatter } : null)) as never;
++  const assetService = { getCollectionForMap: () => 'Own', getCollectionSettings: () => ({ conditions: [], resources: DEFINITIONS }) };
++  const service = Object.assign(Object.create(TokenStatblockLinkService.prototype), { app, assetService });
++  await service.updateAllSpawnedTokens('goblin.webp', notePath);
++  const token = JSON.parse(files.get(mapPath)!).state.objects.tokens.t1;
++  expect(token).toMatchObject({ name: 'Goblin Warrior', statblockPath: notePath, hp: { current: 10, max: 10 } });
++});
++
+ describe('linking a statblock to the tokens of closed maps', () => {
+   const mapPath = 'atlas-vtt/collections/Own/scenes/Cave.atlasmap';
+   const mage = { id: 't1', kind: 'character', imagePath: 'mage.webp', x: 0, y: 0, hp: { current: 3, max: 9 }, stress: 4, maxStress: 6, maxHpOverridden: true, statblockResources: { mana: { current: 1, max: 8 } } };
+-- 
+2.43.0
+
