@@ -663,6 +663,11 @@ sort tipo asc, file.name asc
 {% endif %}
 > - **Hexcrawl giocabile:** apri **Hexmap World Creator** (griglia esagonale, contenuti per esagono, tiri incontri). Le cartelle sono già puntate alle tue note (Towns/Dungeons→`Mondi/Luoghi`, Factions→`Mondi/Fazioni`, Quests→`Mondi/Missioni`, Regions→`Mondi/Regni`). *Al 1° avvio del suo wizard scegli «Don't show again».*
 {{ vista("renderMap") }}
+{%- if battaglia %}
+
+{# La scena di Atlas collegata in `mappa_battaglia`, incorporata (blocco `gdr scena` del plugin). #}
+{{ vista("scena") }}
+{%- endif %}
 {%- endmacro %}
 
 {# Dintorni (geografia spaziale, luogo): regione contenitore, luoghi contenuti,

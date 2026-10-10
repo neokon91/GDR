@@ -16,7 +16,7 @@ import { daMostro } from '../../regole/src/motore/combattente'
 import { comandoAttacco, distanzaDelTiro, ricostruisci, type Dado, type Evento, type InPlancia } from '../../regole/src/motore/motore'
 import { contestoDaPosizioni } from '../../regole/src/motore/geometria'
 import {
-  abbinaToken, fileCollezioneDi, leggiMisuraCollezione, leggiScenaAtlas, percorsoDaLink, riconosciToken, type ScenaAtlas,
+  abbinaToken, fileCollezioneDi, leggiMisuraCollezione, leggiScenaAtlas, percorsoDaLink, riconosciToken, scenaDaIncorporare, type ScenaAtlas,
 } from '../../plugin/atlas'
 import { trovaMostro } from '../../plugin/statblock'
 import { combattenteDiPg, scriviPg } from '../../plugin/pg'
@@ -132,6 +132,15 @@ for (const [link, atteso] of [
 ] as const) assert(percorsoDaLink(link) === atteso, `link ${JSON.stringify(link)} → ${percorsoDaLink(link)}`)
 assert(percorsoDaLink('') === null && percorsoDaLink(undefined) === null, 'nessun link')
 console.log('✓ link: wikilink, Markdown, incorporati, istantanee, percorso nudo')
+
+// Il blocco `gdr scena` delle note: la scena da incorporare, o perché no.
+const risolvi = (l: string) => Object.values(percorsi).find((x) => x === l || x.endsWith(`/${l}`)) ?? null
+const incorpora = (link: unknown, atlas = true) => JSON.stringify(scenaDaIncorporare(link, risolvi, atlas))
+assert(incorpora('[[Cripta.atlasmap|Cripta]]') === JSON.stringify({ tipo: 'scena', percorso: p }), `scena: ${incorpora('[[Cripta.atlasmap|Cripta]]')}`)
+assert(incorpora(undefined) === '{"tipo":"nessuna"}' && incorpora('') === '{"tipo":"nessuna"}', 'senza link')
+assert(incorpora('[[Sparita.atlasmap]]') === '{"tipo":"manca","link":"Sparita.atlasmap"}', 'link a niente')
+assert(incorpora(`[[${p}]]`, false) === '{"tipo":"senza-atlas"}', 'senza Atlas')
+console.log('✓ blocco gdr scena: scena incorporata, o nessun link, link rotto, Atlas assente')
 
 // 7. Ciò che il lettore rifiuta: un formato più nuovo, un file che non è una scena.
 const nuovo = JSON.parse(testoScena('Cripta'))

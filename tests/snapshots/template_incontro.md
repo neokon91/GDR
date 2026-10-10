@@ -73,6 +73,10 @@ renderEncounter
 > schieri; indicare l'HP rende l'incontro **ripetibile** (niente tiro casuale dei PF).
 
 ```gdr
+scena
+```
+
+```gdr
 renderCondizioni
 ```
 ```gdr

@@ -6,6 +6,11 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
 ## [Non rilasciato]
 
 ### Aggiunto
+- **La scena di Atlas nella nota**: Incontro e Luogo mostrano la scheda della mappa di battaglia
+  collegata (`mappa_battaglia`) sotto i suoi bottoni, come Atlas incorpora le scene; cambiato il
+  link, la scheda segue. Senza link, con un link rotto o senza Atlas (solo desktop) la nota lo
+  dice. Le note già create non cambiano: nelle loro basta aggiungere il blocco
+  ```` ```gdr scena ````.
 - **La Board legge la mappa di Atlas VTT**: schierato un Incontro, la Board usa la sua mappa di
   battaglia (o quella del suo Luogo; **Cambia scena…** ne sceglie un'altra) e la rilegge a ogni
   salvataggio di Atlas. I bersagli mostrano i metri; un attacco oltre la portata o la gittata non

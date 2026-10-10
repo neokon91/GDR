@@ -238,3 +238,23 @@ export function riconosciToken<P extends { f: { basename: string }; fm: any }>(
   riconosciuti.sort((a, b) => base(a.token.nome).localeCompare(base(b.token.nome)) || a.token.istanza - b.token.istanza);
   return { riconosciuti, ignoti };
 }
+
+/** Cosa mostra il blocco `gdr scena` di una nota (Incontro, Luogo) per la sua `mappa_battaglia`. */
+export type ScenaDaIncorporare =
+  | { tipo: "nessuna" }
+  | { tipo: "manca"; link: string }
+  | { tipo: "senza-atlas" }
+  | { tipo: "scena"; percorso: string };
+
+/**
+ * Decide il blocco `gdr scena`: la scena da incorporare (`![[percorso]]`, la scheda di Atlas),
+ * oppure perché no: nessun link, un link che non porta a un file del vault, Atlas non attivo
+ * (è solo desktop). `risolvi` è la risoluzione dei link di Obsidian (`getFirstLinkpathDest`).
+ */
+export function scenaDaIncorporare(link: unknown, risolvi: (percorso: string) => string | null, atlasAttivo: boolean): ScenaDaIncorporare {
+  const percorso = percorsoDaLink(link);
+  if (!percorso) return { tipo: "nessuna" };
+  const file = risolvi(percorso);
+  if (!file) return { tipo: "manca", link: percorso };
+  return atlasAttivo ? { tipo: "scena", percorso: file } : { tipo: "senza-atlas" };
+}

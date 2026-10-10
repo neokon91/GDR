@@ -102,6 +102,9 @@ renderTipoProfilo
 ```gdr
 renderMap
 ```
+```gdr
+scena
+```
 
 > [!info] Posizione
 > Coordinate sulla mappa: `INPUT[text:coord]` — `x, y` (per la distanza in linea d'aria; la scala è sul **Mondo**).

@@ -112,6 +112,7 @@ def test_il_ponte_con_atlas_porta_la_mappa_nel_tiro(catalogo, tmp_path):
     assert "goblin a 12 m come il righello di Atlas" in out
     assert "misura a fasce: distanze non calcolate" in out
     assert "link: wikilink, Markdown, incorporati" in out
+    assert "blocco gdr scena: scena incorporata" in out
     assert "Ogre riconosciuto nel bestiario" in out
     assert "formati più nuovi e file estranei rifiutati" in out
 

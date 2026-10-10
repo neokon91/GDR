@@ -51,7 +51,8 @@ calcolati dalla scheda.
   dinamiche sono sperimentali e vanno accese dalla sua tavolozza comandi.
   - **Una scena per luogo o incontro**: creala in Atlas dalla tua immagine, poi collegala
     dalla nota (Incontro, tab *Combattimento*; Luogo, tab *Mappa*) con
-    `BUTTON[collega-tavolo]`. Il link riapre la scena con un clic.
+    `BUTTON[collega-tavolo]`. Il link riapre la scena con un clic, e la nota mostra la scheda
+    della scena subito sotto (con Atlas attivo).
   - **La Board legge la scena**: schierato un Incontro, la Board usa la sua mappa di
     battaglia (o, se non ne ha, quella del suo Luogo; **Cambia scena…** ne sceglie un'altra).
     Ogni volta che sposti un token in Atlas la Board rilegge la scena: i bersagli mostrano i

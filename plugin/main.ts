@@ -36,6 +36,7 @@ import { suggester, tpShim } from "./modali";
 import { renderStatblock, trovaMostro, validaRawMostro, validaDef } from "./statblock";
 import { type ArmaCat, canonizzaMostroScritto } from "./adapters";
 import { BoardView, VIEW_TYPE_BOARD } from "./board";
+import { scenaDaIncorporare } from "./atlas";
 import { CruscottoView, VIEW_TYPE_CRUSCOTTO } from "./cruscotto";
 import { eventiDaIncontro } from "./incontro";
 import { creaLibretto, saliLibretto } from "./creatore";
@@ -174,6 +175,32 @@ export default class GdrPlugin extends Plugin {
           } catch (e: any) {
             el.createEl("pre", { text: `Errore radar ${category}: ${e?.message ?? e}` });
           }
+        });
+        return;
+      }
+
+      // La SCENA di Atlas collegata alla nota (`mappa_battaglia`, Incontro e Luogo), incorporata
+      // come la incorpora Atlas stesso (`![[...]]`, la sua scheda dalla 0.6): segue il link della
+      // nota e si rifà solo quando il link cambia (Atlas aggiorna la scheda da sé). Senza link,
+      // con un link che non porta a niente o senza Atlas (solo desktop) lo dice a parole.
+      if (name === "scena") {
+        let mostrata: string | undefined;
+        reactive(async () => {
+          const risolvi = (p: string) => {
+            const f = this.app.metadataCache.getFirstLinkpathDest(p, ctx.sourcePath);
+            return f instanceof TFile ? f.path : null;
+          };
+          const atlas = Boolean((this.app as any).plugins?.enabledPlugins?.has?.("atlas-vtt"));
+          const d = scenaDaIncorporare(this.frontmatterOf(ctx.sourcePath)?.mappa_battaglia, risolvi, atlas);
+          const chiave = JSON.stringify(d);
+          if (chiave === mostrata) return;
+          mostrata = chiave;
+          el.empty();
+          if (d.tipo === "scena") await MarkdownRenderer.render(this.app, `![[${d.percorso}]]`, el, ctx.sourcePath, child);
+          else el.createDiv({ cls: "gdr-scena-nota", text:
+            d.tipo === "nessuna" ? "Nessuna mappa di battaglia collegata: collegala col bottone qui sopra."
+            : d.tipo === "manca" ? `La mappa di battaglia «${d.link}» non è nel vault: ricollegala.`
+            : "La scena si vede con Atlas VTT attivo (solo desktop)." });
         });
         return;
       }
