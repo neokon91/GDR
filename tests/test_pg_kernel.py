@@ -114,6 +114,7 @@ def test_il_ponte_con_atlas_porta_la_mappa_nel_tiro(catalogo, tmp_path):
     assert "link: wikilink, Markdown, incorporati" in out
     assert "blocco gdr scena: scena incorporata" in out
     assert "Ogre riconosciuto nel bestiario" in out
+    assert "token collegati a una nota: Grishnak è il goblin 2" in out
     assert "formati più nuovi e file estranei rifiutati" in out
 
 

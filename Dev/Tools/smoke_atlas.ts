@@ -74,6 +74,23 @@ assert(r.riconosciuti.length === 1 && r.riconosciuti[0]!.mostro?.nome === 'Ogre'
   `riconosciuti: ${r.riconosciuti.map((x) => x.token.nome)}, ignoti: ${r.ignoti.map((t) => t.nome)}`)
 console.log('✓ da schierare: Ogre riconosciuto nel bestiario, «Drago di cartone» senza riscontro')
 
+// Un token collegato a una nota-statblock in Atlas («Link Statblock») si riconosce dalla nota,
+// qualunque nome il GM gli abbia dato: Grishnak resta il goblin 2, la «Bestia» è l'ogre.
+const collegata = JSON.parse(testoScena('Cripta'))
+for (const t of Object.values<any>(collegata.state.objects.tokens)) {
+  if (t.name === 'Goblin guerriero' && t.instanceNumber === 2) Object.assign(t, { name: 'Grishnak', statblockPath: 'SRD/Mostri/Goblin guerriero.md' })
+  if (t.name === 'Ogre') Object.assign(t, { name: 'Bestia', statblockPath: 'SRD/Mostri/Ogre.md' })
+}
+const scenaCollegata = leggiScenaAtlas(JSON.stringify(collegata)) as ScenaAtlas
+const nomeDellaNota = (percorso: string) => percorso.split('/').pop()!.replace(/\.md$/, '')
+const conNote = abbinaToken(scenaCollegata, s.combattenti, nomeDellaNota)
+assert(Object.keys(conNote.posizioni).includes('gob#2') && conNote.senzaCombattente.map((t) => t.nome).join() === 'Bestia',
+  `per nota: ${Object.keys(conNote.posizioni)} / da schierare ${conNote.senzaCombattente.map((t) => t.nome)}`)
+assert(!Object.keys(abbinaToken(scenaCollegata, s.combattenti).posizioni).includes('gob#2'), 'senza le note, «Grishnak» non è nessuno')
+const daNota = riconosciToken(conNote.senzaCombattente, bestiario, [], nomeDellaNota)
+assert(daNota.riconosciuti[0]?.mostro?.nome === 'Ogre' && daNota.ignoti.length === 0, `la Bestia: ${JSON.stringify(daNota.riconosciuti.map((r) => r.mostro?.nome))}`)
+console.log('✓ token collegati a una nota: Grishnak è il goblin 2, la «Bestia» si schiera come Ogre')
+
 const ctx1 = contestoDaPosizioni(s, posizioni, 'gob#1', kara)!
 const ctx2 = contestoDaPosizioni(s, posizioni, 'gob#2', kara)!
 assert(ctx1.metri === 1.5 && ctx1.nemiciVicini!.includes(kara), `goblin 1 affiancato a Kara: ${JSON.stringify(ctx1)}`)

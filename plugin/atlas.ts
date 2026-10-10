@@ -26,6 +26,8 @@ export type TokenAtlas = {
   /** Da che parte sta, se la scena lo dice (`side`), o come lo legge Atlas (chi ha la visione accesa è dei giocatori). */
   schieramento: "alleato" | "nemico";
   nascosto: boolean;
+  /** La nota-statblock a cui Atlas ha collegato il token («Link Statblock»), se c'è. */
+  nota?: string;
 };
 
 export type ScenaAtlas = {
@@ -131,6 +133,7 @@ export function leggiScenaAtlas(testo: string, collezione: MisuraAtlas | null = 
       caselle: Math.max(1, 2 * size - 1),
       schieramento: lato === "players" ? "alleato" : "nemico",
       nascosto: o.isHidden === true,
+      ...(typeof o.statblockPath === "string" && o.statblockPath ? { nota: o.statblockPath } : {}),
     });
   }
   return {
@@ -173,15 +176,24 @@ const base = nomeConfrontabile;
 const copia = (key: string) => Number(/#(\d+)$/.exec(key)?.[1] ?? 1);
 
 /**
- * Abbina i token ai combattenti della Board per NOME (Atlas, fino alla 0.7, non lega un token a una
- * nota senza Fantasy Statblocks; il nome viene dall'asset e il GM lo cambia in «Edit
- * Token»). Più copie con lo stesso nome si abbinano in ordine: la copia 1 di Atlas alla
- * prima della Board. Torna le impronte per chiave di combattente e i token rimasti senza
- * combattente (da schierare, o un nome da correggere).
+ * Il nome con cui si riconosce un token: quello della sua nota-statblock, se Atlas l'ha
+ * collegato a una (`nomeDellaNota`: il `nome` della nota, o il nome del file), altrimenti il
+ * nome del token. Così un goblin rinominato «Grishnak» resta il goblin del bestiario.
+ */
+const nomeDiRiconoscimento = (t: TokenAtlas, nomeDellaNota?: (percorso: string) => string | null): string =>
+  (t.nota && nomeDellaNota?.(t.nota)) || t.nome;
+
+/**
+ * Abbina i token ai combattenti della Board per NOME: quello della nota collegata se il token
+ * ne ha una, altrimenti il suo (il nome viene dall'asset e il GM lo cambia in «Edit Token»).
+ * Più copie con lo stesso nome si abbinano in ordine: la copia 1 di Atlas alla prima della
+ * Board. Torna le impronte per chiave di combattente e i token rimasti senza combattente (da
+ * schierare, o un nome da correggere).
  */
 export function abbinaToken(
   scena: ScenaAtlas,
   combattenti: readonly { key: string; nome: string }[],
+  nomeDellaNota?: (percorso: string) => string | null,
 ): { posizioni: Record<string, Impronta>; senzaCombattente: TokenAtlas[] } {
   const perNome = new Map<string, { key: string; nome: string }[]>();
   for (const c of combattenti) {
@@ -192,7 +204,10 @@ export function abbinaToken(
   const posizioni: Record<string, Impronta> = {};
   const senzaCombattente: TokenAtlas[] = [];
   const perToken = new Map<string, TokenAtlas[]>();
-  for (const t of scena.token) perToken.set(base(t.nome), [...(perToken.get(base(t.nome)) ?? []), t]);
+  for (const t of scena.token) {
+    const k = base(nomeDiRiconoscimento(t, nomeDellaNota));
+    perToken.set(k, [...(perToken.get(k) ?? []), t]);
+  }
   for (const [nome, tokens] of perToken) {
     const liberi = [...(perNome.get(nome) ?? [])];
     for (const t of [...tokens].sort((a, b) => a.istanza - b.istanza)) {
@@ -214,18 +229,20 @@ export type TokenRiconosciuto<P> =
 
 /**
  * Riconosce i token rimasti senza combattente: prima i PG del vault (`nome` della nota o il
- * nome del file), poi il bestiario (nome, o id/slug come `trovaMostro`). I nomi che non
- * corrispondono a niente tornano a parte: il GM rinomina il token in Atlas.
+ * nome del file), poi il bestiario (nome, o id/slug come `trovaMostro`), col nome della nota
+ * collegata se il token ne ha una (`nomeDellaNota`, come in `abbinaToken`). I nomi che non
+ * corrispondono a niente tornano a parte: il GM rinomina il token in Atlas, o lo collega.
  */
 export function riconosciToken<P extends { f: { basename: string }; fm: any }>(
   token: readonly TokenAtlas[],
   bestiario: readonly any[],
   pgs: readonly P[],
+  nomeDellaNota?: (percorso: string) => string | null,
 ): { riconosciuti: TokenRiconosciuto<P>[]; ignoti: TokenAtlas[] } {
   const riconosciuti: TokenRiconosciuto<P>[] = [];
   const ignoti: TokenAtlas[] = [];
   for (const t of token) {
-    const k = base(t.nome);
+    const k = base(nomeDiRiconoscimento(t, nomeDellaNota));
     const pg = k ? pgs.find((p) => base(String(p.fm?.nome || p.f.basename)) === k) : undefined;
     const mostro = pg || !k ? undefined
       : bestiario.find((m) => base(String(m?.nome ?? "")) === k)
@@ -235,7 +252,8 @@ export function riconosciToken<P extends { f: { basename: string }; fm: any }>(
     else ignoti.push(t);
   }
   // Le copie nell'ordine di Atlas: la copia 1 diventa la prima della Board, come in `abbinaToken`.
-  riconosciuti.sort((a, b) => base(a.token.nome).localeCompare(base(b.token.nome)) || a.token.istanza - b.token.istanza);
+  const chiave = (t: TokenAtlas) => base(nomeDiRiconoscimento(t, nomeDellaNota));
+  riconosciuti.sort((a, b) => chiave(a.token).localeCompare(chiave(b.token)) || a.token.istanza - b.token.istanza);
   return { riconosciuti, ignoti };
 }
 

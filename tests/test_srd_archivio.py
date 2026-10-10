@@ -180,6 +180,8 @@ def test_la_pagina_mostro_porta_nome_e_pf_per_atlas():
     fm = build_srd.frontmatter_mostro({"nome": "Goblin capo", "taglia": "piccola", "dadi_vita": 6,
                                        "caratteristiche": {"costituzione": {"valore": 10}}, "gs": 1})
     assert fm["name"] == "Goblin capo" and fm["hp"] == 21 and fm["nome"] == "Goblin capo"
+    # Atlas la offre fra le note-statblock da collegare e ne mostra la difficoltà.
+    assert fm["statblock"] is True and fm["cr"] == "1"
     variabile = build_srd.frontmatter_mostro({"nome": "Spirito", "taglia": "media",
                                               "dadi_vita": {"valore": "vedi incantesimo", "variabile": True}})
     assert "hp" not in variabile and variabile["name"] == "Spirito"

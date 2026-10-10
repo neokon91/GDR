@@ -253,12 +253,17 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   → `defs` passati ai comandi (prono/avvelenato→svantaggio, afferrato→velocità 0, buff…).
 - **Tavolo virtuale (Atlas VTT, terzo, non critico, solo desktop)**: solo mappa, token, nebbia
   e vista giocatori; PF, turni e condizioni restano alla Board. Atlas non ha API pubblica: il
-  contatto passa per i file. (1) Le pagine mostro SRD portano `name` e `hp` (PF medi,
-  `build_srd.pf_medi`, la regola di `puntiFeritaCalcolati` del kernel), nella forma che Atlas
-  legge da una nota-statblock. Ma Atlas (verificato sul sorgente della 0.7.0, la versione
-  fissata, come prima della 0.5.0) offre da collegare ai token e da importare come token SOLO ciò che passa da Fantasy
-  Statblocks (`useStatblockEntries`, `requireResolvedBestiary`), che il vault non usa: senza
-  quel plugin il collegamento non è raggiungibile, e i campi restano pronti e inerti. (2) Le
+  contatto passa per i file. (1) Le pagine mostro SRD sono note-statblock nella forma che Atlas
+  legge: `statblock: true` (il segno con cui Atlas e Fantasy Statblocks le riconoscono), `name`,
+  `hp` (PF medi, `build_srd.pf_medi`, la regola di `puntiFeritaCalcolati` del kernel) e `cr` (il
+  GS). Collegare un token a una nota («Link Statblock») gli dà nome e PF della nota, e la Board
+  lo riconosce dalla nota (`statblockPath` nella scena) invece che dal nome. Atlas 0.7.0
+  (verificato sul sorgente) legge un token collegato anche senza Fantasy Statblocks, ma la sua
+  finestra di collegamento elenca le note solo con quel plugin (`useStatblockEntries`): la
+  modifica che le elenca anche senza è proposta ad Atlas e non è ancora nella versione
+  fissata; fino ad allora si collega con Fantasy Statblocks installato. Le creature homebrew
+  hanno lo statblock nel corpo (```` ```gdr statblock ````), non nel frontmatter: non sono
+  collegabili. (2) Le
   scene sono file `.atlasmap` (JSON, schema `atlas-vtt` v4, riscritto da Atlas entro 0,5 s da
   ogni modifica). Dalla 0.5.0 un token porta lo schieramento (`side`: `players`/`opponents`) e
   le risorse in `resources` (i PF non stanno più in `hp`); l'azione
@@ -283,8 +288,9 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   scritte nella griglia della scena sono solo una copia presa alla creazione; la scena aggiunge
   la sua distanza per casella (`unitDistanceOverride`, dalla 0.6). Se la collezione non dichiara
   la misura (niente `collection.json`, come prima della 0.6, o senza `gridDefaults`) si misura dalla griglia della scena (5 piedi = 1,5 m se non dice niente) e la Board lo dice. Abbina
-  i token ai combattenti per **nome** (`abbinaToken`: Atlas, fino alla 0.7, non lega un token a una
-  nota senza Fantasy Statblocks; le copie in ordine, «Goblin (2)» è la copia 2). La geometria del
+  i token ai combattenti per **nome** (`abbinaToken`): quello della nota-statblock se il token è
+  collegato a una (`statblockPath`, `nomeDellaNota`: il `nome` della nota), altrimenti il suo; le
+  copie in ordine, «Goblin (2)» è la copia 2. La geometria del
   kernel (`regole/src/motore/geometria.ts`) ne fa i metri e i nemici vicini di un tiro
   (`contestoDaPosizioni` → `distanzaDelTiro`), con la regola delle diagonali della collezione
   (una casella, alternate 5-10-5 o retta, `RegolaDiagonali`: le stesse distanze del righello di

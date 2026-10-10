@@ -159,8 +159,14 @@ export class BoardView extends ItemView {
   // esagonale, misura a fasce) o senza il token di uno dei due: nessuno (il tiro resta com'era).
   private contesto(s: Stato, daKey: string, aKey: string): ContestoDistanza | undefined {
     if (!this.scena || this.scena.senzaDistanze) return undefined;
-    return contestoDaPosizioni(s, abbinaToken(this.scena, s.combattenti).posizioni, daKey, aKey, this.scena.metriCasella, this.scena.diagonali);
+    return contestoDaPosizioni(s, abbinaToken(this.scena, s.combattenti, this.nomeDellaNota).posizioni, daKey, aKey, this.scena.metriCasella, this.scena.diagonali);
   }
+  // Il nome della nota-statblock a cui Atlas ha collegato un token: il `nome` della nota (la
+  // pagina mostro, un PG), o il nome del file. Null se la nota non c'è più.
+  private nomeDellaNota = (percorso: string): string | null => {
+    const f = this.app.vault.getAbstractFileByPath(percorso);
+    return f instanceof TFile ? String(this.app.metadataCache.getFileCache(f)?.frontmatter?.nome ?? f.basename) : null;
+  };
   // Il pezzo d'etichetta di un bersaglio: a quanti metri è e, per un'azione, se non ci arriva.
   private dove(s: Stato, da: InPlancia, a: InPlancia, az?: Azione): string {
     const ctx = this.contesto(s, da.key, a.key);
@@ -186,7 +192,7 @@ export class BoardView extends ItemView {
   // per nome; il lato dal token (i PG alleati). I nascosti partono non spuntati (il GM li
   // tiene per la sorpresa); i nomi che non corrispondono a niente si dicono.
   private async schieraDallaMappa(token: TokenAtlas[]) {
-    const { riconosciuti, ignoti } = riconosciToken(token, this.bestiario, this.plugin.partyPgs());
+    const { riconosciuti, ignoti } = riconosciToken(token, this.bestiario, this.plugin.partyPgs(), this.nomeDellaNota);
     const ignotiTxt = ignoti.length ? `Sulla mappa senza riscontro (rinomina il token in Atlas): ${ignoti.map((t) => t.nome || "senza nome").join(", ")}.` : "";
     if (!riconosciuti.length) { new Notice(ignotiTxt || "Nessun token da schierare."); return; }
     const etich = (r: (typeof riconosciuti)[number]) =>
@@ -221,7 +227,7 @@ export class BoardView extends ItemView {
       btn("Cambia scena…", () => void this.scegliScena());
       return;
     }
-    const { posizioni, senzaCombattente } = abbinaToken(this.scena, s.combattenti);
+    const { posizioni, senzaCombattente } = abbinaToken(this.scena, s.combattenti, this.nomeDellaNota);
     const senzaToken = s.combattenti.filter((c) => !posizioni[c.key]).map((c) => c.nome);
     testo.setText([
       `Mappa: ${this.scenaFile.basename}`,

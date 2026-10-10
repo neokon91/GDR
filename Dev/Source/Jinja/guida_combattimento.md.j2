@@ -63,16 +63,18 @@ calcolati dalla scheda.
     della scena in Atlas.
   - **Token e combattenti si riconoscono per nome**: il token di un mostro col nome del
     bestiario («Goblin guerriero»), quello di un PG col nome del PG; le copie in ordine (la
-    copia 2 di Atlas è «Goblin guerriero (2)» nella Board). **Schiera dalla mappa** porta
-    nella Board i token che non ci sono ancora (i nascosti partono non spuntati); un nome
-    che non corrisponde a niente si segnala: rinomina il token in Atlas (*Edit Token*).
+    copia 2 di Atlas è «Goblin guerriero (2)» nella Board). Un token **collegato** alla pagina
+    del mostro in Atlas (*Link Statblock*) si riconosce dalla pagina, qualunque nome gli dai, e
+    ne prende nome e PF. **Schiera dalla mappa** porta nella Board i token che non ci sono
+    ancora (i nascosti partono non spuntati); un nome che non corrisponde a niente si segnala:
+    rinomina il token in Atlas (*Edit Token*) o collegalo.
   - **Cosa la mappa non decide**: muri, linea di vista e copertura (si dichiarano nelle
     **Relazioni**), dove cade l'area di un incantesimo (spunti chi è preso), le griglie
     esagonali e la misura a fasce di distanza (nessuna distanza).
   - **Chi fa cosa**: tiri, PF, turni e condizioni restano alla Board; su Atlas tieni le
     posizioni. Il suo tracker d'iniziativa, i suoi dadi e i PF dei token non servono: con due
-    segnapunti i PF si segnerebbero due volte. Atlas lega un token a una nota solo attraverso
-    Fantasy Statblocks, che questo vault non usa: il legame è il nome.
+    segnapunti i PF si segnerebbero due volte. Collegare un token a una pagina mostro, per ora,
+    in Atlas richiede il plugin Fantasy Statblocks; senza, il legame è il nome.
 - **Durate narrative** e le scelte di trama (quando finisce un effetto «a scelta del GM»).
 
 ## 4. Creature homebrew giocabili

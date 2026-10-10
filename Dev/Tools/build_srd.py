@@ -128,11 +128,16 @@ def frontmatter_mostro(monster: dict[str, Any]) -> dict[str, Any]:
     if monster.get("punti_esperienza") is not None:
         fm["pe"] = monster["punti_esperienza"]
     # Per Atlas VTT (tavolo virtuale): un token collegato a questa nota ne legge `name` e `hp`
-    # dal frontmatter, senza Fantasy Statblocks. Nota generata → le due chiavi non divergono.
+    # dal frontmatter, senza Fantasy Statblocks; `statblock: true` è il segno con cui Atlas (e
+    # Fantasy Statblocks) riconosce una nota-statblock e la offre in «Link Statblock», `cr` la
+    # difficoltà che mostra e filtra. Nota generata → le chiavi doppie non divergono.
+    fm["statblock"] = True
     fm["name"] = nome
     pf = pf_medi(monster)
     if pf is not None:
         fm["hp"] = pf
+    if monster.get("gs") is not None:
+        fm["cr"] = str(monster["gs"])
     return fm
 
 
