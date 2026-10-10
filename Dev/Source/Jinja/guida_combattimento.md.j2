@@ -56,7 +56,10 @@ calcolati dalla scheda.
     battaglia (o, se non ne ha, quella del suo Luogo; **Cambia scena…** ne sceglie un'altra).
     Ogni volta che sposti un token in Atlas la Board rilegge la scena: i bersagli mostrano i
     **metri**, un attacco oltre la **portata** o la **gittata** non parte (e lo dice), la
-    gittata lunga e un nemico addosso a chi tira a distanza danno **svantaggio** da soli.
+    gittata lunga e un nemico addosso a chi tira a distanza danno **svantaggio** da soli. Le
+    distanze sono quelle del righello di Atlas: unità, distanza per casella e diagonali (una
+    casella, alternate 5-10-5 o in linea retta) vengono dalle impostazioni della collezione e
+    della scena in Atlas.
   - **Token e combattenti si riconoscono per nome**: il token di un mostro col nome del
     bestiario («Goblin guerriero»), quello di un PG col nome del PG; le copie in ordine (la
     copia 2 di Atlas è «Goblin guerriero (2)» nella Board). **Schiera dalla mappa** porta
@@ -64,7 +67,7 @@ calcolati dalla scheda.
     che non corrisponde a niente si segnala: rinomina il token in Atlas (*Edit Token*).
   - **Cosa la mappa non decide**: muri, linea di vista e copertura (si dichiarano nelle
     **Relazioni**), dove cade l'area di un incantesimo (spunti chi è preso), le griglie
-    esagonali (nessuna distanza).
+    esagonali e la misura a fasce di distanza (nessuna distanza).
   - **Chi fa cosa**: tiri, PF, turni e condizioni restano alla Board; su Atlas tieni le
     posizioni. Il suo tracker d'iniziativa, i suoi dadi e i PF dei token non servono: con due
     segnapunti i PF si segnerebbero due volte. Atlas lega un token a una nota solo attraverso

@@ -1,0 +1,18 @@
+{
+  "format": 1,
+  "uid": "gdr-gdr",
+  "version": 1,
+  "tags": {},
+  "settings": {
+    "conditions": [],
+    "gridDefaults": {
+      "unitType": "meters",
+      "unitDistance": 1.5,
+      "measurementMode": "metric",
+      "abstractRangeBands": [],
+      "diagonalRule": "equidistant"
+    }
+  },
+  "createdAt": 1,
+  "modifiedAt": 1
+}

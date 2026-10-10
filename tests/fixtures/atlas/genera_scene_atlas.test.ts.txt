@@ -4,17 +4,35 @@
 // una nostra idea del formato. Per rigenerarle dopo un aggiornamento di Atlas:
 //   git clone https://github.com/ByteMirror/atlas-vtt && cd atlas-vtt && git checkout <versione>
 //   npm ci --ignore-scripts && cp <GDR>/tests/fixtures/atlas/genera_scene_atlas.test.ts.txt tests/unit/_gdr_scena.test.ts
-//   GDR_SCENA_OUT=<GDR>/tests/fixtures/atlas/Cripta.atlasmap \
-//   GDR_SCENA_PIEDI_OUT=<GDR>/tests/fixtures/atlas/Ponte.atlasmap npx vitest run --project unit tests/unit/_gdr_scena.test.ts
-// Generate con Atlas 0.5.0 (741494b), 2026-10-03.
+//   GDR_FIXTURE_DIR=<GDR>/tests/fixtures/atlas npx vitest run --project unit tests/unit/_gdr_scena.test.ts
+// Generate con Atlas 0.7.0 (6542d7f1), 2026-10-10 (prima: 0.5.0, 741494b).
 // PROVA DI FATTIBILITÀ del ponte GDR ↔ Atlas (file temporaneo, non di Atlas).
-// Fa scrivere una scena al CODICE VERO di Atlas 0.5.0: lo store (createViewAtlasStore), le sue
-// azioni (addCharacter, moveToken, updateToken, setGrid) e il suo salvataggio (createAtlasStorage
-// → SceneFileWriter → app.vault.process). Il file ottenuto è quello che il plugin GDR leggerà.
+// Fa scrivere le scene al CODICE VERO di Atlas: lo store (createViewAtlasStore), le sue azioni
+// (addCharacter, moveToken, updateToken, setGrid) e il suo salvataggio (createAtlasStorage →
+// SceneFileWriter → app.vault.process); le regole di misura delle collezioni le scrive il suo
+// `serializeCollection` (`collection.json`, dalla 0.6.0 nel vault). I file ottenuti sono quelli
+// che il plugin GDR leggerà:
+//   - gdr/: Cripta (griglia in metri) e Ponte (griglia predefinita), collezione in metri, 1,5 m
+//     per casella, diagonali da una casella;
+//   - variante/: Torre, collezione in piedi con le diagonali alternate (5-10-5) e la scena con
+//     una distanza per casella sua (`unitDistanceOverride`: 10 piedi), oltre alla copia ormai
+//     vecchia dei 5 piedi della collezione che Atlas scrive nella griglia.
 import { describe, expect, it } from 'vitest';
-import { writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { createViewAtlasStore } from '../../src/app/storeFactory';
+import { serializeCollection } from '../../src/app/services/library/collectionFile';
 import { createInMemoryApp } from '../mocks/inMemoryVault';
+
+// Scrive un file della prova sotto GDR_FIXTURE_DIR col suo percorso nel vault.
+const DIR = process.env.GDR_FIXTURE_DIR ?? '/tmp/gdr-atlas';
+const salva = (percorso: string, testo: string) => {
+  const dove = join(DIR, percorso);
+  mkdirSync(dirname(dove), { recursive: true });
+  writeFileSync(dove, testo);
+};
+const collezione = (id: string, gridDefaults: Record<string, unknown>) =>
+  serializeCollection({ id, name: id, uid: `gdr-${id}`, version: 1, tags: {}, settings: { conditions: [], gridDefaults }, createdAt: 1, modifiedAt: 1 } as never);
 
 const SCENA = 'atlas-vtt/collections/gdr/scenes/Cripta.atlasmap';
 const CELLA = 70;
@@ -52,7 +70,7 @@ describe('scena per il ponte GDR', () => {
 
     const testo = files.get(SCENA);
     expect(testo, `scritture: ${JSON.stringify(scritture)}`).toBeTruthy();
-    writeFileSync(process.env.GDR_SCENA_OUT ?? '/tmp/scena.atlasmap', testo!);
+    salva(SCENA, testo!);
     const scena = JSON.parse(testo!);
     expect(scena.state.schema).toBe('atlas-vtt');
     expect(Object.keys(scena.state.objects.tokens)).toHaveLength(4);
@@ -70,6 +88,28 @@ describe('scena per il ponte GDR', () => {
     s().addCharacter({ ...centro(5, 4), imagePath: 'atlas-vtt/tokens/goblin.png', name: 'Goblin guerriero' });
     await new Promise((r) => setTimeout(r, 0));
     await store.flushStorage();
-    writeFileSync(process.env.GDR_SCENA_PIEDI_OUT ?? '/tmp/ponte.atlasmap', files.get(scena)!);
+    salva(scena, files.get(scena)!);
+    salva('atlas-vtt/collections/gdr/collection.json',
+      collezione('gdr', { unitType: 'meters', unitDistance: 1.5, measurementMode: 'metric', abstractRangeBands: [], diagonalRule: 'equidistant' }));
+  });
+
+  it('una scena con la sua distanza per casella in una collezione a diagonali alternate', async () => {
+    const { app, files } = createInMemoryApp({ files: {} });
+    const store = createViewAtlasStore(app, 'gdr-torre');
+    const s = () => store.getState();
+    const scena = 'atlas-vtt/collections/variante/scenes/Torre.atlasmap';
+    s().setMapPath(scena);
+    s().setMapLoaded(true);
+    // La griglia porta la copia dei 5 piedi della collezione; la scena dice 10 piedi per casella.
+    s().setGrid({ ...s().grid, unitType: 'feet', unitDistance: 5, measurementType: 'units', unitDistanceOverride: 10 });
+    s().addCharacter({ ...centro(0, 0), imagePath: 'atlas-vtt/tokens/kara.png', name: 'Kara' });
+    s().addCharacter({ ...centro(3, 3), imagePath: 'atlas-vtt/tokens/goblin.png', name: 'Goblin guerriero' });
+    await new Promise((r) => setTimeout(r, 0));
+    await store.flushStorage();
+    const testo = files.get(scena)!;
+    expect(JSON.parse(testo).state.grid.unitDistanceOverride).toBe(10);
+    salva(scena, testo);
+    salva('atlas-vtt/collections/variante/collection.json',
+      collezione('variante', { unitType: 'feet', unitDistance: 5, measurementMode: 'metric', abstractRangeBands: [], diagonalRule: 'alternating' }));
   });
 });

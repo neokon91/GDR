@@ -1,14 +1,16 @@
 // IL PONTE CON ATLAS VTT, lato lettura: una scena `.atlasmap` → le posizioni dei combattenti
 // della Board, in metri, per la geometria del kernel (`regole/src/motore/geometria.ts`).
 //
-// Il contratto è il FILE della scena, non il codice di Atlas: Atlas lo scrive con l'API del
-// vault (`app.vault.create`, poi `app.vault.process`) 500 ms dopo l'ultima modifica, e si è
-// impegnato a tenerlo leggibile da ogni versione (busta `{state, version}`, versione 4; i
-// campi vecchi restano). Verificato sul sorgente di Atlas 0.5.0 e su scene scritte dal suo
-// stesso codice (`tests/fixtures/atlas/`). Qui si legge e basta: Atlas non sa che esistiamo.
-import { CASELLA, type Impronta } from "../regole/src/motore/geometria";
+// Il contratto sono i FILE, non il codice di Atlas: la scena (`.atlasmap`), che Atlas scrive
+// con l'API del vault (`app.vault.create`, poi `app.vault.process`) 500 ms dopo l'ultima
+// modifica e si è impegnato a tenere leggibile da ogni versione (busta `{state, version}`,
+// versione 4; i campi vecchi restano), e il `collection.json` della sua collezione (dalla 0.6,
+// nel vault), che decide come si misura. Verificato sul sorgente di Atlas 0.7.0 e su file
+// scritti dal suo stesso codice (`tests/fixtures/atlas/`). Qui si legge e basta: Atlas non sa
+// che esistiamo.
+import { CASELLA, type Impronta, type RegolaDiagonali } from "../regole/src/motore/geometria";
 
-/** La versione del formato che Atlas 0.5 scrive. Una più alta la rifiuta anche Atlas. */
+/** La versione del formato che Atlas scrive (0.5–0.7). Una più alta la rifiuta anche Atlas. */
 export const VERSIONE_SCENA_ATLAS = 4;
 
 /** Un token della scena, nelle unità della mappa (pixel) e con ciò che serve al ponte. */
@@ -31,11 +33,23 @@ export type ScenaAtlas = {
   pixelCasella: number;
   offsetX: number;
   offsetY: number;
-  /** I metri di una casella, dalla scena (metri, piedi, iarde) o il default di Atlas (5 piedi). */
+  /** I metri di una casella, come li misura Atlas (la collezione, o la distanza propria della scena). */
   metriCasella: number;
-  /** Le griglie esagonali non hanno la distanza di Chebyshev: le distanze non si calcolano. */
-  esagonale: boolean;
+  /** Come contano le diagonali: la regola della collezione (una casella se non ne ha). */
+  diagonali: RegolaDiagonali;
+  /** Perché le distanze non si calcolano (griglia esagonale, misura a fasce), o null. */
+  senzaDistanze: string | null;
+  /** Da dove viene la misura: il `collection.json` della collezione, o la scena se non la dichiara. */
+  misuraDa: "collezione" | "scena";
   token: TokenAtlas[];
+};
+
+/** Le regole di misura di una collezione di Atlas (`settings.gridDefaults` del `collection.json`). */
+export type MisuraAtlas = {
+  unitType: string;
+  unitDistance: number;
+  measurementMode: "metric" | "abstract";
+  diagonalRule: "equidistant" | "alternating" | "euclidean";
 };
 
 const numero = (v: unknown): number | undefined => (typeof v === "number" && Number.isFinite(v) ? v : undefined);
@@ -44,12 +58,40 @@ const oggetto = (v: unknown): Record<string, unknown> | undefined =>
 
 // Le unità di Atlas in metri, alla scala del manuale (5 piedi = 1,5 m: 1 piede = 0,3 m).
 const METRI_PER_UNITA: Record<string, number> = { meters: 1, feet: 0.3, yards: 0.9 };
+const DIAGONALI: Record<MisuraAtlas["diagonalRule"], RegolaDiagonali> = { equidistant: "una-casella", alternating: "alternate", euclidean: "retta" };
+// Una distanza per casella che Atlas accetta (`isUnitDistance`).
+const distanzaValida = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v) && v >= 0.000001 && v <= 1_000_000;
+
+/** Il `collection.json` della collezione a cui appartiene una scena: la cartella decide. */
+export function fileCollezioneDi(percorsoScena: string): string | null {
+  const id = /^atlas-vtt\/collections\/([^/]+)\//.exec(percorsoScena)?.[1];
+  return id ? `atlas-vtt/collections/${id}/collection.json` : null;
+}
 
 /**
- * Legge il testo di una scena. Un file che non è una scena di Atlas, o di una versione più
- * nuova, dà un errore con la sua ragione: niente letture a metà.
+ * Le regole di misura di un `collection.json`. Null se la collezione non ne ha (Atlas allora
+ * misura dalla scena) o se il file non è una collezione di Atlas (manca `uid`).
  */
-export function leggiScenaAtlas(testo: string): ScenaAtlas | { errore: string } {
+export function leggiMisuraCollezione(testo: string): MisuraAtlas | null {
+  let grezzo: unknown;
+  try { grezzo = JSON.parse(testo); } catch { return null; }
+  const c = oggetto(grezzo);
+  if (!c || typeof c.uid !== "string" || !c.uid) return null;
+  const g = oggetto(oggetto(c.settings)?.gridDefaults);
+  if (!g || typeof g.unitType !== "string" || !distanzaValida(g.unitDistance)) return null;
+  const regola = g.diagonalRule === "alternating" || g.diagonalRule === "euclidean" ? g.diagonalRule : "equidistant";
+  return { unitType: g.unitType, unitDistance: g.unitDistance, measurementMode: g.measurementMode === "abstract" ? "abstract" : "metric", diagonalRule: regola };
+}
+
+/**
+ * Legge il testo di una scena e la misura come Atlas (`resolveMeasurementSettings`): le
+ * regole della collezione vincono su quelle scritte nella griglia della scena, che ne è solo
+ * una copia presa alla creazione; la scena aggiunge la sua distanza per casella
+ * (`unitDistanceOverride`). Senza collezione nota si misura dalla griglia della scena, coi
+ * 5 piedi di Atlas se non dice niente. Un file che non è una scena di Atlas, o di una
+ * versione più nuova, dà un errore con la sua ragione: niente letture a metà.
+ */
+export function leggiScenaAtlas(testo: string, collezione: MisuraAtlas | null = null): ScenaAtlas | { errore: string } {
   let grezzo: unknown;
   try { grezzo = JSON.parse(testo); } catch { return { errore: "non è JSON" }; }
   const busta = oggetto(grezzo);
@@ -62,10 +104,17 @@ export function leggiScenaAtlas(testo: string): ScenaAtlas | { errore: string } 
   const griglia = oggetto(stato.grid) ?? {};
   const pixelCasella = numero(griglia.size) ?? 70;
   if (pixelCasella <= 0) return { errore: "griglia senza misura" };
-  const unita = typeof griglia.unitType === "string" ? griglia.unitType : "feet";
-  const distanza = numero(griglia.unitDistance) ?? 5;
-  // Una griglia in «units» (astratta) non dice quanto è grande una casella: vale quella del manuale.
-  const metriCasella = METRI_PER_UNITA[unita] ? distanza * METRI_PER_UNITA[unita]! : CASELLA;
+  const regole: MisuraAtlas = collezione ?? {
+    unitType: typeof griglia.unitType === "string" ? griglia.unitType : "feet",
+    unitDistance: distanzaValida(griglia.unitDistance) ? griglia.unitDistance : 5,
+    measurementMode: "metric",
+    diagonalRule: "equidistant",
+  };
+  const propria = regole.measurementMode === "metric" && distanzaValida(griglia.unitDistanceOverride) ? griglia.unitDistanceOverride : undefined;
+  const distanza = propria ?? regole.unitDistance;
+  // In «units» o «custom» una casella non ha una misura reale: vale quella del manuale.
+  const metriCasella = METRI_PER_UNITA[regole.unitType] ? distanza * METRI_PER_UNITA[regole.unitType]! : CASELLA;
+  const esagonale = typeof griglia.type === "string" && griglia.type.startsWith("hex");
 
   const token: TokenAtlas[] = [];
   for (const [chiave, t] of Object.entries(oggetto(oggetto(stato.objects)?.tokens) ?? {})) {
@@ -89,9 +138,26 @@ export function leggiScenaAtlas(testo: string): ScenaAtlas | { errore: string } 
     offsetX: numero(griglia.offsetX) ?? 0,
     offsetY: numero(griglia.offsetY) ?? 0,
     metriCasella,
-    esagonale: typeof griglia.type === "string" && griglia.type.startsWith("hex"),
+    diagonali: DIAGONALI[regole.diagonalRule],
+    senzaDistanze: esagonale ? "griglia esagonale" : regole.measurementMode === "abstract" ? "misura a fasce di distanza" : null,
+    misuraDa: collezione ? "collezione" : "scena",
     token,
   };
+}
+
+/**
+ * Il percorso a cui punta un link del frontmatter, in ogni forma che Obsidian e Atlas scrivono:
+ * wikilink (`[[percorso|alias]]`, `[[Scena#istantanea]]`), link Markdown (`[alias](percorso)`,
+ * anche codificato), incorporato (`![[...]]`) o il percorso nudo. Di una lista, il primo.
+ */
+export function percorsoDaLink(v: unknown): string | null {
+  const testo = String((Array.isArray(v) ? v[0] : v) ?? "").trim().replace(/^!/, "");
+  const wiki = /^\[\[([^\]|#]+)/.exec(testo)?.[1];
+  const markdown = /^\[[^\]]*\]\(\s*<?([^)>#]+?)>?\s*(?:#[^)]*)?\)/.exec(testo)?.[1];
+  let percorso = wiki ?? markdown ?? testo;
+  if (markdown && !wiki) { try { percorso = decodeURIComponent(markdown); } catch { /* resta com'è */ } }
+  percorso = percorso.trim();
+  return percorso || null;
 }
 
 /** L'impronta di un token in metri (centro e lato), per la geometria del kernel. */
@@ -107,7 +173,7 @@ const base = nomeConfrontabile;
 const copia = (key: string) => Number(/#(\d+)$/.exec(key)?.[1] ?? 1);
 
 /**
- * Abbina i token ai combattenti della Board per NOME (Atlas 0.5 non lega un token a una
+ * Abbina i token ai combattenti della Board per NOME (Atlas, fino alla 0.7, non lega un token a una
  * nota senza Fantasy Statblocks; il nome viene dall'asset e il GM lo cambia in «Edit
  * Token»). Più copie con lo stesso nome si abbinano in ordine: la copia 1 di Atlas alla
  * prima della Board. Torna le impronte per chiave di combattente e i token rimasti senza

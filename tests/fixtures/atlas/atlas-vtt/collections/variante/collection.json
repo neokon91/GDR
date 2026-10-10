@@ -1,0 +1,18 @@
+{
+  "format": 1,
+  "uid": "gdr-variante",
+  "version": 1,
+  "tags": {},
+  "settings": {
+    "conditions": [],
+    "gridDefaults": {
+      "unitType": "feet",
+      "unitDistance": 5,
+      "measurementMode": "metric",
+      "abstractRangeBands": [],
+      "diagonalRule": "alternating"
+    }
+  },
+  "createdAt": 1,
+  "modifiedAt": 1
+}

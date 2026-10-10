@@ -1,6 +1,7 @@
 /**
- * SMOKE del PONTE con Atlas VTT — headless, su scene scritte dal CODICE VERO di Atlas 0.5.0
- * (`tests/fixtures/atlas/`, generate col suo store e il suo salvataggio, non a mano).
+ * SMOKE del PONTE con Atlas VTT — headless, su scene e collezioni scritte dal CODICE VERO di
+ * Atlas 0.7.0 (`tests/fixtures/atlas/`, generate col suo store, il suo salvataggio e il suo
+ * `serializeCollection`, non a mano), nei percorsi che hanno nel vault.
  *
  * Prova la catena che la Board userà: la scena → i token abbinati ai combattenti per nome →
  * le posizioni in metri → il contesto del tiro (geometria del kernel) → il tiro per colpire
@@ -14,17 +15,28 @@ import type { Catalogo } from '../../regole/src/creatore/catalogo'
 import { daMostro } from '../../regole/src/motore/combattente'
 import { comandoAttacco, distanzaDelTiro, ricostruisci, type Dado, type Evento, type InPlancia } from '../../regole/src/motore/motore'
 import { contestoDaPosizioni } from '../../regole/src/motore/geometria'
-import { abbinaToken, leggiScenaAtlas, riconosciToken, type ScenaAtlas } from '../../plugin/atlas'
+import {
+  abbinaToken, fileCollezioneDi, leggiMisuraCollezione, leggiScenaAtlas, percorsoDaLink, riconosciToken, type ScenaAtlas,
+} from '../../plugin/atlas'
 import { trovaMostro } from '../../plugin/statblock'
 import { combattenteDiPg, scriviPg } from '../../plugin/pg'
 import { assert, creaDiProva } from './pg_di_prova'
 
 const dati = resolve(process.argv[2] ?? 'data')
-const scene = resolve(process.argv[3] ?? '../tests/fixtures/atlas')
+const vault = resolve(process.argv[3] ?? '../tests/fixtures/atlas')
 const cat = JSON.parse(readFileSync(`${dati}/srd_catalogo.json`, 'utf8')) as Catalogo
 const bestiario = JSON.parse(readFileSync(`${dati}/srd_bestiario.json`, 'utf8')) as any[]
-const scena = (nome: string): ScenaAtlas => {
-  const s = leggiScenaAtlas(readFileSync(`${scene}/${nome}.atlasmap`, 'utf8'))
+const percorsi: Record<string, string> = {
+  Cripta: 'atlas-vtt/collections/gdr/scenes/Cripta.atlasmap',
+  Ponte: 'atlas-vtt/collections/gdr/scenes/Ponte.atlasmap',
+  Torre: 'atlas-vtt/collections/variante/scenes/Torre.atlasmap',
+}
+const testoScena = (nome: string) => readFileSync(`${vault}/${percorsi[nome]}`, 'utf8')
+// Come la Board: la scena con le regole di misura del collection.json della sua cartella.
+const scena = (nome: string, conCollezione = true): ScenaAtlas => {
+  const fc = fileCollezioneDi(percorsi[nome]!)
+  const misura = conCollezione && fc ? leggiMisuraCollezione(readFileSync(`${vault}/${fc}`, 'utf8')) : null
+  const s = leggiScenaAtlas(testoScena(nome), misura)
   assert(!('errore' in s), `${nome}: ${'errore' in s ? s.errore : ''}`)
   return s as ScenaAtlas
 }
@@ -48,7 +60,8 @@ const s = ricostruisci([
 
 // 1. La scena in metri: abbinamento, token rimasti, distanze.
 const cripta = scena('Cripta')
-assert(cripta.metriCasella === 1.5 && !cripta.esagonale, `Cripta: ${cripta.metriCasella} m per casella`)
+assert(cripta.metriCasella === 1.5 && !cripta.senzaDistanze && cripta.misuraDa === 'collezione' && cripta.diagonali === 'una-casella',
+  `Cripta: ${JSON.stringify({ ...cripta, token: undefined })}`)
 const { posizioni, senzaCombattente } = abbinaToken(cripta, s.combattenti)
 assert(Object.keys(posizioni).sort().join() === [kara, 'gob#1', 'gob#2'].sort().join(), `abbinati: ${Object.keys(posizioni)}`)
 assert(senzaCombattente.map((t) => t.nome).join() === 'Ogre' && senzaCombattente[0]!.nascosto && senzaCombattente[0]!.caselle === 2,
@@ -80,16 +93,48 @@ assert(tiroVicino?.tiro === 'svantaggio' && tiroVicino.spazio?.includes('nemico-
 assert(comandoAttacco(s, 'gob#1', kara, fisso(15), scimitarra, {}, ctx1).length > 0, 'la scimitarra affiancata colpisce')
 console.log('✓ regole dello spazio: scimitarra oltre portata rifiutata, arco normale a 9 m, svantaggio col nemico addosso')
 
-// 3. La scena con la griglia predefinita di Atlas (nessuna unità: 5 piedi per casella).
+// 3. La misura viene dalla collezione: il Ponte ha la griglia predefinita (nessuna unità) e
+// misura in metri perché la sua collezione dice così; senza collezione, i 5 piedi di Atlas.
 const ponte = scena('Ponte')
 const p2 = abbinaToken(ponte, s.combattenti)
-const ctx3 = contestoDaPosizioni(s, p2.posizioni, 'gob#1', kara)!
-assert(ponte.metriCasella === 1.5 && ctx3.metri === 6, `Ponte: ${ponte.metriCasella} m per casella, goblin a ${ctx3?.metri} m`)
+const ctx3 = contestoDaPosizioni(s, p2.posizioni, 'gob#1', kara, ponte.metriCasella, ponte.diagonali)!
+assert(ponte.metriCasella === 1.5 && ponte.misuraDa === 'collezione' && ctx3.metri === 6, `Ponte: ${ponte.metriCasella} m per casella, goblin a ${ctx3?.metri} m`)
+const ponteSenza = scena('Ponte', false)
+assert(ponteSenza.misuraDa === 'scena' && ponteSenza.metriCasella === 1.5, `Ponte senza collezione: ${ponteSenza.metriCasella}`)
 assert(ponte.token.every((t) => t.schieramento === 'nemico'), 'senza `side` né visione Atlas li legge avversari')
-console.log(`✓ Ponte (griglia in piedi, default di Atlas): goblin a ${ctx3.metri} m in diagonale`)
+console.log(`✓ Ponte (griglia predefinita, misura della collezione): goblin a ${ctx3.metri} m in diagonale`)
 
-// 4. Ciò che il lettore rifiuta: un formato più nuovo, un file che non è una scena.
-const nuovo = JSON.parse(readFileSync(`${scene}/Cripta.atlasmap`, 'utf8'))
+// 4. La Torre: collezione in piedi a diagonali alternate, la scena con 10 piedi per casella sua
+// (la griglia ne porta ancora la copia vecchia, 5). Kara e il goblin a tre caselle in diagonale.
+const torre = scena('Torre')
+const p4 = abbinaToken(torre, s.combattenti)
+const ctx4 = contestoDaPosizioni(s, p4.posizioni, 'gob#1', kara, torre.metriCasella, torre.diagonali)!
+assert(torre.metriCasella === 3 && torre.diagonali === 'alternate', `Torre: ${torre.metriCasella} m per casella, diagonali ${torre.diagonali}`)
+assert(ctx4.metri === 12, `Torre: tre diagonali alternate da 3 m = 1+2+1 caselle, non ${ctx4.metri} m`)
+const torreSenza = scena('Torre', false)
+assert(torreSenza.metriCasella === 3 && torreSenza.diagonali === 'una-casella', 'senza collezione: la distanza della scena, diagonali da una casella')
+console.log(`✓ Torre (piedi, 10 per casella, diagonali alternate): goblin a ${ctx4.metri} m come il righello di Atlas`)
+
+// 5. Una collezione a fasce di distanza (Daggerheart) non dà metri: niente distanze.
+const fasce = JSON.parse(readFileSync(`${vault}/atlas-vtt/collections/gdr/collection.json`, 'utf8'))
+fasce.settings.gridDefaults.measurementMode = 'abstract'
+const astratta = leggiScenaAtlas(testoScena('Cripta'), leggiMisuraCollezione(JSON.stringify(fasce))) as ScenaAtlas
+assert(astratta.senzaDistanze === 'misura a fasce di distanza', `fasce: ${astratta.senzaDistanze}`)
+assert(leggiMisuraCollezione('{"settings":{}}') === null, 'un file senza uid non è una collezione')
+console.log('✓ misura a fasce: distanze non calcolate')
+
+// 6. I link alla scena, in ogni forma che Obsidian e Atlas scrivono.
+const p = 'atlas-vtt/collections/gdr/scenes/Cripta.atlasmap'
+for (const [link, atteso] of [
+  [`[[${p}|Cripta]]`, p], ['[[Cripta.atlasmap#Prima del crollo]]', 'Cripta.atlasmap'], [`![[${p}]]`, p],
+  ['[Cripta](atlas-vtt/collections/gdr/scenes/Cripta%20vecchia.atlasmap)', 'atlas-vtt/collections/gdr/scenes/Cripta vecchia.atlasmap'],
+  [`[Cripta](<${p}>)`, p], [p, p], [[`[[${p}]]`], p],
+] as const) assert(percorsoDaLink(link) === atteso, `link ${JSON.stringify(link)} → ${percorsoDaLink(link)}`)
+assert(percorsoDaLink('') === null && percorsoDaLink(undefined) === null, 'nessun link')
+console.log('✓ link: wikilink, Markdown, incorporati, istantanee, percorso nudo')
+
+// 7. Ciò che il lettore rifiuta: un formato più nuovo, un file che non è una scena.
+const nuovo = JSON.parse(testoScena('Cripta'))
 nuovo.version = 5
 assert('errore' in leggiScenaAtlas(JSON.stringify(nuovo)), 'un formato più nuovo si rifiuta, come fa Atlas')
 assert('errore' in leggiScenaAtlas('{"nome":"Kara"}') && 'errore' in leggiScenaAtlas('non json'), 'un file che non è una scena si rifiuta')

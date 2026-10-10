@@ -92,11 +92,13 @@ def test_la_board_e_alla_pari_con_la_plancia(catalogo, tmp_path):
 
 
 def test_il_ponte_con_atlas_porta_la_mappa_nel_tiro(catalogo, tmp_path):
-    """Il ponte con Atlas VTT, su scene scritte dal codice vero di Atlas 0.5.0 (store e
-    salvataggio suoi, `tests/fixtures/atlas/`): i token si abbinano ai combattenti per nome,
-    le posizioni diventano metri (anche dalla griglia in piedi che Atlas usa di default), il
+    """Il ponte con Atlas VTT, su scene e collezioni scritte dal codice vero di Atlas 0.7.0
+    (store, salvataggio e `serializeCollection` suoi, `tests/fixtures/atlas/`): i token si
+    abbinano ai combattenti per nome, le posizioni diventano metri con le regole della
+    collezione (unità, distanza propria della scena, diagonali alternate, misura a fasce), il
     contesto arriva al tiro: scimitarra oltre portata rifiutata, arco con un nemico addosso in
-    svantaggio. Un formato più nuovo si rifiuta come fa Atlas."""
+    svantaggio. I link alla scena si leggono in ogni forma; un formato più nuovo si rifiuta
+    come fa Atlas."""
     subprocess.run(["python3", str(ROOT / "Dev" / "Tools" / "gen_bestiario.py")], check=True, capture_output=True)
     dati = tmp_path / "dati"
     dati.mkdir()
@@ -107,6 +109,9 @@ def test_il_ponte_con_atlas_porta_la_mappa_nel_tiro(catalogo, tmp_path):
     assert "goblin 1 a 1.5 m, goblin 2 a 9 m" in out
     assert "svantaggio col nemico addosso" in out
     assert "goblin a 6 m in diagonale" in out
+    assert "goblin a 12 m come il righello di Atlas" in out
+    assert "misura a fasce: distanze non calcolate" in out
+    assert "link: wikilink, Markdown, incorporati" in out
     assert "Ogre riconosciuto nel bestiario" in out
     assert "formati più nuovi e file estranei rifiutati" in out
 
@@ -115,7 +120,8 @@ def test_la_board_legge_la_scena_di_atlas_e_la_porta_nei_tiri(catalogo, tmp_path
     """La Board VERA collegata ad Atlas: la scena dell'Incontro d'origine (`mappa_battaglia`),
     lo schieramento dei token che la Board non ha (il nascosto non spuntato), la scimitarra a
     9 m rifiutata col motivo, il salvataggio di Atlas riletto (il goblin spostato colpisce), i
-    metri nel picker dei bersagli, la scena scelta a mano che vince sul link."""
+    metri nel picker dei bersagli, la scena scelta a mano che vince sul link, le regole della
+    collezione rilette quando Atlas riscrive il suo `collection.json`."""
     subprocess.run(["python3", str(ROOT / "Dev" / "Tools" / "gen_bestiario.py")], check=True, capture_output=True)
     dati = tmp_path / "dati"
     dati.mkdir()
@@ -128,3 +134,4 @@ def test_la_board_legge_la_scena_di_atlas_e_la_porta_nei_tiri(catalogo, tmp_path
     assert "salvataggio di Atlas riletto" in out
     assert "bersagli coi metri" in out and "1,5 m" in out
     assert "scena scelta a mano (Ponte)" in out
+    assert "collection.json riletto" in out and "diagonali alternate" in out

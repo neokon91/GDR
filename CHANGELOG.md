@@ -17,7 +17,7 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   (griglia in metri o in piedi, token con nome, copia, taglia, schieramento, nascosto; rifiuta un
   formato più nuovo come fa Atlas) e abbina i token ai combattenti della Board per nome; la
   geometria del kernel ne ricava distanze e nemici vicini per le regole dello spazio nel tiro. La
-  prova (`npm run smoke:atlas`, in pytest) gira su scene scritte dal codice vero di Atlas 0.5.0.
+  prova (`npm run smoke:atlas`, in pytest) gira su scene scritte dal codice vero di Atlas (oggi la 0.7.0).
 - **Lo spazio nel combattente** (dal kernel): taglia e velocità di chi combatte, portata e gittata
   delle azioni d'attacco (mostri e armi dei PG) e degli incantesimi, anche homebrew (la
   `gittata` scritta a mano, «9 m» o «contatto», si legge), che la Board usa con la mappa di
@@ -66,6 +66,19 @@ versioni [SemVer](https://semver.org/lang/it/). Le date sono `AAAA-MM-GG`.
   con un clic. La Guida al combattimento dice chi fa cosa fra Board e Atlas.
 
 ### Modificato
+- **Atlas VTT 0.5.0 → 0.7.0** (mappe enormi nitide, token che scivolano al loro posto, qualità
+  delle luci per i portatili, barra degli strumenti personalizzabile, scene collegabili e
+  incorporabili nelle note, distanza per casella propria di una scena, libreria che si
+  sincronizza). Verificato sul sorgente: formato delle scene invariato (`atlas-vtt` v4, stessi
+  campi dei token), salvataggio invariato, comando `open-dashboard` presente, collegamento
+  token-nota ancora solo con Fantasy Statblocks. Cosa cambia per noi: la Board misura come Atlas,
+  con le regole della collezione (`collection.json`, ora nel vault: unità, distanza per casella,
+  diagonali alternate o rette, misura a fasce) e la distanza propria della scena, invece delle
+  unità copiate nella griglia della scena; le distanze tornano con quelle del righello di Atlas. I
+  link alla scena si leggono anche nella forma che Atlas copia (Markdown, incorporati, con
+  istantanea). Con Obsidian Sync la libreria di Atlas viaggia solo con «Sincronizza tutti gli altri
+  tipi di file» acceso; aggiornare Atlas su ogni dispositivo prima di toccarla. Le scene di prova
+  sono rigenerate col codice della 0.7.0.
 - **Plugin aggiornati** (verificati sul sorgente, 2026-10-02): **Meta Bind 1.4.15 → 1.5.1**
   (impostazioni sulla nuova API di Obsidian, messaggi d'errore dei bottoni, finestre staccate;
   sintassi di campi e bottoni invariata) e **Homepage 4.4.4 → 4.5.0** (impostazioni per Obsidian

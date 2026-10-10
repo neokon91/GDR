@@ -16,7 +16,10 @@ import {
   type ContestoDistanza, type EsitoDistanza,
 } from "../regole/src/motore/motore";
 import { contestoDaPosizioni } from "../regole/src/motore/geometria";
-import { abbinaToken, leggiScenaAtlas, metriLeggibili, riconosciToken, type ScenaAtlas, type TokenAtlas } from "./atlas";
+import {
+  abbinaToken, fileCollezioneDi, leggiMisuraCollezione, leggiScenaAtlas, metriLeggibili, percorsoDaLink, riconosciToken,
+  type ScenaAtlas, type TokenAtlas,
+} from "./atlas";
 import { daMostro, variantiDi, type Combattente, type Azione, type RisolviIncantesimo, type IncantesimoLanciabile } from "../regole/src/motore/combattente";
 import { StatblockModal, trovaMostro } from "./statblock";
 import { combattenteDiPg, idPg, risorseDaNota, notaDaRisorse, librettoDi } from "./pg";
@@ -29,6 +32,8 @@ export const VIEW_TYPE_BOARD = "gdr-board";
 // Perché un lancio o un'azione non parte, a parole (i motivi li dà il motore).
 const MOTIVO_LANCIO = { slot: "nessuno slot disponibile", usi: "usi del giorno finiti", cariche: "cariche insufficienti", economia: "azione del turno già spesa" } as const;
 const MOTIVO_AZIONE = { economia: "già spesa questo turno", cariche: "cariche finite" } as const;
+// Le diagonali che non contano una casella si dicono nella riga della mappa.
+const DIAGONALI_TXT = { "una-casella": "", alternate: ", diagonali alternate", retta: ", diagonali in linea retta" } as const;
 // Perché un tiro non arriva al bersaglio sulla mappa (il motivo lo dà il motore, `fuoriTiro`).
 const MOTIVO_FUORI: Record<NonNullable<EsitoDistanza["motivo"]>, string> = { "oltre-portata": "oltre la portata", "oltre-gittata": "oltre la gittata" };
 
@@ -64,6 +69,8 @@ export class BoardView extends ItemView {
   private scenaFile: TFile | null = null;
   private scena: ScenaAtlas | null = null;
   private scenaErrore: string | null = null;
+  // Il `collection.json` della collezione della scena: decide come si misura.
+  private collezionePath: string | null = null;
 
   constructor(leaf: WorkspaceLeaf, private plugin: GdrPlugin) { super(leaf); }
 
@@ -87,11 +94,12 @@ export class BoardView extends ItemView {
     await this.leggiScena();
     this.render();
     // Atlas salva la scena 500 ms dopo l'ultima modifica (la prima volta crea il file): la
-    // Board la rilegge e ridisegna. Un `.atlasmap` creato, rinominato o tolto può essere quello
-    // che il link indica; una modifica alla nota d'origine può cambiare il link.
+    // Board la rilegge e ridisegna, e così quando cambiano le regole di misura della sua
+    // collezione. Un `.atlasmap` creato, rinominato o tolto può essere quello che il link
+    // indica; una modifica alla nota d'origine può cambiare il link.
     const ridisegna = () => void this.leggiScena().then(() => this.render());
-    const eScena = (f: TAbstractFile) => f.path.endsWith(".atlasmap");
-    this.registerEvent(this.app.vault.on("modify", (f) => { if (f.path === this.scenaFile?.path) ridisegna(); }));
+    const eScena = (f: TAbstractFile) => f.path.endsWith(".atlasmap") || f.path === this.collezionePath;
+    this.registerEvent(this.app.vault.on("modify", (f) => { if (f.path === this.scenaFile?.path || f.path === this.collezionePath) ridisegna(); }));
     this.registerEvent(this.app.vault.on("create", (f) => { if (eScena(f)) ridisegna(); }));
     this.registerEvent(this.app.vault.on("delete", (f) => { if (eScena(f)) ridisegna(); }));
     this.registerEvent(this.app.vault.on("rename", (f) => { if (eScena(f)) ridisegna(); }));
@@ -119,10 +127,9 @@ export class BoardView extends ItemView {
     const luogo = this.fileDaLink(fm.luogo, orig.path);
     return luogo ? this.fileDaLink(this.app.metadataCache.getFileCache(luogo)?.frontmatter?.mappa_battaglia, luogo.path) : null;
   }
-  // Un link del frontmatter («[[percorso|alias]]», o il percorso nudo; di una lista il primo) → il file.
+  // Un link del frontmatter, in ogni forma che Obsidian e Atlas scrivono (`percorsoDaLink`) → il file.
   private fileDaLink(v: unknown, da: string): TFile | null {
-    const testo = String((Array.isArray(v) ? v[0] : v) ?? "").trim();
-    const percorso = (/^\[\[([^\]|#]+)/.exec(testo)?.[1] ?? testo).trim();
+    const percorso = percorsoDaLink(v);
     if (!percorso) return null;
     const f = this.app.metadataCache.getFirstLinkpathDest(percorso, da);
     return f instanceof TFile ? f : null;
@@ -133,21 +140,26 @@ export class BoardView extends ItemView {
   private async leggiScena() {
     const n = ++this.letture;
     const f = this.scenaCollegata();
+    const collezionePath = f ? fileCollezioneDi(f.path) : null;
     let scena: ScenaAtlas | null = null, errore: string | null = null;
     if (f) {
       try {
-        const r = leggiScenaAtlas(await this.app.vault.read(f));
+        // Le regole di misura della collezione, se il suo `collection.json` c'è (Atlas ≥ 0.6).
+        const fc = collezionePath ? this.app.vault.getAbstractFileByPath(collezionePath) : null;
+        const misura = fc instanceof TFile ? leggiMisuraCollezione(await this.app.vault.read(fc)) : null;
+        const r = leggiScenaAtlas(await this.app.vault.read(f), misura);
         if ("errore" in r) errore = r.errore; else scena = r;
       } catch (e: any) { errore = e?.message ?? String(e); }
     }
     if (n !== this.letture) return;
-    this.scenaFile = f; this.scena = scena; this.scenaErrore = errore;
+    this.scenaFile = f; this.scena = scena; this.scenaErrore = errore; this.collezionePath = collezionePath;
   }
-  // Il contesto del tiro dalla mappa: i metri fra i due e chi è vicino a chi tira. Senza scena,
-  // su una griglia esagonale o senza il token di uno dei due: nessuno (il tiro resta com'era).
+  // Il contesto del tiro dalla mappa: i metri fra i due e chi è vicino a chi tira, con le
+  // diagonali della collezione. Senza scena, dove le distanze non si calcolano (griglia
+  // esagonale, misura a fasce) o senza il token di uno dei due: nessuno (il tiro resta com'era).
   private contesto(s: Stato, daKey: string, aKey: string): ContestoDistanza | undefined {
-    if (!this.scena || this.scena.esagonale) return undefined;
-    return contestoDaPosizioni(s, abbinaToken(this.scena, s.combattenti).posizioni, daKey, aKey, this.scena.metriCasella);
+    if (!this.scena || this.scena.senzaDistanze) return undefined;
+    return contestoDaPosizioni(s, abbinaToken(this.scena, s.combattenti).posizioni, daKey, aKey, this.scena.metriCasella, this.scena.diagonali);
   }
   // Il pezzo d'etichetta di un bersaglio: a quanti metri è e, per un'azione, se non ci arriva.
   private dove(s: Stato, da: InPlancia, a: InPlancia, az?: Azione): string {
@@ -214,7 +226,9 @@ export class BoardView extends ItemView {
     testo.setText([
       `Mappa: ${this.scenaFile.basename}`,
       `${Object.keys(posizioni).length}/${s.combattenti.length} in plancia sulla griglia`,
-      this.scena.esagonale ? "griglia esagonale: distanze non calcolate" : `casella ${metriLeggibili(this.scena.metriCasella)}`,
+      this.scena.senzaDistanze ? `${this.scena.senzaDistanze}: distanze non calcolate`
+        : `casella ${metriLeggibili(this.scena.metriCasella)}${DIAGONALI_TXT[this.scena.diagonali]}`,
+      this.scena.misuraDa === "scena" ? "misura dalla scena: la collezione non dichiara la sua (collection.json)" : "",
       senzaToken.length ? `senza token: ${senzaToken.join(", ")}` : "",
     ].filter(Boolean).join(" · "));
     if (senzaCombattente.length) btn(`Schiera dalla mappa (${senzaCombattente.length})`, () => void this.schieraDallaMappa(senzaCombattente));

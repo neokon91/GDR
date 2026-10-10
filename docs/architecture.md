@@ -255,8 +255,8 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   e vista giocatori; PF, turni e condizioni restano alla Board. Atlas non ha API pubblica: il
   contatto passa per i file. (1) Le pagine mostro SRD portano `name` e `hp` (PF medi,
   `build_srd.pf_medi`, la regola di `puntiFeritaCalcolati` del kernel), nella forma che Atlas
-  legge da una nota-statblock. Ma Atlas (verificato sul sorgente della 0.5.0, la versione
-  fissata) offre da collegare ai token e da importare come token SOLO ciò che passa da Fantasy
+  legge da una nota-statblock. Ma Atlas (verificato sul sorgente della 0.7.0, la versione
+  fissata, come prima della 0.5.0) offre da collegare ai token e da importare come token SOLO ciò che passa da Fantasy
   Statblocks (`useStatblockEntries`, `requireResolvedBestiary`), che il vault non usa: senza
   quel plugin il collegamento non è raggiungibile, e i campi restano pronti e inerti. (2) Le
   scene sono file `.atlasmap` (JSON, schema `atlas-vtt` v4, riscritto da Atlas entro 0,5 s da
@@ -267,27 +267,39 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   il tavolo dal vivo (GM al portatile, giocatori sulla finestra di Atlas su un secondo schermo);
   il gioco online non è un obiettivo, Atlas non ha rete e non gliela si costruisce. Non usati: il tracker d'iniziativa di Atlas (doppione
   della Board) e l'importazione «da statblock» (richiede Fantasy Statblocks).
-  **Il ponte con la Board** (verificato sul sorgente di Atlas 0.5.0, provato su scene scritte dal
-  suo codice): (a) *lettura*. Atlas salva la scena nel `.atlasmap` stesso con l'API del vault
-  (`vault.create`, poi `vault.process`, 500 ms dopo l'ultima modifica), quindi il plugin la sente
-  con gli eventi `create`/`modify`. `plugin/atlas.ts` la legge (`leggiScenaAtlas`: rifiuta un
-  formato più nuovo del 4, come Atlas; metri per casella dalla griglia, 5 piedi = 1,5 m se non
-  dice niente; i token con nome, copia, taglia, `side`, nascosto) e abbina i token ai combattenti
-  per **nome** (`abbinaToken`: Atlas 0.5 non lega un token a una nota senza Fantasy Statblocks;
-  le copie in ordine, «Goblin (2)» è la copia 2). La geometria del kernel
-  (`regole/src/motore/geometria.ts`) ne fa i metri e i nemici vicini di un tiro
-  (`contestoDaPosizioni` → `distanzaDelTiro`). Prova: `npm run smoke:atlas` (in pytest), sulle
-  scene di `tests/fixtures/atlas/`, che si rigenerano col codice di Atlas
-  (`genera_scene_atlas.test.ts.txt`). (b) *dal vivo e in scrittura*: la vista di Atlas espone
+  **Il ponte con la Board** (verificato sul sorgente di Atlas 0.7.0, provato su scene e
+  collezioni scritte dal suo codice; il formato della scena è lo stesso della 0.5.0): (a)
+  *lettura*. Atlas salva la scena nel `.atlasmap` stesso con l'API del vault (`vault.create`,
+  poi `vault.process`, 500 ms dopo l'ultima modifica), quindi il plugin la sente con gli eventi
+  `create`/`modify`. `plugin/atlas.ts` la legge (`leggiScenaAtlas`: rifiuta un formato più nuovo
+  del 4, come Atlas; i token con nome, copia, taglia, `side`, nascosto) e la **misura come Atlas**
+  (`resolveMeasurementSettings`): vincono le regole della collezione, nel `collection.json` della
+  sua cartella (`atlas-vtt/collections/<id>/`, nel vault dalla 0.6; `leggiMisuraCollezione`:
+  unità, distanza per casella, misura metrica o a fasce, regola delle diagonali), perché le unità
+  scritte nella griglia della scena sono solo una copia presa alla creazione; la scena aggiunge
+  la sua distanza per casella (`unitDistanceOverride`, dalla 0.6). Se la collezione non dichiara
+  la misura (niente `collection.json`, come prima della 0.6, o senza `gridDefaults`) si misura dalla griglia della scena (5 piedi = 1,5 m se non dice niente) e la Board lo dice. Abbina
+  i token ai combattenti per **nome** (`abbinaToken`: Atlas, fino alla 0.7, non lega un token a una
+  nota senza Fantasy Statblocks; le copie in ordine, «Goblin (2)» è la copia 2). La geometria del
+  kernel (`regole/src/motore/geometria.ts`) ne fa i metri e i nemici vicini di un tiro
+  (`contestoDaPosizioni` → `distanzaDelTiro`), con la regola delle diagonali della collezione
+  (una casella, alternate 5-10-5 o retta, `RegolaDiagonali`: le stesse distanze del righello di
+  Atlas; due creature affiancate restano a 1,5 m con ogni regola). I link alla scena si leggono in
+  ogni forma che Obsidian e Atlas scrivono (`percorsoDaLink`: wikilink, link Markdown, incorporati
+  `![[...]]`, con `#istantanea`, percorso breve). Le istantanee di Atlas sono `.json` in
+  `collections/<id>/snapshots/`, quindi non compaiono fra le scene. Prova: `npm run smoke:atlas`
+  (in pytest), sui file di `tests/fixtures/atlas/` nei loro percorsi del vault, che si
+  rigenerano col codice di Atlas (`genera_scene_atlas.test.ts.txt`). (b) *dal vivo e in scrittura*: la vista di Atlas espone
   `getStore()` (lo store della scena, con le sue azioni, che Atlas salva da sé) e
   `reloadActiveScene(riscrivi)` (riscrive la scena aperta in sicurezza: salva il sospeso, ferma i
   salvataggi, riscrive, ricarica). Sono interni di Atlas, non un'API promessa: il ponte poggia sul
   file, e questi si useranno solo se presenti. (c) *nella Board* (`board.ts`): la scena è quella
   scelta a mano (**Cambia scena…**, `boardScena` nei dati del plugin, svuotata da Reset e da un
   nuovo schieramento), altrimenti la `mappa_battaglia` dell'Incontro d'origine o del suo `luogo`.
-  La Board la rilegge sugli eventi del vault (`modify` del file, `create`/`delete`/`rename` di un
-  `.atlasmap`, `changed` della nota d'origine) e la riga **Mappa** dice quanti sono sulla griglia e
-  chi è senza token. Ogni tiro riceve il contesto (`contestoDaPosizioni`, casella della scena):
+  La Board la rilegge sugli eventi del vault (`modify` del file o del `collection.json` della sua
+  collezione, `create`/`delete`/`rename` di un `.atlasmap`, `changed` della nota d'origine) e la
+  riga **Mappa** dice quanti sono sulla griglia, chi è senza token, la casella e le diagonali.
+  Ogni tiro riceve il contesto (`contestoDaPosizioni`, casella e diagonali della scena):
   azioni, multiattacchi, leggendarie e attacchi degli incantesimi (`contesti` per bersaglio). I
   picker dei bersagli dicono i metri; un attacco che non arriva (`fuoriTiro` del kernel: un
   multiattacco solo se nessun colpo arriva) non parte e un avviso dice perché, senza spendere
@@ -295,7 +307,7 @@ La superficie di combattimento è la **Board nativa** sul motore event-sourced d
   (`riconosciToken`: PG del vault, poi bestiario, per nome) e li schiera col lato del token (i PG
   alleati; i nascosti non spuntati); i nomi senza riscontro si segnalano. Limiti: muri, linea di
   vista e copertura restano dichiarazioni del GM, l'area di un incantesimo la decide il GM (un TS
-  non si rifiuta per distanza), su griglia esagonale nessuna distanza. Prova: `npm run
+  non si rifiuta per distanza), su griglia esagonale o con la misura a fasce nessuna distanza. Prova: `npm run
   smoke:board-mappa` (in pytest), la Board vera sulle stesse scene.
 
 ### Homebrew giocabile al tavolo (Rotta homebrew)

@@ -1,12 +1,15 @@
 /**
  * SMOKE della BOARD COLLEGATA AD ATLAS — headless (jsdom + `obsidian` finto), con la Board VERA
- * del plugin e le scene scritte dal codice vero di Atlas 0.5.0 (`tests/fixtures/atlas/`).
+ * del plugin e le scene e collezioni scritte dal codice vero di Atlas 0.7.0 (`tests/fixtures/atlas/`,
+ * nei percorsi che hanno nel vault).
  *
  * La catena come la vive il GM: l'Incontro d'origine collega la Cripta (`mappa_battaglia`); la
  * Board la legge, abbina i token, offre di schierare quelli che non ha (il nascosto non
  * spuntato); la scimitarra a 9 m non parte e lo dice; Atlas salva il goblin spostato accanto a
  * Kara e la Board, riletta la scena, lo fa colpire; il picker dei bersagli dice i metri; una
- * scena scelta a mano vince sul link.
+ * scena scelta a mano vince sul link; cambiate in Atlas le regole della collezione (diagonali
+ * alternate), la Board le rilegge. Il link dell'Incontro è come lo copia Atlas: incorporato,
+ * col percorso breve.
  *
  * Uso (da `plugin/`): `npm run smoke:board-mappa` (lo lancia anche pytest, `tests/test_pg_kernel.py`).
  */
@@ -27,11 +30,11 @@ Object.assign(globalThis, { window: dom.window, document: dom.window.document })
 installaDom(dom.window as unknown as { HTMLElement: typeof HTMLElement })
 
 const dati = resolve(process.argv[2] ?? 'data')
-const cartellaScene = resolve(process.argv[3] ?? '../tests/fixtures/atlas')
+const cartellaVault = resolve(process.argv[3] ?? '../tests/fixtures/atlas')
 const cat = JSON.parse(readFileSync(`${dati}/srd_catalogo.json`, 'utf8')) as Catalogo
 const bestiario = JSON.parse(readFileSync(`${dati}/srd_bestiario.json`, 'utf8')) as any[]
 
-// Il vault finto: due scene di Atlas, la nota-Incontro che collega la Cripta, il PG Kara.
+// Il vault finto: le scene e le collezioni di Atlas, la nota-Incontro che collega la Cripta, il PG Kara.
 const file = (path: string): TFile => {
   const f = new TFile() as any
   f.path = path
@@ -40,16 +43,16 @@ const file = (path: string): TFile => {
   f.parent = { path: path.split('/').slice(0, -1).join('/') }
   return f
 }
-const scene = 'atlas-vtt/collections/c/scenes'
-const cripta = file(`${scene}/Cripta.atlasmap`)
-const ponte = file(`${scene}/Ponte.atlasmap`)
+const cripta = file('atlas-vtt/collections/gdr/scenes/Cripta.atlasmap')
+const ponte = file('atlas-vtt/collections/gdr/scenes/Ponte.atlasmap')
+const torre = file('atlas-vtt/collections/variante/scenes/Torre.atlasmap')
+const colGdr = file('atlas-vtt/collections/gdr/collection.json')
+const colVariante = file('atlas-vtt/collections/variante/collection.json')
 const incontro = file('Incontri/Agguato nella cripta.md')
-const testi: Record<string, string> = {
-  [cripta.path]: readFileSync(`${cartellaScene}/Cripta.atlasmap`, 'utf8'),
-  [ponte.path]: readFileSync(`${cartellaScene}/Ponte.atlasmap`, 'utf8'),
-}
-const perPath: Record<string, TFile> = { [cripta.path]: cripta, [ponte.path]: ponte, [incontro.path]: incontro }
-const fmIncontro = { categoria: 'incontro', nome: 'Agguato nella cripta', mappa_battaglia: `[[${cripta.path}|Cripta]]` }
+const daVault = [cripta, ponte, torre, colGdr, colVariante]
+const testi: Record<string, string> = Object.fromEntries(daVault.map((f) => [f.path, readFileSync(`${cartellaVault}/${f.path}`, 'utf8')]))
+const perPath: Record<string, TFile> = Object.fromEntries([...daVault, incontro].map((f) => [f.path, f]))
+const fmIncontro = { categoria: 'incontro', nome: 'Agguato nella cripta', mappa_battaglia: '![[Cripta.atlasmap]]' }
 
 const lib = creaDiProva(cat, 'dnd.classe.guerriero', 'dnd.background.soldato', 1)
 lib.base.nome = 'Kara'
@@ -63,14 +66,15 @@ const app: any = {
   fileManager: { processFrontMatter: async () => {} },
   vault: {
     getMarkdownFiles: () => [],
-    getFiles: () => [cripta, ponte],
+    getFiles: () => daVault,
     getAbstractFileByPath: (p: string) => perPath[p] ?? null,
     read: async (f: TFile) => testi[f.path],
     on: (nome: string, fn: (f: TFile) => void) => { (ascolto[nome] ??= []).push(fn); return {} },
   },
   metadataCache: {
     getFileCache: (f: TFile) => (f.path === incontro.path ? { frontmatter: fmIncontro } : null),
-    getFirstLinkpathDest: (link: string) => perPath[link] ?? null,
+    // Come Obsidian: il percorso intero o, per il percorso breve, il file con quel nome.
+    getFirstLinkpathDest: (link: string) => perPath[link] ?? daVault.find((f) => f.path.endsWith(`/${link}`)) ?? null,
     on: () => ({}),
   },
 }
@@ -187,3 +191,13 @@ await clic('Cambia scena')
 g.__scegli = undefined
 assert(scenaScelta === null && rigaMappa().includes('Mappa: Cripta'), `staccata: ${rigaMappa()}`)
 console.log('✓ scena scelta a mano (Ponte), poi di nuovo quella dell\'Incontro')
+
+// 7. Il GM cambia in Atlas le regole della collezione (diagonali alternate): Atlas riscrive il
+// suo collection.json e la Board, che lo ascolta, lo rilegge.
+const col = JSON.parse(testi[colGdr.path]!)
+col.settings.gridDefaults.diagonalRule = 'alternating'
+testi[colGdr.path] = JSON.stringify(col)
+for (const fn of ascolto.modify ?? []) fn(colGdr)
+await attesa(); await attesa()
+assert(rigaMappa().includes('diagonali alternate'), `regole della collezione rilette: ${rigaMappa()}`)
+console.log(`✓ collection.json riletto: ${rigaMappa()}`)
